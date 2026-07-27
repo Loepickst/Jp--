@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kikiの日本語の家</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260711">
-    <link rel="stylesheet" href="shared/study-directory.css?v=20260712">
+    <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
+    <link rel="stylesheet" href="shared/study-directory.css?v=20260725b">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -134,6 +134,16 @@
             padding: 4px 4px 20px;
             border-bottom: 2px dashed var(--line);
             margin-bottom: 24px;
+        }
+
+        body.home-dashboard-redesign.is-tool-content-only .topbar,
+        body.home-dashboard-redesign.is-tool-content-only .mobile-home-header {
+            display: none !important;
+        }
+
+        body.home-dashboard-redesign.is-tool-content-only .app-workspace,
+        body.home-dashboard-redesign.is-tool-content-only .page-main {
+            min-height: 0;
         }
 
         .brand {
@@ -3442,6 +3452,10 @@
             --legacy-accent: #8a3324;
             --legacy-accent-strong: #6f261b;
             --legacy-accent-soft: rgba(138, 51, 36, 0.08);
+            --legacy-navy: #34506f;
+            --legacy-navy-soft: #edf2f6;
+            --legacy-sage: #7d9270;
+            --legacy-sage-soft: #f0f4ed;
             --legacy-border: #e5e5e0;
             --legacy-border-strong: #d4d4d0;
             --legacy-shadow-sm: 0 2px 8px rgba(44, 44, 42, 0.04);
@@ -4082,6 +4096,594 @@
         .grammar-legacy-related-tag--compare {
             border-color: rgba(155, 48, 38, 0.38);
             color: var(--grammar-modal-red-dark);
+        }
+
+        .grammar-center-action {
+            width: min(100%, 1120px);
+            min-height: 44px;
+            margin: 0 auto 2px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .grammar-center-favorite-entry {
+            min-width: 118px;
+            min-height: 44px;
+            padding: 0 14px;
+            border: 1px solid #cfaa6e;
+            border-radius: 8px;
+            background: rgba(207, 170, 110, 0.06);
+            color: #8f6b2c;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .grammar-center-favorite-entry:hover {
+            transform: translateY(-1px);
+            border-color: #bd9148;
+            background: #cfaa6e;
+            color: #fff;
+        }
+
+        .grammar-center-favorite-entry-icon {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .grammar-center-favorite-entry-count {
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #8f6b2c;
+            font-size: 11px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .grammar-center-favorite-entry:focus-visible,
+        .grammar-favorites-review-button:focus-visible,
+        .grammar-favorites-search input:focus-visible,
+        .grammar-favorites-search button:focus-visible,
+        .grammar-favorites-library-tools select:focus-visible,
+        .grammar-favorites-empty button:focus-visible,
+        .grammar-review-stage:focus-visible,
+        .grammar-review-reveal:focus-visible,
+        .grammar-review-actions button:focus-visible,
+        .grammar-favorite-card:focus-visible {
+            outline: 2px solid var(--legacy-accent);
+            outline-offset: 3px;
+        }
+
+        .grammar-legacy-star,
+        .grammar-legacy-modal-fav {
+            min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grammar-favorites-shell {
+            width: min(100%, 1120px);
+            margin: 0 auto 60px;
+        }
+
+        .grammar-favorites-workspace {
+            display: block;
+        }
+
+        .grammar-favorites-library {
+            min-width: 0;
+            border: 1px solid var(--legacy-border);
+            background: var(--legacy-surface);
+        }
+
+        .grammar-favorites-library.is-review-mode {
+            border: 0;
+            background: transparent;
+        }
+
+        .grammar-favorites-library-head {
+            min-height: 68px;
+            padding: 12px 14px 12px 20px;
+            border-bottom: 1px solid var(--legacy-border);
+            display: grid;
+            grid-template-columns: minmax(150px, 1fr) auto;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .grammar-favorites-library-title {
+            min-width: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .grammar-favorites-library-title h2 {
+            margin: 0;
+            color: var(--legacy-text);
+            font-family: var(--font-display);
+            font-size: 19px;
+        }
+
+        .grammar-favorites-library-title span {
+            color: var(--legacy-muted);
+            font-size: 10px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .grammar-favorites-library-tools {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 7px;
+        }
+
+        .grammar-favorites-search {
+            position: relative;
+            width: 154px;
+        }
+
+        .grammar-favorites-search input,
+        .grammar-favorites-library-tools select {
+            width: 100%;
+            min-height: 38px;
+            border: 1px solid var(--legacy-border-strong);
+            border-radius: 5px;
+            background: var(--legacy-surface-strong);
+            color: var(--legacy-text);
+            font-family: var(--font-ui);
+            font-size: 11px;
+        }
+
+        .grammar-favorites-search input {
+            padding: 0 33px 0 12px;
+        }
+
+        .grammar-favorites-search button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 34px;
+            height: 38px;
+            border: 0;
+            background: transparent;
+            color: var(--legacy-muted);
+            cursor: pointer;
+        }
+
+        .grammar-favorites-library-tools select {
+            width: auto;
+            max-width: 130px;
+            padding: 0 26px 0 10px;
+        }
+
+        .grammar-favorites-review-button {
+            flex: 0 0 auto;
+            min-width: 104px;
+            min-height: 38px;
+            padding: 0 13px;
+            border: 1px solid rgba(138, 51, 36, 0.38);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--legacy-accent-strong);
+            cursor: pointer;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .grammar-favorites-review-button:hover {
+            border-color: var(--legacy-accent);
+            background: rgba(138, 51, 36, 0.05);
+        }
+
+        .grammar-favorites-review-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .grammar-favorites-content {
+            min-width: 0;
+            margin: 0;
+        }
+
+        .grammar-favorites-review-toolbar {
+            width: min(100%, 640px);
+            min-height: 46px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .grammar-favorites-review-toolbar > div {
+            min-width: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .grammar-favorites-review-toolbar strong {
+            color: var(--legacy-text);
+            font-family: var(--font-display);
+            font-size: 17px;
+        }
+
+        .grammar-favorites-review-toolbar span {
+            color: var(--legacy-muted);
+            font-size: 10px;
+        }
+
+        .grammar-favorites-grid {
+            display: block;
+        }
+
+        .grammar-favorite-card {
+            min-width: 0;
+            min-height: 94px;
+            padding: 15px 14px 15px 20px;
+            border: 0;
+            border-bottom: 1px solid var(--legacy-border);
+            background: var(--legacy-surface);
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: minmax(165px, 0.82fr) minmax(170px, 1.2fr) minmax(145px, 0.9fr) 44px;
+            align-items: center;
+            gap: 14px;
+            transition: background 160ms ease;
+        }
+
+        .grammar-favorite-card:last-child {
+            border-bottom: 0;
+        }
+
+        .grammar-favorite-card:hover {
+            background: #fdfbf8;
+        }
+
+        .grammar-favorite-card-name {
+            min-width: 0;
+            padding-left: 13px;
+            border-left: 3px solid var(--legacy-accent);
+        }
+
+        .grammar-favorite-card h3 {
+            margin: 0 0 8px;
+            color: var(--legacy-text);
+            font-family: var(--legacy-grammar-font) !important;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .grammar-favorite-card .grammar-legacy-badge-group {
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .grammar-favorite-card .grammar-legacy-badge {
+            min-height: 20px;
+            padding: 2px 6px;
+            font-size: 9px;
+        }
+
+        .grammar-favorite-card-meaning {
+            min-width: 0;
+            margin: 0;
+            color: var(--legacy-text);
+            font-size: 0.76rem;
+            font-weight: 650;
+            line-height: 1.6;
+        }
+
+        .grammar-favorite-card-connection {
+            min-width: 0;
+            margin: 0;
+            color: var(--legacy-muted);
+            font-family: var(--legacy-grammar-font);
+            font-size: 0.69rem;
+            line-height: 1.6;
+        }
+
+        .grammar-favorite-card-connection span {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--legacy-navy);
+            font-family: var(--font-ui);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .grammar-favorite-card > .grammar-legacy-star {
+            border: 1px solid rgba(138, 51, 36, 0.26);
+            border-radius: 50%;
+            background: #fff;
+            color: var(--legacy-accent);
+        }
+
+        .grammar-favorites-empty {
+            width: 100%;
+            min-height: 220px;
+            margin: 0;
+            padding: 38px 24px;
+            border: 0;
+            border-radius: 0;
+            background: var(--legacy-surface);
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .grammar-favorites-empty > span {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--legacy-accent);
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .grammar-favorites-empty h3 {
+            margin: 0;
+            color: var(--legacy-text);
+            font-size: 1.05rem;
+        }
+
+        .grammar-favorites-empty p {
+            margin: 9px 0 0;
+            color: var(--legacy-muted);
+            font-size: 0.76rem;
+            line-height: 1.65;
+        }
+
+        .grammar-favorites-empty button {
+            min-height: 42px;
+            margin-top: 18px;
+            padding: 0 20px;
+            border: 1px solid var(--legacy-accent);
+            border-radius: 6px;
+            background: var(--legacy-accent);
+            color: #fff;
+            cursor: pointer;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .grammar-review-stage {
+            width: min(100%, 640px);
+            margin: 0 auto 24px;
+        }
+
+        .grammar-review-progress {
+            min-height: 34px;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--legacy-muted);
+            font-size: 11px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .grammar-review-progress .grammar-legacy-star {
+            min-width: 34px;
+            min-height: 34px;
+            font-size: 18px;
+        }
+
+        .grammar-review-card {
+            padding: clamp(26px, 4vw, 38px);
+            border: 1px solid var(--legacy-border-strong);
+            border-top: 3px solid var(--legacy-accent);
+            border-radius: 8px;
+            background: var(--legacy-surface);
+            box-shadow: var(--legacy-shadow-sm);
+        }
+
+        .grammar-review-question {
+            text-align: center;
+        }
+
+        .grammar-review-question h3 {
+            margin: 16px 0 18px;
+            color: var(--legacy-text);
+            font-family: var(--legacy-grammar-font) !important;
+            font-size: clamp(1.75rem, 4vw, 2.35rem);
+            line-height: 1.35;
+            letter-spacing: 0.05em;
+        }
+
+        .grammar-review-answer {
+            display: none;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--legacy-border-strong);
+        }
+
+        .grammar-review-answer.is-revealed {
+            display: grid;
+            gap: 16px;
+        }
+
+        .grammar-review-answer small {
+            color: var(--legacy-accent-strong);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .grammar-review-answer p {
+            margin: 5px 0 0;
+            color: var(--legacy-text);
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        .grammar-review-reveal {
+            width: min(100%, 210px);
+            min-height: 40px;
+            margin: 20px auto 0;
+            border: 1px solid var(--legacy-accent);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--legacy-accent-strong);
+            cursor: pointer;
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .grammar-review-reveal:hover {
+            background: var(--legacy-accent);
+            color: #fff;
+        }
+
+        .grammar-review-actions {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .grammar-review-actions button {
+            min-height: 40px;
+            padding: 0 10px;
+            border: 1px solid var(--legacy-border-strong);
+            border-radius: 6px;
+            background: var(--legacy-surface);
+            color: var(--legacy-text);
+            cursor: pointer;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 650;
+        }
+
+        .grammar-review-actions button:nth-child(2) {
+            border-color: rgba(52, 80, 111, 0.3);
+            color: var(--legacy-navy);
+        }
+
+        .grammar-review-actions button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 980px) {
+            .grammar-favorites-library-head {
+                grid-template-columns: 1fr;
+                align-items: stretch;
+            }
+
+            .grammar-favorites-library-tools {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .grammar-favorite-card {
+                grid-template-columns: minmax(160px, 0.9fr) minmax(180px, 1.25fr) 44px;
+            }
+
+            .grammar-favorite-card-connection {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grammar-center-action {
+                min-height: 40px;
+                margin-bottom: 4px;
+            }
+
+            .grammar-center-favorite-entry {
+                min-width: 108px;
+                min-height: 40px;
+                padding: 0 12px;
+            }
+
+            .grammar-favorites-library-head {
+                padding: 14px;
+            }
+
+            .grammar-favorites-library-tools {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grammar-favorites-search {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .grammar-favorites-library-tools select {
+                width: 100%;
+                max-width: none;
+            }
+
+            .grammar-favorites-review-button {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .grammar-favorite-card {
+                grid-template-columns: minmax(0, 1fr) 44px;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .grammar-favorite-card-name {
+                grid-column: 1;
+            }
+
+            .grammar-favorite-card-meaning {
+                grid-column: 1;
+            }
+
+            .grammar-favorite-card > .grammar-legacy-star {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+            }
+
+            .grammar-review-card {
+                padding: 24px 18px;
+            }
+
+            .grammar-review-actions {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 6px;
+            }
+
+            .grammar-favorites-review-toolbar {
+                padding: 0 2px;
+            }
+
+            .grammar-favorites-review-toolbar .grammar-favorites-review-button {
+                grid-column: auto;
+                width: auto;
+            }
         }
 
         @keyframes grammarModalFadeIn {
@@ -4905,7 +5507,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260724-atamagonashi1">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260727-accent3">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -7193,8 +7795,18 @@
             }
 
             body.home-dashboard-redesign .daily-reading-directory-latest-item {
-                min-height: 74px;
-                padding: 13px 28px 12px 0;
+                min-height: 52px;
+                padding: 10px 28px 10px 0;
+            }
+
+            body.home-dashboard-redesign .daily-reading-directory-latest-item time,
+            body.home-dashboard-redesign .daily-reading-directory-latest-item > span:not(.daily-reading-directory-arrow) {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .daily-reading-directory-latest-item strong {
+                font-size: 11.5px;
+                line-height: 1.3;
             }
 
             body.home-dashboard-redesign .daily-reading-directory-latest-item:nth-child(n + 3) {
@@ -7235,24 +7847,27 @@
             }
 
             body.home-dashboard-redesign .daily-reading-directory-row a {
-                grid-template-columns: 46px minmax(0, 1fr) auto;
-                gap: 11px;
-                min-height: 96px;
-                padding: 16px 0;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 8px;
+                min-height: 54px;
+                padding: 10px 0;
+            }
+
+            body.home-dashboard-redesign .daily-reading-directory-row a > time,
+            body.home-dashboard-redesign .daily-reading-directory-title-zh,
+            body.home-dashboard-redesign .daily-reading-directory-summary,
+            body.home-dashboard-redesign .daily-reading-directory-category {
+                display: none;
             }
 
             body.home-dashboard-redesign .daily-reading-directory-row-copy > strong {
-                font-size: 15px;
-            }
-
-            body.home-dashboard-redesign .daily-reading-directory-summary {
-                margin-top: 4px;
-                font-size: 10.5px;
-                -webkit-line-clamp: 1;
+                font-size: 11.5px;
+                line-height: 1.3;
             }
 
             body.home-dashboard-redesign .daily-reading-directory-row-meta {
-                gap: 7px;
+                gap: 6px;
+                min-height: 0;
             }
 
             body.home-dashboard-redesign .daily-reading-directory-row-meta > span:not(.daily-reading-directory-arrow):not(.daily-reading-directory-favorite):not(.daily-reading-directory-category) {
@@ -10261,7 +10876,7 @@
                 position: relative;
                 flex: 0 0 calc((100% - 10px) / 2);
                 grid-template-columns: 1fr;
-                grid-template-rows: 96px minmax(64px, auto);
+                grid-template-rows: 108px 42px;
                 align-items: stretch;
                 gap: 0;
                 min-height: 0;
@@ -10273,7 +10888,7 @@
 
             body.home-dashboard-redesign .mobile-entry-card__cover {
                 width: 100%;
-                height: 96px;
+                height: 108px;
                 aspect-ratio: auto;
                 border: 0;
                 border-radius: 0;
@@ -10284,74 +10899,38 @@
             }
 
             body.home-dashboard-redesign .mobile-entry-card__label {
-                position: absolute;
-                z-index: 3;
-                top: 8px;
-                left: 8px;
-                display: inline-flex;
-                align-items: center;
-                min-height: 21px;
-                padding: 3px 7px;
-                border: 1px solid rgba(255, 255, 255, 0.78);
-                border-radius: 4px;
-                background: rgba(244, 249, 255, 0.92);
-                color: #547ea5;
-                font-family: var(--mobile-ui-font);
-                font-size: 9px;
-                font-weight: 650;
-                line-height: 1;
-                letter-spacing: 0;
-                box-shadow: 0 2px 7px rgba(52, 73, 91, 0.1);
-                backdrop-filter: blur(4px);
-                -webkit-backdrop-filter: blur(4px);
-                pointer-events: none;
+                display: none;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy {
-                gap: 3px;
-                padding: 10px 11px 12px;
+                display: flex;
+                align-items: center;
+                gap: 0;
+                padding: 8px 26px 8px 10px;
                 font-family: var(--mobile-ui-font);
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy strong {
-                padding-right: 16px;
                 color: #30322d;
-                font-size: 14px;
+                font-size: 11.5px;
                 font-weight: 650;
-                line-height: 1.4;
+                line-height: 1.3;
                 letter-spacing: 0;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy small {
-                color: #73756f;
-                font-size: 10px;
-                font-weight: 400;
-                line-height: 1.45;
-                letter-spacing: 0;
-                -webkit-line-clamp: 2;
+                display: none;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__arrow {
                 position: absolute;
                 right: 9px;
-                bottom: 12px;
+                bottom: 10px;
+                font-size: 14px;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__status {
-                position: absolute;
-                z-index: 2;
-                top: 8px;
-                right: 8px;
-                padding: 3px 7px;
-                border: 1px solid rgba(255, 255, 255, 0.72);
-                border-radius: 999px;
-                background: rgba(255, 255, 255, 0.9);
-                color: #62635d;
-                font-family: var(--mobile-ui-font);
-                font-size: 8.5px;
-                font-weight: 600;
-                line-height: 1.2;
-                box-shadow: 0 2px 7px rgba(52, 57, 49, 0.08);
+                display: none;
             }
 
             body.home-dashboard-redesign .mobile-entry-card.is-disabled {
@@ -10425,26 +11004,79 @@
             }
 
             body.home-dashboard-redesign .mobile-discovery-item-copy {
-                display: grid;
-                gap: 4px;
+                display: flex;
+                align-items: center;
                 min-width: 0;
                 font-family: var(--mobile-ui-font);
             }
 
             body.home-dashboard-redesign .mobile-discovery-item-copy strong {
                 color: #30322d;
-                font-size: 13.5px;
+                font-size: 11.5px;
                 font-weight: 650;
-                line-height: 1.4;
+                line-height: 1.3;
                 letter-spacing: 0;
             }
 
             body.home-dashboard-redesign .mobile-discovery-item-copy small {
-                color: #73756f;
-                font-size: 10px;
-                font-weight: 400;
-                line-height: 1.5;
-                letter-spacing: 0;
+                display: none;
+            }
+
+            body.home-dashboard-redesign .feature-desc,
+            body.home-dashboard-redesign .feature-badge,
+            body.home-dashboard-redesign .feature-context-badge {
+                display: none !important;
+            }
+
+            body.home-dashboard-redesign .feature-grid .feature-card-link,
+            body.home-dashboard-redesign .feature-grid .feature-card--fixed .feature-card-link {
+                grid-template-columns: 60px minmax(0, 1fr);
+                min-height: 62px;
+            }
+
+            body.home-dashboard-redesign .feature-grid .feature-visual,
+            body.home-dashboard-redesign .feature-grid .feature-card--fixed .feature-visual {
+                min-height: 62px;
+            }
+
+            body.home-dashboard-redesign .feature-grid .feature-body,
+            body.home-dashboard-redesign .feature-grid .feature-card--fixed .feature-body,
+            body.home-dashboard-redesign .feature-grid .feature-card--favorite .feature-body,
+            body.home-dashboard-redesign .feature-grid .feature-card--add .feature-body,
+            body.home-dashboard-redesign .feature-grid .feature-card--branch .feature-body,
+            body.home-dashboard-redesign .feature-grid .feature-card--leaf .feature-body {
+                justify-content: center;
+                min-height: 62px;
+                padding: 9px 28px 9px 11px;
+            }
+
+            body.home-dashboard-redesign .feature-grid .feature-title,
+            body.home-dashboard-redesign .feature-grid .feature-card--fixed .feature-title,
+            body.home-dashboard-redesign .feature-grid .feature-card--favorite .feature-title,
+            body.home-dashboard-redesign .feature-grid .feature-card--add .feature-title {
+                font-size: 11.5px !important;
+                line-height: 1.3;
+            }
+
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-card-link,
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--fixed.feature-card--main-directory .feature-card-link {
+                grid-template-columns: 86px minmax(0, 1fr);
+                min-height: 76px;
+            }
+
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-visual,
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--fixed.feature-card--main-directory .feature-visual {
+                min-height: 76px;
+            }
+
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-body,
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--fixed.feature-card--main-directory .feature-body {
+                min-height: 76px;
+                padding: 10px 30px 10px 12px;
+            }
+
+            body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-title {
+                font-size: 11.5px !important;
             }
 
             body.home-dashboard-redesign .dashboard-rail {
@@ -10560,7 +11192,7 @@
 
             body.home-dashboard-redesign .mobile-entry-card {
                 flex-basis: calc((100% - 8px) / 2);
-                grid-template-rows: 88px minmax(62px, auto);
+                grid-template-rows: 98px 42px;
             }
 
             body.home-dashboard-redesign .mobile-entry-grid {
@@ -10568,7 +11200,7 @@
             }
 
             body.home-dashboard-redesign .mobile-entry-card__cover {
-                height: 88px;
+                height: 98px;
             }
         }
 
@@ -10951,15 +11583,15 @@
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
                                                 <img src="assets/home-redesign/hero-mobile-summer-engawa-shiba-v2.webp?v=20260715" alt="夏日屋檐下读书的柴犬，窗外有蓝天、绣球花和风铃">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/7.23.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/7.27.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-23-v4.webp?v=20260723d" alt="一人把装有书籍、茶具、布料和工具的箱子带进逐渐充实的家中的铅笔手绘插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a" alt="修学旅行巴士内，一名学生望着车窗外的河流、村落与铁路道口，后排同学专注车内游戏的铅笔手绘插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>預かりものの思想</h2>
-                                                    <p>搬家时面对堆积的物品，重新思考“拥有”与“暂时保管”之间的区别。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>思考</span><time datetime="2026-07-23">07.23</time></span>
+                                                    <h2>目的地主義</h2>
+                                                    <p>旅程并非抵达目的地前的空白；人生真正值得珍惜的，也正是不断前行的过程。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>思考</span><time datetime="2026-07-27">07.27</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -11225,6 +11857,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/7.27.html" aria-label="阅读：目的地主義">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a" alt="">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">目的地主義</strong>
+                                    <span class="daily-reading-item-subtitle">目的地主义</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">思考</span>
+                                    </span>
+                                    <time datetime="2026-07-27">2026.07.27</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/7.23.html" aria-label="阅读：預かりものの思想">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-07-23-v4.webp?v=20260723d" alt="">
@@ -11236,19 +11881,6 @@
                                         <span class="daily-reading-item-tag">思考</span>
                                     </span>
                                     <time datetime="2026-07-23">2026.07.23</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/7.22.html" aria-label="阅读：独学の精神">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-22.webp?v=20260722b" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">独学の精神</strong>
-                                    <span class="daily-reading-item-subtitle">自学的精神</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">思考</span>
-                                    </span>
-                                    <time datetime="2026-07-22">2026.07.22</time>
                                 </span>
                             </a>
                         </div>
@@ -11395,9 +12027,10 @@
     <script src="shared/grammar-db-core.js?v=20260725b"></script>
     <script src="shared/grammar-db-tags.js?v=20260725b"></script>
     <script src="shared/grammar-db-resources.js"></script>
-    <script src="shared/grammar-db-repo.js"></script>
-    <script src="shared/word-bank-presets.js?v=20260724-atamagonashi1"></script>
-    <script src="shared/word-bank.js?v=20260724-atamagonashi1"></script>
+    <script src="shared/grammar-db-repo.js?v=20260726a"></script>
+    <script src="shared/grammar-favorites.js?v=20260726a"></script>
+    <script src="shared/word-bank-presets.js?v=20260727-lemma1"></script>
+    <script src="shared/word-bank.js?v=20260727-accent-number-only2"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
             { id: "essay", label: "随笔", labelJa: "エッセイ" },
@@ -11413,6 +12046,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-thought-7-27", file: "7.27.html", publishedAt: "2026.07.27", titleJa: "目的地主義", titleZh: "目的地主义", summary: "車窓を見ずに目的地までの時間を埋めようとする旅の姿から、人生では目的地だけでなく「道中」そのものを大切にすべきだと考える文章。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a", coverAlt: "修学旅行巴士内，一名学生望着车窗外的河流、村落与铁路道口，后排同学专注车内游戏的铅笔手绘插画" },
             { id: "daily-thought-7-23", file: "7.23.html", publishedAt: "2026.07.23", titleJa: "預かりものの思想", titleZh: "万物皆为暂借", summary: "引っ越しで目にした物の多さから、家や土地、道具は生きている間だけ世の中から預かるものだと考える思索文。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-23-v4.webp?v=20260723d", coverAlt: "一人把装有书籍、茶具、布料和工具的箱子带进逐渐充实的家中的铅笔手绘插画" },
             { id: "daily-thought-7-22", file: "7.22.html", publishedAt: "2026.07.22", titleJa: "独学の精神", titleZh: "自学的精神", summary: "学問は世界を包む大風呂敷ではなく、自分の気質という土壌を耕し、精神の作物を育てる営みだと説く思索文。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-22.webp?v=20260722b", coverAlt: "一本摊开的书化作土壤，一位年轻人在书页田地上栽种幼苗的铅笔手绘插画" },
             { id: "daily-essay-7-20", file: "7.20.html", publishedAt: "2026.07.20", titleJa: "なにもしない「ながら」時間", titleZh: "什么也不做的“ながら”时间", summary: "茶を飲み続け、ぼんやり歯を磨く習慣を歯科衛生士さんに注意され、自分なりのストレス発散について考える日常随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-07-20.webp?v=20260720a", coverAlt: "晨光中的女子对镜刷牙，门边的猫安静注视，洗面台旁放着茶杯的铅笔手绘插画" },
@@ -11494,7 +12128,7 @@
         ];
 
         const HOME_TEXTBOOK_N1_ITEMS = [
-            ["textbook-try-n1-main", "TRY！N1 文法", "跟随教材逐课理解 N1 重点语法。", "designs/try-n1-content-redesign/lesson-content-redesign.html", "N1"],
+            ["textbook-try-n1-main", "TRY！N1 文法", "跟随教材逐课理解 N1 重点语法。", "designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1", "N1"],
             ["textbook-n1-text", "N1 課文", "在课文中体会 N1 词汇、语法与表达。", "exam/textbook/text_1.html", "本文"]
         ].map(([id, title, desc, href, tag], index) => ({
             id,
@@ -11730,7 +12364,7 @@
                         id: "daily-grammar",
                         title: "语法学习",
                         desc: "从动词变形、助词到句子表达，一步步打好语法基础。",
-                        href: "daily/grammar/index.html",
+                        href: "#daily/daily-grammar",
                         icon: "grammar",
                         tag: "基礎",
                         tone: "blush",
@@ -11870,6 +12504,24 @@
                                 icon: "grammar",
                                 tag: "形式名詞",
                                 tone: "blush"
+                            },
+                            {
+                                id: "daily-grammar-te-auxiliary",
+                                title: "补助动词",
+                                desc: "从て形出发，理解状态、完成、方向与授受等表达体系。",
+                                href: "daily/grammar/foundation/te-auxiliary.html",
+                                icon: "grammar",
+                                tag: "補助動詞",
+                                tone: "blush"
+                            },
+                            {
+                                id: "daily-grammar-appearance",
+                                title: "样态表达",
+                                desc: "根据外观、线索和间接信息，区分样态、推断、传闻与比拟表达。",
+                                href: "daily/grammar/expressions/appearance-expressions.html",
+                                icon: "grammar",
+                                tag: "様態",
+                                tone: "blush"
                             }
                         ]
                     },
@@ -11898,11 +12550,10 @@
                                 id: "textbook-try-n1",
                                 title: "TRY！N1",
                                 desc: "跟随 TRY！N1 逐课理解重点语法与课文。",
-                                href: "exam/textbook/n1_menu.html",
+                                href: "designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1",
                                 icon: "textbook",
                                 tag: "N1",
-                                tone: "blush",
-                                children: HOME_TEXTBOOK_N1_ITEMS
+                                tone: "blush"
                             },
                             {
                                 id: "textbook-try-n2",
@@ -12514,10 +13165,17 @@
         let grammarSearchQuery = "";
         let grammarLevelFilter = "all";
         let grammarBookFilter = "all";
+        let grammarActiveView = "search";
+        let grammarFavoritesQuery = "";
+        let grammarFavoritesLevelFilter = "all";
+        let grammarFavoritesBookFilter = "all";
+        let grammarFavoritesSort = "recent";
+        let grammarFavoritesMode = "browse";
+        let grammarFavoritesReviewIndex = 0;
+        let grammarFavoritesReviewRevealed = false;
+        const grammarViewScrollPositions = { search: 0, favorites: 0 };
         let grammarSelectedId = null;
         let grammarExpandedExamplesId = null;
-        let grammarFavorites = loadGrammarFavorites();
-        let grammarFavoritesOnly = false;
         let grammarSearchTimer = 0;
         let grammarSearchPanelDirty = false;
         let grammarSearchComposing = false;
@@ -13922,7 +14580,7 @@
 
         function getGrammarSearchResults() {
             const query = normalizeGrammarText(grammarSearchQuery);
-            if (!query && !grammarFavoritesOnly) {
+            if (!query) {
                 return [];
             }
 
@@ -13930,13 +14588,12 @@
             const filtered = getGrammarSearchDataset().filter((item) => {
                 const matchBook = grammarBookFilter === "all" || item.book === grammarBookFilter;
                 const matchLevel = grammarLevelFilter === "all" || item.level === grammarLevelFilter;
-                const matchFavorite = !grammarFavoritesOnly || isGrammarFavorite(item.id);
-                const matchSearch = !query || normalize(item.title).includes(query)
+                const matchSearch = normalize(item.title).includes(query)
                     || normalize(item.meaning).includes(query)
                     || normalize(item.romaji).includes(query)
                     || normalize(item.kana).includes(query)
                     || normalize(item.tags).includes(query);
-                return matchBook && matchLevel && matchFavorite && matchSearch;
+                return matchBook && matchLevel && matchSearch;
             });
 
             return filtered.sort((a, b) => {
@@ -13977,6 +14634,12 @@
             return getGrammarSearchDataset().find((item) => Number(item.id) === numericId) || null;
         }
 
+        function getGrammarItemByCanonicalId(grammarId) {
+            const canonicalId = String(grammarId || "").trim();
+            if (!canonicalId) return null;
+            return getGrammarSearchDataset().find((item) => item.canonicalId === canonicalId) || null;
+        }
+
         function getGrammarExtraExamples(itemId) {
             const repo = getGrammarRepo();
             if (!repo || typeof repo.getExtraExamples !== "function") {
@@ -13988,37 +14651,24 @@
             return Array.isArray(itemExamples) ? itemExamples : [];
         }
 
-        function loadGrammarFavorites() {
-            try {
-                const storageKey = "kikiGrammarFavoritesV1";
-                const storedValue = localStorage.getItem(storageKey);
-                const legacyValue = localStorage.getItem("n1_favorites_v2");
-                const parsed = JSON.parse(storedValue || legacyValue || "[]");
-                const favorites = Array.isArray(parsed)
-                    ? [...new Set(parsed.map(Number).filter((id) => !Number.isNaN(id)))]
-                    : [];
-                if (!storedValue && favorites.length) {
-                    localStorage.setItem(storageKey, JSON.stringify(favorites));
-                }
-                return favorites;
-            } catch (error) {
-                return [];
-            }
+        function getGrammarFavoritesStore() {
+            return window.GrammarFavorites || null;
         }
 
-        function saveGrammarFavorites() {
-            localStorage.setItem("kikiGrammarFavoritesV1", JSON.stringify(grammarFavorites));
-            localStorage.setItem("n1_favorites_v2", JSON.stringify(grammarFavorites));
+        function getGrammarFavoriteRecords() {
+            const store = getGrammarFavoritesStore();
+            return store && typeof store.getAll === "function" ? store.getAll() : [];
         }
 
-        function isGrammarFavorite(itemId) {
-            return grammarFavorites.includes(Number(itemId));
+        function isGrammarFavorite(grammarId) {
+            const store = getGrammarFavoritesStore();
+            return Boolean(store && typeof store.has === "function" && store.has(grammarId));
         }
 
-        function syncGrammarFavoriteButtons(itemId) {
-            const numericId = Number(itemId);
-            const isFav = isGrammarFavorite(numericId);
-            featurePanels.querySelectorAll(`[data-grammar-favorite="${numericId}"]`).forEach((button) => {
+        function syncGrammarFavoriteButtons(grammarId) {
+            const canonicalId = String(grammarId || "").trim();
+            const isFav = isGrammarFavorite(canonicalId);
+            document.querySelectorAll(`[data-grammar-favorite="${canonicalId}"]`).forEach((button) => {
                 button.classList.toggle("is-fav", isFav);
                 button.textContent = isFav ? "★" : "☆";
                 button.setAttribute("aria-pressed", String(isFav));
@@ -14027,32 +14677,69 @@
                 const title = rawLabel.replace(/^取消收藏\s*/, "").replace(/^收藏\s*/, "").trim();
                 button.setAttribute("aria-label", title ? `${labelPrefix} ${title}` : labelPrefix);
             });
-            featurePanels.querySelectorAll("[data-grammar-favorites-count]").forEach((counter) => {
-                counter.textContent = String(grammarFavorites.length);
+            document.querySelectorAll("[data-grammar-favorites-count]").forEach((counter) => {
+                counter.textContent = String(getGrammarFavoriteRecords().length);
             });
         }
 
-        function toggleGrammarFavorite(itemId) {
-            const numericId = Number(itemId);
-            if (Number.isNaN(numericId)) {
-                return;
-            }
-            const index = grammarFavorites.indexOf(numericId);
-            if (index === -1) {
-                grammarFavorites.push(numericId);
-            } else {
-                grammarFavorites.splice(index, 1);
-            }
-            saveGrammarFavorites();
-            if (grammarFavoritesOnly) {
-                if (!isGrammarFavorite(numericId) && Number(grammarSelectedId) === numericId) {
-                    grammarSelectedId = null;
-                    grammarExpandedExamplesId = null;
+        function syncAllGrammarFavoriteButtons() {
+            const ids = new Set(
+                Array.from(document.querySelectorAll("[data-grammar-favorite]"))
+                    .map((button) => button.getAttribute("data-grammar-favorite"))
+                    .filter(Boolean)
+            );
+            ids.forEach(syncGrammarFavoriteButtons);
+            document.querySelectorAll("[data-grammar-favorites-count]").forEach((counter) => {
+                counter.textContent = String(getGrammarFavoriteRecords().length);
+            });
+        }
+
+        function toggleGrammarFavorite(grammarId) {
+            const canonicalId = String(grammarId || "").trim();
+            const store = getGrammarFavoritesStore();
+            if (!canonicalId || !store || typeof store.toggle !== "function") return;
+            store.toggle(canonicalId);
+        }
+
+        function getGrammarFavoriteItems() {
+            return getGrammarFavoriteRecords()
+                .map((record) => {
+                    const item = getGrammarItemByCanonicalId(record.grammarId);
+                    return item ? Object.assign({}, item, { addedAt: record.addedAt }) : null;
+                })
+                .filter(Boolean);
+        }
+
+        function getGrammarFavoriteResults() {
+            const query = normalizeGrammarText(grammarFavoritesQuery);
+            const favoriteItems = getGrammarFavoriteItems()
+                .filter((item) => {
+                    const matchBook = grammarFavoritesBookFilter === "all" || item.book === grammarFavoritesBookFilter;
+                    const matchLevel = grammarFavoritesLevelFilter === "all" || item.level === grammarFavoritesLevelFilter;
+                    const matchQuery = !query
+                        || normalizeGrammarText(item.title).includes(query)
+                        || normalizeGrammarText(item.meaning).includes(query)
+                        || normalizeGrammarText(item.connection).includes(query)
+                        || normalizeGrammarText(item.kana).includes(query)
+                        || normalizeGrammarText(item.romaji).includes(query)
+                        || normalizeGrammarText(item.tags).includes(query);
+                    return matchBook && matchLevel && matchQuery;
+                });
+
+            return favoriteItems.sort((a, b) => {
+                if (grammarFavoritesSort === "title") {
+                    return String(a.title || "").replace(/^～/, "").localeCompare(
+                        String(b.title || "").replace(/^～/, ""),
+                        "ja"
+                    );
                 }
-                refreshGrammarSearchPanel();
-                return;
-            }
-            syncGrammarFavoriteButtons(numericId);
+                if (grammarFavoritesSort === "level") {
+                    const levelOrder = { N1: 1, N2: 2, N3: 3 };
+                    return (levelOrder[a.level] || 9) - (levelOrder[b.level] || 9)
+                        || String(a.title || "").localeCompare(String(b.title || ""), "ja");
+                }
+                return String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
+            });
         }
 
         function getGrammarLevelBadgeClass(level) {
@@ -14063,11 +14750,11 @@
         }
 
         function getGrammarResultMarkup(item) {
-            const isFav = isGrammarFavorite(item.id);
+            const isFav = isGrammarFavorite(item.canonicalId);
             const levelClass = getGrammarLevelBadgeClass(item.level);
             return `
                 <article class="grammar-legacy-card" data-grammar-select="${escapeHtml(item.id)}" role="button" tabindex="0">
-                    <button type="button" class="grammar-legacy-star${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.id)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}">${isFav ? "★" : "☆"}</button>
+                    <button type="button" class="grammar-legacy-star${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}">${isFav ? "★" : "☆"}</button>
                     <div class="grammar-legacy-card-header">
                         <h3 class="grammar-legacy-card-title">${escapeHtml(item.title || "未命名文法")}</h3>
                         <div class="grammar-legacy-badge-group">
@@ -14117,7 +14804,7 @@
                 return "";
             }
 
-            const isFav = isGrammarFavorite(item.id);
+            const isFav = isGrammarFavorite(item.canonicalId);
             const examples = Array.isArray(item.examples) ? item.examples : [];
             const extraExamples = getGrammarExtraExamples(item.id);
             const isExamplesExpanded = Number(grammarExpandedExamplesId) === Number(item.id);
@@ -14146,7 +14833,7 @@
                                     ${lessonBadges}
                                 </div>
                             </div>
-                            <button type="button" class="grammar-legacy-modal-fav${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.id)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}">${isFav ? "★" : "☆"}</button>
+                            <button type="button" class="grammar-legacy-modal-fav${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}">${isFav ? "★" : "☆"}</button>
                         </div>
                         <div class="grammar-legacy-modal-body">
                             <div class="grammar-legacy-detail-item">
@@ -14185,9 +14872,218 @@
             `;
         }
 
+        function getGrammarCenterActionMarkup() {
+            const count = getGrammarFavoriteRecords().length;
+            const isFavorites = grammarActiveView === "favorites";
+            return `
+                <div class="grammar-center-action">
+                    <button type="button" class="grammar-center-favorite-entry" data-grammar-center-view="${isFavorites ? "search" : "favorites"}" aria-label="${isFavorites ? "返回语法搜索" : `打开我的收藏，共 ${count} 条`}">
+                        <span class="grammar-center-favorite-entry-icon" aria-hidden="true">${isFavorites ? "←" : "☆"}</span>
+                        <span>${isFavorites ? "返回语法搜索" : "我的收藏"}</span>
+                        ${isFavorites ? "" : `<span class="grammar-center-favorite-entry-count" data-grammar-favorites-count>${count}</span>`}
+                    </button>
+                </div>
+            `;
+        }
+
+        function getGrammarSearchViewMarkup() {
+            const results = getGrammarSearchResults();
+            const hasQuery = Boolean(normalizeGrammarText(grammarSearchQuery));
+            const bookOptions = getGrammarBookOptions();
+
+            return `
+                <section class="grammar-legacy-hero">
+                    <h2 class="grammar-legacy-title">日本語文法検索</h2>
+                    <p class="grammar-legacy-subtitle">快速查找语法、接续与例句</p>
+                    <div class="grammar-legacy-search-container">
+                        <input type="text" class="grammar-legacy-search-input" value="${escapeHtml(grammarSearchQuery)}" placeholder="输入语法关键词、特征或假名（如：niitattewa / 举例）..." data-grammar-search-input>
+                        <button type="button" class="grammar-legacy-search-clear" data-grammar-search-clear="search" aria-label="清空搜索"${grammarSearchQuery ? "" : " hidden"}>✕</button>
+                    </div>
+                    <div class="grammar-legacy-filter-bar">
+                        <select class="grammar-legacy-filter-select" data-grammar-book-filter aria-label="筛选书籍">
+                            <option value="all"${grammarBookFilter === "all" ? " selected" : ""}>📖 全部书籍</option>
+                            ${bookOptions.map((book) => `<option value="${escapeHtml(book)}"${grammarBookFilter === book ? " selected" : ""}>${escapeHtml(book)}</option>`).join("")}
+                        </select>
+                        <select class="grammar-legacy-filter-select" data-grammar-level-filter aria-label="筛选等级">
+                            <option value="all"${grammarLevelFilter === "all" ? " selected" : ""}>🎓 全部等级</option>
+                            <option value="N1"${grammarLevelFilter === "N1" ? " selected" : ""}>🔴 N1</option>
+                            <option value="N2"${grammarLevelFilter === "N2" ? " selected" : ""}>🔵 N2</option>
+                            <option value="N3"${grammarLevelFilter === "N3" ? " selected" : ""}>🟢 N3</option>
+                        </select>
+                    </div>
+                </section>
+                <div class="grammar-legacy-container">
+                    <div class="grammar-legacy-status${hasQuery && !results.length ? " is-visible" : ""}">
+                        ${hasQuery && !results.length ? `
+                            <span class="grammar-legacy-status-icon" aria-hidden="true">⌕</span>
+                            <h3>未找到结果</h3>
+                        ` : ""}
+                    </div>
+                    <div class="grammar-legacy-grid">${hasQuery ? results.map(getGrammarResultMarkup).join("") : ""}</div>
+                </div>
+            `;
+        }
+
+        function getGrammarFavoriteCardMarkup(item) {
+            const levelClass = getGrammarLevelBadgeClass(item.level);
+            return `
+                <article class="grammar-favorite-card" data-grammar-select="${escapeHtml(item.id)}" role="button" tabindex="0" aria-label="查看 ${escapeHtml(item.title || "语法")} 的完整讲解">
+                    <div class="grammar-favorite-card-name">
+                        <h3 lang="ja">${escapeHtml(item.title || "未命名文法")}</h3>
+                        <div class="grammar-legacy-badge-group">
+                            <span class="grammar-legacy-badge ${levelClass}">${escapeHtml(item.level || "")}</span>
+                            <span class="grammar-legacy-badge">${escapeHtml(item.book || "")}${item.lesson ? ` · ${escapeHtml(item.lesson)}` : ""}</span>
+                        </div>
+                    </div>
+                    <p class="grammar-favorite-card-meaning">${escapeHtml(item.meaning || "")}</p>
+                    <p class="grammar-favorite-card-connection"><span>接续</span>${escapeHtml(item.connection || "暂无接续信息")}</p>
+                    <button type="button" class="grammar-legacy-star is-fav" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="取消收藏 ${escapeHtml(item.title)}" aria-pressed="true">★</button>
+                </article>
+            `;
+        }
+
+        function getGrammarFavoritesEmptyMarkup(filtered) {
+            return `
+                <div class="grammar-favorites-empty">
+                    <span aria-hidden="true">${filtered ? "⌕" : "☆"}</span>
+                    <h3>${filtered ? "没有符合当前条件的收藏" : "还没有收藏的语法表达"}</h3>
+                    <p>${filtered ? "可以调整关键词或筛选条件。" : "在语法搜索中点击星标，语法会集中显示在这里。"}</p>
+                    ${filtered ? "" : `<button type="button" data-grammar-center-view="search">去搜索语法</button>`}
+                </div>
+            `;
+        }
+
+        function getGrammarFavoritesBrowseMarkup(results) {
+            const hasAnyFavorites = getGrammarFavoriteRecords().length > 0;
+            if (!results.length) return getGrammarFavoritesEmptyMarkup(hasAnyFavorites);
+            return `<div class="grammar-favorites-grid">${results.map(getGrammarFavoriteCardMarkup).join("")}</div>`;
+        }
+
+        function getGrammarFavoritesReviewMarkup(results) {
+            const hasAnyFavorites = getGrammarFavoriteRecords().length > 0;
+            if (!results.length) return getGrammarFavoritesEmptyMarkup(hasAnyFavorites);
+
+            grammarFavoritesReviewIndex = Math.max(0, Math.min(grammarFavoritesReviewIndex, results.length - 1));
+            const item = results[grammarFavoritesReviewIndex];
+            const levelClass = getGrammarLevelBadgeClass(item.level);
+            const example = Array.isArray(item.examples) ? item.examples[0] : null;
+
+            return `
+                <section class="grammar-review-stage" tabindex="0" data-grammar-review-stage aria-label="语法快速复习">
+                    <div class="grammar-review-progress">
+                        <span>${grammarFavoritesReviewIndex + 1} / ${results.length}</span>
+                        <button type="button" class="grammar-legacy-star is-fav" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="取消收藏 ${escapeHtml(item.title)}" aria-pressed="true">★</button>
+                    </div>
+                    <article class="grammar-review-card">
+                        <div class="grammar-review-question">
+                            <span class="grammar-legacy-badge ${levelClass}">${escapeHtml(item.level || "")}</span>
+                            <h3 lang="ja">${escapeHtml(item.title || "未命名文法")}</h3>
+                        </div>
+                        <div class="grammar-review-answer${grammarFavoritesReviewRevealed ? " is-revealed" : ""}" aria-hidden="${!grammarFavoritesReviewRevealed}">
+                            <div>
+                                <small>含义</small>
+                                <p>${escapeHtml(item.meaning || "")}</p>
+                            </div>
+                            <div>
+                                <small>接续</small>
+                                <p>${escapeHtml(item.connection || "暂无接续信息")}</p>
+                            </div>
+                            ${example ? `
+                                <div>
+                                    <small>例句</small>
+                                    ${getGrammarExampleMarkup(example)}
+                                </div>
+                            ` : ""}
+                        </div>
+                        <button type="button" class="grammar-review-reveal" data-grammar-review-reveal aria-expanded="${grammarFavoritesReviewRevealed}">
+                            ${grammarFavoritesReviewRevealed ? "收起说明" : "显示说明"}
+                        </button>
+                    </article>
+                    <div class="grammar-review-actions">
+                        <button type="button" data-grammar-review-prev ${grammarFavoritesReviewIndex === 0 ? "disabled" : ""}>← 上一个</button>
+                        <button type="button" data-grammar-select="${escapeHtml(item.id)}">查看完整讲解</button>
+                        <button type="button" data-grammar-review-next ${grammarFavoritesReviewIndex === results.length - 1 ? "disabled" : ""}>下一个 →</button>
+                    </div>
+                </section>
+            `;
+        }
+
+        function getGrammarFavoritesContentMarkup() {
+            const results = getGrammarFavoriteResults();
+            return grammarFavoritesMode === "review"
+                ? getGrammarFavoritesReviewMarkup(results)
+                : getGrammarFavoritesBrowseMarkup(results);
+        }
+
+        function getGrammarFavoritesViewMarkup() {
+            const bookOptions = getGrammarBookOptions();
+            const results = getGrammarFavoriteResults();
+            const hasFavorites = getGrammarFavoriteRecords().length > 0;
+            const hasActiveFilters = Boolean(normalizeGrammarText(grammarFavoritesQuery))
+                || grammarFavoritesBookFilter !== "all"
+                || grammarFavoritesLevelFilter !== "all";
+            return `
+                <div class="grammar-favorites-shell">
+                    <div class="grammar-favorites-workspace">
+                        <section class="grammar-favorites-library${grammarFavoritesMode === "review" ? " is-review-mode" : ""}">
+                            ${grammarFavoritesMode === "review" ? `
+                                <header class="grammar-favorites-review-toolbar">
+                                    <div>
+                                        <strong>快速复习</strong>
+                                        <span data-grammar-favorites-result-count>${results.length} 条语法</span>
+                                    </div>
+                                    <button type="button" class="grammar-favorites-review-button" data-grammar-favorites-mode="browse" data-grammar-favorites-review-entry-action>
+                                        返回收藏列表
+                                    </button>
+                                </header>
+                            ` : `
+                                <header class="grammar-favorites-library-head">
+                                    <div class="grammar-favorites-library-title">
+                                        <h2>${hasActiveFilters ? "筛选结果" : "全部收藏"}</h2>
+                                        <span data-grammar-favorites-result-count>${results.length} 条语法</span>
+                                    </div>
+                                    <div class="grammar-favorites-library-tools">
+                                        <div class="grammar-favorites-search">
+                                            <input type="text" value="${escapeHtml(grammarFavoritesQuery)}" placeholder="收藏内搜索" aria-label="在收藏中搜索语法、含义或接续" data-grammar-favorites-input>
+                                            <button type="button" data-grammar-search-clear="favorites" aria-label="清空收藏搜索"${grammarFavoritesQuery ? "" : " hidden"}>✕</button>
+                                        </div>
+                                        <select data-grammar-favorites-book aria-label="筛选收藏教材">
+                                            <option value="all"${grammarFavoritesBookFilter === "all" ? " selected" : ""}>全部教材</option>
+                                            ${bookOptions.map((book) => `<option value="${escapeHtml(book)}"${grammarFavoritesBookFilter === book ? " selected" : ""}>${escapeHtml(book)}</option>`).join("")}
+                                        </select>
+                                        <select data-grammar-favorites-level aria-label="筛选收藏等级">
+                                            <option value="all"${grammarFavoritesLevelFilter === "all" ? " selected" : ""}>全部等级</option>
+                                            <option value="N1"${grammarFavoritesLevelFilter === "N1" ? " selected" : ""}>N1</option>
+                                            <option value="N2"${grammarFavoritesLevelFilter === "N2" ? " selected" : ""}>N2</option>
+                                            <option value="N3"${grammarFavoritesLevelFilter === "N3" ? " selected" : ""}>N3</option>
+                                        </select>
+                                        <select data-grammar-favorites-sort aria-label="收藏排序">
+                                            <option value="recent"${grammarFavoritesSort === "recent" ? " selected" : ""}>最近收藏</option>
+                                            <option value="title"${grammarFavoritesSort === "title" ? " selected" : ""}>语法名称</option>
+                                            <option value="level"${grammarFavoritesSort === "level" ? " selected" : ""}>等级顺序</option>
+                                        </select>
+                                        ${hasFavorites ? `
+                                            <button type="button" class="grammar-favorites-review-button" data-grammar-favorites-mode="review" data-grammar-favorites-review-entry-action${results.length ? "" : " disabled"}>
+                                                开始复习 →
+                                            </button>
+                                        ` : ""}
+                                    </div>
+                                </header>
+                            `}
+                            <div class="grammar-favorites-content" data-grammar-favorites-content>
+                                ${grammarFavoritesMode === "review"
+                                    ? getGrammarFavoritesReviewMarkup(results)
+                                    : getGrammarFavoritesBrowseMarkup(results)}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            `;
+        }
+
         function getGrammarSearchPanelMarkup() {
             const repo = getGrammarRepo();
-            if (!repo) {
+            if (!repo || !getGrammarFavoritesStore()) {
                 return `
                     <div class="grammar-legacy-search">
                         <div class="grammar-legacy-status is-visible">语法数据库暂时没有加载完成。</div>
@@ -14195,45 +15091,10 @@
                 `;
             }
 
-            const results = getGrammarSearchResults();
-            const hasQuery = Boolean(normalizeGrammarText(grammarSearchQuery));
-            const shouldShowResults = hasQuery || grammarFavoritesOnly;
-            const bookOptions = getGrammarBookOptions();
-
             return `
-                <div class="grammar-legacy-search" data-grammar-search-panel>
-                    <section class="grammar-legacy-hero">
-                        <h2 class="grammar-legacy-title">日本語文法検索</h2>
-                        <p class="grammar-legacy-subtitle">快速查找语法、接续与例句</p>
-                        <div class="grammar-legacy-search-container">
-                            <input type="text" class="grammar-legacy-search-input" value="${escapeHtml(grammarSearchQuery)}" placeholder="输入语法关键词、特征或假名（如：niitattewa / 举例）..." data-grammar-search-input>
-                            <button type="button" class="grammar-legacy-search-clear" data-grammar-search-clear aria-label="清空搜索"${grammarSearchQuery ? "" : " hidden"}>✕</button>
-                        </div>
-                        <div class="grammar-legacy-filter-bar">
-                            <select class="grammar-legacy-filter-select" data-grammar-book-filter aria-label="筛选书籍">
-                                <option value="all"${grammarBookFilter === "all" ? " selected" : ""}>📖 全部书籍</option>
-                                ${bookOptions.map((book) => `<option value="${escapeHtml(book)}"${grammarBookFilter === book ? " selected" : ""}>${escapeHtml(book)}</option>`).join("")}
-                            </select>
-                            <select class="grammar-legacy-filter-select" data-grammar-level-filter aria-label="筛选等级">
-                                <option value="all"${grammarLevelFilter === "all" ? " selected" : ""}>🎓 全部等级</option>
-                                <option value="N1"${grammarLevelFilter === "N1" ? " selected" : ""}>🔴 N1</option>
-                                <option value="N2"${grammarLevelFilter === "N2" ? " selected" : ""}>🔵 N2</option>
-                                <option value="N3"${grammarLevelFilter === "N3" ? " selected" : ""}>🟢 N3</option>
-                            </select>
-                            <button type="button" class="grammar-legacy-favorites-filter${grammarFavoritesOnly ? " is-active" : ""}" data-grammar-favorites-filter aria-pressed="${grammarFavoritesOnly}">
-                                <span aria-hidden="true">${grammarFavoritesOnly ? "★" : "☆"}</span>
-                                <span>收藏语法</span>
-                                <span class="grammar-legacy-favorites-count" data-grammar-favorites-count>${grammarFavorites.length}</span>
-                            </button>
-                        </div>
-                    </section>
-                    <div class="grammar-legacy-container">
-                        <div class="grammar-legacy-status${shouldShowResults && !results.length ? " is-visible" : ""}">
-                            <span class="grammar-legacy-status-icon" aria-hidden="true">${grammarFavoritesOnly ? "☆" : "⌕"}</span>
-                            <h3>${grammarFavoritesOnly ? "还没有收藏的语法表达" : "未找到结果"}</h3>
-                        </div>
-                        <div class="grammar-legacy-grid">${shouldShowResults ? results.map(getGrammarResultMarkup).join("") : ""}</div>
-                    </div>
+                <div class="grammar-legacy-search" data-grammar-search-panel data-grammar-center-active="${grammarActiveView}">
+                    ${getGrammarCenterActionMarkup()}
+                    ${grammarActiveView === "favorites" ? getGrammarFavoritesViewMarkup() : getGrammarSearchViewMarkup()}
                     <div class="grammar-legacy-modal-host" data-grammar-modal-host></div>
                 </div>
             `;
@@ -14248,6 +15109,11 @@
             panel.dataset.rendered = "grammar-search:root";
             grammarSearchPanelDirty = false;
             updateGrammarModalHost();
+            requestAnimationFrame(() => {
+                if (contentPanel) {
+                    contentPanel.scrollTop = grammarViewScrollPositions[grammarActiveView] || 0;
+                }
+            });
         }
 
         function updateGrammarSearchResultsOnly() {
@@ -14256,9 +15122,9 @@
                 return false;
             }
 
+            if (grammarActiveView !== "search") return false;
             const results = getGrammarSearchResults();
             const hasQuery = Boolean(normalizeGrammarText(grammarSearchQuery));
-            const shouldShowResults = hasQuery || grammarFavoritesOnly;
             const clearButton = panel.querySelector("[data-grammar-search-clear]");
             const status = panel.querySelector(".grammar-legacy-status");
             const grid = panel.querySelector(".grammar-legacy-grid");
@@ -14268,22 +15134,46 @@
             }
 
             if (status) {
-                const isEmpty = shouldShowResults && !results.length;
+                const isEmpty = hasQuery && !results.length;
                 status.classList.toggle("is-visible", isEmpty);
                 status.innerHTML = isEmpty
                     ? `
-                        <span class="grammar-legacy-status-icon" aria-hidden="true">${grammarFavoritesOnly ? "☆" : "⌕"}</span>
-                        <h3>${grammarFavoritesOnly ? "还没有收藏的语法表达" : "未找到结果"}</h3>
+                        <span class="grammar-legacy-status-icon" aria-hidden="true">⌕</span>
+                        <h3>未找到结果</h3>
                     `
                     : "";
             }
 
             if (grid) {
-                grid.innerHTML = shouldShowResults ? results.map(getGrammarResultMarkup).join("") : "";
+                grid.innerHTML = hasQuery ? results.map(getGrammarResultMarkup).join("") : "";
             }
 
             updateGrammarModalHost();
 
+            grammarSearchPanelDirty = false;
+            return true;
+        }
+
+        function updateGrammarFavoritesResultsOnly() {
+            const panel = featurePanels.querySelector("[data-grammar-search-panel]");
+            if (!panel || activeSection !== "grammar-search" || grammarActiveView !== "favorites") {
+                return false;
+            }
+            const content = panel.querySelector("[data-grammar-favorites-content]");
+            const clearButton = panel.querySelector('[data-grammar-search-clear="favorites"]');
+            if (clearButton) clearButton.hidden = !grammarFavoritesQuery;
+            if (content) content.innerHTML = getGrammarFavoritesContentMarkup();
+            const resultCount = panel.querySelector("[data-grammar-favorites-result-count]");
+            const currentResults = getGrammarFavoriteResults();
+            if (resultCount) resultCount.textContent = `${currentResults.length} 条语法`;
+            const reviewEntryAction = panel.querySelector("[data-grammar-favorites-review-entry-action]");
+            if (reviewEntryAction) {
+                reviewEntryAction.disabled = grammarFavoritesMode !== "review" && currentResults.length === 0;
+            }
+            document.querySelectorAll("[data-grammar-favorites-count]").forEach((counter) => {
+                counter.textContent = String(getGrammarFavoriteRecords().length);
+            });
+            updateGrammarModalHost();
             grammarSearchPanelDirty = false;
             return true;
         }
@@ -14355,7 +15245,10 @@
             if (activeSection === "grammar-search") {
                 renderSection("grammar-search", false, false);
                 if (options.focusSearch) {
-                    const input = featurePanels.querySelector("[data-grammar-search-input]");
+                    const selector = options.searchContext === "favorites"
+                        ? "[data-grammar-favorites-input]"
+                        : "[data-grammar-search-input]";
+                    const input = featurePanels.querySelector(selector);
                     if (input) {
                         input.focus();
                         input.setSelectionRange(input.value.length, input.value.length);
@@ -15134,8 +16027,34 @@
             });
         }
 
-        function getGrammarDirectoryRowMarkup(item, number, view) {
+        const HOME_GRAMMAR_LAST_VIEWED_KEY = "kijiHomeGrammarLastViewedV1";
+
+        function getLastViewedGrammarEntry() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(HOME_GRAMMAR_LAST_VIEWED_KEY) || "null");
+                return saved && typeof saved.id === "string" ? saved : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function saveLastViewedGrammarEntry(entry) {
+            if (!entry || !entry.id) return;
+            try {
+                localStorage.setItem(HOME_GRAMMAR_LAST_VIEWED_KEY, JSON.stringify({
+                    id: entry.id,
+                    title: entry.title || "",
+                    href: entry.href || "",
+                    viewedAt: new Date().toISOString()
+                }));
+            } catch (error) {
+                // Browsing still works when storage is unavailable.
+            }
+        }
+
+        function getGrammarDirectoryRowMarkup(item, number, view, lastViewedId = "") {
             if (!item) return "";
+            const isLastViewed = item.id === lastViewedId;
             const content = `
                     <span class="home-grammar-directory-number">${String(number).padStart(2, "0")}</span>
                     <span class="home-grammar-directory-row-copy">
@@ -15153,7 +16072,7 @@
                 `;
             }
             return `
-                <a class="home-grammar-directory-row" href="${escapeHtml(appendReturnParam(item.href, "daily", view.sectionPath))}">
+                <a class="home-grammar-directory-row${isLastViewed ? " is-last-viewed" : ""}" href="${escapeHtml(appendReturnParam(item.href, "daily", view.sectionPath))}" data-grammar-directory-entry="${escapeHtml(item.id)}" data-grammar-directory-title="${escapeHtml(item.title)}" data-grammar-directory-href="${escapeHtml(item.href)}"${isLastViewed ? ' data-last-viewed="true"' : ""}>
                     ${content}
                 </a>
             `;
@@ -15161,6 +16080,8 @@
 
         function renderGrammarDirectory(panel, view) {
             const items = new Map(view.items.map((item) => [item.id, item]));
+            const lastViewedGrammarEntry = getLastViewedGrammarEntry();
+            const lastViewedGrammarId = lastViewedGrammarEntry ? lastViewedGrammarEntry.id : "";
             const groups = [
                 {
                     className: "foundation",
@@ -15175,7 +16096,7 @@
                 {
                     className: "expression",
                     label: ["表", "現"],
-                    rows: [["daily-grammar-conjunction", 11], ["daily-grammar-compound-particle", 12], ["daily-grammar-keigo", 13], ["daily-grammar-conditional", 14], ["daily-grammar-formal-noun", 15]]
+                    rows: [["daily-grammar-conjunction", 11], ["daily-grammar-compound-particle", 12], ["daily-grammar-keigo", 13], ["daily-grammar-conditional", 14], ["daily-grammar-formal-noun", 15], ["daily-grammar-te-auxiliary", 16], ["daily-grammar-appearance", 17]]
                 }
             ];
             const groupMarkup = groups.map((group) => `
@@ -15184,7 +16105,7 @@
                         ${group.label.map((character) => `<span>${character}</span>`).join("")}
                     </div>
                     <div class="home-grammar-directory-rows">
-                        ${group.rows.map(([id, number]) => getGrammarDirectoryRowMarkup(items.get(id), number, view)).join("")}
+                        ${group.rows.map(([id, number]) => getGrammarDirectoryRowMarkup(items.get(id), number, view, lastViewedGrammarId)).join("")}
                     </div>
                 </section>
             `).join("");
@@ -15212,7 +16133,8 @@
                     </section>
 
                     <div class="home-grammar-directory-title-row">
-                        <h3>学习路径</h3>
+                        <h3><span class="home-grammar-directory-title-desktop">学习路径</span><span class="home-grammar-directory-title-mobile">语法学习</span></h3>
+                        <button type="button" class="section-view-back home-grammar-directory-back-mobile" data-section-back="daily" data-section-back-path="${escapeHtml((view.parentPath || []).join("/"))}">${getArrowSvg("left")} 返回上一层</button>
                         <span aria-hidden="true"></span>
                     </div>
 
@@ -15478,6 +16400,68 @@
             })).join("");
         }
 
+        function getMobileCombinedStudyCardMarkup(item, sectionKey) {
+            if (!item) return "";
+            const cover = item.cover || "";
+            const content = `
+                <span class="mobile-combined-study-card__cover" aria-hidden="true">
+                    ${cover ? `<img src="${escapeHtml(cover)}" alt="" loading="lazy" decoding="async">` : ""}
+                </span>
+                <span class="mobile-combined-study-card__footer">
+                    <strong>${escapeHtml(item.title)}</strong>
+                    <span aria-hidden="true">›</span>
+                </span>
+            `;
+
+            if (item.disabled) {
+                return `<div class="mobile-combined-study-card is-disabled" aria-disabled="true">${content}</div>`;
+            }
+
+            if (hasChildItems(item)) {
+                return `
+                    <button type="button" class="mobile-combined-study-card" data-section-path="${escapeHtml(item.id)}" data-section-key="${escapeHtml(sectionKey)}" aria-label="查看 ${escapeHtml(item.title)} 的具体入口">
+                        ${content}
+                    </button>
+                `;
+            }
+
+            return `
+                <a class="mobile-combined-study-card" href="${escapeHtml(appendReturnParam(item.href, sectionKey, []))}">
+                    ${content}
+                </a>
+            `;
+        }
+
+        function getMobileCombinedStudyDirectoryMarkup() {
+            const sections = [
+                { key: "daily", title: "日常学习", label: "DAILY LEARNING" },
+                { key: "exam", title: "备考专区", label: "JLPT PREPARATION" }
+            ];
+
+            return `
+                <section class="mobile-combined-study-directory" aria-labelledby="mobile-combined-study-title">
+                    <header class="mobile-combined-study-head">
+                        <span>LEARNING INDEX</span>
+                        <h2 id="mobile-combined-study-title">学习目录</h2>
+                    </header>
+                    ${sections.map((section) => `
+                        <section class="mobile-combined-study-section" aria-labelledby="mobile-combined-study-${section.key}">
+                            <div class="mobile-combined-study-section-head">
+                                <div>
+                                    <span>${escapeHtml(section.label)}</span>
+                                    <h3 id="mobile-combined-study-${section.key}">${escapeHtml(section.title)}</h3>
+                                </div>
+                                <span aria-hidden="true"></span>
+                            </div>
+                            <div class="mobile-combined-study-grid">
+                                ${(HOME_SECTIONS[section.key]?.items || []).map((item) => getMobileCombinedStudyCardMarkup(item, section.key)).join("")}
+                            </div>
+                        </section>
+                    `).join("")}
+                </section>
+            `;
+        }
+
         function getOrCreateSectionPanel(sectionKey) {
             if (sectionPanels.has(sectionKey)) {
                 return sectionPanels.get(sectionKey);
@@ -15542,7 +16526,16 @@
                 return panel;
             }
 
-            panel.innerHTML = `
+            const isMainStudyRoot = !view.isNested && (sectionKey === "daily" || sectionKey === "exam");
+            panel.innerHTML = isMainStudyRoot ? `
+                <div class="desktop-study-root-directory">
+                    ${getSectionHeaderMarkup(sectionKey, view)}
+                    <div class="feature-grid" data-section-grid="${escapeHtml(sectionKey)}" data-view-depth="${depth}">
+                        ${getSectionGridMarkup(sectionKey, view.sectionPath)}
+                    </div>
+                </div>
+                ${getMobileCombinedStudyDirectoryMarkup()}
+            ` : `
                 ${getSectionHeaderMarkup(sectionKey, view)}
                 <div class="feature-grid" data-section-grid="${escapeHtml(sectionKey)}" data-view-depth="${depth}">
                     ${getSectionGridMarkup(sectionKey, view.sectionPath)}
@@ -15939,7 +16932,7 @@
             grammarExpandedExamplesId = null;
             updateGrammarModalHost();
             document.body.classList.add("is-home-view");
-            document.body.classList.remove("is-daily-reading-directory", "is-culture-music-directory", "is-grammar-directory", "is-study-directory");
+            document.body.classList.remove("is-daily-reading-directory", "is-culture-music-directory", "is-grammar-directory", "is-study-directory", "is-tool-content-only");
             setActiveSwitch(null);
             noticePanel.classList.remove("is-hidden");
             contentPanel.classList.add("is-hidden");
@@ -15966,6 +16959,10 @@
                 updateGrammarModalHost();
             }
             document.body.classList.remove("is-home-view");
+            document.body.classList.toggle(
+                "is-tool-content-only",
+                sectionKey === "grammar-search" || sectionKey === "word-bank"
+            );
             document.body.classList.toggle(
                 "is-daily-reading-directory",
                 isDailyReadingDirectoryPath(sectionKey, activeSectionPath)
@@ -16105,6 +17102,15 @@
         });
 
         featurePanels.addEventListener("click", (event) => {
+            const grammarDirectoryEntry = event.target.closest("[data-grammar-directory-entry]");
+            if (grammarDirectoryEntry) {
+                saveLastViewedGrammarEntry({
+                    id: grammarDirectoryEntry.getAttribute("data-grammar-directory-entry") || "",
+                    title: grammarDirectoryEntry.getAttribute("data-grammar-directory-title") || "",
+                    href: grammarDirectoryEntry.getAttribute("data-grammar-directory-href") || ""
+                });
+            }
+
             const backTarget = event.target.closest("[data-section-back]");
             if (backTarget) {
                 event.preventDefault();
@@ -16142,6 +17148,7 @@
                 event.preventDefault();
                 const grammarId = Number(siteGrammarTarget.getAttribute("data-site-search-grammar-id"));
                 const item = getGrammarItemById(grammarId);
+                grammarActiveView = "search";
                 grammarSearchQuery = item ? String(item.title || "").replace(/^～/, "") : siteSearchQuery;
                 grammarSelectedId = Number.isNaN(grammarId) ? null : grammarId;
                 grammarExpandedExamplesId = null;
@@ -16178,13 +17185,59 @@
                 return;
             }
 
-            const grammarFavoritesFilterTarget = event.target.closest("[data-grammar-favorites-filter]");
-            if (grammarFavoritesFilterTarget) {
+            const grammarCenterViewTarget = event.target.closest("[data-grammar-center-view]");
+            if (grammarCenterViewTarget) {
                 event.preventDefault();
-                grammarFavoritesOnly = !grammarFavoritesOnly;
+                grammarViewScrollPositions[grammarActiveView] = contentPanel ? contentPanel.scrollTop : 0;
+                grammarActiveView = grammarCenterViewTarget.getAttribute("data-grammar-center-view") === "favorites"
+                    ? "favorites"
+                    : "search";
                 grammarSelectedId = null;
                 grammarExpandedExamplesId = null;
                 refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarFavoritesModeTarget = event.target.closest("[data-grammar-favorites-mode]");
+            if (grammarFavoritesModeTarget) {
+                event.preventDefault();
+                grammarFavoritesMode = grammarFavoritesModeTarget.getAttribute("data-grammar-favorites-mode") === "review"
+                    ? "review"
+                    : "browse";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarReviewRevealTarget = event.target.closest("[data-grammar-review-reveal]");
+            if (grammarReviewRevealTarget) {
+                event.preventDefault();
+                grammarFavoritesReviewRevealed = !grammarFavoritesReviewRevealed;
+                updateGrammarFavoritesResultsOnly();
+                requestAnimationFrame(() => {
+                    const reveal = featurePanels.querySelector("[data-grammar-review-reveal]");
+                    if (reveal) reveal.focus();
+                });
+                return;
+            }
+
+            const grammarReviewPrevTarget = event.target.closest("[data-grammar-review-prev]");
+            if (grammarReviewPrevTarget) {
+                event.preventDefault();
+                grammarFavoritesReviewIndex = Math.max(0, grammarFavoritesReviewIndex - 1);
+                grammarFavoritesReviewRevealed = false;
+                updateGrammarFavoritesResultsOnly();
+                return;
+            }
+
+            const grammarReviewNextTarget = event.target.closest("[data-grammar-review-next]");
+            if (grammarReviewNextTarget) {
+                event.preventDefault();
+                const total = getGrammarFavoriteResults().length;
+                grammarFavoritesReviewIndex = Math.min(Math.max(0, total - 1), grammarFavoritesReviewIndex + 1);
+                grammarFavoritesReviewRevealed = false;
+                updateGrammarFavoritesResultsOnly();
                 return;
             }
 
@@ -16210,10 +17263,17 @@
             const grammarClearTarget = event.target.closest("[data-grammar-search-clear]");
             if (grammarClearTarget) {
                 event.preventDefault();
-                grammarSearchQuery = "";
+                const clearContext = grammarClearTarget.getAttribute("data-grammar-search-clear");
+                if (clearContext === "favorites") {
+                    grammarFavoritesQuery = "";
+                    grammarFavoritesReviewIndex = 0;
+                    grammarFavoritesReviewRevealed = false;
+                } else {
+                    grammarSearchQuery = "";
+                }
                 grammarSelectedId = null;
                 grammarExpandedExamplesId = null;
-                refreshGrammarSearchPanel({ focusSearch: true });
+                refreshGrammarSearchPanel({ focusSearch: true, searchContext: clearContext });
                 return;
             }
 
@@ -16313,6 +17373,47 @@
             }
         });
 
+        featurePanels.addEventListener("keydown", (event) => {
+            const reviewStage = event.target.closest("[data-grammar-review-stage]");
+            if (reviewStage && event.target === reviewStage) {
+                if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                    event.preventDefault();
+                    const results = getGrammarFavoriteResults();
+                    const direction = event.key === "ArrowRight" ? 1 : -1;
+                    grammarFavoritesReviewIndex = Math.max(
+                        0,
+                        Math.min(Math.max(0, results.length - 1), grammarFavoritesReviewIndex + direction)
+                    );
+                    grammarFavoritesReviewRevealed = false;
+                    updateGrammarFavoritesResultsOnly();
+                    requestAnimationFrame(() => {
+                        const stage = featurePanels.querySelector("[data-grammar-review-stage]");
+                        if (stage) stage.focus();
+                    });
+                    return;
+                }
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    grammarFavoritesReviewRevealed = !grammarFavoritesReviewRevealed;
+                    updateGrammarFavoritesResultsOnly();
+                    requestAnimationFrame(() => {
+                        const stage = featurePanels.querySelector("[data-grammar-review-stage]");
+                        if (stage) stage.focus();
+                    });
+                    return;
+                }
+            }
+
+            const grammarCard = event.target.closest(".grammar-legacy-card[data-grammar-select], .grammar-favorite-card[data-grammar-select]");
+            if (!grammarCard || event.target !== grammarCard || (event.key !== "Enter" && event.key !== " ")) {
+                return;
+            }
+            event.preventDefault();
+            grammarSelectedId = Number(grammarCard.getAttribute("data-grammar-select")) || null;
+            grammarExpandedExamplesId = null;
+            refreshGrammarModalOnly();
+        });
+
         featurePanels.addEventListener("compositionstart", (event) => {
             if (event.target.closest("[data-site-search-input]")) {
                 siteSearchComposing = true;
@@ -16320,7 +17421,7 @@
                 return;
             }
 
-            if (event.target.closest("[data-grammar-search-input]")) {
+            if (event.target.closest("[data-grammar-search-input], [data-grammar-favorites-input]")) {
                 grammarSearchComposing = true;
                 window.clearTimeout(grammarSearchTimer);
             }
@@ -16348,6 +17449,19 @@
                     grammarSelectedId = null;
                     grammarExpandedExamplesId = null;
                     updateGrammarSearchResultsOnly();
+                }, 90);
+                return;
+            }
+
+            const grammarFavoritesInput = event.target.closest("[data-grammar-favorites-input]");
+            if (grammarFavoritesInput) {
+                grammarSearchComposing = false;
+                grammarFavoritesQuery = grammarFavoritesInput.value;
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                window.clearTimeout(grammarSearchTimer);
+                grammarSearchTimer = window.setTimeout(() => {
+                    updateGrammarFavoritesResultsOnly();
                 }, 90);
             }
         });
@@ -16377,6 +17491,21 @@
                     grammarSelectedId = null;
                     grammarExpandedExamplesId = null;
                     updateGrammarSearchResultsOnly();
+                }, 90);
+                return;
+            }
+
+            const grammarFavoritesInput = event.target.closest("[data-grammar-favorites-input]");
+            if (grammarFavoritesInput) {
+                if (event.isComposing || grammarSearchComposing) {
+                    return;
+                }
+                grammarFavoritesQuery = grammarFavoritesInput.value;
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                window.clearTimeout(grammarSearchTimer);
+                grammarSearchTimer = window.setTimeout(() => {
+                    updateGrammarFavoritesResultsOnly();
                 }, 90);
                 return;
             }
@@ -16413,6 +17542,33 @@
                 grammarBookFilter = grammarBookTarget.value || "all";
                 grammarSelectedId = null;
                 grammarExpandedExamplesId = null;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarFavoritesLevelTarget = event.target.closest("[data-grammar-favorites-level]");
+            if (grammarFavoritesLevelTarget) {
+                grammarFavoritesLevelFilter = grammarFavoritesLevelTarget.value || "all";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarFavoritesBookTarget = event.target.closest("[data-grammar-favorites-book]");
+            if (grammarFavoritesBookTarget) {
+                grammarFavoritesBookFilter = grammarFavoritesBookTarget.value || "all";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarFavoritesSortTarget = event.target.closest("[data-grammar-favorites-sort]");
+            if (grammarFavoritesSortTarget) {
+                grammarFavoritesSort = grammarFavoritesSortTarget.value || "recent";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
                 refreshGrammarSearchPanel();
                 return;
             }
@@ -16631,6 +17787,23 @@
         mountStaticIcons();
         renderSupportCards();
         renderFavoritePresets();
+        const grammarFavoritesStore = getGrammarFavoritesStore();
+        if (grammarFavoritesStore && typeof grammarFavoritesStore.subscribe === "function") {
+            grammarFavoritesStore.subscribe(() => {
+                if (activeSection !== "grammar-search") return;
+                if (grammarActiveView === "favorites") {
+                    const results = getGrammarFavoriteResults();
+                    grammarFavoritesReviewIndex = Math.max(
+                        0,
+                        Math.min(grammarFavoritesReviewIndex, Math.max(0, results.length - 1))
+                    );
+                    grammarFavoritesReviewRevealed = false;
+                    refreshGrammarSearchPanel();
+                    return;
+                }
+                syncAllGrammarFavoriteButtons();
+            });
+        }
         fixedEntryCoverMap = loadFixedEntryCoverMap();
         initializeSectionPanels();
         resetFavoriteEditor();
