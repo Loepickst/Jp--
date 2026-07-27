@@ -2746,7 +2746,7 @@
             area: 'daily',
             sectionKey: 'daily',
             label: '格助词题库',
-            href: createTrackedHref(config, 'daily/grammar/index.html', 'daily'),
+            href: createTrackedHref(config, 'index.html#daily/daily-grammar', 'daily'),
             statusText: `待复习 ${reviewCount} 题`,
             reviewCount,
             score: 12 + reviewCount * 4
@@ -2893,9 +2893,9 @@
             return [];
         }
 
-        let rawHref = 'exam/textbook/try-n1.html';
+        let rawHref = 'designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1';
         if (lastRoute.startsWith('lesson:')) {
-            rawHref += `?lesson=${encodeURIComponent(lastRoute.split(':')[1] || '')}`;
+            rawHref = `designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=${encodeURIComponent(lastRoute.split(':')[1] || '1')}`;
         }
 
         return [{

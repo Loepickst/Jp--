@@ -883,9 +883,9 @@
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0;
+    gap: 9px;
     color: var(--word-bank-muted);
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.5;
 }
 
@@ -893,10 +893,30 @@
     display: none;
 }
 
-.kiki-word-card-meta span + span::before {
+.kiki-word-card-part-of-speech {
+    white-space: nowrap;
+}
+
+.kiki-word-card-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--word-bank-muted);
+    font-family: var(--word-bank-ui);
+    font-style: normal;
+    line-height: 1.45;
+    white-space: nowrap;
+}
+
+.kiki-word-card-accent::before {
     content: "·";
-    margin: 0 7px;
     color: var(--word-bank-faint);
+}
+
+.kiki-word-card-accent b {
+    color: #a22f29;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 .kiki-word-card-reading {

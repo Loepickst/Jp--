@@ -142,6 +142,7 @@
     const legacy = item.legacy || {};
     return {
       id: Number(legacy.searchId),
+      canonicalId: item.id,
       title: item.title,
       romaji: item.romaji || "",
       kana: item.kana || "",

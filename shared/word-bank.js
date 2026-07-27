@@ -5,12 +5,14 @@
         return;
     }
 
-    const VERSION = "1.11.1";
+    const VERSION = "1.12.2";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
     const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV7";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
     const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV1";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
+    const LEMMA_SYNC_KEY = "kikiWordBankLemmaSyncedV1";
+    const ACCENT_SYNC_KEY = "kikiWordBankAccentSyncedV1";
     const STYLE_ID = "kiki-word-bank-style";
     const FLOAT_ID = "kiki-word-bank-float";
     const MODAL_ID = "kiki-word-bank-modal";
@@ -469,6 +471,38 @@
         });
     }
 
+    const ENTRY_ACCENT_DEFAULTS = Object.freeze({
+        "むくむくと": "1 · 头高型（むくむく）",
+        "所有する": "0 · 平板型",
+        "ぱんぱん": "0 · 平板型",
+        "付け替える": "4/3/0 · 中高型/平板型",
+        "思い至る": "5/0 · 中高型/平板型",
+        "変哲もない": "0 · 平板型（変哲）",
+        "主眼": "0 · 平板型",
+        "手がける": "3 · 中高型",
+        "またとない": "2/1 · 中高型/头高型",
+        "正気の沙汰ではない": "0/1・2/1 · 短语（正気＋沙汰）",
+        "毛頭": "0 · 平板型",
+        "面持ち": "0/3 · 平板型/中高型",
+        "ぶっ通し": "0 · 平板型",
+        "心外": "0 · 平板型",
+        "身だしなみ": "0 · 平板型",
+        "勘当": "0 · 平板型",
+        "筒抜け": "0 · 平板型",
+        "やってのける": "0 · 平板型",
+        "ぽつんと": "2 · 中高型（ぽつん）",
+        "力む": "2 · 中高型",
+        "頭ごなし": "4 · 中高型"
+    });
+
+    function getRawPresetAccent(id) {
+        if (!id || !Array.isArray(window.WORD_BANK_PRESETS)) {
+            return "";
+        }
+        const preset = window.WORD_BANK_PRESETS.find((entry) => entry && entry.id === id);
+        return preset ? normalizeText(preset.accent, 32) : "";
+    }
+
     function normalizeEntry(rawEntry, fallback = {}) {
         const id = normalizeText(rawEntry && rawEntry.id ? rawEntry.id : fallback.id, 80) || createId();
         const createdAt = normalizeText(rawEntry && rawEntry.createdAt ? rawEntry.createdAt : fallback.createdAt, 40) || nowIso();
@@ -476,7 +510,9 @@
         const word = normalizeText(rawEntry && rawEntry.word, 80);
         const reading = normalizeText(rawEntry && rawEntry.reading, 120);
         const partOfSpeech = normalizeText(rawEntry && rawEntry.partOfSpeech, 48);
-        const accent = normalizeText(rawEntry && rawEntry.accent, 32);
+        const accent = normalizeText(rawEntry && rawEntry.accent, 32)
+            || getRawPresetAccent(id)
+            || normalizeText(ENTRY_ACCENT_DEFAULTS[word], 32);
         const jlptLevel = normalizeText(rawEntry && rawEntry.jlptLevel, 12).toUpperCase();
         const meaningZh = normalizeMultiline(rawEntry && rawEntry.meaningZh, 420);
         const meaningJa = normalizeMultiline(rawEntry && rawEntry.meaningJa, 420);
@@ -790,6 +826,93 @@
                 });
             }
             localStorage.setItem(MULTI_SENSE_SYNC_KEY, "true");
+        } catch (error) {
+            // Keep existing saved words available when storage is disabled.
+        }
+    }
+
+    function syncPresetLemmasOnce() {
+        try {
+            if (localStorage.getItem(LEMMA_SYNC_KEY) === "true") {
+                return;
+            }
+
+            const targetIds = new Set([
+                "kiki-daily-0714-shoyuushitai",
+                "kiki-daily-0714-tsukekaerarereba",
+                "kiki-daily-0714-omoiitatta"
+            ]);
+            const presetById = new Map(getPresets().map((entry) => [entry.id, entry]));
+            const entries = loadEntries();
+            let updated = 0;
+            const nextEntries = entries.map((entry) => {
+                if (!targetIds.has(entry.id)) {
+                    return entry;
+                }
+                const preset = presetById.get(entry.id);
+                if (!preset) {
+                    return entry;
+                }
+                updated += 1;
+                return {
+                    ...entry,
+                    word: preset.word,
+                    reading: preset.reading,
+                    partOfSpeech: preset.partOfSpeech,
+                    accent: preset.accent,
+                    meaning: preset.meaning,
+                    nuance: preset.nuance,
+                    usage: preset.usage,
+                    collocations: preset.collocations,
+                    relatedWords: preset.relatedWords,
+                    tags: preset.tags
+                };
+            });
+
+            if (updated > 0) {
+                saveEntries(nextEntries, {
+                    action: "sync-lemmas",
+                    updated
+                });
+            }
+            localStorage.setItem(LEMMA_SYNC_KEY, "true");
+        } catch (error) {
+            // Keep existing saved words available when storage is disabled.
+        }
+    }
+
+    function syncPresetAccentsOnce() {
+        try {
+            if (localStorage.getItem(ACCENT_SYNC_KEY) === "true") {
+                return;
+            }
+
+            const presetById = new Map(getPresets().map((entry) => [entry.id, entry]));
+            if (!presetById.size) {
+                return;
+            }
+
+            const entries = loadEntries();
+            let updated = 0;
+            const nextEntries = entries.map((entry) => {
+                const preset = presetById.get(entry.id);
+                if (!preset || !preset.accent || entry.accent === preset.accent) {
+                    return entry;
+                }
+                updated += 1;
+                return {
+                    ...entry,
+                    accent: preset.accent
+                };
+            });
+
+            if (updated > 0) {
+                saveEntries(nextEntries, {
+                    action: "sync-accents",
+                    updated
+                });
+            }
+            localStorage.setItem(ACCENT_SYNC_KEY, "true");
         } catch (error) {
             // Keep existing saved words available when storage is disabled.
         }
@@ -1545,10 +1668,7 @@
         if (reading) {
             reading.hidden = !entry.reading;
         }
-        renderCardItems(modal, "#kiki-word-card-meta", [
-            entry.partOfSpeech,
-            entry.accent ? `音调 ${entry.accent}` : ""
-        ]);
+        renderCardMeta(modal, entry);
         const meaning = entry.meaning || entry.meaningZh || entry.meaningJa;
         renderSenseGroups(modal.querySelector("#kiki-word-card-senses"), {
             word: entry.word,
@@ -1561,6 +1681,72 @@
         renderCardItems(modal, "#kiki-word-card-related", entry.relatedWords || []);
         setCardBlock(modal, "#kiki-word-card-note", entry.note);
 
+    }
+
+    function renderCardMeta(modal, entry) {
+        const container = modal.querySelector("#kiki-word-card-meta");
+        if (!container) {
+            return;
+        }
+
+        container.replaceChildren();
+
+        if (entry.partOfSpeech) {
+            const partOfSpeech = document.createElement("span");
+            partOfSpeech.className = "kiki-word-card-part-of-speech";
+            partOfSpeech.textContent = simplifyPartOfSpeech(entry.partOfSpeech);
+            partOfSpeech.setAttribute("title", entry.partOfSpeech);
+            container.appendChild(partOfSpeech);
+        }
+
+        if (entry.accent) {
+            const rawAccent = String(entry.accent).trim();
+            const dividerIndex = rawAccent.indexOf(" · ");
+            const accentNumber = dividerIndex >= 0 ? rawAccent.slice(0, dividerIndex).trim() : rawAccent;
+            const badge = document.createElement("span");
+            badge.className = "kiki-word-card-accent";
+            badge.setAttribute("aria-label", `音调 ${accentNumber}`);
+            badge.setAttribute("title", `音调 ${accentNumber}`);
+
+            const number = document.createElement("b");
+            number.textContent = formatAccentNumber(accentNumber);
+            badge.appendChild(number);
+
+            container.appendChild(badge);
+        }
+    }
+
+    function simplifyPartOfSpeech(value) {
+        const raw = String(value || "").trim();
+        const exactMap = {
+            "一段动词・他动词": "一段・他动",
+            "一段动词・自动词": "一段・自动",
+            "五段动词・他动词": "五段・他动",
+            "五段动词・自动词": "五段・自动",
+            "サ变动词・他动词": "サ变・他动",
+            "サ变动词・自动词": "サ变・自动",
+            "名词・副词用法": "名词・副词"
+        };
+        return exactMap[raw] || raw;
+    }
+
+    function formatAccentNumber(value) {
+        const circledDigits = {
+            "0": "⓪",
+            "1": "①",
+            "2": "②",
+            "3": "③",
+            "4": "④",
+            "5": "⑤",
+            "6": "⑥",
+            "7": "⑦",
+            "8": "⑧",
+            "9": "⑨"
+        };
+        return String(value || "")
+            .replace(/[0-9]/g, (digit) => circledDigits[digit] || digit)
+            .replace(/\//g, "／")
+            .replace(/・/g, " · ");
     }
 
     function openCard(rawEntry = {}) {
@@ -2088,6 +2274,8 @@
         setupCanonicalBackLinks();
         initSelectionCapture();
         ensurePresetsImported();
+        syncPresetLemmasOnce();
+        syncPresetAccentsOnce();
         syncPresetFuriganaOnce();
         syncPresetMultiSenseOnce();
         clearExistingNotesOnce();
@@ -2128,6 +2316,8 @@
         NOTES_CLEARED_KEY,
         FURIGANA_SYNC_KEY,
         MULTI_SENSE_SYNC_KEY,
+        LEMMA_SYNC_KEY,
+        ACCENT_SYNC_KEY,
         loadEntries,
         saveEntries,
         normalizeEntry,
