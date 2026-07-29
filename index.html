@@ -11734,9 +11734,10 @@
                                                 <span class="mobile-discovery-item-copy"><strong>今月の運勢</strong><small>十二星座の七月を、仕事・人間関係・ひとことで読む。</small></span>
                                                 <span aria-hidden="true">›</span>
                                             </button>
-                                            <a class="mobile-discovery-item" href="daily/culture/mahjong/japanese-mahjong.html" aria-label="阅读日本麻将文化文章《来，搓一把🀄️？》">
-                                                <img src="daily/culture/mahjong/imgs/cover-mahjong-win-moment-square-v2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                                                <span class="mobile-discovery-item-copy"><strong>来，搓一把🀄️？</strong><small>了解日本的麻将文化</small></span>
+                                            <!-- 最新日本文化：与桌面端右侧轮播入口同步更新。 -->
+                                            <a class="mobile-discovery-item" href="daily/culture/tradition/hanabi-festival.html" aria-label="阅读日本传统文化文章《日本人为什么这么喜欢花火大会？》">
+                                                <img src="daily/culture/tradition/assets/hanabi/hanabi-hero-v1.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                                                <span class="mobile-discovery-item-copy"><strong>日本人为什么这么喜欢花火大会？</strong><small>了解日本的花火大会文化</small></span>
                                                 <span aria-hidden="true">›</span>
                                             </a>
                                         </div>
@@ -11784,15 +11785,16 @@
                         <div class="home-rail-carousel-viewport" data-home-rail-carousel-viewport>
                             <div class="home-rail-carousel-track" data-home-rail-carousel-track>
                                 <div class="home-rail-carousel-slide" data-home-rail-carousel-slide aria-hidden="false">
-                                    <a class="latest-culture-quick-link" href="daily/culture/mahjong/japanese-mahjong.html" aria-label="阅读日本麻将文化文章《来，搓一把🀄️？》">
+                                    <!-- 最新日本文化：与手机端“发现”入口同步更新。 -->
+                                    <a class="latest-culture-quick-link" href="daily/culture/tradition/hanabi-festival.html" aria-label="阅读日本传统文化文章《日本人为什么这么喜欢花火大会？》">
                                         <span class="latest-culture-quick-media" aria-hidden="true">
-                                            <img src="daily/culture/mahjong/imgs/cover-mahjong-win-moment-square-v2.webp" alt="" loading="lazy" decoding="async">
+                                            <img src="daily/culture/tradition/assets/hanabi/hanabi-hero-v1.webp" alt="" loading="lazy" decoding="async">
                                             <span class="latest-culture-quick-kicker">日本文化 · 最新</span>
                                         </span>
                                         <span class="latest-culture-quick-copy">
                                             <span>
-                                                <strong>来，搓一把🀄️？</strong>
-                                                <small>了解日本的麻将文化</small>
+                                                <strong>日本人为什么这么喜欢花火大会？</strong>
+                                                <small>了解日本的花火大会文化</small>
                                             </span>
                                             <span class="latest-culture-quick-arrow" aria-hidden="true">→</span>
                                         </span>
@@ -12027,6 +12029,7 @@
     <script src="shared/grammar-db-core.js?v=20260725b"></script>
     <script src="shared/grammar-db-tags.js?v=20260725b"></script>
     <script src="shared/grammar-db-resources.js"></script>
+    <script src="shared/grammar-learning-sources.js?v=20260729a"></script>
     <script src="shared/grammar-db-repo.js?v=20260726a"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
     <script src="shared/word-bank-presets.js?v=20260727-lemma1"></script>
@@ -12262,12 +12265,35 @@
                                 ]
                             },
                             {
+                                id: "culture-japanese-tradition",
+                                title: "日本の伝統",
+                                desc: "从祭典、节庆与传统习俗中，了解延续至今的日本文化。",
+                                href: "#",
+                                icon: "light-read",
+                                tag: "伝統",
+                                tone: "mist",
+                                children: [
+                                    {
+                                        id: "culture-tradition-hanabi",
+                                        title: "日本人为什么这么喜欢花火大会？",
+                                        desc: "从江户时代的河边纳凉，到今天的竞技花火与城市活动，了解日本花火大会的变化。",
+                                        href: "daily/culture/tradition/hanabi-festival.html",
+                                        cover: "daily/culture/tradition/assets/hanabi/hanabi-hero-v1.webp",
+                                        icon: "light-read",
+                                        tag: "花火",
+                                        tone: "mist",
+                                        fileNumber: "001",
+                                        state: "published"
+                                    }
+                                ]
+                            },
+                            {
                                 id: "culture-music-people",
-                                title: "音乐与人物",
+                                title: "音楽の物語",
                                 desc: "认识日本音乐人与代表作品，在旋律与故事中感受日本音乐文化。",
                                 href: "daily/culture/music/index.html",
                                 icon: "listen",
-                                tag: "装修中",
+                                tag: "準備中",
                                 tone: "pearl",
                                 disabled: true,
                                 children: [
@@ -12330,32 +12356,12 @@
                             },
                             {
                                 id: "culture-food-seasons",
-                                title: "食与季节",
+                                title: "食と季節",
                                 desc: "从一餐、点心与当令食材理解日本的季节感。",
                                 href: "#",
                                 icon: "textbook",
                                 tag: "準備中",
                                 tone: "sage",
-                                disabled: true
-                            },
-                            {
-                                id: "culture-life-places",
-                                title: "生活与风景",
-                                desc: "走进街道、商店与地方生活，认识真实的日常表达。",
-                                href: "#",
-                                icon: "light-read",
-                                tag: "準備中",
-                                tone: "mist",
-                                disabled: true
-                            },
-                            {
-                                id: "culture-art-stories",
-                                title: "艺术与故事",
-                                desc: "通过文学、电影、设计与传统技艺阅读文化痕迹。",
-                                href: "#",
-                                icon: "reading",
-                                tag: "準備中",
-                                tone: "blush",
                                 disabled: true
                             }
                         ]
@@ -12522,6 +12528,24 @@
                                 icon: "grammar",
                                 tag: "様態",
                                 tone: "blush"
+                            },
+                            {
+                                id: "daily-grammar-demonstratives",
+                                title: "指示词",
+                                desc: "理解「こ・そ・あ・ど」在现场和上下文中的指示关系。",
+                                href: "daily/grammar/foundation/demonstratives.html",
+                                icon: "grammar",
+                                tag: "指示詞",
+                                tone: "mist"
+                            },
+                            {
+                                id: "daily-grammar-affixes",
+                                title: "接头接尾词",
+                                desc: "从词的前后位置出发，整理接头词、接尾词与接尾表达。",
+                                href: "daily/grammar/foundation/affixes.html",
+                                icon: "grammar",
+                                tag: "接辞",
+                                tone: "sage"
                             }
                         ]
                     },
@@ -15651,6 +15675,7 @@
         const DAILY_READING_DIRECTORY_PATH = "daily-light-read";
         const GRAMMAR_DIRECTORY_PATH = "daily-grammar";
         const CULTURE_ANIME_DIRECTORY_PATH = "daily-culture/culture-anime-world";
+        const CULTURE_TRADITION_DIRECTORY_PATH = "daily-culture/culture-japanese-tradition";
         const CULTURE_MUSIC_DIRECTORY_PATH = "daily-culture/culture-music-people";
 
         function isDailyReadingDirectoryPath(sectionKey, sectionPath = []) {
@@ -15673,6 +15698,11 @@
                 && normalizeSectionPath(sectionPath).join("/") === CULTURE_ANIME_DIRECTORY_PATH;
         }
 
+        function isCultureTraditionDirectoryPath(sectionKey, sectionPath = []) {
+            return sectionKey === "daily"
+                && normalizeSectionPath(sectionPath).join("/") === CULTURE_TRADITION_DIRECTORY_PATH;
+        }
+
         function isUnifiedStudyDirectoryPath(sectionKey, sectionPath = []) {
             const path = normalizeSectionPath(sectionPath);
             return (sectionKey === "daily" || sectionKey === "exam")
@@ -15680,6 +15710,7 @@
                 && !isDailyReadingDirectoryPath(sectionKey, path)
                 && !isGrammarDirectoryPath(sectionKey, path)
                 && !isCultureAnimeDirectoryPath(sectionKey, path)
+                && !isCultureTraditionDirectoryPath(sectionKey, path)
                 && !isCultureMusicDirectoryPath(sectionKey, path);
         }
 
@@ -16027,6 +16058,38 @@
             });
         }
 
+        function renderCultureTraditionDirectory(panel, view) {
+            const categoryDefinitions = [
+                { id: "festival", label: "祭典与节庆", labelJa: "祭り" }
+            ];
+            const items = view.items
+                .filter((item) => !item.disabled)
+                .map((item) => ({
+                    ...item,
+                    titleJa: item.title,
+                    titleZh: "",
+                    summary: item.desc || "",
+                    series: item.tag || "日本の伝統",
+                    category: "festival",
+                    directoryLabel: item.fileNumber || ""
+                }))
+                .sort((a, b) => String(b.fileNumber || "").localeCompare(String(a.fileNumber || "")));
+
+            return renderDailyReadingDirectory(panel, view, {
+                items,
+                categoryDefinitions,
+                enableFavorites: false,
+                useRecent: false,
+                eyebrow: "JAPANESE TRADITION",
+                title: "日本の伝統",
+                description: view.desc || "从祭典、节庆与传统习俗中，了解延续至今的日本文化。",
+                latestTitle: "最新内容",
+                archiveTitle: "全部内容",
+                leadKicker: "最新内容",
+                renderKey: "culture-tradition"
+            });
+        }
+
         const HOME_GRAMMAR_LAST_VIEWED_KEY = "kijiHomeGrammarLastViewedV1";
 
         function getLastViewedGrammarEntry() {
@@ -16096,7 +16159,7 @@
                 {
                     className: "expression",
                     label: ["表", "現"],
-                    rows: [["daily-grammar-conjunction", 11], ["daily-grammar-compound-particle", 12], ["daily-grammar-keigo", 13], ["daily-grammar-conditional", 14], ["daily-grammar-formal-noun", 15], ["daily-grammar-te-auxiliary", 16], ["daily-grammar-appearance", 17]]
+                    rows: [["daily-grammar-conjunction", 11], ["daily-grammar-compound-particle", 12], ["daily-grammar-keigo", 13], ["daily-grammar-conditional", 14], ["daily-grammar-formal-noun", 15], ["daily-grammar-te-auxiliary", 16], ["daily-grammar-appearance", 17], ["daily-grammar-demonstratives", 18], ["daily-grammar-affixes", 19]]
                 }
             ];
             const groupMarkup = groups.map((group) => `
@@ -16483,10 +16546,11 @@
             const isDailyReadingDirectory = isDailyReadingDirectoryPath(sectionKey, view.sectionPath);
             const isGrammarDirectory = isGrammarDirectoryPath(sectionKey, view.sectionPath);
             const isCultureAnimeDirectory = isCultureAnimeDirectoryPath(sectionKey, view.sectionPath);
+            const isCultureTraditionDirectory = isCultureTraditionDirectoryPath(sectionKey, view.sectionPath);
             const isCultureMusicDirectory = isCultureMusicDirectoryPath(sectionKey, view.sectionPath);
             const isUnifiedStudyDirectory = isUnifiedStudyDirectoryPath(sectionKey, view.sectionPath);
 
-            panel.classList.toggle("daily-reading-directory-panel", isDailyReadingDirectory || isCultureAnimeDirectory || isCultureMusicDirectory);
+            panel.classList.toggle("daily-reading-directory-panel", isDailyReadingDirectory || isCultureAnimeDirectory || isCultureTraditionDirectory || isCultureMusicDirectory);
             panel.classList.toggle("culture-music-directory-panel", isCultureMusicDirectory);
             panel.classList.toggle("grammar-directory-panel", isGrammarDirectory);
             panel.classList.toggle("study-directory-panel", isUnifiedStudyDirectory);
@@ -16501,6 +16565,10 @@
 
             if (isCultureAnimeDirectory) {
                 return renderCultureAnimeDirectory(panel, view);
+            }
+
+            if (isCultureTraditionDirectory) {
+                return renderCultureTraditionDirectory(panel, view);
             }
 
             if (isCultureMusicDirectory) {
