@@ -7,9 +7,10 @@
     --anime-matcha-soft: #eef3e9;
     --anime-sakura: #c97d77;
     --anime-sakura-soft: #fbefed;
+    --anime-zh-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: #fff;
     color: var(--anime-ink);
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: var(--anime-zh-sans);
 }
 
 .anime-ranking-page .reading-site-header {
@@ -19,7 +20,7 @@
 .anime-ranking-page .reading-head-title,
 .anime-ranking-page .reading-head-back {
     color: #000;
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif !important;
+    font-family: var(--anime-zh-sans) !important;
 }
 
 .anime-ranking-header-mark {
@@ -62,11 +63,12 @@
 .anime-ranking-intro h2 {
     margin: 18px 0 22px;
     color: #000;
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: var(--anime-zh-sans) !important;
     font-size: clamp(32px, 3.3vw, 42px);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.42;
     letter-spacing: 0.02em;
+    font-synthesis: none;
 }
 
 .anime-ranking-intro h2 span {
@@ -136,8 +138,9 @@
 
 .anime-ranking-language-pair p[lang="zh-CN"] {
     color: #557249;
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: var(--anime-zh-sans) !important;
     font-size: 13px;
+    font-weight: 400;
 }
 
 .anime-ranking-section-head {
@@ -301,8 +304,9 @@
 .anime-ranking-translation {
     padding-top: 14px;
     color: #557249;
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: var(--anime-zh-sans) !important;
     font-size: 13px;
+    font-weight: 400;
 }
 
 .anime-ranking-pickup p {
@@ -353,51 +357,184 @@
 }
 
 @media (max-width: 520px) {
+    .anime-ranking-page .reading-site-header {
+        grid-template-columns: 104px minmax(0, 1fr) 104px !important;
+        min-height: 54px !important;
+        padding: 5px 14px !important;
+        background: rgba(255, 255, 255, 0.97) !important;
+    }
+
+    .anime-ranking-page .reading-head-back {
+        min-height: 40px !important;
+        font-size: 12px !important;
+        white-space: nowrap;
+    }
+
+    .anime-ranking-page .reading-head-title {
+        font-size: 15px !important;
+        font-weight: 700;
+    }
+
+    .anime-ranking-page .reading-head-tools {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+    }
+
     .anime-ranking-header-mark {
         display: none;
     }
 
     .anime-ranking-shell {
-        padding-bottom: 48px;
+        width: calc(100% - 28px);
+        padding: 18px 0 52px;
     }
 
     .anime-ranking-intro {
+        display: flex;
+        flex-direction: column;
         min-height: 0;
+        border-radius: 10px;
     }
 
     .anime-ranking-intro-copy {
-        padding: 28px 24px;
+        order: 2;
+        padding: 22px 20px 24px;
+    }
+
+    .anime-ranking-eyebrow,
+    .anime-ranking-section-head > span {
+        font-size: 10px;
     }
 
     .anime-ranking-intro h2 {
-        font-size: 30px;
+        margin: 12px 0 14px;
+        font-size: clamp(26px, 8.2vw, 32px);
+        line-height: 1.34;
+        letter-spacing: 0;
     }
 
     .anime-ranking-intro-art {
-        min-height: 220px;
+        order: 1;
+        min-height: 0;
+        aspect-ratio: 16 / 10;
+        border-bottom: 1px solid var(--anime-line);
+    }
+
+    .anime-ranking-intro-art img {
+        display: block;
+        object-position: center 24%;
     }
 
     .anime-ranking-prologue,
     .anime-ranking-board,
     .anime-ranking-pickups {
-        margin-top: 42px;
+        margin-top: 36px;
+    }
+
+    .anime-ranking-prologue .anime-ranking-section-head,
+    .anime-ranking-section-head {
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        padding: 0 0 12px;
+    }
+
+    .anime-ranking-section-head h3 {
+        font-size: 21px;
+    }
+
+    .anime-ranking-language-pair {
+        gap: 10px;
+        padding: 18px 2px;
+    }
+
+    .anime-ranking-language-pair p[lang="ja"] {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    .anime-ranking-language-pair p[lang="zh-CN"] {
+        padding-left: 12px;
+        border-left: 2px solid rgba(111, 134, 89, 0.42);
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .anime-ranking-list {
+        border-radius: 9px;
     }
 
     .anime-ranking-item {
-        grid-template-columns: 112px minmax(0, 1fr);
-        min-height: 112px;
+        grid-template-columns: 104px minmax(0, 1fr);
+        min-height: 116px;
     }
 
     .anime-ranking-item > div {
-        padding: 14px 16px;
+        padding: 14px;
+    }
+
+    .anime-ranking-number {
+        margin-bottom: 6px;
+        font-size: 10px;
     }
 
     .anime-ranking-item strong {
-        font-size: 13px;
+        font-size: 14px;
+        line-height: 1.48;
+    }
+
+    .anime-ranking-item small {
+        margin-top: 7px;
+        font-size: 9px;
     }
 
     .anime-ranking-pickup-copy {
-        padding: 24px;
+        padding: 20px 20px 24px;
+    }
+
+    .anime-ranking-pickup {
+        border-radius: 9px;
+    }
+
+    .anime-ranking-pickup figure {
+        aspect-ratio: 16 / 9;
+    }
+
+    .anime-ranking-pickup h4 {
+        margin: 9px 0 18px;
+        font-size: 20px;
+    }
+
+    .anime-ranking-source-copy {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .anime-ranking-translation {
+        margin-top: 14px !important;
+        padding-top: 14px;
+        border-top: 1px solid var(--anime-line);
+        font-size: 13px;
+        line-height: 1.85;
+    }
+}
+
+@media (max-width: 380px) {
+    .anime-ranking-page .reading-site-header {
+        grid-template-columns: 94px minmax(0, 1fr) 94px !important;
+        padding-inline: 10px !important;
+    }
+
+    .anime-ranking-page .reading-head-back {
+        font-size: 11px !important;
+    }
+
+    .anime-ranking-intro h2 {
+        font-size: 26px;
+    }
+
+    .anime-ranking-item {
+        grid-template-columns: 96px minmax(0, 1fr);
     }
 }
 

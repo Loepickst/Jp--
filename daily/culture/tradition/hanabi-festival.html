@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>日本人为什么这么喜欢花火大会？｜日本の伝統 - KIKI</title>
+  <meta name="description" content="从江户时代的河边纳凉，到今天的竞技花火、音乐花火与大型会场，了解日本花火大会的起源、现状、趣闻和观光名所。">
+  <link rel="stylesheet" href="../../../shared/site-fonts.css">
+  <style>
+    :root {
+      --ink: #1d2530;
+      --ink-soft: #58616a;
+      --paper: #f6f4ee;
+      --paper-deep: #edeae2;
+      --night: #142b43;
+      --night-deep: #0b1d30;
+      --blue: #315d7c;
+      --vermilion: #b75d50;
+      --gold: #d6a769;
+      --line: rgba(29, 37, 48, 0.16);
+      --white: #fffdf8;
+      --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans JP", sans-serif;
+      --site-font-ui: var(--sans);
+      --site-font-display: var(--sans);
+      --font-ui: var(--sans);
+      --font-display: var(--sans);
+      --font-sans: var(--sans);
+      --font-serif: var(--sans);
+      --japanese-font: var(--sans);
+      --chinese-font: var(--sans);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(21, 38, 52, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 38, 52, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      font-family: var(--sans);
+      font-weight: 400;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-head {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--white);
+      background: rgba(11, 29, 48, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .site-head a {
+      width: max-content;
+      color: rgba(255, 253, 248, 0.82);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .site-head strong {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .site-head span {
+      justify-self: end;
+      color: rgba(255, 253, 248, 0.58);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .hero {
+      position: relative;
+      min-height: min(760px, calc(100vh - 56px));
+      overflow: hidden;
+      color: var(--white);
+      background: var(--night-deep);
+    }
+
+    .hero::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(90deg, rgba(8, 21, 36, 0.9) 0%, rgba(8, 21, 36, 0.66) 34%, rgba(8, 21, 36, 0.06) 70%),
+        linear-gradient(0deg, rgba(8, 21, 36, 0.72) 0%, transparent 46%);
+      pointer-events: none;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: min(1240px, calc(100% - 96px));
+      min-height: min(760px, calc(100vh - 56px));
+      margin: 0 auto;
+      padding: 88px 0 72px;
+    }
+
+    .series {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: max-content;
+      margin-bottom: 28px;
+      color: #f1c89b;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .series::before {
+      width: 34px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(48px, 6.1vw, 94px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      text-wrap: balance;
+    }
+
+    .hero-lead {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: rgba(255, 253, 248, 0.82);
+      font-size: clamp(16px, 1.45vw, 21px);
+      line-height: 1.9;
+    }
+
+    .hero-lead strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .scroll-mark {
+      position: absolute;
+      z-index: 3;
+      right: 34px;
+      bottom: 32px;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      color: rgba(255, 253, 248, 0.58);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-mark::after {
+      width: 1px;
+      height: 54px;
+      content: "";
+      background: rgba(255, 253, 248, 0.4);
+    }
+
+    .article-shell {
+      position: relative;
+      background: rgba(246, 244, 238, 0.96);
+    }
+
+    .opening {
+      width: min(820px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 108px 0 60px;
+    }
+
+    .opening p {
+      margin: 0;
+      color: #37414b;
+      font-size: clamp(19px, 2vw, 27px);
+      font-weight: 500;
+      line-height: 2.05;
+    }
+
+    .opening strong {
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: inset 0 -0.34em rgba(214, 167, 105, 0.38);
+    }
+
+    .chapter {
+      width: min(1160px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 112px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .chapter-head {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      align-items: start;
+      margin-bottom: 54px;
+      padding-right: max(0px, calc((100% - 820px) / 2));
+      padding-left: max(0px, calc((100% - 820px) / 2 - 96px));
+    }
+
+    .chapter-no {
+      color: var(--vermilion);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .chapter-title small {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .chapter-title h2 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(34px, 4.2vw, 64px);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.045em;
+    }
+
+    .chapter-figure {
+      width: min(820px, 100%);
+      margin: 0 auto 38px;
+    }
+
+    .chapter-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(29, 37, 48, 0.1);
+    }
+
+    .chapter-figure figcaption {
+      margin-top: 12px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .article-copy {
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    .article-copy p {
+      margin: 0 0 1.45em;
+      color: #46505a;
+      font-size: 17px;
+      line-height: 2.05;
+    }
+
+    .article-copy strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .now-scenes {
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    .now-intro {
+      padding-bottom: 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .now-intro p {
+      margin: 0;
+      color: #46505a;
+      font-size: 17px;
+      line-height: 2.05;
+    }
+
+    .now-intro p + p {
+      margin-top: 1.1em;
+    }
+
+    .now-intro strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .now-scene {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 30px;
+      align-items: start;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .now-scene figure {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .now-scene figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+
+    .now-scene-copy > span {
+      color: var(--vermilion);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .now-scene h3 {
+      margin: 0 0 16px;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .now-scene p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.95;
+    }
+
+    .now-scene p + p {
+      margin-top: 0.9em;
+    }
+
+    .now-scene strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .now-video {
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .now-video-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      background: var(--night);
+    }
+
+    .now-video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .now-video-fallback {
+      margin-top: 9px !important;
+      color: #6d746f !important;
+      font-size: 12px !important;
+      line-height: 1.7 !important;
+    }
+
+    .now-video-fallback a {
+      color: var(--blue);
+      font-weight: 800;
+      text-underline-offset: 3px;
+    }
+
+    .facts-wrap {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 88% 15%, rgba(214, 167, 105, 0.22), transparent 24%),
+        radial-gradient(circle at 12% 84%, rgba(183, 93, 80, 0.18), transparent 27%),
+        var(--night);
+    }
+
+    .facts-wrap .chapter {
+      border-top-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .facts-wrap .chapter-no,
+    .facts-wrap .chapter-title small {
+      color: #f0bd8e;
+    }
+
+    .fact-list {
+      width: min(820px, 100%);
+      margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: 150px minmax(190px, 0.72fr) minmax(0, 1.28fr);
+      align-items: center;
+      gap: 26px;
+      padding: 38px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .fact-thumb {
+      width: 150px;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .fact-thumb img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .fact--feature {
+      position: relative;
+      display: block;
+      padding-top: 0;
+    }
+
+    .fact-feature-visual {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: var(--night-deep);
+    }
+
+    .fact-feature-visual::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(90deg, rgba(7, 19, 32, 0.92) 0%, rgba(7, 19, 32, 0.68) 42%, rgba(7, 19, 32, 0.08) 76%),
+        linear-gradient(0deg, rgba(7, 19, 32, 0.72) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .fact--feature .fact-thumb {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .fact--feature .fact-thumb img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .fact-feature-copy {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 34px;
+    }
+
+    .fact--feature h3 {
+      max-width: 500px;
+      margin-top: 8px;
+      font-size: clamp(22px, 2.5vw, 30px);
+      line-height: 1.35;
+    }
+
+    .fact-feature-shout {
+      display: block;
+      margin-top: 12px;
+      color: #fff7e8;
+      font-size: clamp(58px, 8vw, 88px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      text-shadow: 0 3px 20px rgba(7, 19, 32, 0.4);
+    }
+
+    .fact-feature-body {
+      margin-top: 26px;
+    }
+
+    .fact-feature-body p + p {
+      margin-top: 0.9em;
+    }
+
+    .fact h3 {
+      margin: 0;
+      color: #fff7e8;
+      font-size: clamp(25px, 3.2vw, 42px);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+    }
+
+    .fact p {
+      margin: 0;
+      color: rgba(255, 253, 248, 0.72);
+      font-size: 15px;
+      line-height: 1.95;
+    }
+
+    .fact strong {
+      color: var(--white);
+    }
+
+    .fact-call {
+      color: #f4c28d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .places {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    .place {
+      position: relative;
+      min-height: 330px;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .place-sketch {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 1;
+      width: 90px;
+      height: 90px;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .place-sketch img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .place-label {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+      width: calc(100% - 112px);
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .place h3 {
+      position: relative;
+      z-index: 1;
+      max-width: 360px;
+      margin: 70px 0 16px;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.28;
+      letter-spacing: -0.035em;
+    }
+
+    .place p {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .place strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .ending {
+      width: min(820px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 38px 0 130px;
+    }
+
+    .ending p {
+      margin: 0;
+      color: #37414b;
+      font-size: clamp(20px, 2.1vw, 29px);
+      font-weight: 600;
+      line-height: 2.05;
+    }
+
+    .ending strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .design-note {
+      padding: 24px;
+      color: rgba(255, 253, 248, 0.58);
+      background: var(--night-deep);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .site-head {
+        grid-template-columns: 1fr auto;
+        padding: 0 16px;
+      }
+
+      .site-head strong {
+        justify-self: end;
+      }
+
+      .site-head span {
+        display: none;
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(0deg, rgba(8, 21, 36, 0.94) 0%, rgba(8, 21, 36, 0.52) 52%, rgba(8, 21, 36, 0.16) 100%);
+      }
+
+      .hero img {
+        object-position: 66% center;
+      }
+
+      .hero-copy {
+        justify-content: flex-end;
+        width: calc(100% - 40px);
+        min-height: 680px;
+        padding: 72px 0 54px;
+      }
+
+      .hero h1 {
+        font-size: 49px;
+      }
+
+      .hero-lead {
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .scroll-mark {
+        display: none;
+      }
+
+      .opening {
+        padding: 72px 0 40px;
+      }
+
+      .opening p {
+        font-size: 20px;
+        line-height: 1.95;
+      }
+
+      .chapter {
+        width: calc(100% - 36px);
+        padding: 82px 0;
+      }
+
+      .chapter-head {
+        grid-template-columns: 46px minmax(0, 1fr);
+        margin-bottom: 36px;
+        padding-inline: 0;
+      }
+
+      .chapter-title h2 {
+        font-size: 36px;
+      }
+
+      .article-copy p {
+        font-size: 16px;
+        line-height: 2;
+      }
+
+      .history-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .now-scene {
+        display: block;
+      }
+
+      .now-scene figure {
+        float: right;
+        width: 36%;
+        max-width: 138px;
+        margin: 0 0 12px 18px;
+      }
+
+      .now-scene::after {
+        display: block;
+        clear: both;
+        content: "";
+      }
+
+      .now-scene h3 {
+        margin-bottom: 14px;
+      }
+
+      .now-scene .now-video {
+        clear: both;
+      }
+
+      .fact {
+        grid-template-columns: 104px minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .fact-thumb {
+        width: 104px;
+      }
+
+      .fact p {
+        grid-column: 1 / -1;
+      }
+
+      .fact-feature-visual {
+        aspect-ratio: 4 / 3;
+      }
+
+      .fact-feature-copy {
+        padding: 22px;
+      }
+
+      .fact--feature h3 {
+        max-width: 280px;
+        font-size: 22px;
+      }
+
+      .fact-feature-shout {
+        font-size: 50px;
+      }
+
+      .fact--feature .fact-thumb img {
+        object-position: 62% center;
+      }
+
+      .places {
+        grid-template-columns: 1fr;
+      }
+
+      .place {
+        min-height: 300px;
+      }
+
+      .place-sketch {
+        width: 82px;
+        height: 82px;
+      }
+
+      .ending {
+        padding-bottom: 88px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-head">
+    <a href="../../../index.html#daily/daily-culture/culture-japanese-tradition" aria-label="返回日本传统文化目录">← 返回日本の伝統</a>
+    <strong>日本の伝統</strong>
+    <span>JAPANESE TRADITION · 001</span>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <img src="assets/hanabi/hanabi-hero-v1.webp" width="1672" height="941" alt="身穿浴衣的人们在河边观看夏夜花火的日漫铅笔素描插画">
+      <div class="hero-copy">
+        <span class="series">日本の伝統 001 · 花火大会</span>
+        <h1 id="page-title">日本人为什么这么喜欢花火大会？</h1>
+        <p class="hero-lead">它不只是夏夜里的一场烟火，也是从<strong>江户时代延续至今的纳凉方式</strong>、花火师展示技术的舞台，以及许多人专程前往一座城市的理由。</p>
+      </div>
+      <span class="scroll-mark" aria-hidden="true">SCROLL</span>
+    </section>
+
+    <div class="article-shell">
+      <section class="opening">
+        <p>夏天一到，日本各地的河边、湖边和海边就会陆续举行花火大会。人们穿上浴衣、带着坐垫提前到场，等一场通常只有一两个小时的夜空表演。这样的夏日习惯，<strong>究竟是怎么形成的？</strong></p>
+      </section>
+
+      <section class="chapter" id="origin">
+        <header class="chapter-head">
+          <span class="chapter-no">01</span>
+          <div class="chapter-title">
+            <small>起源 / ORIGIN</small>
+            <h2>花火大会是怎么出现的？</h2>
+          </div>
+        </header>
+
+        <figure class="chapter-figure">
+          <img src="assets/hanabi/hanabi-origin-edo-v1.webp" width="1536" height="1024" alt="江户时期人们乘船在河边观看早期花火的铅笔素描插画">
+          <figcaption>江户时代的花火，往往和河边纳凉、乘船与夜间饮食连在一起。</figcaption>
+        </figure>
+
+        <div class="article-copy">
+          <p>把时间拉回到 17 世纪的江户，当时人们看到的还不是今天这种升上高空、在夜空中展开的花火。早期的观赏花火多半小巧而简单，有些只是把火药装进细管，点燃后近距离观看火光。日本烟火协会的资料记载，<strong>1659 年，来自大和国、也就是今天奈良一带的弥兵卫来到江户</strong>，用装有火药的稻草管制作花火出售。弥兵卫后来成为初代“键屋”，这种新鲜玩意也开始从少数人的消遣，变成江户百姓能够接触到的娱乐。</p>
+          <p>然而，木造房屋密集的江户最怕失火。随着花火越来越受欢迎，幕府开始限制人们在街市中随意燃放，<strong>开阔的隅田川水面便成了较为安全的观赏地点</strong>。明历大火后修建的両国桥，两端留有大片防火空地，摊贩、茶屋和表演棚渐渐聚集起来。到了夏天，人们会乘船到当时被称为“大川”的隅田川纳凉；卖花火的小船则穿行在屋形船之间。花火、船游和河岸饮食，就是在这样的夜晚里慢慢连在了一起。</p>
+          <p>真正让両国花火成为固定夏日活动的，是 <strong>1733 年旧历五月二十八日举行的“両国川开”</strong>。这里的“川开”不是把河流打开，而是宣布夏季纳凉期从这一天开始。前一年，日本遭遇享保大饥荒，江户又有疫病流行。按照隅田川花火大会沿用至今的官方说法，八代将军德川吉宗为悼念死者、祈求疫病退散，在隅田川举行水神祭；随后，両国桥周边的茶屋和料理店获得许可，在河面上燃放花火。</p>
+          <p>那一晚的场面远没有今天壮观。相关资料推测，当时燃放的打上花火和仕挂花火合计<strong>大约只有二十发</strong>。人们来到河边，先参加祭祀和慰灵活动，再坐船、吃饭、吹着河风看几束火光升起。它更像是江户夏夜生活中的一段节目，而不是一场从头到尾只为花火举行的大型演出。关于最早一次川开花火的具体细节，今天仍有不同考证；但可以确定的是，<strong>祭祀、纳凉、夜间饮食与花火</strong>从这一时期开始稳定地出现在同一片河岸上。</p>
+          <p>此后，每年川开之后，両国一带会进入持续数月的纳凉季。桥边摆满食物摊和见世物小屋，河面上挤着屋形船，花火也从简单的小型玩具逐渐发展出更复杂的打上与仕挂形式。両国花火经历过停办和复办，1961 年后又因交通、建筑密集等问题中断，直到 <strong>1978 年以“隅田川花火大会”之名重新举行</strong>。今天人们看到的万人大会，并不是 1733 年那一晚的简单放大，而是江户河岸的纳凉习惯经过两个多世纪变化后的结果。</p>
+        </div>
+      </section>
+
+      <section class="chapter" id="today">
+        <header class="chapter-head">
+          <span class="chapter-no">02</span>
+          <div class="chapter-title">
+            <small>现在状况 / TODAY</small>
+            <h2>今天的花火大会，已经不只是“放烟花”</h2>
+          </div>
+        </header>
+
+        <figure class="chapter-figure">
+          <img src="assets/hanabi/hanabi-today-festival-v1.webp" width="1536" height="1024" alt="现代日本花火大会开始前，人们经过屋台前往河边观赏区的铅笔素描插画">
+          <figcaption>在现代花火大会里，等待、散步、屋台和与同行者聊天，同样构成了完整体验。</figcaption>
+        </figure>
+
+        <div class="now-scenes">
+          <div class="now-intro">
+            <p>今天的花火大会，早已脱离了单纯“点火、升空、听响”的范畴，演变成了一场<strong>融合了顶尖技术、艺术创意与硬核统筹的综合性盛宴</strong>。</p>
+            <p>而这一切蜕变的起点，源自于<strong>花火师们对极致美感近乎苛刻的追求</strong>。</p>
+          </div>
+
+          <article class="now-scene">
+            <figure>
+              <img src="assets/hanabi/hanabi-today-competition-v1.webp" width="960" height="640" loading="lazy" decoding="async" alt="花火师在工作室检查球形花火玉，并对照花火展开图的日漫铅笔素描插画">
+            </figure>
+            <div class="now-scene-copy">
+              <h3>花火竞技大会</h3>
+              <p>在对于花火美感的追求路上，日本的花火制作师们举办了一场“武林大会”——花火竞技大会。在这里，放烟花不再是单纯的庆祝，而是一场<strong>极其考验技术的“命题作文”</strong>。</p>
+              <p>以秋田县著名的“大曲的花火”为例，每家参赛工坊需要提交<strong>两枚“十号玉”（大型烟花弹），外加一段限时两分三十秒的创作花火</strong>。这两枚大型烟花分工明确：一枚专门用来检验花火师的基本功，需要严格按照<strong>传统的同心圆结构</strong>来展现；另一枚则允许花火师自由发挥设计创意。而那段创作花火，则要求花火师将色彩、声音、节奏和空间感巧妙地融合成一个完整的节目。</p>
+              <p>发射前，现场会郑重播报花火师的名字和作品名称。第一枚烟花升空后，评审们会仔细观察它<strong>是否在正确的高度打开、圆形的结构是否完整、颜色变化是否清晰明了</strong>；到了创作花火环节，评判的重点则变成了观众到底能不能看懂烟花所表达的主题。</p>
+              <p>正是这种年复一年的竞技与内卷，让一位位花火师<strong>将长达数月的准备心血压缩成短短几分钟的极致精华</strong>，也为更复杂的现代花火表演打下了技术基石。</p>
+            </div>
+          </article>
+
+          <article class="now-scene">
+            <figure>
+              <img src="assets/hanabi/hanabi-today-music-v1.webp" width="960" height="640" loading="lazy" decoding="async" alt="工作人员在控制帐篷里按照时间表操作音乐花火，远处河面上花火连续升起的日漫铅笔素描插画">
+            </figure>
+            <div class="now-scene-copy">
+              <h3>踩着节拍绽放的音乐花火</h3>
+              <p>随着点火控制技术的日益精准，花火大会的艺术表现力也迎来了质的飞跃。如今最受观众瞩目的<strong>“音乐花火”</strong>，便是技术与艺术高度融合的产物。</p>
+              <p>音乐花火并不是简单的现场随便放首歌。花火师会像解剖一样<strong>拆分音乐的各个段落，在旋律的转折处、强烈的鼓点以及情绪高潮点精心安排不同形态的烟花</strong>。随后，他们会将这些复杂的点火顺序依次输入到专业的控制设备中。</p>
+              <p>因为烟花从地面飞到空中需要一段时间，所以<strong>真实的发射指令通常要比观众听到的重拍更早</strong>，这样才能确保花火展开的那一瞬间，精准地落在音乐节拍上。当演出真正开始时，低空的喷射花火、中层的连续绽放以及高空的大玉烟花会交错重叠，形成极具视觉冲击的层次感。</p>
+              <p>观众们目眩神迷的这几分钟<strong>“スターマイン（速射连发花火）”</strong>，本质上是一段早就先在时间轴上编排好，最后再被搬到河岸与夜空中的宏大演出。</p>
+              <div class="now-video">
+                <div class="now-video-frame">
+                  <iframe
+                    src="https://player.bilibili.com/player.html?bvid=BV1jo4y137M2&amp;p=1&amp;autoplay=0&amp;danmaku=0"
+                    title="音乐花火现场视频"
+                    loading="lazy"
+                    scrolling="no"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <p class="now-video-fallback">视频无法加载时，可<a href="https://www.bilibili.com/video/BV1jo4y137M2/" target="_blank" rel="noopener noreferrer">前往哔哩哔哩观看</a>。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="now-scene">
+            <figure>
+              <img src="assets/hanabi/hanabi-today-city-v1.webp" width="960" height="640" loading="lazy" decoding="async" alt="日本河岸花火大会开始前，工作人员搭建围栏、救护帐篷和垃圾分类点的日漫铅笔素描插画">
+            </figure>
+            <div class="now-scene-copy">
+              <h3>大型会场的统筹</h3>
+              <p>为了让花火大会顺利举办，<strong>会场的统筹同样很重要</strong>。</p>
+              <p>主办方需要先敲定<strong>燃放的水域、划定警戒范围，并规划好观赏席和长长的步行路线</strong>。紧接着，他们还需要与警察、消防、铁路部门以及附近的街区进行繁复的协调工作。以盛大的隅田川花火大会为例，现场不仅会设置大会本部，还会设立<strong>水上本部、警备本部和救护所</strong>。为了应对庞大的人流，地铁系统可能会增加班次，会场周边则会实行严格的车辆管制，部分道路甚至只允许观众按照单一方向移动以避免拥挤。</p>
+              <p>除了官方力量，<strong>当地的町会、商店老板、学生和志愿者</strong>们也都会齐心协力，参与到会场的搭建、路线引导、清扫垃圾和散场疏散中。当你穿着浴衣，惬意地穿梭在屋台（小吃摊）和河边坐席时，不要忘了在这些美好画面的背后，还有<strong>围栏、广播、垃圾回收和急救</strong>等大量繁琐的工作在默默运转。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div class="facts-wrap">
+        <section class="chapter" id="facts">
+          <header class="chapter-head">
+            <span class="chapter-no">03</span>
+            <div class="chapter-title">
+              <small>趣闻 / SMALL STORIES</small>
+              <h2>你不知道的花火大会</h2>
+            </div>
+          </header>
+
+          <div class="fact-list">
+            <article class="fact fact--feature">
+              <div class="fact-feature-visual">
+                <figure class="fact-thumb">
+                  <img src="assets/hanabi/hanabi-fact-tamaya-anime-v3.webp" width="1280" height="721" loading="lazy" decoding="async" alt="身穿浴衣的动漫女主角在河边花火大会上朝夜空呼喊的日漫铅笔素描插画">
+                </figure>
+                <div class="fact-feature-copy">
+                  <span class="fact-call">动漫里经常听到的一句话</span>
+                  <b class="fact-feature-shout" lang="ja">たまや〜</b>
+                  <h3>经常会听到的「たまや、かぎや」是怎么来的？</h3>
+                </div>
+              </div>
+              <div class="fact-feature-body">
+                <p>在动漫日语里，经常能听到主角在看花火大会时喊出「たまや〜」。这个说法究竟是从哪里来的呢？</p>
+                <p>「たまや」和「かぎや」原本是过去日本两家很有名的花火制造商的屋号，中文一般写作“玉屋”和“键屋”。玉屋原本从键屋分出，两家后来分别负责両国桥上游和下游的花火。每当花火在夜空中完整展开，观众就会喊出喜欢的屋号，为花火师喝彩。<strong>1843 年，玉屋因店铺失火受到江户驱逐处分</strong>，之后逐渐消失；键屋则一直延续下来。虽然玉屋的经营时间更短，但「たまや〜」成为更常见的喝彩声，并沿用至今。</p>
+              </div>
+            </article>
+            <article class="fact fact--feature">
+              <div class="fact-feature-visual">
+                <figure class="fact-thumb">
+                  <img src="assets/hanabi/hanabi-fact-confession-feature-v2.webp" width="1280" height="721" loading="lazy" decoding="async" alt="两名身穿浴衣的年轻人坐在神社石阶上，一人的话恰好被花火声盖住的日漫铅笔素描插画">
+                </figure>
+                <div class="fact-feature-copy">
+                  <span class="fact-call">影视剧里常见的告白</span>
+                  <b class="fact-feature-shout" lang="ja">え、何て？</b>
+                </div>
+              </div>
+              <div class="fact-feature-body">
+                <p>在动漫或者影视剧中，常会在花火大会引入告白的场景，而且逐渐形成了一个“定番”，这个场景之所以深入人心，是因为在花火爆炸声的掩盖中所进行的“模糊不清”的告白，往往留下悬念，且花火的绚丽和它稍纵即逝的美，也营造出了浪漫的氛围感。花火的绽放虽然只有短短一瞬，但那个夏夜的回忆，却会因为一句勇敢的「好きだ」而变得无比漫长且鲜活。在这个夏天，如果有想要传达心意的人，不如约对方一起去看一场烟花吧。</p>
+              </div>
+            </article>
+
+            <article class="fact fact--feature">
+              <div class="fact-feature-visual">
+                <figure class="fact-thumb">
+                  <img src="assets/hanabi/hanabi-fact-warimono-v1.webp" width="1280" height="721" loading="lazy" decoding="async" alt="一枚具有多层同心圆结构的球形花火在河面上空完整展开的日漫铅笔素描插画">
+                </figure>
+                <div class="fact-feature-copy">
+                  <span class="fact-call">日本花火的球形结构</span>
+                  <b class="fact-feature-shout" lang="ja">割物</b>
+                  <h3>世界罕见的“全方位无死角”球形</h3>
+                </div>
+              </div>
+              <div class="fact-feature-body">
+                <p>日本的烟花在国际上以规整的球形（日文中称为「割物」）著称。西方的传统烟花很多是圆柱形的，升空后呈喷射状散开。</p>
+                <p>而日本的烟花职人会将火药精密地排列在球形的弹壳里，这样烟花在空中爆炸时，无论观众从东南西北哪个角度看，看到的都是同样规整的圆形花朵，且颜色还会随着花瓣的绽放发生两到三次渐变。</p>
+              </div>
+            </article>
+
+            <article class="fact fact--feature">
+              <div class="fact-feature-visual">
+                <figure class="fact-thumb">
+                  <img src="assets/hanabi/hanabi-fact-katamono-v1.webp" width="1280" height="721" loading="lazy" decoding="async" alt="笑脸图案花火正对观众展开，旁边另一枚图案花火侧向变窄的日漫铅笔素描插画">
+                </figure>
+                <div class="fact-feature-copy">
+                  <span class="fact-call">特殊图案花火</span>
+                  <b class="fact-feature-shout" lang="ja">見えた！</b>
+                  <h3>“哆啦A梦”，意味着美好的一天</h3>
+                </div>
+              </div>
+              <div class="fact-feature-body">
+                <p>现代花火大会经常会放一些特殊形状的烟花，比如笑脸、爱心、西瓜，甚至皮卡丘和哆啦A梦。</p>
+                <p>但由于烟花弹在发射升空的过程中会不断旋转，爆炸的那一瞬间，图案的正面究竟是朝向你，还是背对着你，亦或是侧着只留下一条线，纯粹是概率问题。所以，如果你能看到一个非常正的笑脸，说明当天的运气相当好。</p>
+              </div>
+            </article>
+
+            <article class="fact fact--feature">
+              <div class="fact-feature-visual">
+                <figure class="fact-thumb">
+                  <img src="assets/hanabi/hanabi-fact-yonshakudama-v1.webp" width="1280" height="721" loading="lazy" decoding="async" alt="两名花火师在巨大的四尺玉和钢制发射筒旁检查装填设备的日漫铅笔素描插画">
+                </figure>
+                <div class="fact-feature-copy">
+                  <span class="fact-call">片贝祭的巨型花火</span>
+                  <b class="fact-feature-shout" lang="ja">四尺玉</b>
+                  <h3>世界最大的烟花，体积堪比一辆小汽车</h3>
+                </div>
+              </div>
+              <div class="fact-feature-body">
+                <p>在日本新潟县的片贝祭上，会燃放被称为“四尺玉”的巨型烟花，被称之为世界上最大的烟花。</p>
+                <p>这个烟花弹本身的直径就有 1.2 米，重达 420 公斤。发射后会在高达 800 米的空中，绽放出一朵直径同样长达 800 米的巨型花朵，十分的壮观。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section class="chapter" id="places">
+        <header class="chapter-head">
+          <span class="chapter-no">04</span>
+          <div class="chapter-title">
+            <small>观光名所 / WHERE TO SEE</small>
+            <h2>想专程看一次，可以从这四场开始</h2>
+          </div>
+        </header>
+
+        <div class="article-copy">
+          <p>日本各地都有花火大会，很难简单排出高下。下面四场分别代表了<strong>江户传统、城市记忆、花火竞技和现代演出</strong>。</p>
+        </div>
+
+        <div class="places">
+          <article class="place">
+            <figure class="place-sketch">
+              <img src="assets/hanabi/hanabi-place-sumida-v1.webp" width="480" height="480" loading="lazy" decoding="async" alt="隅田川上空升起花火，河面有屋形船经过的日漫铅笔素描简图">
+            </figure>
+            <div class="place-label"><span>东京</span><span>TOKYO</span></div>
+            <h3>隅田川花火大会</h3>
+            <p>最适合从现代东京回看江户花火传统。浅草周边的城市河岸、两个燃放会场和密集人潮，共同构成它独有的观看体验。</p>
+          </article>
+          <article class="place">
+            <figure class="place-sketch">
+              <img src="assets/hanabi/hanabi-place-nagaoka-v1.webp" width="480" height="480" loading="lazy" decoding="async" alt="长冈凤凰花火横跨信浓川夜空的日漫铅笔素描简图">
+            </figure>
+            <div class="place-label"><span>新潟</span><span>NIIGATA</span></div>
+            <h3>长冈祭大花火大会</h3>
+            <p><strong>慰灵、复兴与和平</strong>是理解长冈花火的关键词。正三尺玉与“凤凰”规模宏大，但它真正特别的地方，是整座城市赋予花火的记忆。</p>
+          </article>
+          <article class="place">
+            <figure class="place-sketch">
+              <img src="assets/hanabi/hanabi-place-omagari-v1.webp" width="480" height="480" loading="lazy" decoding="async" alt="大曲竞赛花火以完整同心圆在夜空展开的日漫铅笔素描简图">
+            </figure>
+            <div class="place-label"><span>秋田</span><span>AKITA</span></div>
+            <h3>大曲の花火</h3>
+            <p>正式名称是全国花火竞技大会。来自各地的花火师带着作品参赛，适合认真观察一枚花火的圆度、颜色变化和整体设计。</p>
+          </article>
+          <article class="place">
+            <figure class="place-sketch">
+              <img src="assets/hanabi/hanabi-place-tsuchiura-v1.webp" width="480" height="480" loading="lazy" decoding="async" alt="土浦河岸连续升起多层星雷花火的日漫铅笔素描简图">
+            </figure>
+            <div class="place-label"><span>茨城</span><span>IBARAKI</span></div>
+            <h3>土浦全国花火竞技大会</h3>
+            <p>日本代表性的竞技大会之一，<strong>スターマイン</strong>是重要看点。这里能看到现代花火如何从单发作品发展成一整段有节奏的演出。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="ending">
+        <p>从江户人的河边纳凉，到今天需要整座城市共同配合的大型活动，日本的花火大会一直不只是把烟火送上天空。它记录地方历史，也让花火师展示技术，更给许多人留下了一段<strong>只属于夏夜的共同记忆</strong>。</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="design-note">KIKI · 日本の伝統 001 · 花火大会</footer>
+</body>
+</html>
