@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Try！N1</title>
+    <script>
+        (() => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("legacy")) return;
+            const target = new URL("../../designs/try-n1-content-redesign/lesson-content-redesign.html", window.location.href);
+            const lesson = params.get("lesson");
+            if (lesson) target.searchParams.set("lesson", lesson);
+            window.location.replace(target.href);
+        })();
+    </script>
     <style>
         /* =========================================
            1. 🎨 全局变量
@@ -1786,5 +1796,7 @@ select.btn:hover {
         };
         
     </script>
+    <script src="../../shared/word-bank.js"></script>
+    <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

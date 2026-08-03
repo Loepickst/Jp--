@@ -5047,3 +5047,11 @@ const questionData = {
     },
     
 };
+
+if (typeof window !== "undefined") {
+  Object.defineProperty(window, "tryN1QuestionData", {
+    value: questionData,
+    writable: false,
+    configurable: true
+  });
+}

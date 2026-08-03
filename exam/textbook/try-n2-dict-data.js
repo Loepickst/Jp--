@@ -519,7 +519,7 @@
                 type: 'vocab', title: 'ヘクトパスカル', 
                 desc: `<div class="desc-row"><span class="desc-label">【含义】</span>百帕（hPa）。</div>
                        <div class="desc-row"><span class="desc-label">【用法】</span>气象学术语，用于表示气压的单位。</div>`,
-                ex: '' 
+                ex: '気圧は1013<strong>ヘクトパスカル</strong>です。<br>（气压是1013百帕。）' 
             },
             'fukin': { 
                 type: 'vocab', title: '付近', 

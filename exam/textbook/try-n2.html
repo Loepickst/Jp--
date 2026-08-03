@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=../../designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=1">
+    <link rel="canonical" href="../../designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=1">
     <title>Try! N2</title>
+    <script>
+        (function () {
+            const lessonMatch = String(new URLSearchParams(window.location.search).get("lesson") || "1").match(/\d+/);
+            const lesson = Math.min(14, Math.max(1, lessonMatch ? Number(lessonMatch[0]) : 1));
+            window.location.replace(`../../designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=${lesson}`);
+        })();
+    </script>
     <style>
         /* =========================================
            1. 🎨 全局变量
@@ -2300,5 +2309,7 @@
         
         window.onresize = checkResponsive;
     </script>
+    <script src="../../shared/word-bank.js"></script>
+    <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

@@ -4096,3 +4096,11 @@ const questionData = {
         ]
     }
 };
+
+if (typeof window !== "undefined") {
+  Object.defineProperty(window, "tryN2QuestionData", {
+    value: questionData,
+    writable: false,
+    configurable: true
+  });
+}

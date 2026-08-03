@@ -1508,16 +1508,15 @@
                     leftBtn.onclick = () => navigateTo('review');
                     leftBtn.style.display = 'inline-flex';
                     
-                    // 右上角按钮：变为“课文入口”，跳转到 try-n2.html
+                    // 右上角按钮：进入新版 Try! N2 课文页。
                     const match = currentLessonName.match(/\d+/);
                     const chapterNum = match ? parseInt(match[0]) : 1;
-                    const lessonId = chapterToIdMap[chapterNum] || 1;
                     
                     const reviewBtn = document.getElementById('navReviewBtn');
                     if (reviewBtn) {
                         reviewBtn.innerHTML = '📖 课文入口';
                         reviewBtn.onclick = () => {
-                             window.location.href = `try-n2.html?lesson=${lessonId}`;
+                             window.location.href = `../../designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=${chapterNum}`;
                         };
                         reviewBtn.style.display = 'inline-flex';
                     }
@@ -2722,5 +2721,7 @@
              document.getElementById('compareModal').style.display = 'block';
         }
     </script>
+    <script src="../../shared/word-bank.js"></script>
+    <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
