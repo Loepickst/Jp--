@@ -6,7 +6,7 @@
     <title>kikiの日本語の家</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
-    <link rel="stylesheet" href="shared/study-directory.css?v=20260725b">
+    <link rel="stylesheet" href="shared/study-directory.css?v=20260730c">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -3478,7 +3478,7 @@
         }
 
         .grammar-legacy-title {
-            margin: 0 0 8px;
+            margin: 0;
             color: var(--legacy-text);
             font-family: var(--legacy-grammar-font) !important;
             font-synthesis: none;
@@ -3486,6 +3486,29 @@
             font-weight: 600;
             line-height: 1.35;
             letter-spacing: 0.08em;
+        }
+
+        .grammar-legacy-title-lockup {
+            position: relative;
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grammar-legacy-title-shiba {
+            position: absolute;
+            top: 50%;
+            left: calc(100% + 8px);
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            opacity: 0.72;
+            filter: saturate(0.78) contrast(0.94);
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            user-select: none;
+            transform: translateY(-48%) rotate(1.5deg);
         }
 
         .grammar-legacy-subtitle {
@@ -3556,34 +3579,269 @@
             display: none !important;
         }
 
-        .grammar-legacy-filter-bar {
-            margin-top: 20px;
+        .grammar-search-history {
+            width: 100%;
+            max-width: 840px;
+            margin-top: 12px;
+            overflow: hidden;
+            border: 1px solid var(--legacy-border);
+            border-radius: 8px;
+            box-sizing: border-box;
+            background: var(--legacy-surface);
+            box-shadow: var(--legacy-shadow-sm);
+            text-align: left;
+        }
+
+        .grammar-search-history[hidden] {
+            display: none !important;
+        }
+
+        .grammar-search-history-head {
+            min-height: 42px;
+            padding: 8px 12px 8px 16px;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid var(--legacy-border);
+            box-sizing: border-box;
+        }
+
+        .grammar-search-history-heading {
+            min-width: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            color: var(--legacy-text);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .grammar-search-history-note {
+            color: var(--legacy-muted);
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        .grammar-search-history-clear {
+            flex: 0 0 auto;
+            padding: 5px 8px;
+            border: 0;
+            border-radius: 5px;
+            background: transparent;
+            color: var(--legacy-accent);
+            cursor: pointer;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .grammar-search-history-clear:hover {
+            background: var(--legacy-accent-soft);
+        }
+
+        .grammar-search-history-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .grammar-search-history-row {
+            min-height: 48px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 38px;
+            align-items: stretch;
+            border-bottom: 1px solid var(--legacy-border);
+        }
+
+        .grammar-search-history-row:last-child {
+            border-bottom: 0;
+        }
+
+        .grammar-search-history-open {
+            min-width: 0;
+            padding: 9px 8px 9px 16px;
+            display: grid;
+            grid-template-columns: 20px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            border: 0;
+            background: transparent;
+            color: var(--legacy-text);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .grammar-search-history-open:hover {
+            background: var(--legacy-accent-soft);
+        }
+
+        .grammar-search-history-icon {
+            color: var(--legacy-muted);
+            font-size: 17px;
+            line-height: 1;
+        }
+
+        .grammar-search-history-copy {
+            min-width: 0;
+            display: flex;
+            align-items: baseline;
             gap: 12px;
+        }
+
+        .grammar-search-history-grammar {
+            flex: 0 0 auto;
+            color: var(--legacy-text);
+            font-family: var(--legacy-grammar-font);
+            font-size: 15px;
+            font-weight: 650;
+        }
+
+        .grammar-search-history-meaning {
+            min-width: 0;
+            overflow: hidden;
+            color: var(--legacy-muted);
+            font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .grammar-search-history-level {
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: var(--legacy-surface-strong);
+            color: var(--legacy-muted);
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .grammar-search-history-remove {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: var(--legacy-muted);
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .grammar-search-history-remove:hover {
+            background: var(--legacy-surface-strong);
+            color: var(--legacy-accent);
+        }
+
+        .grammar-search-history-clear:focus-visible,
+        .grammar-search-history-open:focus-visible,
+        .grammar-search-history-remove:focus-visible {
+            position: relative;
+            z-index: 1;
+            outline: 2px solid var(--legacy-accent);
+            outline-offset: -2px;
+        }
+
+        .grammar-legacy-filter-bar {
+            width: 100%;
+            max-width: 840px;
+            min-height: 44px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .grammar-legacy-filter-bar[hidden] {
+            display: none !important;
+        }
+
+        .grammar-legacy-filter-control {
+            position: relative;
+            min-width: 150px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--legacy-border-strong);
+            border-radius: 10px;
+            box-sizing: border-box;
+            background: var(--legacy-surface);
+            box-shadow: var(--legacy-shadow-sm);
+            color: var(--legacy-muted);
+            transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+        }
+
+        .grammar-legacy-filter-control:hover {
+            border-color: #bebeb8;
+            background: #f6f5f2;
+            color: var(--legacy-text);
+        }
+
+        .grammar-legacy-filter-control:focus-within {
+            border-color: var(--legacy-accent);
+            background: var(--legacy-surface);
+            box-shadow: 0 0 0 3px var(--legacy-accent-soft);
+            color: var(--legacy-accent);
+        }
+
+        .grammar-legacy-filter-control.is-active {
+            border-color: rgba(138, 51, 36, 0.34);
+            background: var(--legacy-accent-soft);
+            color: var(--legacy-accent);
+        }
+
+        .grammar-legacy-filter-icon,
+        .grammar-legacy-filter-chevron {
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+
+        .grammar-legacy-filter-icon {
+            left: 13px;
+            width: 17px;
+            height: 17px;
+        }
+
+        .grammar-legacy-filter-chevron {
+            right: 12px;
+            width: 14px;
+            height: 14px;
+            color: var(--legacy-text);
+        }
+
+        .grammar-legacy-filter-icon svg,
+        .grammar-legacy-filter-chevron svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.75;
         }
 
         .grammar-legacy-filter-select {
-            min-width: 130px;
-            padding: 8px 16px;
-            border: 1px solid var(--legacy-border-strong);
-            border-radius: 6px;
-            background: var(--legacy-surface);
-            color: var(--legacy-text);
-            box-shadow: var(--legacy-shadow-sm);
-            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0 36px 0 38px;
+            border: 0;
+            border-radius: inherit;
             outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            color: var(--legacy-text);
+            cursor: pointer;
+            font-family: var(--font-ui);
             font-size: 13px;
-            font-weight: 500;
-            transition: all 300ms cubic-bezier(0.34, 1.2, 0.64, 1);
-        }
-
-        .grammar-legacy-filter-select:hover,
-        .grammar-legacy-filter-select:focus {
-            border-color: var(--legacy-accent);
-            background: var(--legacy-surface-muted);
-            box-shadow: var(--legacy-shadow-md);
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
         .grammar-legacy-favorites-filter {
@@ -4160,6 +4418,7 @@
         .grammar-favorites-search input:focus-visible,
         .grammar-favorites-search button:focus-visible,
         .grammar-favorites-library-tools select:focus-visible,
+        .grammar-favorite-card-sources button:focus-visible,
         .grammar-favorites-empty button:focus-visible,
         .grammar-review-stage:focus-visible,
         .grammar-review-reveal:focus-visible,
@@ -4384,6 +4643,36 @@
             min-height: 20px;
             padding: 2px 6px;
             font-size: 9px;
+        }
+
+        .grammar-favorite-card-sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 7px;
+        }
+
+        .grammar-favorite-card-sources button {
+            min-height: 24px;
+            padding: 3px 7px;
+            border: 1px solid rgba(51, 76, 105, 0.22);
+            border-radius: 3px;
+            background: #f4f7fa;
+            color: var(--legacy-navy);
+            font-family: var(--font-ui);
+            font-size: 9px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-decoration: none;
+        }
+
+        .grammar-favorite-card-sources button {
+            cursor: pointer;
+        }
+
+        .grammar-favorite-card-sources button:hover {
+            border-color: var(--legacy-accent);
+            color: var(--legacy-accent);
         }
 
         .grammar-favorite-card-meaning {
@@ -4613,6 +4902,51 @@
         }
 
         @media (max-width: 640px) {
+            .grammar-legacy-title-shiba {
+                left: calc(100% + 2px);
+                width: 70px;
+                height: 70px;
+                opacity: 0.66;
+            }
+
+            .grammar-legacy-filter-bar {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .grammar-legacy-filter-control {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .grammar-search-history-head {
+                padding-left: 12px;
+            }
+
+            .grammar-search-history-note,
+            .grammar-search-history-meaning {
+                display: none;
+            }
+
+            .grammar-search-history-open {
+                padding-left: 12px;
+                grid-template-columns: 18px minmax(0, 1fr) auto;
+                gap: 8px;
+            }
+
+            .grammar-search-history-copy {
+                display: block;
+                overflow: hidden;
+            }
+
+            .grammar-search-history-grammar {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
             .grammar-center-action {
                 min-height: 40px;
                 margin-bottom: 4px;
@@ -5507,7 +5841,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260727-accent3">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260803-tsuitaiken1">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -10876,7 +11210,7 @@
                 position: relative;
                 flex: 0 0 calc((100% - 10px) / 2);
                 grid-template-columns: 1fr;
-                grid-template-rows: 108px 42px;
+                grid-template-rows: 108px 52px;
                 align-items: stretch;
                 gap: 0;
                 min-height: 0;
@@ -10899,15 +11233,45 @@
             }
 
             body.home-dashboard-redesign .mobile-entry-card__label {
-                display: none;
+                position: absolute;
+                z-index: 2;
+                top: 8px;
+                left: 8px;
+                display: inline-flex;
+                align-items: center;
+                min-height: 21px;
+                padding: 2px 7px;
+                border: 1px solid rgba(31, 95, 153, 0.26);
+                border-radius: 4px;
+                background: rgba(237, 245, 252, 0.94);
+                color: #1f5f99;
+                font-family: var(--mobile-ui-font);
+                font-size: 9px;
+                font-weight: 700;
+                line-height: 1;
+                pointer-events: none;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy {
-                display: flex;
-                align-items: center;
-                gap: 0;
-                padding: 8px 26px 8px 10px;
+                display: grid;
+                align-content: center;
+                justify-items: start;
+                gap: 2px;
+                min-width: 0;
+                width: 100%;
+                padding: 7px 26px 8px 9px;
                 font-family: var(--mobile-ui-font);
+                text-align: left;
+                box-sizing: border-box;
+            }
+
+            body.home-dashboard-redesign .mobile-entry-card__copy strong,
+            body.home-dashboard-redesign .mobile-entry-card__copy small {
+                display: block;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy strong {
@@ -10919,13 +11283,18 @@
             }
 
             body.home-dashboard-redesign .mobile-entry-card__copy small {
-                display: none;
+                width: 100%;
+                color: var(--color-text-secondary, #62635d);
+                font-size: 8.5px;
+                font-weight: 400;
+                line-height: 1.3;
+                text-align: left;
             }
 
             body.home-dashboard-redesign .mobile-entry-card__arrow {
                 position: absolute;
                 right: 9px;
-                bottom: 10px;
+                bottom: 18px;
                 font-size: 14px;
             }
 
@@ -11192,7 +11561,7 @@
 
             body.home-dashboard-redesign .mobile-entry-card {
                 flex-basis: calc((100% - 8px) / 2);
-                grid-template-rows: 98px 42px;
+                grid-template-rows: 98px 52px;
             }
 
             body.home-dashboard-redesign .mobile-entry-grid {
@@ -11581,17 +11950,17 @@
                                     <section class="mobile-feature-carousel" aria-label="主页精选内容" data-mobile-feature-carousel>
                                         <div class="mobile-feature-viewport" data-mobile-feature-viewport>
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
-                                                <img src="assets/home-redesign/hero-mobile-summer-engawa-shiba-v2.webp?v=20260715" alt="夏日屋檐下读书的柴犬，窗外有蓝天、绣球花和风铃">
+                                                <img src="assets/home-redesign/hero-mobile-summer-engawa-shiba-quote-v1.webp?v=20260730" alt="夏日屋檐下读书的柴犬，窗外有蓝天、绣球花和风铃，题字为“積み上げてきたことが、君の武器になる。”">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/7.27.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/7.31.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a" alt="修学旅行巴士内，一名学生望着车窗外的河流、村落与铁路道口，后排同学专注车内游戏的铅笔手绘插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-31.webp?v=20260731a" alt="和室里，柴犬跪坐在矮桌前用毛笔反复练习书法的日漫水墨插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>目的地主義</h2>
-                                                    <p>旅程并非抵达目的地前的空白；人生真正值得珍惜的，也正是不断前行的过程。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>思考</span><time datetime="2026-07-27">07.27</time></span>
+                                                    <h2>こつのふしぎ</h2>
+                                                    <p>“诀窍”并不是别人标出的重点，而是身体在反复实践中记住的要领。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-07-31">07.31</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -11669,25 +12038,25 @@
                                             <button type="button" class="mobile-entry-card" data-home-section-link="daily" data-home-section-path="daily-grammar">
                                                 <span class="mobile-entry-card__label">日常</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-grammar-learning-v1.webp?v=20260721b" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>语法学习</strong><small>从变形、助词到句子表达。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>语法学习</strong><small>构建完整语法体系</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="daily" data-home-section-path="daily-light-read">
                                                 <span class="mobile-entry-card__label">日常</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-light-reading-v1.webp?v=20260721b" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>轻松一读</strong><small>在故事与随笔中培养语感。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>轻松一读</strong><small>通过阅读培养语感</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="daily" data-home-section-path="daily-culture">
                                                 <span class="mobile-entry-card__label">日常</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-culture-fuji-v1.webp?v=20260721c" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>日本文化</strong><small>从日常风景理解语言背后的日本。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>日本文化</strong><small>了解语言背后的日本</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="daily" data-home-section-path="exam-textbook">
                                                 <span class="mobile-entry-card__label">日常</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-textbook-v1.webp?v=20260721b" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>教材学习</strong><small>跟随 TRY！N1 / N2 逐课学习。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>教材学习</strong><small>跟随教材逐课学习</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                         </nav>
@@ -11700,26 +12069,26 @@
                                         <nav class="mobile-entry-grid" aria-label="备考专区入口">
                                             <button type="button" class="mobile-entry-card" data-home-section-link="exam" data-home-section-path="exam-vocabulary">
                                                 <span class="mobile-entry-card__label">JLPT</span>
-                                                <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-vocabulary-v1.webp" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>語彙暗記</strong><small>按等级与词性记忆高频词汇。</small></span>
+                                                <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-vocabulary-cafe-study-v2.webp?v=20260730" alt=""></span>
+                                                <span class="mobile-entry-card__copy"><strong>語彙暗記</strong><small>记忆能力考核心词汇</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="exam" data-home-section-path="exam-grammar">
                                                 <span class="mobile-entry-card__label">JLPT</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-grammar-exam-v1.webp" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>语法专项</strong><small>按题型掌握能力考常见考法。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>语法专项</strong><small>强化能力考语法题型</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="exam" data-home-section-path="exam-reading">
                                                 <span class="mobile-entry-card__label">JLPT</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-reading-exam-v1.webp" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>読解特训</strong><small>练习快速定位与准确理解。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>読解特训</strong><small>提升快速阅读理解</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                             <button type="button" class="mobile-entry-card" data-home-section-link="exam" data-home-section-path="exam-listening">
                                                 <span class="mobile-entry-card__label">JLPT</span>
                                                 <span class="mobile-entry-card__cover" aria-hidden="true"><img src="assets/home-redesign/main-directory-covers/main-cover-listening-v1.webp" alt=""></span>
-                                                <span class="mobile-entry-card__copy"><strong>聴解練習</strong><small>抓住关键信息与作答节奏。</small></span>
+                                                <span class="mobile-entry-card__copy"><strong>聴解練習</strong><small>训练听力作答技巧</small></span>
                                                 <span class="mobile-entry-card__arrow" aria-hidden="true">›</span>
                                             </button>
                                         </nav>
@@ -11859,6 +12228,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/7.31.html" aria-label="阅读：こつのふしぎ">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-31.webp?v=20260731a" alt="">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">こつのふしぎ</strong>
+                                    <span class="daily-reading-item-subtitle">诀窍的奥妙</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">随笔</span>
+                                    </span>
+                                    <time datetime="2026-07-31">2026.07.31</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/7.27.html" aria-label="阅读：目的地主義">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a" alt="">
@@ -11870,19 +12252,6 @@
                                         <span class="daily-reading-item-tag">思考</span>
                                     </span>
                                     <time datetime="2026-07-27">2026.07.27</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/7.23.html" aria-label="阅读：預かりものの思想">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-07-23-v4.webp?v=20260723d" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">預かりものの思想</strong>
-                                    <span class="daily-reading-item-subtitle">万物皆为暂借</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">思考</span>
-                                    </span>
-                                    <time datetime="2026-07-23">2026.07.23</time>
                                 </span>
                             </a>
                         </div>
@@ -12029,11 +12398,11 @@
     <script src="shared/grammar-db-core.js?v=20260725b"></script>
     <script src="shared/grammar-db-tags.js?v=20260725b"></script>
     <script src="shared/grammar-db-resources.js"></script>
-    <script src="shared/grammar-learning-sources.js?v=20260729a"></script>
+    <script src="shared/grammar-learning-sources.js?v=20260730b"></script>
     <script src="shared/grammar-db-repo.js?v=20260726a"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260727-lemma1"></script>
-    <script src="shared/word-bank.js?v=20260727-accent-number-only2"></script>
+    <script src="shared/word-bank-presets.js?v=20260803-tsuitaiken1"></script>
+    <script src="shared/word-bank.js?v=20260803-tsuitaiken1"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
             { id: "essay", label: "随笔", labelJa: "エッセイ" },
@@ -12049,6 +12418,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-essay-7-31", file: "7.31.html", publishedAt: "2026.07.31", titleJa: "こつのふしぎ", titleZh: "诀窍的奥妙", summary: "「こつ」という言葉へのためらいから、pointやtipsとの違い、ヴェイユの『工場日記』、語源の「骨」へと思考をたどる言葉の随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-07-31.webp?v=20260731a", coverAlt: "和室里，柴犬跪坐在矮桌前用毛笔反复练习书法的日漫水墨插画" },
             { id: "daily-thought-7-27", file: "7.27.html", publishedAt: "2026.07.27", titleJa: "目的地主義", titleZh: "目的地主义", summary: "車窓を見ずに目的地までの時間を埋めようとする旅の姿から、人生では目的地だけでなく「道中」そのものを大切にすべきだと考える文章。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-27.webp?v=20260727a", coverAlt: "修学旅行巴士内，一名学生望着车窗外的河流、村落与铁路道口，后排同学专注车内游戏的铅笔手绘插画" },
             { id: "daily-thought-7-23", file: "7.23.html", publishedAt: "2026.07.23", titleJa: "預かりものの思想", titleZh: "万物皆为暂借", summary: "引っ越しで目にした物の多さから、家や土地、道具は生きている間だけ世の中から預かるものだと考える思索文。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-23-v4.webp?v=20260723d", coverAlt: "一人把装有书籍、茶具、布料和工具的箱子带进逐渐充实的家中的铅笔手绘插画" },
             { id: "daily-thought-7-22", file: "7.22.html", publishedAt: "2026.07.22", titleJa: "独学の精神", titleZh: "自学的精神", summary: "学問は世界を包む大風呂敷ではなく、自分の気質という土壌を耕し、精神の作物を育てる営みだと説く思索文。", category: "thought", series: "思考", cover: "daily/light-read/daily/assets/covers/daily-cover-07-22.webp?v=20260722b", coverAlt: "一本摊开的书化作土壤，一位年轻人在书页田地上栽种幼苗的铅笔手绘插画" },
@@ -12156,7 +12526,8 @@
             desc,
             href,
             icon: "vocabulary",
-            tag,
+            tag: id === "n1-vocab-past" ? "装修中" : tag,
+            disabled: id === "n1-vocab-past",
             tone: ["pearl", "sage", "mist", "blush"][index % 4]
         }));
 
@@ -12164,20 +12535,29 @@
             {
                 id: "n2-vocab-verbs",
                 title: "N2 動詞",
-                desc: "N2 动词分组记忆与练习。",
+                desc: "N2 核心动词与复合动词分类学习。",
                 href: "exam/vocabulary/n2/verbs_n2.html",
                 icon: "vocabulary",
                 tag: "動詞",
                 tone: "sage"
             },
             {
-                id: "n2-vocab-more",
-                title: "更多 N2 词汇",
-                desc: "其他 N2 分类内容整理中。",
+                id: "n2-vocab-adjectives",
+                title: "N2 形容詞",
+                desc: "N2 い形容词与な形容词分类学习。",
+                href: "exam/vocabulary/n2/adjectives_n2.html",
                 icon: "vocabulary",
-                tag: "整理中",
-                tone: "mist",
-                disabled: true
+                tag: "形容詞",
+                tone: "blush"
+            },
+            {
+                id: "n2-vocab-adverbs",
+                title: "N2 副詞",
+                desc: "N2 副词功能分类与语境训练。",
+                href: "exam/vocabulary/n2/adverbs_n2.html",
+                icon: "vocabulary",
+                tag: "副詞",
+                tone: "mist"
             }
         ];
 
@@ -12613,7 +12993,7 @@
                         icon: "vocabulary",
                         tag: "語彙",
                         tone: "pearl",
-                        cover: "assets/home-redesign/main-directory-covers/main-cover-vocabulary-v1.webp",
+                        cover: "assets/home-redesign/main-directory-covers/main-cover-vocabulary-cafe-study-v2.webp?v=20260730",
                         children: [
                             {
                                 id: "exam-vocabulary-n1",
@@ -12628,7 +13008,7 @@
                             {
                                 id: "exam-vocabulary-n2",
                                 title: "N2 中上級特訓",
-                                desc: "面向 N2 的核心词汇分类记忆与专项练习。",
+                                desc: "面向 N2 的核心词汇分类学习与阶段练习。",
                                 href: "exam/vocabulary/n2/index.html",
                                 icon: "vocabulary",
                                 tag: "N2",
@@ -13186,6 +13566,8 @@
         let siteSearchCompositionEndedAt = 0;
         let globalSiteSearchComposing = false;
         let globalSiteSearchCompositionEndedAt = 0;
+        const GRAMMAR_RECENT_SEARCHES_KEY = "kiki.homeGrammarRecentSearches.v1";
+        const GRAMMAR_RECENT_SEARCHES_LIMIT = 5;
         let grammarSearchQuery = "";
         let grammarLevelFilter = "all";
         let grammarBookFilter = "all";
@@ -13193,6 +13575,7 @@
         let grammarFavoritesQuery = "";
         let grammarFavoritesLevelFilter = "all";
         let grammarFavoritesBookFilter = "all";
+        let grammarFavoritesSourceFilter = "all";
         let grammarFavoritesSort = "recent";
         let grammarFavoritesMode = "browse";
         let grammarFavoritesReviewIndex = 0;
@@ -13203,6 +13586,7 @@
         let grammarSearchTimer = 0;
         let grammarSearchPanelDirty = false;
         let grammarSearchComposing = false;
+        let grammarRecentSearchIds = null;
         let activeFavoritePresetId = null;
         let activeFavoriteCoverFortuneId = null;
         let fixedEntryCoverMap = {};
@@ -14658,6 +15042,105 @@
             return getGrammarSearchDataset().find((item) => Number(item.id) === numericId) || null;
         }
 
+        function loadGrammarRecentSearchIds() {
+            try {
+                const saved = JSON.parse(window.localStorage.getItem(GRAMMAR_RECENT_SEARCHES_KEY) || "[]");
+                if (!Array.isArray(saved)) return [];
+                return [...new Set(saved.map(Number).filter(Number.isFinite))]
+                    .slice(0, GRAMMAR_RECENT_SEARCHES_LIMIT);
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function getGrammarRecentSearchIds() {
+            if (!Array.isArray(grammarRecentSearchIds)) {
+                grammarRecentSearchIds = loadGrammarRecentSearchIds();
+            }
+            return grammarRecentSearchIds;
+        }
+
+        function saveGrammarRecentSearchIds() {
+            try {
+                window.localStorage.setItem(
+                    GRAMMAR_RECENT_SEARCHES_KEY,
+                    JSON.stringify(getGrammarRecentSearchIds())
+                );
+            } catch (error) {
+                // 本地存储不可用时，当前页面内仍可正常保留最近记录。
+            }
+        }
+
+        function getGrammarRecentSearchItems() {
+            return getGrammarRecentSearchIds()
+                .map((itemId) => getGrammarItemById(itemId))
+                .filter(Boolean)
+                .slice(0, GRAMMAR_RECENT_SEARCHES_LIMIT);
+        }
+
+        function recordGrammarRecentSearch(itemId) {
+            const item = getGrammarItemById(itemId);
+            if (!item) return;
+            const numericId = Number(item.id);
+            grammarRecentSearchIds = [
+                numericId,
+                ...getGrammarRecentSearchIds().filter((savedId) => Number(savedId) !== numericId)
+            ].slice(0, GRAMMAR_RECENT_SEARCHES_LIMIT);
+            saveGrammarRecentSearchIds();
+            syncGrammarRecentSearchMarkup();
+        }
+
+        function removeGrammarRecentSearch(itemId) {
+            const numericId = Number(itemId);
+            grammarRecentSearchIds = getGrammarRecentSearchIds()
+                .filter((savedId) => Number(savedId) !== numericId);
+            saveGrammarRecentSearchIds();
+            syncGrammarRecentSearchMarkup();
+        }
+
+        function clearGrammarRecentSearches() {
+            grammarRecentSearchIds = [];
+            saveGrammarRecentSearchIds();
+            syncGrammarRecentSearchMarkup();
+        }
+
+        function getGrammarRecentSearchMarkup(items = getGrammarRecentSearchItems()) {
+            return `
+                <div class="grammar-search-history-head">
+                    <div class="grammar-search-history-heading">
+                        <span>最近搜索</span>
+                        <span class="grammar-search-history-note">仅保存在本机 · 最多 5 项</span>
+                    </div>
+                    <button type="button" class="grammar-search-history-clear" data-grammar-history-clear>清空</button>
+                </div>
+                <ul class="grammar-search-history-list">
+                    ${items.map((item) => `
+                        <li class="grammar-search-history-row">
+                            <button type="button" class="grammar-search-history-open" data-grammar-select="${escapeHtml(item.id)}" aria-label="再次查看 ${escapeHtml(item.title || "语法")}">
+                                <span class="grammar-search-history-icon" aria-hidden="true">◷</span>
+                                <span class="grammar-search-history-copy">
+                                    <span class="grammar-search-history-grammar" lang="ja">${escapeHtml(item.title || "未命名文法")}</span>
+                                    <span class="grammar-search-history-meaning">${escapeHtml(item.meaning || "")}</span>
+                                </span>
+                                <span class="grammar-search-history-level">${escapeHtml(item.level || "")}</span>
+                            </button>
+                            <button type="button" class="grammar-search-history-remove" data-grammar-history-remove="${escapeHtml(item.id)}" aria-label="从最近搜索中移除 ${escapeHtml(item.title || "语法")}">×</button>
+                        </li>
+                    `).join("")}
+                </ul>
+            `;
+        }
+
+        function syncGrammarRecentSearchMarkup(panel = featurePanels.querySelector("[data-grammar-search-panel]")) {
+            if (!panel || grammarActiveView !== "search") return;
+            const history = panel.querySelector("[data-grammar-search-history]");
+            if (!history) return;
+            const items = getGrammarRecentSearchItems();
+            const shouldShow = !normalizeGrammarText(grammarSearchQuery) && items.length > 0;
+            history.hidden = !shouldShow;
+            history.innerHTML = shouldShow ? getGrammarRecentSearchMarkup(items) : "";
+        }
+
         function getGrammarItemByCanonicalId(grammarId) {
             const canonicalId = String(grammarId || "").trim();
             if (!canonicalId) return null;
@@ -14734,12 +15217,46 @@
                 .filter(Boolean);
         }
 
+        function getGrammarLearningSources(item) {
+            const sources = Array.isArray(item && item.learningSources) ? item.learningSources : [];
+            const seen = new Set();
+            const normalized = sources
+                .map((source) => ({
+                    key: String(source && source.key || "").trim(),
+                    label: String(source && source.label || "").trim(),
+                    href: String(source && source.href || "").trim(),
+                    anchor: String(source && source.anchor || "").replace(/^#/, "").trim()
+                }))
+                .filter((source) => source.key && source.label)
+                .filter((source) => {
+                    if (seen.has(source.key)) return false;
+                    seen.add(source.key);
+                    return true;
+                });
+            return normalized.length
+                ? normalized
+                : [{ key: "grammar-search", label: "语法搜索", href: "", anchor: "" }];
+        }
+
+        function getGrammarFavoriteSourceOptions() {
+            const sources = new Map();
+            getGrammarFavoriteItems().forEach((item) => {
+                getGrammarLearningSources(item).forEach((source) => {
+                    if (!sources.has(source.key)) sources.set(source.key, source.label);
+                });
+            });
+            return Array.from(sources, ([key, label]) => ({ key, label }))
+                .sort((a, b) => a.label.localeCompare(b.label, "zh-CN"));
+        }
+
         function getGrammarFavoriteResults() {
             const query = normalizeGrammarText(grammarFavoritesQuery);
             const favoriteItems = getGrammarFavoriteItems()
                 .filter((item) => {
                     const matchBook = grammarFavoritesBookFilter === "all" || item.book === grammarFavoritesBookFilter;
                     const matchLevel = grammarFavoritesLevelFilter === "all" || item.level === grammarFavoritesLevelFilter;
+                    const matchSource = grammarFavoritesSourceFilter === "all"
+                        || getGrammarLearningSources(item).some((source) => source.key === grammarFavoritesSourceFilter);
                     const matchQuery = !query
                         || normalizeGrammarText(item.title).includes(query)
                         || normalizeGrammarText(item.meaning).includes(query)
@@ -14747,7 +15264,7 @@
                         || normalizeGrammarText(item.kana).includes(query)
                         || normalizeGrammarText(item.romaji).includes(query)
                         || normalizeGrammarText(item.tags).includes(query);
-                    return matchBook && matchLevel && matchQuery;
+                    return matchBook && matchLevel && matchSource && matchQuery;
                 });
 
             return favoriteItems.sort((a, b) => {
@@ -14758,7 +15275,7 @@
                     );
                 }
                 if (grammarFavoritesSort === "level") {
-                    const levelOrder = { N1: 1, N2: 2, N3: 3 };
+                    const levelOrder = { N1: 1, N2: 2, N3: 3, N4: 4, N5: 5, "基础": 6 };
                     return (levelOrder[a.level] || 9) - (levelOrder[b.level] || 9)
                         || String(a.title || "").localeCompare(String(b.title || ""), "ja");
                 }
@@ -14914,26 +15431,60 @@
             const results = getGrammarSearchResults();
             const hasQuery = Boolean(normalizeGrammarText(grammarSearchQuery));
             const bookOptions = getGrammarBookOptions();
+            const recentItems = getGrammarRecentSearchItems();
+            const showRecentSearches = !hasQuery && recentItems.length > 0;
 
             return `
                 <section class="grammar-legacy-hero">
-                    <h2 class="grammar-legacy-title">日本語文法検索</h2>
+                    <div class="grammar-legacy-title-lockup">
+                        <h2 class="grammar-legacy-title">日本語文法検索</h2>
+                        <img class="grammar-legacy-title-shiba" src="assets/grammar/shiba-crossed-paws-pencil-avatar-v1.png" alt="" aria-hidden="true" decoding="async">
+                    </div>
                     <p class="grammar-legacy-subtitle">快速查找语法、接续与例句</p>
                     <div class="grammar-legacy-search-container">
                         <input type="text" class="grammar-legacy-search-input" value="${escapeHtml(grammarSearchQuery)}" placeholder="输入语法关键词、特征或假名（如：niitattewa / 举例）..." data-grammar-search-input>
                         <button type="button" class="grammar-legacy-search-clear" data-grammar-search-clear="search" aria-label="清空搜索"${grammarSearchQuery ? "" : " hidden"}>✕</button>
                     </div>
-                    <div class="grammar-legacy-filter-bar">
-                        <select class="grammar-legacy-filter-select" data-grammar-book-filter aria-label="筛选书籍">
-                            <option value="all"${grammarBookFilter === "all" ? " selected" : ""}>📖 全部书籍</option>
-                            ${bookOptions.map((book) => `<option value="${escapeHtml(book)}"${grammarBookFilter === book ? " selected" : ""}>${escapeHtml(book)}</option>`).join("")}
-                        </select>
-                        <select class="grammar-legacy-filter-select" data-grammar-level-filter aria-label="筛选等级">
-                            <option value="all"${grammarLevelFilter === "all" ? " selected" : ""}>🎓 全部等级</option>
-                            <option value="N1"${grammarLevelFilter === "N1" ? " selected" : ""}>🔴 N1</option>
-                            <option value="N2"${grammarLevelFilter === "N2" ? " selected" : ""}>🔵 N2</option>
-                            <option value="N3"${grammarLevelFilter === "N3" ? " selected" : ""}>🟢 N3</option>
-                        </select>
+                    <div class="grammar-legacy-filter-bar" data-grammar-search-filters aria-label="搜索结果筛选"${hasQuery ? "" : " hidden"}>
+                        <label class="grammar-legacy-filter-control${grammarBookFilter === "all" ? "" : " is-active"}">
+                            <span class="grammar-legacy-filter-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3.5 5.5c2.9-.9 5.6-.45 8.5 1.25v12c-2.9-1.7-5.6-2.15-8.5-1.25z"></path>
+                                    <path d="M20.5 5.5c-2.9-.9-5.6-.45-8.5 1.25v12c2.9-1.7 5.6-2.15 8.5-1.25z"></path>
+                                </svg>
+                            </span>
+                            <select class="grammar-legacy-filter-select" data-grammar-book-filter aria-label="筛选书籍">
+                                <option value="all"${grammarBookFilter === "all" ? " selected" : ""}>书籍 · 全部</option>
+                                ${bookOptions.map((book) => `<option value="${escapeHtml(book)}"${grammarBookFilter === book ? " selected" : ""}>${escapeHtml(book)}</option>`).join("")}
+                            </select>
+                            <span class="grammar-legacy-filter-chevron" aria-hidden="true">
+                                <svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"></path></svg>
+                            </span>
+                        </label>
+                        <label class="grammar-legacy-filter-control${grammarLevelFilter === "all" ? "" : " is-active"}">
+                            <span class="grammar-legacy-filter-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="m3 9 9-5 9 5-9 5z"></path>
+                                    <path d="M7 12v5c2.8 2 7.2 2 10 0v-5"></path>
+                                    <path d="M21 9v6"></path>
+                                </svg>
+                            </span>
+                            <select class="grammar-legacy-filter-select" data-grammar-level-filter aria-label="筛选等级">
+                                <option value="all"${grammarLevelFilter === "all" ? " selected" : ""}>等级 · 全部</option>
+                                <option value="N1"${grammarLevelFilter === "N1" ? " selected" : ""}>N1</option>
+                                <option value="N2"${grammarLevelFilter === "N2" ? " selected" : ""}>N2</option>
+                                <option value="N3"${grammarLevelFilter === "N3" ? " selected" : ""}>N3</option>
+                                <option value="N4"${grammarLevelFilter === "N4" ? " selected" : ""}>N4</option>
+                                <option value="N5"${grammarLevelFilter === "N5" ? " selected" : ""}>N5</option>
+                                <option value="基础"${grammarLevelFilter === "基础" ? " selected" : ""}>基础</option>
+                            </select>
+                            <span class="grammar-legacy-filter-chevron" aria-hidden="true">
+                                <svg viewBox="0 0 20 20"><path d="m5 7.5 5 5 5-5"></path></svg>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="grammar-search-history" data-grammar-search-history aria-label="最近搜索"${showRecentSearches ? "" : " hidden"}>
+                        ${showRecentSearches ? getGrammarRecentSearchMarkup(recentItems) : ""}
                     </div>
                 </section>
                 <div class="grammar-legacy-container">
@@ -14950,6 +15501,7 @@
 
         function getGrammarFavoriteCardMarkup(item) {
             const levelClass = getGrammarLevelBadgeClass(item.level);
+            const learningSources = getGrammarLearningSources(item);
             return `
                 <article class="grammar-favorite-card" data-grammar-select="${escapeHtml(item.id)}" role="button" tabindex="0" aria-label="查看 ${escapeHtml(item.title || "语法")} 的完整讲解">
                     <div class="grammar-favorite-card-name">
@@ -14957,6 +15509,15 @@
                         <div class="grammar-legacy-badge-group">
                             <span class="grammar-legacy-badge ${levelClass}">${escapeHtml(item.level || "")}</span>
                             <span class="grammar-legacy-badge">${escapeHtml(item.book || "")}${item.lesson ? ` · ${escapeHtml(item.lesson)}` : ""}</span>
+                        </div>
+                        <div class="grammar-favorite-card-sources" aria-label="来源文档">
+                            ${learningSources.map((source) => `
+                                <button
+                                    type="button"
+                                    data-grammar-favorites-source-value="${escapeHtml(source.key)}"
+                                    aria-label="只看来源于${escapeHtml(source.label)}的收藏"
+                                >${escapeHtml(source.label)}</button>
+                            `).join("")}
                         </div>
                     </div>
                     <p class="grammar-favorite-card-meaning">${escapeHtml(item.meaning || "")}</p>
@@ -15041,11 +15602,17 @@
 
         function getGrammarFavoritesViewMarkup() {
             const bookOptions = getGrammarBookOptions();
+            const sourceOptions = getGrammarFavoriteSourceOptions();
+            if (grammarFavoritesSourceFilter !== "all"
+                && !sourceOptions.some((source) => source.key === grammarFavoritesSourceFilter)) {
+                grammarFavoritesSourceFilter = "all";
+            }
             const results = getGrammarFavoriteResults();
             const hasFavorites = getGrammarFavoriteRecords().length > 0;
             const hasActiveFilters = Boolean(normalizeGrammarText(grammarFavoritesQuery))
                 || grammarFavoritesBookFilter !== "all"
-                || grammarFavoritesLevelFilter !== "all";
+                || grammarFavoritesLevelFilter !== "all"
+                || grammarFavoritesSourceFilter !== "all";
             return `
                 <div class="grammar-favorites-shell">
                     <div class="grammar-favorites-workspace">
@@ -15080,6 +15647,13 @@
                                             <option value="N1"${grammarFavoritesLevelFilter === "N1" ? " selected" : ""}>N1</option>
                                             <option value="N2"${grammarFavoritesLevelFilter === "N2" ? " selected" : ""}>N2</option>
                                             <option value="N3"${grammarFavoritesLevelFilter === "N3" ? " selected" : ""}>N3</option>
+                                            <option value="N4"${grammarFavoritesLevelFilter === "N4" ? " selected" : ""}>N4</option>
+                                            <option value="N5"${grammarFavoritesLevelFilter === "N5" ? " selected" : ""}>N5</option>
+                                            <option value="基础"${grammarFavoritesLevelFilter === "基础" ? " selected" : ""}>基础</option>
+                                        </select>
+                                        <select data-grammar-favorites-source aria-label="筛选来源文档">
+                                            <option value="all"${grammarFavoritesSourceFilter === "all" ? " selected" : ""}>全部来源</option>
+                                            ${sourceOptions.map((source) => `<option value="${escapeHtml(source.key)}"${grammarFavoritesSourceFilter === source.key ? " selected" : ""}>${escapeHtml(source.label)}</option>`).join("")}
                                         </select>
                                         <select data-grammar-favorites-sort aria-label="收藏排序">
                                             <option value="recent"${grammarFavoritesSort === "recent" ? " selected" : ""}>最近收藏</option>
@@ -15150,11 +15724,16 @@
             const results = getGrammarSearchResults();
             const hasQuery = Boolean(normalizeGrammarText(grammarSearchQuery));
             const clearButton = panel.querySelector("[data-grammar-search-clear]");
+            const filterBar = panel.querySelector("[data-grammar-search-filters]");
             const status = panel.querySelector(".grammar-legacy-status");
             const grid = panel.querySelector(".grammar-legacy-grid");
 
             if (clearButton) {
                 clearButton.hidden = !grammarSearchQuery;
+            }
+
+            if (filterBar) {
+                filterBar.hidden = !hasQuery;
             }
 
             if (status) {
@@ -15172,6 +15751,7 @@
                 grid.innerHTML = hasQuery ? results.map(getGrammarResultMarkup).join("") : "";
             }
 
+            syncGrammarRecentSearchMarkup(panel);
             updateGrammarModalHost();
 
             grammarSearchPanelDirty = false;
@@ -15254,6 +15834,7 @@
                 event.preventDefault();
                 grammarSelectedId = Number(selectTarget.getAttribute("data-grammar-select")) || null;
                 grammarExpandedExamplesId = null;
+                if (grammarSelectedId) recordGrammarRecentSearch(grammarSelectedId);
                 refreshGrammarModalOnly();
             }
         }
@@ -16466,12 +17047,28 @@
         function getMobileCombinedStudyCardMarkup(item, sectionKey) {
             if (!item) return "";
             const cover = item.cover || "";
+            const summaries = {
+                "daily-culture": "了解语言背后的日本",
+                "daily-grammar": "构建完整语法体系",
+                "daily-light-read": "通过阅读培养语感",
+                "exam-textbook": "跟随教材逐课学习",
+                "exam-vocabulary": "记忆能力考核心词汇",
+                "exam-grammar": "强化能力考语法题型",
+                "exam-reading": "提升快速阅读理解",
+                "exam-listening": "训练听力作答技巧"
+            };
+            const summary = summaries[item.id] || item.desc || "";
+            const contextLabel = sectionKey === "exam" ? "JLPT" : "日常";
             const content = `
                 <span class="mobile-combined-study-card__cover" aria-hidden="true">
+                    <span class="mobile-combined-study-card__label">${contextLabel}</span>
                     ${cover ? `<img src="${escapeHtml(cover)}" alt="" loading="lazy" decoding="async">` : ""}
                 </span>
                 <span class="mobile-combined-study-card__footer">
-                    <strong>${escapeHtml(item.title)}</strong>
+                    <span class="mobile-combined-study-card__copy">
+                        <strong>${escapeHtml(item.title)}</strong>
+                        <small>${escapeHtml(summary)}</small>
+                    </span>
                     <span aria-hidden="true">›</span>
                 </span>
             `;
@@ -16502,11 +17099,7 @@
             ];
 
             return `
-                <section class="mobile-combined-study-directory" aria-labelledby="mobile-combined-study-title">
-                    <header class="mobile-combined-study-head">
-                        <span>LEARNING INDEX</span>
-                        <h2 id="mobile-combined-study-title">学习目录</h2>
-                    </header>
+                <section class="mobile-combined-study-directory" aria-label="学习目录">
                     ${sections.map((section) => `
                         <section class="mobile-combined-study-section" aria-labelledby="mobile-combined-study-${section.key}">
                             <div class="mobile-combined-study-section-head">
@@ -17220,6 +17813,7 @@
                 grammarSearchQuery = item ? String(item.title || "").replace(/^～/, "") : siteSearchQuery;
                 grammarSelectedId = Number.isNaN(grammarId) ? null : grammarId;
                 grammarExpandedExamplesId = null;
+                if (grammarSelectedId) recordGrammarRecentSearch(grammarSelectedId);
                 grammarSearchPanelDirty = true;
                 renderSection("grammar-search", true, true);
                 return;
@@ -17309,6 +17903,17 @@
                 return;
             }
 
+            const grammarFavoriteSourceTarget = event.target.closest("[data-grammar-favorites-source-value]");
+            if (grammarFavoriteSourceTarget) {
+                event.preventDefault();
+                event.stopPropagation();
+                grammarFavoritesSourceFilter = grammarFavoriteSourceTarget.getAttribute("data-grammar-favorites-source-value") || "all";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
             const grammarMoreExamplesTarget = event.target.closest("[data-grammar-more-examples]");
             if (grammarMoreExamplesTarget) {
                 event.preventDefault();
@@ -17319,11 +17924,29 @@
                 return;
             }
 
+            const grammarHistoryRemoveTarget = event.target.closest("[data-grammar-history-remove]");
+            if (grammarHistoryRemoveTarget) {
+                event.preventDefault();
+                event.stopPropagation();
+                removeGrammarRecentSearch(grammarHistoryRemoveTarget.getAttribute("data-grammar-history-remove"));
+                return;
+            }
+
+            const grammarHistoryClearTarget = event.target.closest("[data-grammar-history-clear]");
+            if (grammarHistoryClearTarget) {
+                event.preventDefault();
+                clearGrammarRecentSearches();
+                const input = featurePanels.querySelector("[data-grammar-search-input]");
+                if (input) input.focus();
+                return;
+            }
+
             const grammarSelectTarget = event.target.closest("[data-grammar-select]");
             if (grammarSelectTarget) {
                 event.preventDefault();
                 grammarSelectedId = Number(grammarSelectTarget.getAttribute("data-grammar-select")) || null;
                 grammarExpandedExamplesId = null;
+                if (grammarSelectedId) recordGrammarRecentSearch(grammarSelectedId);
                 refreshGrammarModalOnly();
                 return;
             }
@@ -17479,6 +18102,7 @@
             event.preventDefault();
             grammarSelectedId = Number(grammarCard.getAttribute("data-grammar-select")) || null;
             grammarExpandedExamplesId = null;
+            if (grammarSelectedId) recordGrammarRecentSearch(grammarSelectedId);
             refreshGrammarModalOnly();
         });
 
@@ -17635,6 +18259,15 @@
             const grammarFavoritesSortTarget = event.target.closest("[data-grammar-favorites-sort]");
             if (grammarFavoritesSortTarget) {
                 grammarFavoritesSort = grammarFavoritesSortTarget.value || "recent";
+                grammarFavoritesReviewIndex = 0;
+                grammarFavoritesReviewRevealed = false;
+                refreshGrammarSearchPanel();
+                return;
+            }
+
+            const grammarFavoritesSourceTarget = event.target.closest("[data-grammar-favorites-source]");
+            if (grammarFavoritesSourceTarget) {
+                grammarFavoritesSourceFilter = grammarFavoritesSourceTarget.value || "all";
                 grammarFavoritesReviewIndex = 0;
                 grammarFavoritesReviewRevealed = false;
                 refreshGrammarSearchPanel();
