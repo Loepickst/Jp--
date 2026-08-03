@@ -346,13 +346,6 @@ body.home-dashboard-redesign .home-study-directory-footnote {
         color: var(--home-ink);
     }
 
-    body.home-dashboard-redesign .mobile-combined-study-head {
-        margin-bottom: 24px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid rgba(63, 67, 58, 0.14);
-    }
-
-    body.home-dashboard-redesign .mobile-combined-study-head > span,
     body.home-dashboard-redesign .mobile-combined-study-section-head > div > span {
         display: block;
         color: var(--home-green-deep);
@@ -361,14 +354,6 @@ body.home-dashboard-redesign .home-study-directory-footnote {
         font-weight: 700;
         line-height: 1.3;
         letter-spacing: 0.15em;
-    }
-
-    body.home-dashboard-redesign .mobile-combined-study-head h2 {
-        margin: 5px 0 0;
-        font-family: "Noto Serif JP", "Noto Serif SC", serif;
-        font-size: 23px;
-        font-weight: 600;
-        line-height: 1.25;
     }
 
     body.home-dashboard-redesign .mobile-combined-study-section + .mobile-combined-study-section {
@@ -418,9 +403,10 @@ body.home-dashboard-redesign .home-study-directory-footnote {
     }
 
     body.home-dashboard-redesign .mobile-combined-study-card {
-        display: grid;
-        grid-template-rows: 104px 40px;
+        display: flex;
+        flex-direction: column;
         min-width: 0;
+        height: 156px;
         padding: 0;
         overflow: hidden;
         border: 1px solid rgba(63, 67, 58, 0.14);
@@ -432,13 +418,39 @@ body.home-dashboard-redesign .home-study-directory-footnote {
         text-decoration: none;
         box-shadow: 0 5px 16px rgba(56, 52, 43, 0.045);
         cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
     }
 
     body.home-dashboard-redesign .mobile-combined-study-card__cover {
+        position: relative;
         display: block;
+        flex: 0 0 104px;
         min-width: 0;
+        width: 100%;
+        height: 104px;
         overflow: hidden;
         background: #f3efe6;
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__label {
+        position: absolute;
+        z-index: 2;
+        top: 8px;
+        left: 8px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 21px;
+        padding: 2px 7px;
+        border: 1px solid rgba(31, 95, 153, 0.26);
+        border-radius: 4px;
+        background: rgba(237, 245, 252, 0.94);
+        color: #1f5f99;
+        font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 1;
+        pointer-events: none;
     }
 
     body.home-dashboard-redesign .mobile-combined-study-card__cover img {
@@ -451,21 +463,50 @@ body.home-dashboard-redesign .home-study-directory-footnote {
 
     body.home-dashboard-redesign .mobile-combined-study-card__footer {
         display: grid;
+        flex: 0 0 52px;
         grid-template-columns: minmax(0, 1fr) 12px;
         align-items: center;
         gap: 5px;
         min-width: 0;
-        padding: 7px 9px;
+        width: 100%;
+        height: 52px;
+        padding: 7px 9px 8px;
+        box-sizing: border-box;
+        background: #fffdf8;
     }
 
-    body.home-dashboard-redesign .mobile-combined-study-card__footer strong {
+    body.home-dashboard-redesign .mobile-combined-study-card__copy {
+        display: grid;
+        gap: 2px;
+        min-width: 0;
+        width: 100%;
+        justify-items: start;
+        text-align: left;
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__copy strong,
+    body.home-dashboard-redesign .mobile-combined-study-card__copy small {
+        display: block;
+        min-width: 0;
         overflow: hidden;
         font-family: var(--font-ui);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__copy strong {
         font-size: 11.5px;
         font-weight: 650;
         line-height: 1.3;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__copy small {
+        width: 100%;
+        color: var(--study-directory-muted);
+        font-size: 8.5px;
+        font-weight: 400;
+        line-height: 1.3;
+        text-align: left;
     }
 
     body.home-dashboard-redesign .mobile-combined-study-card__footer > span {
