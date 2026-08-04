@@ -86,7 +86,7 @@
                                 ]
                             },
                             {
-                                sourceId: "n2-236",
+                                sourceId: "learn-dake-ni",
                                 displayTitle: "〜だけあって／〜だけのことがある",
                                 displayMeaning: "不愧是……／确实值得……",
                                 displayConnection: "动词普通形／い形容词普通形／な形容词词干＋な／名词＋（である）＋だけあって・だけのことがある",
@@ -952,6 +952,15 @@
             .replace(/<\/b>/g, "</strong>");
     }
 
+    function escapeHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
     function renderExample(example, label, secondary) {
         return `
             <div class="${secondary ? "particle-example-secondary" : "particle-example-primary"}">
@@ -975,6 +984,14 @@
             const meaning = item.displayMeaning || source.meaning;
             const connection = item.displayConnection || source.connection;
             const number = `${String(usageIndex + 1).padStart(2, "0")}-${itemIndex + 1}`;
+            const anchor = getGrammarAnchor(particle, usageIndex, itemIndex);
+            if (window.GrammarLearningCatalog?.updateSourceAnchor) {
+                window.GrammarLearningCatalog.updateSourceAnchor(
+                    item.sourceId,
+                    "adverbial-particles",
+                    anchor
+                );
+            }
             const examplePairs = item.examples.map((example) => `
                 <div class="particle-related-example-pair">
                     <p class="particle-related-example-jp" lang="ja">${example.text}</p>
@@ -983,16 +1000,21 @@
             `).join("");
 
             return `
-                <article id="${getGrammarAnchor(particle, usageIndex, itemIndex)}" class="particle-related-entry" data-grammar-source="${item.sourceId}" tabindex="-1">
+                <article id="${anchor}" class="particle-related-entry" data-grammar-source="${item.sourceId}" tabindex="-1">
                     <header class="particle-related-entry-heading">
                         <span class="particle-related-number">${number}</span>
                         <div class="particle-related-title-block">
-                            <p class="particle-related-meta"><span>${source.level}</span> 相关语法</p>
                             <div class="particle-related-title-line">
                                 <h5 lang="ja">${title}</h5>
                                 <span class="particle-related-heading-meaning">${meaning}</span>
                             </div>
                         </div>
+                        <button
+                            class="grammar-learning-favorite particle-related-favorite"
+                            type="button"
+                            data-grammar-favorite="${escapeHtml(item.sourceId)}"
+                            data-grammar-title="${escapeHtml(title)}"
+                        ></button>
                     </header>
                     <div class="particle-related-body">
                         <div class="particle-related-meta-block">

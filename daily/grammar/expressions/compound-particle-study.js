@@ -83,7 +83,7 @@
     GROUPS.forEach(group => group.entries.forEach(entryId => entryToGroup.set(entryId, group.id)));
 
     function getCard(entryId) {
-        return document.querySelector(`.mastery-toggle[data-id="${CSS.escape(entryId)}"]`)?.closest('.grammar-card') || null;
+        return document.querySelector(`.grammar-learning-favorite[data-id="${CSS.escape(entryId)}"]`)?.closest('.grammar-card') || null;
     }
 
     function getCardTitle(entryId) {
@@ -312,23 +312,24 @@
         }
     }
 
-    function getStatus(entryId) {
-        return getCard(entryId)?.querySelector('.mastery-toggle')?.dataset.status || 'unseen';
+    function getFavoriteId(entryId) {
+        return window.GrammarLearningCatalog?.resolve?.('compound-particles', entryId) || '';
     }
 
-    function getStatusLabel(status) {
-        if (status === 'mastered') return '已掌握';
-        if (status === 'confused') return '需复习';
-        return '未学习';
+    function isFavorited(entryId) {
+        const favoriteId = getFavoriteId(entryId);
+        return Boolean(favoriteId && window.GrammarFavorites?.has?.(favoriteId));
     }
 
-    function matchesCurrentFilter(entryId, status) {
+    function matchesCurrentFilter(entryId, favorited) {
         const activeFilter = typeof currentGrammarFilter === 'string' ? currentGrammarFilter : 'all';
         if (activeFilter === 'all') return true;
         if (activeFilter === 'wrong') {
             return typeof getActiveWrongGrammarIdSet === 'function' && getActiveWrongGrammarIdSet().has(entryId);
         }
-        return status === activeFilter;
+        if (activeFilter === 'favorited') return favorited;
+        if (activeFilter === 'unfavorited') return !favorited;
+        return true;
     }
 
     function refreshAtlas() {
@@ -338,8 +339,8 @@
 
         GROUPS.forEach(group => {
             group.entries.forEach(entryId => {
-                const status = getStatus(entryId);
-                if (!matchesCurrentFilter(entryId, status)) return;
+                const favorited = isFavorited(entryId);
+                if (!matchesCurrentFilter(entryId, favorited)) return;
                 const row = document.createElement('tr');
                 row.className = 'compound-atlas-row';
                 row.tabIndex = 0;
@@ -347,7 +348,7 @@
                     <td>${group.label}</td>
                     <td class="compound-atlas-expression">${getCardTitle(entryId)}</td>
                     <td>${getCardMeaning(entryId)}</td>
-                    <td><span class="compound-status-label" data-status="${status}">${getStatusLabel(status)}</span></td>
+                    <td><span class="compound-status-label" data-status="${favorited ? 'favorited' : 'unfavorited'}">${favorited ? '★ 已收藏' : '☆ 未收藏'}</span></td>
                 `;
                 const open = () => selectEntry(entryId, { updateHash: true, focus: true });
                 row.addEventListener('click', open);
@@ -427,7 +428,7 @@
         window.addEventListener('popstate', () => restoreFromHash(false));
 
         document.addEventListener('click', event => {
-            if (event.target.closest('.mastery-toggle') || event.target.closest('.grammar-filter-chip')) {
+            if (event.target.closest('.grammar-learning-favorite') || event.target.closest('.grammar-filter-chip')) {
                 window.setTimeout(refreshAtlas, 0);
             }
         });

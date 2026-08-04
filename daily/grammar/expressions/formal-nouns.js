@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    const STORAGE_PREFIX = "formal_noun_status_";
+    const INDEX_COLLAPSE_STORAGE_KEY = "kikiFormalNounIndexCollapse";
     const LEVEL_ORDER = { N3: 1, N2: 2, N1: 3 };
     const GROUP_DEFINITIONS = [
         {
@@ -363,6 +363,19 @@
     const ENTRIES = GROUPS.flatMap((group) => [group.conceptEntry, ...group.entries]);
     const entryMap = new Map(ENTRIES.map((entry) => [entry.id, entry]));
     const entryToGroup = new Map(ENTRIES.map((entry) => [entry.id, entry.groupId]));
+    if (window.GrammarLearningCatalog?.updateSourceAnchor) {
+        GROUPS.forEach((group) => {
+            group.entries.forEach((entry) => {
+                entry.variants.forEach((variant) => {
+                    window.GrammarLearningCatalog.updateSourceAnchor(
+                        variant.id,
+                        "formal-nouns",
+                        `formal-${entry.id}`
+                    );
+                });
+            });
+        });
+    }
 
     const state = {
         mode: "study",
@@ -370,38 +383,50 @@
         groupId: "concept",
         atlasGroupId: GROUPS[0]?.id || ""
     };
+    let indexCollapseState = readIndexCollapseState();
 
     function groupForEntry(entryId) {
         return GROUPS.find((group) => group.id === entryToGroup.get(entryId)) || GROUPS[0];
     }
 
-    function readStatus(entryId) {
+    function readIndexCollapseState() {
         try {
-            const stored = window.localStorage.getItem(`${STORAGE_PREFIX}${entryId}`);
-            return ["unseen", "confused", "mastered"].includes(stored) ? stored : "unseen";
+            const stored = JSON.parse(window.localStorage.getItem(INDEX_COLLAPSE_STORAGE_KEY) || "{}");
+            return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
         } catch (error) {
-            return "unseen";
+            return {};
         }
     }
 
-    function writeStatus(entryId, status) {
+    function writeIndexCollapseState() {
         try {
-            window.localStorage.setItem(`${STORAGE_PREFIX}${entryId}`, status);
+            window.localStorage.setItem(
+                INDEX_COLLAPSE_STORAGE_KEY,
+                JSON.stringify(indexCollapseState)
+            );
         } catch (error) {
-            // Learning content remains usable when storage is unavailable.
+            // The directory remains collapsible when storage is unavailable.
         }
     }
 
-    function statusLabel(status) {
-        if (status === "mastered") return "已掌握";
-        if (status === "confused") return "需复习";
-        return "未学";
-    }
+    function setIndexGroupOpen(wrapper, open, persist = true) {
+        if (!wrapper || wrapper.dataset.indexGroup === "concept") return;
+        const groupId = wrapper.dataset.indexGroup;
+        const button = wrapper.querySelector(".compound-index-group-button");
+        const list = wrapper.querySelector(".compound-index-entries");
+        const group = GROUPS.find((item) => item.id === groupId);
 
-    function statusIcon(status) {
-        if (status === "mastered") return "✓";
-        if (status === "confused") return "△";
-        return "○";
+        wrapper.classList.toggle("is-open", open);
+        button?.setAttribute("aria-expanded", String(open));
+        list?.setAttribute("aria-hidden", String(!open));
+        if (button && group) {
+            button.setAttribute("aria-label", `${open ? "收起" : "展开"}${group.noun}相关内容`);
+        }
+
+        if (persist) {
+            indexCollapseState[groupId] = !open;
+            writeIndexCollapseState();
+        }
     }
 
     function renderExamples(examples) {
@@ -490,8 +515,15 @@
                 </article>
             `;
         }
-        const status = readStatus(entry.id);
         const connectionMarkup = entry.connections.map(escapeHtml).join("<br>");
+        const favoriteButtons = entry.variants.map((variant) => `
+            <button
+                class="grammar-learning-favorite"
+                type="button"
+                data-grammar-favorite="${escapeHtml(variant.id)}"
+                data-grammar-title="${escapeHtml(variant.title)}"
+            ></button>
+        `).join("");
 
         return `
             <article class="grammar-card sketch-box bg-white p-6 md:p-8" id="formal-${entry.id}" data-formal-entry="${entry.id}" data-study-group="${group.id}" tabindex="-1" aria-hidden="true">
@@ -501,12 +533,7 @@
                         <h3 class="compound-entry-title" lang="ja">${escapeHtml(entry.title)}</h3>
                         <span class="compound-entry-meaning">${escapeHtml(entry.meaning)}</span>
                     </div>
-                    <div class="ml-auto">
-                        <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" type="button" data-entry-status="${entry.id}" data-status="${status}">
-                            <span class="status-icon" aria-hidden="true">${statusIcon(status)}</span>
-                            <span class="status-text">${statusLabel(status)}</span>
-                        </button>
-                    </div>
+                    <div class="ml-auto formal-favorite-actions">${favoriteButtons}</div>
                 </header>
                 <div class="compound-entry-body">
                     <aside class="compound-entry-meta">
@@ -572,12 +599,12 @@
             wrapper.dataset.indexGroup = group.id;
 
             const groupButton = createGroupButton(group, true);
-            groupButton.setAttribute("aria-expanded", "false");
-            groupButton.setAttribute("aria-label", `${group.noun}，概念说明，${group.entries.length}条相关语法`);
-            groupButton.addEventListener("click", () => selectEntry(group.conceptEntry.id, { updateHash: true, focus: true }));
+            const listId = `formal-index-${group.id}`;
+            groupButton.setAttribute("aria-controls", listId);
 
             const list = document.createElement("ul");
             list.className = "compound-index-entries";
+            list.id = listId;
             [group.conceptEntry, ...group.entries].forEach((entry) => {
                 const item = document.createElement("li");
                 const button = document.createElement("button");
@@ -593,6 +620,10 @@
 
             wrapper.append(groupButton, list);
             root.appendChild(wrapper);
+            setIndexGroupOpen(wrapper, indexCollapseState[group.id] !== true, false);
+            groupButton.addEventListener("click", () => {
+                setIndexGroupOpen(wrapper, !wrapper.classList.contains("is-open"));
+            });
         });
 
     }
@@ -643,7 +674,6 @@
 
     function renderAtlasLeaves(entries) {
         return entries.map((entry) => {
-            const status = readStatus(entry.id);
             return `
                 <div class="formal-mindmap-leaf-wrapper">
                     <button class="formal-atlas-leaf" type="button" data-atlas-entry="${entry.id}">
@@ -652,7 +682,6 @@
                             <b lang="ja">${escapeHtml(entry.title)}</b>
                             <span>${escapeHtml(entry.meaning)}</span>
                         </span>
-                        <span class="formal-status-label" data-status="${status}">${statusLabel(status)}</span>
                     </button>
                 </div>
             `;
@@ -839,11 +868,12 @@
     }
 
     function syncIndex() {
-        document.querySelectorAll("[data-index-group]").forEach((wrapper) => {
-            const open = wrapper.dataset.indexGroup === state.groupId;
-            wrapper.classList.toggle("is-open", open);
-            wrapper.querySelector(".compound-index-group-button")?.setAttribute("aria-expanded", String(open));
-        });
+        if (state.groupId !== "concept") {
+            const currentGroup = document.querySelector(
+                `[data-index-group="${CSS.escape(state.groupId)}"]`
+            );
+            setIndexGroupOpen(currentGroup, true, false);
+        }
         document.querySelectorAll(".compound-index-entry-button").forEach((button) => {
             const active = button.dataset.entryId === state.entryId;
             button.classList.toggle("is-active", active);
@@ -924,30 +954,6 @@
         }
     }
 
-    function updateStatusControls(entryId, status) {
-        const button = document.querySelector(`[data-entry-status="${CSS.escape(entryId)}"]`);
-        if (button) {
-            button.dataset.status = status;
-            const icon = button.querySelector(".status-icon");
-            const text = button.querySelector(".status-text");
-            if (icon) icon.textContent = statusIcon(status);
-            if (text) text.textContent = statusLabel(status);
-        }
-        buildAtlas();
-    }
-
-    function bindStatusControls() {
-        document.querySelectorAll("[data-entry-status]").forEach((button) => {
-            button.addEventListener("click", () => {
-                const current = button.dataset.status || "unseen";
-                const next = current === "unseen" ? "confused" : current === "confused" ? "mastered" : "unseen";
-                const entryId = button.dataset.entryStatus;
-                writeStatus(entryId, next);
-                updateStatusControls(entryId, next);
-            });
-        });
-    }
-
     function applyHash() {
         const hash = window.location.hash;
         if (hash === "#formal-atlas") {
@@ -974,8 +980,6 @@
         buildCards();
         buildIndex();
         buildAtlas();
-        bindStatusControls();
-
         document.querySelectorAll("[data-formal-mode]").forEach((button) => {
             button.addEventListener("click", () => setMode(button.dataset.formalMode, { updateHash: true, focus: true }));
         });

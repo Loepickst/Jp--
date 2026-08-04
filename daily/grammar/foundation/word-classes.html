@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../../../shared/fonts/noto-serif-jp/noto-serif-jp-variable.css">
     <link rel="stylesheet" href="../../../shared/site-fonts.css">
     <link rel="stylesheet" href="../../../shared/grammar-side-index.css?v=20260724b">
-    <link rel="stylesheet" href="word-classes.css?v=20260724ad">
+    <link rel="stylesheet" href="word-classes.css?v=20260728a">
 </head>
 <body class="word-classes-page">
     <header class="wc-topbar">
-        <a class="wc-back" href="../index.html"><span aria-hidden="true">←</span><span>返回语法目录</span></a>
+        <a class="wc-back" href="../../../index.html#daily/daily-grammar"><span aria-hidden="true">←</span><span>返回语法目录</span></a>
         <span class="wc-topbar-title">文法理解</span>
         <span class="wc-topbar-spacer" aria-hidden="true"></span>
     </header>
@@ -49,6 +49,8 @@
                     <p class="wc-index-group wc-index-group--major">附属语</p>
                     <a class="wc-index-link wc-index-link--sub" href="#auxiliaries"><span>01</span><b>助动词</b></a>
                     <a class="wc-index-link wc-index-link--sub" href="#particles"><span>02</span><b>助词</b></a>
+                    <p class="wc-index-group wc-index-group--major">特殊类</p>
+                    <a class="wc-index-link wc-index-link--sub" href="#affixes"><span>01</span><b>接头接尾词</b></a>
                 </nav>
             </aside>
 
@@ -60,28 +62,51 @@
                     </header>
 
                     <p class="wc-concept-copy">日语词汇根据<strong>位置、形式和作用</strong>，可以分为名词、动词、形容词、副词等。</p>
-                    <h3 class="wc-concept-subtitle">例句</h3>
-
                     <div class="wc-observation">
-                        <p class="wc-observation-sentence wc-jp" lang="ja">
-                            <mark data-kind="interjection">ああ</mark>、<mark data-kind="noun">昨日</mark>、<mark data-kind="adnominal">あの</mark><mark data-kind="na-adjective">静かな</mark><mark data-kind="noun">図書館</mark><mark data-kind="particle">で</mark><mark data-kind="noun">学生</mark><mark data-kind="particle">が</mark><mark data-kind="i-adjective">新しい</mark><mark data-kind="noun">本</mark><mark data-kind="particle">を</mark><mark data-kind="adverb">ゆっくり</mark><mark data-kind="verb">読んでい</mark><mark data-kind="auxiliary">ました</mark>。<mark data-kind="conjunction">しかし</mark>、もう閉館する時間でした。
-                        </p>
+                        <header class="wc-observation-heading">
+                            <div>
+                                <small>例句观察</small>
+                                <h3>先看词在句中的位置和作用</h3>
+                            </div>
+                            <span>颜色对应词性</span>
+                        </header>
+                        <div class="wc-observation-sentence-panel">
+                            <p class="wc-observation-sentence wc-jp" lang="ja">
+                                <mark data-kind="interjection">ああ</mark>、<mark data-kind="noun">昨日</mark>、<mark data-kind="adnominal">あの</mark><mark data-kind="na-adjective">静かな</mark><mark data-kind="noun">図書館</mark><mark data-kind="particle">で</mark><mark data-kind="noun">学生</mark><mark data-kind="particle">が</mark><mark data-kind="i-adjective">新しい</mark><mark data-kind="noun">本</mark><mark data-kind="particle">を</mark><mark data-kind="adverb">ゆっくり</mark><mark data-kind="verb">読んでい</mark><mark data-kind="auxiliary">ました</mark>。<mark data-kind="conjunction">しかし</mark>、<mark data-kind="adverb">もう</mark><mark data-kind="noun">閉館</mark><mark data-kind="verb">する</mark><mark data-kind="noun">時間</mark><mark data-kind="auxiliary">でし</mark><mark data-kind="auxiliary">た</mark>。
+                            </p>
+                        </div>
                         <div class="wc-observation-key" aria-label="例句中的单词类别">
-                            <span><i data-kind="noun"></i>名词</span>
-                            <span><i data-kind="verb"></i>动词</span>
-                            <span><i data-kind="i-adjective"></i>イ形容词</span>
-                            <span><i data-kind="na-adjective"></i>ナ形容词</span>
-                            <span><i data-kind="adverb"></i>副词</span>
-                            <span><i data-kind="adnominal"></i>连体词</span>
-                            <span><i data-kind="conjunction"></i>接续词</span>
-                            <span><i data-kind="interjection"></i>感动词</span>
-                            <span><i data-kind="auxiliary"></i>助动词</span>
-                            <span><i data-kind="particle"></i>助词</span>
+                            <section class="wc-observation-key-group">
+                                <div class="wc-observation-key-heading">
+                                    <b>独立语</b>
+                                    <small>能够独立构成句子成分</small>
+                                </div>
+                                <div class="wc-observation-key-list">
+                                    <span data-kind="noun"><i></i>名词</span>
+                                    <span data-kind="verb"><i></i>动词</span>
+                                    <span data-kind="i-adjective"><i></i>イ形容词</span>
+                                    <span data-kind="na-adjective"><i></i>ナ形容词</span>
+                                    <span data-kind="adverb"><i></i>副词</span>
+                                    <span data-kind="adnominal"><i></i>连体词</span>
+                                    <span data-kind="conjunction"><i></i>接续词</span>
+                                    <span data-kind="interjection"><i></i>感动词</span>
+                                </div>
+                            </section>
+                            <section class="wc-observation-key-group wc-observation-key-group--attached">
+                                <div class="wc-observation-key-heading">
+                                    <b>附属语</b>
+                                    <small>补充语法意义或标记关系</small>
+                                </div>
+                                <div class="wc-observation-key-list">
+                                    <span data-kind="auxiliary"><i></i>助动词</span>
+                                    <span data-kind="particle"><i></i>助词</span>
+                                </div>
+                            </section>
                         </div>
                     </div>
 
-                    <p class="wc-category-lead">具体划分为：<strong>独立语、附属语</strong></p>
-                    <div class="wc-binary">
+                    <p class="wc-category-lead">本页整理为：<strong>独立语、附属语，以及特殊构词成分</strong></p>
+                    <div class="wc-binary wc-category-overview">
                         <article>
                             <small>独立语</small>
                             <h3>独立语</h3>
@@ -93,6 +118,12 @@
                             <h3>附属语</h3>
                             <p>通常不能单独构成句子成分，用来标明成分关系，或补充否定、过去、礼貌等语法意义。</p>
                             <p><b>包括：</b>助词、助动词。</p>
+                        </article>
+                        <article>
+                            <small>特殊类</small>
+                            <h3>构词成分</h3>
+                            <p>接在词的前面或后面，与原词组成新的词汇，并补充否定、程度、类别等意义。</p>
+                            <p><b>包括：</b>接头词、接尾词。</p>
                         </article>
                     </div>
                 </section>
@@ -120,7 +151,7 @@
                                 <article>
                                     <span>01</span>
                                     <div>
-                                        <h5>动作类动词</h5>
+                                        <h5>动作动词</h5>
                                         <p>表示主体实际进行的动作或行为。</p>
                                     </div>
                                     <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">読む・食べる・話す</b></div>
@@ -128,15 +159,15 @@
                                 <article>
                                     <span>02</span>
                                     <div>
-                                        <h5>状态类动词</h5>
-                                        <p>表示存在、能力、认识或持续状态，不强调动作过程。</p>
+                                        <h5>状态动词</h5>
+                                        <p>表示认识、性质或持续呈现的状态，重点在状态本身。</p>
                                     </div>
-                                    <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">ある・いる・分かる・できる</b></div>
+                                    <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">分かる・知る・似る・優れる</b></div>
                                 </article>
                                 <article>
                                     <span>03</span>
                                     <div>
-                                        <h5>变化类动词</h5>
+                                        <h5>变化动词</h5>
                                         <p>表示事物从一种状态进入另一种状态，重点在变化或结果。</p>
                                     </div>
                                     <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">なる・増える・始まる・壊れる</b></div>
@@ -144,10 +175,10 @@
                                 <article>
                                     <span>04</span>
                                     <div>
-                                        <h5>特殊类动词</h5>
-                                        <p>常以「～ている」说明持续呈现的性质或状态，并不表示动作正在进行。</p>
+                                        <h5>特殊动词</h5>
+                                        <p>本身已经表示存在、能力或需要，通常没有「～ている」形态。</p>
                                     </div>
-                                    <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">似ている・優れている・そびえている</b></div>
+                                    <div class="wc-verb-function-examples"><small>动词举例</small><b class="wc-jp" lang="ja">ある・いる・できる（能力）・要る</b></div>
                                 </article>
                             </div>
 
@@ -423,9 +454,9 @@
                                 <p>接「に」后可以说明动作以怎样的状态或方式进行。</p>
                             </article>
                         </div>
-                        <button class="wc-quick-link wc-quick-link--locked" type="button" disabled aria-label="查看样态表达讲解，暂未开放">
-                            <span>查看样态表达讲解</span><span class="wc-quick-link-lock" aria-hidden="true"></span>
-                        </button>
+                        <a class="wc-quick-link" href="../expressions/appearance-expressions.html?return=../foundation/word-classes.html%23adjective-topic-3">
+                            查看样态表达讲解 <span aria-hidden="true">→</span>
+                        </a>
                     </section>
 
                 </section>
@@ -549,9 +580,9 @@
                                 </div>
                             </article>
                         </div>
-                        <button class="wc-quick-link wc-quick-link--locked" type="button" disabled aria-label="查看指示词讲解，暂未开放">
-                            <span>查看指示词讲解</span><span class="wc-quick-link-lock" aria-hidden="true"></span>
-                        </button>
+                        <a class="wc-quick-link" href="demonstratives.html">
+                            <span>查看指示词讲解</span><span aria-hidden="true">→</span>
+                        </a>
 
                     </section>
 
@@ -1073,6 +1104,81 @@
 
                 </section>
 
+                <section class="wc-section wc-major-section" id="special" aria-labelledby="special-title">
+                    <header class="wc-section-heading">
+                        <span>04</span>
+                        <div><small>词汇体系</small><h2 id="special-title">特殊类</h2></div>
+                    </header>
+                    <p class="wc-lead">接头词和接尾词是附加在词语前后、用来组成新词的<strong>构词成分</strong>。它们不独立使用，也不负责标记句子成分之间的关系。</p>
+
+                    <section class="wc-subsection wc-special-content" aria-label="接头词与接尾词">
+                        <article class="wc-pos-entry" id="affixes">
+                            <header>
+                                <span>01</span>
+                                <div><small class="wc-pos-kind-label">特殊类</small><h3>接头接尾词</h3></div>
+                            </header>
+
+                            <div class="wc-pos-copy wc-pos-copy--lesson">
+                                <h4>实际作用</h4>
+                                <p>接在原词的前面或后面，与原词构成一个整体，为词汇增加<strong class="wc-highlight">否定、反复、敬意、程度、类别或性质</strong>等意义。</p>
+
+                                <h4>基本分类</h4>
+                                <div class="wc-verb-function-list" aria-label="接头词与接尾词的分类">
+                                    <article>
+                                        <span>01</span>
+                                        <div>
+                                            <h5>接头词（接頭辞）</h5>
+                                            <p>放在原词前面，为后面的词增加意义。</p>
+                                        </div>
+                                        <div class="wc-verb-function-examples">
+                                            <small>构词举例</small>
+                                            <div>
+                                                <b class="wc-jp" lang="ja">不可能・再確認・お茶・真っ白</b>
+                                                <p>分别补充否定、再次、礼貌或美化、程度强调等意义。</p>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                    <article>
+                                        <span>02</span>
+                                        <div>
+                                            <h5>接尾词（接尾辞）</h5>
+                                            <p>放在原词后面，为前面的词补充类别、数量、方法或性质等意义。</p>
+                                        </div>
+                                        <div class="wc-verb-function-examples">
+                                            <small>构词举例</small>
+                                            <div>
+                                                <b class="wc-jp" lang="ja">学生たち・日本人・読み方・静かさ</b>
+                                                <p>分别表示复数、人或类别、方法，以及把性质转成名词。</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+
+                                <h4>使用特点</h4>
+                                <div class="wc-verb-use-list">
+                                    <div>
+                                        <b>必须依附原词</b>
+                                        <p class="wc-jp" lang="ja">不＋可能 → 不可能</p>
+                                        <span>接头词不能脱离后面的词单独使用。</span>
+                                    </div>
+                                    <div>
+                                        <b>与原词组成一个新词</b>
+                                        <p class="wc-jp" lang="ja">読む＋方 → 読み方</p>
+                                        <span>接尾词连接时，原词有时会使用词干或连用形。</span>
+                                    </div>
+                                    <div>
+                                        <b>不同于助词和助动词</b>
+                                        <p class="wc-jp" lang="ja">学生たちが来ました。</p>
+                                        <span>「たち」参与构词；「が」才负责标记句中的成分关系。</span>
+                                    </div>
+                                </div>
+                                <a class="wc-quick-link" href="affixes.html">查看接头接尾词讲解 <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+                    </section>
+                </section>
+
             </article>
         </div>
     </main>
@@ -1123,8 +1229,8 @@
         </div>
     </dialog>
 
-    <script src="../../../shared/grammar-side-index.js?v=20260722a"></script>
+    <script src="../../../shared/grammar-side-index.js?v=20260730a"></script>
     <script src="word-classes.js?v=20260724b"></script>
-    <script src="../../../shared/unified-header.js?v=20260723b" data-kiki-unified-header-loader></script>
+    <script src="../../../shared/unified-header.js?v=20260728c" data-kiki-unified-header-loader></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <title>JLPT 文法 - 复合格助词自学合并版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shared/grammar-learning-favorites.css?v=20260730d">
     <script>
         window.tailwind = window.tailwind || {};
         window.tailwind.config = {
@@ -1089,21 +1090,6 @@
                 justify-self: end;
             }
 
-            .mastery-toggle {
-                min-height: 26px;
-                padding: 3px 7px !important;
-                flex: 0 0 auto;
-                gap: 3px;
-                white-space: nowrap;
-                font-size: 10px !important;
-                line-height: 1;
-            }
-
-            .mastery-toggle .status-icon,
-            .mastery-toggle .status-text {
-                flex: 0 0 auto;
-            }
-
             .grammar-card .grid {
                 gap: 0.85rem;
             }
@@ -1167,10 +1153,10 @@
     <link rel="stylesheet" href="compound-particle-study.css?v=20260724g">
     <link rel="stylesheet" href="../../../shared/grammar-side-index.css?v=20260724b">
 </head>
-<body class="compound-particle-page font-sans antialiased min-h-screen">
+<body class="compound-particle-page font-sans antialiased min-h-screen" data-grammar-source-key="compound-particles">
 
     <header class="compound-topbar">
-        <a href="../index.html" class="compound-back-link compound-header-back">← 返回语法学习</a>
+        <a href="../../../index.html#daily/daily-grammar" class="compound-back-link compound-header-back">← 返回语法学习</a>
         <div class="header-actions">
             <a class="compound-practice-link" href="复合格助词练习.html">
                 <span>复合格助词练习</span><span aria-hidden="true">→</span>
@@ -1238,10 +1224,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜について</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">关于……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_tsuite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_tsuite" data-grammar-local-id="ni_tsuite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1288,10 +1271,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に対して</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">对……／每……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_taishite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_taishite" data-grammar-local-id="ni_taishite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1387,10 +1367,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜によって</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">通过……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_yotte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_yotte" data-grammar-local-id="ni_yotte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1486,10 +1463,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にとって</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">对……来说</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_totte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_totte" data-grammar-local-id="ni_totte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1536,10 +1510,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にあたって・にあたり</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">在……之际</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_atatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_atatte" data-grammar-local-id="ni_atatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1586,10 +1557,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に至る</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">发展到……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_itaru" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_itaru" data-grammar-local-id="ni_itaru" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1663,10 +1631,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜において・における</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">在……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_oite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_oite" data-grammar-local-id="ni_oite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1713,10 +1678,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に応じて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">根据……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_oujite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_oujite" data-grammar-local-id="ni_oujite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1763,10 +1725,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にかかわらず</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">不管……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kakawarazu" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kakawarazu" data-grammar-local-id="ni_kakawarazu" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1813,10 +1772,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を問わず</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">不论……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_towazu" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_towazu" data-grammar-local-id="wo_towazu" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1863,10 +1819,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に限る</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">最好……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kagiru" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kagiru" data-grammar-local-id="ni_kagiru" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1913,10 +1866,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に限って</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">偏偏…… / 唯独……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kagitte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kagitte" data-grammar-local-id="ni_kagitte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -1988,10 +1938,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に限り</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">仅限……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kagiri" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kagiri" data-grammar-local-id="ni_kagiri" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2038,10 +1985,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にかけて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">直到……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kakete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kakete" data-grammar-local-id="ni_kakete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2088,10 +2032,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にかけては</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">在……方面</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kakete_wa" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kakete_wa" data-grammar-local-id="ni_kakete_wa" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2138,10 +2079,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にかわって・にかわり</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">代替……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kawatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kawatte" data-grammar-local-id="ni_kawatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2188,10 +2126,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にくらべて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">与……相比</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kurabete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kurabete" data-grammar-local-id="ni_kurabete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2238,10 +2173,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にくわえて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">加上……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kuwaete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kuwaete" data-grammar-local-id="ni_kuwaete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2288,10 +2220,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にこたえて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">响应……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kotaete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kotaete" data-grammar-local-id="ni_kotaete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2338,10 +2267,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に際して</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">在……之际</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_saishite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_saishite" data-grammar-local-id="ni_saishite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2388,10 +2314,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に先立ち・に先立って</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">在……之前</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_sakidatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_sakidatte" data-grammar-local-id="ni_sakidatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2438,10 +2361,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にしたがって・にしたがい</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">随着……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_shitagatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_shitagatte" data-grammar-local-id="ni_shitagatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2488,10 +2408,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にしては</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">就……而言</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_shite_wa" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_shite_wa" data-grammar-local-id="ni_shite_wa" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2538,10 +2455,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にわたって・にわたり</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">历经……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_watatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_watatte" data-grammar-local-id="ni_watatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2588,10 +2502,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に備えて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">防备……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_sonaete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_sonaete" data-grammar-local-id="ni_sonaete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2638,10 +2549,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にしたって・にしたら</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">在……看来</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_shitatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_shitatte" data-grammar-local-id="ni_shitatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2715,10 +2623,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にそって</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">沿着……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_sotte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_sotte" data-grammar-local-id="ni_sotte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2765,10 +2670,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜につき</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">因为…… / 每……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_tsuki" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_tsuki" data-grammar-local-id="ni_tsuki" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2842,10 +2744,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜につけ</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">每当…… / 无论……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_tsuke" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_tsuke" data-grammar-local-id="ni_tsuke" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2919,10 +2818,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜につれて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">伴随……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_tsurete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_tsurete" data-grammar-local-id="ni_tsurete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -2969,10 +2865,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にともない・にともなって</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">伴随……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_tomonai" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_tomonai" data-grammar-local-id="ni_tomonai" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3020,10 +2913,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に反し・に反して</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">与……相反</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_hanshite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_hanshite" data-grammar-local-id="ni_hanshite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3070,10 +2960,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に向かって</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">面向……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_mukatte" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_mukatte" data-grammar-local-id="ni_mukatte" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3147,10 +3034,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に向けて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">针对……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_mukete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_mukete" data-grammar-local-id="ni_mukete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3197,10 +3081,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に面して</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">面临……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_menshite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_menshite" data-grammar-local-id="ni_menshite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3247,10 +3128,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に基づいて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">基于……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_motozuite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_motozuite" data-grammar-local-id="ni_motozuite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3297,10 +3175,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜に限らず</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">不仅……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_kagirazu" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_kagirazu" data-grammar-local-id="ni_kagirazu" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3347,10 +3222,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜にとどまらず</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">不限于……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="ni_todomarazu" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="ni_todomarazu" data-grammar-local-id="ni_todomarazu" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3397,10 +3269,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を込めて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">倾注……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_komete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_komete" data-grammar-local-id="wo_komete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3447,10 +3316,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を除いて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">除了……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_nozoite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_nozoite" data-grammar-local-id="wo_nozoite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3497,10 +3363,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を通じて・を通して</h3>
                         <span class="text-textSub font-medium text-sm bg-markerLavender px-2 py-1 rounded">整个…… / 通过……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_tsuujite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_tsuujite" data-grammar-local-id="wo_tsuujite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3574,10 +3437,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を〜に（として）<span class="compound-zh-text">框架</span></h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">设定基准 / 角色</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_ni_toshite_group" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_ni_toshite_group" data-grammar-local-id="wo_ni_toshite_group" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3788,10 +3648,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜として</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">作为……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="toshite" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="toshite" data-grammar-local-id="toshite" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3838,10 +3695,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜としても</h3>
                         <span class="text-textSub font-medium text-sm bg-markerPink px-2 py-1 rounded">即使……也……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="toshitemo" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="toshitemo" data-grammar-local-id="toshitemo" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3888,10 +3742,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜をもとに（して）</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">以……为素材</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_motoni" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_motoni" data-grammar-local-id="wo_motoni" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3938,10 +3789,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜のもとで・のもとに</h3>
                         <span class="text-textSub font-medium text-sm bg-markerMint px-2 py-1 rounded">在……之下</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="no_motode" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="no_motode" data-grammar-local-id="no_motode" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -3988,10 +3836,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を前に（して）</h3>
                         <span class="text-textSub font-medium text-sm bg-markerYellow px-2 py-1 rounded">面临……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_maeni" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span>
-                                <span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_maeni" data-grammar-local-id="wo_maeni" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
 
@@ -4038,9 +3883,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を受けて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">应…… / 受到……影响</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_ukete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span><span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_ukete" data-grammar-local-id="wo_ukete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -4092,9 +3935,7 @@
                         <h3 class="text-2xl font-bold font-serif-jp tracking-wider">〜を兼ねて</h3>
                         <span class="text-textSub font-medium text-sm bg-markerBlue px-2 py-1 rounded">兼作…… / 同时也为了……</span>
                         <div class="ml-auto">
-                            <button class="mastery-toggle sketch-btn px-3 py-1 text-xs font-bold transition-all bg-markerYellow text-textMain flex items-center gap-1" data-id="wo_kanete" data-status="unseen" onclick="toggleStatus(this)">
-                                <span class="status-icon">○</span><span class="status-text">未学</span>
-                            </button>
+                            <button class="grammar-learning-favorite" type="button" data-id="wo_kanete" data-grammar-local-id="wo_kanete" data-grammar-source-key="compound-particles"></button>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -4138,13 +3979,13 @@
                     <p>按照表达关系集中查找词条。这里用于快速确认，详细说明仍在“基础理解”中阅读。</p>
                 </div>
                 <button id="openGrammarFilterBtn" class="compound-filter-button" type="button" aria-haspopup="dialog" aria-controls="grammarFilterOverlay">
-                    筛选学习状态
+                    筛选收藏状态
                 </button>
             </div>
             <div class="compound-atlas-table-wrap">
                 <table class="compound-atlas-table">
                     <thead>
-                        <tr><th>分类</th><th>表达</th><th>核心意义</th><th>学习状态</th></tr>
+                        <tr><th>分类</th><th>表达</th><th>核心意义</th><th>收藏状态</th></tr>
                     </thead>
                     <tbody id="compoundAtlasBody"></tbody>
                 </table>
@@ -4167,9 +4008,9 @@
         <div class="practice-modal grammar-filter-modal sketch-box" role="dialog" aria-modal="true" aria-labelledby="grammarFilterTitle">
             <div class="practice-modal-header">
                 <div>
-                    <p class="practice-modal-kicker">学习状态筛选</p>
+                    <p class="practice-modal-kicker">收藏状态筛选</p>
                     <h2 id="grammarFilterTitle" class="practice-modal-title">词条筛选</h2>
-                    <p class="practice-modal-subtitle">按掌握状态或错题记录筛选当前 49 个语法条。</p>
+                    <p class="practice-modal-subtitle">按收藏状态或错题记录筛选当前 49 个语法条。</p>
                 </div>
                 <button id="closeGrammarFilterBtn" class="practice-close-btn sketch-btn" type="button" aria-label="关闭词条筛选">×</button>
             </div>
@@ -4177,9 +4018,8 @@
             <div id="grammarFilterPanel" class="grammar-filter-panel">
                 <div class="grammar-filter-row" aria-label="语法条标签筛选">
                     <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="all">全部 <span data-grammar-filter-count="all">0</span></button>
-                    <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="unseen">未学 <span data-grammar-filter-count="unseen">0</span></button>
-                    <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="confused">模糊 <span data-grammar-filter-count="confused">0</span></button>
-                    <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="mastered">掌握 <span data-grammar-filter-count="mastered">0</span></button>
+                    <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="favorited">已收藏 <span data-grammar-filter-count="favorited">0</span></button>
+                    <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="unfavorited">未收藏 <span data-grammar-filter-count="unfavorited">0</span></button>
                     <button class="grammar-filter-chip sketch-btn" type="button" data-grammar-filter="wrong">有错题 <span data-grammar-filter-count="wrong">0</span></button>
                 </div>
                 <p id="grammarFilterSummary" class="grammar-filter-summary">显示全部语法条。</p>
@@ -4188,7 +4028,6 @@
     </div>
 
     <script>
-        const STATUS_PREFIX = 'compound_particle_status_';
         const GRAMMAR_FILTER_KEY = 'compound_particle_grammar_filter';
         const COMPOUND_WRONG_RECORDS_KEY = 'compound_particle_wrong_records_v1';
         const COMPOUND_QUESTION_GRAMMAR_MAP = {
@@ -4280,35 +4119,13 @@
             }
         }
 
-        function setStatus(btn, status, save = true) {
-            btn.setAttribute('data-status', status);
-            const card = btn.closest('.grammar-card');
-            if (card) card.setAttribute('data-status', status);
-            const icon = btn.querySelector('.status-icon');
-            const text = btn.querySelector('.status-text');
-            const grammarId = btn.getAttribute('data-id');
-            btn.classList.remove('bg-markerYellow', 'bg-markerMint', 'bg-markerGray', 'bg-white');
-            if (status === 'mastered') { btn.classList.add('bg-markerMint'); icon.textContent = '✓'; text.textContent = '掌握'; }
-            else if (status === 'confused') { btn.classList.add('bg-markerYellow'); icon.textContent = '?'; text.textContent = '模糊'; }
-            else { btn.classList.add('bg-markerGray'); icon.textContent = '○'; text.textContent = '未学'; }
-            if (save && grammarId) localStorage.setItem(STATUS_PREFIX + grammarId, status);
-            updateStats();
-            applyFilters();
-        }
-
-        function toggleStatus(btn) {
-            const current = btn.getAttribute('data-status') || 'unseen';
-            const next = current === 'unseen' ? 'confused' : current === 'confused' ? 'mastered' : 'unseen';
-            setStatus(btn, next);
-        }
-
         function getGrammarIdForCard(card) {
-            return card?.querySelector('.mastery-toggle')?.dataset.id || '';
+            return card?.querySelector('.grammar-learning-favorite[data-id]')?.dataset.id || '';
         }
 
         function getGrammarCardById(grammarId) {
             if (!grammarId) return null;
-            return document.querySelector(`.mastery-toggle[data-id="${CSS.escape(grammarId)}"]`)?.closest('.grammar-card') || null;
+            return document.querySelector(`.grammar-learning-favorite[data-id="${CSS.escape(grammarId)}"]`)?.closest('.grammar-card') || null;
         }
 
         function getGrammarTitleById(grammarId) {
@@ -4346,22 +4163,28 @@
             return ids;
         }
 
-        function getCardStatus(card) {
-            return card?.dataset.status || 'unseen';
+        function getFavoriteIdForGrammar(grammarId) {
+            return window.GrammarLearningCatalog?.resolve?.('compound-particles', grammarId) || '';
+        }
+
+        function isGrammarFavorited(grammarId) {
+            const favoriteId = getFavoriteIdForGrammar(grammarId);
+            return Boolean(favoriteId && window.GrammarFavorites?.has?.(favoriteId));
         }
 
         function applyFilters() {
-            const validFilters = ['all', 'unseen', 'confused', 'mastered', 'wrong'];
+            const validFilters = ['all', 'favorited', 'unfavorited', 'wrong'];
             if (!validFilters.includes(currentGrammarFilter)) currentGrammarFilter = 'all';
             const wrongGrammarIds = getActiveWrongGrammarIdSet();
             let visibleCount = 0;
 
             document.querySelectorAll('.grammar-card').forEach(card => {
                 const grammarId = getGrammarIdForCard(card);
-                const status = getCardStatus(card);
+                const favorited = isGrammarFavorited(grammarId);
                 const hasWrong = wrongGrammarIds.has(grammarId);
                 const shouldShow = currentGrammarFilter === 'all'
-                    || currentGrammarFilter === status
+                    || (currentGrammarFilter === 'favorited' && favorited)
+                    || (currentGrammarFilter === 'unfavorited' && !favorited)
                     || (currentGrammarFilter === 'wrong' && hasWrong);
                 card.classList.toggle('is-hidden', !shouldShow);
                 if (shouldShow) visibleCount += 1;
@@ -4393,30 +4216,22 @@
 
             const summary = document.getElementById('grammarFilterSummary');
             if (summary) {
-                const labelMap = { all: '全部', unseen: '未学', confused: '模糊', mastered: '掌握', wrong: '有错题' };
+                const labelMap = { all: '全部', favorited: '已收藏', unfavorited: '未收藏', wrong: '有错题' };
                 summary.textContent = `当前筛选：${labelMap[currentGrammarFilter] || '全部'} · 显示 ${visibleCount} / ${document.querySelectorAll('.grammar-card').length} 项`;
             }
         }
 
         function updateStats() {
-            const counts = { unseen: 0, confused: 0, mastered: 0 };
+            const counts = { favorited: 0, unfavorited: 0 };
             const wrongGrammarIds = getActiveWrongGrammarIdSet();
             document.querySelectorAll('.grammar-card').forEach(card => {
-                const status = getCardStatus(card);
-                if (!counts[status]) counts[status] = 0;
-                counts[status] += 1;
+                const grammarId = getGrammarIdForCard(card);
+                counts[isGrammarFavorited(grammarId) ? 'favorited' : 'unfavorited'] += 1;
             });
-            const unseenCount = document.getElementById('unseenCount');
-            const confusedCount = document.getElementById('confusedCount');
-            const masteredCount = document.getElementById('masteredCount');
-            if (unseenCount) unseenCount.textContent = counts.unseen || 0;
-            if (confusedCount) confusedCount.textContent = counts.confused || 0;
-            if (masteredCount) masteredCount.textContent = counts.mastered || 0;
             const filterCounts = {
                 all: document.querySelectorAll('.grammar-card').length,
-                unseen: counts.unseen || 0,
-                confused: counts.confused || 0,
-                mastered: counts.mastered || 0,
+                favorited: counts.favorited,
+                unfavorited: counts.unfavorited,
                 wrong: wrongGrammarIds.size
             };
             Object.entries(filterCounts).forEach(([key, value]) => {
@@ -4546,13 +4361,6 @@
             if (badge) badge.textContent = getCompoundWrongRecordList('active').length;
         }
 
-        function markQuestionGrammarsConfused(question) {
-            getCompoundQuestionGrammarIds(question).forEach(grammarId => {
-                const button = getGrammarCardById(grammarId)?.querySelector('.mastery-toggle');
-                if (button) setStatus(button, 'confused');
-            });
-        }
-
         function recordCompoundQuestionResult(question, selectedOptionId, isCorrect) {
             if (!question?.id) return;
             const records = getCompoundWrongRecords();
@@ -4594,7 +4402,6 @@
                 lastCorrectAt: existing.lastCorrectAt || null
             };
             saveCompoundWrongRecords(records);
-            markQuestionGrammarsConfused(question);
         }
 
         function openCompoundWrongReview(tab = compoundPracticeState.wrongTab || 'active') {
@@ -5023,16 +4830,27 @@
             organizeGrammarCards();
             initGrammarFilterControls();
             initGrammarFilterOverlay();
-            document.querySelectorAll('.mastery-toggle').forEach(btn => setStatus(btn, localStorage.getItem(STATUS_PREFIX + btn.dataset.id) || 'unseen', false));
             updateCompoundWrongBadge();
             updateStats();
             applyFilters();
             initCompoundPracticeMode();
+            window.GrammarFavorites?.subscribe?.(() => {
+                updateStats();
+                applyFilters();
+                window.refreshCompoundAtlas?.();
+            });
         });
     </script>
-    <script src="compound-particle-study.js?v=20260724d"></script>
-    <script src="../../../shared/grammar-side-index.js?v=20260722a"></script>
+    <script src="../../../shared/grammar-db-core.js?v=20260725b"></script>
+    <script src="../../../shared/grammar-db-tags.js?v=20260725b"></script>
+    <script src="../../../shared/grammar-db-resources.js"></script>
+    <script src="../../../shared/grammar-learning-sources.js?v=20260730b"></script>
+    <script src="../../../shared/grammar-db-repo.js?v=20260730a"></script>
+    <script src="../../../shared/grammar-favorites.js?v=20260726a"></script>
+    <script src="compound-particle-study.js?v=20260730a"></script>
+    <script src="../../../shared/grammar-learning-favorites.js?v=20260730a"></script>
+    <script src="../../../shared/grammar-side-index.js?v=20260730a"></script>
     <script src="../../../shared/word-bank.js"></script>
-    <script src="../../../shared/unified-header.js?v=20260723a" data-kiki-unified-header-loader></script>
+    <script src="../../../shared/unified-header.js?v=20260728c" data-kiki-unified-header-loader></script>
 </body>
 </html>

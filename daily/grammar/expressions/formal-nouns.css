@@ -14,7 +14,6 @@
 .formal-nouns-page .compound-entry-meta,
 .formal-nouns-page .compound-entry-usages,
 .formal-nouns-page .compound-example-cn,
-.formal-nouns-page .formal-status-label,
 .formal-nouns-page .compound-reference-header,
 .formal-nouns-page .formal-mindmap-root small,
 .formal-nouns-page .formal-mindmap-root span,
@@ -36,30 +35,6 @@
     color: var(--compound-muted);
     background: var(--compound-apricot-soft);
     font-size: 14px;
-}
-
-.formal-nouns-page .formal-status-label {
-    display: inline-flex;
-    min-height: 28px;
-    align-items: center;
-    padding: 0 9px;
-    border: 1px solid var(--compound-line);
-    color: var(--compound-muted);
-    background: var(--compound-white);
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.formal-nouns-page .formal-status-label[data-status="confused"] {
-    border-color: var(--compound-apricot);
-    color: var(--compound-apricot);
-    background: var(--compound-apricot-soft);
-}
-
-.formal-nouns-page .formal-status-label[data-status="mastered"] {
-    border-color: var(--compound-blue);
-    color: var(--compound-blue-dark);
-    background: var(--compound-blue-soft);
 }
 
 .formal-nouns-page .compound-entry-list > .grammar-card.formal-noun-concept-card {
@@ -112,6 +87,14 @@
 
 .formal-nouns-page .formal-noun-concept-copy {
     display: block;
+}
+
+.formal-nouns-page .formal-favorite-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 7px;
+    max-width: min(420px, 42vw);
 }
 
 .formal-nouns-page .formal-noun-concept-copy > h4 {
@@ -507,17 +490,11 @@
     white-space: nowrap;
 }
 
-.formal-nouns-page .formal-atlas-leaf .formal-status-label {
-    min-height: 24px;
-    padding: 0 7px;
-    border-radius: 6px;
-    border-color: #d4d4d0;
-    color: #666662;
-    background: #e5e5e0;
-    font-size: 9px;
-}
-
 @media (max-width: 640px) {
+    .formal-nouns-page .formal-favorite-actions {
+        max-width: none;
+    }
+
     .formal-nouns-page .compound-entry-list > .grammar-card.formal-noun-concept-card {
         padding: 20px 0 28px 22px !important;
         border-left-width: 1px !important;

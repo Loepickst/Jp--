@@ -1119,18 +1119,25 @@ body.adverbial-particle-page {
 }
 
 .adverbial-particle-page .particle-related-entry-heading {
+    position: relative;
     display: grid;
     grid-template-columns: 54px minmax(0, 1fr);
     gap: 14px;
     align-items: start;
+    padding-right: 92px;
     padding-bottom: 0;
     border-bottom: 0;
 }
 
+.adverbial-particle-page .particle-related-favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .adverbial-particle-page .particle-related-title-block {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 24px;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     min-width: 0;
 }
@@ -1149,28 +1156,6 @@ body.adverbial-particle-page {
     letter-spacing: 0.04em;
     place-items: center;
     margin-top: 3px;
-}
-
-.adverbial-particle-page .particle-related-meta {
-    display: flex;
-    grid-column: 2;
-    grid-row: 1;
-    align-items: center;
-    justify-self: end;
-    gap: 7px;
-    margin: 2px 0 0;
-    color: var(--related-muted);
-    font-family: var(--related-zh-sans) !important;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-}
-
-.adverbial-particle-page .particle-related-meta span {
-    padding: 2px 7px;
-    background: #eef2f7;
-    color: var(--related-blue);
-    font-family: Arial, sans-serif !important;
 }
 
 .adverbial-particle-page .particle-related-title-line {
@@ -2313,6 +2298,7 @@ body.adverbial-particle-page {
     .adverbial-particle-page .particle-related-entry-heading {
         grid-template-columns: 48px minmax(0, 1fr);
         gap: 10px;
+        padding-right: 54px;
     }
 
     .adverbial-particle-page .particle-related-number {
@@ -2323,12 +2309,6 @@ body.adverbial-particle-page {
     .adverbial-particle-page .particle-related-title-block {
         grid-template-columns: minmax(0, 1fr);
         row-gap: 8px;
-    }
-
-    .adverbial-particle-page .particle-related-meta {
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: end;
     }
 
     .adverbial-particle-page .particle-related-title-line {
@@ -2770,8 +2750,7 @@ body.adverbial-particle-page {
     }
 
     .adverbial-particle-page .particle-related-title-block {
-        grid-template-columns: minmax(0, 1fr) auto;
-        column-gap: 8px;
+        grid-template-columns: minmax(0, 1fr);
         row-gap: 0;
         align-items: start;
     }
@@ -2780,15 +2759,6 @@ body.adverbial-particle-page {
         display: block;
         grid-column: 1;
         grid-row: 1;
-    }
-
-    .adverbial-particle-page .particle-related-meta {
-        grid-column: 2;
-        grid-row: 1;
-        align-self: start;
-        justify-self: end;
-        margin-top: 2px;
-        white-space: nowrap;
     }
 
     .adverbial-particle-page .particle-related-number {

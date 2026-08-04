@@ -143,6 +143,14 @@ body.home-dashboard-redesign .home-grammar-directory-title-row > span {
     background: var(--grammar-directory-line);
 }
 
+body.home-dashboard-redesign .home-grammar-directory-title-mobile {
+    display: none;
+}
+
+body.home-dashboard-redesign .home-grammar-directory-back-mobile {
+    display: none !important;
+}
+
 body.home-dashboard-redesign .home-grammar-directory-groups {
     display: grid;
     gap: 14px;
@@ -362,41 +370,44 @@ body.home-dashboard-redesign .home-grammar-directory-footnote {
     }
 
     body.home-dashboard-redesign .home-grammar-directory-head {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        margin-bottom: 16px;
-        padding-bottom: 15px;
-    }
-
-    body.home-dashboard-redesign .home-grammar-directory-head > .section-view-back {
-        grid-row: 1;
-        justify-self: start;
-        min-height: 42px;
-    }
-
-    body.home-dashboard-redesign .home-grammar-directory-head > div {
-        grid-row: 2;
+        display: none;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-cover {
-        min-height: 0;
+        display: none;
     }
 
-    body.home-dashboard-redesign .home-grammar-directory-cover-copy {
-        min-height: 184px;
-        padding: 24px;
+    body.home-dashboard-redesign .home-grammar-directory-title-desktop {
+        display: none;
     }
 
-    body.home-dashboard-redesign .home-grammar-directory-cover h2 {
-        font-size: 33px;
-    }
-
-    body.home-dashboard-redesign .home-grammar-directory-cover-art {
-        height: 174px;
+    body.home-dashboard-redesign .home-grammar-directory-title-mobile {
+        display: inline;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-title-row {
-        margin-top: 22px;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 0;
+        margin-bottom: 14px;
+    }
+
+    body.home-dashboard-redesign .home-grammar-directory-title-row > span[aria-hidden="true"] {
+        display: none;
+    }
+
+    body.home-dashboard-redesign .home-grammar-directory-back-mobile {
+        display: inline-flex !important;
+        justify-self: end;
+        min-height: 34px;
+        padding: 0 10px;
+        font-size: 10.5px;
+    }
+
+    body.home-dashboard-redesign .home-grammar-directory-back-mobile svg {
+        width: 12px;
+        height: 12px;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-group {
@@ -412,40 +423,46 @@ body.home-dashboard-redesign .home-grammar-directory-footnote {
     }
 
     body.home-dashboard-redesign .home-grammar-directory-row {
-        grid-template-columns: 32px minmax(0, 1fr) 24px;
-        gap: 9px;
-        min-height: 82px;
+        grid-template-columns: minmax(0, 1fr) 20px;
+        gap: 7px;
+        min-height: 54px;
         padding-right: 7px;
     }
 
+    body.home-dashboard-redesign .home-grammar-directory-number,
     body.home-dashboard-redesign .home-grammar-directory-tag {
         display: none;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-row.is-locked {
-        grid-template-columns: 32px minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 1fr) 20px;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-row.is-locked .home-grammar-directory-tag {
-        display: inline-flex;
-        grid-column: 3;
-        font-size: 10px;
-    }
-
-    body.home-dashboard-redesign .home-grammar-directory-row.is-locked .home-grammar-directory-arrow {
         display: none;
     }
 
+    body.home-dashboard-redesign .home-grammar-directory-row.is-locked .home-grammar-directory-arrow {
+        display: inline;
+    }
+
     body.home-dashboard-redesign .home-grammar-directory-row-copy strong {
-        font-size: 15px;
+        font-size: 11.5px;
+        line-height: 1.3;
     }
 
     body.home-dashboard-redesign .home-grammar-directory-row-copy > span {
-        display: -webkit-box;
-        overflow: hidden;
-        font-size: 10.5px;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        display: none;
+    }
+
+    body.home-dashboard-redesign .home-grammar-directory-row.is-last-viewed {
+        background: rgba(111, 138, 85, 0.075);
+        box-shadow: inset 3px 0 0 rgba(111, 138, 85, 0.62);
+    }
+
+    body.home-dashboard-redesign .home-grammar-directory-row.is-last-viewed .home-grammar-directory-row-copy strong {
+        color: var(--grammar-directory-accent);
+        font-weight: 700;
     }
 }
 
