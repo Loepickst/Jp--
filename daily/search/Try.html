@@ -223,76 +223,64 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./try-mindmap-fresh.css?v=20260805-2">
 </head>
-<body class="bg-[#f0f0eb] text-[#2c2c2a] font-sans h-screen flex flex-col overflow-hidden">
+<body class="try-mindmap-app h-screen flex flex-col overflow-hidden">
 
-    <!-- 顶部导航栏 -->
-    <header class="pt-5 pb-1 sm:pt-5 sm:pb-2 flex-shrink-0 relative z-30 isolate">
-        <div class="max-w-6xl mx-auto px-3 sm:px-4">
-            <div class="flex items-center justify-between gap-2 sm:gap-4 min-h-[44px]">
-                <div class="min-w-0 flex items-center justify-start">
-                    <a href="../../index.html#daily/exam-textbook" class="inline-flex min-h-[40px] sm:min-h-[44px] items-center gap-1.5 rounded-lg border border-[#d4d4d0] bg-[#f9f8f6] px-2.5 py-2 sm:px-4 text-[10px] sm:text-sm font-bold text-[#6f6f6a] shadow-sm transition-colors hover:bg-[#e5e5e0] hover:text-[#2c2c2a] whitespace-nowrap" data-back-nav>
-                        <i class="fa-solid fa-arrow-left text-[10px] sm:text-xs"></i>
-                        <span>返回教材学习</span>
-                    </a>
-                </div>
+    <header class="try-app-header">
+        <div class="try-topbar">
+            <a href="../../index.html#daily/exam-textbook" class="try-back-button" data-back-nav aria-label="返回教材学习">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>返回教材学习</span>
+            </a>
+            <h1 class="try-page-title">Try! 思维导图</h1>
+            <div class="try-main-tabs" aria-label="视图切换">
+                <button id="tab-directory" class="try-main-tab is-active" onclick="switchMainTab('directory')">
+                    <i class="fa-solid fa-diagram-project"></i><span>导图</span>
+                </button>
+                <button id="tab-flashcard" class="try-main-tab" onclick="switchMainTab('flashcard')">
+                    <i class="fa-solid fa-clone"></i><span>自检</span>
+                </button>
+            </div>
+        </div>
 
-                <div class="min-w-0 flex items-center justify-end">
-                    <div class="bg-[#e5e5e0] p-1 rounded-xl inline-flex items-center min-h-[40px] sm:min-h-[44px] relative shadow-inner">
-                        <button id="tab-directory" class="h-8 sm:h-9 px-3 sm:px-4 rounded-lg font-bold text-xs sm:text-sm transition-all bg-[#2c2c2a] text-white shadow-sm whitespace-nowrap" onclick="switchMainTab('directory')">
-                            <i class="fa-solid fa-diagram-project mr-1"></i> 导图
+        <div class="try-toolbar">
+            <div id="directory-scope-slot">
+                <div id="scope-filter-shell">
+                    <div class="try-scope-control">
+                        <button id="scope-filter-toggle" type="button" onclick="toggleScopeFilter()" class="try-scope-button w-full text-left">
+                            <span class="try-scope-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
+                            <span class="try-scope-copy">
+                                <strong>书籍与课程</strong>
+                                <small>选择教材与课次</small>
+                            </span>
+                            <i id="scope-filter-chevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                         </button>
-                        <button id="tab-flashcard" class="h-8 sm:h-9 px-3 sm:px-4 rounded-lg font-bold text-xs sm:text-sm transition-all text-[#8a8a85] hover:text-[#2c2c2a] hover:bg-[#d4d4d0] whitespace-nowrap" onclick="switchMainTab('flashcard')">
-                            <i class="fa-solid fa-clone mr-1"></i> 自检
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-2 sm:mt-3">
-                <div class="h-px bg-gradient-to-r from-transparent via-[#d6d6d0] to-transparent opacity-80"></div>
-            </div>
-
-
-            <div id="scope-filter-shell" class="mt-2.5 sm:mt-3.5">
-                <div class="bg-[#f9f8f6] border border-[#e5e5e0] rounded-2xl shadow-sm overflow-hidden">
-                    <button id="scope-filter-toggle" type="button" onclick="toggleScopeFilter()" class="w-full px-4 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between text-left text-sm sm:text-base font-bold text-[#2c2c2a] hover:bg-[#efefe9] transition-colors">
-                        <span>书籍与课程</span>
-                        <i id="scope-filter-chevron" class="fa-solid fa-chevron-down text-xs text-[#8a8a85] transition-transform duration-300"></i>
-                    </button>
-                    <div id="scope-filter-panel" class="hidden px-4 pb-4 sm:px-5 sm:pb-5">
-                        <div id="scope-filter-books" class="space-y-3"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="grammar-search-shell" class="mt-2.5 sm:mt-3.5 relative z-40 isolate">
-                <div class="bg-[#f9f8f6] border border-[#e5e5e0] rounded-2xl shadow-sm relative">
-                    <div class="px-4 py-3 sm:px-5 sm:py-3.5">
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <i class="fa-solid fa-magnifying-glass text-xs sm:text-sm text-[#8a8a85]"></i>
-                            <input id="grammar-search-input" type="search" placeholder="搜索语法 / 假名 / 中文义项" class="flex-1 bg-transparent border-0 outline-none text-sm sm:text-base text-[#2c2c2a] placeholder:text-[#b1b1ab]">
-                            <button id="grammar-search-clear" type="button" class="hidden text-[10px] sm:text-xs bg-white hover:bg-[#e5e5e0] text-[#8a8a85] hover:text-[#2c2c2a] font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-lg border border-[#d4d4d0] shadow-sm transition-all">
-                                清空
-                            </button>
+                        <div id="scope-filter-panel" class="hidden">
+                            <div id="scope-filter-books"></div>
                         </div>
                     </div>
-                    <div id="grammar-search-results" class="hidden absolute left-0 right-0 top-full z-50 mt-1 sm:mt-1.5 max-h-[40vh] sm:max-h-80 overflow-y-auto overscroll-contain rounded-2xl border border-[#e5e5e0] bg-white shadow-2xl"></div>
                 </div>
             </div>
 
+            <div id="grammar-search-shell" class="try-search-control relative z-40 isolate">
+                <i class="try-search-icon fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input id="grammar-search-input" type="search" placeholder="搜索语法、假名或中文义项" aria-label="搜索语法、假名或中文义项">
+                <button id="grammar-search-clear" type="button" class="hidden">清空</button>
+                <div id="grammar-search-results" class="hidden absolute left-0 right-0 top-full z-50 max-h-[40vh] sm:max-h-80 overflow-y-auto overscroll-contain bg-white"></div>
+            </div>
 
-            <div id="directory-grouping-controls" class="mt-2 sm:mt-3 flex justify-start sm:justify-center">
-                <div class="inline-flex bg-[#f9f8f6] border border-[#e5e5e0] rounded-full p-1 shadow-sm">
-                        <button id="btn-group-lesson" class="px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all bg-[#2c2c2a] text-white shadow-sm" onclick="setGrouping('lesson')">
-                            <i class="fa-solid fa-book-open mr-1 opacity-70"></i> 按课本
-                        </button>
-                        <button id="btn-group-category" class="px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all text-[#8a8a85] hover:text-[#2c2c2a] hover:bg-[#e5e5e0]" onclick="setGrouping('category')">
-                            <i class="fa-solid fa-layer-group mr-1 opacity-70"></i> 按用法
-                        </button>
-                        <button id="btn-group-special" class="px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all text-[#8a8a85] hover:text-[#2c2c2a] hover:bg-[#e5e5e0]" onclick="setGrouping('special')">
-                            <i class="fa-solid fa-puzzle-piece mr-1 opacity-70"></i> 特殊分类
-                        </button>
+            <div id="directory-grouping-controls">
+                <div class="try-group-tabs">
+                    <button id="btn-group-lesson" class="try-group-tab is-active" onclick="setGrouping('lesson')">
+                        <i class="fa-solid fa-book-open"></i><span>按课本</span>
+                    </button>
+                    <button id="btn-group-category" class="try-group-tab" onclick="setGrouping('category')">
+                        <i class="fa-solid fa-layer-group"></i><span>按用法</span>
+                    </button>
+                    <button id="btn-group-special" class="try-group-tab" onclick="setGrouping('special')">
+                        <i class="fa-solid fa-puzzle-piece"></i><span>特殊分类</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -300,18 +288,24 @@
 
     <!-- 主要内容区 -->
     <main class="flex-1 overflow-y-auto no-scrollbar relative z-0">
-        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-1 sm:py-4 h-full">
+        <div class="try-main-content">
 
             <!-- 视图1: 语法目录/思维导图 -->
-            <div id="view-directory" class="h-full flex flex-col">
-                <!-- 导图容器 (已加入边框样式) -->
-                <div id="directory-mindmap-shell" class="overflow-x-auto pb-12 pt-1 sm:pt-3 px-0.5 sm:px-1">
-                    <div class="bg-[#f9f8f6] border border-[#e5e5e0] rounded-2xl shadow-sm p-3.5 sm:p-8 min-w-max w-full">
-                        <div id="directory-container" class="flex flex-col pr-2 sm:pr-8">
+            <div id="view-directory" class="flex flex-col">
+                <section class="try-map-panel" aria-label="课程语法思维导图">
+                    <div class="try-map-panel-head">
+                        <div class="try-map-heading">
+                            <h2>课程语法网络</h2>
+                            <span id="directory-group-label" class="try-map-group-badge">按课本</span>
+                        </div>
+                        <span id="directory-scope-summary" class="try-map-summary"></span>
+                    </div>
+                    <div id="directory-mindmap-shell">
+                        <div id="directory-container">
                             <!-- 动态渲染的树状结构将插入这里 -->
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
 
             <!-- 视图2: 自检卡片 -->
@@ -328,6 +322,8 @@
                                 <h2 class="text-xl sm:text-3xl font-extrabold text-[#2c2c2a] tracking-wide mb-0 sm:mb-2 font-serif-jp">请选择自检模式</h2>
                             </div>
                         </div>
+
+                        <div id="flashcard-scope-slot"></div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 w-full max-w-3xl px-4 sm:px-6">
                             <!-- 模式1: 含义 -> 语法 -->
@@ -516,8 +512,8 @@ const grammarData = [
         "meaning": "告诉...做... / 拜托...做...",
         "explanation": "用于<span class='font-bold text-[#8a3324]'>间接引用</span>他人的指示、要求或请求，表示传达某种指令。",
         "example": {
-            "jp": "お母さんに、お見合いの時はスマホばかり見ない<span class='grammar-highlight'>ように言われた</span>。",
-            "cn": "老妈嘱咐我，相亲的时候千万别老是盯着手机看。"
+            "jp": "<ruby>母<rt>はは</rt></ruby>に、<ruby>帰<rt>かえ</rt></ruby>りが<ruby>遅<rt>おそ</rt></ruby>くなるときは<ruby>連<rt>れん</rt></ruby><ruby>絡<rt>らく</rt></ruby>する<span class='grammar-highlight'>ように<ruby>言<rt>い</rt></ruby>われた</span>。",
+            "cn": "妈妈叮嘱我，回去晚的时候要联系她。"
         },
         "similarGrammar": [],
         "firstKana": "よ",
@@ -531,26 +527,26 @@ const grammarData = [
     {
         "id": 3003,
         "lesson": "第1课",
-        "macro": "传闻与引用",
-        "category": "传闻・解释",
+        "macro": "主张与评价",
+        "category": "总结・解释",
         "point": "～ということだ",
         "connection": "<span class='text-[#8a3324] mx-1'>普通体</span> ＋ ということだ",
-        "meaning": "据说... / 也就是说...",
-        "explanation": "既可表示<span class='font-bold text-[#8a3324]'>传闻</span>（据说/听说），也可用于对前述情况进行<span class='font-bold text-[#8a3324]'>总结与解释说明</span>（也就是说）。",
+        "meaning": "也就是说…… / 这意味着……",
+        "explanation": "用于对前面已经提到的事实或情况进行<span class='font-bold text-[#8a3324]'>总结、归纳或换言解释</span>，说明由此可以得出什么结论。",
         "example": {
-            "jp": "いつもサボってばかりいるあの同僚は、なんと社長の親戚だ<span class='grammar-highlight'>ということだ</span>。",
-            "cn": "听说那个整天摸鱼的同事，居然是老板的亲戚。"
+            "jp": "締め切りは今日までだ。つまり、明日では間に合わない<span class='grammar-highlight'>ということだ</span>。",
+            "cn": "截止日期到今天为止。也就是说，明天再交就来不及了。"
         },
         "similarGrammar": [
             3029
         ],
         "firstKana": "と",
-        "keyword": "传闻或解释说明",
+        "keyword": "总结并换言说明",
         "book": "N3",
         "sourceId": 3,
         "lessonNumber": 1,
-        "sourceMacro": "传闻与说明",
-        "sourceCategory": "传闻・解释"
+        "sourceMacro": "主张与评价",
+        "sourceCategory": "总结・解释"
     },
     {
         "id": 3004,
@@ -989,7 +985,7 @@ const grammarData = [
         "explanation": "表示<span class='font-bold text-[#8a3324]'>客观存在的原因或理由</span>，导致了后项的结果。常用于书面或较为郑重的场合。",
         "example": {
             "jp": "夜中にラーメンを食べた<span class='grammar-highlight'>ため</span>、翌朝顔がパンパンに腫れてしまった。",
-            "cn": "因为大半夜吃了拉面，第二天早上脸肿得像个包子。"
+            "cn": "因为半夜吃了拉面，第二天早上脸肿得厉害。"
         },
         "similarGrammar": [],
         "firstKana": "た",
@@ -1121,8 +1117,8 @@ const grammarData = [
         "category": "转达信息",
         "point": "～ということだ / ～とのことだ",
         "connection": "<span class='text-[#8a3324] mx-1'>普通体</span> ＋ ということだ / とのことだ",
-        "meaning": "听说... / 据说...",
-        "explanation": "将从别处得到的<span class='font-bold text-[#8a3324]'>信息传达给他人</span>。“とのことだ”常用于传达某人具体的留言。",
+        "meaning": "听说…… / 据说……",
+        "explanation": "用于把从他人、通知、新闻等处听到的<span class='font-bold text-[#8a3324]'>传闻或消息转述给别人</span>，并非说话人亲自确认的信息。“とのことだ”语气较正式，也常用于传达某人的具体留言。",
         "example": {
             "jp": "幹事からの連絡によると、今日の飲み会は部長のおごりだ<span class='grammar-highlight'>ということだ</span>。",
             "cn": "根据聚会干事的通知，据说今天的酒局是部长请客。"
@@ -1418,8 +1414,8 @@ const grammarData = [
         "meaning": "像...一样",
         "explanation": "举出一个<span class='font-bold text-[#8a3324]'>典型的事物</span>进行比喻，说明其状态或性质。口语中常使用「〜みたい」。",
         "example": {
-            "jp": "彼はまるでプロの歌手<span class='grammar-highlight'>のように</span>歌が上手だ。",
-            "cn": "他唱歌好听得简直就像专业歌手一样。"
+            "jp": "<ruby>彼<rt>かの</rt></ruby><ruby>女<rt>じょ</rt></ruby>はまるでプロの<ruby>歌<rt>か</rt></ruby><ruby>手<rt>しゅ</rt></ruby><span class='grammar-highlight'>のように</span>、<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>に<ruby>歌<rt>うた</rt></ruby>う。",
+            "cn": "她唱得非常好，简直像职业歌手一样。"
         },
         "similarGrammar": [
             3027,
@@ -1619,8 +1615,8 @@ const grammarData = [
         "meaning": "多亏了... / 幸亏...",
         "explanation": "表示因为某人或某事的帮助，得到了好的结果。带有<span class='font-bold text-[#8a3324]'>感激的心情</span>。",
         "example": {
-            "jp": "毎日推しの動画を見ている<span class='grammar-highlight'>おかげで</span>、仕事の辛いストレスを乗り越えられている。",
-            "cn": "多亏了每天看偶像的视频，我才能熬过工作的痛苦压力。"
+            "jp": "毎日推しの動画を見ている<span class='grammar-highlight'>おかげで</span>、仕事のストレスを乗り越えられている。",
+            "cn": "多亏了每天看喜欢的偶像的视频，我才能熬过工作带来的压力。"
         },
         "similarGrammar": [],
         "firstKana": "お",
@@ -2665,10 +2661,10 @@ const grammarData = [
         "point": "～せいだ / ～せいで",
         "connection": "<span class='text-[#8a3324] mx-1'>普通体</span>（名词＋の / な形容词＋な） ＋ せいだ / せいで",
         "meaning": "都怪... / 因为...（导致不好结果）",
-        "explanation": "将某个不好的结果归咎于前项的原因，带有<span class='font-bold text-[#8a3324]'>埋怨、推卸责任</span>的语气。",
+        "explanation": "将某个不好的结果归因于前项，常带有<span class='font-bold text-[#8a3324]'>埋怨、责怪或遗憾</span>的语气。",
         "example": {
             "jp": "目覚まし時計が鳴らなかった<span class='grammar-highlight'>せいで</span>、大事な面接に遅刻してしまった。",
-            "cn": "都怪闹钟没响，害得我错过了重要的面试。"
+            "cn": "都怪闹钟没响，害得我参加重要面试时迟到了。"
         },
         "similarGrammar": [],
         "firstKana": "せ",
@@ -6229,15 +6225,15 @@ const grammarData = [
         "category": "发展起点",
         "point": "～を皮切りに（して）",
         "connection": "名词 + を皮切りに（して） / を皮切りとして",
-        "meaning": "以...为开端；以...为起步",
-        "explanation": "表示<span class='font-bold text-[#8a3324]'>以某件事为开端</span>，随后同类的事情或现象<span class='font-bold text-[#8a3324]'>接连发生、不断扩大</span>。一般不用于自然现象或不好的事情。",
+        "meaning": "以...为第一项，随后同类事项接连展开",
+        "explanation": "表示把前项作为<span class='font-bold text-[#8a3324]'>一连串同类活动或事件中的第一项</span>，此后同类事项<span class='font-bold text-[#8a3324]'>接连进行</span>，或范围向多个地点、对象不断展开。重点不只是“开始”，而是<span class='font-bold text-[#8a3324]'>后续还有连续、多次的展开</span>；不能用于只发生一次的单独动作，也不同于表示契机或转折的「～を機に／～を契機に」。<span class='font-bold text-[#8a3324]'>表达本身不限定好坏</span>。",
         "example": {
             "jp": "「樽明け」<span class='grammar-highlight'>を皮切りに</span>、盛大なお祭りが始まりました。",
             "cn": "随着“开桶”仪式的进行，盛大的祭典拉开了帷幕。"
         },
         "similarGrammar": [],
         "firstKana": "を",
-        "keyword": "积极发展开端",
+        "keyword": "首项 第一项 连续 接连 同类 展开 扩展",
         "book": "N1",
         "sourceId": 1,
         "lessonNumber": 1,
@@ -9274,19 +9270,19 @@ const grammarData = [
         const BOOK_ORDER = ["N3", "N2", "N1"];
         const LOCAL_STORAGE_KEY = "try-all-review-state-v1";
 
-        const MAIN_TAB_ACTIVE_CLASS = "px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold text-xs sm:text-sm transition-all bg-[#2c2c2a] text-white shadow-sm whitespace-nowrap";
-        const MAIN_TAB_INACTIVE_CLASS = "px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold text-xs sm:text-sm transition-all text-[#8a8a85] hover:text-[#2c2c2a] hover:bg-[#d4d4d0] whitespace-nowrap";
-        const GROUP_TAB_ACTIVE_CLASS = "px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all bg-[#2c2c2a] text-white shadow-sm";
-        const GROUP_TAB_INACTIVE_CLASS = "px-4 py-1.5 sm:px-5 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all text-[#8a8a85] hover:text-[#2c2c2a] hover:bg-[#e5e5e0]";
-        const FILTER_TAG_SELECTED_CLASS = "px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#2c2c2a] text-white border border-[#2c2c2a] shadow-sm transition-all";
-        const FILTER_TAG_UNSELECTED_CLASS = "px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-white text-[#8a8a85] border border-[#d4d4d0] hover:border-[#2c2c2a] hover:text-[#2c2c2a] transition-all";
-        const FILTER_TAG_CLEAR_CLASS = "px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#f3f1ed] text-[#555552] border border-[#d4d4d0] hover:border-[#8a3324] hover:text-[#8a3324] transition-all";
-        const FILTER_TAG_CLEAR_DISABLED_CLASS = "px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-[#f3f1ed] text-[#b0b0ab] border border-[#e5e5e0] cursor-not-allowed opacity-70 transition-all";
-        const FILTER_PANEL_BUTTON_CLASS = "flex-1 px-3 py-2 rounded-xl bg-[#f5f4ef] hover:bg-[#efefe9] border border-[#e5e5e0] text-[#2c2c2a] font-bold text-xs sm:text-sm transition-colors flex items-center justify-between gap-2";
+        const MAIN_TAB_ACTIVE_CLASS = "try-main-tab is-active";
+        const MAIN_TAB_INACTIVE_CLASS = "try-main-tab";
+        const GROUP_TAB_ACTIVE_CLASS = "try-group-tab is-active";
+        const GROUP_TAB_INACTIVE_CLASS = "try-group-tab";
+        const FILTER_TAG_SELECTED_CLASS = "try-filter-chip is-selected";
+        const FILTER_TAG_UNSELECTED_CLASS = "try-filter-chip";
+        const FILTER_TAG_CLEAR_CLASS = "try-filter-chip is-clear";
+        const FILTER_TAG_CLEAR_DISABLED_CLASS = "try-filter-chip is-clear";
+        const FILTER_PANEL_BUTTON_CLASS = "try-filter-expand";
         const FLASHCARD_TAG_VALUES = ["untagged", "fuzzy", "known"];
         const FLASHCARD_TAG_LABELS = { untagged: "未标记", fuzzy: "模糊", known: "熟悉" };
-        const FLASHCARD_CARD_TAG_ACTIVE_CLASS = "px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-[#2c2c2a] text-white border border-[#2c2c2a] shadow-sm transition-all";
-        const FLASHCARD_CARD_TAG_INACTIVE_CLASS = "px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-[#8a8a85] border border-[#d4d4d0] hover:border-[#2c2c2a] hover:text-[#2c2c2a] transition-all";
+        const FLASHCARD_CARD_TAG_ACTIVE_CLASS = "try-filter-chip is-selected";
+        const FLASHCARD_CARD_TAG_INACTIVE_CLASS = "try-filter-chip";
 
         const SPECIAL_ONLY_MACROS = ["授受与敬语"];
         const CATEGORY_BLOCKS = [
@@ -9863,9 +9859,9 @@ const grammarData = [
         ]
 		    }
 		];
-        const MINDMAP_ROOT_NODE_CLASS = "bg-[#2c2c2a] text-white px-2.5 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl font-bold shadow-md flex items-center justify-between min-w-[96px] sm:min-w-[140px] text-[11px] sm:text-base border border-[#2c2c2a] z-10 transition-all cursor-pointer hover:bg-[#8a3324] hover:border-[#8a3324] group-hover/macro:-translate-y-0.5";
-        const MINDMAP_MICRO_NODE_CLASS = "bg-[#e5e5e0] text-[#2c2c2a] px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold shadow-sm flex items-center min-w-[74px] sm:min-w-[110px] text-[9px] sm:text-xs border border-[#d4d4d0] z-10 transition-all group-hover/micro:-translate-y-0.5 group-hover/micro:border-[#8a3324]/30";
-        const MINDMAP_LEAF_NODE_CLASS = "mindmap-node-wrapper-anchor bg-[#f9f8f6] border border-[#d4d4d0] hover:border-[#8a3324] shadow-sm hover:shadow-md transition-all px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl cursor-pointer group flex items-center gap-1.5 sm:gap-3 min-w-[188px] max-w-[232px] sm:min-w-[260px] sm:max-w-[320px] z-10 hover:-translate-y-1";
+        const MINDMAP_ROOT_NODE_CLASS = "mindmap-root-node";
+        const MINDMAP_MICRO_NODE_CLASS = "mindmap-micro-node";
+        const MINDMAP_LEAF_NODE_CLASS = "mindmap-node-wrapper-anchor mindmap-leaf-node";
 
         function getLessonNumber(lesson) {
             const match = lesson.match(/\d+/);
@@ -9961,6 +9957,7 @@ const grammarData = [
         let currentMode = savedState.currentMode === 'flashcard' ? 'flashcard' : 'directory';
         let currentGrouping = ['lesson', 'category', 'special'].includes(savedState.currentGrouping) ? savedState.currentGrouping : 'lesson';
         let expandedLessonKey = null;
+        let hasInitializedLessonExpansion = false;
         let expandedCategoryGroups = {};
         let expandedSpecialGroups = {};
         let flashcards = [];
@@ -10571,9 +10568,9 @@ const grammarData = [
             booksContainer.innerHTML = '';
             BOOK_ORDER.forEach(book => {
                 const bookSection = document.createElement('div');
-                bookSection.className = 'rounded-xl border border-[#e5e5e0] bg-white/70 shadow-sm overflow-hidden';
+                bookSection.className = 'scope-book';
                 const header = document.createElement('div');
-                header.className = 'flex items-center gap-2 p-3';
+                header.className = 'scope-book-header';
                 const selectButton = document.createElement('button');
                 selectButton.type = 'button';
                 selectButton.className = selectedBooks.has(book) ? FILTER_TAG_SELECTED_CLASS : FILTER_TAG_UNSELECTED_CLASS;
@@ -10589,7 +10586,7 @@ const grammarData = [
                 bookSection.appendChild(header);
                 if (expandedBookFilters[book]) {
                     const panelBody = document.createElement('div');
-                    panelBody.className = 'px-3 pb-3';
+                    panelBody.className = 'scope-book-body';
                     const actionRow = document.createElement('div');
                     actionRow.className = 'flex flex-wrap gap-2 mb-2.5';
                     const totalLessons = BOOK_LESSON_OPTIONS[book] || [];
@@ -10743,15 +10740,14 @@ const grammarData = [
 
         function getMindmapLeafNodeContent(item, badgeText) {
             return `
-                <div class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#d4d4d0] group-hover:bg-[#8a3324] transition-colors shrink-0 shadow-inner"></div>
-                <div class="flex-1 min-w-0">
-                    <h4 class="text-[13px] sm:text-base font-bold text-[#2c2c2a] group-hover:text-[#8a3324] transition-colors flex items-start sm:items-center justify-between font-serif-jp leading-tight">
-                        <span class="mindmap-leaf-title pr-1 sm:pr-2">${item.point}</span>
-                        <i class="fa-solid fa-chevron-right text-[8px] sm:text-[10px] text-[#d4d4d0] group-hover:text-[#8a3324] transition-colors opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 shrink-0 mt-0.5 sm:mt-0"></i>
+                <span class="mindmap-leaf-dot"></span>
+                <div class="mindmap-leaf-copy">
+                    <h4>
+                        <span class="mindmap-leaf-title">${item.point}</span>
                     </h4>
-                    <p class="mindmap-leaf-meaning text-[9px] sm:text-xs text-[#8a8a85] mt-0.5">${item.meaning}</p>
+                    <p class="mindmap-leaf-meaning">${item.meaning}</p>
                 </div>
-                <span class="text-[8px] sm:text-[10px] bg-[#e5e5e0] text-[#555552] px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md whitespace-nowrap max-w-[4rem] sm:max-w-none truncate shrink-0 font-bold group-hover:bg-[#8a3324]/10 group-hover:text-[#8a3324] transition-colors">${badgeText}</span>
+                <span class="mindmap-leaf-badge">${badgeText}</span>
             `;
         }
 
@@ -10787,6 +10783,10 @@ const grammarData = [
             const flashTab = document.getElementById('tab-flashcard');
             const dirView = document.getElementById('view-directory');
             const flashView = document.getElementById('view-flashcard');
+            const toolbar = document.querySelector('.try-toolbar');
+            const scopeFilterShell = document.getElementById('scope-filter-shell');
+            const directoryScopeSlot = document.getElementById('directory-scope-slot');
+            const flashcardScopeSlot = document.getElementById('flashcard-scope-slot');
             const groupingControls = document.getElementById('directory-grouping-controls');
             const searchShell = document.getElementById('grammar-search-shell');
             const searchResultsPanel = document.getElementById('grammar-search-results');
@@ -10798,6 +10798,11 @@ const grammarData = [
                 flashTab.className = MAIN_TAB_INACTIVE_CLASS;
                 dirView.classList.remove('hidden');
                 flashView.classList.add('hidden');
+                document.body.classList.remove('is-flashcard-mode');
+                if (toolbar) toolbar.classList.remove('is-hidden');
+                if (scopeFilterShell && directoryScopeSlot && scopeFilterShell.parentElement !== directoryScopeSlot) {
+                    directoryScopeSlot.appendChild(scopeFilterShell);
+                }
                 groupingControls.classList.remove('hidden');
                 if (searchShell) searchShell.classList.remove('hidden');
                 renderDirectory();
@@ -10808,6 +10813,11 @@ const grammarData = [
                 dirTab.className = MAIN_TAB_INACTIVE_CLASS;
                 flashView.classList.remove('hidden');
                 dirView.classList.add('hidden');
+                document.body.classList.add('is-flashcard-mode');
+                if (toolbar) toolbar.classList.add('is-hidden');
+                if (scopeFilterShell && flashcardScopeSlot && scopeFilterShell.parentElement !== flashcardScopeSlot) {
+                    flashcardScopeSlot.appendChild(scopeFilterShell);
+                }
                 groupingControls.classList.add('hidden');
                 if (searchShell) searchShell.classList.add('hidden');
                 if (searchResultsPanel) searchResultsPanel.classList.add('hidden');
@@ -10838,6 +10848,10 @@ const grammarData = [
                 btnSpecial.className = GROUP_TAB_ACTIVE_CLASS;
                 btnLesson.className = GROUP_TAB_INACTIVE_CLASS;
                 btnCategory.className = GROUP_TAB_INACTIVE_CLASS;
+            }
+            const groupLabel = document.getElementById('directory-group-label');
+            if (groupLabel) {
+                groupLabel.textContent = groupType === 'lesson' ? '按课本' : groupType === 'category' ? '按用法' : '特殊分类';
             }
             saveAppState();
             renderDirectory();
@@ -10962,6 +10976,17 @@ const grammarData = [
             const shell = document.getElementById('directory-mindmap-shell');
             const filteredGrammar = getFilteredDirectoryGrammar();
             const specialFamilies = currentGrouping === 'special' ? getSpecialFamilyEntries(filteredGrammar) : [];
+            const summary = document.getElementById('directory-scope-summary');
+            if (summary) summary.textContent = `${filteredGrammar.length}项语法`;
+
+            if (currentGrouping === 'lesson' && !hasInitializedLessonExpansion && filteredGrammar.length) {
+                const firstBook = BOOK_ORDER.find(book => filteredGrammar.some(item => item.book === book));
+                const firstLesson = firstBook
+                    ? sortLessonLabels([...new Set(filteredGrammar.filter(item => item.book === firstBook).map(item => item.lesson))])[0]
+                    : null;
+                if (firstBook && firstLesson) expandedLessonKey = `${firstBook}::${firstLesson}`;
+                hasInitializedLessonExpansion = true;
+            }
             container.innerHTML = '';
             const hasContent = currentGrouping === 'special' ? specialFamilies.length > 0 : filteredGrammar.length > 0;
             if (shell) shell.classList.toggle('hidden', !hasContent);
@@ -10975,13 +11000,13 @@ const grammarData = [
                     if (!bookItems.length) return;
                     const lessonLabels = sortLessonLabels([...new Set(bookItems.map(item => item.lesson))]);
                     const blockWrapper = document.createElement('section');
-                    blockWrapper.className = 'mb-6 sm:mb-8 last:mb-0';
+                    blockWrapper.className = 'mindmap-book-block';
                     const blockHeader = document.createElement('div');
-                    blockHeader.className = 'flex items-center gap-3 mb-3 sm:mb-4 px-1';
-                    blockHeader.innerHTML = `<span class="text-[11px] sm:text-xs font-bold text-[#8a8a85] tracking-[0.2em] whitespace-nowrap">${book}</span><div class="h-px flex-1 bg-gradient-to-r from-[#d6d6d0] to-transparent opacity-90"></div><span class="text-[10px] sm:text-xs text-[#8a8a85] font-bold whitespace-nowrap">${lessonLabels.length}课</span>`;
+                    blockHeader.className = 'mindmap-book-header';
+                    blockHeader.innerHTML = `<span class="mindmap-book-name">${book}</span><span class="mindmap-book-divider"></span><span class="mindmap-book-count">${lessonLabels.length}课</span>`;
                     blockWrapper.appendChild(blockHeader);
                     const blockContent = document.createElement('div');
-                    blockContent.className = 'flex flex-col gap-3 sm:gap-5';
+                    blockContent.className = 'mindmap-book-content';
                     const grouped = bookItems.reduce((acc, curr) => { if (!acc[curr.lesson]) acc[curr.lesson] = []; acc[curr.lesson].push(curr); return acc; }, {});
                     lessonLabels.forEach(key => {
                         const compositeKey = `${book}::${key}`;
@@ -11009,13 +11034,13 @@ const grammarData = [
             } else if (currentGrouping === 'category') {
                 getCategoryMacroBlocks(getCategoryMacroEntries(filteredGrammar)).forEach(({ blockKey, entries }) => {
                     const blockWrapper = document.createElement('section');
-                    blockWrapper.className = 'mb-6 sm:mb-8 last:mb-0';
+                    blockWrapper.className = 'mindmap-book-block';
                     const blockHeader = document.createElement('div');
-                    blockHeader.className = 'flex items-center gap-3 mb-3 sm:mb-4 px-1';
-                    blockHeader.innerHTML = `<span class="text-[11px] sm:text-xs font-bold text-[#8a8a85] tracking-[0.2em] whitespace-nowrap">${blockKey}</span><div class="h-px flex-1 bg-gradient-to-r from-[#d6d6d0] to-transparent opacity-90"></div>`;
+                    blockHeader.className = 'mindmap-book-header';
+                    blockHeader.innerHTML = `<span class="mindmap-book-name">${blockKey}</span><span class="mindmap-book-divider"></span>`;
                     blockWrapper.appendChild(blockHeader);
                     const blockContent = document.createElement('div');
-                    blockContent.className = 'flex flex-col gap-3 sm:gap-5';
+                    blockContent.className = 'mindmap-book-content';
                     entries.forEach(({ macroKey, special, microEntries }) => {
                         const isExpanded = !!expandedCategoryGroups[macroKey];
                         const rowDiv = document.createElement('div');
@@ -11407,6 +11432,5 @@ const grammarData = [
         });
     </script>
     <script src="../../shared/word-bank.js"></script>
-    <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
