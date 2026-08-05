@@ -12330,7 +12330,7 @@
                 </div>
                 <div>
                     <label class="field-label" for="favorite-url-input">链接</label>
-                    <input class="field-input" id="favorite-url-input" name="url" type="text" placeholder="例如：exam/textbook/try-n2.html 或 https://example.com">
+                    <input class="field-input" id="favorite-url-input" name="url" type="text" placeholder="例如：daily/try-n2/lesson-content-redesign.html 或 https://example.com">
                 </div>
                 <div>
                     <label class="field-label" for="favorite-note-input">备注</label>
@@ -12500,19 +12500,6 @@
             ...HOME_DAILY_READING_ESSAYS,
             ...HOME_FOLKLORE_STORIES
         ];
-
-        const HOME_TEXTBOOK_N1_ITEMS = [
-            ["textbook-try-n1-main", "TRY！N1 文法", "跟随教材逐课理解 N1 重点语法。", "designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1", "N1"],
-            ["textbook-n1-text", "N1 課文", "在课文中体会 N1 词汇、语法与表达。", "exam/textbook/text_1.html", "本文"]
-        ].map(([id, title, desc, href, tag], index) => ({
-            id,
-            title,
-            desc,
-            href,
-            icon: "textbook",
-            tag,
-            tone: index % 2 ? "sage" : "blush"
-        }));
 
         const HOME_VOCAB_N1_ITEMS = [
             ["n1-vocab-verbs", "N1 動詞", "按课程推进 N1 动词记忆。", "exam/vocabulary/n1/verbs_n1.html", "動詞"],
@@ -12945,7 +12932,7 @@
                         id: "exam-textbook",
                         title: "教材学習",
                         desc: "跟随 TRY！N1 / N2 逐课学习，把课文和语法真正串联起来。",
-                        href: "exam/textbook/index.html",
+                        href: "daily/try-n1/lesson-content-redesign.html?lesson=1",
                         icon: "textbook",
                         tag: "教材",
                         tone: "sage",
@@ -12955,7 +12942,7 @@
                                 id: "textbook-try-n1",
                                 title: "TRY！N1",
                                 desc: "跟随 TRY！N1 逐课理解重点语法与课文。",
-                                href: "designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1",
+                                href: "daily/try-n1/lesson-content-redesign.html?lesson=1",
                                 icon: "textbook",
                                 tag: "N1",
                                 tone: "blush"
@@ -12964,7 +12951,7 @@
                                 id: "textbook-try-n2",
                                 title: "TRY！N2",
                                 desc: "逐课学习课文、词汇、文型与课后练习。",
-                                href: "designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=1",
+                                href: "daily/try-n2/lesson-content-redesign.html?lesson=1",
                                 icon: "textbook",
                                 tag: "N2",
                                 tone: "sage"
@@ -13477,7 +13464,7 @@
             {
                 id: "try-n2-textbook",
                 name: "Try！N2课文内容",
-                url: "designs/try-n2-content-redesign/lesson-content-redesign.html?lesson=1",
+                url: "daily/try-n2/lesson-content-redesign.html?lesson=1",
                 note: "直接打开 Try！N2 正文学习"
             },
             {
