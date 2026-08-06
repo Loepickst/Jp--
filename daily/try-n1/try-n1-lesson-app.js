@@ -1633,7 +1633,12 @@
                 type="button"
                 data-grammar-favorite="${escapeHtml(grammarFavoriteId)}"
                 data-grammar-title="${escapeHtml(patternTitle)}"
-              ></button>
+                aria-label="收藏语法 ${escapeHtml(patternTitle)}"
+                title="收藏"
+              >
+                <span class="grammar-learning-favorite-icon" aria-hidden="true">☆</span>
+                <span class="grammar-learning-favorite-label">收藏</span>
+              </button>
             </div>
           </header>
           <div class="grammar-study-body">

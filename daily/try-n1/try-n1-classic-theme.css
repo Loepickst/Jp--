@@ -3148,6 +3148,47 @@ body,
   }
 }
 
+@media (max-width: 620px) {
+  .lesson-pattern-bank .grammar-study-actions.grammar-learning-favorite-slot {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions button.grammar-learning-favorite {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    flex: 0 0 36px;
+    padding: 0 !important;
+    border-radius: 6px;
+    overflow: visible;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-learning-favorite-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-learning-favorite-icon {
+    display: block !important;
+    width: auto;
+    height: auto;
+    color: currentColor;
+    font-family: Georgia, "Times New Roman", "Noto Sans Symbols 2", serif !important;
+    font-size: 22px !important;
+    font-weight: 400;
+    line-height: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Pattern practice uses the same paper-card language as the grammar list. */
 .pattern-practice-shell {
   --grammar-doc-blue: #4e6178;
