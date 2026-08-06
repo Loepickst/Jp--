@@ -1295,8 +1295,18 @@
               </div>
             </div>
             <div class="grammar-study-actions grammar-learning-favorite-slot">
-              <button class="grammar-textbook-open grammar-study-textbook" type="button" data-grammar-textbook-key="${escapeHtml(entry.key)}" aria-label="更多例句" title="更多例句">更多例句</button>
-              <button class="grammar-learning-favorite" type="button" data-grammar-favorite="${escapeHtml(grammarFavoriteId)}" data-grammar-title="${escapeHtml(patternTitle)}"></button>
+              <button class="grammar-textbook-open grammar-study-textbook" type="button" data-grammar-textbook-key="${escapeHtml(entry.key)}" aria-label="更多例句" title="更多例句">
+                <svg class="grammar-study-textbook-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 7v14"></path>
+                  <path d="M3 18a1 1 0 0 1-1-1V5a2 2 0 0 1 2-2h5a3 3 0 0 1 3 3v15a3 3 0 0 0-3-3Z"></path>
+                  <path d="M21 18a1 1 0 0 0 1-1V5a2 2 0 0 0-2-2h-5a3 3 0 0 0-3 3v15a3 3 0 0 1 3-3Z"></path>
+                </svg>
+                <span class="grammar-study-textbook-label">更多例句</span>
+              </button>
+              <button class="grammar-learning-favorite" type="button" data-grammar-favorite="${escapeHtml(grammarFavoriteId)}" data-grammar-title="${escapeHtml(patternTitle)}">
+                <span class="grammar-learning-favorite-icon" aria-hidden="true">☆</span>
+                <span class="grammar-learning-favorite-label">收藏</span>
+              </button>
             </div>
           </header>
           <div class="grammar-study-body">

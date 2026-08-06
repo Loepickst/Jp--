@@ -1819,6 +1819,13 @@ body {
   letter-spacing: 0.01em;
 }
 
+.lesson-pattern-bank .grammar-study-actions .grammar-study-textbook-icon {
+  display: none;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+}
+
 .lesson-pattern-bank .grammar-study-actions .grammar-study-textbook:hover {
   border-color: #8ea2b2 !important;
   background: #edf2f5;
@@ -1980,6 +1987,54 @@ body {
 
   .lesson-pattern-bank .grammar-study-examples .pattern-example-translation {
     font-size: 13px;
+  }
+}
+
+@media (max-width: 620px) {
+  .lesson-pattern-bank .grammar-study-actions.grammar-learning-favorite-slot {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-study-textbook,
+  .lesson-pattern-bank .grammar-study-actions button.grammar-learning-favorite {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    flex: 0 0 36px;
+    padding: 0 !important;
+    border-radius: 6px;
+    overflow: visible;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-study-textbook-icon {
+    display: block;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-study-textbook-label,
+  .lesson-pattern-bank .grammar-study-actions .grammar-learning-favorite-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .lesson-pattern-bank .grammar-study-actions .grammar-learning-favorite-icon {
+    display: block !important;
+    width: auto;
+    height: auto;
+    color: currentColor;
+    font-family: Georgia, "Times New Roman", "Noto Sans Symbols 2", serif !important;
+    font-size: 22px !important;
+    font-weight: 400;
+    line-height: 1 !important;
+    transform: none !important;
   }
 }
 
