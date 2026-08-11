@@ -118,6 +118,10 @@
                 : lastObtainedAt;
         }
         nextEntry.isNew = Boolean(nextEntry.isNew || incomingEntry.isNew);
+        const incomingExclusiveVariantId = String(incomingEntry.exclusiveVariantId || "").trim();
+        if (!nextEntry.exclusiveVariantId && incomingExclusiveVariantId) {
+            nextEntry.exclusiveVariantId = incomingExclusiveVariantId;
+        }
         const hiddenStage2UnlockedAt = Number(incomingEntry.hiddenStage2UnlockedAt);
         if (Number.isFinite(hiddenStage2UnlockedAt) && hiddenStage2UnlockedAt > 0) {
             nextEntry.hiddenStage2UnlockedAt = nextEntry.hiddenStage2UnlockedAt
@@ -144,6 +148,42 @@
 
     const fortunes = [
         { id: "sp1", rarity: "SP", title: "感谢祭", desc: "感谢你一直以来的支持，谢谢。", weight: 1, color: "#9c27b0", icon: `${EX_CARD_ASSET_BASE}ganxieji.png`, isSpecial: true },
+        {
+            id: "sp_qiuji_autumn",
+            rarity: "SP",
+            title: "秋吉",
+            desc: "上次的怦然心动，还记得是什么时候吗",
+            weight: 1,
+            color: "#9c27b0",
+            icon: "takarakuji/qiuji_starlight.webp",
+            isSpecial: true,
+            poolRole: "guaranteed_once",
+            guaranteedOnce: true,
+            lockedCollectionTitle: "秋吉",
+            lockedCollectionMark: "？",
+            exclusiveArtVariants: [
+                {
+                    id: "starlight",
+                    icon: "takarakuji/qiuji_starlight.webp",
+                    desc: "上次的怦然心动，还记得是什么时候吗"
+                },
+                {
+                    id: "pumpkin",
+                    icon: "takarakuji/qiuji_pumpkin.webp",
+                    desc: "秋天的第一个南瓜，最甜了"
+                },
+                {
+                    id: "companions",
+                    icon: "takarakuji/qiuji_companions.webp",
+                    desc: "好狗伴，陪一生"
+                },
+                {
+                    id: "hike",
+                    icon: "takarakuji/qiuji_hike.webp",
+                    desc: "来一场说走就走的远足吧"
+                }
+            ]
+        },
         { id: "food_journey_jiangbanya", rarity: "SP", title: "酱吉", desc: "好的就是山胡椒油这口味", weight: 1, color: "#9c27b0", icon: "takarakuji/food_journey_jiangbanya.webp", isSpecial: true, unlockPoolId: "ki_food_journey", poolRole: "followup", unlockRequirement: { type: "card_owned", cardId: "food_journey_chiji_starter" } },
         { id: "food_journey_choudoufu", rarity: "SP", title: "臭吉", desc: "臭臭的，但是吃着挺香", weight: 1, color: "#9c27b0", icon: "takarakuji/food_journey_choudoufu.webp", isSpecial: true, unlockPoolId: "ki_food_journey", poolRole: "followup", unlockRequirement: { type: "card_owned", cardId: "food_journey_chiji_starter" } },
         { id: "food_journey_xiaolongxia", rarity: "SP", title: "虾吉", desc: "小龙虾配啤酒，最高！", weight: 1, color: "#9c27b0", icon: "takarakuji/food_journey_xiaolongxia.webp", isSpecial: true, unlockPoolId: "ki_food_journey", poolRole: "followup", unlockRequirement: { type: "card_owned", cardId: "food_journey_chiji_starter" } },
@@ -385,6 +425,21 @@
         return normalizedId && catalogById[normalizedId] ? catalogById[normalizedId] : null;
     }
 
+    function getExclusiveArtVariant(cardId, variantId) {
+        const fortune = typeof cardId === "object" && cardId
+            ? cardId
+            : getFortuneById(cardId);
+        const variants = fortune && Array.isArray(fortune.exclusiveArtVariants)
+            ? fortune.exclusiveArtVariants
+            : [];
+        const normalizedVariantId = String(variantId || "").trim();
+        if (!normalizedVariantId || variants.length === 0) {
+            return null;
+        }
+        const variant = variants.find((item) => item && item.id === normalizedVariantId);
+        return variant ? { ...variant } : null;
+    }
+
     function getThemeSetById(id) {
         const normalizedId = String(id || "").trim();
         return normalizedId && themeSetById[normalizedId] ? themeSetById[normalizedId] : null;
@@ -471,6 +526,7 @@
         getUnlockedFortuneIds,
         getUnlockedCatalog,
         getFortuneById,
+        getExclusiveArtVariant,
         getThemeSetById,
         getUnlockPoolById,
         getThemeSetProgress,
