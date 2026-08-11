@@ -1333,6 +1333,14 @@
             box-shadow: none;
         }
 
+        .collection-item.exclusive-locked-item {
+            justify-content: center;
+        }
+
+        .collection-item.exclusive-locked-item .item-title {
+            color: var(--ink-main);
+        }
+
         .collection-item.unlocked {
             cursor: pointer;
         }
@@ -3004,7 +3012,7 @@
         </div>
     </div>
 
-    <script src="shared/omikuji-catalog.js?v=20260721-stage2-rarity1"></script>
+    <script src="shared/omikuji-catalog.js?v=20260811-qiuji1"></script>
     <script src="shared/kiki-inventory.js?v=20260721-ticket-cost50-1"></script>
     <script src="shared/home-pet.js?v=20260717-ronin-unlock1"></script>
     <script>
@@ -3249,6 +3257,10 @@
             nextEntry.rarity = incomingEntry.rarity || nextEntry.rarity;
             nextEntry.title = incomingEntry.title || nextEntry.title;
             nextEntry.source = incomingEntry.source || nextEntry.source;
+            const incomingExclusiveVariantId = String(incomingEntry.exclusiveVariantId || '').trim();
+            if (!nextEntry.exclusiveVariantId && incomingExclusiveVariantId) {
+                nextEntry.exclusiveVariantId = incomingExclusiveVariantId;
+            }
             const hiddenStage2UnlockedAt = Number(incomingEntry.hiddenStage2UnlockedAt);
             if (Number.isFinite(hiddenStage2UnlockedAt) && hiddenStage2UnlockedAt > 0) {
                 nextEntry.hiddenStage2UnlockedAt = nextEntry.hiddenStage2UnlockedAt
@@ -3993,6 +4005,18 @@
 
             didChange = migratePracticeRewardsIntoCollection(meta) || didChange;
 
+            Object.entries(meta).forEach(([id, entry]) => {
+                const fortune = omikujiCatalogApi && typeof omikujiCatalogApi.getFortuneById === 'function'
+                    ? omikujiCatalogApi.getFortuneById(id)
+                    : fortunes.find((item) => item.id === id);
+                const exclusiveVariants = getExclusiveArtVariants(fortune);
+                if (exclusiveVariants.length === 0 || getExclusiveArtVariant(fortune, entry.exclusiveVariantId)) {
+                    return;
+                }
+                entry.exclusiveVariantId = exclusiveVariants[0].id;
+                didChange = true;
+            });
+
             const normalizedLegacy = getUnlockedIdsFromMeta(meta);
             if (normalizedLegacy.length !== legacyIds.length || normalizedLegacy.some((id, index) => id !== legacyIds[index])) {
                 saveCollection(normalizedLegacy);
@@ -4122,21 +4146,60 @@
             return rarity;
         }
 
-        function getNormalDisplayFortune(fortune, entryOrCount) {
-            const stage2 = fortune && fortune.hiddenStage2;
-            if (!stage2 || !stage2.icon) {
+        function getExclusiveArtVariants(fortune) {
+            return fortune && Array.isArray(fortune.exclusiveArtVariants)
+                ? fortune.exclusiveArtVariants.filter((variant) => variant && variant.id && variant.icon)
+                : [];
+        }
+
+        function getExclusiveArtVariant(fortune, variantId) {
+            if (omikujiCatalogApi && typeof omikujiCatalogApi.getExclusiveArtVariant === 'function') {
+                return omikujiCatalogApi.getExclusiveArtVariant(fortune, variantId);
+            }
+            const normalizedVariantId = String(variantId || '').trim();
+            return getExclusiveArtVariants(fortune).find((variant) => variant.id === normalizedVariantId) || null;
+        }
+
+        function pickExclusiveArtVariant(fortune) {
+            const variants = getExclusiveArtVariants(fortune);
+            return variants.length > 0
+                ? variants[Math.floor(Math.random() * variants.length)]
+                : null;
+        }
+
+        function getExclusiveDisplayFortune(fortune, entryOrCount) {
+            const entryVariantId = typeof entryOrCount === 'object' && entryOrCount
+                ? entryOrCount.exclusiveVariantId
+                : '';
+            const variantId = entryVariantId || fortune.selectedExclusiveVariantId || '';
+            const variant = getExclusiveArtVariant(fortune, variantId);
+            if (!variant) {
                 return fortune;
+            }
+            return {
+                ...fortune,
+                icon: variant.icon,
+                desc: variant.desc || fortune.desc,
+                selectedExclusiveVariantId: variant.id
+            };
+        }
+
+        function getNormalDisplayFortune(fortune, entryOrCount) {
+            const exclusiveDisplayFortune = getExclusiveDisplayFortune(fortune, entryOrCount);
+            const stage2 = exclusiveDisplayFortune && exclusiveDisplayFortune.hiddenStage2;
+            if (!stage2 || !stage2.icon) {
+                return exclusiveDisplayFortune;
             }
 
             const unlockedAt = typeof entryOrCount === 'number'
                 ? 0
                 : Number(entryOrCount && entryOrCount.hiddenStage2UnlockedAt) || 0;
             if (unlockedAt <= 0) {
-                return fortune;
+                return exclusiveDisplayFortune;
             }
 
             return {
-                ...fortune,
+                ...exclusiveDisplayFortune,
                 icon: stage2.icon
             };
         }
@@ -4165,6 +4228,10 @@
             const now = Number.isFinite(Number(options.obtainedAt)) ? Number(options.obtainedAt) : Date.now();
             const existing = meta[fortune.id];
             const variant = options.variant === 'foil' ? 'foil' : 'normal';
+            const selectedExclusiveVariantId = String(
+                options.exclusiveVariantId || fortune.selectedExclusiveVariantId || ''
+            ).trim();
+            const selectedExclusiveVariant = getExclusiveArtVariant(fortune, selectedExclusiveVariantId);
             const stage2 = fortune && fortune.hiddenStage2;
             const stage2UnlockCount = stage2 && stage2.icon
                 ? Math.max(1, Number(stage2.unlockCount) || 10)
@@ -4207,6 +4274,9 @@
             nextEntry.rarity = fortune.rarity;
             nextEntry.title = fortune.title;
             nextEntry.source = nextEntry.source || 'lottery';
+            if (!nextEntry.exclusiveVariantId && selectedExclusiveVariant) {
+                nextEntry.exclusiveVariantId = selectedExclusiveVariant.id;
+            }
 
             meta[fortune.id] = nextEntry;
             saveCollectionMeta(meta);
@@ -4511,6 +4581,7 @@
                         return;
                     }
 
+                    const exclusiveVariant = pickExclusiveArtVariant(fortune);
                     nextMeta[id] = {
                         count: 1,
                         variants: { normalCount: 1, foilCount: 0 },
@@ -4520,7 +4591,8 @@
                         isNew: false,
                         rarity: fortune.rarity,
                         title: fortune.title,
-                        source: 'unlock_patch'
+                        source: 'unlock_patch',
+                        ...(exclusiveVariant ? { exclusiveVariantId: exclusiveVariant.id } : {})
                     };
                     addedCount += 1;
                 });
@@ -4804,12 +4876,13 @@
                     const isFoilDisplay = hasFoil && displayVariant === 'foil';
                     const displayFortune = getVariantDisplayFortune(fortune, entry, displayVariant);
                     const isLockedMr = fortune.rarity === 'MR' && !isUnlocked;
+                    const isLockedExclusive = Boolean(!isUnlocked && fortune.guaranteedOnce);
                     const availabilityLabel = getAvailabilityLabel(fortune);
                     const sourceLabel = availabilityLabel
                         ? `${getSourceLabel(fortune)} · ${availabilityLabel}`
                         : getSourceLabel(fortune);
                     const div = document.createElement('div');
-                    div.className = `collection-item ${isUnlocked ? 'unlocked' : 'locked'}${isFoilDisplay ? ' is-foil' : ''}`;
+                    div.className = `collection-item ${isUnlocked ? 'unlocked' : 'locked'}${isFoilDisplay ? ' is-foil' : ''}${isLockedExclusive ? ' exclusive-locked-item' : ''}`;
                     div.dataset.fortuneId = fortune.id;
                     if (lastObtained && lastObtained.id === fortune.id) {
                         div.classList.add('latest-target');
@@ -4819,18 +4892,24 @@
                     }
 
                     div.innerHTML = `
-                        <div class="item-source">${escapeHtml(sourceLabel)}</div>
+                        ${isLockedExclusive ? '' : `<div class="item-source">${escapeHtml(sourceLabel)}</div>`}
                         ${isUnlocked && entry && entry.isNew ? '<div class="item-new-badge">新获得</div>' : ''}
-                        ${isLockedMr
+                        ${isLockedExclusive
+                            ? `<div class="item-icon mystery-icon">
+                                <span class="collection-mystery-mark">${escapeHtml(fortune.lockedCollectionMark || '？')}</span>
+                            </div>`
+                            : isLockedMr
                             ? `<div class="item-icon mystery-icon">
                                 <span class="collection-mystery-mark">謎</span>
                             </div>`
                             : `<div class="item-icon">
                                 <img src="${escapeHtml(displayFortune.icon)}" alt="${escapeHtml(displayFortune.title)}" class="collection-icon-img">
                             </div>`}
-                        <div class="item-title">${isUnlocked ? escapeHtml(displayFortune.title) : '???'}</div>
+                        <div class="item-title">${isUnlocked
+                            ? escapeHtml(displayFortune.title)
+                            : escapeHtml(isLockedExclusive ? (fortune.lockedCollectionTitle || fortune.title) : '???')}</div>
                         ${isUnlocked && entry ? `<div class="item-count">×${entry.count}</div>` : ''}
-                        <div class="item-rarity" style="background:${escapeHtml(rarityColors[fortune.rarity] || fortune.color || 'var(--accent)')}">${escapeHtml(fortune.rarity)}</div>
+                        ${isLockedExclusive ? '' : `<div class="item-rarity" style="background:${escapeHtml(rarityColors[fortune.rarity] || fortune.color || 'var(--accent)')}">${escapeHtml(fortune.rarity)}</div>`}
                     `;
 
                     const itemImage = div.querySelector('.collection-icon-img');
@@ -5309,16 +5388,47 @@
         function drawSpecialFortune() {
             const collectionMeta = getCollectionMeta();
             const specialPool = getDrawableFortunes(
-                fortunes.filter((fortune) => fortune.isSpecial && fortune.poolRole !== 'followup'),
+                fortunes.filter((fortune) => (
+                    fortune.isSpecial
+                    && fortune.poolRole !== 'followup'
+                    && !fortune.guaranteedOnce
+                )),
                 new Date(),
                 collectionMeta
             );
             return pickWeightedFortune(specialPool) || drawFortune();
         }
 
+        function getPendingGuaranteedOnceFortune(meta = getCollectionMeta()) {
+            return fortunes.find((fortune) => (
+                fortune
+                && fortune.guaranteedOnce
+                && getExclusiveArtVariants(fortune).length > 0
+                && !hasCollectedFortune(fortune.id, meta)
+            )) || null;
+        }
+
+        function createGuaranteedOnceDrawFortune(fortune) {
+            const selectedVariant = pickExclusiveArtVariant(fortune);
+            if (!fortune || !selectedVariant) {
+                return fortune;
+            }
+            return {
+                ...fortune,
+                icon: selectedVariant.icon,
+                desc: selectedVariant.desc || fortune.desc,
+                selectedExclusiveVariantId: selectedVariant.id
+            };
+        }
+
         function drawFortuneWithSpecialPool() {
-            const specialState = getSpecialPoolState();
             const collectionMeta = getCollectionMeta();
+            const guaranteedOnceFortune = getPendingGuaranteedOnceFortune(collectionMeta);
+            if (guaranteedOnceFortune) {
+                return createGuaranteedOnceDrawFortune(guaranteedOnceFortune);
+            }
+
+            const specialState = getSpecialPoolState();
             const followupFortunes = getUnownedFollowupFortunes(collectionMeta);
 
             if (followupFortunes.length > 0) {
@@ -5394,7 +5504,8 @@
                         collectionMetaBeforeDraw[randomFortune.id] || null
                     );
                     const drawRecord = grantFortune(randomFortune, {
-                        variant: foilResult.isFoil ? 'foil' : 'normal'
+                        variant: foilResult.isFoil ? 'foil' : 'normal',
+                        exclusiveVariantId: randomFortune.selectedExclusiveVariantId || ''
                     });
                     const duplicatePointResult = awardDuplicateCardPoints(randomFortune, drawRecord);
                     drawRecord.guaranteedByFoilPity = foilResult.guaranteedByPity;
