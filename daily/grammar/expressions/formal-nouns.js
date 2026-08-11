@@ -8,12 +8,13 @@
             id: "koto", noun: "こと", meaning: "事情・内容",
             concept: "把动作、状态或整段内容看作一件事情，是日语中最常用的名词化形式之一。",
             uses: ["把句子名词化，作为主语、宾语或判断对象", "表达经历、决定、规定、传闻和评价", "终助词化后表示命令、提醒或感叹"],
-            excludeSourceIds: ["n1-050"]
+            excludeSourceIds: ["n1-050", "mainichi-n1-014"]
         },
         {
             id: "mono", noun: "もの", meaning: "事物・常理",
             concept: "原指人或事物，也可以把前项作为具有某种性质、常理或感情色彩的对象来概括。",
-            uses: ["概括事物的性质、常理和应有状态", "表达原因、辩解、感慨或强烈否定", "与条件、逆接等形式结合构成固定表达"]
+            uses: ["概括事物的性质、常理和应有状态", "表达原因、辩解、感慨或强烈否定", "与条件、逆接等形式结合构成固定表达"],
+            excludeSourceIds: ["mainichi-n1-001", "n1-096"]
         },
         {
             id: "tokoro", noun: "ところ", meaning: "阶段・位置",
@@ -72,7 +73,8 @@
         {
             id: "kawari", noun: "かわり", meaning: "替代・交换",
             concept: "表示某人或某事代替另一对象，也可以表示以一个条件、优点或负担交换另一个方面。",
-            uses: ["表示代替别人或其他事物", "说明交换条件、补偿关系或相反的两个方面"]
+            uses: ["表示代替别人或其他事物", "说明交换条件、补偿关系或相反的两个方面"],
+            sourceIds: ["n3-045"]
         },
         {
             id: "toki", noun: "とき", meaning: "时间・场合",
@@ -100,9 +102,9 @@
         },
         {
             id: "kagiri", noun: "限り", meaning: "范围・限度",
-            concept: "表示边界、限度或能够成立的范围，可用于限定对象、时间、条件或感情达到的程度。",
-            uses: ["表示仅限某个对象或范围", "表示某状态持续期间后项成立", "说明终点、界限或感情的最高程度"],
-            sourceIds: ["n1-072", "n1-107", "n2-130", "n2-154"]
+            concept: "表示边界、限度或能够成立的范围，可用于说明终点、成立期间或感情达到的程度。",
+            uses: ["说明事情的终点或界限", "表示某状态持续期间后项成立", "表示感情或评价达到最高程度"],
+            sourceIds: ["n1-072", "n1-107", "n2-154"]
         },
     ];
 
@@ -186,27 +188,29 @@
             { title: "把前项内容名词化", description: "把动作、状态或整段内容作为名词性整体，例如「本を読むのが好きだ」。" }
         ],
         kagiri: [
-            { title: "限定对象与范围", description: "表示后项只适用于特定对象、数量、时间或条件范围。" },
+            { title: "说明终点与界限", description: "表示事情到某个时点结束，或明确其能够达到的边界。" },
             { title: "限定成立期间", description: "表示只要前项状态持续，后项就在这一范围内成立。" },
-            { title: "表示终点或最高程度", description: "说明事情的界限、结束时点，或感情达到的最高程度。" }
+            { title: "表示最高程度", description: "说明感情或评价达到了所能表达的最高程度。" }
         ]
     };
 
     const ATLAS_RELATIONS = {
         koto: [
-            { pos: "名词", posLabel: "事（こと）", label: "事柄・出来事", summary: "指事情、经历、情况、原因或已经形成的状态。", ids: ["n2-193", "n3-018", "n2-241", "supp-n1-review-014", "supp-n1-review-020", "supp-n1-review-021", "supp-n1-review-025"] },
-            { pos: "名词", posLabel: "事（こと）", label: "与特定对象相关的事情", summary: "指与某个人、事物或对象相关的内容。", ids: ["n3-098"] },
-            { pos: "名词", posLabel: "事（こと）", label: "行为・动作", summary: "把前项动作作为一项行为、做法或需要处理的事情。", ids: ["n1-064", "n1-070", "n1-084", "n1-126", "n2-151", "n2-180", "n2-218", "n2-249"] },
-            { pos: "名词", posLabel: "事（こと）", label: "话语的内容・含义", summary: "把前项作为要说明、传达、解释或指出的内容。", ids: ["n3-003", "n3-029", "supp-n1-review-044"] },
-            { pos: "名词", posLabel: "事（こと）", label: "强调", summary: "把前项事实或感情作为对象加以突出、评价或保留判断。", ids: ["n1-039", "n2-171", "n2-185", "n3-094"] },
+            { pos: "名词", posLabel: "事（こと）", label: "总结・解释", summary: "把前项内容作为一件事重新概括，说明它所表示的结论或含义。", ids: ["n3-003"] },
+            { pos: "名词", posLabel: "事（こと）", label: "传闻・转述", summary: "把从他人、通知或新闻等处听到的内容作为消息转述给别人。", ids: ["n3-029"] },
+            { pos: "名词", posLabel: "事（こと）", label: "核心・本质所在", summary: "把前项名词化，明确指出某事物的目的、本质、问题或关键所在。", ids: ["supp-n1-review-044"] },
+            { pos: "名词", posLabel: "事（こと）", label: "发生・规定・主观认定", summary: "把动作或状态当作一件事，说明偶尔发生、客观规定或主观上如何处理。", ids: ["n3-018", "supp-n1-review-014", "n2-249"] },
+            { pos: "名词", posLabel: "事（こと）", label: "原因・根据・手段・背景", summary: "以「こと」所指的事实为理由、判断线索、实现方式或说明背景。", ids: ["n1-070", "n2-193", "supp-n1-review-020", "supp-n1-review-021", "supp-n1-review-025", "mainichi-n1-016"] },
+            { pos: "名词", posLabel: "事（こと）", label: "否定・条件・不发生", summary: "把前项行为名词化后否定它的必要性、成立可能或发生，也可将它设为后项的前提。", ids: ["n1-064", "n1-084", "n1-126", "n2-151", "n2-180", "n2-185", "n2-241", "mainichi-n1-015"] },
+            { pos: "名词", posLabel: "事（こと）", label: "评价・强调・感叹", summary: "把前项状态或感情作为一件事加以突出，表达评价、程度或强烈感受。", ids: ["n1-039", "n2-171", "n2-173", "n3-094"] },
+            { pos: "名词", posLabel: "事（こと）", label: "特定对象的性格・情况", summary: "以与特定人物相关的已知情况为根据，推测其后续行为。", ids: ["n3-098"] },
+            { pos: "名词", posLabel: "事（こと）", label: "忠告・应采取的行为", summary: "把建议采取或避免的动作作为一项原则，用于给出忠告或教训。", ids: ["n2-218"] },
             { pos: "终助词", posLabel: "こと", label: "命令・注意", summary: "放在句末表示规定、命令或提醒。", ids: ["n2-136"] },
-            { pos: "终助词", posLabel: "こと", label: "感动・咏叹", summary: "放在句末加强惊讶、感叹或强烈感受。", ids: ["n2-173"] }
         ],
         mono: [
             { pos: "名词", posLabel: "物・者（もの）", label: "一般的性质・常理", summary: "把前项作为普遍性质、常理、评价或主观感受来概括。", ids: ["n2-141", "n2-183", "n2-223"] },
             { pos: "名词", posLabel: "物・者（もの）", label: "期间・持续的状态", summary: "指从某一契机开始持续的时间或状态。", ids: ["n1-093", "n1-094"] },
             { pos: "名词", posLabel: "物・者（もの）", label: "应有的规范・判断", summary: "依据一般认识否定绝对判断，或说明行为规范。", ids: ["n2-156", "n2-177"] },
-            { pos: "名词", posLabel: "物・者（もの）", label: "作为障碍的事物", summary: "把困难、阻碍等作为不予顾虑的对象。", ids: ["n1-096"] },
             { pos: "终助词", posLabel: "もの・もん", label: "反问・强烈否定", summary: "以反问形式表达不可能、拒绝或强烈否定。", ids: ["n1-051", "n2-182"] },
             { pos: "终助词", posLabel: "もの・もん", label: "愿望・感慨", summary: "表达难以实现的期待、愿望或由衷感慨。", ids: ["n1-063", "supp-n1-review-053"] },
             { pos: "终助词", posLabel: "もの・もん", label: "理由・辩解", summary: "在句末补充带有个人语气的理由或辩解。", ids: ["n2-187"] },
@@ -272,7 +276,7 @@
         ],
         kagiri: [
             { pos: "名词", posLabel: "限り（かぎり）", label: "终点・界限", summary: "表示某件事到此结束，或以某个时点作为界限。", ids: ["n1-107"] },
-            { pos: "名词", posLabel: "限り（かぎり）", label: "对象・成立范围", summary: "限定适用对象，或表示只要前项状态成立，后项就在该范围内成立。", ids: ["n2-130", "n2-154"] },
+            { pos: "名词", posLabel: "限り（かぎり）", label: "成立范围", summary: "表示只要前项状态成立，后项就在这一范围内成立。", ids: ["n2-154"] },
             { pos: "名词", posLabel: "限り（かぎり）", label: "程度的极限", summary: "表示感情或评价达到了所能表达的最高程度。", ids: ["n1-072"] }
         ]
     };
@@ -430,9 +434,10 @@
     }
 
     function renderExamples(examples) {
+        const formatter = window.FormalNounExampleFormatter;
         return examples.slice(0, 2).map((example) => `
             <div class="compound-example-pair">
-                <p class="compound-example-jp font-serif-jp" lang="ja">${example.jp || ""}</p>
+                <p class="compound-example-jp font-serif-jp" lang="ja">${formatter ? formatter.format(example.jp || "") : (example.jp || "")}</p>
                 <p class="compound-example-cn">${escapeHtml(example.cn || "")}</p>
             </div>
         `).join("");

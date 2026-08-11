@@ -3,7 +3,7 @@
 
     window.FormalNounExtraExamples = Object.freeze({
         "n3-003": [
-            { jp: "天気予報によると、週末は雪になる<span class=\"text-accentRed\">ということだ</span>。", cn: "据天气预报说，周末会下雪。" }
+            { jp: "料金は一人三千円だ。つまり、二人分は六千円かかる<span class=\"text-accentRed\">ということだ</span>。", cn: "费用是每人三千日元。也就是说，两个人需要六千日元。" }
         ],
         "supp-n1-review-014": [
             { jp: "この寮では、夜十一時までに戻る<span class=\"text-accentRed\">ことになっている</span>。", cn: "这所宿舍规定晚上十一点前必须回来。" }
@@ -33,7 +33,7 @@
             { jp: "時間も遅い<span class=\"text-accentRed\">ことだし</span>、今日はここまでにしましょう。", cn: "时间也不早了，今天就到这里吧。" }
         ],
         "supp-n1-review-044": [
-            { jp: "語学学習で大切なのは、毎日続ける<span class=\"text-accentRed\">ことにある</span>。", cn: "语言学习的关键在于每天坚持。" }
+            { jp: "この制度の目的は、子育てを支援する<span class=\"text-accentRed\">ことにある</span>。", cn: "这项制度的目的在于支援育儿。" }
         ],
         "n2-151": [
             { jp: "彼女は一度も振り返る<span class=\"text-accentRed\">ことなく</span>、駅へ向かった。", cn: "她一次也没有回头，径直走向车站。" }
@@ -63,7 +63,7 @@
             { jp: "彼女は英語<span class=\"text-accentRed\">もさることながら</span>、中国語も流暢だ。", cn: "她的英语自不用说，中文也很流利。" }
         ],
         "n1-050": [
-            { jp: "親が留守なの<span class=\"text-accentRed\">をいいことに</span>、子どもたちは夜更かしした。", cn: "孩子们趁父母不在家熬夜了。" }
+            { jp: "親が留守な<span class=\"text-accentRed\">のをいいことに</span>、子どもたちは夜更かしした。", cn: "孩子们趁父母不在家熬夜了。" }
         ],
         "n1-064": [
             { jp: "大事なデータはバックアップしておく<span class=\"text-accentRed\">に越したことはない</span>。", cn: "重要数据最好事先做好备份。" }
@@ -72,10 +72,10 @@
             { jp: "子どものした<span class=\"text-accentRed\">こととて</span>、どうかお許しください。", cn: "毕竟是孩子做的事，还请原谅。" }
         ],
         "n3-065": [
-            { jp: "道に迷った<span class=\"text-accentRed\">ものですから</span>、到着が遅くなりました。", cn: "因为迷路了，所以到晚了。" }
+            { jp: "道に迷った<span class=\"text-accentRed\">ものですから</span>、到着が遅くなりました。", cn: "因为迷路了，所以迟到了。" }
         ],
         "supp-n1-review-053": [
-            { jp: "一度でいいから、オーロラを見てみたい<span class=\"text-accentRed\">ものです</span>。", cn: "哪怕只有一次，也真想看看极光。" }
+            { jp: "子どもたちには、もっと外で元気に遊ん<span class=\"text-accentRed\">でほしいものです</span>。", cn: "真希望孩子们能更多地在户外尽情玩耍。" }
         ],
         "n2-156": [
             { jp: "高い商品が必ずしも良い<span class=\"text-accentRed\">というものではない</span>。", cn: "价格高的商品并不一定就好。" }
@@ -118,9 +118,6 @@
         ],
         "n1-094": [
             { jp: "この一週間<span class=\"text-accentRed\">というもの</span>、雨の日が続いている。", cn: "这一周以来一直在下雨。" }
-        ],
-        "n1-096": [
-            { jp: "彼は数々の困難<span class=\"text-accentRed\">をものともせず</span>、研究を完成させた。", cn: "他不畏重重困难，完成了研究。" }
         ],
         "supp-n1-review-010": [
             { jp: "実際に使ってみた<span class=\"text-accentRed\">ところ</span>、思ったより操作が簡単だった。", cn: "实际试用之后，发现操作比想象中简单。" }
@@ -189,7 +186,7 @@
             { jp: "窓を開けた<span class=\"text-accentRed\">まま</span>寝てしまった。", cn: "开着窗户就睡着了。" }
         ],
         "n2-227": [
-            { jp: "店が開くか開かないか<span class=\"text-accentRed\">のうちに</span>、客が並び始めた。", cn: "店刚要开门，客人就开始排队了。" }
+            { jp: "店が開く<span class=\"text-accentRed\">か</span>開かない<span class=\"text-accentRed\">かのうちに</span>、客が並び始めた。", cn: "店刚要开门，客人就开始排队了。" }
         ],
         "n3-068": [
             { jp: "若い<span class=\"text-accentRed\">うちに</span>、いろいろなことに挑戦したほうがいい。", cn: "最好趁年轻多挑战各种事情。" }
@@ -222,10 +219,10 @@
             { jp: "明日の試合で勝てます<span class=\"text-accentRed\">ように</span>。", cn: "希望明天的比赛能够获胜。" }
         ],
         "supp-n1-review-056": [
-            { jp: "忘れない<span class=\"text-accentRed\">ように</span>、予定を手帳に書く<span class=\"text-accentRed\">ようにしている</span>。", cn: "为了不忘记，我尽量把安排写进记事本。" }
+            { jp: "忘れないように、予定を手帳に書く<span class=\"text-accentRed\">ようにしている</span>。", cn: "为了不忘记，我尽量把安排写进记事本。" }
         ],
         "n3-027": [
-            { jp: "この町には、京都<span class=\"text-accentRed\">のような</span>古い建物が多い。", cn: "这座城市有很多像京都那样的古老建筑。" }
+            { jp: "この町には、寺や神社<span class=\"text-accentRed\">のような</span>古い建物が多い。", cn: "这座城镇里有许多寺院、神社之类的古老建筑。" }
         ],
         "n3-042": [
             { jp: "彼女は鳥<span class=\"text-accentRed\">のように</span>軽やかに踊った。", cn: "她像鸟儿一样轻盈地舞蹈。" }
@@ -247,9 +244,6 @@
         ],
         "n3-064": [
             { jp: "相談したいことがある<span class=\"text-accentRed\">んだけれど</span>、今少し時間ある？", cn: "我有件事想商量，你现在有一点时间吗？" }
-        ],
-        "n2-130": [
-            { jp: "会員<span class=\"text-accentRed\">に限り</span>、入場料は無料です。", cn: "仅限会员，入场免费。" }
         ],
         "n2-154": [
             { jp: "命がある<span class=\"text-accentRed\">限り</span>、希望を捨てない。", cn: "只要还活着，就不放弃希望。" }
