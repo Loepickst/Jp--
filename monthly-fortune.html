@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#f4f7f1">
-    <title>2026年7月运势 | kiji</title>
+    <title>2026年8月运势 | kiji</title>
     <style>
         :root {
             --page: #ffffff;
@@ -293,7 +293,7 @@
 
         .category-tabs {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             margin: 0 14px;
             padding: 3px;
             border-radius: 9px;
@@ -379,6 +379,12 @@
             text-align: center;
         }
 
+        .fortune-note a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         :focus-visible {
             outline: 2px solid rgba(111, 138, 85, 0.7);
             outline-offset: 2px;
@@ -416,19 +422,19 @@
 <body>
     <div class="fortune-app">
         <header class="fortune-header">
-            <a class="fortune-back" href="index.html" aria-label="返回主页">‹</a>
+            <a class="fortune-back" href="index.html#daily/daily-culture" aria-label="返回上一页" data-fortune-back>‹</a>
             <span class="fortune-header-title"><strong>今月の運勢</strong><small>MONTHLY FORTUNE</small></span>
-            <span class="fortune-header-mark" aria-hidden="true">七</span>
+            <span class="fortune-header-mark" aria-hidden="true">八</span>
         </header>
 
         <main class="fortune-main">
             <section class="fortune-intro" aria-labelledby="fortune-page-title">
                 <div class="fortune-intro-copy">
-                    <p class="fortune-eyebrow">2026 JULY</p>
-                    <h1 id="fortune-page-title">七月の星だより</h1>
+                    <p class="fortune-eyebrow">2026 AUGUST</p>
+                    <h1 id="fortune-page-title">八月の星だより</h1>
                     <p>自分の星座を選んで、今月の運勢を読んでみましょう。</p>
                 </div>
-                <span class="fortune-month-seal" aria-hidden="true"><span><strong>07</strong><small>月</small></span></span>
+                <span class="fortune-month-seal" aria-hidden="true"><span><strong>08</strong><small>月</small></span></span>
             </section>
 
             <section class="sign-section" aria-labelledby="sign-section-title">
@@ -445,12 +451,11 @@
                     </span>
                 </header>
                 <div class="category-tabs" role="tablist" aria-label="运势分类">
-                    <button type="button" role="tab" aria-selected="true" data-category="work">仕事</button>
-                    <button type="button" role="tab" aria-selected="false" data-category="relationships">人間関係</button>
-                    <button type="button" role="tab" aria-selected="false" data-category="advice">ひとこと</button>
+                    <button type="button" role="tab" aria-selected="true" data-category="fortune">今月の運勢</button>
+                    <button type="button" role="tab" aria-selected="false" data-category="food">開運フード</button>
                 </div>
                 <article class="fortune-copy" data-fortune-copy>
-                    <span class="fortune-copy-label" data-copy-label>仕事運</span>
+                    <span class="fortune-copy-label" data-copy-label>今月の運勢</span>
                     <p class="fortune-original" lang="ja" data-copy-text></p>
                     <div class="fortune-translation">
                         <p lang="zh-CN" data-copy-translation></p>
@@ -458,156 +463,24 @@
                 </article>
             </section>
 
-            <p class="fortune-note">占いは「これを意識すると楽かも」くらいの距離感で、気軽に楽しんでください。
-            </p>
+            <p class="fortune-note">内容参考 <a href="https://www.tokyu-dept.co.jp/shibuyafoodislands/articles/horoscope/detail.html?id=337" target="_blank" rel="noopener noreferrer">miraimiku 2026年8月占い</a>；日语部分为重新整理的概述，下方附对应中文翻译。</p>
         </main>
     </div>
 
+    <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         (() => {
-            const preferenceKey = "kikiMonthlyFortunePreferencesV1";
-            const categoryLabels = {
-                work: "仕事運",
-                relationships: "人間関係",
-                advice: "今月のひとこと"
-            };
-            const fortunes = [
-                {
-                    id: "aries", symbol: "♈", name: "おひつじ座", dates: "3/21〜4/19",
-                    work: "勢いで走りたくなる月ですが、7月は「段取りの月」。前半のうちにタスクの棚卸しをして、新月（14日）を過ぎてから新しいことに着手すると、後半の追い風にきれいに乗れます。急いで出した企画より、一晩寝かせた企画のほうが通りやすい流れ。",
-                    relationships: "言葉が少し強く出やすい時期。悪気のない一言が誤解されそうなときは、送信前にワンクッション置くと楽です。後半は、あなたの率直さがむしろ好かれる場面が増えます。",
-                    advice: "即レスより、一呼吸。速さはあなたの武器だからこそ、今月はあえて温存を。"
-                },
-                {
-                    id: "taurus", symbol: "♉", name: "おうし座", dates: "4/20〜5/20",
-                    work: "続けてきたことに光が当たる月。派手な成果より、「いつも丁寧だよね」という信頼がじわっと効いてきます。前半はルーティンの精度を上げ、後半は続けてきたことを誰かに見せる機会をひとつ作ってみてください。",
-                    relationships: "身近な人ほど、感謝を言葉にすると関係があたたかくなります。照れくさければ、おいしいものを一緒に食べるだけでも十分。",
-                    advice: "夜の散歩、湯船、好きな音楽。五感が喜ぶ時間を予定に先に入れておくと、月の後半が軽くなります。"
-                },
-                {
-                    id: "gemini", symbol: "♊", name: "ふたご座", dates: "5/21〜6/21",
-                    work: "情報の整理月間。あちこちに散らばったメモ、ブックマーク、読みかけの資料を前半のうちにまとめておくと、後半に「あ、これ使える」が連発します。二つのことを同時に進めるより、午前と午後でテーマを分けると頭が冴える。学び直しにも向いている流れです。",
-                    relationships: "何気ない雑談が、思わぬ縁をつなぎます。用件だけで終わらせず、ひとこと添える。それだけで印象がだいぶ変わる月です。",
-                    advice: "思いついたことは、その場でメモ。今月のあなたのひらめきは鮮度が命です。"
-                },
-                {
-                    id: "cancer", symbol: "♋", name: "かに座", dates: "6/22〜7/22",
-                    work: "お誕生月、おめでとうございます。14日の新月はあなたの星座で起こります。占星術では「自分の星座の新月」は1年の種まきに向くとされるタイミング。大きく動く必要はなくて、「今年はこれをやりたい」を紙に書き出すだけでも仕込みとしては上々です。",
-                    relationships: "頑張って支える側に回りがちなあなたですが、今月は甘え上手が吉。「手伝ってほしい」が素直に言えると、関係がむしろ深まります。",
-                    advice: "誕生日の願い事は、ひとつに絞って書いておく。書いたものは強い。"
-                },
-                {
-                    id: "leo", symbol: "♌", name: "しし座", dates: "7/23〜8/22",
-                    work: "23日ごろから太陽があなたの星座に入り、月の後半でエンジンがかかります。正直なところ、前半は調子が出なくても大丈夫。充電期間と割り切って、後半の見せ場に向けてネタを溜めておきましょう。",
-                    relationships: "あえて主役を譲る場面で、あなたの株が上がります。誰かのがんばりに気づいて拍手を送れる人は、結局いちばん目立つのです。後半は誘いも増えるので、行きたいものから順に選んで大丈夫。",
-                    advice: "前半は充電、後半に点火。順番さえ間違えなければ、いい月になります。"
-                },
-                {
-                    id: "virgo", symbol: "♍", name: "おとめ座", dates: "8/23〜9/22",
-                    work: "細部への丁寧さが評価される月。ただし完璧主義が顔を出しすぎると、自分だけが疲れます。「6割できたら次へ」を合言葉に、進めながら整える方式がちょうどいい塩梅。見直しの時間は最後にまとめて取るより、途中で小刻みに挟むほうが今月は合っています。",
-                    relationships: "頼られる場面が増えそう。ぜんぶ引き受けず、7割で受けて3割は相手に返すと、お互いに気持ちよく回ります。",
-                    advice: "自分への採点を、いつもより2割甘く。それでもあなたの仕事は十分きれいです。"
-                },
-                {
-                    id: "libra", symbol: "♎", name: "てんびん座", dates: "9/23〜10/23",
-                    work: "調整役としての腕が光ります。会議、チーム仕事、間に立つ役回り。「どちらの言い分もわかる」というあなたの性質が、今月は弱みではなく武器になります。あなたが間に入るだけで話がまとまる、そんな場面が続きそう。",
-                    relationships: "満月（29日）の前後に、新しい縁や、しばらく会っていなかった人との再会の気配。誘われたら、少し面倒でも顔を出してみると案外楽しい。",
-                    advice: "迷ったら、美しいと感じるほうへ。あなたの審美眼は、だいたい正しい。"
-                },
-                {
-                    id: "scorpio", symbol: "♏", name: "さそり座", dates: "10/24〜11/22",
-                    work: "あれこれ手を広げるより、一点に深く潜る月。ひとつのテーマを掘り下げた人から、後半に手応えが返ってきます。集中できる時間帯を先にカレンダーで確保しておくのがおすすめ。",
-                    relationships: "本音を少しだけ開示すると楽になります。全部見せる必要はないので、信頼できる人に一割だけ。それで十分、距離が縮まります。",
-                    advice: "深く潜った日は、意識して早めに切り上げて。潜る力が強い人ほど、浮上の時間も要ります。"
-                },
-                {
-                    id: "sagittarius", symbol: "♐", name: "いて座", dates: "11/23〜12/21",
-                    work: "遠くを見る月。目の前の作業と並行して、「半年後にどこにいたいか」を考える時間を取ると、日々の優先順位がすっと整理されます。学びの計画、旅の計画を立てるのにも向いた流れ。",
-                    relationships: "久しぶりの人に、あなたから連絡してみて。「ちょうど思い出してた」と言われるような、気持ちのいい再会がありそうです。",
-                    advice: "地図を広げる時間を、週にひとつ。遠くを見るほど、あなたは元気になります。"
-                },
-                {
-                    id: "capricorn", symbol: "♑", name: "やぎ座", dates: "12/22〜1/19",
-                    work: "積み上げてきたものを見直す月。「やめること」をひとつ決めると、残したものの質がぐっと上がります。抱えているタスクの中に、惰性で続けているものはありませんか。やめる候補に迷ったら、「半年後も続けていたいか」で判定を。",
-                    relationships: "肩の力を抜いた雑談が、思いのほか信頼につながります。真面目な顔の合間に見せる笑顔は、それだけで価値がある。",
-                    advice: "「頑張らない日」を先に予定に入れる。休むのも段取りのうちです。"
-                },
-                {
-                    id: "aquarius", symbol: "♒", name: "みずがめ座", dates: "1/20〜2/18",
-                    work: "29日の満月はあなたの星座で起こります。月の後半、温めてきた独自のアイデアを人に見せるのに良いタイミング。「変わってるね」は、今月のあなたにとっては誉め言葉です。",
-                    relationships: "仲間やコミュニティとの縁が動く月。ひとりの時間も大事にしつつ、月末は人の輪の中に少しだけ長くいてみてください。",
-                    advice: "満月の夜、今のチームや仲間に「ありがとう」をひとつ伝える。それが来月の追い風になります。"
-                },
-                {
-                    id: "pisces", symbol: "♓", name: "うお座", dates: "2/19〜3/20",
-                    work: "想像力が冴える月。ただ、ふくらんだイメージを形にするには締切の力を借りるのが近道です。「金曜までにラフを出す」のように、小さな締切を自分で切ると、才能がちゃんと外に出ます。",
-                    relationships: "聞き役に回ると信頼が積み上がります。あなたの相づちには、人を安心させる不思議な力がある。聞き役のあとは、自分ひとりの時間でゆっくり回復を。",
-                    advice: "感じたことを一行だけ日記に。月末に読み返すと、自分の変化に驚くはずです。"
-                }
-            ];
+            const backLink = document.querySelector("[data-fortune-back]");
+            const returnTarget = new URLSearchParams(window.location.search).get("return");
+            if (backLink && returnTarget && !/^(?:[a-z]+:|\/\/)/i.test(returnTarget)) {
+                backLink.href = returnTarget;
+            }
 
-            const translations = {
-                aries: {
-                    work: "这个月虽然很容易让你产生一口气往前冲的念头，但7月更适合先把步骤安排好。前半月先梳理手头任务，等14日新月过后再启动新计划，就更容易借到后半月的顺风。比起匆忙提交的方案，放一晚再推敲的内容反而更容易通过。",
-                    relationships: "这段时间说话容易显得稍微强硬。若担心无心的一句话引起误会，发送前稍停一下，会轻松很多。到了后半月，你的坦率反而更容易赢得好感。",
-                    advice: "与其秒回，不如先呼吸一下。速度本就是你的优势，这个月不妨有意识地把它留到真正需要的时候。"
-                },
-                taurus: {
-                    work: "长期坚持的事情会被看见。不一定是耀眼的成果，而是“你做事一直很认真”这样的信赖逐渐发挥作用。前半月提升日常流程的精度，后半月找一个机会，把坚持在做的事情展示给别人。",
-                    relationships: "对越亲近的人，越要把感谢说出口。若觉得难为情，一起吃顿好吃的，也足以传达心意。",
-                    advice: "夜晚散步、泡澡、听喜欢的音乐。先把能取悦五感的时间排进日程，后半月会轻松许多。"
-                },
-                gemini: {
-                    work: "这个月适合整理信息。前半月把散落各处的笔记、书签和没读完的资料归拢起来，后半月会不断遇到“这个正好用得上”的时刻。与其同时做两件事，不如把上午和下午分成不同主题，思路会更清楚。也很适合重新开始学习。",
-                    relationships: "不经意的闲聊可能带来意想不到的缘分。别只说完正事就结束，多补一句话，给人的印象会大不一样。",
-                    advice: "想到什么就马上记下来。你这个月的灵感，贵在新鲜。"
-                },
-                cancer: {
-                    work: "生日月快乐。14日的新月发生在你的星座。占星中，自己星座的新月适合为新一年播下种子。无需立刻做出大动作，只要把“今年想做的事”写在纸上，就是很好的准备。",
-                    relationships: "你常常习惯照顾和支持别人，但这个月，懂得向人撒娇、求助会更幸运。坦率说出“希望你帮帮我”，反而能让关系更深。",
-                    advice: "把生日愿望收拢成一个，并认真写下来。写下来的愿望，会更有力量。"
-                },
-                leo: {
-                    work: "23日前后太阳进入你的星座，后半月会逐渐进入状态。即使前半月提不起劲也没关系，不妨把它当作充电期，先为后半月的登场积累素材。",
-                    relationships: "主动把主角的位置让给别人，反而会提升大家对你的评价。能看见别人的努力并送上掌声的人，最后往往最受瞩目。后半月邀约增多，按自己最想去的顺序选择就好。",
-                    advice: "前半月充电，后半月点火。只要顺序不乱，这会是一个不错的月份。"
-                },
-                virgo: {
-                    work: "你对细节的认真会受到肯定。不过，完美主义太强只会让自己疲惫。以“做到六成就先往下走”为原则，一边推进一边调整，反而最合适。这个月与其最后统一检查，不如在过程中分几次小幅校对。",
-                    relationships: "别人来依赖你的场合可能增加。不要全部接下，自己承担七成，再把三成还给对方，彼此都会更舒服。",
-                    advice: "给自己的评分比平时宽松两成。即便如此，你完成的事情依然足够漂亮。"
-                },
-                libra: {
-                    work: "你的协调能力会格外出色。无论会议、团队合作，还是居中沟通，“双方的想法我都能理解”这一点，本月不是弱点，而是你的优势。只要有你在中间，事情就更容易顺利谈妥。",
-                    relationships: "29日满月前后，可能出现新的缘分，也可能与许久未见的人重逢。即使觉得稍微麻烦，受到邀请时也不妨露个面，或许会比预想中开心。",
-                    advice: "犹豫时，选择你觉得更美的那一个。你的审美判断通常不会错。"
-                },
-                scorpio: {
-                    work: "与其同时铺开许多事情，不如深入一个重点。专注挖掘一个主题的人，会在后半月获得反馈。建议提前在日历里留出不受打扰的专注时间。",
-                    relationships: "稍微表达一点真实想法，会让你轻松许多。无需把全部内心摊开，只需向值得信赖的人透露一成，就足以拉近距离。",
-                    advice: "深入专注了一天之后，要有意识地早点收工。越擅长沉下去的人，越需要给自己留出浮上来的时间。"
-                },
-                sagittarius: {
-                    work: "这个月适合把目光放远。在处理眼前工作的同时，留一点时间想想“半年后希望自己在哪里”，日常的优先顺序会自然清晰。也很适合制定学习或旅行计划。",
-                    relationships: "主动联系一位许久未见的人。你可能会听到“我正好也在想你”，迎来一次让人心情愉快的重逢。",
-                    advice: "每周给自己一次摊开地图、想象远方的时间。看得越远，你越有精神。"
-                },
-                capricorn: {
-                    work: "这个月适合重新审视过去积累的事物。只要决定停下其中一件，留下来的内容质量就会明显提升。手头任务中是否有只是出于惯性才继续的？拿不准时，就问自己“半年后还愿意继续吗？”",
-                    relationships: "放松下来随意聊聊，可能比想象中更能累积信任。认真神情之间偶尔露出的笑容，本身就很有魅力。",
-                    advice: "先在日程里安排一个“不努力的日子”。休息也是计划的一部分。"
-                },
-                aquarius: {
-                    work: "29日的满月发生在你的星座。后半月很适合把酝酿已久的独特想法展示给别人。这个月听到“你好特别”，不妨把它当作赞美。",
-                    relationships: "你与伙伴或社群之间的联系会有所变化。珍惜独处时间的同时，月底也可以在人群里多停留一会儿。",
-                    advice: "满月那天，向现在的团队或伙伴说一句“谢谢”。这会成为下个月的助力。"
-                },
-                pisces: {
-                    work: "想象力格外敏锐。不过，要把丰富的画面真正落地，借助截止日期会更有效。比如给自己定下“周五前完成初稿”这样的小期限，才能让才华顺利走到现实中。",
-                    relationships: "做倾听者会不断累积信任。你的回应有一种让人安心的力量。听完别人之后，也别忘了留出独处时间，慢慢恢复自己。",
-                    advice: "每天把感受写成一句话。月底回头再看，你可能会惊讶于自己的变化。"
-                }
-            };
+            const preferenceKey = "kikiMonthlyFortunePreferencesV1";
+            const monthlyFortuneData = window.KIKI_MONTHLY_FORTUNE;
+            const categoryLabels = monthlyFortuneData.categories;
+            const fortunes = monthlyFortuneData.fortunes;
+            const translations = monthlyFortuneData.translations;
 
             const signGrid = document.querySelector("[data-sign-grid]");
             const symbol = document.querySelector("[data-reading-symbol]");
@@ -619,7 +492,7 @@
             const copyTranslation = document.querySelector("[data-copy-translation]");
             const categoryButtons = Array.from(document.querySelectorAll("[data-category]"));
             let activeSignId = "aries";
-            let activeCategory = "work";
+            let activeCategory = "fortune";
 
             try {
                 const stored = JSON.parse(localStorage.getItem(preferenceKey) || "null");
