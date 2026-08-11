@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>初音未来如何改变了音乐文化｜二次元の世界 - KIKI</title>
+  <meta name="description" content="从歌声合成软件到全球创作文化，介绍初音未来带来的音乐变化。">
+  <style>
+    :root {
+      --paper: #f4f7f4;
+      --white: #fff;
+      --ink: #102220;
+      --text: #3e4c4a;
+      --muted: #72807e;
+      --line: #d7e0dd;
+      --mint: #25d9b8;
+      --mint-dark: #0b7563;
+      --mint-soft: #eaf7f3;
+      --pink: #ec7292;
+      --max: 1160px;
+      --read: 820px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--paper); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    .topbar a { text-decoration: none; }
+
+    .topbar {
+      height: 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+    .topbar span:last-child { color: var(--muted); }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 64px 26px 76px;
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(420px, 1.06fr);
+      gap: clamp(40px, 6vw, 82px);
+      align-items: center;
+    }
+    .kicker {
+      margin: 0 0 22px;
+      color: var(--mint-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 5.2vw, 72px);
+      line-height: 1.14;
+      letter-spacing: -.055em;
+      font-weight: 850;
+    }
+    .hero-cn {
+      margin: 24px 0 0;
+      color: #30403e;
+      font-size: 21px;
+      line-height: 1.65;
+      font-weight: 700;
+    }
+    .hero-lead {
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .hero-link {
+      display: inline-flex;
+      margin-top: 28px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .hero-visual {
+      position: relative;
+      min-height: 570px;
+      margin: 0;
+      overflow: hidden;
+      background: #071515;
+    }
+    .hero-visual img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 58% center;
+    }
+    .hero-visual figcaption {
+      position: absolute;
+      left: 18px;
+      bottom: 17px;
+      color: rgba(255,255,255,.78);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+    }
+
+    main { background: var(--white); border-top: 1px solid var(--line); }
+    .chapter,
+    .ending {
+      width: min(calc(100% - 48px), var(--read));
+      margin-inline: auto;
+    }
+
+    .chapter {
+      padding: 74px 0 82px;
+      border-top: 1px solid var(--line);
+    }
+    .chapter-header {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 16px;
+      margin-bottom: 42px;
+    }
+    .num {
+      padding-top: 8px;
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(29px, 3.2vw, 43px);
+      line-height: 1.3;
+      letter-spacing: -.04em;
+      font-weight: 850;
+    }
+    .section-cn-title {
+      display: block;
+      margin-top: 10px;
+      color: var(--mint-dark);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 0;
+      font-weight: 750;
+    }
+
+    .pair {
+      margin-left: 70px;
+    }
+    .pair + .pair { margin-top: 42px; }
+    .jp {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+      font-size: 18px;
+      line-height: 2.05;
+      font-weight: 500;
+    }
+    .cn-box {
+      margin-top: 20px;
+      padding: 24px 26px;
+      border-left: 4px solid var(--mint);
+      background: var(--mint-soft);
+    }
+    .cn {
+      margin: 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 2;
+      font-weight: 450;
+    }
+    .jp strong,
+    .cn strong { font-weight: 800; color: var(--ink); }
+
+    .editorial-figure {
+      margin: 48px 0 0 70px;
+    }
+    .editorial-figure img {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border: 1px solid var(--line);
+    }
+    .editorial-figure figcaption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .official-photo {
+      margin: 30px 0 0 70px;
+      border: 1px solid var(--line);
+      background: #101817;
+      overflow: hidden;
+    }
+    .official-photo a {
+      display: block;
+    }
+    .official-photo img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .watch-cta {
+      margin: 48px 0 0 70px;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--mint);
+      background: var(--mint-soft);
+    }
+    .watch-cta p {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(21px, 2.5vw, 29px);
+      line-height: 1.55;
+      font-weight: 800;
+    }
+    .watch-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 12px 18px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .watch-cta a:hover,
+    .watch-cta a:focus-visible {
+      background: var(--mint-dark);
+      border-color: var(--mint-dark);
+    }
+
+    footer {
+      padding: 22px 24px;
+      border-top: 1px solid var(--line);
+      background: var(--white);
+      color: var(--muted);
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .12em;
+    }
+
+    @media (max-width: 820px) {
+      .topbar { height: 56px; padding-inline: 19px; }
+      .hero {
+        padding: 42px 19px 56px;
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+      h1 { font-size: clamp(40px, 12vw, 58px); }
+      .hero-cn { margin-top: 18px; font-size: 18px; }
+      .hero-visual { min-height: 0; aspect-ratio: 4 / 5; }
+      .chapter { width: min(calc(100% - 38px), var(--read)); }
+      .chapter { padding: 58px 0 64px; }
+      .chapter-header { grid-template-columns: 38px 1fr; gap: 8px; margin-bottom: 34px; }
+      .pair { margin-left: 46px; }
+      .editorial-figure,
+      .official-photo,
+      .watch-cta { margin-left: 46px; }
+      .jp { font-size: 16px; line-height: 2; }
+      .cn { font-size: 15px; line-height: 1.95; }
+      .cn-box { padding: 20px; }
+    }
+
+    @media (max-width: 460px) {
+      .topbar span:last-child { display: none; }
+      .pair { margin-left: 0; }
+      .editorial-figure,
+      .official-photo,
+      .watch-cta { margin-left: 0; }
+      .chapter-header { grid-template-columns: 32px 1fr; }
+      .cn-box { margin-top: 16px; }
+      .watch-cta { padding: 24px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../../../index.html#daily/daily-culture/culture-anime-world" aria-label="返回二次元の世界">← 返回二次元</a>
+    <span>二次元の世界</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">HATSUNE MIKU / CULTURE</p>
+      <h1>初音ミクは、どのように音楽文化を変えたのか</h1>
+      <p class="hero-cn">初音未来如何改变了音乐文化</p>
+      <p class="hero-lead">她最初是一款歌声合成软件，后来却成为连接音乐、插画、影像和无数创作者的文化入口。</p>
+      <a class="hero-link" href="#story">开始阅读 ↓</a>
+    </div>
+    <figure class="hero-visual">
+      <img src="hatsune-miku-assets/hatsune-miku-hero.webp" alt="初音未来站在舞台上，面向挥动青绿色荧光棒的观众">
+      <figcaption>A VOICE CREATED TOGETHER</figcaption>
+    </figure>
+  </section>
+
+  <main id="story">
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">00</span>
+        <h2>初音ミクは、どのように音楽文化を変えたのか<span class="section-cn-title">初音未来如何改变了音乐文化</span></h2>
+      </header>
+      <div class="pair">
+        <p class="jp">2007年に発売された歌声合成ソフト「初音ミク」は、音楽制作のための道具として登場した。その後、楽曲、イラスト、映像、ダンス、小説など、さまざまな表現を結びつける存在となり、日本のインターネット文化と音楽シーンに大きな変化をもたらした。</p>
+        <div class="cn-box">
+          <p class="cn">2007年推出的歌声合成软件“初音未来”，最初是一款音乐制作工具。此后，她逐渐成为连接歌曲、插画、影像、舞蹈和小说等多种表达形式的存在，也给日本的网络文化与音乐领域带来了明显变化。</p>
+        </div>
+      </div>
+      <figure class="editorial-figure">
+        <img src="hatsune-miku-assets/02-scene-miku-creative-network.webp" alt="初音未来连接音乐、插画、影像、舞蹈和文字创作者的铅笔素描" loading="lazy">
+      </figure>
+    </section>
+
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">01</span>
+        <h2>歌を作る人に「声」という選択肢を与えた<span class="section-cn-title">为音乐创作者提供“歌声”</span></h2>
+      </header>
+      <div class="pair">
+        <p class="jp">初音ミクは、クリプトン・フューチャー・メディアがヤマハの歌声合成技術「VOCALOID2」を使って開発し、<strong>2007年8月31日</strong>に発売したソフトウェアである。メロディーと歌詞を入力すると、声優・藤田咲の声をもとに作られた歌声で楽曲を歌わせることができた。</p>
+        <div class="cn-box">
+          <p class="cn">初音未来由 Crypton Future Media 使用雅马哈的歌声合成技术“VOCALOID2”开发，并于<strong>2007年8月31日</strong>发售。使用者只要输入旋律和歌词，就能让软件以声优藤田咲的声音为基础，合成歌声并演唱歌曲。</p>
+        </div>
+      </div>
+      <div class="pair">
+        <p class="jp">それまで、個人の音楽制作者が歌入りの曲を完成させるには、自分で歌うか、歌手を探して録音を依頼する必要があった。初音ミクの登場によって、自宅のコンピューターだけでも歌声を含む楽曲を制作し、インターネットで発表できるようになった。</p>
+        <div class="cn-box">
+          <p class="cn">在此之前，个人音乐创作者要完成一首有人声的作品，只能自己演唱，或寻找歌手并委托对方录音。初音未来出现后，创作者仅靠家用电脑也能制作带有歌声的歌曲，并将作品发布到互联网上。</p>
+        </div>
+      </div>
+      <figure class="editorial-figure">
+        <img src="hatsune-miku-assets/03-scene-miku-bedroom-producer.webp" alt="个人音乐创作者在家中使用歌声合成软件制作歌曲的铅笔素描" loading="lazy">
+      </figure>
+    </section>
+
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">02</span>
+        <h2>少ない設定が、創作の余白になった<span class="section-cn-title">简单的设定，留下了创作空间</span></h2>
+      </header>
+      <div class="pair">
+        <p class="jp">発売時に示されたのは、青緑色のツインテールを持つ16歳の少女という外見と、身長158センチ、体重42キロ、得意な音楽ジャンルなどの基本的なプロフィールだった。物語や性格が細かく決められていなかったため、制作者は楽曲に合わせて初音ミクの人物像や世界観を自由に考えることができた。</p>
+        <div class="cn-box">
+          <p class="cn">初音未来发售时公开的设定并不复杂：她是一名留着蓝绿色双马尾的16岁少女，身高158厘米、体重42公斤，同时还有擅长的音乐类型等基本资料。由于官方没有详细规定她的故事和性格，创作者可以根据歌曲自由设计她的形象和所在的世界。</p>
+        </div>
+      </div>
+      <div class="pair">
+        <p class="jp">初音ミクは、完成された物語を持つキャラクターではなく、制作者がそれぞれの作品の中で新しい姿を与えられるシンガーとして広がっていった。</p>
+        <div class="cn-box">
+          <p class="cn">初音未来没有一段已经写完的固定故事。她更像是一名可以由不同创作者在各自作品中重新塑造的歌手。</p>
+        </div>
+      </div>
+      <figure class="editorial-figure">
+        <img src="hatsune-miku-assets/04-scene-miku-open-character.webp" alt="不同创作者在画册中塑造不同初音未来形象的铅笔素描" loading="lazy">
+      </figure>
+    </section>
+
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">03</span>
+        <h2>一曲から、絵と映像と物語が生まれた<span class="section-cn-title">一首歌带来了插画、影像和故事</span></h2>
+      </header>
+      <div class="pair">
+        <p class="jp">音楽制作者がニコニコ動画やYouTubeに初音ミクの楽曲を投稿すると、それを聴いた別の利用者がイラストを描き、さらに別の利用者がその絵を使ってミュージックビデオを制作した。歌ってみた動画、ダンス、楽曲のアレンジ、小説なども生まれ、<strong>一つの作品から次の作品へと創作が続いていった。</strong></p>
+        <div class="cn-box">
+          <p class="cn">当音乐创作者把初音未来演唱的歌曲上传到 Niconico 动画或 YouTube 后，其他用户会受到歌曲启发，创作相关插画；也有人使用这些插画制作音乐视频。随后又出现了翻唱、舞蹈、改编和小说等内容，<strong>一部作品就这样不断带来新的作品。</strong></p>
+        </div>
+      </div>
+      <div class="pair">
+        <p class="jp">クリプトン・フューチャー・メディアは2007年12月に投稿サイト「ピアプロ」を開設し、キャラクター利用のためのガイドラインを示した。これにより、非営利の個人による二次創作が行いやすくなり、音楽、絵、文章など異なる分野の制作者が作品を通してつながる環境が整えられた。</p>
+        <div class="cn-box">
+          <p class="cn">2007年12月，Crypton Future Media 开设了投稿平台“Piapro”，并公布角色使用指南。这让个人创作者在非营利范围内更容易进行二次创作，也为音乐、插画和文字等不同领域的创作者提供了通过作品相互合作的环境。</p>
+        </div>
+      </div>
+      <div class="pair">
+        <p class="jp">同じ年の12月にryoが発表した『メルト』は、公開から一年間で<strong>300万回を超えて再生</strong>された。初音ミクというキャラクターだけでなく、楽曲を作るボカロPにも注目が集まるきっかけとなり、その後はハチ、wowakaをはじめ、多くの制作者がインターネットから知られるようになった。</p>
+        <div class="cn-box">
+          <p class="cn">同年12月，ryo发布的《メルト》在公开后一年内<strong>播放量超过300万次</strong>。这首歌让听众在关注初音未来这一角色的同时，也开始注意歌曲背后的 VOCALOID 创作者。此后，包括Hachi、wowaka在内的许多创作者开始通过互联网受到关注。</p>
+        </div>
+      </div>
+      <figure class="editorial-figure">
+        <img src="hatsune-miku-assets/05-scene-miku-creation-relay.webp" alt="一首初音未来歌曲继续带来插画、影像、舞蹈和故事创作的铅笔素描" loading="lazy">
+      </figure>
+    </section>
+
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">04</span>
+        <h2>日本の音楽文化の一部へ<span class="section-cn-title">成为日本音乐文化的一部分</span></h2>
+      </header>
+      <div class="pair">
+        <p class="jp">2012年には、kzによる『Tell Your World』がGoogle Chromeのグローバルキャンペーンに使用された。インターネットを通じて、名前を知られていない個人の作品も世界へ届けられるという、初音ミクを取り巻く創作文化が広く紹介された。</p>
+        <div class="cn-box">
+          <p class="cn">2012年，kz创作的《Tell Your World》被用于 Google Chrome 的全球宣传活动。作品让更多人了解到围绕初音未来形成的创作文化：即使是没有名气的个人，也有机会通过互联网把作品传向世界。</p>
+        </div>
+      </div>
+      <div class="pair">
+        <p class="jp">初音ミクから始まった動きは一時的な流行に終わらず、ボカロPの楽曲を聴いて育った世代にも受け継がれた。米津玄師、Ayaseをはじめ、VOCALOIDを使った制作経験を持つ音楽家が現在の日本の音楽シーンで活動している。初音ミクは、歌声合成ソフトであると同時に、<strong>多くの制作者が参加できる音楽文化の入口</strong>となった。</p>
+        <div class="cn-box">
+          <p class="cn">从初音未来开始的这股潮流没有停留在短期流行中，而是继续影响着听 VOCALOID 创作者歌曲长大的一代。包括米津玄师、Ayase在内，许多拥有 VOCALOID 创作经历的音乐人如今活跃在日本音乐领域。初音未来既是一款歌声合成软件，也成为<strong>许多创作者参与音乐文化的入口</strong>。</p>
+        </div>
+      </div>
+
+      <figure class="editorial-figure">
+        <img src="hatsune-miku-assets/01-scene-yonezu-ayase-pencil.webp" alt="米津玄师与YOASOBI成员Ayase的双人铅笔素描" loading="lazy">
+        <figcaption>左：米津玄師　／　右：Ayase（YOASOBI）——两人都曾以VOCALOID进行音乐创作。</figcaption>
+      </figure>
+    </section>
+
+    <section class="chapter">
+      <header class="chapter-header">
+        <span class="num">05</span>
+        <h2>スクリーンの中から、世界のステージへ<span class="section-cn-title">从屏幕中走向世界舞台</span></h2>
+      </header>
+
+      <div class="pair">
+        <p class="jp">初音ミクの楽曲が増えるにつれて、その発表の場は動画サイトだけでなくライブ会場にも広がった。3DCGで表現された初音ミクたちがバンドの演奏に合わせて歌うライブでは、観客がペンライトを振り、インターネットで聴いてきた楽曲を会場で共有するようになった。</p>
+        <div class="cn-box">
+          <p class="cn">随着初音未来的歌曲不断增加，作品的展示空间也不再局限于视频网站，而是进一步进入演唱会现场。在由3DCG形象的初音未来等虚拟歌手配合乐队演奏进行表演的演唱会上，观众挥动荧光棒，共同聆听过去只能通过网络接触的歌曲。</p>
+        </div>
+      </div>
+
+      <div class="pair">
+        <p class="jp"><strong>2013年に横浜アリーナで初めて開催された「マジカルミライ」には、1万5000人が来場した。</strong>このイベントは3DCGライブだけでなく、創作文化に触れられる企画展も同時に行う形式を取り、その後もファンとクリエーターが集まる恒例イベントとして続いている。</p>
+        <div class="cn-box">
+          <p class="cn"><strong>2013年，第一届“魔法未来（マジカルミライ）”在横滨体育馆举办，共有1.5万人到场。</strong>活动不只包括3DCG演唱会，还同时设置了让观众接触相关创作文化的企划展。此后，“魔法未来”持续举办，逐渐成为粉丝与创作者定期聚集的活动。</p>
+        </div>
+      </div>
+
+      <figure class="official-photo">
+        <a href="https://blog.piapro.net/2013/09/2013-21.html" target="_blank" rel="noreferrer" aria-label="查看初音未来官方博客的魔法未来2013活动记录">
+          <img src="hatsune-miku-assets/07-photo-magical-mirai-2013.webp" alt="初音未来魔法未来2013横滨体育馆演唱会彩色现场照片" loading="lazy">
+        </a>
+      </figure>
+
+      <div class="pair">
+        <p class="jp">海外では、世界ツアー「HATSUNE MIKU EXPO」が<strong>2014年5月にインドネシアのジャカルタ</strong>から始まった。公式の10周年資料によると、<strong>2024年5月までに世界30都市で68公演</strong>を実施。その後もアジア、北米、ヨーロッパ、オセアニアへ開催地域を広げている。ライブに加えて、展示、ワークショップ、クラブイベントなども行われ、各地のファンが初音ミクを取り巻く創作文化に触れられる場となった。</p>
+        <div class="cn-box">
+          <p class="cn">海外方面，世界巡演“HATSUNE MIKU EXPO”于<strong>2014年5月从印度尼西亚雅加达</strong>开始。根据官方十周年资料，<strong>截至2024年5月，巡演已经在全球30座城市举办68场演出</strong>。此后，活动继续扩展至亚洲、北美、欧洲和大洋洲。除演唱会外，现场还会举办展览、工作坊和俱乐部活动，让不同地区的粉丝接触围绕初音未来形成的创作文化。</p>
+        </div>
+      </div>
+
+      <div class="pair">
+        <p class="jp">海外公演が難しかった時期には、2021年のオンラインコンサート、2022年の「MIKU EXPO Rewind」、2023年のVR配信が行われた。初音ミクのライブは会場だけに限定されず、オンラインも使いながら世界の観客とつながる形へと広がった。</p>
+        <div class="cn-box">
+          <p class="cn">在难以举办海外现场演出的时期，主办方又先后推出2021年线上演唱会、2022年的“MIKU EXPO Rewind”和2023年的VR直播。初音未来的演出不再只依赖实体会场，也通过线上形式继续连接世界各地的观众。</p>
+        </div>
+      </div>
+
+      <div class="pair">
+        <p class="jp">こうしたイベントでは、音楽だけでなく、イラスト、衣装、映像、ダンス、ファンによる作品なども同じ場所に集まる。初音ミクを中心に生まれた創作文化は、インターネットの投稿から始まり、国内イベントと世界ツアーを通じて、<strong>多くの人が参加する文化へと発展した。</strong></p>
+        <div class="cn-box">
+          <p class="cn">在这些活动中，音乐、插画、服装、影像、舞蹈和粉丝创作会集中出现在同一个空间。围绕初音未来形成的创作文化从网络投稿开始，又通过日本国内活动和世界巡演，逐渐发展为<strong>更多人可以参与的文化现象。</strong></p>
+        </div>
+      </div>
+      <div class="watch-cta">
+        <p>让我们来一起欣赏一下初音未来的魅力吧</p>
+        <a href="https://www.bilibili.com/video/BV1dT411p7sQ/?spm_id_from=333.337.search-card.all.click&amp;vd_source=e2c997307f1052473c8c84176c694501" target="_blank" rel="noreferrer">前往 Bilibili 观看 <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>初音未来文化专题 / HATSUNE MIKU</footer>
+  <script src="../../../shared/unified-header.js?v=20260808-miku1" data-kiki-unified-header-loader></script>
+</body>
+</html>
