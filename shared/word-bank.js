@@ -5,9 +5,9 @@
         return;
     }
 
-    const VERSION = "1.12.2";
+    const VERSION = "1.12.5";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
-    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV7";
+    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV10";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
     const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV1";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
@@ -41,7 +41,7 @@
         ? new URL("./", currentScript.src)
         : new URL("./shared/", window.location.href);
     const siteRoot = new URL("../", sharedBase);
-    const cssHref = new URL("word-bank.css?v=20260724-atamagonashi1", sharedBase).href;
+    const cssHref = new URL("word-bank.css?v=20260810-novel5-1", sharedBase).href;
 
     let activeSelection = null;
     let selectionTimer = 0;
@@ -202,12 +202,9 @@
         "daily/light-read/index.html": "#daily/daily-light-read",
         "daily/light-read/daily/read_daily.html": "#daily/daily-light-read",
         "daily/light-read/folklore/read_folklore.html": "#daily/daily-light-read",
-        "exam/textbook/index.html": "#daily/exam-textbook",
-        "exam/textbook/n1_menu.html": "#daily/exam-textbook/textbook-try-n1",
-        "exam/textbook/n2_menu.html": "#daily/exam-textbook/textbook-try-n2",
         "exam/vocabulary/index.html": "#exam/exam-vocabulary",
-        "exam/vocabulary/n1/index.html": "#exam/exam-vocabulary/exam-vocabulary-n1",
-        "exam/vocabulary/n2/index.html": "#exam/exam-vocabulary/exam-vocabulary-n2",
+        "exam/vocabulary/n1/index.html": "#exam/exam-vocabulary",
+        "exam/vocabulary/n2/index.html": "#exam/exam-vocabulary",
         "exam/grammar/index.html": "#exam/exam-grammar",
         "exam/jlpt-reading/index.html": "#exam/exam-reading",
         "exam/listening/index.html": "#exam/exam-listening",
@@ -268,11 +265,11 @@
         }
 
         if (/^exam\/vocabulary\/n1\/(?!index\.html)[^/]+\.html$/.test(path)) {
-            return "#exam/exam-vocabulary/exam-vocabulary-n1";
+            return "#exam/exam-vocabulary";
         }
 
         if (/^exam\/vocabulary\/n2\/(?!index\.html)[^/]+\.html$/.test(path)) {
-            return "#exam/exam-vocabulary/exam-vocabulary-n2";
+            return "#exam/exam-vocabulary";
         }
 
         if (/^exam\/grammar\/复合格助词\.html$/.test(path)) {
@@ -423,7 +420,23 @@
         }
 
         if (element.tagName === "BUTTON") {
-            return Boolean(getCanonicalHomeUrl(window.location.href));
+            /* A toggle is not a back button merely because it lives in a
+               header. Reading pages use the same visual base class for the
+               timer, font-size and furigana controls; treating every one of
+               them as navigation made their real click handlers unreachable. */
+            if (element.matches(".reading-tool-btn, [id*='timer'], [id*='font'], [id*='furigana'], [aria-controls]")) {
+                return false;
+            }
+            const backIntent = [
+                element.id,
+                element.className,
+                element.getAttribute("aria-label"),
+                element.getAttribute("title"),
+                element.getAttribute("onclick"),
+                element.textContent
+            ].filter(Boolean).join(" ");
+            return /(?:back|return|history\.back|返回|回到|上一页|上一个|目录|戻る|もどる)/i.test(backIntent)
+                && Boolean(getCanonicalHomeUrl(window.location.href));
         }
 
         const rawHref = element.getAttribute("href");

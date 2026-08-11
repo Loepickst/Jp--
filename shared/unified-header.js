@@ -9,7 +9,7 @@
     const script = document.currentScript;
     const sharedBase = script && script.src ? new URL(".", script.src) : new URL("shared/", window.location.href);
     const homeUrl = new URL("../index.html", sharedBase);
-    const logoUrl = new URL("../assets/home-redesign/kiji-logo-brush-sharp-v2.webp", sharedBase);
+    const logoUrl = new URL("../assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline", sharedBase);
 
     function ensureStylesheet() {
         if (document.querySelector("link[data-kiki-unified-header-style]")) {
@@ -17,7 +17,7 @@
         }
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = new URL("unified-header.css?v=20260723a", sharedBase).href;
+        link.href = new URL("unified-header.css?v=20260811-listening-jp", sharedBase).href;
         link.dataset.kikiUnifiedHeaderStyle = "true";
         document.head.appendChild(link);
     }
@@ -31,6 +31,104 @@
 
     function normalizedPath() {
         return projectPath(window.location);
+    }
+
+    function listeningSectionConfig(path) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+        const pathLevel = path.match(/\/(n[123])(?:\/|$)/i);
+        const level = (pathLevel ? pathLevel[1] : params.get("level") || "").toUpperCase();
+        const base = {
+            title: level ? `${level} 聴解特訓` : "聴解特訓",
+            backLabel: "試験対策へ戻る",
+            hash: "#exam/exam-listening",
+            type: "practice"
+        };
+
+        if (/\/years\/[^/]+\.html$/i.test(path)) {
+            return {
+                ...base,
+                backLabel: "年度一覧へ戻る",
+                href: "../index.html?browse=year",
+                freshBack: true
+            };
+        }
+
+        if (path === "exam/listening/shared/category-practice.html") {
+            const folderByType = {
+                task_comprehension: "task-comprehension",
+                point_comprehension: "point-comprehension",
+                overview_comprehension: "summary-comprehension",
+                summary_comprehension: "summary-comprehension",
+                immediate_response: "immediate-response",
+                integrated_comprehension: "integrated-comprehension"
+            };
+            const folder = folderByType[String(params.get("type") || "").toLowerCase()];
+            const category = params.get("category");
+            const categoryQuery = category ? `&category=${encodeURIComponent(category)}` : "";
+            return {
+                ...base,
+                backLabel: "分類一覧へ戻る",
+                freshBack: true,
+                href: folder && level
+                    ? `../${folder}/${level.toLowerCase()}/index.html?browse=category${categoryQuery}`
+                    : "../index.html"
+            };
+        }
+
+        if (path === "exam/listening/shared/random-exam.html") {
+            const folderByType = {
+                task_comprehension: "task-comprehension",
+                point_comprehension: "point-comprehension",
+                overview_comprehension: "summary-comprehension",
+                summary_comprehension: "summary-comprehension",
+                immediate_response: "immediate-response",
+                integrated_comprehension: "integrated-comprehension"
+            };
+            const folder = folderByType[String(params.get("type") || "").toLowerCase()];
+            return {
+                ...base,
+                backLabel: "練習メニューへ戻る",
+                freshBack: true,
+                href: folder && level
+                    ? `../${folder}/${level.toLowerCase()}/index.html`
+                    : "../index.html"
+            };
+        }
+
+        if (path === "exam/listening/full-practice/practice.html") {
+            return {
+                ...base,
+                backLabel: "模擬試験一覧へ戻る",
+                href: "./index.html?browse=year",
+                freshBack: true
+            };
+        }
+
+        if (/^exam\/listening\/[^/]+\/n[123]\/index\.html$/i.test(path)) {
+            const browse = params.get("browse");
+            if (["year", "category", "mistakes"].includes(browse)) {
+                return {
+                    ...base,
+                    backLabel: "練習メニューへ戻る",
+                    href: "./index.html"
+                };
+            }
+            return {
+                ...base,
+                backLabel: "聴解メニューへ戻る"
+            };
+        }
+
+        if (/^exam\/listening\/[^/]+\/index\.html$/i.test(path)
+            || path === "exam/listening/full-practice/index.html") {
+            return {
+                ...base,
+                backLabel: "聴解メニューへ戻る"
+            };
+        }
+
+        return base;
     }
 
     function sectionConfig(path) {
@@ -76,6 +174,10 @@
                 "sentence-structure-practice.html": "文法理解",
                 "conjunction.html": "文法理解",
                 "formal-nouns.html": "文法理解",
+                "te-auxiliary.html": "文法理解",
+                "appearance-expressions.html": "文法理解",
+                "demonstratives.html": "文法理解",
+                "affixes.html": "文法理解",
                 "kakujyo_practice.html": "格助詞練習",
                 "敬语.html": "敬語学習",
                 "conditional-comparison.html": "仮定表現"
@@ -83,12 +185,25 @@
             const fileName = path.split("/").pop();
             return { title: grammarTitles[fileName] || "语法学习", backLabel: "返回语法学习", hash: "#daily/daily-grammar", type: "study" };
         }
-        if (path.startsWith("designs/try-n2-content-redesign/")) {
-            return { title: "TRY! N2 教材学习", backLabel: "返回教材学习", hash: "#daily/exam-textbook", type: "study" };
+        if (path.startsWith("daily/try-n1/") || path.startsWith("daily/try-n2/")) {
+            const level = path.startsWith("daily/try-n1/") ? "N1" : "N2";
+            return { title: `TRY! ${level} 教材学习`, backLabel: "返回教材学习", hash: "#daily/exam-textbook", type: "study" };
         }
-        if (path.startsWith("exam/textbook/")) {
-            const level = /(?:^|\/)n1|try-n1|text_1/.test(path) ? "N1" : (/(?:^|\/)n2|try-n2|text_2/.test(path) ? "N2" : "");
-            return { title: level ? `TRY! ${level} 教材学习` : "教材学习", backLabel: "返回教材学习", hash: "#daily/exam-textbook", type: "study" };
+        if (path === "exam/vocabulary/n1/practice_n1_verbs.html") {
+            return {
+                title: "N1 語彙特訓",
+                backLabel: "返回单词背诵页面",
+                href: "./verbs_n1.html",
+                type: "practice"
+            };
+        }
+        if (path === "exam/vocabulary/n1/practice_n1_adjectives.html") {
+            return {
+                title: "N1 語彙特訓",
+                backLabel: "返回单词背诵页面",
+                href: "./adjectives_n1.html",
+                type: "practice"
+            };
         }
         if (path.startsWith("exam/vocabulary/")) {
             const level = path.includes("/n1/") ? "N1" : (path.includes("/n2/") ? "N2" : "");
@@ -105,13 +220,15 @@
             return { title: level ? `${level} 読解特训` : "読解特训", backLabel: "返回备考专区", hash: "#exam/exam-reading", type: "practice" };
         }
         if (path.startsWith("exam/listening/")) {
-            const level = path.includes("/n1/") ? "N1" : (path.includes("/n2/") ? "N2" : "");
-            return { title: level ? `${level} 聴解練習` : "聴解練習", backLabel: "返回备考专区", hash: "#exam/exam-listening", type: "practice" };
+            return listeningSectionConfig(path);
         }
         return { title: "日语学习", backLabel: "返回首页", hash: "", type: "study" };
     }
 
     function returnTarget(config) {
+        if (config.href) {
+            return new URL(config.href, window.location.href).href;
+        }
         const params = new URL(window.location.href).searchParams;
         const returnValue = params.get("return");
         if (returnValue) {
@@ -197,6 +314,7 @@
 
     function findBackElement(source) {
         const selectors = [
+            "[data-kiki-unified-back]",
             "[data-reading-back]",
             ".reading-site-back",
             ".reading-head-back",
@@ -204,6 +322,8 @@
             ".header-back-control",
             ".ss-back",
             "#back-to-reading-index",
+            "#backBtn",
+            "[data-back-nav]",
             ".back-btn",
             ".header-btn"
         ];
@@ -239,7 +359,7 @@
         const directControls = Array.from(source.children).filter((element) => {
             if (!(element instanceof HTMLElement)) return false;
             if (!element.matches("a, button")) return false;
-            return !element.matches(".reading-head-back, .reading-site-back, .compound-header-back, .header-back-control, .ss-back, #back-to-reading-index, .back-btn, .header-btn");
+            return !element.matches("[data-kiki-unified-back], .reading-head-back, .reading-site-back, .compound-header-back, .header-back-control, .ss-back, #back-to-reading-index, .back-btn, .header-btn");
         });
         if (directControls.length) {
             const wrapper = document.createElement("div");
@@ -254,9 +374,30 @@
         return '<svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>';
     }
 
+    function normalizeBackLabel(value, fallback) {
+        const label = String(value || "")
+            .replace(/^[\s\u2039\u203A\u276E\u276F\u3008\u3009\u300A\u300B\u2190\u2192\u21A9\u21AA<>]+/u, "")
+            .trim();
+        return label || fallback;
+    }
+
     function prepareBackElement(existing, config) {
         let back = existing || document.createElement("a");
-        const backLabel = hasReturnSource() ? "返回上一学习页" : config.backLabel;
+        if (config.freshBack && existing && !existing.hasAttribute("data-kiki-dynamic-back")) {
+            const replacement = document.createElement("a");
+            replacement.id = existing.id;
+            replacement.className = existing.className;
+            existing.replaceWith(replacement);
+            back = replacement;
+        }
+        const isDynamicBack = back.hasAttribute("data-kiki-dynamic-back");
+        const currentBackLabel = normalizeBackLabel(
+            back.getAttribute("aria-label") || back.textContent,
+            config.backLabel
+        );
+        const backLabel = isDynamicBack
+            ? (currentBackLabel || config.backLabel)
+            : (hasReturnSource() ? "返回上一学习页" : config.backLabel);
         if (back.tagName !== "A") {
             const replacement = document.createElement("a");
             replacement.id = back.id;
@@ -264,9 +405,12 @@
             back = replacement;
         }
         back.classList.add("kiki-unified-back");
-        back.href = returnTarget(config);
+        if (!isDynamicBack) {
+            back.href = returnTarget(config);
+        }
+        const mobileBackLabel = /聴解/.test(config.title) ? "戻る" : "返回";
         back.setAttribute("aria-label", backLabel);
-        back.innerHTML = `${arrowMarkup()}<span class="kiki-unified-back-label">${backLabel}</span><span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>`;
+        back.innerHTML = `${arrowMarkup()}<span class="kiki-unified-back-label">${backLabel}</span><span class="kiki-unified-back-label-mobile" aria-hidden="true">${mobileBackLabel}</span>`;
         return back;
     }
 
@@ -284,9 +428,20 @@
 
     function keepOnlyGrammarPracticeActions(container, path) {
         if (!container || !path.startsWith("daily/grammar/")) return;
+        if (container.matches("[data-kiki-header-utility]")) return;
 
         container.querySelectorAll("a, button, .nav-item").forEach((control) => {
             if (!isPracticeAction(control)) {
+                control.remove();
+            }
+        });
+    }
+
+    function removeListeningLegacyActions(container, path) {
+        if (!container || !path.startsWith("exam/listening/")) return;
+        container.querySelectorAll("a, button, .nav-item").forEach((control) => {
+            const text = (control.textContent || "").replace(/\s+/g, "");
+            if (/^(?:主页|ホーム|返回题型页|返回练习目录|返回年度目录|練習メニューへ戻る|年度一覧へ戻る)/.test(text)) {
                 control.remove();
             }
         });
@@ -308,14 +463,154 @@
 
     function prepareActionLabels(container) {
         if (!container) return;
+        if (container.matches("[data-kiki-header-utility]")) return;
         container.querySelectorAll("a, button, .nav-item").forEach((control) => {
             if (!(control instanceof HTMLElement)) return;
             if (control.closest(".reading-settings-popover")) return;
+            if (control.matches("[data-reading-action='favorite'], .reading-settings-trigger, .reading-immersive-trigger")) {
+                control.removeAttribute("data-kiki-mobile-label");
+                return;
+            }
             const label = mobileActionLabel(control);
             if (label) {
                 control.setAttribute("data-kiki-mobile-label", label);
             }
         });
+    }
+
+    function setupGrammarTextSizeControl(path, rightSlot) {
+        if (!path.startsWith("daily/grammar/") || !rightSlot) return;
+
+        const storageKey = "kikiGrammarTextSize";
+        const validSizes = new Set(["small", "standard", "large"]);
+        const textSelector = [
+            "h1", "h2", "h3", "h4", "h5", "h6",
+            "p", "li", "dt", "dd", "th", "td",
+            "figcaption", "blockquote", "label", "summary", "small",
+            "a", "button", "span", "b", "strong", "em", "i", "mark", "time",
+            "input", "select", "textarea"
+        ].join(",");
+
+        function readStoredSize() {
+            try {
+                const stored = window.localStorage.getItem(storageKey);
+                return validSizes.has(stored) ? stored : "standard";
+            } catch (_error) {
+                return "standard";
+            }
+        }
+
+        function writeStoredSize(size) {
+            try {
+                window.localStorage.setItem(storageKey, size);
+            } catch (_error) {
+                // The setting remains active for the current page.
+            }
+        }
+
+        function hasOwnText(element) {
+            if (element.matches("input, select, textarea")) return true;
+            return Array.from(element.childNodes).some((node) =>
+                node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+            );
+        }
+
+        function isDocumentText(element) {
+            if (!(element instanceof HTMLElement)) return false;
+            if (!hasOwnText(element)) return false;
+            if (element.closest(".kiki-unified-header, [data-kiki-header-source-hidden='true'], .kiki-grammar-text-size-control")) return false;
+            return true;
+        }
+
+        function registerTextNodes(root) {
+            if (!(root instanceof Element || root instanceof Document)) return;
+            const candidates = [];
+            if (root instanceof Element && root.matches(textSelector)) candidates.push(root);
+            candidates.push(...root.querySelectorAll(textSelector));
+
+            candidates.forEach((element) => {
+                if (!isDocumentText(element) || element.hasAttribute("data-kiki-grammar-font-node")) return;
+                const fontSize = Number.parseFloat(window.getComputedStyle(element).fontSize);
+                if (!Number.isFinite(fontSize) || fontSize <= 0) return;
+                element.style.setProperty("--kiki-grammar-base-font-size", `${fontSize}px`);
+                element.style.setProperty("--kiki-grammar-small-font-size", `${(fontSize * 0.9).toFixed(2)}px`);
+                element.style.setProperty("--kiki-grammar-large-font-size", `${(fontSize * 1.14).toFixed(2)}px`);
+                element.setAttribute("data-kiki-grammar-font-node", "");
+            });
+        }
+
+        const control = document.createElement("div");
+        control.className = "kiki-grammar-text-size-control";
+        control.dataset.kikiHeaderUtility = "true";
+        control.innerHTML = `
+            <button class="kiki-grammar-text-size-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="kikiGrammarTextSizeDrawer" data-kiki-mobile-label="字号">
+                <span>字号</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"></path></svg>
+            </button>
+            <div class="kiki-grammar-text-size-drawer" id="kikiGrammarTextSizeDrawer" role="group" aria-label="文字大小" hidden>
+                <span>文字大小</span>
+                <div>
+                    <button type="button" data-kiki-grammar-text-size="small" aria-pressed="false">小</button>
+                    <button type="button" data-kiki-grammar-text-size="standard" aria-pressed="true">标准</button>
+                    <button type="button" data-kiki-grammar-text-size="large" aria-pressed="false">大</button>
+                </div>
+            </div>
+        `;
+
+        const toggle = control.querySelector(".kiki-grammar-text-size-toggle");
+        const drawer = control.querySelector(".kiki-grammar-text-size-drawer");
+        const sizeButtons = [...control.querySelectorAll("[data-kiki-grammar-text-size]")];
+
+        function applySize(size, persist = true) {
+            const nextSize = validSizes.has(size) ? size : "standard";
+            document.body.dataset.kikiGrammarTextSize = nextSize;
+            sizeButtons.forEach((button) => {
+                const selected = button.dataset.kikiGrammarTextSize === nextSize;
+                button.classList.toggle("is-active", selected);
+                button.setAttribute("aria-pressed", String(selected));
+            });
+            if (persist) writeStoredSize(nextSize);
+        }
+
+        function setOpen(open, restoreFocus = false) {
+            drawer.hidden = !open;
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.classList.toggle("is-open", open);
+            if (restoreFocus) toggle.focus({ preventScroll: true });
+        }
+
+        toggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            setOpen(drawer.hidden);
+        });
+        drawer.addEventListener("click", (event) => event.stopPropagation());
+        sizeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applySize(button.dataset.kikiGrammarTextSize);
+                setOpen(false, true);
+            });
+        });
+        document.addEventListener("click", () => {
+            if (!drawer.hidden) setOpen(false);
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !drawer.hidden) setOpen(false, true);
+        });
+
+        rightSlot.appendChild(control);
+        document.querySelectorAll("main, [role='main']").forEach(registerTextNodes);
+        if (!document.querySelector("main, [role='main']")) registerTextNodes(document.body);
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node instanceof Element) registerTextNodes(node);
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        applySize(readStoredSize(), false);
     }
 
     function shouldHideSource(source) {
@@ -344,8 +639,12 @@
         const existingBack = findBackElement(source);
         const actionContainer = findActionContainer(source);
         keepOnlyGrammarPracticeActions(actionContainer, path);
+        removeListeningLegacyActions(actionContainer, path);
         const header = document.createElement("header");
         header.className = `kiki-unified-header kiki-unified-header--${config.type}`;
+        if (path.startsWith("exam/listening/")) {
+            header.classList.add("kiki-unified-header--listening");
+        }
         header.setAttribute("data-kiki-unified-header", config.type);
 
         const left = document.createElement("div");
@@ -374,6 +673,7 @@
             prepareActionLabels(actionContainer);
             right.appendChild(actionContainer);
         }
+        setupGrammarTextSizeControl(path, right);
 
         header.append(left, title, right);
 

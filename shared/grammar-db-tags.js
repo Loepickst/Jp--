@@ -5,7 +5,7 @@
     "id": "n1-001",
     "macro": null,
     "category": null,
-    "keyword": "起点 契机 扩展",
+    "keyword": "起点 首项 第一项 连续 接连 同类 展开 扩展",
     "firstKana": "を",
     "sourceMacro": null,
     "sourceCategory": null,
@@ -3373,12 +3373,12 @@
   },
   {
     "id": "n3-003",
-    "macro": "传闻与引用",
-    "category": "传闻・解释",
-    "keyword": "传闻或解释说明",
+    "macro": "主张与评价",
+    "category": "总结・解释",
+    "keyword": "总结并换言说明",
     "firstKana": "と",
-    "sourceMacro": "传闻与说明",
-    "sourceCategory": "传闻・解释",
+    "sourceMacro": "主张与评价",
+    "sourceCategory": "总结・解释",
     "legacy": {
       "tryCenterId": 3003,
       "searchId": 3003
@@ -5788,6 +5788,18 @@
     }
   },
   {
+    "id": "supp-n1-review-081",
+    "macro": "时间与顺序",
+    "category": "作为界线发生前后变化",
+    "keyword": "以……为界；从……起",
+    "firstKana": "を",
+    "sourceMacro": "时间与顺序",
+    "sourceCategory": "作为界线发生前后变化",
+    "legacy": {
+      "searchId": 4086
+    }
+  },
+  {
     "id": "supp-formal-noun-001",
     "macro": "逆接与让步",
     "category": "表面印象与实际不同",
@@ -5809,6 +5821,330 @@
     "sourceCategory": "任凭或依照前项行事",
     "legacy": {
       "searchId": 4085
+    }
+  },
+  {
+    "id": "mainichi-n0-002",
+    "macro": "条件与假定",
+    "category": "以前项存在为既定前提",
+    "keyword": "以……为前提",
+    "firstKana": "あ",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "以前项存在为既定前提",
+    "legacy": {
+      "searchId": 4087
+    }
+  },
+  {
+    "id": "mainichi-n0-003",
+    "macro": "时间与顺序",
+    "category": "夙愿实现后的安排",
+    "keyword": "一旦夙愿实现；到了……的那一天",
+    "firstKana": "あ",
+    "sourceMacro": "时间与顺序",
+    "sourceCategory": "夙愿实现后的安排",
+    "legacy": {
+      "searchId": 4088
+    }
+  },
+  {
+    "id": "mainichi-n0-010",
+    "macro": "条件与假定",
+    "category": "反事实地更换情境或对象",
+    "keyword": "要是换一个……；如果碰上别的……",
+    "firstKana": "が",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "反事实地更换情境或对象",
+    "legacy": {
+      "searchId": 4089
+    }
+  },
+  {
+    "id": "mainichi-n0-011",
+    "macro": "主张与评价",
+    "category": "并列批评关系密切的双方",
+    "keyword": "……和……都不怎么样；双方都有问题",
+    "firstKana": "が",
+    "sourceMacro": "主张与评价",
+    "sourceCategory": "并列批评关系密切的双方",
+    "legacy": {
+      "searchId": 4090
+    }
+  },
+  {
+    "id": "mainichi-n0-012",
+    "macro": "指示与忠告",
+    "category": "强硬放任或命令",
+    "keyword": "随你……吧；尽管……吧",
+    "firstKana": "が",
+    "sourceMacro": "指示与忠告",
+    "sourceCategory": "强硬放任或命令",
+    "legacy": {
+      "searchId": 4091
+    }
+  },
+  {
+    "id": "mainichi-n0-013",
+    "macro": "状态与结果",
+    "category": "负面气味、特征或迹象",
+    "keyword": "带有……的气味或感觉；显得……",
+    "firstKana": "く",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "负面气味、特征或迹象",
+    "legacy": {
+      "searchId": 4092
+    }
+  },
+  {
+    "id": "mainichi-n1-001",
+    "macro": "主张与评价",
+    "category": "强调唯一准确的性质或结论",
+    "keyword": "不是别的，正是……；无非就是……",
+    "firstKana": "い",
+    "sourceMacro": "主张与评价",
+    "sourceCategory": "强调唯一准确的性质或结论",
+    "legacy": {
+      "searchId": 4093
+    }
+  },
+  {
+    "id": "mainichi-n1-002",
+    "macro": "主张与评价",
+    "category": "不该明说或无须明说",
+    "keyword": "不该说的；自不必说",
+    "firstKana": "い",
+    "sourceMacro": "主张与评价",
+    "sourceCategory": "不该明说或无须明说",
+    "legacy": {
+      "searchId": 4094
+    }
+  },
+  {
+    "id": "mainichi-n1-003",
+    "macro": "条件与假定",
+    "category": "不论选项如何结论不变",
+    "keyword": "无论怎样；总之；反正",
+    "firstKana": "い",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "不论选项如何结论不变",
+    "legacy": {
+      "searchId": 4095
+    }
+  },
+  {
+    "id": "mainichi-n1-004",
+    "macro": "主张与评价",
+    "category": "避免把不同情况笼统一概而论",
+    "keyword": "不能一概而论；不能笼统地……",
+    "firstKana": "い",
+    "sourceMacro": "主张与评价",
+    "sourceCategory": "避免把不同情况笼统一概而论",
+    "legacy": {
+      "searchId": 4096
+    }
+  },
+  {
+    "id": "mainichi-n1-005",
+    "macro": "状态与结果",
+    "category": "距离理想状态略有欠缺",
+    "keyword": "还差一点；不太令人满意",
+    "firstKana": "い",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "距离理想状态略有欠缺",
+    "legacy": {
+      "searchId": 4097
+    }
+  },
+  {
+    "id": "mainichi-n1-006",
+    "macro": "限定与程度",
+    "category": "未达到可归入某类的程度",
+    "keyword": "算不上……；还不能算作……",
+    "firstKana": "う",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "未达到可归入某类的程度",
+    "legacy": {
+      "searchId": 4098
+    }
+  },
+  {
+    "id": "mainichi-n1-007",
+    "macro": "条件与假定",
+    "category": "相反两端均不改变结论",
+    "keyword": "不论……还是……；或多或少",
+    "firstKana": "か",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "相反两端均不改变结论",
+    "legacy": {
+      "searchId": 4099
+    }
+  },
+  {
+    "id": "mainichi-n1-008",
+    "macro": "条件与假定",
+    "category": "正式提出成立与否的二选一问题",
+    "keyword": "是否……",
+    "firstKana": "か",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "正式提出成立与否的二选一问题",
+    "legacy": {
+      "searchId": 4100
+    }
+  },
+  {
+    "id": "mainichi-n1-009",
+    "macro": "状态与结果",
+    "category": "带有令人不快或强加于人的作风",
+    "keyword": "带有……作风；显得……",
+    "firstKana": "が",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "带有令人不快或强加于人的作风",
+    "legacy": {
+      "searchId": 4101
+    }
+  },
+  {
+    "id": "mainichi-n1-014",
+    "macro": "限定与程度",
+    "category": "达到无法再提高的极限程度",
+    "keyword": "极其……；无比……；……至极",
+    "firstKana": "こ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "达到无法再提高的极限程度",
+    "legacy": {
+      "searchId": 4102
+    }
+  },
+  {
+    "id": "mainichi-n1-015",
+    "macro": "指示与忠告",
+    "category": "为避免问题发生而采取措施",
+    "keyword": "为了不发生……；以免……",
+    "firstKana": "こ",
+    "sourceMacro": "指示与忠告",
+    "sourceCategory": "为避免问题发生而采取措施",
+    "legacy": {
+      "searchId": 4103
+    }
+  },
+  {
+    "id": "mainichi-n1-016",
+    "macro": "原因与理由",
+    "category": "列举多个原因中的一个背景因素",
+    "keyword": "也因为……；加之……",
+    "firstKana": "こ",
+    "sourceMacro": "原因与理由",
+    "sourceCategory": "列举多个原因中的一个背景因素",
+    "legacy": {
+      "searchId": 4104
+    }
+  },
+  {
+    "id": "mainichi-n1-017",
+    "macro": "否定",
+    "category": "没有特别突出或值得指出的事项",
+    "keyword": "没有什么特别值得一提的……",
+    "firstKana": "こ",
+    "sourceMacro": "否定",
+    "sourceCategory": "没有特别突出或值得指出的事项",
+    "legacy": {
+      "searchId": 4105
+    }
+  },
+  {
+    "id": "mainichi-n1-018",
+    "macro": "可能性",
+    "category": "缺少实现行动的方法或手段",
+    "keyword": "没有办法……；无从……",
+    "firstKana": "す",
+    "sourceMacro": "可能性",
+    "sourceCategory": "缺少实现行动的方法或手段",
+    "legacy": {
+      "searchId": 4106
+    }
+  },
+  {
+    "id": "mainichi-n1-019",
+    "macro": "状态与结果",
+    "category": "事情结束时仍未实现原定行动",
+    "keyword": "最终没能……；到头来也没有……",
+    "firstKana": "す",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "事情结束时仍未实现原定行动",
+    "legacy": {
+      "searchId": 4107
+    }
+  },
+  {
+    "id": "mainichi-n1-020",
+    "macro": "状态与结果",
+    "category": "因错过时机而没能行动",
+    "keyword": "错过机会，没能……",
+    "firstKana": "そ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "因错过时机而没能行动",
+    "legacy": {
+      "searchId": 4108
+    }
+  },
+  {
+    "id": "mainichi-n1-021",
+    "macro": "状态与结果",
+    "category": "因失误或处理不当而执行失败",
+    "keyword": "没能……；把……做失败了",
+    "firstKana": "そ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "因失误或处理不当而执行失败",
+    "legacy": {
+      "searchId": 4109
+    }
+  },
+  {
+    "id": "mainichi-n2-046",
+    "macro": "依据与视角",
+    "category": "所知・信息范围",
+    "keyword": "据……所知；在所见、所闻或调查所得的范围内",
+    "firstKana": "か",
+    "sourceMacro": "依据与视角",
+    "sourceCategory": "所知・信息范围",
+    "legacy": {
+      "searchId": 4113
+    }
+  },
+  {
+    "id": "mainichi-n3-019",
+    "macro": "逆接与让步",
+    "category": "先承认前项再补充相反限制",
+    "keyword": "确实……，不过……；虽说……",
+    "firstKana": "く",
+    "sourceMacro": "逆接与让步",
+    "sourceCategory": "先承认前项再补充相反限制",
+    "legacy": {
+      "searchId": 4110
+    }
+  },
+  {
+    "id": "mainichi-n3-020",
+    "macro": "情感与决心",
+    "category": "决定者基于自身意志作出选择",
+    "keyword": "决定……；决定不……",
+    "firstKana": "こ",
+    "sourceMacro": "情感与决心",
+    "sourceCategory": "决定者基于自身意志作出选择",
+    "legacy": {
+      "searchId": 4111
+    }
+  },
+  {
+    "id": "mainichi-n3-021",
+    "macro": "状态与结果",
+    "category": "由外部决定或客观条件形成安排",
+    "keyword": "决定为……；结果要……",
+    "firstKana": "こ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "由外部决定或客观条件形成安排",
+    "legacy": {
+      "searchId": 4112
     }
   }
 ];

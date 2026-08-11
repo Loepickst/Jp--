@@ -314,6 +314,11 @@
             buttons.forEach((button) => {
                 button.classList.toggle("is-active", active);
                 button.setAttribute("aria-pressed", String(active));
+                const accessibleLabel = active
+                    ? "お気に入りを解除"
+                    : (button.getAttribute("data-default-label") || "お気に入りに追加");
+                button.setAttribute("aria-label", accessibleLabel);
+                button.title = accessibleLabel;
                 const label = button.querySelector("[data-label]");
                 if (label) label.textContent = active ? "保存済み" : (button.getAttribute("data-default-label") || "お気に入りに追加");
             });

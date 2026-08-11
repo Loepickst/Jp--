@@ -321,14 +321,12 @@
         }
         if (/(^|[^a-z0-9])n1([^a-z0-9]|$)/.test(text)
             || text.includes('textbook_n1')
-            || text.includes('try-n1')
-            || text.includes('text_1.html')) {
+            || text.includes('try-n1')) {
             return 'N1';
         }
         if (/(^|[^a-z0-9])n2([^a-z0-9]|$)/.test(text)
             || text.includes('textbook_n2')
-            || text.includes('try-n2')
-            || text.includes('text_2.html')) {
+            || text.includes('try-n2')) {
             return 'N2';
         }
         if (/(^|[^a-z0-9])n3([^a-z0-9]|$)/.test(text)) {

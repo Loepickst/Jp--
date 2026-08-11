@@ -4,12 +4,9 @@
         "daily/light-read/index.html": "#daily/daily-light-read",
         "daily/light-read/daily/read_daily.html": "#daily/daily-light-read",
         "daily/light-read/folklore/read_folklore.html": "#daily/daily-light-read",
-        "exam/textbook/index.html": "#daily/exam-textbook",
-        "exam/textbook/n1_menu.html": "#daily/exam-textbook/textbook-try-n1",
-        "exam/textbook/n2_menu.html": "#daily/exam-textbook/textbook-try-n2",
         "exam/vocabulary/index.html": "#exam/exam-vocabulary",
-        "exam/vocabulary/n1/index.html": "#exam/exam-vocabulary/exam-vocabulary-n1",
-        "exam/vocabulary/n2/index.html": "#exam/exam-vocabulary/exam-vocabulary-n2",
+        "exam/vocabulary/n1/index.html": "#exam/exam-vocabulary",
+        "exam/vocabulary/n2/index.html": "#exam/exam-vocabulary",
         "exam/grammar/index.html": "#exam/exam-grammar",
         "exam/jlpt-reading/index.html": "#exam/exam-reading",
         "exam/listening/index.html": "#exam/exam-listening",
@@ -98,11 +95,11 @@
         }
 
         if (/^exam\/vocabulary\/n1\/(?!index\.html)[^/]+\.html$/.test(path)) {
-            return "#exam/exam-vocabulary/exam-vocabulary-n1";
+            return "#exam/exam-vocabulary";
         }
 
         if (/^exam\/vocabulary\/n2\/(?!index\.html)[^/]+\.html$/.test(path)) {
-            return "#exam/exam-vocabulary/exam-vocabulary-n2";
+            return "#exam/exam-vocabulary";
         }
 
         if (/^exam\/grammar\/复合格助词\.html$/.test(path)) {

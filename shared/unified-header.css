@@ -40,6 +40,14 @@ body.kiki-unified-header-enabled {
     letter-spacing: 0;
 }
 
+/* 听力目录与练习共用纯白顶栏，避免旧页面的半透明/暖白覆盖造成跳色。 */
+.kiki-unified-header.kiki-unified-header--listening {
+    --kiki-header-bg: #ffffff;
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 .kiki-unified-header-left,
 .kiki-unified-header-right {
     display: flex;
@@ -63,8 +71,8 @@ body.kiki-unified-header-enabled {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 62px;
-    height: 34px;
+    width: 96px;
+    height: 44px;
     flex: none;
     color: inherit;
     text-decoration: none;
@@ -145,6 +153,12 @@ body.kiki-unified-header-enabled {
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.kiki-unified-back-label {
+    display: block;
+    flex: none;
+    white-space: nowrap;
 }
 
 .kiki-unified-back-label-mobile {
@@ -230,6 +244,12 @@ body:is(.daily-reading-page, .folklore-reading-page, .reading-list-page) .kiki-u
     transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease !important;
 }
 
+/* Dynamic page controls must remain hideable after they are moved into the unified header. */
+.kiki-unified-header-right > *[hidden],
+.kiki-unified-header-right [hidden] {
+    display: none !important;
+}
+
 .kiki-unified-header-right a:hover,
 .kiki-unified-header-right button:hover,
 .kiki-unified-header-right .nav-item:hover,
@@ -237,6 +257,89 @@ body:is(.daily-reading-page, .folklore-reading-page, .reading-list-page) .kiki-u
     border-color: rgba(111, 138, 85, 0.38) !important;
     background: var(--kiki-header-primary-soft) !important;
     color: #465d39 !important;
+}
+
+.kiki-unified-header-right > .kiki-grammar-text-size-control {
+    position: relative !important;
+    display: block !important;
+    overflow: visible !important;
+}
+
+.kiki-grammar-text-size-toggle svg {
+    transition: transform 160ms ease;
+}
+
+.kiki-grammar-text-size-toggle.is-open svg {
+    transform: rotate(180deg);
+}
+
+.kiki-unified-header-right .kiki-grammar-text-size-drawer {
+    position: absolute !important;
+    z-index: 1200;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    display: block !important;
+    width: 224px !important;
+    height: auto !important;
+    padding: 14px !important;
+    border: 1px solid #d7d4cb !important;
+    border-radius: 6px !important;
+    background: #fffefa !important;
+    box-shadow: 0 14px 34px rgba(43, 50, 46, 0.14) !important;
+}
+
+.kiki-unified-header-right .kiki-grammar-text-size-drawer[hidden] {
+    display: none !important;
+}
+
+.kiki-grammar-text-size-drawer > span {
+    display: block;
+    margin: 0 0 9px;
+    color: var(--kiki-header-muted);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.kiki-grammar-text-size-drawer > div {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 !important;
+    overflow: hidden;
+    border: 1px solid var(--kiki-header-border) !important;
+    border-radius: 5px;
+}
+
+.kiki-unified-header-right .kiki-grammar-text-size-drawer button {
+    position: static !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 8px !important;
+    border: 0 !important;
+    border-right: 1px solid var(--kiki-header-border) !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: var(--kiki-header-muted) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+}
+
+.kiki-unified-header-right .kiki-grammar-text-size-drawer button:last-child {
+    border-right: 0 !important;
+}
+
+.kiki-unified-header-right .kiki-grammar-text-size-drawer button:is(.is-active, [aria-pressed="true"]) {
+    background: var(--kiki-header-primary-soft) !important;
+    color: #465d39 !important;
+}
+
+body[data-kiki-grammar-text-size="small"] [data-kiki-grammar-font-node] {
+    font-size: var(--kiki-grammar-small-font-size) !important;
+}
+
+body[data-kiki-grammar-text-size="large"] [data-kiki-grammar-font-node] {
+    font-size: var(--kiki-grammar-large-font-size) !important;
 }
 
 .kiki-unified-header-right svg {
@@ -369,6 +472,14 @@ body.folklore-reading-page .kiki-unified-header-right .reading-font-controls but
         overflow: hidden;
     }
 
+    body:is(.daily-reading-page:not(.reading-list-page), .folklore-reading-page) .kiki-unified-header-right {
+        overflow: visible !important;
+    }
+
+    body[data-kiki-grammar-text-size] .kiki-unified-header-right {
+        overflow: visible !important;
+    }
+
     .kiki-unified-header-right > * {
         gap: 4px !important;
     }
@@ -403,6 +514,20 @@ body.folklore-reading-page .kiki-unified-header-right .reading-font-controls but
         line-height: 1;
     }
 
+    /* Reading controls use their own icons and must not inherit compact text labels. */
+    .kiki-unified-header .kiki-unified-header-right [data-reading-action="favorite"][data-kiki-mobile-label] {
+        font-size: inherit !important;
+    }
+
+    .kiki-unified-header .kiki-unified-header-right [data-reading-action="favorite"][data-kiki-mobile-label]::before {
+        content: none !important;
+        display: none !important;
+    }
+
+    .kiki-unified-header .kiki-unified-header-right [data-reading-action="favorite"][data-kiki-mobile-label] > svg {
+        display: block !important;
+    }
+
     .kiki-unified-header-right a svg,
     .kiki-unified-header-right button svg {
         width: 16px;
@@ -413,6 +538,10 @@ body.folklore-reading-page .kiki-unified-header-right .reading-font-controls but
     .kiki-unified-header-right .header-progress,
     .kiki-unified-header-right [data-header-progress] {
         display: none !important;
+    }
+
+    .kiki-unified-header-right .kiki-grammar-text-size-drawer {
+        width: min(224px, calc(100vw - 20px)) !important;
     }
 
     .kiki-unified-header-right [data-reading-action="favorite"],

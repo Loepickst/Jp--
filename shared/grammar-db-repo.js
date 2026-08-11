@@ -3,7 +3,7 @@
 
   const core = Array.isArray(window.GrammarDB.core) ? window.GrammarDB.core : [];
   const tags = Array.isArray(window.GrammarDB.tags) ? window.GrammarDB.tags : [];
-  const resources = window.GrammarDB.resources || { comparisonNotes: {}, extraExamples: {} };
+  const resources = window.GrammarDB.resources || { extraExamples: {} };
   const collections = window.GrammarDB.collections || { specialCollections: [], similarityGroups: [] };
   const legacyTryView = Array.isArray(window.GrammarDB.legacyTryView) ? window.GrammarDB.legacyTryView : [];
 
@@ -157,7 +157,6 @@
       related: (item.related || [])
         .map((relatedId) => resolveSearchIdFromCanonicalId(relatedId))
         .filter((relatedId) => relatedId != null),
-      compareWith: clone(legacy.compareWith || []),
       lessonNumber: item.lessonNumber,
       sourceId: legacy.sourceId != null ? legacy.sourceId : legacy.sourceNumericId,
       macro: item.macro ?? null,
@@ -166,7 +165,8 @@
       firstKana: item.firstKana ?? null,
       sourceMacro: item.sourceMacro ?? null,
       sourceCategory: item.sourceCategory ?? null,
-      sourcePage: legacy.sourcePage || null
+      sourcePage: legacy.sourcePage || null,
+      learningSources: clone(item.learningSources || [])
     };
   }
 
@@ -203,10 +203,6 @@
 
     getSearchDataset(filters) {
       return clone(core.map(enrichGrammar).filter((item) => matchesFilter(item, filters)).map(toSearchItem));
-    },
-
-    getComparisonNotes() {
-      return clone(resources.comparisonNotes || {});
     },
 
     getExtraExamples() {

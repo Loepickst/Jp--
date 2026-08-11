@@ -2893,9 +2893,9 @@
             return [];
         }
 
-        let rawHref = 'designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=1';
+        let rawHref = 'daily/try-n1/lesson-content-redesign.html?lesson=1';
         if (lastRoute.startsWith('lesson:')) {
-            rawHref = `designs/try-n1-content-redesign/lesson-content-redesign.html?lesson=${encodeURIComponent(lastRoute.split(':')[1] || '1')}`;
+            rawHref = `daily/try-n1/lesson-content-redesign.html?lesson=${encodeURIComponent(lastRoute.split(':')[1] || '1')}`;
         }
 
         return [{
