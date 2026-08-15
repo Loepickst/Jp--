@@ -5800,6 +5800,42 @@
     }
   },
   {
+    "id": "supp-n1-review-082",
+    "macro": "限定与程度",
+    "category": "评价不足以表达实际程度",
+    "keyword": "岂止是……；远不是……所能形容",
+    "firstKana": "な",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "评价不足以表达实际程度",
+    "legacy": {
+      "searchId": 4114
+    }
+  },
+  {
+    "id": "supp-n1-review-083",
+    "macro": "比较与伴随",
+    "category": "差距悬殊而无法相提并论",
+    "keyword": "与……无法相提并论；远非……可比",
+    "firstKana": "と",
+    "sourceMacro": "比较与伴随",
+    "sourceCategory": "差距悬殊而无法相提并论",
+    "legacy": {
+      "searchId": 4115
+    }
+  },
+  {
+    "id": "supp-n2-review-001",
+    "macro": "对象与关联",
+    "category": "强调移动或变化的方向",
+    "keyword": "向着……；朝……方向或状态发展",
+    "firstKana": "へ",
+    "sourceMacro": "对象与关联",
+    "sourceCategory": "强调移动或变化的方向",
+    "legacy": {
+      "searchId": 4116
+    }
+  },
+  {
     "id": "supp-formal-noun-001",
     "macro": "逆接与让步",
     "category": "表面印象与实际不同",

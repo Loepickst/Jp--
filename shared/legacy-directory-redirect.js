@@ -13,8 +13,7 @@
         "exam/listening/task-comprehension/index.html": "#exam/exam-listening/exam-listening-task",
         "exam/listening/point-comprehension/index.html": "#exam/exam-listening/exam-listening-point",
         "exam/listening/summary-comprehension/index.html": "#exam/exam-listening/exam-listening-summary",
-        "exam/listening/immediate-response/index.html": "#exam/exam-listening/exam-listening-response",
-        "exam/jlpt-reading/index.html": "#exam/exam-reading"
+        "exam/listening/immediate-response/index.html": "#exam/exam-listening/exam-listening-response"
     };
 
     function getProjectRelativePath() {

@@ -2397,7 +2397,8 @@
     "related": [
       "n1-072",
       "n1-120",
-      "mainichi-n1-014"
+      "mainichi-n1-014",
+      "supp-n1-review-082"
     ],
     "kana": "といったらない",
     "romaji": "toittaranai",
@@ -5197,7 +5198,9 @@
         "cn": "和哥哥相比，弟弟很用功学习。"
       }
     ],
-    "related": [],
+    "related": [
+      "supp-n1-review-083"
+    ],
     "kana": "にくらべて",
     "romaji": "nikurabete",
     "legacy": {
@@ -13728,6 +13731,151 @@
       "compareWith": [],
       "sourcePage": "user-request",
       "sourceId": 81
+    }
+  },
+  {
+    "id": "supp-n1-review-082",
+    "level": "N1",
+    "bookKey": "n1-review-supplement",
+    "bookLabel": "其他",
+    "lesson": "N1语法复习补充",
+    "lessonNumber": 1,
+    "title": "～なんてもんじゃない／なんてものではない",
+    "meaning": "岂止是……；远不是……所能形容",
+    "connection": "普通形（※ナ形容词・名词省略「だ」）＋なんてものではない／なんてもんじゃない",
+    "desc": "先用前项作出评价，再以否定形式指出<b>这一说法远不足以概括实际程度</b>，表示真实情况比前项所说的<b>强烈、严重或出色得多</b>，相当于“岂止是……”“远不是……所能形容”。这里并不是否定前项评价本身，而是强调<b>该评价说得太轻</b>，正面与负面评价均可使用。",
+    "examples": [
+      {
+        "jp": "<b>そして<ruby>共<rt>きょう</rt></ruby><ruby>演<rt>えん</rt></ruby><ruby>中<rt>ちゅう</rt></ruby>の<ruby>黒<rt>くろ</rt></ruby><ruby>木<rt>き</rt></ruby>については「<ruby>凄<rt>すご</rt></ruby>い<span style='color:#d64045'>なんてもんじゃない</span>」と<ruby>絶<rt>ぜっ</rt></ruby><ruby>賛<rt>さん</rt></ruby>。</b>",
+        "cn": "而谈到共同出演的黑木时，她盛赞道：“远不是‘厉害’两个字能够形容的。”",
+        "source": {
+          "original": "そして共演中の黒木については「凄いなんてもんじゃない」と絶賛。",
+          "name": "Sponichi Annex「野呂佳代『凄いなんてもんじゃない』」",
+          "url": "https://www.sponichi.co.jp/entertainment/news/2026/05/18/articles/20260518s00041000152000c.html",
+          "type": "新闻",
+          "accessedAt": "2026-08-12"
+        }
+      },
+      {
+        "jp": "<b>ディズニーランドを<ruby>貸<rt>か</rt></ruby>し<ruby>切<rt>き</rt></ruby>りにできたら、<ruby>楽<rt>たの</rt></ruby>しい<span style='color:#d64045'>なんてものじゃないだろう</span>。</b>",
+        "cn": "如果能把迪士尼乐园整个包下来，那可远不只是“开心”而已吧。",
+        "source": {
+          "original": "ディズニーランドを貸し切りにできたら、楽しいなんてものじゃないだろう。",
+          "name": "言語処理学会第28回年次大会「ナンテのアノテーションとガイドライン」",
+          "url": "https://www.anlp.jp/proceedings/annual_meeting/2022/pdf_dir/PH1-2.pdf",
+          "type": "语言学研究论文",
+          "accessedAt": "2026-08-12"
+        }
+      }
+    ],
+    "related": [
+      "n1-085"
+    ],
+    "kana": "なんてもんじゃない／なんてものではない",
+    "romaji": "nante mon janai / nante mono dewa nai",
+    "legacy": {
+      "searchId": 4114,
+      "sourceNumericId": 82,
+      "searchTags": "～なんてもんじゃない ～なんてものじゃない ～なんてものではない なんてもんじゃない なんてものじゃない なんてものではない なんてもんじゃなかった なんてものではなかった なんてもんじゃありません なんてものではありません nante mon janai nante mono janai nante mono dewa nai 岂止是 远不只是 不足以形容 程度更强 说得太轻 强烈程度 口语强调",
+      "compareWith": [],
+      "sourcePage": "user-request",
+      "sourceId": 82
+    }
+  },
+  {
+    "id": "supp-n1-review-083",
+    "level": "N1",
+    "bookKey": "n1-review-supplement",
+    "bookLabel": "其他",
+    "lesson": "N1语法复习补充",
+    "lessonNumber": 1,
+    "title": "～とは比べものにならない／とは比べ物にならない",
+    "meaning": "与……无法相提并论；远非……可比",
+    "connection": "名词＋とは比べものにならない／とは比べ物にならない",
+    "desc": "以「とは」前的名词为比较基准，表示两者在数量、程度、性质或能力上的差距<b>大到无法放在同一层次比较</b>。既可用于一方明显优于另一方，也可表示两者只是<b>差异悬殊</b>；究竟哪一方更高，需要结合句意或后续评价判断。句末可以直接断定，也可后接「ほど／くらい」进一步说明差距的具体方向或程度。",
+    "examples": [
+      {
+        "jp": "<b><ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>の<ruby>生<rt>う</rt></ruby>み<ruby>出<rt>だ</rt></ruby>した<ruby>音<rt>おん</rt></ruby><ruby>楽<rt>がく</rt></ruby>は、<ruby>動<rt>どう</rt></ruby><ruby>物<rt>ぶつ</rt></ruby>たちの<ruby>囀<rt>さえず</rt></ruby>り<span style='color:#d64045'>とは、<ruby>比<rt>くら</rt></ruby>べものにならない</span>。</b>",
+        "cn": "人类创造的音乐，远非动物的鸣啭所能相比。",
+        "source": {
+          "original": "人間の生み出した音楽は、動物たちの囀りとは、比べものにならない。",
+          "name": "宮崎学園短期大学紀要「プロセス神学の思想」",
+          "url": "https://www.mgjc.ac.jp/burger_editor/burger_editor/dl/15__MDM-d-.pdf",
+          "type": "大学学术论文",
+          "accessedAt": "2026-08-13"
+        }
+      },
+      {
+        "jp": "<b><ruby>子<rt>こ</rt></ruby><ruby>供<rt>ども</rt></ruby>のころ、<ruby>今<rt>いま</rt></ruby><span style='color:#d64045'>とは<ruby>比<rt>くら</rt></ruby>べ<ruby>物<rt>もの</rt></ruby>にならないほど</span>の<ruby>農<rt>のう</rt></ruby><ruby>薬<rt>やく</rt></ruby>をまいていた。</b>",
+        "cn": "小时候喷洒的农药量大得与现在根本无法相比。",
+        "source": {
+          "original": "子供のころ、今とは比べ物にならないほどの農薬をまいていた。",
+          "name": "内閣府食品安全委員会事務局「食品の安全性に係るリスクコミュニケーション等に関する調査」",
+          "url": "https://www.fsc.go.jp/fsciis/attachedFile/download?fileId=001&retrievalId=cho20090020001",
+          "type": "政府调查报告",
+          "accessedAt": "2026-08-13"
+        }
+      }
+    ],
+    "related": [
+      "n2-181"
+    ],
+    "kana": "とはくらべものにならない",
+    "romaji": "to wa kurabemono ni naranai",
+    "legacy": {
+      "searchId": 4115,
+      "sourceNumericId": 83,
+      "searchTags": "～とは比べものにならない ～とは比べ物にならない とは比べものにならない とは比べ物にならない とはくらべものにならない ～とは比べものになりません ～とは比べ物になりません ～とは比べものにならないほど ～とは比べ物にならないほど to wa kurabemono ni naranai towa kurabemono ni naranai 与……无法相提并论 无法相比 不能相比 远非……可比 相差悬殊 差距很大 比不上 不可同日而语 比较 程度",
+      "compareWith": [],
+      "sourcePage": "user-request",
+      "sourceId": 83
+    }
+  },
+  {
+    "id": "supp-n2-review-001",
+    "level": "N2",
+    "bookKey": "n2-review-supplement",
+    "bookLabel": "其他",
+    "lesson": "N2语法补充",
+    "lessonNumber": 1,
+    "title": "～へと",
+    "meaning": "向着……；朝……方向或状态发展",
+    "connection": "名词＋へと＋表示移动、变化或发展的动词",
+    "desc": "表示人或事物<b>朝某个地点、方向或状态移动、发展</b>。与「へ」相比，「へと」更强调<b>明确的方向和变化过程</b>，较常用于书面表达。<br><b>常见搭配：</b>「～へと向かう／進む」（向……前进）、「～へと広がる／つながる」（扩展、通向……）、「～へと発展する／変化する」（发展、转变为……）。",
+    "examples": [
+      {
+        "jp": "<b><ruby>限<rt>げん</rt></ruby><ruby>界<rt>かい</rt></ruby>まで<ruby>手<rt>て</rt></ruby>を<ruby>入<rt>い</rt></ruby>れ、いよいよ<ruby>学<rt>がく</rt></ruby><ruby>生<rt>せい</rt></ruby>たちは、<ruby>完<rt>かん</rt></ruby><ruby>成<rt>せい</rt></ruby>した<ruby>機<rt>き</rt></ruby><ruby>体<rt>たい</rt></ruby>とともに<ruby>琵<rt>び</rt></ruby><ruby>琶<rt>わ</rt></ruby><ruby>湖<rt>こ</rt></ruby><span style='color:#d64045'>へと</span><ruby>向<rt>む</rt></ruby>かった。</b>",
+        "cn": "在把机体调整到极限之后，学生们终于带着完成的机体前往琵琶湖。",
+        "source": {
+          "original": "限界まで手を入れ、いよいよ学生たちは、完成した機体とともに琵琶湖へと向かった。",
+          "name": "大阪大学「幾多の壁を越えつかんだ 鳥人間コンテスト初優勝！」",
+          "url": "https://www.osaka-u.ac.jp/ja/news/storyz/storyz_campuslife/nl94_student_01",
+          "type": "大学官方网站",
+          "accessedAt": "2026-08-14"
+        }
+      },
+      {
+        "jp": "<b>メキシコ<ruby>国<rt>こく</rt></ruby><ruby>内<rt>ない</rt></ruby>で<ruby>培<rt>つちか</rt></ruby>われた<ruby>知<rt>ち</rt></ruby><ruby>見<rt>けん</rt></ruby>を<ruby>中<rt>ちゅう</rt></ruby><ruby>南<rt>なん</rt></ruby><ruby>米<rt>べい</rt></ruby><ruby>地<rt>ち</rt></ruby><ruby>域<rt>いき</rt></ruby>や<ruby>世<rt>せ</rt></ruby><ruby>界<rt>かい</rt></ruby><span style='color:#d64045'>へと</span><ruby>広<rt>ひろ</rt></ruby>げていくことを<ruby>目<rt>め</rt></ruby><ruby>指<rt>ざ</rt></ruby>しています。</b>",
+        "cn": "我们的目标是把在墨西哥国内积累的知识推广至中南美地区乃至全世界。",
+        "source": {
+          "original": "メキシコ国内で培われた知見を中南米地域や世界へと広げていくことを目指しています。",
+          "name": "国際協力機構メキシコ事務所「所長あいさつ」",
+          "url": "https://www.jica.go.jp/overseas/mexico/office/about/greeting.html",
+          "type": "政府系机构",
+          "accessedAt": "2026-08-14"
+        }
+      }
+    ],
+    "related": [],
+    "kana": "へと",
+    "romaji": "e to",
+    "legacy": {
+      "searchId": 4116,
+      "sourceNumericId": 1,
+      "searchTags": "～へと へと e to eto heto 向着…… 朝……方向 朝……发展 到……去 向……移动 方向 目的地 归着点 变化 发展 扩展 推进 过程感 书面表达",
+      "compareWith": [],
+      "sourcePage": "user-request",
+      "sourceId": 1
     }
   },
   {

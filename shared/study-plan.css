@@ -1,0 +1,1177 @@
+.study-plan-embedded {
+    --plan-paper: #fffdf9;
+    --plan-panel: #f7f0e9;
+    --plan-line: #e7ddd4;
+    --plan-line-strong: #dacbc0;
+    --plan-ink: #3d332e;
+    --plan-muted: #8d7e73;
+    --plan-maple: #b6343a;
+    --plan-maple-dark: #8f242b;
+    --plan-maple-soft: #f8dfd9;
+    --plan-vocabulary: #b65355;
+    --plan-vocabulary-soft: #f8dfd9;
+    --plan-grammar: #b68a4a;
+    --plan-grammar-soft: #f1e7d7;
+    --plan-reading: #4f7d7b;
+    --plan-reading-soft: #e5eeed;
+    --plan-listening: #587a98;
+    --plan-listening-soft: #e8edf4;
+    --plan-test: #756179;
+    --plan-test-soft: #eee7f1;
+    --plan-success: #5f8370;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: 18px 18px 32px;
+    color: var(--plan-ink);
+    font-family: var(--font-ui, "Noto Sans SC", sans-serif);
+}
+
+.study-plan-embedded button,
+.study-plan-embedded select {
+    color: inherit;
+    font: inherit;
+}
+
+.study-plan-embedded button:focus-visible,
+.study-plan-embedded select:focus-visible,
+.study-plan-embedded a:focus-visible,
+.study-plan-embedded summary:focus-visible {
+    outline: 2px solid rgba(182, 52, 58, 0.48);
+    outline-offset: 2px;
+}
+
+.study-plan-embedded .plan-embedded-header {
+    display: grid;
+    grid-template-columns: auto minmax(240px, 1fr) 110px auto;
+    align-items: center;
+    gap: 16px;
+    min-height: 66px;
+    padding: 10px 16px;
+    border: 1px solid var(--plan-line);
+    border-left: 4px solid var(--plan-maple);
+    border-radius: 4px 14px 14px 4px;
+    background: linear-gradient(135deg, #fffaf5, #f4ece4);
+    box-shadow: 0 5px 14px rgba(86, 66, 54, 0.045);
+}
+
+.study-plan-embedded .plan-embedded-heading {
+    min-width: 112px;
+}
+
+.study-plan-embedded .plan-embedded-heading > span {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--plan-maple);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+}
+
+.study-plan-embedded .plan-embedded-heading h2 {
+    margin: 0;
+    font-family: var(--font-display, "Noto Serif SC", serif);
+    font-size: 20px;
+    line-height: 1.15;
+}
+
+.study-plan-embedded .plan-summary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.study-plan-embedded .plan-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 25px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 9.5px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.study-plan-embedded .plan-tag--target {
+    background: var(--plan-maple-soft);
+    color: #6f3032;
+}
+
+.study-plan-embedded .plan-tag--target i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--plan-maple);
+}
+
+.study-plan-embedded .plan-tag--stage {
+    background: #e9efe8;
+    color: #58715e;
+}
+
+.study-plan-embedded .plan-summary-progress {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 5px 8px;
+    min-width: 0;
+}
+
+.study-plan-embedded .plan-summary-progress > span {
+    color: var(--plan-muted);
+    font-size: 9px;
+}
+
+.study-plan-embedded .plan-summary-progress strong {
+    font-size: 11px;
+}
+
+.study-plan-embedded .plan-progress-track,
+.study-plan-embedded .growth-xp-track,
+.study-plan-embedded .ability-item i {
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e5d9cf;
+}
+
+.study-plan-embedded .plan-progress-track {
+    grid-column: 1 / -1;
+    height: 4px;
+}
+
+.study-plan-embedded .plan-progress-track span,
+.study-plan-embedded .growth-xp-track span,
+.study-plan-embedded .ability-item i b {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 220ms ease;
+}
+
+.study-plan-embedded .plan-progress-track span,
+.study-plan-embedded .growth-xp-track span {
+    background: linear-gradient(90deg, var(--plan-maple), #d16857);
+}
+
+.study-plan-embedded .plan-summary-metrics {
+    display: flex;
+    margin: 0;
+}
+
+.study-plan-embedded .plan-summary-metrics > div {
+    min-width: 78px;
+    padding: 0 12px;
+    border-left: 1px solid var(--plan-line);
+}
+
+.study-plan-embedded .plan-summary-metrics dt {
+    margin-bottom: 3px;
+    color: var(--plan-muted);
+    font-size: 9px;
+}
+
+.study-plan-embedded .plan-summary-metrics dd {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 0;
+}
+
+.study-plan-embedded .plan-summary-metrics strong {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.study-plan-embedded .plan-summary-metrics dd span {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.study-plan-embedded .plan-embedded-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 306px;
+    align-items: start;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.study-plan-embedded .calendar-card,
+.study-plan-embedded .day-panel {
+    border: 1px solid var(--plan-line);
+    border-radius: 15px;
+    background: var(--plan-paper);
+    box-shadow: 0 8px 24px rgba(86, 66, 54, 0.065);
+}
+
+.study-plan-embedded .calendar-card {
+    min-width: 0;
+    padding: 13px 14px 11px;
+}
+
+.study-plan-embedded .calendar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 34px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee5dd;
+}
+
+.study-plan-embedded .calendar-toolbar h3 {
+    margin: 0;
+    font-family: var(--font-display, "Noto Serif SC", serif);
+    font-size: 18px;
+}
+
+.study-plan-embedded .calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.study-plan-embedded .calendar-controls button {
+    min-width: 29px;
+    height: 29px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #f4ede6;
+    color: #6f625a;
+    font-size: 10px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.study-plan-embedded .calendar-controls button:nth-child(2) {
+    border-color: var(--plan-line);
+    background: #fff;
+}
+
+.study-plan-embedded .calendar-controls button:hover {
+    border-color: #dfcfc2;
+    background: #fff9f5;
+}
+
+.study-plan-embedded .calendar-scroll {
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-color: #d9c8bb transparent;
+    scrollbar-width: thin;
+}
+
+.study-plan-embedded .calendar-weekdays,
+.study-plan-embedded .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(82px, 1fr));
+    gap: 6px;
+    min-width: 616px;
+}
+
+.study-plan-embedded .calendar-weekdays {
+    padding: 9px 0 5px;
+}
+
+.study-plan-embedded .calendar-weekdays span {
+    color: var(--plan-muted);
+    font-size: 10px;
+    font-weight: 650;
+    text-align: center;
+}
+
+.study-plan-embedded .calendar-weekdays span:nth-child(n + 6) {
+    color: #a8564e;
+}
+
+.study-plan-embedded .calendar-grid {
+    grid-auto-rows: 70px;
+}
+
+.study-plan-embedded .calendar-day {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 70px;
+    padding: 0;
+    border: 1px solid #eee3da;
+    border-radius: 9px;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.study-plan-embedded .calendar-day:hover {
+    border-color: #d9c8bb;
+    background: #fffbf7;
+    transform: translateY(-1px);
+}
+
+.study-plan-embedded .calendar-day.is-outside {
+    border-color: transparent;
+    background: #faf7f2;
+    opacity: 0.43;
+}
+
+.study-plan-embedded .calendar-day.is-weekend:not(.is-selected) .calendar-day-number {
+    color: #a8564e;
+}
+
+.study-plan-embedded .calendar-day.is-selected {
+    border: 1.5px solid var(--plan-maple);
+    background: #fff8f6;
+    box-shadow: 0 3px 9px rgba(182, 52, 58, 0.085);
+}
+
+.study-plan-embedded .calendar-day.is-today:not(.is-selected) {
+    border-color: rgba(182, 52, 58, 0.45);
+}
+
+.study-plan-embedded .calendar-day.is-public-holiday:not(.is-selected) {
+    border-color: #ecd3ce;
+    background: #fffaf9;
+}
+
+.study-plan-embedded .calendar-day.is-exam-day {
+    z-index: 1;
+    isolation: isolate;
+    border: 1.5px solid #b52f39;
+    background:
+        radial-gradient(circle at 88% 82%, rgba(181, 47, 57, 0.08), transparent 32%),
+        linear-gradient(145deg, #fffdf9, #fff4f1);
+    box-shadow: 0 5px 14px rgba(181, 47, 57, 0.14);
+}
+
+.study-plan-embedded .calendar-day.is-exam-day::before {
+    position: absolute;
+    z-index: -1;
+    right: -8px;
+    bottom: -10px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(181, 47, 57, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(181, 47, 57, 0.035);
+    content: "";
+    animation: plan-exam-ink-ring 820ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    pointer-events: none;
+}
+
+.study-plan-embedded .calendar-day-button {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: 6px 7px 5px;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: inherit;
+}
+
+.study-plan-embedded .calendar-day-number-row {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 18px;
+}
+
+.study-plan-embedded .calendar-day-flags {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto;
+}
+
+.study-plan-embedded .calendar-holiday-badge {
+    display: inline-grid;
+    width: 15px;
+    height: 15px;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 7px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.study-plan-embedded .calendar-holiday-badge.is-holiday {
+    background: #f5d8d5;
+    color: #a83c3c;
+}
+
+.study-plan-embedded .calendar-exam-seal {
+    display: inline-grid;
+    width: 23px;
+    height: 23px;
+    place-items: center;
+    border: 2px solid rgba(169, 37, 49, 0.9);
+    border-radius: 50%;
+    background: rgba(255, 249, 246, 0.88);
+    color: #a92531;
+    box-shadow:
+        inset 0 0 0 1px rgba(169, 37, 49, 0.28),
+        0 1px 2px rgba(116, 28, 34, 0.08);
+    font-family: var(--font-display, "Noto Serif SC", serif);
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+    writing-mode: vertical-rl;
+    transform: rotate(-8deg);
+    animation: plan-exam-stamp 620ms cubic-bezier(0.2, 0.9, 0.24, 1.2) both;
+}
+
+.study-plan-embedded .calendar-exam-name {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    align-self: flex-start;
+    min-height: 14px;
+    margin-top: 3px;
+    padding: 2px 5px;
+    border-radius: 999px;
+    background: #b52f39;
+    color: #fff;
+    font-family: var(--font-display, "Noto Serif SC", serif);
+    font-size: 7.5px;
+    font-weight: 750;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.study-plan-embedded .calendar-holiday-name {
+    display: block;
+    flex: 0 0 auto;
+    overflow: hidden;
+    margin-top: 2px;
+    font-size: 7.5px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.study-plan-embedded .calendar-holiday-name.is-holiday {
+    color: #aa4844;
+}
+
+.study-plan-embedded .calendar-day-number {
+    display: inline-grid;
+    min-width: 19px;
+    height: 19px;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 10.5px;
+    font-weight: 750;
+}
+
+.study-plan-embedded .calendar-day.is-today .calendar-day-number {
+    background: var(--plan-maple);
+    color: #fff;
+}
+
+.study-plan-embedded .calendar-today-label {
+    color: var(--plan-maple-dark);
+    font-size: 7.5px;
+    font-weight: 700;
+}
+
+.study-plan-embedded .calendar-complete-mark {
+    display: grid;
+    width: 14px;
+    height: 14px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--plan-success);
+    color: #fff;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.study-plan-embedded .calendar-task-chips {
+    display: grid;
+    gap: 3px;
+    margin-top: 3px;
+}
+
+.study-plan-embedded .calendar-task-chip {
+    overflow: hidden;
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-size: 8px;
+    font-weight: 650;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.study-plan-embedded .calendar-task-chip.is-completed {
+    opacity: 0.56;
+    text-decoration: line-through;
+}
+
+.study-plan-embedded .calendar-task-more {
+    color: var(--plan-muted);
+    font-size: 7.5px;
+}
+
+.study-plan-embedded .calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 9px 2px 0;
+    color: var(--plan-muted);
+    font-size: 9px;
+}
+
+.study-plan-embedded .calendar-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.study-plan-embedded .type-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.study-plan-embedded .type-vocabulary { background: var(--plan-vocabulary); }
+.study-plan-embedded .type-grammar { background: var(--plan-grammar); }
+.study-plan-embedded .type-reading { background: var(--plan-reading); }
+.study-plan-embedded .type-listening { background: var(--plan-listening); }
+.study-plan-embedded .type-test { background: var(--plan-test); }
+.study-plan-embedded .type-soft-vocabulary { background: var(--plan-vocabulary-soft); color: #98353b; }
+.study-plan-embedded .type-soft-grammar { background: var(--plan-grammar-soft); color: #8b6236; }
+.study-plan-embedded .type-soft-reading { background: var(--plan-reading-soft); color: #426e6c; }
+.study-plan-embedded .type-soft-listening { background: var(--plan-listening-soft); color: #4e6f8c; }
+.study-plan-embedded .type-soft-test { background: var(--plan-test-soft); color: #756179; }
+
+.study-plan-embedded .day-panel {
+    position: sticky;
+    top: 12px;
+    max-height: calc(100vh - 46px);
+    overflow-y: auto;
+    padding: 13px;
+    scrollbar-color: #d9c8bb transparent;
+    scrollbar-width: thin;
+}
+
+.study-plan-embedded .day-panel-header h3 {
+    margin: 0 0 9px;
+    font-family: var(--font-display, "Noto Serif SC", serif);
+    font-size: 17px;
+}
+
+.study-plan-embedded .growth-card {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 8px 11px;
+    padding: 10px;
+    border: 1px solid var(--plan-line);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.study-plan-embedded .preset-character {
+    width: 58px;
+    height: 58px;
+}
+
+.study-plan-embedded .preset-character img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.study-plan-embedded .growth-profile {
+    align-self: center;
+    min-width: 0;
+}
+
+.study-plan-embedded .growth-profile h4 {
+    margin: 0 0 2px;
+    font-size: 13px;
+}
+
+.study-plan-embedded .growth-profile > span,
+.study-plan-embedded .growth-profile small {
+    color: var(--plan-muted);
+    font-size: 8.5px;
+}
+
+.study-plan-embedded .growth-xp-track {
+    height: 4px;
+    margin: 6px 0 4px;
+}
+
+.study-plan-embedded .ability-list {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+    padding-top: 7px;
+    border-top: 1px solid var(--plan-line);
+}
+
+.study-plan-embedded .ability-list h4 {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 9.5px;
+}
+
+.study-plan-embedded .ability-item {
+    display: grid;
+    grid-template-columns: 24px minmax(34px, 1fr) 16px;
+    align-items: center;
+    gap: 5px;
+    color: var(--plan-muted);
+    font-size: 8px;
+}
+
+.study-plan-embedded .ability-item i {
+    height: 3px;
+}
+
+.study-plan-embedded .ability-item strong {
+    font-size: 8px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.study-plan-embedded .ability-item[data-ability="vocabulary"] i b { background: var(--plan-vocabulary); }
+.study-plan-embedded .ability-item[data-ability="grammar"] i b { background: var(--plan-grammar); }
+.study-plan-embedded .ability-item[data-ability="reading"] i b { background: var(--plan-reading); }
+.study-plan-embedded .ability-item[data-ability="listening"] i b { background: var(--plan-listening); }
+
+.study-plan-embedded .day-tasks {
+    margin-top: 11px;
+    padding-top: 10px;
+    border-top: 1px solid var(--plan-line);
+}
+
+.study-plan-embedded .day-tasks > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 7px;
+}
+
+.study-plan-embedded .day-tasks h4 {
+    margin: 0;
+    font-size: 11px;
+}
+
+.study-plan-embedded .day-tasks > header span {
+    color: var(--plan-muted);
+    font-size: 8.5px;
+}
+
+.study-plan-embedded .day-task-list {
+    display: grid;
+    gap: 6px;
+}
+
+.study-plan-embedded .day-task-empty {
+    display: grid;
+    min-height: 62px;
+    place-items: center;
+    padding: 12px;
+    border: 1px dashed var(--plan-line-strong);
+    border-radius: 10px;
+    color: var(--plan-muted);
+    font-size: 9px;
+    text-align: center;
+}
+
+.study-plan-embedded .day-task-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 5px 7px;
+    padding: 8px 8px 7px 11px;
+    border: 1px solid var(--plan-line);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.study-plan-embedded .day-task-card::before {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    width: 3px;
+    border-radius: 10px 0 0 10px;
+    background: var(--task-color);
+    content: "";
+}
+
+.study-plan-embedded .day-task-card.is-completed {
+    background: #fbfaf7;
+}
+
+.study-plan-embedded .day-task-copy {
+    min-width: 0;
+}
+
+.study-plan-embedded .day-task-type {
+    display: inline-flex;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 7.5px;
+    font-weight: 700;
+}
+
+.study-plan-embedded .day-task-copy h4 {
+    margin: 5px 0 2px;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.study-plan-embedded .day-task-card.is-completed h4 {
+    color: var(--plan-muted);
+    text-decoration: line-through;
+}
+
+.study-plan-embedded .day-task-copy small {
+    color: var(--plan-muted);
+    font-size: 8px;
+}
+
+.study-plan-embedded .day-task-actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.study-plan-embedded .day-task-actions a,
+.study-plan-embedded .day-task-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 23px;
+    padding: 0 6px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: #f4ede7;
+    color: var(--plan-ink);
+    font-size: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.study-plan-embedded .day-task-actions a:hover,
+.study-plan-embedded .day-task-actions button:hover {
+    border-color: var(--plan-line-strong);
+    background: #fff9f5;
+}
+
+.study-plan-embedded .day-task-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 7px;
+    padding-top: 5px;
+    border-top: 1px solid #eee6df;
+}
+
+.study-plan-embedded .task-complete-button,
+.study-plan-embedded .task-delete-button {
+    border: 0;
+    background: transparent;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+.study-plan-embedded .task-complete-button {
+    color: #4f7562;
+    font-weight: 700;
+}
+
+.study-plan-embedded .task-delete-button {
+    color: #9a8177;
+}
+
+.study-plan-embedded .task-form-panel {
+    margin-top: 9px;
+    border: 1px solid var(--plan-line);
+    border-radius: 10px;
+    background: #faf6f1;
+}
+
+.study-plan-embedded .task-form-panel summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 0 10px;
+    color: var(--plan-maple-dark);
+    font-size: 9px;
+    font-weight: 750;
+    list-style: none;
+    cursor: pointer;
+}
+
+.study-plan-embedded .task-form-panel summary::-webkit-details-marker {
+    display: none;
+}
+
+.study-plan-embedded .task-form-panel summary::after {
+    margin-left: auto;
+    color: var(--plan-muted);
+    content: "展开";
+    font-size: 7.5px;
+    font-weight: 500;
+}
+
+.study-plan-embedded .task-form-panel[open] summary::after {
+    content: "收起";
+}
+
+.study-plan-embedded .task-form {
+    display: grid;
+    gap: 9px;
+    padding: 10px;
+    border-top: 1px solid var(--plan-line);
+}
+
+.study-plan-embedded .task-type-fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.study-plan-embedded .task-type-fieldset legend,
+.study-plan-embedded .task-field > span {
+    display: block;
+    margin-bottom: 5px;
+    color: #6f6158;
+    font-size: 8px;
+    font-weight: 650;
+}
+
+.study-plan-embedded .task-type-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+}
+
+.study-plan-embedded .task-type-option {
+    min-height: 26px;
+    padding: 0 4px;
+    border: 1px solid var(--plan-line);
+    border-radius: 7px;
+    background: #fff;
+    color: var(--plan-ink);
+    font-size: 8px;
+    cursor: pointer;
+}
+
+.study-plan-embedded .task-type-option.is-active {
+    border-color: var(--active-color);
+    background: var(--active-color);
+    color: #fff;
+    font-weight: 700;
+}
+
+.study-plan-embedded .task-field {
+    min-width: 0;
+}
+
+.study-plan-embedded .task-field select {
+    width: 100%;
+    min-height: 32px;
+    padding: 0 27px 0 8px;
+    border: 1px solid var(--plan-line-strong);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 8.5px;
+}
+
+.study-plan-embedded .task-form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 6px;
+}
+
+.study-plan-embedded .save-task-button {
+    min-height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--plan-maple);
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.study-plan-embedded .save-task-button:hover {
+    background: var(--plan-maple-dark);
+}
+
+.study-plan-embedded .plan-toast {
+    position: fixed;
+    z-index: 30;
+    right: 20px;
+    bottom: 20px;
+    max-width: min(300px, calc(100vw - 28px));
+    padding: 9px 12px;
+    border-radius: 9px;
+    background: #3f3935;
+    color: #fff;
+    box-shadow: 0 10px 28px rgba(45, 37, 33, 0.22);
+    font-size: 9.5px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(7px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.study-plan-embedded .plan-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes plan-exam-stamp {
+    0% {
+        opacity: 0;
+        filter: blur(1px);
+        transform: translateY(-8px) rotate(-15deg) scale(1.75);
+    }
+    62% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(1px) rotate(-8deg) scale(0.88);
+    }
+    82% {
+        transform: translateY(0) rotate(-8deg) scale(1.06);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(-8deg) scale(1);
+    }
+}
+
+@keyframes plan-exam-ink-ring {
+    0% {
+        opacity: 0;
+        transform: scale(0.55);
+    }
+    58% {
+        opacity: 0.85;
+        transform: scale(1.14);
+    }
+    100% {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1120px) {
+    .study-plan-embedded .plan-embedded-header {
+        grid-template-columns: auto minmax(220px, 1fr) auto;
+    }
+
+    .study-plan-embedded .plan-summary-progress {
+        display: none;
+    }
+
+    .study-plan-embedded .plan-embedded-layout {
+        grid-template-columns: minmax(0, 1fr) 286px;
+    }
+}
+
+@media (max-width: 900px) {
+    .study-plan-embedded .plan-embedded-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .study-plan-embedded .day-panel {
+        position: static;
+        display: grid;
+        grid-template-columns: minmax(250px, 0.8fr) minmax(300px, 1.2fr);
+        gap: 12px 15px;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .study-plan-embedded .day-panel-header,
+    .study-plan-embedded .task-form-panel {
+        grid-column: 1 / -1;
+    }
+
+    .study-plan-embedded .day-panel-header h3,
+    .study-plan-embedded .task-form-panel {
+        margin: 0;
+    }
+
+    .study-plan-embedded .growth-card {
+        align-self: start;
+    }
+
+    .study-plan-embedded .day-tasks {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    body.home-dashboard-redesign .feature-panel[data-section="study-plan"].is-active {
+        padding-bottom: 72px;
+    }
+
+    .study-plan-embedded {
+        width: 100%;
+        padding: 10px 10px 24px;
+    }
+
+    .study-plan-embedded .plan-embedded-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px 12px;
+        padding: 10px 12px;
+    }
+
+    .study-plan-embedded .plan-embedded-heading {
+        min-width: 0;
+    }
+
+    .study-plan-embedded .plan-embedded-heading h2 {
+        font-size: 17px;
+    }
+
+    .study-plan-embedded .plan-summary-tags {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .study-plan-embedded .plan-summary-metrics {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .study-plan-embedded .plan-summary-metrics > div {
+        min-width: 58px;
+        padding: 0 7px;
+    }
+
+    .study-plan-embedded .plan-summary-metrics strong {
+        font-size: 17px;
+    }
+
+    .study-plan-embedded .plan-tag {
+        min-height: 22px;
+        padding: 3px 7px;
+        font-size: 8px;
+    }
+
+    .study-plan-embedded .plan-embedded-layout {
+        margin-top: 9px;
+    }
+
+    .study-plan-embedded .calendar-card {
+        padding: 10px 9px 9px;
+        border-radius: 13px;
+    }
+
+    .study-plan-embedded .calendar-toolbar h3 {
+        font-size: 16px;
+    }
+
+    .study-plan-embedded .calendar-controls button {
+        min-width: 27px;
+        height: 27px;
+        padding: 0 7px;
+    }
+
+    .study-plan-embedded .calendar-weekdays,
+    .study-plan-embedded .calendar-grid {
+        grid-template-columns: repeat(7, 66px);
+        gap: 5px;
+        min-width: 492px;
+    }
+
+    .study-plan-embedded .calendar-grid {
+        grid-auto-rows: 66px;
+    }
+
+    .study-plan-embedded .calendar-day {
+        min-height: 66px;
+    }
+
+    .study-plan-embedded .calendar-task-chip {
+        height: 5px;
+        padding: 0;
+        color: transparent;
+    }
+
+    .study-plan-embedded .day-panel {
+        display: block;
+        padding: 12px;
+        border-radius: 13px;
+    }
+
+    .study-plan-embedded .day-panel-header h3 {
+        margin-bottom: 8px;
+    }
+
+    .study-plan-embedded .day-tasks {
+        margin-top: 10px;
+        padding-top: 9px;
+        border-top: 1px solid var(--plan-line);
+    }
+
+    .study-plan-embedded .task-form-panel {
+        margin-top: 9px;
+    }
+}
+
+@media (max-width: 420px) {
+    .study-plan-embedded .plan-summary-metrics > div:nth-child(2) {
+        display: none;
+    }
+
+    .study-plan-embedded .calendar-controls button:nth-child(2) {
+        display: none;
+    }
+
+    .study-plan-embedded .day-task-card {
+        grid-template-columns: 1fr;
+    }
+
+    .study-plan-embedded .day-task-actions {
+        grid-row: 1;
+        justify-content: flex-end;
+    }
+
+    .study-plan-embedded .task-form-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .study-plan-embedded *,
+    .study-plan-embedded *::before,
+    .study-plan-embedded *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

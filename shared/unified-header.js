@@ -131,6 +131,59 @@
         return base;
     }
 
+    function readingSectionConfig(path) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+        const pathLevel = path.match(/\/(n[12])(?:\/|$)/i);
+        const level = (pathLevel ? pathLevel[1] : params.get("level") || "").toUpperCase();
+        const pathTypeMap = {
+            "/s/": "short",
+            "/m/": "middle",
+            "/l/": "long",
+            "/d/": "integrated",
+            "/t/": "search"
+        };
+        const typeTitleMap = {
+            short: "短文読解",
+            middle: "中篇読解",
+            long: "長文読解",
+            integrated: "統合理解",
+            search: "情報検索"
+        };
+        const pathType = Object.keys(pathTypeMap).find((key) => path.includes(key));
+        const readingType = pathType ? pathTypeMap[pathType] : String(params.get("type") || "").toLowerCase();
+        const typeTitle = typeTitleMap[readingType] || "読解特訓";
+
+        const readingIndex = new URL("../exam/jlpt-reading/index.html", sharedBase);
+        readingIndex.searchParams.set("level", level || "N1");
+        if (readingType) readingIndex.searchParams.set("type", readingType);
+
+        let backLabel = "返回备考专区";
+        let href = `${readingIndex.pathname}${readingIndex.search}`;
+        if (params.get("mode") === "review") {
+            backLabel = "返回错题目录";
+            readingIndex.searchParams.set("browse", "mistakes");
+            href = `${readingIndex.pathname}${readingIndex.search}`;
+        } else if (params.get("practiceMode") === "category" && params.get("category")) {
+            backLabel = "返回分类目录";
+            readingIndex.searchParams.set("browse", "category");
+            readingIndex.searchParams.set("category", params.get("category"));
+            href = `${readingIndex.pathname}${readingIndex.search}`;
+        } else if (readingType) {
+            backLabel = "返回年度目录";
+            readingIndex.searchParams.set("browse", "year");
+            href = `${readingIndex.pathname}${readingIndex.search}`;
+        }
+
+        return {
+            title: level ? `${level} · ${typeTitle}` : typeTitle,
+            backLabel,
+            href,
+            canonicalBack: true,
+            type: "practice"
+        };
+    }
+
     function sectionConfig(path) {
         if (path.endsWith("lottery.html")) {
             return { title: "御神签", backLabel: "返回首页", hash: "", type: "practice" };
@@ -216,8 +269,7 @@
             return { title, backLabel: "返回备考专区", hash: "#exam/exam-grammar", type: "practice" };
         }
         if (path.startsWith("exam/jlpt-reading/")) {
-            const level = path.includes("/n1/") || /[?&]level=n1/i.test(window.location.search) ? "N1" : (path.includes("/n2/") || /[?&]level=n2/i.test(window.location.search) ? "N2" : "");
-            return { title: level ? `${level} 読解特训` : "読解特训", backLabel: "返回备考专区", hash: "#exam/exam-reading", type: "practice" };
+            return readingSectionConfig(path);
         }
         if (path.startsWith("exam/listening/")) {
             return listeningSectionConfig(path);
@@ -341,6 +393,9 @@
         const selectors = [
             ".reading-site-actions",
             ".reading-head-tools",
+            ".reading-editorial-actions",
+            ".top-actions",
+            ".top-bar-controls",
             ".header-actions",
             ".header-right-slot",
             ".topbar-actions"
@@ -395,9 +450,11 @@
             back.getAttribute("aria-label") || back.textContent,
             config.backLabel
         );
-        const backLabel = isDynamicBack
-            ? (currentBackLabel || config.backLabel)
-            : (hasReturnSource() ? "返回上一学习页" : config.backLabel);
+        const backLabel = config.canonicalBack
+            ? config.backLabel
+            : (isDynamicBack
+                ? (currentBackLabel || config.backLabel)
+                : (hasReturnSource() ? "返回上一学习页" : config.backLabel));
         if (back.tagName !== "A") {
             const replacement = document.createElement("a");
             replacement.id = back.id;
@@ -405,7 +462,7 @@
             back = replacement;
         }
         back.classList.add("kiki-unified-back");
-        if (!isDynamicBack) {
+        if (!isDynamicBack || config.canonicalBack) {
             back.href = returnTarget(config);
         }
         const mobileBackLabel = /聴解/.test(config.title) ? "戻る" : "返回";
@@ -627,7 +684,8 @@
     }
 
     function initUnifiedHeader() {
-        if (document.querySelector(".kiki-unified-header") || document.querySelector('meta[http-equiv="refresh"]')) {
+        const headerHost = document.querySelector("[data-kiki-unified-header-host]");
+        if (document.querySelector(".kiki-unified-header:not([data-kiki-unified-header-host])") || document.querySelector('meta[http-equiv="refresh"]')) {
             return;
         }
 
@@ -635,12 +693,13 @@
         const path = normalizedPath();
         const config = sectionConfig(path);
         enableGrammarReturnChain(path);
-        const source = findSourceHeader();
+        const source = headerHost || findSourceHeader();
         const existingBack = findBackElement(source);
         const actionContainer = findActionContainer(source);
         keepOnlyGrammarPracticeActions(actionContainer, path);
         removeListeningLegacyActions(actionContainer, path);
-        const header = document.createElement("header");
+        const header = headerHost || document.createElement("header");
+        if (headerHost) header.replaceChildren();
         header.className = `kiki-unified-header kiki-unified-header--${config.type}`;
         if (path.startsWith("exam/listening/")) {
             header.classList.add("kiki-unified-header--listening");
@@ -677,9 +736,16 @@
 
         header.append(left, title, right);
 
-        if (source) {
+        if (headerHost) {
+            // The reading practice pages ship one canonical header node in the
+            // initial HTML. Hydrate that same node instead of replacing a
+            // legacy header after first paint.
+        } else if (source) {
             source.insertAdjacentElement("beforebegin", header);
-            if (shouldHideSource(source)) {
+            if (document.body.classList.contains("reading-content-page")
+                && source.matches(".reading-editorial-header, .top-bar")) {
+                source.remove();
+            } else if (shouldHideSource(source)) {
                 source.dataset.kikiHeaderSourceHidden = "true";
                 source.setAttribute("aria-hidden", "true");
             }

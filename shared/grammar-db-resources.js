@@ -4298,6 +4298,27 @@
         "source": { "original": "これについては廃止しているところは、私が知る限り１件もないです。", "name": "内阁府消费者委员会「公共料金等専門調査会（第3回）议事录」", "url": "https://www.cao.go.jp/consumer/history/02/kabusoshiki/kokyoryokin/senmon/003/gijiroku/__icsFiles/afieldfile/2013/04/03/003_130304_gijiroku.pdf", "type": "政府会议记录", "accessedAt": "2026-08-10" }
       }
     ],
+    "4114": [
+      {
+        "jp": "<ruby>目<rt>め</rt></ruby>からウロコ、<span style='color:#d64045'>なんてもんじゃなかった</span>。",
+        "cn": "那已经远远不是“恍然大悟”所能形容的了。",
+        "source": { "original": "目からウロコ、なんてもんじゃなかった。", "name": "日本进口车协会《UCG》Vol.87「クルマで人生が変わった！」", "url": "https://www.ninteicyukosha.com/UCG/pdf/2008/02/87-08_02_046-051.pdf", "type": "行业杂志", "accessedAt": "2026-08-12" }
+      }
+    ],
+    "4115": [
+      {
+        "jp": "コンプライアンスやハラスメントへの<ruby>考<rt>かんが</rt></ruby>え<ruby>方<rt>かた</rt></ruby>、<ruby>企<rt>き</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>に<ruby>求<rt>もと</rt></ruby>められる<ruby>責<rt>せき</rt></ruby><ruby>任<rt>にん</rt></ruby>は、かつて<span style='color:#d64045'>とは<ruby>比<rt>くら</rt></ruby>べものになりません</span>。",
+        "cn": "对于合规与职场骚扰的认识，以及社会对企业责任的要求，都已不可与从前相提并论。",
+        "source": { "original": "コンプライアンスやハラスメントへの考え方、企業に求められる責任は、かつてとは比べものになりません。", "name": "積水ハウスグループ「コード・インテグリティ ガイドブック」", "url": "https://www.sekisuihouse.co.jp/library/company/info/Integrity_Code.pdf?20260204=", "type": "企业合规指南", "accessedAt": "2026-08-13" }
+      }
+    ],
+    "4116": [
+      {
+        "jp": "さらに、<ruby>鉄<rt>てつ</rt></ruby><ruby>道<rt>どう</rt></ruby>・<ruby>道<rt>どう</rt></ruby><ruby>路<rt>ろ</rt></ruby>の<ruby>整<rt>せい</rt></ruby><ruby>備<rt>び</rt></ruby>により「<ruby>地<rt>じ</rt></ruby><ruby>獄<rt>ごく</rt></ruby>」<ruby>巡<rt>めぐ</rt></ruby>りを<ruby>目<rt>もく</rt></ruby><ruby>的<rt>てき</rt></ruby>とする<ruby>観<rt>かん</rt></ruby><ruby>光<rt>こう</rt></ruby><ruby>客<rt>きゃく</rt></ruby>も<ruby>増<rt>ぞう</rt></ruby><ruby>加<rt>か</rt></ruby>し、<ruby>別<rt>べっ</rt></ruby><ruby>府<rt>ぷ</rt></ruby>は<ruby>一<rt>いち</rt></ruby><ruby>大<rt>だい</rt></ruby><ruby>観<rt>かん</rt></ruby><ruby>光<rt>こう</rt></ruby><ruby>都<rt>と</rt></ruby><ruby>市<rt>し</rt></ruby><span style='color:#d64045'>へと</span><ruby>発<rt>はっ</rt></ruby><ruby>展<rt>てん</rt></ruby>した。",
+        "cn": "此外，随着铁路和公路的完善，以巡游“地狱”为目的的游客也有所增加，别府由此发展成一座大型旅游城市。",
+        "source": { "original": "さらに、鉄道・道路の整備により「地獄」巡りを目的とする観光客も増加し、別府は一大観光都市へと発展した。", "name": "文化庁 国指定文化財等データベース「別府の湯けむり・温泉地景観」", "url": "https://kunishitei.bunka.go.jp/bsys/maindetails/412/00003778", "type": "政府数据库", "accessedAt": "2026-08-14" }
+      }
+    ],
     "950001": [
       {
         "jp": "また、<ruby>本<rt>ほん</rt></ruby><ruby>年<rt>ねん</rt></ruby>は<ruby>専<rt>せん</rt></ruby><ruby>売<rt>ばい</rt></ruby><ruby>特<rt>とっ</rt></ruby><ruby>許<rt>きょ</rt></ruby><ruby>条<rt>じょう</rt></ruby><ruby>例<rt>れい</rt></ruby>（<ruby>現<rt>げん</rt></ruby><ruby>在<rt>ざい</rt></ruby>の<ruby>特<rt>とっ</rt></ruby><ruby>許<rt>きょ</rt></ruby><ruby>法<rt>ほう</rt></ruby>）が<ruby>公<rt>こう</rt></ruby><ruby>布<rt>ふ</rt></ruby>されてから<span style='color:#d64045'>140<ruby>周<rt>しゅう</rt></ruby><ruby>年<rt>ねん</rt></ruby>にあたる</span><ruby>節<rt>ふし</rt></ruby><ruby>目<rt>め</rt></ruby>の<ruby>年<rt>とし</rt></ruby>となることから、これを<ruby>記<rt>き</rt></ruby><ruby>念<rt>ねん</rt></ruby>し、<ruby>産<rt>さん</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>財<rt>ざい</rt></ruby><ruby>産<rt>さん</rt></ruby><ruby>権<rt>けん</rt></ruby><ruby>制<rt>せい</rt></ruby><ruby>度<rt>ど</rt></ruby>の<ruby>普<rt>ふ</rt></ruby><ruby>及<rt>きゅう</rt></ruby>・<ruby>発<rt>はっ</rt></ruby><ruby>展<rt>てん</rt></ruby>に<ruby>極<rt>きわ</rt></ruby>めて<ruby>顕<rt>けん</rt></ruby><ruby>著<rt>ちょ</rt></ruby>な<ruby>功<rt>こう</rt></ruby><ruby>労<rt>ろう</rt></ruby>や<ruby>功<rt>こう</rt></ruby><ruby>績<rt>せき</rt></ruby>があった<ruby>企<rt>き</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>等<rt>とう</rt></ruby>、<ruby>又<rt>また</rt></ruby><ruby>同<rt>どう</rt></ruby><ruby>制<rt>せい</rt></ruby><ruby>度<rt>ど</rt></ruby>を<ruby>活<rt>かつ</rt></ruby><ruby>用<rt>よう</rt></ruby>し、<ruby>地<rt>ち</rt></ruby><ruby>域<rt>いき</rt></ruby><ruby>経<rt>けい</rt></ruby><ruby>済<rt>ざい</rt></ruby>の<ruby>発<rt>はっ</rt></ruby><ruby>展<rt>てん</rt></ruby>に<ruby>極<rt>きわ</rt></ruby>めて<ruby>顕<rt>けん</rt></ruby><ruby>著<rt>ちょ</rt></ruby>な<ruby>功<rt>こう</rt></ruby><ruby>績<rt>せき</rt></ruby>があった<ruby>企<rt>き</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>等<rt>とう</rt></ruby>に<ruby>対<rt>たい</rt></ruby>し、「<ruby>内<rt>ない</rt></ruby><ruby>閣<rt>かく</rt></ruby><ruby>総<rt>そう</rt></ruby><ruby>理<rt>り</rt></ruby><ruby>大<rt>だい</rt></ruby><ruby>臣<rt>じん</rt></ruby><ruby>感<rt>かん</rt></ruby><ruby>謝<rt>しゃ</rt></ruby><ruby>状<rt>じょう</rt></ruby>」の<ruby>贈<rt>ぞう</rt></ruby><ruby>呈<rt>てい</rt></ruby>を<ruby>行<rt>おこな</rt></ruby>います。",

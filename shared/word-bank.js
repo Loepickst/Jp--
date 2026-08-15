@@ -5,11 +5,11 @@
         return;
     }
 
-    const VERSION = "1.12.5";
+    const VERSION = "1.13.2";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
-    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV10";
+    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV16";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
-    const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV1";
+    const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV2";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
     const LEMMA_SYNC_KEY = "kikiWordBankLemmaSyncedV1";
     const ACCENT_SYNC_KEY = "kikiWordBankAccentSyncedV1";
@@ -25,8 +25,16 @@
         "kiki-exam-20260723-potsunto",
         "kiki-exam-20260723-rikimu"
     ]);
+    const FURIGANA_REPAIR_PRESET_IDS = new Set([
+        "kiki-novel-20260810-yasegaman",
+        "kiki-novel-20260810-tewokudasu",
+        "kiki-novel-20260810-hateshinai",
+        "kiki-novel-20260810-tameguchi",
+        "kiki-novel-20260810-tekoire"
+    ]);
     const SOURCE_CATEGORIES = new Set([
         "movie",
+        "lyrics",
         "novel",
         "article",
         "news",
@@ -41,7 +49,7 @@
         ? new URL("./", currentScript.src)
         : new URL("./shared/", window.location.href);
     const siteRoot = new URL("../", sharedBase);
-    const cssHref = new URL("word-bank.css?v=20260810-novel5-1", sharedBase).href;
+    const cssHref = new URL("word-bank.css?v=20260815-novel-anaba1", sharedBase).href;
 
     let activeSelection = null;
     let selectionTimer = 0;
@@ -148,6 +156,9 @@
         const haystack = `${sourceTitle || ""} ${sourceUrl || ""}`.toLowerCase();
         if (/(movie|anime|drama|影视|动画|动漫|电影|电视剧|ドラマ)/i.test(haystack)) {
             return "movie";
+        }
+        if (/(lyrics|song|歌词|歌詞)/i.test(haystack)) {
+            return "lyrics";
         }
         if (/(novel|小说|小説|文学)/i.test(haystack)) {
             return "novel";
@@ -408,6 +419,17 @@
 
     function isCanonicalBackElement(element) {
         if (!element || element.nodeType !== 1) {
+            return false;
+        }
+
+        /*
+         * Dynamic back controls are owned by the page that created them.
+         * Reading category/review pages rewrite the same shared header control
+         * to a view-specific directory. Binding the generic home fallback here
+         * first leaves two click handlers on one button, and the generic one
+         * wins because it was registered earlier.
+         */
+        if (element.hasAttribute("data-kiki-dynamic-back")) {
             return false;
         }
 
@@ -777,7 +799,11 @@
                 }
 
                 const patch = {};
-                if (!entry.exampleRuby && preset.exampleRuby && entry.example === preset.example) {
+                const shouldRepairPresetFurigana = FURIGANA_REPAIR_PRESET_IDS.has(entry.id)
+                    && entry.updatedAt === entry.createdAt
+                    && entry.exampleRuby !== preset.exampleRuby;
+                if (preset.exampleRuby && entry.example === preset.example
+                    && (!entry.exampleRuby || shouldRepairPresetFurigana)) {
                     patch.exampleRuby = preset.exampleRuby;
                 }
                 if (entry.partOfSpeech === "サ变动词" && preset.partOfSpeech.includes("・")) {
@@ -1211,7 +1237,6 @@
                             </div>
                             <article class="kiki-word-bank-card-preview">
                                 <header class="kiki-word-bank-card-term">
-                                    <div class="kiki-word-bank-card-reading" id="kiki-word-bank-preview-reading">假名读音</div>
                                     <div class="kiki-word-bank-card-term-line">
                                         <div class="kiki-word-bank-card-word" id="kiki-word-bank-preview-word">词形</div>
                                         <div class="kiki-word-bank-card-meta" id="kiki-word-bank-preview-meta"></div>
@@ -1309,7 +1334,6 @@
                 <div class="kiki-word-card-scroll">
                     <article class="kiki-word-card-content">
                         <header class="kiki-word-card-term">
-                            <p class="kiki-word-card-reading" id="kiki-word-card-reading"></p>
                             <div class="kiki-word-card-term-line">
                                 <h2 class="kiki-word-card-word" id="kiki-word-card-word">词形</h2>
                                 <div class="kiki-word-card-meta" id="kiki-word-card-meta"></div>
@@ -1511,6 +1535,101 @@
         }
     }
 
+    function normalizeKanaForMatch(value) {
+        return String(value || "").replace(/[ァ-ヶ]/g, (character) => (
+            String.fromCharCode(character.charCodeAt(0) - 0x60)
+        ));
+    }
+
+    function getHeadwordFuriganaParts(word, reading) {
+        const displayWord = String(word || "");
+        const displayReading = String(reading || "");
+        const kanjiPattern = /[\u3400-\u9fff々〆ヵヶ]+/g;
+        const kanjiMatches = Array.from(displayWord.matchAll(kanjiPattern));
+        if (!displayWord || !displayReading || !kanjiMatches.length) {
+            return [{ text: displayWord }];
+        }
+
+        const normalizedReading = normalizeKanaForMatch(displayReading);
+        const parts = [];
+        let wordCursor = 0;
+        let readingCursor = 0;
+
+        for (let index = 0; index < kanjiMatches.length; index += 1) {
+            const match = kanjiMatches[index];
+            const matchStart = match.index;
+            const matchEnd = matchStart + match[0].length;
+            const plainBefore = displayWord.slice(wordCursor, matchStart);
+            if (plainBefore) {
+                const normalizedPlain = normalizeKanaForMatch(plainBefore);
+                if (normalizedReading.slice(readingCursor, readingCursor + normalizedPlain.length) !== normalizedPlain) {
+                    return [{ text: displayWord }];
+                }
+                parts.push({ text: plainBefore });
+                readingCursor += normalizedPlain.length;
+            }
+
+            const nextMatch = kanjiMatches[index + 1];
+            const nextKanjiStart = nextMatch ? nextMatch.index : displayWord.length;
+            const followingKana = displayWord.slice(matchEnd, nextKanjiStart);
+            let readingEnd = displayReading.length;
+            if (followingKana) {
+                readingEnd = normalizedReading.indexOf(
+                    normalizeKanaForMatch(followingKana),
+                    readingCursor
+                );
+                if (readingEnd < readingCursor) {
+                    return [{ text: displayWord }];
+                }
+            }
+
+            const rubyReading = displayReading.slice(readingCursor, readingEnd);
+            if (!rubyReading) {
+                return [{ text: displayWord }];
+            }
+            parts.push({ text: match[0], reading: rubyReading });
+            readingCursor = readingEnd;
+            wordCursor = matchEnd;
+        }
+
+        const plainAfter = displayWord.slice(wordCursor);
+        if (plainAfter) {
+            const normalizedPlain = normalizeKanaForMatch(plainAfter);
+            if (normalizedReading.slice(readingCursor, readingCursor + normalizedPlain.length) !== normalizedPlain) {
+                return [{ text: displayWord }];
+            }
+            parts.push({ text: plainAfter });
+            readingCursor += normalizedPlain.length;
+        }
+
+        if (readingCursor !== displayReading.length) {
+            return [{ text: displayWord }];
+        }
+        return parts;
+    }
+
+    function renderHeadwordFurigana(target, word, reading, fallback = "词形") {
+        if (!target) {
+            return;
+        }
+        const displayWord = word || fallback;
+        target.replaceChildren();
+        getHeadwordFuriganaParts(displayWord, reading).forEach((part) => {
+            if (!part.reading) {
+                target.appendChild(document.createTextNode(part.text));
+                return;
+            }
+            const ruby = document.createElement("ruby");
+            const rb = document.createElement("rb");
+            const rt = document.createElement("rt");
+            rb.textContent = part.text;
+            rt.textContent = part.reading;
+            ruby.append(rb, rt);
+            target.appendChild(ruby);
+        });
+        target.setAttribute("aria-label", reading ? `${displayWord}，${reading}` : displayWord);
+    }
+
     function renderSenseGroups(target, data = {}, options = {}) {
         if (!target) {
             return;
@@ -1668,18 +1787,14 @@
     }
 
     function populateCardModal(modal, entry) {
-        setCardText(modal, "#kiki-word-card-word", entry.word, "未命名词条");
-        updateWordLengthClass(modal.querySelector("#kiki-word-card-word"), entry.word);
+        const wordTarget = modal.querySelector("#kiki-word-card-word");
+        renderHeadwordFurigana(wordTarget, entry.word, entry.reading, "未命名词条");
+        updateWordLengthClass(wordTarget, entry.word);
         const speakButton = modal.querySelector("[data-word-card-speak]");
         if (speakButton) {
             const label = `朗读${entry.word || "单词"}`;
             speakButton.setAttribute("aria-label", label);
             speakButton.setAttribute("title", label);
-        }
-        setCardText(modal, "#kiki-word-card-reading", entry.reading);
-        const reading = modal.querySelector("#kiki-word-card-reading");
-        if (reading) {
-            reading.hidden = !entry.reading;
         }
         renderCardMeta(modal, entry);
         const meaning = entry.meaning || entry.meaningZh || entry.meaningJa;
@@ -1865,9 +1980,9 @@
         const relatedWords = normalizeLearningList(getFieldValue(modal, "#kiki-word-bank-related"), 8, 48);
         const note = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-note"), 520);
 
-        setPreviewText(modal, "#kiki-word-bank-preview-word", word, "词形");
-        updateWordLengthClass(modal.querySelector("#kiki-word-bank-preview-word"), word);
-        setPreviewText(modal, "#kiki-word-bank-preview-reading", reading, "假名读音");
+        const previewWord = modal.querySelector("#kiki-word-bank-preview-word");
+        renderHeadwordFurigana(previewWord, word, reading, "词形");
+        updateWordLengthClass(previewWord, word);
         renderSenseGroups(modal.querySelector("#kiki-word-bank-preview-senses"), {
             word,
             meaning,

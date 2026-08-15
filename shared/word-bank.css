@@ -511,6 +511,22 @@
     line-height: 1.25;
 }
 
+.kiki-word-bank-card-word ruby,
+.kiki-word-card-word ruby {
+    ruby-align: center;
+    ruby-position: over;
+}
+
+.kiki-word-bank-card-word rt,
+.kiki-word-card-word rt {
+    color: var(--word-bank-muted);
+    font-family: var(--word-bank-ui);
+    font-size: 0.34em;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
 .kiki-word-bank-card-reading {
     margin: 0 0 5px;
     color: var(--word-bank-muted);
@@ -3124,6 +3140,12 @@
 .word-bank-board [data-source-tone="movie"] {
     --wb-source-tone: #9b4652;
     --wb-source-soft: #faedef;
+}
+
+.word-bank-board [data-word-bank-source="lyrics"],
+.word-bank-board [data-source-tone="lyrics"] {
+    --wb-source-tone: #c43f35;
+    --wb-source-soft: #fff0ed;
 }
 
 .word-bank-board [data-word-bank-source="novel"],
