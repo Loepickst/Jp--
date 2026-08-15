@@ -1,0 +1,83 @@
+@import url("./practice-n1-verbs-v2.css");
+
+:root {
+    --practice-page: #f7f4f2;
+    --practice-surface: #ffffff;
+    --practice-surface-soft: #fbf8f7;
+    --practice-ink: #2f2a2b;
+    --practice-ink-soft: #51474a;
+    --practice-muted: #786d70;
+    --practice-faint: #786d70;
+    --practice-line: #e8e1df;
+    --practice-line-strong: #d6cac8;
+    --practice-accent: #563e4a;
+    --practice-rose: #a85f62;
+    --practice-green: #4e776b;
+    --practice-green-soft: #edf4f1;
+    --practice-red: #b85f61;
+    --practice-red-soft: #faeeee;
+    --practice-shadow: 0 18px 48px rgba(72, 49, 60, .08);
+}
+
+body.vocab-adjectives-practice .practice-topbar-title::before,
+body.vocab-adjectives-practice .dialogue-type-label::before {
+    background: var(--practice-rose);
+}
+
+body.vocab-adjectives-practice .enemy-avatar,
+body.vocab-adjectives-practice .enemy-avatar[style] {
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: .62;
+}
+
+body.vocab-adjectives-practice .enemy-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: contain;
+}
+
+body.vocab-adjectives-practice .practice-mentor-speaker {
+    color: var(--practice-rose);
+}
+
+body.vocab-adjectives-practice .action-option:hover:not(:disabled),
+body.vocab-adjectives-practice .action-option:focus-visible:not(:disabled) {
+    background: #fcf8f7;
+}
+
+body.vocab-adjectives-practice :is(
+    .practice-context-kind,
+    .practice-context-title,
+    .dialogue-counter,
+    .practice-mentor-copy,
+    .practice-question-footer,
+    .practice-choice-hint-btn,
+    .practice-skip-btn
+) {
+    font-size: 12px;
+}
+
+body.vocab-adjectives-practice :is(
+    button,
+    a,
+    input
+):focus-visible {
+    outline: 2px solid var(--practice-accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-adjectives-practice *,
+    body.vocab-adjectives-practice *::before,
+    body.vocab-adjectives-practice *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

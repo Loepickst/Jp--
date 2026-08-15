@@ -1,0 +1,48 @@
+@import url("./verbs-n1-directory-v2.css");
+
+body.vocab-mimetic-page .directory-mentor-portrait {
+    align-self: stretch;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url("icon/qingmei-cutout.png?v=20260730");
+    background-position: center 2px;
+    background-repeat: no-repeat;
+    background-size: 176px auto;
+    box-shadow: none;
+    filter: none;
+}
+
+body.vocab-mimetic-page .directory-heading-copy::before {
+    border-color: var(--vocab-line);
+}
+
+body.vocab-mimetic-page .directory-heading-copy:hover,
+body.vocab-mimetic-page .curriculum-unit:hover,
+body.vocab-mimetic-page .directory-review:not(:disabled):hover {
+    background: #FFF8E3;
+}
+
+body.vocab-mimetic-page .curriculum-stage-header {
+    border-left-color: var(--vocab-rose);
+    background: #FFF4D7;
+}
+
+@media (max-width: 900px) {
+    body.vocab-mimetic-page .directory-mentor-portrait {
+        background-size: 164px auto;
+    }
+}
+
+@media (max-width: 700px) {
+    body.vocab-mimetic-page .directory-mentor-portrait {
+        background-size: 146px auto;
+    }
+}
+
+@media (max-width: 520px) {
+    body.vocab-mimetic-page .directory-mentor-portrait {
+        background-size: 128px auto;
+    }
+}

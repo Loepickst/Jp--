@@ -672,14 +672,6 @@
             padding-left: 1px;
         }
 
-        .practice-picker-context {
-            color: var(--text-dim);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
         .practice-picker-close {
             width: 32px;
             height: 32px;
@@ -736,37 +728,12 @@
             border-style: dashed;
         }
 
-        .practice-picker-option.is-last-used {
-            border-color: var(--text-accent);
-            background: #FFF9F7;
-        }
-        
-        .practice-picker-option.is-last-used::before {
-            content: '📌 推荐练习';
-            display: inline-block;
-            background: var(--text-accent);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-
         .practice-picker-option-title {
             display: block;
             font-size: 16px;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 6px;
-        }
-
-        .practice-picker-option-sub {
-            display: block;
-            color: var(--text-dim);
-            font-size: 13px;
-            line-height: 1.5;
-            font-weight: 500;
         }
 
         .practice-picker-option-count {
@@ -1052,12 +1019,6 @@
                 font-size: 17px;
             }
 
-            .practice-picker-context {
-                font-size: 12.5px;
-                line-height: 1.55;
-                margin-bottom: 18px;
-            }
-
             .practice-picker-option {
                 padding: 12px 13px;
             }
@@ -1067,10 +1028,6 @@
                 margin-bottom: 4px;
             }
 
-            .practice-picker-option-sub {
-                font-size: 12px;
-                line-height: 1.45;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1273,24 +1230,54 @@
                 font-size: 13.5px;
             }
 
-            .practice-picker-option-sub {
-                font-size: 11.5px;
-            }
         }
     </style>
     <link rel="stylesheet" href="../../../shared/site-fonts.css">
     <link rel="stylesheet" href="../shared/vocabulary-sketch-theme.css">
+    <link rel="stylesheet" href="loanwords-n1-display-v2.css?v=20260731-sync1">
+    <link rel="stylesheet" href="loanwords-n1-directory-v2.css?v=20260731-sync1">
+    <link rel="stylesheet" href="../shared/vocabulary-level-switcher.css?v=20260808-1">
 </head>
-<body>
+<body class="vocab-loanwords-page">
     <header>
-        <a id="back-btn" class="back-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <a id="back-btn" class="back-btn" href="#" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             返回
         </a>
         <h1 id="page-title">N1 外来語</h1>
         <div class="header-actions">
-            <a id="header-home-btn" href="../../../index.html" class="home-btn">主页</a>
-            <button type="button" id="header-practice-btn" class="home-btn" style="display: none;">今日练习</button>
+            <div class="font-size-control" aria-label="切换内容字号">
+                <button
+                    type="button"
+                    id="font-size-trigger"
+                    class="font-size-trigger"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-controls="font-size-drawer"
+                >
+                    <span class="font-size-trigger-mark" aria-hidden="true">Aa</span>
+                    <span id="font-size-current-label" class="font-size-trigger-label">标准</span>
+                    <span class="font-size-trigger-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div id="font-size-drawer" class="font-size-drawer" role="menu" aria-hidden="true">
+                    <button type="button" class="font-size-option" data-detail-font-size="small" role="menuitemradio" aria-checked="false">
+                        <span class="font-size-option-glyph">A−</span>
+                        <span class="font-size-option-copy">小字号</span>
+                        <span class="font-size-option-check" aria-hidden="true">✓</span>
+                    </button>
+                    <button type="button" class="font-size-option" data-detail-font-size="medium" role="menuitemradio" aria-checked="true">
+                        <span class="font-size-option-glyph">A</span>
+                        <span class="font-size-option-copy">标准字号</span>
+                        <span class="font-size-option-check" aria-hidden="true">✓</span>
+                    </button>
+                    <button type="button" class="font-size-option" data-detail-font-size="large" role="menuitemradio" aria-checked="false">
+                        <span class="font-size-option-glyph">A+</span>
+                        <span class="font-size-option-copy">大字号</span>
+                        <span class="font-size-option-check" aria-hidden="true">✓</span>
+                    </button>
+                </div>
+            </div>
+            <button type="button" id="header-practice-btn" hidden>练习</button>
         </div>
     </header>
 
@@ -1302,7 +1289,7 @@
 
         <!-- View 2: Word List (Directory) -->
         <div id="word-list-view" class="hidden">
-            <div id="word-list-container" style="display: flex; flex-direction: column; gap: 16px;">
+            <div id="word-list-container" style="display: flex; flex-direction: column; gap: 12px;">
                 <!-- Injected by JS -->
             </div>
         </div>
@@ -1316,39 +1303,52 @@
     <div id="practice-picker-overlay" class="practice-picker-overlay" aria-hidden="true">
         <div class="practice-picker-panel" role="dialog" aria-modal="true" aria-labelledby="practice-picker-title">
             <div class="practice-picker-topline">
-                <div>
-                    <div class="practice-picker-kicker">阳的外来语辅导室</div>
-                    <div id="practice-picker-title" class="practice-picker-title">选择练习方式</div>
+                <div class="practice-picker-identity">
+                    <img class="practice-picker-avatar" src="icon/wailaiyu-cutout.png?v=20260731" alt="" aria-hidden="true" onerror="this.hidden=true">
+                    <div>
+                        <div class="practice-picker-kicker">阳太的练习建议</div>
+                        <div id="practice-picker-title" class="practice-picker-title">选择练习方式</div>
+                    </div>
                 </div>
-                <button type="button" id="practice-picker-close" class="practice-picker-close" aria-label="关闭">×</button>
+                <button type="button" id="practice-picker-close" class="practice-picker-close" aria-label="关闭">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
             </div>
-            <div id="practice-picker-context" class="practice-picker-context"></div>
             <div id="practice-picker-options" class="practice-picker-options"></div>
         </div>
     </div>
 
     <script src="n1_loanwords_data.js"></script>
-    <script src="n1-loanwords-curriculum.js"></script>
+    <script src="n1-loanwords-memory-hints.js?v=20260815-yota1"></script>
+    <script src="../shared/vocabulary-memory-hint.js?v=20260815-yota1"></script>
+    <script src="n1-loanwords-curriculum.js?v=20260801-groups2"></script>
     <script src="../shared/vocabulary-sentence-review-store.js"></script>
+    <script src="../shared/vocabulary-temporary-unit.js?v=20260807-1"></script>
     <script>
         const CURRICULUM_DAYS = Array.isArray(window.LAB_N1_LOANWORD_DAYS) ? window.LAB_N1_LOANWORD_DAYS : [];
         const CURRICULUM_STAGES = Array.isArray(window.LAB_N1_LOANWORD_STAGES) ? window.LAB_N1_LOANWORD_STAGES : [];
         const CURRICULUM_GROUPS = Array.isArray(window.LAB_N1_LOANWORD_GROUPS) ? window.LAB_N1_LOANWORD_GROUPS : [];
-        
-        const STAR_KEY_PREFIX = 'study_quest_test_v1_vocab_star::';
+        const LOCAL_AUDIO_BY_WORD_ID = new Map();
+        const STAR_KEY_PREFIX = 'study_quest_test_v1_n1_loanwords_vocab_star::';
+        const LEGACY_STAR_KEY_PREFIX = 'study_quest_test_v1_vocab_star::';
         const LAST_DAY_STORAGE_KEY = 'study_quest_test_v1_n1_loanwords_last_day';
         const PRACTICE_TYPE_STORAGE_KEY = 'study_quest_test_v1_n1_loanwords_practice_type';
-        
+        const INDEX_COLLAPSED_STORAGE_KEY = 'study_quest_test_v1_n1_loanwords_index_collapsed';
+        const DETAIL_FONT_SIZE_STORAGE_KEY = 'study_quest_test_v1_n1_loanwords_detail_font_size';
+        const PET_SETTINGS_STORAGE_KEY = 'study_quest_test_v1_kiki_pet_settings_v1';
+        const VOCABULARY_DIRECTORY_HREF = './loanwords_n1.html';
+        const N1_VOCABULARY_HOME_HREF = '../index.html';
+        const BACK_ICON_HTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>';
         const PRACTICE_TYPE_OPTIONS = Object.freeze([
             Object.freeze({
                 id: 'meaning',
                 label: '假名选义',
-                hint: '看外来语选中文意思，确认它在日语里的语感。'
+                hint: '看假名，选出最合适的中文含义。'
             }),
             Object.freeze({
                 id: 'sentence',
-                label: '句子填空',
-                hint: '结合例句语境，选出最合适的外来语。'
+                label: '语境填空',
+                hint: '结合语境，选出最合适的外来语。'
             })
         ]);
         const SENTENCE_REVIEW_MODULE_KEY = 'n1_loanwords';
@@ -1361,19 +1361,30 @@
         let currentWordIndex = 0;
         let currentPracticeType = getStoredPracticeType();
         let practicePickerContext = null;
+        let activeVocabularyAudio = null;
+        let activeSpeechUtterance = null;
+        let activePronounceButton = null;
+        let practicePickerReturnFocus = null;
+        let isWordIndexCollapsed = safeGetItem(INDEX_COLLAPSED_STORAGE_KEY) === 'true';
+        let currentDetailFontSize = normalizeDetailFontSize(safeGetItem(DETAIL_FONT_SIZE_STORAGE_KEY));
+        let directoryScrollY = 0;
+        let wordIndexScrollTop = 0;
+        let isBackNavigationLocked = false;
 
         const backBtn = document.getElementById('back-btn');
         const pageTitle = document.getElementById('page-title');
-        const homeBtn = document.getElementById('header-home-btn');
-        const headerActions = document.querySelector('.header-actions');
         const headerPracticeBtn = document.getElementById('header-practice-btn');
         const daysView = document.getElementById('days-view');
         const wordListView = document.getElementById('word-list-view');
         const wordDetailView = document.getElementById('word-detail-view');
         const practicePickerOverlay = document.getElementById('practice-picker-overlay');
         const practicePickerCloseBtn = document.getElementById('practice-picker-close');
-        const practicePickerContextNode = document.getElementById('practice-picker-context');
         const practicePickerOptionsNode = document.getElementById('practice-picker-options');
+        const detailFontSizeButtons = document.querySelectorAll('[data-detail-font-size]');
+        const fontSizeControl = document.querySelector('.font-size-control');
+        const fontSizeTrigger = document.getElementById('font-size-trigger');
+        const fontSizeDrawer = document.getElementById('font-size-drawer');
+        const fontSizeCurrentLabel = document.getElementById('font-size-current-label');
 
         function safeGetItem(key) {
             try {
@@ -1400,14 +1411,40 @@
             }
         }
 
-        function syncHeaderActions() {
-            if (!headerActions) {
-                return;
+        function normalizeDetailFontSize(value) {
+            return ['small', 'medium', 'large'].includes(value) ? value : 'medium';
+        }
+
+        function applyDetailFontSize(size, shouldPersist = true) {
+            currentDetailFontSize = normalizeDetailFontSize(size);
+            document.body.dataset.vocabFontSize = currentDetailFontSize;
+            detailFontSizeButtons.forEach((button) => {
+                const isActive = button.dataset.detailFontSize === currentDetailFontSize;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-checked', String(isActive));
+            });
+            if (fontSizeCurrentLabel) {
+                fontSizeCurrentLabel.textContent = {
+                    small: '小',
+                    medium: '标准',
+                    large: '大'
+                }[currentDetailFontSize];
             }
-            const shouldShowHome = !!homeBtn && homeBtn.style.display !== 'none';
-            const shouldShowPractice = !!headerPracticeBtn && headerPracticeBtn.style.display !== 'none';
-            headerActions.style.visibility = shouldShowHome || shouldShowPractice ? 'visible' : 'hidden';
-            headerActions.style.pointerEvents = shouldShowHome || shouldShowPractice ? 'auto' : 'none';
+            if (shouldPersist) {
+                safeSetItem(DETAIL_FONT_SIZE_STORAGE_KEY, currentDetailFontSize);
+            }
+        }
+
+        function setFontSizeDrawerOpen(shouldOpen, shouldFocus = false) {
+            if (!fontSizeControl || !fontSizeTrigger || !fontSizeDrawer) return;
+            fontSizeControl.classList.toggle('is-open', shouldOpen);
+            fontSizeTrigger.setAttribute('aria-expanded', String(shouldOpen));
+            fontSizeDrawer.setAttribute('aria-hidden', String(!shouldOpen));
+            if (shouldOpen && shouldFocus) {
+                window.requestAnimationFrame(() => {
+                    fontSizeDrawer.querySelector('.font-size-option.is-active')?.focus();
+                });
+            }
         }
 
         function escapeHtml(value) {
@@ -1420,20 +1457,19 @@
             }[char]));
         }
 
-        function stripDefinitionPrefix(text, meanText, allMeanings = []) {
-            const rawText = String(text || '').trim();
-            if (!rawText) return '';
-            const candidates = [meanText, ...allMeanings]
-                .flatMap((item) => String(item || '').split(/[、，,／/；;]/))
-                .map((item) => item.trim())
-                .filter(Boolean)
-                .sort((a, b) => b.length - a.length);
-            for (const candidate of candidates) {
-                if (rawText.startsWith(`${candidate}：`) || rawText.startsWith(`${candidate}:`)) {
-                    return rawText.slice(candidate.length + 1).trim();
-                }
+        function getPetSystemUserName() {
+            if (window.HomePetSystem && typeof window.HomePetSystem.getUserName === 'function') {
+                const systemName = String(window.HomePetSystem.getUserName() || '').trim();
+                if (systemName) return Array.from(systemName).slice(0, 16).join('');
             }
-            return rawText;
+            try {
+                const settings = JSON.parse(safeGetItem(PET_SETTINGS_STORAGE_KEY) || '{}');
+                return Array.from(String(settings && settings.userName ? settings.userName : '').trim())
+                    .slice(0, 16)
+                    .join('');
+            } catch (error) {
+                return '';
+            }
         }
 
         function isPlaceholderWord(word) {
@@ -1634,6 +1670,17 @@
                 : defaultMessage;
         }
 
+        function migrateLegacyProgress() {
+            if (typeof FULL_WORD_LIST === 'undefined' || !Array.isArray(FULL_WORD_LIST)) return;
+            FULL_WORD_LIST.forEach((word) => {
+                if (!word || isPlaceholderWord(word)) return;
+                const legacyKey = `${LEGACY_STAR_KEY_PREFIX}${word.word}`;
+                if (safeGetItem(legacyKey) === 'true' && safeGetItem(getVocabStarKey(word.word)) !== 'true') {
+                    safeSetItem(getVocabStarKey(word.word), 'true');
+                }
+            });
+        }
+
         function getLastStudiedDay() {
             return parseInt(safeGetItem(LAST_DAY_STORAGE_KEY) || '', 10) || 0;
         }
@@ -1701,7 +1748,7 @@
             if (typeof FULL_WORD_LIST === 'undefined' || !Array.isArray(FULL_WORD_LIST)) return [];
             const wordsPerDay = typeof WORDS_PER_DAY !== 'undefined' ? WORDS_PER_DAY : 20;
             const start = (dayId - 1) * wordsPerDay;
-            const size = dayId === 13 ? 25 : wordsPerDay;
+            const size = wordsPerDay;
             return FULL_WORD_LIST.slice(start, start + size).filter((word) => !isPlaceholderWord(word));
         }
 
@@ -1724,48 +1771,50 @@
 
         function buildPracticePickerMeta(params) {
             if (params && params.mode === 'final') {
-                return {
-                    title: '阳的最终测验',
-                    context: '把外来语的来源、拼写和语感放在一起，做一次完整复习。'
-                };
+                return { title: '综合练习' };
             }
             if (params && Number(params.day) === -1) {
-                return {
-                    title: '错题整理夹',
-                    context: '之前没看稳的外来语，这次慢慢整理清楚。'
-                };
+                return { title: '错题练习' };
             }
             if (params && params.stage != null) {
-                const stage = getCurriculumStage(Number(params.stage));
-                const group = stage ? getCurriculumGroup(stage.groupId) : null;
-                return {
-                    title: '选择练习方式',
-                    context: stage
-                        ? `${group ? `${group.title} · ` : ''}${stage.title}`
-                        : `阶段特训 ${params.stage}`
-                };
+                const stage = getCurriculumStage(params.stage);
+                return { title: stage ? `${stage.title}阶段练习` : '阶段练习' };
             }
             if (params && params.day != null) {
-                const day = getCurriculumDay(Number(params.day));
-                const group = day ? getCurriculumGroup(day.groupId) : null;
-                return {
-                    title: '选择练习方式',
-                    context: day
-                        ? `${group ? `${group.title} · ` : ''}${day.title}`
-                        : `第 ${params.day} 单元`
-                };
+                return { title: '单元练习' };
             }
-            return {
-                title: '选择练习方式',
-                context: '选一个节奏，跟阳把外来语语感整理清楚。'
-            };
+            return { title: '选择练习方式' };
         }
 
-        function closePracticePicker() {
+        function getPracticePickerFocusableNodes() {
+            return Array.from(practicePickerOverlay.querySelectorAll(
+                'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )).filter((node) => !node.hidden);
+        }
+
+        function showPracticePicker() {
+            practicePickerReturnFocus = document.activeElement instanceof HTMLElement
+                ? document.activeElement
+                : null;
+            practicePickerOverlay.classList.add('is-open');
+            practicePickerOverlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('practice-picker-open');
+            window.requestAnimationFrame(() => {
+                const firstOption = practicePickerOptionsNode.querySelector('button:not([disabled])');
+                (firstOption || practicePickerCloseBtn)?.focus();
+            });
+        }
+
+        function closePracticePicker(restoreFocus = true) {
+            const wasOpen = practicePickerOverlay.classList.contains('is-open');
             practicePickerContext = null;
             practicePickerOverlay.classList.remove('is-open');
             practicePickerOverlay.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('practice-picker-open');
+            if (wasOpen && restoreFocus && practicePickerReturnFocus?.isConnected) {
+                window.requestAnimationFrame(() => practicePickerReturnFocus.focus());
+            }
+            practicePickerReturnFocus = null;
         }
 
         function launchPracticeFromPicker(type) {
@@ -1804,7 +1853,6 @@
                 params: { ...(params || {}) },
                 meta: pickerMeta
             };
-            practicePickerContextNode.textContent = pickerMeta.context;
             document.getElementById('practice-picker-title').textContent = pickerMeta.title;
             const isReviewPicker = Number(practicePickerContext.params.day) === -1;
             if (isReviewPicker) {
@@ -1814,14 +1862,12 @@
                     {
                         id: 'keywords',
                         label: '看错关键词',
-                        hint: '把看错、记错和自己记录的词先集中确认一遍。',
                         countLabel: keywordCount > 0 ? `${keywordCount} 词待确认` : '暂无看错关键词',
                         disabled: keywordCount <= 0
                     },
                     {
                         id: 'sentence',
                         label: '句子题回放',
-                        hint: '重做当时错过的句子题，并查看完整解析。',
                         countLabel: sentenceCount > 0 ? `${sentenceCount} 题待回放` : '暂无句子错题',
                         disabled: sentenceCount <= 0
                     }
@@ -1834,41 +1880,31 @@
                     ${option.disabled ? 'disabled' : ''}
                 >
                     <span class="practice-picker-option-title">${escapeHtml(option.label)}</span>
-                    <span class="practice-picker-option-sub">${escapeHtml(option.hint)}<span class="practice-picker-option-count">${escapeHtml(option.countLabel)}</span></span>
+                    <span class="practice-picker-option-count">${escapeHtml(option.countLabel)}</span>
                 </button>
             `).join('');
                 practicePickerOptionsNode.querySelectorAll('[data-review-action]').forEach((node) => {
                     node.addEventListener('click', () => launchReviewActionFromPicker(node.dataset.reviewAction));
                 });
-                practicePickerOverlay.classList.add('is-open');
-                practicePickerOverlay.setAttribute('aria-hidden', 'false');
-                document.body.classList.add('practice-picker-open');
+                showPracticePicker();
                 return;
             }
-            practicePickerOptionsNode.innerHTML = PRACTICE_TYPE_OPTIONS.map((option) => {
-                const reviewCount = isReviewPicker ? getPracticeOptionReviewCount(option.id) : null;
-                const isDisabled = isReviewPicker && reviewCount <= 0;
-                const countHtml = isReviewPicker
-                    ? `<span class="practice-picker-option-count">${escapeHtml(getPracticeOptionReviewCountLabel(option.id))}</span>`
-                    : '';
-                return `
+            practicePickerOptionsNode.innerHTML = PRACTICE_TYPE_OPTIONS.map((option) => `
                 <button
                     type="button"
-                    class="practice-picker-option ${option.id === currentPracticeType ? 'is-last-used' : ''} ${isDisabled ? 'is-disabled' : ''}"
+                    class="practice-picker-option"
                     data-picker-type="${option.id}"
-                    ${isDisabled ? 'disabled' : ''}
                 >
-                    <span class="practice-picker-option-title">${escapeHtml(option.label)}</span>
-                    <span class="practice-picker-option-sub">${escapeHtml(option.hint)}${countHtml}</span>
+                    <span class="practice-picker-option-copy">
+                        <span class="practice-picker-option-title">${escapeHtml(option.label)}</span>
+                        <span class="practice-picker-option-sub">${escapeHtml(option.hint)}</span>
+                    </span>
                 </button>
-            `;
-            }).join('');
+            `).join('');
             practicePickerOptionsNode.querySelectorAll('[data-picker-type]').forEach((node) => {
                 node.addEventListener('click', () => launchPracticeFromPicker(node.dataset.pickerType));
             });
-            practicePickerOverlay.classList.add('is-open');
-            practicePickerOverlay.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('practice-picker-open');
+            showPracticePicker();
         }
 
         function startPractice(dayId) {
@@ -1889,7 +1925,7 @@
 
         function startReviewPractice() {
             if (getReviewWordCount() === 0 && getSentenceReviewQuestionCount() === 0) {
-                alert('还没有需要复习的外来语关键词。');
+                alert('太棒啦！错题本目前是空的哦，继续保持！');
                 return;
             }
             openPracticePicker({ day: -1 });
@@ -1898,140 +1934,157 @@
         function selectStarredWords() {
             const reviewableWords = getReviewableWords();
             if (reviewableWords.length === 0) {
-                alert('还没有需要复习的外来语关键词。');
+                alert('太棒啦！错题本目前是空的哦，继续保持！');
                 return;
             }
             currentDay = -1;
             currentDailyWords = reviewableWords;
-            currentView = 'list';
-            renderWordList(currentDailyWords);
+            currentWordIndex = 0;
+            wordIndexScrollTop = 0;
+            currentView = 'detail';
+            renderDetailCard();
             updateUI();
         }
 
         function renderDays() {
-            daysView.innerHTML = '';
             const reviewWordCount = getReviewWordCount();
             const sentenceReviewQuestionCount = getSentenceReviewQuestionCount();
-            const reviewSubtitle = `看错关键词 ${reviewWordCount} 词 • 句子题 ${sentenceReviewQuestionCount} 题待回放`;
+            const totalDaysCount = CURRICULUM_DAYS.length || 9;
+            const lastDay = Math.min(Math.max(Number(getLastStudiedDay()) || 1, 1), totalDaysCount);
+            const currentDayData = getCurriculumDay(lastDay);
+            const currentUnitTitle = currentDayData && currentDayData.title
+                ? currentDayData.title
+                : `${lastDay}日目`;
+            const currentGroupTitle = currentDayData && currentDayData.groupTitle
+                ? currentDayData.groupTitle
+                : '外来語';
+            const userName = getPetSystemUserName();
+            const greetingText = userName
+                ? `今天也来认识几个新词吧，${userName}！`
+                : '今天也来认识几个新词吧！';
+            const pendingReviewCount = reviewWordCount + sentenceReviewQuestionCount;
+            const stages = CURRICULUM_STAGES.length > 0
+                ? CURRICULUM_STAGES
+                : [{
+                    id: 1,
+                    groupTitle: '外来語',
+                    dayIds: Array.from({ length: totalDaysCount }, (_, index) => index + 1)
+                }];
 
-            // Review Card
-            const reviewCard = document.createElement('div');
-            reviewCard.className = 'day-card';
-            reviewCard.style.borderColor = 'var(--text-accent)';
-            reviewCard.style.background = 'rgba(194, 122, 98, 0.03)';
-            reviewCard.innerHTML = `
-                <div class="day-info">
-                    <div class="day-icon" style="color: var(--text-accent); border-color: var(--text-accent); background: #fff;">🔖</div>
-                    <div class="day-text-group">
-                        <div class="day-title" style="color: var(--text-accent);">错题整理夹</div>
-                        <div class="day-subtitle">${reviewSubtitle}</div>
-                    </div>
-                </div>
-                <div class="go-badge" style="background: var(--text-accent); color: #fff;">复习</div>
-            `;
-            reviewCard.addEventListener('click', startReviewPractice);
-            daysView.appendChild(reviewCard);
-
-            const lastDay = getLastStudiedDay();
-            const stageByEndDay = new Map();
-            CURRICULUM_STAGES.forEach((stage) => {
-                if (Array.isArray(stage.dayIds) && stage.dayIds.length > 0) {
-                    stageByEndDay.set(stage.dayIds[stage.dayIds.length - 1], stage);
-                }
-            });
-
-            const totalDaysCount = CURRICULUM_DAYS.length || 18;
-            
-            for (let dayId = 1; dayId <= totalDaysCount; dayId += 1) {
-                const day = getCurriculumDay(dayId);
-                const wordsPerDay = typeof WORDS_PER_DAY !== 'undefined' ? WORDS_PER_DAY : 20;
-                const wordCount = day && Array.isArray(day.wordIds)
-                    ? day.wordIds.length
-                    : (dayId === 13 ? 25 : wordsPerDay);
-                const badgeHtml = dayId === lastDay ? `<span class="last-studied-badge">上次背诵</span>` : '';
-
-                const dayCard = document.createElement('div');
-                dayCard.className = 'day-card';
-                dayCard.innerHTML = `
-                    <div class="day-info">
-                    <div class="day-icon">📝</div>
-                        <div class="day-text-group">
-                            <div class="day-title-row">
-                                <div class="day-title">第 ${dayId} 单元</div>
-                                ${badgeHtml}
-                            </div>
-                            <div class="day-subtitle">${wordCount} 词 • 待背诵</div>
-                        </div>
-                    </div>
-                    <div class="go-badge">研习</div>
-                `;
-                dayCard.addEventListener('click', () => selectDay(dayId));
-                daysView.appendChild(dayCard);
-
-                const stage = stageByEndDay.get(dayId);
-                if (stage) {
-                    const startDay = stage.dayIds[0];
-                    const endDay = stage.dayIds[stage.dayIds.length - 1];
-                    const stageCard = document.createElement('div');
-                    stageCard.className = 'day-card';
-                    stageCard.style.borderColor = 'var(--accent-teal)';
-                    stageCard.style.background = '#F0FDFA';
-                    stageCard.innerHTML = `
-                        <div class="day-info">
-                            <div class="day-icon" style="border-color: var(--accent-green);">📌</div>
-                            <div class="day-text-group">
-                                <div class="day-title" style="color: var(--accent-green);">${escapeHtml(stage.title || `阶段考核 ${stage.id}`)}</div>
-                                <div class="day-subtitle">单元 ${startDay} - ${endDay} • 20 题考核</div>
-                            </div>
-                        </div>
-                        <div class="go-badge" style="background: var(--accent-green); color: #fff; border-color: var(--accent-green);">考核</div>
+            const stagesHtml = stages.map((stage, stageIndex) => {
+                const dayIds = Array.isArray(stage.dayIds) ? stage.dayIds : [];
+                const startDayId = dayIds[0] || 1;
+                const endDayId = dayIds[dayIds.length - 1] || startDayId;
+                const startDayData = getCurriculumDay(startDayId);
+                const endDayData = getCurriculumDay(endDayId);
+                const startDayTitle = startDayData && startDayData.title ? startDayData.title : `${startDayId}日目`;
+                const endDayTitle = endDayData && endDayData.title ? endDayData.title : `${endDayId}日目`;
+                const stageDayRange = startDayId === endDayId
+                    ? startDayTitle
+                    : `${startDayTitle} 至 ${endDayTitle}`;
+                const stageName = String(stage.groupTitle || stage.title || '外来語');
+                const stageWordCount = dayIds.reduce((total, dayId) => {
+                    const day = getCurriculumDay(dayId);
+                    return total + (day && Array.isArray(day.wordIds) ? day.wordIds.length : 0);
+                }, 0);
+                const stageQuestionCount = Math.min(20, stageWordCount);
+                const unitsHtml = dayIds.map((dayId) => {
+                    const day = getCurriculumDay(dayId);
+                    const fallbackCount = typeof WORDS_PER_DAY !== 'undefined' ? WORDS_PER_DAY : 10;
+                    const wordCount = day && Array.isArray(day.wordIds) ? day.wordIds.length : fallbackCount;
+                    const unitTitle = day && day.title ? day.title : `${dayId}日目`;
+                    const unitOrder = day && Number(day.dayNumber) > 0 ? Number(day.dayNumber) : dayId;
+                    const isCurrent = dayId === lastDay;
+                    return `
+                        <button type="button" class="curriculum-unit ${isCurrent ? 'is-current' : ''}" data-directory-day="${dayId}">
+                            <span class="curriculum-unit-order">${String(unitOrder).padStart(2, '0')}</span>
+                            <span class="curriculum-unit-copy">
+                                <strong>${escapeHtml(unitTitle)}</strong>
+                            </span>
+                            <span class="curriculum-unit-count">${wordCount} 词</span>
+                            <span class="curriculum-unit-state">${isCurrent ? '当前' : '›'}</span>
+                        </button>
                     `;
-                    stageCard.addEventListener('click', () => startStagePractice(stage.id));
-                    daysView.appendChild(stageCard);
-                }
-            }
+                }).join('');
 
-            const finalCard = document.createElement('div');
-            finalCard.className = 'day-card';
-            finalCard.style.borderColor = 'var(--accent-rose)';
-            finalCard.style.background = '#FFF1F2';
-            finalCard.innerHTML = `
-                <div class="day-info">
-                    <div class="day-icon" style="border-color: var(--accent-gold); font-size: 28px;">🎯</div>
-                    <div class="day-text-group">
-                        <div class="day-title" style="color: var(--accent-gold);">阳的最终测验</div>
-                        <div class="day-subtitle">全 ${getAllCurriculumWords().length} 词 • 20 题综合复习</div>
-                    </div>
-                </div>
-                <div class="go-badge" style="background: var(--accent-gold); color: #fff; border: none;">挑战</div>
-            `;
-            finalCard.addEventListener('click', startFinalPractice);
-            daysView.appendChild(finalCard);
-
-            // Prep Card
-            const prepCard = document.createElement('div');
-            prepCard.className = 'day-card prep';
-            prepCard.innerHTML = `
-                <div class="day-info">
-                    <div class="day-text-group">
-                        <div style="margin-bottom:6px;">
-                            <span style="background: rgba(0,0,0,0.1); color: var(--text-secondary); font-size:11px; padding:2px 8px; border-radius:4px; font-weight:700;">整理中</span>
+                return `
+                    <section class="curriculum-stage">
+                        <header class="curriculum-stage-header">
+                            <span class="curriculum-stage-number">${String(stageIndex + 1).padStart(2, '0')}</span>
+                            <div class="curriculum-stage-copy">
+                                <small>大分類</small>
+                                <h3>${escapeHtml(stageName)}</h3>
+                            </div>
+                            <button
+                                type="button"
+                                class="curriculum-stage-practice"
+                                data-directory-stage="${stage.id}"
+                                aria-label="开始${escapeHtml(stageName)}阶段练习，${escapeHtml(stageDayRange)}，共 ${stageQuestionCount} 题"
+                            >阶段练习</button>
+                        </header>
+                        <div class="curriculum-unit-grid">
+                            ${unitsHtml}
                         </div>
-                        <div class="day-title">新内容整理中</div>
-                        <div class="day-subtitle" style="margin-top:4px;">新一批外来语还在整理中。</div>
+                    </section>
+                `;
+            }).join('');
+
+            daysView.innerHTML = `
+                <section class="directory-heading" aria-labelledby="directory-title">
+                    <span class="directory-mentor-portrait" role="img" aria-hidden="true"></span>
+                    <button type="button" class="directory-heading-copy" data-continue-day="${lastDay}">
+                        <small>阳太</small>
+                        <h2 id="directory-title">${escapeHtml(greetingText)}</h2>
+                        <span class="directory-current-unit">
+                            <span>继续学习</span>
+                            <strong>${escapeHtml(currentGroupTitle)} · ${escapeHtml(currentUnitTitle)}</strong>
+                            <b>›</b>
+                        </span>
+                    </button>
+                </section>
+
+                <button type="button" class="directory-review ${pendingReviewCount > 0 ? '' : 'is-empty'}" data-directory-review ${pendingReviewCount > 0 ? '' : 'disabled'}>
+                    <span class="directory-review-marker" aria-hidden="true"></span>
+                    <span class="directory-review-copy">
+                        <strong>错题库</strong>
+                        <small>${pendingReviewCount > 0 ? `${pendingReviewCount} 项内容等待复盘` : '目前没有需要复盘的内容'}</small>
+                    </span>
+                    <span class="directory-review-action">${pendingReviewCount > 0 ? '查看错题' : '状态良好'} <b>›</b></span>
+                </button>
+
+                <div class="directory-section-heading">
+                    <div>
+                        <h2>学習日程</h2>
                     </div>
+                    <p>学習する日を選択</p>
                 </div>
-                <div class="construction-icon">💤</div>
+
+                <div class="curriculum-stage-list">
+                    ${stagesHtml}
+                </div>
             `;
-            daysView.appendChild(prepCard);
+
+            daysView.querySelectorAll('[data-directory-day]').forEach((button) => {
+                button.addEventListener('click', () => selectDay(Number(button.dataset.directoryDay)));
+            });
+            daysView.querySelectorAll('[data-directory-stage]').forEach((button) => {
+                button.addEventListener('click', () => startStagePractice(Number(button.dataset.directoryStage)));
+            });
+            daysView.querySelector('[data-continue-day]')?.addEventListener('click', (event) => {
+                selectDay(Number(event.currentTarget.dataset.continueDay));
+            });
+            daysView.querySelector('[data-directory-review]')?.addEventListener('click', startReviewPractice);
         }
 
         function selectDay(dayId) {
+            directoryScrollY = window.scrollY;
             setLastStudiedDay(dayId);
             currentDay = dayId;
-            currentView = 'list';
             currentDailyWords = getDayWords(dayId);
-            renderWordList(currentDailyWords);
+            currentWordIndex = 0;
+            wordIndexScrollTop = 0;
+            currentView = 'detail';
+            renderDetailCard();
             updateUI();
         }
 
@@ -2042,7 +2095,7 @@
 
             if (words.length === 0) {
                 container.innerHTML = `
-                    <div style="padding:42px 20px; text-align:center; color:var(--text-secondary); font-weight:900; line-height:1.8;">
+                    <div style="padding:42px 20px; text-align:center; color:var(--text-dim); font-weight:700; line-height:1.8;">
                         ${isReviewKeywordList ? '看错关键词已经清空。句子题如果还有待回放，可以从错题库入口继续复盘。' : '这一组词条还在整理中。'}
                     </div>
                 `;
@@ -2060,7 +2113,7 @@
                 const actionTitle = isReviewKeywordList ? '移出错题词' : '加入错题本';
                 const sentenceMistakeCount = getSentenceMistakeCountForWord(wordData);
                 const sentenceMistakeHtml = sentenceMistakeCount > 0
-                    ? `<div style="font-size:12px; font-weight:700; color: var(--text-tertiary); line-height:1.5;">句子错 ${sentenceMistakeCount} 次</div>`
+                    ? `<div style="font-size:12px; font-weight:600; color: var(--text-dim); line-height:1.5;">句子错 ${sentenceMistakeCount} 次</div>`
                     : '';
                 item.innerHTML = `
                     <div style="min-width:0; display:flex; flex-direction:column; gap:4px;">
@@ -2106,6 +2159,118 @@
             button.classList.toggle('active', nextActive);
         }
 
+        function restorePronounceButton(button) {
+            if (!button) return;
+            button.classList.remove('is-playing');
+            button.textContent = '发音';
+        }
+
+        function stopVocabularyPlayback() {
+            const audio = activeVocabularyAudio;
+            const button = activePronounceButton;
+            activeVocabularyAudio = null;
+            activeSpeechUtterance = null;
+            activePronounceButton = null;
+
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+            restorePronounceButton(button);
+        }
+
+        function playSystemVocabularyWord(word, button) {
+            const synth = window.speechSynthesis;
+            if (!synth || typeof window.SpeechSynthesisUtterance !== 'function') {
+                alert('当前浏览器暂不支持词汇发音。');
+                restorePronounceButton(button);
+                return;
+            }
+
+            synth.cancel();
+            const utterance = new window.SpeechSynthesisUtterance(String(word || '').trim());
+            const japaneseVoice = synth.getVoices().find((voice) => /^ja(?:-|_)/i.test(voice.lang));
+            utterance.lang = 'ja-JP';
+            utterance.rate = 0.82;
+            utterance.pitch = 1;
+            if (japaneseVoice) {
+                utterance.voice = japaneseVoice;
+            }
+
+            const restoreButton = () => {
+                if (activeSpeechUtterance !== utterance) return;
+                activeSpeechUtterance = null;
+                activePronounceButton = null;
+                restorePronounceButton(button);
+            };
+
+            activeSpeechUtterance = utterance;
+            activePronounceButton = button;
+            button.classList.add('is-playing');
+            button.textContent = '播放中';
+            utterance.addEventListener('end', restoreButton, { once: true });
+            utterance.addEventListener('error', restoreButton, { once: true });
+            synth.speak(utterance);
+        }
+
+        function playLocalVocabularyAudio(entry, word, button) {
+            const audio = new window.Audio(entry.src);
+            let fallbackStarted = false;
+
+            const finishPlayback = () => {
+                if (activeVocabularyAudio !== audio) return;
+                activeVocabularyAudio = null;
+                activePronounceButton = null;
+                restorePronounceButton(button);
+            };
+            const fallbackToSystemVoice = () => {
+                if (fallbackStarted || activeVocabularyAudio !== audio) return;
+                fallbackStarted = true;
+                audio.pause();
+                activeVocabularyAudio = null;
+                activePronounceButton = null;
+                restorePronounceButton(button);
+                playSystemVocabularyWord(word, button);
+            };
+
+            audio.preload = 'auto';
+            activeVocabularyAudio = audio;
+            activePronounceButton = button;
+            button.classList.add('is-playing');
+            button.textContent = '播放中';
+            audio.addEventListener('ended', finishPlayback, { once: true });
+            audio.addEventListener('error', fallbackToSystemVoice, { once: true });
+
+            const playPromise = audio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(fallbackToSystemVoice);
+            }
+        }
+
+        function getLoanwordSpokenForm(wordData) {
+            const reading = String(wordData && wordData.reading || '').trim();
+            return reading || String(wordData && wordData.word || '').trim();
+        }
+
+        function speakVocabularyWord(wordData, button) {
+            if (activePronounceButton === button && button.classList.contains('is-playing')) {
+                stopVocabularyPlayback();
+                return;
+            }
+
+            stopVocabularyPlayback();
+            const localAudio = LOCAL_AUDIO_BY_WORD_ID.get(Number(wordData && wordData.id));
+            const spokenForm = getLoanwordSpokenForm(wordData);
+            if (localAudio && typeof window.Audio === 'function') {
+                playLocalVocabularyAudio(localAudio, spokenForm, button);
+                return;
+            }
+            playSystemVocabularyWord(spokenForm, button);
+        }
+
         function openWordDetail(index) {
             currentWordIndex = index;
             currentView = 'detail';
@@ -2113,105 +2278,213 @@
             updateUI();
         }
 
+        function restoreWordIndexPosition(container) {
+            const wordList = container.querySelector('.study-word-list');
+            if (!wordList) return;
+
+            wordList.scrollTop = wordIndexScrollTop;
+            if (!isWordIndexCollapsed) {
+                const selectedWord = wordList.querySelector('.study-word-link.is-selected');
+                if (selectedWord) {
+                    const listRect = wordList.getBoundingClientRect();
+                    const selectedRect = selectedWord.getBoundingClientRect();
+                    if (selectedRect.top < listRect.top) {
+                        wordList.scrollTop -= listRect.top - selectedRect.top;
+                    } else if (selectedRect.bottom > listRect.bottom) {
+                        wordList.scrollTop += selectedRect.bottom - listRect.bottom;
+                    }
+                }
+            }
+            wordIndexScrollTop = wordList.scrollTop;
+        }
+
         function renderDetailCard() {
+            stopVocabularyPlayback();
             const container = document.getElementById('word-detail-view');
+            const previousWordList = container.querySelector('.study-word-list');
+            if (previousWordList) {
+                wordIndexScrollTop = previousWordList.scrollTop;
+            }
             const wordData = currentDailyWords[currentWordIndex];
             if (!wordData) return;
 
-            const toneHtml = wordData.tone ? `<span class="tone-number">${wordData.tone}</span>` : '';
-            const posHtml = wordData.pos ? `<span class="pos-tag">${wordData.pos}</span>` : '';
-            const originHtml = wordData.origin ? `<span class="pos-tag">${escapeHtml(wordData.origin)}</span>` : '';
+            const toneHtml = wordData.tone ? `<span class="study-tone">${escapeHtml(wordData.tone)}</span>` : '';
+            const posHtml = wordData.pos ? `<span class="study-pos">${escapeHtml(wordData.pos)}</span>` : '';
+            const originHtml = wordData.origin ? `<span class="study-origin">${escapeHtml(wordData.origin)}</span>` : '';
             const meanings = wordData.mean ? wordData.mean.split(/[；;]/).map((item) => item.trim()).filter(Boolean) : [];
             const nuances = wordData.nuance
                 ? wordData.nuance.split('\n').map((line) => line.trim().replace(/^\d+\.\s*/, '')).filter(Boolean)
                 : [];
             const examples = Array.isArray(wordData.examples) ? wordData.examples : [];
             const count = Math.max(meanings.length, nuances.length, examples.length);
-            const numbers = ['❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽', '❾', '❿'];
+            const isReviewKeywordList = currentDay === -1;
+            const isTemporaryUnit = currentDay === -2;
+            const isReviewStyleUnit = isReviewKeywordList || isTemporaryUnit;
+            const dayData = isReviewStyleUnit ? null : getCurriculumDay(currentDay);
+            const unitTitle = isTemporaryUnit ? '本次错词复习' : (isReviewKeywordList ? '看错关键词' : (dayData && dayData.title ? dayData.title : `${currentDay}日目`));
+            const unitLabel = isTemporaryUnit ? '临时单元' : (isReviewKeywordList
+                ? 'N1 外来語 · 错题库'
+                : `N1 · ${dayData && dayData.groupTitle ? dayData.groupTitle : '外来語'}`);
+            const coreText = window.VocabularyMemoryHint
+                ? window.VocabularyMemoryHint.buildHint(wordData, 'yota')
+                : (nuances[0] || meanings.join('；') || '先把片假名词形和它在日语中的实际意思连起来。');
+            const directoryTitle = isTemporaryUnit ? '本次错词' : (isReviewKeywordList ? '错题词汇' : '本日词汇');
+            const progress = currentDailyWords.length > 0
+                ? Math.round(((currentWordIndex + 1) / currentDailyWords.length) * 100)
+                : 0;
+
+            const wordListHtml = currentDailyWords.map((word, index) => `
+                <button
+                    type="button"
+                    class="study-word-link ${index === currentWordIndex ? 'is-selected' : ''}"
+                    data-study-word-index="${index}"
+                    ${index === currentWordIndex ? 'aria-current="page"' : ''}
+                >
+                    ${word.word_html || escapeHtml(word.word)}
+                </button>
+            `).join('');
 
             let definitionsHtml = '';
             for (let index = 0; index < count; index += 1) {
                 const meanText = meanings[index] || (meanings.length === 1 && index === 0 ? meanings[0] : '');
-                const nuanceText = stripDefinitionPrefix(nuances[index] || '', meanText, meanings);
+                const nuanceText = nuances[index] || '';
                 const example = examples[index];
-                
-                definitionsHtml += `<div class="def-group">`;
-                if (meanText || nuanceText) {
-                    definitionsHtml += `
-                        <div class="def-head">
-                            <span class="def-number">${numbers[index] || `${index + 1}.`}</span>
-                            <div class="def-copy">
-                                ${meanText ? `<span class="def-meaning">${meanText}</span>` : ''}
-                                ${nuanceText ? `<span class="def-nuance">（${nuanceText}）</span>` : ''}
+
+                definitionsHtml += `
+                    <div class="study-usage-group">
+                        <div class="study-usage-number">${String(index + 1).padStart(2, '0')}</div>
+                        <div>
+                            <div class="study-usage-copy">
+                                ${meanText ? `<strong class="hide-target">${escapeHtml(meanText)}</strong>` : '<strong>典型用法</strong>'}
+                                ${nuanceText ? `<span class="hide-target">${escapeHtml(nuanceText)}</span>` : ''}
                             </div>
+                            ${example ? `
+                                <div class="study-example">
+                                    <p class="study-example-jp" lang="ja">${example.jp}</p>
+                                    <span class="hide-target study-example-cn">${escapeHtml(example.cn)}</span>
+                                </div>
+                            ` : ''}
                         </div>
-                    `;
-                }
-                if (example) {
-                    definitionsHtml += `
-                        <div class="def-ex">
-                            <div class="def-example-label">例句</div>
-                            <div class="def-example-body">
-                                <div class="ex-jp" lang="ja">${example.jp}</div>
-                                <div class="ex-cn">（${example.cn}）</div>
-                            </div>
-                        </div>
-                    `;
-                }
-                definitionsHtml += `</div>`;
+                    </div>
+                `;
             }
 
             const isFirst = currentWordIndex === 0;
             const isLast = currentWordIndex === currentDailyWords.length - 1;
-            const isReviewKeywordList = currentDay === -1;
             const wordId = wordData.word;
             const isStarred = safeGetItem(getVocabStarKey(wordId)) === 'true';
             const actionClass = isReviewKeywordList ? 'active review-remove' : (isStarred ? 'active' : '');
-            const actionLabel = isReviewKeywordList ? '移出' : '🔖';
+            const actionLabel = isReviewKeywordList ? '移出错题库' : (isStarred ? '★ 已收藏' : '☆ 收藏');
             const actionTitle = isReviewKeywordList ? '移出错题词' : '加入错题本';
-            const sentenceMistakeCount = getSentenceMistakeCountForWord(wordData);
-            const metaHtml = toneHtml || posHtml || originHtml
-                ? `<div class="fc-meta-group">${toneHtml}${posHtml}${originHtml}</div>`
-                : '';
-            const sentenceMistakeHtml = sentenceMistakeCount > 0
-                ? `<div style="margin-top:10px;"><span style="display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background: rgba(198, 104, 104, 0.08); border: 1px solid rgba(198, 104, 104, 0.22); color: var(--text-accent); font-size:12px; font-weight:700; letter-spacing:0.04em;">句子错 ${sentenceMistakeCount} 次</span></div>`
-                : '';
+            const spokenForm = getLoanwordSpokenForm(wordData);
 
             container.innerHTML = `
-                <div class="flashcard-main">
-                    <div class="fc-header">
-                        <div class="fc-word-group">
-                            <div class="fc-title-row">
-                                <div class="fc-word">${wordData.word_html || wordData.word}</div>
-                                ${metaHtml}
-                            </div>
-                            ${sentenceMistakeHtml}
-                        </div>
-                        <div class="mark-btn fc-action ${actionClass}" onclick="toggleMark(this, '${wordId}')" title="${actionTitle}" aria-label="${actionTitle}">${actionLabel}</div>
+                <div class="study-unit-line">
+                    <div class="study-unit-copy">
+                        <span class="study-unit-label">${escapeHtml(unitLabel)}</span>
+                        <strong class="study-unit-title">${escapeHtml(unitTitle)}</strong>
                     </div>
-                    
-                    <div style="flex: 1;">
-                        <div class="fc-section-title">解析与例句</div>
-                        <div>
-                            ${definitionsHtml}
-                        </div>
-                    </div>
-
-                    <div class="nav-controls">
-                        <button class="nav-btn ${isFirst ? 'disabled' : ''}" onclick="navigateWord(-1)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                            上一词
-                        </button>
-                        <div class="nav-progress">${currentWordIndex + 1} / ${currentDailyWords.length}</div>
-                        <button class="nav-btn primary ${isReviewKeywordList ? (isLast ? 'disabled' : '') : (isLast ? 'practice-btn' : '')}" onclick="${isReviewKeywordList ? (isLast ? '' : 'navigateWord(1)') : (isLast ? `startPractice(${currentDay})` : 'navigateWord(1)')}">
-                            ${isReviewKeywordList ? '下一词' : (isLast ? '去考核 (考核)' : '下一词')}
-                            ${isReviewKeywordList && isLast ? '' : (!isReviewKeywordList && isLast ? '' : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>')}
-                        </button>
+                    <div class="study-unit-progress" aria-label="词汇进度 ${currentWordIndex + 1}/${currentDailyWords.length}">
+                        <span>${currentWordIndex + 1} / ${currentDailyWords.length}</span>
+                        <i class="study-progress-track"><span style="width:${progress}%"></span></i>
                     </div>
                 </div>
+
+                <section class="study-workspace ${isWordIndexCollapsed ? 'is-index-collapsed' : ''}">
+                    <aside class="study-word-index">
+                        <div class="study-index-header">
+                            <div class="study-index-title">
+                                <strong>${escapeHtml(directoryTitle)}</strong>
+                                <span>${currentDailyWords.length} 词</span>
+                            </div>
+                            <button
+                                type="button"
+                                class="study-index-toggle"
+                                data-index-toggle
+                                aria-expanded="${isWordIndexCollapsed ? 'false' : 'true'}"
+                                aria-label="${isWordIndexCollapsed ? '展开词汇目录' : '收起词汇目录'}"
+                                title="${isWordIndexCollapsed ? '展开词汇目录' : '收起词汇目录'}"
+                            >${isWordIndexCollapsed ? '›' : '‹'}</button>
+                        </div>
+                        <nav class="study-word-list" aria-label="${escapeHtml(directoryTitle)}">
+                            ${wordListHtml}
+                        </nav>
+                    </aside>
+
+                    <article class="study-detail-panel">
+                        <header class="study-word-header">
+                            <div class="study-word-title-row">
+                                <div class="study-word-title">
+                                    <h2>${wordData.word_html || escapeHtml(wordData.word)}</h2>
+                                    <div>
+                                        ${toneHtml}
+                                        ${posHtml}
+                                        ${originHtml}
+                                    </div>
+                                    <button type="button" class="study-pronounce" data-study-pronounce aria-label="播放 ${escapeHtml(spokenForm)} 的日语发音">发音</button>
+                                </div>
+                                <button type="button" class="detail-save ${actionClass}" data-detail-mark title="${actionTitle}" aria-label="${actionTitle}">${actionLabel}</button>
+                            </div>
+                        </header>
+
+                        <section class="study-usage-section">
+                            <div class="study-section-heading">
+                                <h3>用法与例句</h3>
+                                <p>结合词源和日语语境理解实际用法</p>
+                            </div>
+                            ${definitionsHtml || '<div class="study-usage-group"><div class="study-usage-number">01</div><div class="study-usage-copy"><span>内容整理中</span></div></div>'}
+                        </section>
+
+                        <aside class="study-mentor-note">
+                            <img src="icon/wailaiyu-cutout.png?v=20260731" alt="" aria-hidden="true" onerror="this.hidden=true">
+                            <div>
+                                <strong>阳太的学习提示</strong>
+                                <p>${escapeHtml(coreText)}</p>
+                            </div>
+                        </aside>
+
+                        <footer class="study-detail-footer">
+                            <button type="button" data-study-nav="-1" ${isFirst ? 'disabled' : ''}>‹ 上一词${!isFirst ? `　${escapeHtml(currentDailyWords[currentWordIndex - 1].word)}` : ''}</button>
+                            <span>第 ${currentWordIndex + 1} 个，共 ${currentDailyWords.length} 个</span>
+                            <button type="button" data-study-nav="1" ${isReviewStyleUnit && isLast ? 'disabled' : ''}>${isLast && !isReviewStyleUnit ? '完成并练习' : `下一词${!isLast ? `　${escapeHtml(currentDailyWords[currentWordIndex + 1].word)}` : ''} ›`}</button>
+                        </footer>
+                    </article>
+                </section>
             `;
 
-            window.scrollTo(0, 0);
+            restoreWordIndexPosition(container);
+            container.querySelectorAll('[data-study-word-index]').forEach((button) => {
+                button.addEventListener('click', () => openWordDetail(Number(button.dataset.studyWordIndex)));
+            });
+            container.querySelector('[data-index-toggle]')?.addEventListener('click', (event) => {
+                isWordIndexCollapsed = !isWordIndexCollapsed;
+                safeSetItem(INDEX_COLLAPSED_STORAGE_KEY, String(isWordIndexCollapsed));
+                const workspace = container.querySelector('.study-workspace');
+                workspace?.classList.toggle('is-index-collapsed', isWordIndexCollapsed);
+                event.currentTarget.textContent = isWordIndexCollapsed ? '›' : '‹';
+                event.currentTarget.setAttribute('aria-expanded', isWordIndexCollapsed ? 'false' : 'true');
+                event.currentTarget.setAttribute('aria-label', isWordIndexCollapsed ? '展开词汇目录' : '收起词汇目录');
+                event.currentTarget.setAttribute('title', isWordIndexCollapsed ? '展开词汇目录' : '收起词汇目录');
+            });
+            container.querySelector('[data-detail-mark]')?.addEventListener('click', (event) => {
+                toggleMark(event.currentTarget, wordId);
+                if (!isReviewKeywordList) {
+                    renderDetailCard();
+                }
+            });
+            container.querySelector('[data-study-pronounce]')?.addEventListener('click', (event) => {
+                speakVocabularyWord(wordData, event.currentTarget);
+            });
+            container.querySelectorAll('[data-study-nav]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const direction = Number(button.dataset.studyNav);
+                    if (isLast && direction === 1 && !isReviewStyleUnit) {
+                        startPractice(currentDay);
+                        return;
+                    }
+                    navigateWord(direction);
+                });
+            });
         }
 
         function navigateWord(direction) {
@@ -2222,69 +2495,131 @@
             }
         }
 
+        function configureBackButton(label, href) {
+            backBtn.setAttribute('href', href);
+            backBtn.setAttribute('aria-label', label);
+            backBtn.innerHTML = `${BACK_ICON_HTML} ${label}`;
+        }
+
+        function returnToVocabularyDirectory() {
+            currentView = 'days';
+            renderDays();
+            updateUI();
+            window.requestAnimationFrame(() => {
+                window.scrollTo({ top: directoryScrollY, behavior: 'auto' });
+            });
+        }
+
+        function handleBackNavigation(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            if (isBackNavigationLocked) return;
+            isBackNavigationLocked = true;
+            if (currentView === 'days') {
+                window.location.assign(N1_VOCABULARY_HOME_HREF);
+                return;
+            }
+            returnToVocabularyDirectory();
+            window.setTimeout(() => {
+                isBackNavigationLocked = false;
+            }, 300);
+        }
+
+        function handleHeaderPracticeClick() {
+            if (currentView !== 'list' && currentView !== 'detail') return;
+            if (currentDay === -2) return;
+            if (currentDay === -1) {
+                startReviewPractice();
+                return;
+            }
+            startPractice(currentDay);
+        }
+
         function updateUI() {
+            if (currentView !== 'detail') {
+                stopVocabularyPlayback();
+                setFontSizeDrawerOpen(false);
+            }
             daysView.classList.add('hidden');
             wordListView.classList.add('hidden');
             wordDetailView.classList.add('hidden');
+            document.body.classList.toggle('study-detail-active', currentView === 'detail');
+            document.body.classList.toggle('study-days-active', currentView === 'days');
 
-            if (homeBtn) {
-                homeBtn.style.display = 'none';
-            }
             if (headerPracticeBtn) {
-                headerPracticeBtn.style.display = 'none';
-                headerPracticeBtn.onclick = null;
+                headerPracticeBtn.hidden = true;
             }
 
             if (currentView === 'days') {
                 daysView.classList.remove('hidden');
                 pageTitle.textContent = 'N1 外来語';
-                backBtn.onclick = () => window.location.href = 'index.html';
-                backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> 返回';
-                if (homeBtn) {
-                    homeBtn.style.display = 'inline-flex';
-                }
-                syncHeaderActions();
+                configureBackButton('返回词汇入口', N1_VOCABULARY_HOME_HREF);
                 return;
             }
 
             if (currentView === 'list') {
                 wordListView.classList.remove('hidden');
-                pageTitle.textContent = currentDay === -1 ? '错题合集' : `第 ${currentDay} 单元`;
+                pageTitle.textContent = currentDay === -1 ? '错题合集' : `${getCurriculumDay(currentDay)?.title || `${currentDay}日目`}`;
                 if (currentDailyWords.length > 0) {
                     renderWordList(currentDailyWords);
                 }
                 if (headerPracticeBtn) {
                     headerPracticeBtn.textContent = currentDay === -1 ? '错题练习' : '今日练习';
-                    headerPracticeBtn.onclick = () => {
-                        if (currentDay === -1) {
-                            startReviewPractice();
-                            return;
-                        }
-                        startPractice(currentDay);
-                    };
-                    headerPracticeBtn.style.display = 'inline-flex';
+                    headerPracticeBtn.hidden = currentDay === -2;
                 }
-                syncHeaderActions();
-                backBtn.onclick = () => {
-                    currentView = 'days';
-                    renderDays();
-                    updateUI();
-                };
-                backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> 返回';
+                configureBackButton('返回目录', VOCABULARY_DIRECTORY_HREF);
                 return;
             }
 
             wordDetailView.classList.remove('hidden');
-            pageTitle.textContent = '细细打磨';
-            syncHeaderActions();
-            backBtn.onclick = () => {
-                currentView = 'list';
-                updateUI();
-            };
-            backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> 返回';
+            pageTitle.textContent = 'N1 外来語';
+            if (headerPracticeBtn) {
+                headerPracticeBtn.textContent = currentDay === -1 ? '错题练习' : '练习';
+                headerPracticeBtn.hidden = currentDay === -2;
+            }
+            configureBackButton('返回目录', VOCABULARY_DIRECTORY_HREF);
         }
 
-        renderDays();
+        document.addEventListener('click', (event) => {
+            const dynamicBack = event.target instanceof Element
+                ? event.target.closest('#back-btn[data-kiki-dynamic-back]')
+                : null;
+            if (!dynamicBack) return;
+            handleBackNavigation(event);
+        }, true);
+        headerPracticeBtn?.addEventListener('click', handleHeaderPracticeClick);
+        applyDetailFontSize(currentDetailFontSize, false);
+        detailFontSizeButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                applyDetailFontSize(button.dataset.detailFontSize);
+                setFontSizeDrawerOpen(false);
+                fontSizeTrigger?.focus();
+            });
+        });
+        fontSizeTrigger?.addEventListener('click', () => {
+            const shouldOpen = !fontSizeControl.classList.contains('is-open');
+            setFontSizeDrawerOpen(shouldOpen, shouldOpen);
+        });
+        document.addEventListener('click', (event) => {
+            if (fontSizeControl && !fontSizeControl.contains(event.target)) {
+                setFontSizeDrawerOpen(false);
+            }
+        });
+
+        migrateLegacyProgress();
+        const temporaryUnitWords = window.VocabularyTemporaryUnit && window.VocabularyTemporaryUnit.isRequested()
+            ? window.VocabularyTemporaryUnit.resolve(SENTENCE_REVIEW_MODULE_KEY, FULL_WORD_LIST, getWordStorageId)
+            : [];
+        if (temporaryUnitWords.length) {
+            currentDay = -2;
+            currentDailyWords = temporaryUnitWords;
+            currentWordIndex = 0;
+            wordIndexScrollTop = 0;
+            currentView = 'detail';
+            renderDetailCard();
+        } else {
+            renderDays();
+        }
         updateUI();
 
         if (practicePickerCloseBtn) {
@@ -2300,6 +2635,25 @@
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && practicePickerOverlay.classList.contains('is-open')) {
                 closePracticePicker();
+                return;
+            }
+            if (event.key === 'Tab' && practicePickerOverlay.classList.contains('is-open')) {
+                const focusableNodes = getPracticePickerFocusableNodes();
+                if (focusableNodes.length > 0) {
+                    const firstNode = focusableNodes[0];
+                    const lastNode = focusableNodes[focusableNodes.length - 1];
+                    if (event.shiftKey && (document.activeElement === firstNode || !practicePickerOverlay.contains(document.activeElement))) {
+                        event.preventDefault();
+                        lastNode.focus();
+                    } else if (!event.shiftKey && document.activeElement === lastNode) {
+                        event.preventDefault();
+                        firstNode.focus();
+                    }
+                }
+            }
+            if (event.key === 'Escape' && fontSizeControl?.classList.contains('is-open')) {
+                setFontSizeDrawerOpen(false);
+                fontSizeTrigger?.focus();
             }
         });
 
@@ -2325,5 +2679,8 @@
             }
         }, false);
     </script>
+    <script src="../shared/vocabulary-level-switcher.js?v=20260808-1"></script>
+    <script src="../../../shared/word-bank.js?v=20260808-vocab-pos1"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

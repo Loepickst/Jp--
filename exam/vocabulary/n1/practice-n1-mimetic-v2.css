@@ -1,0 +1,97 @@
+@import url("./practice-n1-verbs-v2.css");
+
+:root {
+    --practice-page: #FBF7EA;
+    --practice-surface: #FFFDF7;
+    --practice-surface-soft: #FFF8E8;
+    --practice-ink: #2F2B23;
+    --practice-ink-soft: #514A3D;
+    --practice-muted: #706654;
+    --practice-faint: #706654;
+    --practice-line: #E8DDBF;
+    --practice-line-strong: #C8B98F;
+    --practice-accent: #956000;
+    --practice-navy: #744A00;
+    --practice-rose: #956000;
+    --practice-green: #47705B;
+    --practice-green-soft: #EBF3ED;
+    --practice-red: #A64E43;
+    --practice-red-soft: #FAECE9;
+    --practice-shadow: 0 18px 48px rgba(116, 74, 0, .09);
+}
+
+body.vocab-mimetic-practice .practice-topbar-title::before,
+body.vocab-mimetic-practice .dialogue-type-label::before {
+    background: var(--practice-rose);
+}
+
+body.vocab-mimetic-practice .enemy-avatar,
+body.vocab-mimetic-practice .enemy-avatar[style] {
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: .58;
+}
+
+body.vocab-mimetic-practice .enemy-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: contain;
+}
+
+body.vocab-mimetic-practice .intro-avatar,
+body.vocab-mimetic-practice .intro-avatar[style] {
+    width: 116px;
+    height: 116px;
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.vocab-mimetic-practice .intro-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: contain;
+}
+
+body.vocab-mimetic-practice .practice-mentor-speaker {
+    color: var(--practice-rose);
+}
+
+body.vocab-mimetic-practice .action-option:hover:not(:disabled),
+body.vocab-mimetic-practice .action-option:focus-visible:not(:disabled) {
+    background: #FFF8E3 !important;
+}
+
+body.vocab-mimetic-practice :is(
+    .practice-context-kind,
+    .practice-context-title,
+    .dialogue-counter,
+    .practice-mentor-copy,
+    .practice-question-footer,
+    .practice-skip-btn
+) {
+    font-size: 12px;
+}
+
+body.vocab-mimetic-practice :is(button, a, input):focus-visible {
+    outline: 2px solid var(--practice-accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-mimetic-practice *,
+    body.vocab-mimetic-practice *::before,
+    body.vocab-mimetic-practice *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

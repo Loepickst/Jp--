@@ -1,0 +1,83 @@
+@import url("./verbs-n1-display-v2.css?v=20260730-scroll1");
+
+:root {
+    --vocab-page: #f7f4f2;
+    --vocab-surface: #ffffff;
+    --vocab-surface-subtle: #fbf8f7;
+    --vocab-surface-accent: #f5efee;
+    --vocab-ink: #2f2a2b;
+    --vocab-ink-soft: #51474a;
+    --vocab-muted: #786d70;
+    --vocab-faint: #786d70;
+    --vocab-line: #e8e1df;
+    --vocab-line-strong: #d6cac8;
+    --vocab-accent: #765b68;
+    --vocab-accent-strong: #563e4a;
+    --vocab-accent-soft: #eee7eb;
+    --vocab-accent-faint: #faf6f8;
+    --vocab-rose: #a85f62;
+    --vocab-rose-soft: #f7e9e7;
+    --vocab-sage: #4e776b;
+    --vocab-sage-soft: #edf4f1;
+    --vocab-shadow: 0 18px 48px rgba(72, 49, 60, .08);
+    --vocab-shadow-float: 0 22px 54px rgba(62, 40, 51, .16);
+}
+
+body.vocab-adjectives-page .practice-picker-avatar,
+body.vocab-adjectives-page .study-mentor-note img {
+    border: 0;
+    border-radius: 11px;
+    object-fit: cover;
+    box-shadow: 0 4px 14px rgba(79, 50, 60, .14);
+}
+
+body.vocab-adjectives-page .study-mentor-note {
+    border-left-color: var(--vocab-rose);
+    background: #fbf6f5;
+}
+
+body.vocab-adjectives-page .study-example-jp .ex-highlight {
+    background: #f5e5e1;
+}
+
+body.vocab-adjectives-page #header-practice-btn:hover {
+    background: #46313c !important;
+}
+
+body.vocab-adjectives-page :is(
+    #header-practice-btn,
+    .font-size-trigger,
+    .font-size-option-copy,
+    .font-size-option-check,
+    .study-unit-label,
+    .study-unit-progress > span,
+    .study-index-title span,
+    .study-pronounce,
+    .study-pos,
+    .study-detail-footer,
+    .study-detail-footer button,
+    .practice-picker-kicker,
+    .practice-picker-option-sub,
+    .practice-picker-option-count
+) {
+    font-size: 12px;
+}
+
+body.vocab-adjectives-page .study-detail-footer {
+    min-height: 56px;
+}
+
+body.vocab-adjectives-page :is(button, a, input):focus-visible {
+    outline-color: var(--vocab-accent-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-adjectives-page *,
+    body.vocab-adjectives-page *::before,
+    body.vocab-adjectives-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

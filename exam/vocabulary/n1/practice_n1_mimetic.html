@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>擬音語・擬態語 - 練習</title>
+    <title>擬声語・擬態語 - 練習</title>
     <!-- 引入优雅的衬线与无衬线字体，契合文字游戏与沉浸阅读风格 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -147,8 +147,7 @@
         }
 
         /* 面板通用设定（介绍/结算） */
-        .intro-card,
-        .summary-card {
+        .intro-card {
             width: 100%;
             background: var(--panel-bg);
             backdrop-filter: var(--glass-blur);
@@ -245,7 +244,7 @@
         }
 
         /* 通用按钮 */
-        .intro-actions, .summary-actions {
+        .intro-actions {
             display: grid;
             gap: 16px;
             margin-top: 32px;
@@ -253,9 +252,7 @@
             padding-top: 32px;
         }
 
-        .intro-primary-btn,
-        .summary-primary-btn,
-        .summary-secondary-btn {
+        .intro-primary-btn {
             width: 100%;
             padding: 14px;
             border-radius: 6px;
@@ -271,28 +268,13 @@
             text-align: center;
         }
 
-        .intro-primary-btn:hover,
-        .summary-primary-btn:hover {
+        .intro-primary-btn:hover {
             background: var(--text-accent);
             color: #fff;
             box-shadow: var(--shadow-glow);
         }
 
-        .summary-secondary-btn {
-            background: transparent;
-            color: var(--text-secondary);
-            border-color: rgba(0,0,0,0.15);
-        }
-
-        .summary-secondary-btn:hover {
-            background: rgba(0,0,0,0.03);
-            color: var(--text-main);
-            border-color: var(--text-secondary);
-        }
-
         .intro-primary-btn:active,
-        .summary-primary-btn:active,
-        .summary-secondary-btn:active,
         .action-option:active:not(:disabled) {
             transform: scale(0.99);
         }
@@ -1037,152 +1019,6 @@
             40%, 80% { transform: translate(4px, 0); }
         }
 
-        /* 结算界面数据 */
-        .summary-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border: 1px solid var(--panel-border);
-            background: #fff;
-            border-radius: 4px;
-            color: var(--text-tertiary);
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-        }
-
-        .summary-overline {
-            color: var(--text-accent);
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-        }
-
-        .summary-title {
-            margin: 10px 0 10px;
-            font-size: 28px;
-            font-family: var(--font-serif);
-            font-weight: 600;
-            color: var(--text-main);
-            letter-spacing: 0.05em;
-        }
-
-        .summary-rank {
-            font-size: 64px;
-            font-family: var(--font-ui);
-            font-weight: 800;
-            color: var(--text-accent);
-            text-shadow: 0 4px 16px rgba(194, 122, 98, 0.2);
-            margin: 10px 0 20px;
-            line-height: 1;
-        }
-
-        .summary-eval {
-            color: var(--text-secondary);
-            font-size: 16px;
-            font-family: var(--font-serif);
-            font-weight: 600;
-        }
-
-        .summary-msg {
-            margin-top: 16px;
-            color: var(--text-secondary);
-            font-size: 13px;
-            line-height: 1.65;
-        }
-
-        .summary-stat-grid {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: rgba(0,0,0,0.05); /* 仅用作细线分隔 */
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .summary-stat {
-            background: var(--panel-bg);
-            padding: 20px;
-        }
-
-        .summary-stat-label {
-            display: block;
-            color: var(--text-secondary);
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-
-        .summary-stat-value {
-            display: block;
-            margin-top: 8px;
-            color: var(--text-accent);
-            font-size: 24px;
-            font-family: var(--font-ui);
-            font-weight: 700;
-        }
-
-        .review-summary-list {
-            margin-top: 26px;
-            display: grid;
-            gap: 14px;
-            text-align: left;
-        }
-
-        .review-summary-item {
-            border: 1px solid rgba(184, 125, 98, 0.22);
-            background: rgba(255, 252, 248, 0.82);
-            border-radius: 16px;
-            padding: 16px 18px;
-            box-shadow: 0 10px 24px rgba(88, 70, 55, 0.06);
-        }
-
-        .review-summary-term {
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 8px 10px;
-            color: var(--text-main);
-            font-family: var(--font-serif);
-            font-size: 21px;
-            font-weight: 700;
-            line-height: 1.25;
-        }
-
-        .review-summary-meta {
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .review-summary-line {
-            margin-top: 8px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.7;
-        }
-
-        .review-summary-line strong {
-            color: var(--text-main);
-            font-weight: 800;
-            margin-right: 0.45em;
-        }
-
-        .review-summary-empty {
-            margin-top: 24px;
-            padding: 18px;
-            border: 1px dashed rgba(184, 125, 98, 0.28);
-            border-radius: 16px;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 700;
-            text-align: center;
-        }
-
         /* Toast 提示 */
         .toast {
             position: fixed;
@@ -1235,34 +1071,58 @@
                 font-size: 23px;
             }
             .question-main-text { font-size: 16px; }
-            .intro-card, .summary-card { padding: 30px 20px; border-radius: 12px; }
+            .intro-card { padding: 30px 20px; border-radius: 12px; }
             .difficulty-grid { grid-template-columns: 1fr; gap: 12px; }
             .player-hud { align-items: stretch; }
             .hud-left { flex-direction: column; align-items: flex-start; }
             .hud-hp-wrap { padding: 4px 10px; max-width: none; width: 100%; }
             .hud-hp-bar-bg { width: 60px; }
-            .summary-stat-grid { margin-top: 24px; gap: 1px; }
-            .summary-stat { padding: 12px; border-radius: 0; }
-            .summary-stat-value { font-size: 20px; }
         }
     </style>
     <link rel="stylesheet" href="../shared/vocabulary-sketch-theme.css">
+    <link rel="stylesheet" href="practice-n1-mimetic-v2.css?v=20260730-sunny1">
+    <link rel="stylesheet" href="../shared/vocabulary-result-summary.css?v=20260807-4">
 </head>
-<body>
-    <a href="mimetic_n1.html" class="page-back-btn" id="page-back-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        返回练习列表
-    </a>
+<body class="vocab-mimetic-practice">
+    <header class="practice-topbar">
+        <a href="mimetic_n1.html" class="page-back-btn" id="page-back-btn" aria-label="返回单词背诵页面" data-kiki-unified-back data-kiki-dynamic-back>
+            <span class="practice-back-mark" aria-hidden="true">‹</span>
+            返回单词背诵页面
+        </a>
+        <h1 class="practice-topbar-title">N1 語彙特訓</h1>
+        <div class="practice-session-actions header-actions" data-kiki-header-utility>
+            <button
+                type="button"
+                class="practice-finish-trigger"
+                id="practice-finish-trigger"
+                aria-expanded="false"
+                aria-controls="practice-finish-popover"
+                hidden
+            >结束本轮</button>
+            <div
+                class="practice-finish-popover"
+                id="practice-finish-popover"
+                role="dialog"
+                aria-modal="false"
+                aria-labelledby="practice-finish-dialog-title"
+                hidden
+            >
+                <p id="practice-finish-dialog-title">结束本轮练习？</p>
+                <span>已作答内容会进入本轮结算。</span>
+                <div class="practice-finish-confirm-actions">
+                    <button type="button" id="practice-finish-cancel">继续练习</button>
+                    <button type="button" id="practice-finish-confirm">结束本轮</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="practice-shell">
         <div class="screen intro-screen" id="view-intro">
             <div class="intro-card">
                 <div class="intro-dialogue-row">
-                    <div class="intro-avatar-wrap">
-                        <div class="intro-avatar friend-breathe">
-                            <!-- 替换为你自己的青梅竹马图片链接 -->
-                            <img src="icon/qingmei.png?v=20260429" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/qingmei.png?v=20260429';" alt="阳葵（ひまり）">
-                        </div>
+                    <div class="intro-avatar friend-breathe">
+                        <img src="icon/qingmei-cutout.png?v=20260730" alt="阳葵（ひまり）" onerror="this.hidden=true">
                     </div>
                     <div class="intro-dialogue-main">
                         <div class="story-panel" id="intro-story-panel">
@@ -1276,22 +1136,34 @@
         </div>
 
         <div class="screen challenge-screen hidden" id="view-main">
+            <div class="practice-context-row">
+                <div class="practice-context-copy">
+                    <span class="practice-context-kind" id="practice-context-kind">单元练习</span>
+                    <span class="practice-context-title" id="practice-context-title">N1 擬声語・擬態語</span>
+                </div>
+                <div class="practice-progress" aria-label="练习进度">
+                    <span class="dialogue-counter" id="dialogue-counter">1 / 10</span>
+                    <div class="enemy-hp-bar-shell" aria-hidden="true">
+                        <div class="enemy-hp-bar" id="enemy-hp-bar"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="arena-shell">
-                
-                <!-- 导师状态区 -->
+
+                <!-- 角色只作为轻量提示，题目保持视觉中心 -->
                 <div class="enemy-stage">
                     <div class="slash-container" id="slash-effect"><div class="slash-line"></div></div>
                     <div class="damage-text" id="damage-text"></div>
+                    <div class="practice-mentor-note">
+                        <p class="practice-mentor-copy">
+                            <span class="practice-mentor-speaker">阳葵</span>
+                            <span>「别着急，先想想这个词描绘的是怎样的感觉。」</span>
+                        </p>
+                    </div>
                     <div class="enemy-side-stack">
                         <div class="enemy-avatar friend-breathe" id="enemy-avatar">
-                            <img src="icon/qingmei.png?v=20260429" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/qingmei.png?v=20260429';" alt="阳葵（ひまり）">
-                        </div>
-                        <div class="enemy-status-box">
-                            <div class="enemy-name" id="enemy-name">阳葵（ひまり）</div>
-                            <div class="dialogue-counter" id="dialogue-counter">进行度 1 / 20</div>
-                            <div class="enemy-hp-bar-shell">
-                                <div class="enemy-hp-bar" id="enemy-hp-bar"></div>
-                            </div>
+                            <img src="icon/qingmei-cutout.png?v=20260730" alt="" aria-hidden="true" onerror="this.hidden=true">
                         </div>
                     </div>
                     <div class="enemy-aside-bubble hidden" id="question-aside"></div>
@@ -1318,6 +1190,19 @@
                     <div class="review-next-action hidden" id="review-next-action">
                         <button type="button" class="review-next-btn" id="review-next-btn" onclick="continueReviewQuestion()">下一题</button>
                     </div>
+                    <div class="practice-question-footer hidden" id="practice-question-footer">
+                        <span class="practice-question-footer-spacer" aria-hidden="true"></span>
+                        <span class="practice-question-footer-note" id="practice-question-footer-note">跳过后将在本轮稍后再次出现</span>
+                        <button
+                            type="button"
+                            class="practice-skip-btn"
+                            id="practice-skip-btn"
+                            onclick="skipCurrentQuestion()"
+                        >
+                            暂时跳过
+                            <span aria-hidden="true">›</span>
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -1342,59 +1227,38 @@
         </div>
 
         <div class="screen summary-screen hidden" id="view-summary">
-            <div class="summary-card result-enter">
-                <div class="summary-badge">LESSON COMPLETE</div>
-                <div class="summary-overline" id="summary-overline"></div>
-                <h2 class="summary-title" id="summary-title">复习结束啦</h2>
-                <div class="summary-rank" id="summary-rank">S</div>
-                <p class="summary-eval" id="summary-eval"></p>
-                <div class="summary-msg" id="summary-msg"></div>
-                <div class="summary-stat-grid">
-                    <div class="summary-stat">
-                        <span class="summary-stat-label">准确率</span>
-                        <span class="summary-stat-value" id="summary-accuracy">0%</span>
-                    </div>
-                    <div class="summary-stat">
-                        <span class="summary-stat-label">最高连对</span>
-                        <span class="summary-stat-value" id="summary-streak">0</span>
-                    </div>
-                </div>
-                <div class="summary-wrong-review" id="summary-wrong-review">
-                    <div class="summary-wrong-head">
-                        <span class="summary-wrong-title">本轮错词</span>
-                        <span class="summary-wrong-count" id="summary-wrong-count">0 词</span>
-                    </div>
-                    <div class="summary-wrong-list" id="summary-wrong-list"></div>
-                </div>
-                <div class="summary-actions">
-                    <button class="summary-primary-btn" type="button" onclick="location.reload()">再陪我练习一次！</button>
-                    <button class="summary-secondary-btn" type="button" onclick="location.href='mimetic_n1.html'">今天先到这里 (返回)</button>
-                </div>
-            </div>
-        </div>
-        <div class="summary-word-overlay" id="summary-word-overlay" hidden>
-            <div class="summary-word-card" id="summary-word-card" role="dialog" aria-modal="true" aria-label="错词速查卡"></div>
+            <div class="vocab-result-sheet result-enter" aria-live="polite"></div>
         </div>
     </div>
 
     <!-- Import shared data -->
-    <script src="../../../shared/back-navigation.js"></script>
     <script src="../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../shared/study-quest-test-boot.js"></script>
     <script src="n1_mimetic_data.js"></script>
-    <script src="n1-mimetic-curriculum.js"></script>
+    <script src="n1-mimetic-curriculum.js?v=20260731-two-stages1"></script>
     <script src="../shared/vocabulary-sentence-review-store.js"></script>
+    <script src="../shared/vocabulary-option-lexicon.js"></script>
     <script src="../shared/vocabulary-sentence-analysis.js"></script>
 
     <script src="vocabulary-reading-helper.js"></script>
-    <script src="../shared/vocabulary-practice-core.js"></script>
+    <script src="../shared/vocabulary-practice-core.js?v=20260807-1"></script>
+    <script src="../shared/vocabulary-temporary-unit.js?v=20260807-1"></script>
+    <script src="../shared/vocabulary-result-summary.js?v=20260807-3"></script>
     <script src="vocabulary-role-config.js"></script>
     <script>
-        if (typeof window.bindStatefulBack === 'function') {
-            window.bindStatefulBack({
-                selector: '#page-back-btn',
-                fallback: 'mimetic_n1.html'
-            });
+        const VOCABULARY_RETURN_URL = new URL('mimetic_n1.html', window.location.href).href;
+
+        function returnToVocabularyPage(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            window.location.replace(VOCABULARY_RETURN_URL);
+        }
+
+        const pageBackButton = document.getElementById('page-back-btn');
+        if (pageBackButton) {
+            pageBackButton.href = VOCABULARY_RETURN_URL;
+            pageBackButton.addEventListener('click', returnToVocabularyPage);
         }
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -1411,6 +1275,7 @@
         const dailyPracticeType = Object.prototype.hasOwnProperty.call(DAILY_PRACTICE_TYPE_MAP, typeParam)
             ? typeParam
             : 'sentence';
+        document.body.dataset.practiceType = dailyPracticeType;
         localStorage.setItem(PRACTICE_TYPE_STORAGE_KEY, dailyPracticeType);
 
         let targetWords = [];
@@ -1433,12 +1298,13 @@
         let introTypingController = null;
         let questionTypingController = null;
         let pendingQuestionReveal = null;
+        let pendingNextQuestion = null;
         let sessionWrongWords = [];
         const sessionWrongWordIds = new Set();
-        let currentSummaryWordIndex = -1;
 
         const testServer = window.StudyQuestTestServer;
-        const VOCAB_STAR_KEY_PREFIX = 'study_quest_test_v1_vocab_star::';
+        const VOCAB_STAR_KEY_PREFIX = 'study_quest_test_v1_n1_mimetic_vocab_star::';
+        const LEGACY_VOCAB_STAR_KEY_PREFIX = 'study_quest_test_v1_vocab_star::';
         
         const CURRICULUM_DAYS = Array.isArray(window.LAB_ONOMATOPOEIA_DAYS) ? window.LAB_ONOMATOPOEIA_DAYS : [];
         const CURRICULUM_STAGES = Array.isArray(window.LAB_ONOMATOPOEIA_STAGES) ? window.LAB_ONOMATOPOEIA_STAGES : [];
@@ -1455,6 +1321,14 @@
         const challengeAnalysis = document.getElementById('challenge-analysis');
         const reviewNextAction = document.getElementById('review-next-action');
         const reviewNextBtn = document.getElementById('review-next-btn');
+        const practiceQuestionFooter = document.getElementById('practice-question-footer');
+        const practiceQuestionFooterNote = document.getElementById('practice-question-footer-note');
+        const practiceSkipBtn = document.getElementById('practice-skip-btn');
+        const practiceFinishTrigger = document.getElementById('practice-finish-trigger');
+        const practiceFinishPopover = document.getElementById('practice-finish-popover');
+        const practiceFinishCancel = document.getElementById('practice-finish-cancel');
+        const practiceFinishConfirm = document.getElementById('practice-finish-confirm');
+        let practiceFinishReturnFocus = null;
         const SENTENCE_REVIEW_MODULE_KEY = 'n1_mimetic';
         const sentenceReviewStore = window.VocabularySentenceReviewStore || null;
         const reviewStore = window.VocabularyReviewStore || null;
@@ -1465,17 +1339,60 @@
             return `${VOCAB_STAR_KEY_PREFIX}${String(wordId || '').trim()}`;
         }
 
+        function migrateLegacyMimeticStars() {
+            if (typeof FULL_WORD_LIST === 'undefined' || !Array.isArray(FULL_WORD_LIST)) return;
+            try {
+                FULL_WORD_LIST.forEach((word) => {
+                    const wordId = String(word && word.word ? word.word : '').trim();
+                    if (!wordId) return;
+                    const scopedKey = getVocabStarKey(wordId);
+                    const legacyKey = `${LEGACY_VOCAB_STAR_KEY_PREFIX}${wordId}`;
+                    if (localStorage.getItem(scopedKey) !== 'true' && localStorage.getItem(legacyKey) === 'true') {
+                        localStorage.setItem(scopedKey, 'true');
+                    }
+                });
+            } catch (_error) {
+                // Storage may be unavailable; the current practice session can still continue.
+            }
+        }
+
         function getWordStorageId(word) {
             return String(word && (word.id || word.word) ? (word.id || word.word) : '').trim();
         }
 
-        function rememberSessionWrongWord(question) {
+        function rememberSessionWrongWord(question, submittedAnswer, isTimeout = false) {
             const word = question && question.word;
             if (!word) return;
             const wordId = getWordStorageId(word) || getWordDisplayText(word);
-            if (!wordId || sessionWrongWordIds.has(wordId)) return;
+            if (!wordId) return;
+
+            const sentenceTranslation = String(
+                question.sentenceCn
+                || question.cn
+                || (question.reviewAnalysis && question.reviewAnalysis.sentenceTranslation)
+                || ''
+            ).trim();
+            const detail = practiceCore && typeof practiceCore.buildResultWrongDetail === 'function'
+                ? practiceCore.buildResultWrongDetail(question, submittedAnswer, isTimeout)
+                : {
+                questionType: getQuestionTypeLabel(question),
+                prompt: String(question.typingText || getWordDisplayText(word) || '').trim(),
+                submittedAnswer: isTimeout ? '未作答（超时）' : String(submittedAnswer || '未作答').trim(),
+                correctAnswer: String(question.correctAnswer || '').trim(),
+                translation: sentenceTranslation || extractPrimaryMeaning(word),
+                translationLabel: sentenceTranslation ? '中文翻译' : '中文释义'
+                };
+            const summaryWord = { ...word, __resultWrongDetail: detail };
+
+            if (sessionWrongWordIds.has(wordId)) {
+                const existingIndex = sessionWrongWords.findIndex((item) => {
+                    return (getWordStorageId(item) || getWordDisplayText(item)) === wordId;
+                });
+                if (existingIndex >= 0) sessionWrongWords[existingIndex] = summaryWord;
+                return;
+            }
             sessionWrongWordIds.add(wordId);
-            sessionWrongWords.push(word);
+            sessionWrongWords.push(summaryWord);
         }
 
         function restoreReviewKeyword(word) {
@@ -1527,6 +1444,11 @@
             return stage ? getCurriculumGroup(stage.groupId) : null;
         }
 
+        function getDayDisplayTitle(dayId) {
+            const day = getCurriculumDay(dayId);
+            return day && day.title ? day.title : `${dayId}日目`;
+        }
+
         function getPracticeTypeLabel() {
             return DAILY_PRACTICE_TYPE_MAP[dailyPracticeType] || '语境填空';
         }
@@ -1558,9 +1480,9 @@
                 return collectWordsByIndexes(day.wordIds);
             }
             if (typeof FULL_WORD_LIST === 'undefined') return [];
-            const WORDS_PER_DAY = 20;
-            const start = (dayId - 1) * WORDS_PER_DAY;
-            const end = start + WORDS_PER_DAY;
+            const fallbackWordsPerDay = 10;
+            const start = (dayId - 1) * fallbackWordsPerDay;
+            const end = start + fallbackWordsPerDay;
             return FULL_WORD_LIST.slice(start, end).filter((word) => word.word !== '（準備中）');
         }
 
@@ -1602,9 +1524,9 @@
                     mode: 'final',
                     scopeKey: appendPracticeTypeToScope('final-all'),
                     title: '拟声拟态大测验',
-                    overline: '大复习来啦',
-                    subtitle: `全课程 · ${getPracticeTypeLabel()} · ${FINAL_QUESTION_LIMIT} 問随机`,
-                    challengeTitle: '总复习大测验',
+                    overline: '综合练习',
+                    subtitle: `全 ${CURRICULUM_DAYS.length || 9} 日 · ${getPracticeTypeLabel()} · ${FINAL_QUESTION_LIMIT} 問随机`,
+                    challengeTitle: '擬声語・擬態語 · 综合练习',
                     routeLabel: 'FINAL TEST',
                     typeLabel: getPracticeTypeLabel(),
                     pool: getFinalWords()
@@ -1613,30 +1535,39 @@
             if (currentStageValue != null) {
                 const stage = getCurriculumStage(currentStageValue);
                 const group = getStageGroup(currentStageValue);
+                const firstStageDayId = stage && stage.dayIds.length > 0 ? stage.dayIds[0] : 1;
+                const lastStageDayId = stage && stage.dayIds.length > 0
+                    ? stage.dayIds[stage.dayIds.length - 1]
+                    : firstStageDayId;
+                const stageDayRange = firstStageDayId === lastStageDayId
+                    ? getDayDisplayTitle(firstStageDayId)
+                    : `${getDayDisplayTitle(firstStageDayId)} - ${getDayDisplayTitle(lastStageDayId)}`;
+                const stageWords = getStageWords(currentStageValue);
+                const stageQuestionCount = Math.min(STAGE_QUESTION_LIMIT, stageWords.length);
                 return {
                     mode: selectedDifficulty ? 'challenge' : 'stage',
                     scopeKey: selectedDifficulty
                         ? appendPracticeTypeToScope(`stage-${currentStageValue}-${selectedDifficulty}`)
                         : appendPracticeTypeToScope(`stage-${currentStageValue}`),
-                    title: stage ? stage.title : `阶段复习 ${currentStageValue}`,
-                    overline: stage ? `${group ? `${group.title} · ` : ''}${stage.title}` : `阶段 ${currentStageValue}`,
+                    title: stage ? `${stage.title} · 段階練習` : `阶段练习 ${currentStageValue}`,
+                    overline: stage ? stage.title : `阶段 ${currentStageValue}`,
                     subtitle: stage
-                        ? `第 ${stage.dayIds[0]} - ${stage.dayIds[stage.dayIds.length - 1]} 关 · ${getPracticeTypeLabel()} · ${STAGE_QUESTION_LIMIT} 問随机`
-                        : `${getPracticeTypeLabel()} · ${STAGE_QUESTION_LIMIT} 問随机`,
-                    challengeTitle: stage ? stage.title : `阶段小测 ${currentStageValue}`,
+                        ? `${stageDayRange} · ${getPracticeTypeLabel()} · ${stageQuestionCount} 問随机`
+                        : `${getPracticeTypeLabel()} · ${stageQuestionCount} 問随机`,
+                    challengeTitle: stage ? `${stage.title} · 段階練習` : `阶段练习 ${currentStageValue}`,
                     routeLabel: `STAGE ${currentStageValue}`,
                     typeLabel: getPracticeTypeLabel(),
-                    pool: getStageWords(currentStageValue)
+                    pool: stageWords
                 };
             }
             if (currentDayValue < 0) {
                 return {
                     mode: 'review',
                     scopeKey: appendPracticeTypeToScope('review-starred'),
-                    title: '错题扫除大作战',
-                    overline: '错题大扫除',
+                    title: '错题库巩固',
+                    overline: '错题库巩固',
                     subtitle: `按错题库数量生成本轮题目 · ${getPracticeTypeLabel()}`,
-                    challengeTitle: '错题复习',
+                    challengeTitle: '错题库巩固',
                     routeLabel: 'REVIEW',
                     typeLabel: getPracticeTypeLabel(),
                     pool: getStarredWords()
@@ -1644,13 +1575,15 @@
             }
             const day = getCurriculumDay(currentDayValue);
             const group = getDayGroup(currentDayValue);
+            const dayTitle = day && day.title ? day.title : `${currentDayValue}日目`;
+            const groupTitle = group && group.title ? group.title : '擬声語・擬態語';
             return {
                 mode: 'day',
                 scopeKey: appendPracticeTypeToScope(`day-${currentDayValue}`),
-                title: day ? `第${day.id}个书签 · ${day.title}` : `DAY ${currentDayValue}`,
-                overline: day ? `${group ? `${group.title} · ` : ''}${day.title}` : `第${currentDayValue}个书签`,
+                title: dayTitle,
+                overline: dayTitle,
                 subtitle: `${getPracticeTypeLabel()} · ${DAY_QUESTION_LIMIT} 問随机`,
-                challengeTitle: day ? `${group ? `${group.title} · ` : ''}${day.title}` : `DAY ${currentDayValue}`,
+                challengeTitle: `${groupTitle} · ${dayTitle}`,
                 routeLabel: `DAY ${currentDayValue}`,
                 typeLabel: getPracticeTypeLabel(),
                 pool: getDayWords(currentDayValue)
@@ -1766,12 +1699,6 @@
                 sourcePage: window.location.pathname
             });
             return rewardResult;
-        }
-
-        function getDrawAffordanceMarkup(reward) {
-            if (!reward || !reward.accepted || !reward.drawOffer || !reward.drawOffer.available) return '';
-            if (!window.StudyQuestTestUi || typeof window.StudyQuestTestUi.getDrawAffordanceMarkup !== 'function') return '';
-            return window.StudyQuestTestUi.getDrawAffordanceMarkup(reward.drawOffer.runKey || (rewardRunMeta && rewardRunMeta.runKey));
         }
 
         function shuffleArray(array) {
@@ -2951,6 +2878,112 @@
                     node.classList.add('hidden');
                 }
             });
+            if (practiceFinishTrigger) {
+                practiceFinishTrigger.hidden = viewId !== 'view-main';
+            }
+            if (viewId !== 'view-main') {
+                hidePracticeQuestionFooter();
+            }
+            closePracticeFinishPopover(false);
+        }
+
+        function getPracticeFinishFocusableNodes() {
+            if (!practiceFinishPopover) return [];
+            return Array.from(practiceFinishPopover.querySelectorAll(
+                'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )).filter((node) => !node.hidden);
+        }
+
+        function closePracticeFinishPopover(restoreFocus = true) {
+            if (!practiceFinishPopover || practiceFinishPopover.hidden) return;
+            practiceFinishPopover.hidden = true;
+            practiceFinishTrigger?.setAttribute('aria-expanded', 'false');
+            if (restoreFocus && practiceFinishReturnFocus?.isConnected && !practiceFinishTrigger?.hidden) {
+                window.requestAnimationFrame(() => practiceFinishReturnFocus.focus());
+            }
+            practiceFinishReturnFocus = null;
+        }
+
+        function openPracticeFinishPopover() {
+            if (!practiceFinishPopover || !practiceFinishTrigger) return;
+            practiceFinishReturnFocus = document.activeElement instanceof HTMLElement
+                ? document.activeElement
+                : practiceFinishTrigger;
+            practiceFinishPopover.hidden = false;
+            practiceFinishTrigger.setAttribute('aria-expanded', 'true');
+            window.requestAnimationFrame(() => {
+                (practiceFinishCancel || getPracticeFinishFocusableNodes()[0])?.focus();
+            });
+        }
+
+        function togglePracticeFinishPopover() {
+            if (!practiceFinishPopover || !practiceFinishTrigger) return;
+            if (practiceFinishPopover.hidden) {
+                openPracticeFinishPopover();
+            } else {
+                closePracticeFinishPopover();
+            }
+        }
+
+        function endCurrentPracticeSession() {
+            closePracticeFinishPopover(false);
+            isAnswering = false;
+            clearTimer();
+            clearTypewriter('question');
+            if (pendingQuestionReveal) {
+                clearTimeout(pendingQuestionReveal);
+                pendingQuestionReveal = null;
+            }
+            if (pendingNextQuestion) {
+                clearTimeout(pendingNextQuestion);
+                pendingNextQuestion = null;
+            }
+            renderSummary({ endedEarly: true });
+        }
+
+        if (practiceFinishTrigger) {
+            practiceFinishTrigger.addEventListener('click', (event) => {
+                event.stopPropagation();
+                togglePracticeFinishPopover();
+            });
+        }
+        if (practiceFinishCancel) {
+            practiceFinishCancel.addEventListener('click', closePracticeFinishPopover);
+        }
+        if (practiceFinishConfirm) {
+            practiceFinishConfirm.addEventListener('click', endCurrentPracticeSession);
+        }
+        if (practiceFinishPopover) {
+            practiceFinishPopover.addEventListener('click', (event) => event.stopPropagation());
+        }
+        document.addEventListener('click', closePracticeFinishPopover);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closePracticeFinishPopover();
+                return;
+            }
+            if (event.key === 'Tab' && practiceFinishPopover && !practiceFinishPopover.hidden) {
+                const focusableNodes = getPracticeFinishFocusableNodes();
+                if (focusableNodes.length > 0) {
+                    const firstNode = focusableNodes[0];
+                    const lastNode = focusableNodes[focusableNodes.length - 1];
+                    if (event.shiftKey && (document.activeElement === firstNode || !practiceFinishPopover.contains(document.activeElement))) {
+                        event.preventDefault();
+                        lastNode.focus();
+                    } else if (!event.shiftKey && document.activeElement === lastNode) {
+                        event.preventDefault();
+                        firstNode.focus();
+                    }
+                }
+            }
+        });
+
+        function getPracticeContextKindLabel(context) {
+            if (!context) return '词汇练习';
+            if (context.mode === 'final') return '综合练习';
+            if (context.mode === 'review') return '错题练习';
+            if (context.mode === 'stage' || context.mode === 'challenge') return '阶段练习';
+            return '单元练习';
         }
 
         function updateHud() {
@@ -2960,11 +2993,23 @@
                 playerHud.classList.toggle('hidden', context.mode === 'review');
             }
             document.body.classList.toggle('is-review-mode', context.mode === 'review');
-            
+            document.getElementById('hud-route').textContent = `ROUTE: ${context.routeLabel}`;
+            const contextKind = document.getElementById('practice-context-kind');
+            const contextTitle = document.getElementById('practice-context-title');
+            const dialogueLabel = document.getElementById('dialogue-label');
+            if (contextKind) {
+                contextKind.textContent = getPracticeContextKindLabel(context);
+            }
+            if (contextTitle) {
+                contextTitle.textContent = context.challengeTitle || context.title || 'N1 擬声語・擬態語';
+            }
+            if (dialogueLabel) {
+                dialogueLabel.textContent = context.typeLabel || getPracticeTypeLabel();
+            }
             const progressCount = questions.length > 0 ? Math.min(currentQuestionIndex + 1, questions.length) : 0;
             const dialogueCounter = document.getElementById('dialogue-counter');
             if (dialogueCounter) {
-                dialogueCounter.textContent = `进行度 ${progressCount} / ${questions.length}`;
+                dialogueCounter.textContent = `${progressCount} / ${questions.length}`;
             }
             const playerHpFill = document.getElementById('player-hp-fill');
             const playerHpText = document.getElementById('player-hp-text');
@@ -3276,6 +3321,43 @@
             focusReadingInput(1);
         }
 
+        function hidePracticeQuestionFooter() {
+            if (practiceQuestionFooter) {
+                practiceQuestionFooter.classList.add('hidden');
+            }
+            if (practiceSkipBtn) {
+                practiceSkipBtn.disabled = true;
+            }
+        }
+
+        function updatePracticeQuestionFooter() {
+            if (!practiceQuestionFooter || !practiceSkipBtn) return;
+            const pendingQuestionCount = Math.max(0, questions.length - currentQuestionIndex);
+            const canSkip = isAnswering && pendingQuestionCount > 1;
+
+            practiceQuestionFooter.classList.toggle('hidden', !canSkip);
+            if (practiceQuestionFooterNote) {
+                practiceQuestionFooterNote.hidden = !canSkip;
+            }
+            practiceSkipBtn.hidden = !canSkip;
+            practiceSkipBtn.disabled = !canSkip;
+        }
+
+        function skipCurrentQuestion() {
+            const pendingQuestionCount = Math.max(0, questions.length - currentQuestionIndex);
+            if (!isAnswering || pendingQuestionCount <= 1) return;
+
+            isAnswering = false;
+            clearTimer();
+            clearTypewriter('question');
+            hidePracticeQuestionFooter();
+
+            const skippedQuestions = questions.splice(currentQuestionIndex, 1);
+            if (skippedQuestions.length === 0) return;
+            questions.push(skippedQuestions[0]);
+            renderQuestion();
+        }
+
         function renderAnswerArea(question) {
             const answerArea = document.getElementById('challenge-answer-area');
             const feedback = document.getElementById('challenge-feedback');
@@ -3316,6 +3398,7 @@
             renderAnswerArea(question);
             document.getElementById('challenge-answer-area').classList.remove('hidden');
             isAnswering = true;
+            updatePracticeQuestionFooter();
             startTimer();
             if (question.answerMode === 'input') {
                 focusReadingInput(0);
@@ -3331,6 +3414,7 @@
         function renderQuestion() {
             clearTimer();
             clearTypewriter('question');
+            hidePracticeQuestionFooter();
             if (pendingQuestionReveal) {
                 clearTimeout(pendingQuestionReveal);
                 pendingQuestionReveal = null;
@@ -3354,7 +3438,7 @@
             const questionSupport = document.getElementById('question-support');
             const displayModel = getQuestionDisplayModel(question);
 
-            dialogueCounter.textContent = `进行度 ${currentQuestionIndex + 1} / ${questions.length}`;
+            dialogueCounter.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
             setQuestionAside(displayModel.asideText);
             challengeQuestion.innerText = '';
             typingCursor.className = 'typing-cursor';
@@ -3420,6 +3504,7 @@
             if (!isAnswering) return;
             isAnswering = false;
             clearTimer();
+            hidePracticeQuestionFooter();
 
             const question = questions[currentQuestionIndex];
             const shouldShowReviewAnalysis = isSentenceReviewMode(question);
@@ -3460,7 +3545,7 @@
                 setTimeout(() => avatar.classList.remove('hit'), 500);
             } else {
                 answerStreak = 0;
-                rememberSessionWrongWord(question);
+                rememberSessionWrongWord(question, selected, isTimeout);
                 feedback.textContent = isTimeout ? '呜哇！时间不小心跑掉啦，别发呆哦！' : `哎呀，选错啦。正确答案是「${question.correctAnswer}」，下次一定能选对的！`;
                 feedback.classList.add('bad');
                 const dialogueBox = document.getElementById('dialogue-box');
@@ -3526,7 +3611,7 @@
             updateHud();
 
             if (isChallengeMode && selectedDifficulty && hp <= 0) {
-                setTimeout(renderSummary, 1500);
+                pendingNextQuestion = setTimeout(renderSummary, 1500);
                 return;
             }
 
@@ -3536,10 +3621,11 @@
             }
 
             const nextDelay = shouldShowReviewAnalysis ? 4800 : (isCorrect ? 1000 : 2000);
-            setTimeout(nextQuestion, nextDelay);
+            pendingNextQuestion = setTimeout(nextQuestion, nextDelay);
         }
 
         function nextQuestion() {
+            pendingNextQuestion = null;
             currentQuestionIndex += 1;
             if (currentQuestionIndex < questions.length) {
                 renderQuestion();
@@ -3548,199 +3634,6 @@
             }
         }
 
-
-        function cacheSummaryDefaults() {
-            const summaryRoot = document.getElementById('view-summary');
-            if (!summaryRoot) return;
-            ['.summary-badge', '.summary-primary-btn'].forEach((selector) => {
-                const node = summaryRoot.querySelector(selector);
-                if (node && !node.dataset.defaultText) {
-                    node.dataset.defaultText = node.textContent;
-                }
-            });
-        }
-
-        function setReviewSummaryMode(isReview) {
-            cacheSummaryDefaults();
-            const summaryRoot = document.getElementById('view-summary');
-            if (!summaryRoot) return;
-            const selectors = ['#summary-rank', '#summary-eval', '.summary-stat-grid', '#summary-wrong-review'];
-            selectors.forEach((selector) => {
-                const node = summaryRoot.querySelector(selector);
-                if (node) node.style.display = isReview ? 'none' : '';
-            });
-        }
-
-        function resetSummaryStandardView() {
-            setReviewSummaryMode(false);
-            const summaryRoot = document.getElementById('view-summary');
-            if (!summaryRoot) return;
-            ['.summary-badge', '.summary-primary-btn'].forEach((selector) => {
-                const node = summaryRoot.querySelector(selector);
-                if (node && node.dataset.defaultText) {
-                    node.textContent = node.dataset.defaultText;
-                }
-            });
-        }
-
-
-        function buildSummaryWordCardMarkup(word, index) {
-            if (!word) return '';
-            const totalWords = sessionWrongWords.filter(Boolean).length || 1;
-            const safeIndex = Math.max(0, Math.min(Number(index) || 0, totalWords - 1));
-            const isFirst = safeIndex <= 0;
-            const isLast = safeIndex >= totalWords - 1;
-            const toneHtml = word.tone ? `<span class="tone-number">${escapeHtml(word.tone)}</span>` : '';
-            const posHtml = word.pos ? `<span class="pos-tag">${escapeHtml(word.pos)}</span>` : '';
-            const meaning = extractPrimaryMeaning(word);
-            const usage = extractPrimaryUsage(word);
-            const meanings = word.mean ? word.mean.split(/[；;]/).map((item) => item.trim()).filter(Boolean) : [];
-            const nuances = word.nuance
-                ? word.nuance.split('\n').map((line) => line.trim().replace(/^\d+\.\s*/, '')).filter(Boolean)
-                : [];
-            const examples = Array.isArray(word.examples) ? word.examples : [];
-            const count = Math.max(meanings.length, nuances.length, examples.length, usage || meaning ? 1 : 0);
-            const definitionNumbers = ['❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽', '❾', '❿'];
-            let definitionsHtml = '';
-
-            for (let itemIndex = 0; itemIndex < count; itemIndex += 1) {
-                const meanText = meanings[itemIndex] || (itemIndex === 0 ? (usage || meaning) : '');
-                const nuanceText = nuances[itemIndex] || '';
-                const example = examples[itemIndex];
-                if (!meanText && !nuanceText && !(example && example.jp)) {
-                    continue;
-                }
-                definitionsHtml += `
-                    <div class="def-group">
-                        ${(meanText || nuanceText) ? `
-                            <div class="def-head">
-                                <span class="def-number">${definitionNumbers[itemIndex] || `${itemIndex + 1}.`}</span>
-                                <div class="def-copy">
-                                    ${meanText ? `<span class="def-meaning">${escapeHtml(meanText)}</span>` : ''}
-                                    ${nuanceText ? `<span class="def-nuance">（${escapeHtml(nuanceText)}）</span>` : ''}
-                                </div>
-                            </div>
-                        ` : ''}
-                        ${example && example.jp ? `
-                            <div class="def-ex">
-                                <div class="def-example-label">例句</div>
-                                <div class="def-example-body">
-                                    <div class="ex-jp" lang="ja">${example.jp}</div>
-                                    ${example.cn ? `<div class="ex-cn">（${escapeHtml(example.cn)}）</div>` : ''}
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-            const metaHtml = toneHtml || posHtml
-                ? `<div class="fc-meta-group">${toneHtml}${posHtml}</div>`
-                : '';
-
-            return `
-                <div class="flashcard-main">
-                    <div class="fc-header">
-                        <div class="fc-word-group">
-                            <div class="fc-title-row">
-                                <div class="fc-word">${word.word_html || escapeHtml(word.word || getWordDisplayText(word))}</div>
-                                ${metaHtml}
-                            </div>
-                        </div>
-                        <button type="button" class="summary-word-close" data-summary-word-close aria-label="关闭词卡">×</button>
-                    </div>
-                    <div style="flex: 1;">
-                        <div class="fc-section-title">解析与例句</div>
-                        <div>
-                            ${definitionsHtml || '<div class="def-group"><div class="def-copy"><span class="def-meaning">暂无解析</span></div></div>'}
-                        </div>
-                    </div>
-                    <div class="summary-word-nav" aria-label="本轮错词翻页">
-                        <button type="button" class="summary-word-nav-btn" data-summary-word-prev ${isFirst ? 'disabled' : ''}>‹ 上一词</button>
-                        <div class="summary-word-progress">${safeIndex + 1} / ${totalWords}</div>
-                        <button type="button" class="summary-word-nav-btn" data-summary-word-next ${isLast ? 'disabled' : ''}>下一词 ›</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function closeSummaryWordCard() {
-            const overlay = document.getElementById('summary-word-overlay');
-            const card = document.getElementById('summary-word-card');
-            if (overlay) {
-                overlay.hidden = true;
-            }
-            if (card) {
-                card.innerHTML = '';
-            }
-            currentSummaryWordIndex = -1;
-            document.querySelectorAll('.summary-wrong-chip.is-active').forEach((node) => node.classList.remove('is-active'));
-        }
-
-        function showSummaryWordCard(index) {
-            const overlay = document.getElementById('summary-word-overlay');
-            const card = document.getElementById('summary-word-card');
-            const wrongWords = sessionWrongWords.filter(Boolean);
-            const safeIndex = Math.max(0, Math.min(Number(index) || 0, wrongWords.length - 1));
-            const word = wrongWords[safeIndex];
-            if (!overlay || !card || !word) return;
-            currentSummaryWordIndex = safeIndex;
-            card.innerHTML = buildSummaryWordCardMarkup(word, safeIndex);
-            overlay.hidden = false;
-            document.querySelectorAll('.summary-wrong-chip').forEach((node) => {
-                node.classList.toggle('is-active', Number(node.dataset.wrongIndex) === safeIndex);
-            });
-            const closeBtn = card.querySelector('[data-summary-word-close]');
-            if (closeBtn) closeBtn.addEventListener('click', closeSummaryWordCard);
-            const prevBtn = card.querySelector('[data-summary-word-prev]');
-            if (prevBtn) prevBtn.addEventListener('click', showPreviousSummaryWord);
-            const nextBtn = card.querySelector('[data-summary-word-next]');
-            if (nextBtn) nextBtn.addEventListener('click', showNextSummaryWord);
-        }
-
-        function showPreviousSummaryWord() {
-            if (currentSummaryWordIndex > 0) {
-                showSummaryWordCard(currentSummaryWordIndex - 1);
-            }
-        }
-
-        function showNextSummaryWord() {
-            const wrongWords = sessionWrongWords.filter(Boolean);
-            if (currentSummaryWordIndex >= 0 && currentSummaryWordIndex < wrongWords.length - 1) {
-                showSummaryWordCard(currentSummaryWordIndex + 1);
-            }
-        }
-
-        function renderSessionWrongWords() {
-            const countNode = document.getElementById('summary-wrong-count');
-            const listNode = document.getElementById('summary-wrong-list');
-            if (!countNode || !listNode) return;
-            closeSummaryWordCard();
-            const wrongWords = sessionWrongWords.filter(Boolean);
-            countNode.textContent = wrongWords.length ? `${wrongWords.length} 词` : '0 词';
-
-            if (!wrongWords.length) {
-                listNode.innerHTML = '<div class="summary-wrong-empty">本轮没有错词，老师暂时收起戒尺。</div>';
-                return;
-            }
-
-            listNode.innerHTML = wrongWords.map((word, index) => {
-                const label = getWordDisplayText(word) || word.word || `错词 ${index + 1}`;
-                return `<button type="button" class="summary-wrong-chip" data-wrong-index="${index}">${escapeHtml(label)}</button>`;
-            }).join('');
-
-            listNode.querySelectorAll('[data-wrong-index]').forEach((button) => {
-                button.addEventListener('click', () => showSummaryWordCard(Number(button.dataset.wrongIndex)));
-            });
-        }
-
-        const summaryWordOverlay = document.getElementById('summary-word-overlay');
-        if (summaryWordOverlay) {
-            summaryWordOverlay.addEventListener('click', (event) => {
-                if (event.target === summaryWordOverlay) {
-                    closeSummaryWordCard();
-                }
-            });
-        }
 
         function getQuestionTypeLabel(question) {
             if (!question) return '错题';
@@ -3756,101 +3649,65 @@
             return extractKanaDisplayTextFromWordHtml(word && word.word_html, '');
         }
 
-        function buildReviewSummaryItems() {
-            const seen = new Set();
-            return (Array.isArray(questions) ? questions : []).map((question) => {
-                const word = question && question.word;
-                if (!word) return null;
-                const wordId = getWordStorageId(word) || getWordDisplayText(word) || String(word.word || question.correctAnswer || '');
-                if (!wordId || seen.has(wordId)) return null;
-                seen.add(wordId);
-
-                const correct = question.kind === 'sentence' && question.reviewAnalysis && question.reviewAnalysis.correct
-                    ? question.reviewAnalysis.correct
-                    : null;
-                const meaning = String((correct && correct.meaning) || extractPrimaryMeaning(word) || '').trim();
-                const usage = String((correct && correct.usage) || extractPrimaryUsage(word) || '').trim();
-                const collocation = String((correct && correct.collocation) || extractCommonCollocation(word) || '').trim();
-
-                return {
-                    term: getWordDisplayText(word) || String(word.word || question.correctAnswer || '').trim(),
-                    reading: getReviewSummaryReading(word),
-                    typeLabel: getQuestionTypeLabel(question),
-                    meaning,
-                    usage: usage && usage !== meaning ? usage : '',
-                    collocation
-                };
-            }).filter(Boolean);
-        }
-
-        function buildReviewSummaryMarkup() {
-            const items = buildReviewSummaryItems();
-            if (!items.length) {
-                return '<div class="review-summary-empty">本次没有待回顾的考点词汇。</div>';
-            }
-            const renderLine = (label, value) => value
-                ? '<div class="review-summary-line"><strong>' + label + '</strong>' + escapeHtml(value) + '</div>'
-                : '';
-            return '<div class="review-summary-list">' + items.map((item) => {
-                const metaParts = [item.reading, item.typeLabel].filter(Boolean);
-                return '<article class="review-summary-item">'
-                    + '<div class="review-summary-term"><span>' + escapeHtml(item.term) + '</span>'
-                    + (metaParts.length ? '<span class="review-summary-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' : '')
-                    + '</div>'
-                    + renderLine('释义', item.meaning)
-                    + renderLine('用法', item.usage)
-                    + renderLine('搭配', item.collocation)
-                    + '</article>';
-            }).join('') + '</div>';
+        function renderUnifiedVocabularySummary(context, options = {}) {
+            if (!window.VocabularyResultSummary) return;
+            const total = Number.isFinite(options.total) ? options.total : questions.length;
+            const correct = Number.isFinite(options.correct) ? options.correct : score;
+            window.VocabularyResultSummary.render({
+                root: document.getElementById('view-summary'),
+                title: options.title || context.challengeTitle,
+                total,
+                correct,
+                wrongWords: sessionWrongWords,
+                practiceType: dailyPracticeType,
+                feedback: options.feedback || '',
+                getDisplayText: getWordDisplayText,
+                getReading: getReviewSummaryReading,
+                getMeaning: extractPrimaryMeaning,
+                temporaryUnitKey: SENTENCE_REVIEW_MODULE_KEY,
+                temporaryUnitUrl: VOCABULARY_RETURN_URL,
+                getWordId: getWordStorageId,
+                onReturn: returnToVocabularyPage,
+                onRestart: () => window.location.reload()
+            });
         }
 
         function renderReviewSummary(context = getPracticeContext()) {
-            setReviewSummaryMode(true);
-            const summaryRoot = document.getElementById('view-summary');
-            const badge = summaryRoot ? summaryRoot.querySelector('.summary-badge') : null;
-            const primaryBtn = summaryRoot ? summaryRoot.querySelector('.summary-primary-btn') : null;
-            if (badge) badge.textContent = 'REVIEW COMPLETE';
-            if (primaryBtn) primaryBtn.textContent = '再巩固一次';
-
-            document.getElementById('summary-overline').textContent = '错题库巩固';
-            document.getElementById('summary-title').textContent = '考点回顾';
-            document.getElementById('summary-rank').textContent = '';
-            document.getElementById('summary-eval').textContent = '';
-            document.getElementById('summary-msg').innerHTML = buildReviewSummaryMarkup();
+            renderUnifiedVocabularySummary(context, {
+                title: '错题巩固完成',
+                total: questions.length,
+                correct: score,
+                feedback: '这一轮的易错词已经重新整理过了，再看一遍仍不确定的词。'
+            });
         }
 
-        function calculateSummaryRank(percentage) {
-            if (percentage === 100) {
-                return { rank: 'SS', eval: '满分！！太厉害了吧！不愧是你！今天要好好庆祝一下！' };
-            }
-            if (percentage >= 90) {
-                return { rank: 'S', eval: '超棒的成绩！照这个势头，考试绝对没问题啦！' };
-            }
-            if (percentage >= 80) {
-                return { rank: 'A', eval: '表现很好哦！稍微复习一下错题就完美了！' };
-            }
-            if (percentage >= 65) {
-                return { rank: 'B', eval: '有点可惜呢，不过没关系，我们一起把不懂的再过一遍！' };
-            }
-            if (percentage >= 50) {
-                return { rank: 'C', eval: '好像遇到瓶颈了？别气馁，我陪你从头再来！' };
-            }
-            return { rank: 'F', eval: '呜哇……这次有点惨烈呢。别灰心，我们一步一步重新开始！' };
+        function getVocabularyResultFeedback(percentage) {
+            if (percentage === 100) return '满分！太厉害了，今天要好好庆祝一下！';
+            if (percentage >= 90) return '超棒的成绩！照这个势头继续前进吧！';
+            if (percentage >= 80) return '表现很好，稍微复习一下错题就更稳了！';
+            if (percentage >= 65) return '有点可惜，不过把不懂的再过一遍就好！';
+            if (percentage >= 50) return '好像遇到瓶颈了？别气馁，我们重新整理一下！';
+            return '这次还不够稳，先把错词一步一步重新看过吧。';
         }
 
-        function renderSummary() {
+        function renderSummary(options = {}) {
+            const endedEarly = Boolean(options && options.endedEarly);
             clearTimer();
             clearTypewriter('question');
             if (pendingQuestionReveal) {
                 clearTimeout(pendingQuestionReveal);
                 pendingQuestionReveal = null;
             }
+            if (pendingNextQuestion) {
+                clearTimeout(pendingNextQuestion);
+                pendingNextQuestion = null;
+            }
 
             switchView('view-summary');
 
             const context = getPracticeContext();
 
-            if (context.mode === 'review') {
+            if (context.mode === 'review' && !endedEarly) {
 
                 renderReviewSummary(context);
 
@@ -3858,43 +3715,38 @@
 
             }
 
-            resetSummaryStandardView();
+            const scoredQuestionCount = endedEarly ? clearedCount : questions.length;
+            const percentage = scoredQuestionCount > 0 ? Math.round((score / scoredQuestionCount) * 100) : 0;
+            if (!endedEarly) ensureRewardResult();
+            const resultFeedback = endedEarly
+                ? `已完成 ${clearedCount} / ${questions.length} 题，本轮仅统计已作答内容。`
+                : getVocabularyResultFeedback(percentage);
 
-            const percentage = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
-            const reward = ensureRewardResult();
-            const rankData = calculateSummaryRank(percentage);
-
-            let title = '练习结束啦！';
-            let message = '把错题好好复习一下，下次一定会更好的！';
-            
-            if (isChallengeMode && selectedDifficulty && hp <= 0) {
-                title = '体力耗尽啦';
-                message = `今天就先休息一下吧？（只答到了第 ${Math.min(clearedCount, questions.length)} 题哦）`;
+            if (endedEarly) {
+                dispatchPracticeState('exit', {
+                    isCorrect: null,
+                    streak: bestStreak,
+                    questionIndex: clearedCount,
+                    questionCount: questions.length,
+                    accuracy: clearedCount > 0 ? score / clearedCount : 0,
+                    meta: { endedEarly: true }
+                });
+            } else {
+                dispatchPracticeState(percentage === 100 ? 'perfect_clear' : 'clear', {
+                    isCorrect: true,
+                    streak: bestStreak,
+                    questionIndex: questions.length,
+                    questionCount: questions.length,
+                    accuracy: questions.length > 0 ? score / questions.length : 0
+                });
             }
 
-            const drawAffordance = getDrawAffordanceMarkup(reward);
-            const summaryMsg = drawAffordance
-                ? `<div class="lab-result-copy-row"><span>${message}</span>${drawAffordance}</div>`
-                : message;
-
-            dispatchPracticeState(percentage === 100 ? 'perfect_clear' : 'clear', {
-                isCorrect: true,
-                streak: bestStreak,
-                questionIndex: questions.length,
-                questionCount: questions.length,
-                accuracy: questions.length > 0 ? score / questions.length : 0
+            renderUnifiedVocabularySummary(context, {
+                title: context.challengeTitle,
+                total: scoredQuestionCount,
+                correct: score,
+                feedback: resultFeedback
             });
-
-            document.getElementById('summary-overline').textContent = isChallengeMode && selectedDifficulty
-                ? `[${difficultyMap[selectedDifficulty].label}] ${context.challengeTitle}`
-                : context.challengeTitle;
-            document.getElementById('summary-rank').textContent = rankData.rank;
-            document.getElementById('summary-title').textContent = title;
-            document.getElementById('summary-eval').textContent = rankData.eval;
-            document.getElementById('summary-msg').innerHTML = summaryMsg;
-            document.getElementById('summary-accuracy').textContent = `${percentage}%`;
-            document.getElementById('summary-streak').textContent = String(bestStreak);
-            renderSessionWrongWords();
         }
 
         function prepareQuestionSet() {
@@ -3994,7 +3846,7 @@
             introView.innerHTML = `
                 <div class="intro-card">
                     <div style="width: 100px; height: 100px; margin: 0 auto 20px; border-radius: 50%; overflow: hidden; border: 2px solid var(--panel-border); box-shadow: 0 4px 16px rgba(180, 160, 145, 0.2);">
-                        <img src="icon/qingmei.png?v=20260429" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/qingmei.png?v=20260429';" alt="阳葵（ひまり）" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="icon/qingmei-cutout.png?v=20260730" alt="阳葵（ひまり）" onerror="this.hidden=true" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                     <h2 style="font-size: 24px; margin-bottom: 16px; font-family: var(--font-serif); font-weight: normal; color: var(--text-accent);">题目不见啦</h2>
                     <p style="color: var(--text-secondary); line-height: 1.68; font-weight: 500;">${escapeHtml(message)}</p>
@@ -4084,7 +3936,6 @@
             buildReadingQuestionSpec = practiceCore.buildReadingQuestionSpec;
             buildMeaningQuestionSpec = practiceCore.buildMeaningQuestionSpec;
             buildReviewSummaryItems = () => practiceCore.buildReviewSummaryItems(questions);
-            buildReviewSummaryMarkup = () => practiceCore.buildReviewSummaryMarkup(questions);
             prepareQuestionSet = function prepareQuestionSetWithCore() {
                 const prepared = practiceCore.prepareQuestionSet(getPracticeContext(), dailyPracticeType);
                 targetWords = prepared.targetWords;
@@ -4092,6 +3943,7 @@
             };
         }
 
+        migrateLegacyMimeticStars();
         installVocabularyPracticeCore();
 
         document.getElementById('intro-story-panel').addEventListener('click', () => {
@@ -4111,5 +3963,7 @@
 
         startApp();
     </script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

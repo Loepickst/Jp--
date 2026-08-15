@@ -1,0 +1,102 @@
+@import url("./verbs-n1-display-v2.css?v=20260730-scroll1");
+
+:root {
+    --vocab-page: #F3F7FB;
+    --vocab-surface: #FFFFFF;
+    --vocab-surface-subtle: #F7FAFD;
+    --vocab-surface-accent: #EAF2F9;
+    --vocab-ink: #202B38;
+    --vocab-ink-soft: #3C4B5D;
+    --vocab-muted: #617185;
+    --vocab-faint: #76879A;
+    --vocab-line: #D8E3ED;
+    --vocab-line-strong: #B8CADB;
+    --vocab-accent: #4E79A8;
+    --vocab-accent-strong: #315C88;
+    --vocab-accent-soft: #DDEAF5;
+    --vocab-accent-faint: #F0F6FB;
+    --vocab-rose: #C48B3F;
+    --vocab-rose-soft: #F7ECD9;
+    --vocab-sage: #47705B;
+    --vocab-sage-soft: #EBF3ED;
+    --vocab-shadow: 0 18px 48px rgba(42, 78, 112, .08);
+    --vocab-shadow-float: 0 22px 54px rgba(42, 78, 112, .15);
+}
+
+body.vocab-loanwords-page .practice-picker-avatar,
+body.vocab-loanwords-page .study-mentor-note img {
+    border: 0;
+    border-radius: 0;
+    object-fit: contain;
+    background: transparent;
+    box-shadow: none;
+}
+
+body.vocab-loanwords-page .practice-picker-avatar {
+    width: 42px;
+    height: 42px;
+}
+
+body.vocab-loanwords-page .study-mentor-note {
+    border-left-color: var(--vocab-accent);
+    background: #F1F6FB;
+}
+
+body.vocab-loanwords-page .study-example-jp .ex-highlight {
+    background: #E5F0F9;
+}
+
+body.vocab-loanwords-page #header-practice-btn:hover {
+    background: var(--vocab-accent-strong) !important;
+}
+
+body.vocab-loanwords-page :is(
+    #header-practice-btn,
+    .font-size-trigger,
+    .font-size-option-copy,
+    .font-size-option-check,
+    .study-unit-label,
+    .study-unit-progress > span,
+    .study-index-title span,
+    .study-pronounce,
+    .study-pos,
+    .study-origin,
+    .study-detail-footer,
+    .study-detail-footer button,
+    .practice-picker-kicker,
+    .practice-picker-option-sub,
+    .practice-picker-option-count
+) {
+    font-size: 12px;
+}
+
+body.vocab-loanwords-page .study-origin {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: #F7F1E7;
+    color: #7D5A2A;
+    font-family: var(--font-ui);
+    font-weight: 700;
+}
+
+body.vocab-loanwords-page .study-detail-footer {
+    min-height: 56px;
+}
+
+body.vocab-loanwords-page :is(button, a, input):focus-visible {
+    outline-color: var(--vocab-accent-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-loanwords-page *,
+    body.vocab-loanwords-page *::before,
+    body.vocab-loanwords-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

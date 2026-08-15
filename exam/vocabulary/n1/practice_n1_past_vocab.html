@@ -144,7 +144,6 @@
 
         .challenge-shell,
         .dialogue-box,
-        .summary-card,
         .empty-card {
             border: 1px solid var(--panel-border);
             border-radius: 18px;
@@ -519,13 +518,12 @@
             text-decoration: none;
         }
 
-        .summary-card,
         .empty-card {
             padding: 34px 28px;
             text-align: center;
         }
 
-        .summary-kicker {
+        .empty-kicker {
             margin-bottom: 8px;
             color: var(--text-accent);
             font-size: 12px;
@@ -533,7 +531,7 @@
             letter-spacing: 0.16em;
         }
 
-        .summary-title {
+        .empty-title {
             color: var(--text-main);
             font-family: var(--font-serif);
             font-size: 30px;
@@ -541,15 +539,6 @@
             line-height: 1.35;
         }
 
-        .summary-score {
-            margin-top: 18px;
-            color: var(--text-accent);
-            font-size: 46px;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .summary-text,
         .empty-text {
             margin-top: 16px;
             color: var(--text-dim);
@@ -558,7 +547,7 @@
             line-height: 1.75;
         }
 
-        .summary-actions {
+        .empty-actions {
             margin-top: 24px;
             display: flex;
             justify-content: center;
@@ -669,6 +658,7 @@
         }
     </style>
     <link rel="stylesheet" href="../shared/vocabulary-sketch-theme.css">
+    <link rel="stylesheet" href="../shared/vocabulary-result-summary.css?v=20260806">
 </head>
 <body>
     <header>
@@ -681,7 +671,7 @@
     </header>
 
     <main class="page-shell">
-        <section id="practice-view" class="challenge-shell hidden">
+        <section id="view-main" class="challenge-shell hidden">
             <div class="enemy-header">
                 <div class="enemy-avatar">
                     <img src="icon/kiki.png?v=20260515" alt="琦木" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/kiki.png?v=20260515';">
@@ -715,23 +705,15 @@
             </div>
         </section>
 
-        <section id="summary-view" class="summary-card hidden">
-            <div id="summary-kicker" class="summary-kicker">PRACTICE COMPLETE</div>
-            <h2 id="summary-title" class="summary-title">真题练习完成</h2>
-            <div id="summary-score" class="summary-score"></div>
-            <p id="summary-text" class="summary-text"></p>
-            <div class="summary-actions">
-                <button id="next-set-btn" class="primary-btn hidden" type="button">继续下一组</button>
-                <button id="retry-btn" class="secondary-btn" type="button">重做本组</button>
-                <a href="past_vocab_n1.html" class="secondary-btn directory-link">返回目录</a>
-            </div>
+        <section id="view-summary" class="summary-screen hidden">
+            <div class="vocab-result-sheet result-enter" aria-live="polite"></div>
         </section>
 
         <section id="empty-view" class="empty-card hidden">
-            <div class="summary-kicker">NO QUESTIONS</div>
-            <h2 class="summary-title">这里暂时没有题目</h2>
+            <div class="empty-kicker">NO QUESTIONS</div>
+            <h2 class="empty-title">这里暂时没有题目</h2>
             <p class="empty-text">这个题型和词性的组合还没有整理出真题。先回目录换一个入口吧。</p>
-            <div class="summary-actions">
+            <div class="empty-actions">
                 <a href="past_vocab_n1.html" class="secondary-btn directory-link">返回目录</a>
             </div>
         </section>
@@ -741,6 +723,7 @@
     <script src="../../../shared/study-quest-test-boot.js"></script>
     <script src="n1_past_vocab_data.js"></script>
     <script src="n1_past_vocab_review_store.js"></script>
+    <script src="../shared/vocabulary-result-summary.js?v=20260806"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
         const selectedPart = params.get("part");
@@ -777,13 +760,14 @@
         let currentStreak = 0;
         let bestStreak = 0;
         let answered = false;
+        let sessionWrongQuestions = [];
         const testServer = window.StudyQuestTestServer || null;
         let rewardRunMeta = null;
         let rewardResult = null;
 
         const pageTitle = document.getElementById("page-title");
-        const practiceView = document.getElementById("practice-view");
-        const summaryView = document.getElementById("summary-view");
+        const practiceView = document.getElementById("view-main");
+        const summaryView = document.getElementById("view-summary");
         const emptyView = document.getElementById("empty-view");
         const questionKicker = document.getElementById("question-kicker");
         const questionMeta = document.getElementById("question-meta");
@@ -796,12 +780,6 @@
         const analysisPanel = document.getElementById("analysis-panel");
         const continueRow = document.getElementById("continue-row");
         const continueBtn = document.getElementById("continue-btn");
-        const summaryKicker = document.getElementById("summary-kicker");
-        const summaryTitle = document.getElementById("summary-title");
-        const summaryScore = document.getElementById("summary-score");
-        const summaryText = document.getElementById("summary-text");
-        const nextSetBtn = document.getElementById("next-set-btn");
-        const retryBtn = document.getElementById("retry-btn");
         document.getElementById("directory-back-link").href = directoryUrl;
         document.querySelectorAll(".directory-link").forEach(function(link) {
             link.href = directoryUrl;
@@ -901,12 +879,6 @@
                 sourcePage: window.location.pathname
             });
             return rewardResult;
-        }
-
-        function getDrawAffordanceMarkup(reward) {
-            if (!reward || !reward.accepted || !reward.drawOffer || !reward.drawOffer.available) return "";
-            if (!window.StudyQuestTestUi || typeof window.StudyQuestTestUi.getDrawAffordanceMarkup !== "function") return "";
-            return window.StudyQuestTestUi.getDrawAffordanceMarkup(reward.drawOffer.runKey || (rewardRunMeta && rewardRunMeta.runKey));
         }
 
         function escapeHtml(value) {
@@ -1136,6 +1108,9 @@
             if (!isCorrect && reviewStore) {
                 reviewStore.saveWrong(question);
             }
+            if (!isCorrect && !sessionWrongQuestions.some(function(item) { return item.id === question.id; })) {
+                sessionWrongQuestions.push(question);
+            }
 
             optionsGrid.querySelectorAll(".option-btn").forEach(function(button) {
                 const optionIndex = Number(button.dataset.index);
@@ -1164,22 +1139,50 @@
             emptyView.classList.add("hidden");
             const percent = questions.length ? Math.round((correctCount / questions.length) * 100) : 0;
             const hasNextGroup = !isReviewMode && currentGroupNumber < totalGroups;
-            const reward = ensureRewardResult();
-            const drawAffordance = getDrawAffordanceMarkup(reward);
-            summaryKicker.textContent = isReviewMode ? "REVIEW COMPLETE" : "SET COMPLETE";
-            summaryTitle.textContent = isReviewMode
-                ? "错题库巩固完成"
-                : `第 ${currentGroupNumber} 组完成`;
-            summaryScore.textContent = `${correctCount} / ${questions.length}`;
-            const summaryMessage = isReviewMode
-                ? `正确率 ${percent}%。这组 ${partLabels[selectedPart] || "真题"} 错题已经复习完成，答对的题已从错题库移出。`
-                : `正确率 ${percent}%。${partLabels[selectedPart] || "真题"} / ${categoryLabels[selectedCategory] || "分类"} 第 ${currentGroupNumber} 组已经走完${hasNextGroup ? "，可以继续下一组。" : "，这个分类的分组已经全部完成。"} `;
-            summaryText.innerHTML = drawAffordance
-                ? `<div class="lab-result-copy-row"><span>${escapeHtml(summaryMessage)}</span>${drawAffordance}</div>`
-                : escapeHtml(summaryMessage);
-            nextSetBtn.classList.toggle("hidden", !hasNextGroup);
-            nextSetBtn.textContent = "继续下一组";
-            retryBtn.textContent = isReviewMode ? "刷新错题库" : "再练一次";
+            ensureRewardResult();
+            const feedbackMessage = isReviewMode
+                ? `正确率 ${percent}%。答对的题已经移出错题库，剩余内容可以继续巩固。`
+                : (sessionWrongQuestions.length
+                    ? `正确率 ${percent}%。先回看本轮真题中的易错词，再继续下一组。`
+                    : `正确率 ${percent}%。这一组真题词汇掌握得很稳。`);
+            window.VocabularyResultSummary.render({
+                root: summaryView,
+                level: "N1",
+                title: isReviewMode
+                    ? "真题错题巩固"
+                    : `${partLabels[selectedPart] || "真题词汇"} · 第 ${currentGroupNumber} 组`,
+                total: questions.length,
+                correct: correctCount,
+                wrongWords: sessionWrongQuestions,
+                feedback: feedbackMessage,
+                mentorName: "琦木",
+                mentorAvatar: "icon/kiki.png?v=20260515",
+                reasonLabel: partLabels[selectedPart] || "真题词汇",
+                wordActionLabel: "真题错项",
+                getDisplayText: function(question) { return question.focus || question.answer || "真题词汇"; },
+                getReading: function(question) { return question.part === "kanji-reading" ? question.answer : ""; },
+                getMeaning: function(question) { return visibleText(question.prompt || question.promptHtml || ""); },
+                secondaryText: isReviewMode ? "刷新错题库" : "再练一次",
+                primaryText: hasNextGroup ? "继续下一组" : "返回词汇目录",
+                onSecondary: function() {
+                    if (isReviewMode) {
+                        window.location.reload();
+                        return;
+                    }
+                    currentIndex = 0;
+                    correctCount = 0;
+                    currentStreak = 0;
+                    bestStreak = 0;
+                    sessionWrongQuestions = [];
+                    summaryView.classList.add("hidden");
+                    practiceView.classList.remove("hidden");
+                    startRewardRun();
+                    renderQuestion();
+                },
+                onPrimary: function() {
+                    window.location.href = hasNextGroup ? getGroupUrl(currentGroupNumber + 1) : directoryUrl;
+                }
+            });
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
@@ -1192,31 +1195,13 @@
             renderQuestion();
         });
 
-        retryBtn.addEventListener("click", function() {
-            if (isReviewMode) {
-                window.location.reload();
-                return;
-            }
-            currentIndex = 0;
-            correctCount = 0;
-            currentStreak = 0;
-            bestStreak = 0;
-            startRewardRun();
-            renderQuestion();
-        });
-
-        nextSetBtn.addEventListener("click", function() {
-            if (isReviewMode || currentGroupNumber >= totalGroups) return;
-            window.location.href = getGroupUrl(currentGroupNumber + 1);
-        });
-
         if (!questions.length) {
             practiceView.classList.add("hidden");
             summaryView.classList.add("hidden");
             emptyView.classList.remove("hidden");
             if (isReviewMode) {
                 pageTitle.textContent = `${partLabels[selectedPart] || "真题练习"} · 错题库`;
-                emptyView.querySelector(".summary-title").textContent = "这里暂时没有错题";
+                emptyView.querySelector(".empty-title").textContent = "这里暂时没有错题";
                 emptyView.querySelector(".empty-text").textContent = "这个题型还没有待复习的真题错题。先回目录继续练习吧。";
             }
         } else {
@@ -1224,5 +1209,7 @@
             renderQuestion();
         }
     </script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

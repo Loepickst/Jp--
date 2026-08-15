@@ -1,0 +1,48 @@
+@import url("./verbs-n1-directory-v2.css?v=20260730-scroll1");
+
+body.vocab-loanwords-page .directory-mentor-portrait {
+    align-self: stretch;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url("icon/wailaiyu-cutout.png?v=20260731");
+    background-position: center 2px;
+    background-repeat: no-repeat;
+    background-size: 184px auto;
+    box-shadow: none;
+    filter: none;
+}
+
+body.vocab-loanwords-page .directory-heading-copy::before {
+    border-color: var(--vocab-line);
+}
+
+body.vocab-loanwords-page .directory-heading-copy:hover,
+body.vocab-loanwords-page .curriculum-unit:hover,
+body.vocab-loanwords-page .directory-review:not(:disabled):hover {
+    background: #EEF5FB;
+}
+
+body.vocab-loanwords-page .curriculum-stage-header {
+    border-left-color: var(--vocab-accent);
+    background: #EDF4FA;
+}
+
+@media (max-width: 900px) {
+    body.vocab-loanwords-page .directory-mentor-portrait {
+        background-size: 170px auto;
+    }
+}
+
+@media (max-width: 700px) {
+    body.vocab-loanwords-page .directory-mentor-portrait {
+        background-size: 150px auto;
+    }
+}
+
+@media (max-width: 520px) {
+    body.vocab-loanwords-page .directory-mentor-portrait {
+        background-size: 130px auto;
+    }
+}

@@ -6,6 +6,7 @@
     <title>N1 語彙特訓センター</title>
     <!-- 引入优雅的衬线与无衬线字体，契合沉浸阅读风格 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="../../../shared/legacy-directory-redirect.js?v=20260808-vocab-pos1"></script>
     <style>
         html {
             -webkit-text-size-adjust: 100%;
@@ -431,14 +432,14 @@
                 <span class="lesson-tag tag-active">辅导中</span>
             </a>
 
-            <!-- 擬音・擬態語 (阳葵) -->
+            <!-- 擬声語・擬態語 (阳葵) -->
             <a class="lesson-item" href="mimetic_n1.html">
                 <div class="lesson-content">
                     <div class="lesson-icon">
                         <img src="icon/qingmei.png?v=20260429" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/qingmei.png?v=20260429';" alt="阳葵（ひまり）">
                     </div>
                     <div class="lesson-text">
-                        <h3>擬音・擬態語</h3>
+                        <h3>擬声語・擬態語</h3>
                         <p>担当：阳葵<br>热情细心的拟声词导师。</p>
                     </div>
                 </div>
@@ -474,24 +475,24 @@
             </a>
 
             <!-- N1 真题词汇练习 (琦木) -->
-            <a class="lesson-item" href="past_vocab_n1.html">
+            <div class="lesson-item disabled" aria-disabled="true">
                 <div class="lesson-content">
                     <div class="lesson-icon">
                         <img src="icon/kiki.png?v=20260515" alt="琦木" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/exam/vocabulary/n1/icon/kiki.png?v=20260515';">
                     </div>
                     <div class="lesson-text">
                         <h3>N1 真题词汇练习</h3>
-                        <p>担当：琦木<br>要考N1？那就来练习吧。</p>
+                        <p>担当：琦木<br>入口装修中，完成后重新开放。</p>
                     </div>
                 </div>
-                <span class="lesson-tag tag-active">练习中</span>
-            </a>
+                <span class="lesson-tag tag-prep">装修中</span>
+            </div>
 
         </div>
     </div>
 
     <!-- 包含 Fallback 机制的返回逻辑 -->
-    <script src="../../../shared/back-navigation.js"></script>
+    <script src="../../../shared/back-navigation.js?v=20260808-vocab-pos1"></script>
     <script>
         if (typeof window.bindHierarchicalBack === 'function') {
             window.bindHierarchicalBack({
@@ -516,6 +517,7 @@
     <footer>
         学园词汇特训中心
     </footer>
-
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

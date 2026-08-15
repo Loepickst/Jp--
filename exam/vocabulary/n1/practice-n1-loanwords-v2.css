@@ -1,0 +1,91 @@
+@import url("./practice-n1-verbs-v2.css?v=20260730");
+
+:root {
+    --practice-page: #F3F7FB;
+    --practice-surface: #FFFFFF;
+    --practice-surface-soft: #F7FAFD;
+    --practice-ink: #202B38;
+    --practice-ink-soft: #3C4B5D;
+    --practice-muted: #617185;
+    --practice-faint: #76879A;
+    --practice-line: #D8E3ED;
+    --practice-line-strong: #B8CADB;
+    --practice-accent: #4E79A8;
+    --practice-navy: #315C88;
+    --practice-rose: #C48B3F;
+    --practice-green: #47705B;
+    --practice-green-soft: #EBF3ED;
+    --practice-red: #A64E43;
+    --practice-red-soft: #FAECE9;
+    --practice-shadow: 0 18px 48px rgba(42, 78, 112, .09);
+}
+
+body.vocab-loanwords-practice .practice-topbar-title::before,
+body.vocab-loanwords-practice .dialogue-type-label::before {
+    background: var(--practice-accent);
+}
+
+body.vocab-loanwords-practice .enemy-avatar,
+body.vocab-loanwords-practice .enemy-avatar[style] {
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    opacity: .62;
+}
+
+body.vocab-loanwords-practice .enemy-avatar img,
+body.vocab-loanwords-practice .intro-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: contain;
+}
+
+body.vocab-loanwords-practice .intro-avatar,
+body.vocab-loanwords-practice .intro-avatar[style] {
+    width: 116px;
+    height: 116px;
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.vocab-loanwords-practice .practice-mentor-speaker {
+    color: var(--practice-accent);
+}
+
+body.vocab-loanwords-practice .action-option:hover:not(:disabled),
+body.vocab-loanwords-practice .action-option:focus-visible:not(:disabled) {
+    background: #EEF5FB !important;
+}
+
+body.vocab-loanwords-practice :is(
+    .practice-context-kind,
+    .practice-context-title,
+    .dialogue-counter,
+    .practice-mentor-copy,
+    .practice-question-footer,
+    .practice-skip-btn
+) {
+    font-size: 12px;
+}
+
+body.vocab-loanwords-practice :is(button, a, input):focus-visible {
+    outline: 2px solid var(--practice-accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-loanwords-practice *,
+    body.vocab-loanwords-practice *::before,
+    body.vocab-loanwords-practice *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

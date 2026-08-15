@@ -1,0 +1,93 @@
+@import url("./verbs-n1-display-v2.css?v=20260730-scroll1");
+
+:root {
+    --vocab-page: #FBF7EA;
+    --vocab-surface: #FFFDF7;
+    --vocab-surface-subtle: #FFF8E8;
+    --vocab-surface-accent: #FFF1C9;
+    --vocab-ink: #2F2B23;
+    --vocab-ink-soft: #514A3D;
+    --vocab-muted: #706654;
+    --vocab-faint: #706654;
+    --vocab-line: #E8DDBF;
+    --vocab-line-strong: #C8B98F;
+    --vocab-accent: #956000;
+    --vocab-accent-strong: #744A00;
+    --vocab-accent-soft: #F6E5B0;
+    --vocab-accent-faint: #FFF8E3;
+    --vocab-rose: #956000;
+    --vocab-rose-soft: #FAEDC8;
+    --vocab-sage: #47705B;
+    --vocab-sage-soft: #EBF3ED;
+    --vocab-shadow: 0 18px 48px rgba(116, 74, 0, .08);
+    --vocab-shadow-float: 0 22px 54px rgba(116, 74, 0, .15);
+}
+
+body.vocab-mimetic-page .practice-picker-avatar {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 0;
+    object-fit: contain;
+    background: transparent;
+    box-shadow: none;
+}
+
+body.vocab-mimetic-page .study-mentor-note img {
+    border: 0;
+    border-radius: 0;
+    object-fit: contain;
+    background: transparent;
+    box-shadow: none;
+}
+
+body.vocab-mimetic-page .study-mentor-note {
+    border-left-color: var(--vocab-rose);
+    background: #FFF6DD;
+}
+
+body.vocab-mimetic-page .study-example-jp .ex-highlight {
+    background: #FFF0C2;
+}
+
+body.vocab-mimetic-page #header-practice-btn:hover {
+    background: #744A00 !important;
+}
+
+body.vocab-mimetic-page :is(
+    #header-practice-btn,
+    .font-size-trigger,
+    .font-size-option-copy,
+    .font-size-option-check,
+    .study-unit-label,
+    .study-unit-progress > span,
+    .study-index-title span,
+    .study-pronounce,
+    .study-pos,
+    .study-detail-footer,
+    .study-detail-footer button,
+    .practice-picker-kicker,
+    .practice-picker-option-sub,
+    .practice-picker-option-count
+) {
+    font-size: 12px;
+}
+
+body.vocab-mimetic-page .study-detail-footer {
+    min-height: 56px;
+}
+
+body.vocab-mimetic-page :is(button, a, input):focus-visible {
+    outline-color: var(--vocab-accent-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.vocab-mimetic-page *,
+    body.vocab-mimetic-page *::before,
+    body.vocab-mimetic-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}

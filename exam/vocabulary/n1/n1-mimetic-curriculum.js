@@ -2,39 +2,61 @@
     const groups = [
         {
             id: 1,
-            title: "第 1 阶段",
-            summary: "Day 1 - Day 5"
+            title: "擬声語",
+            summary: ""
         },
         {
             id: 2,
-            title: "第 2 阶段",
-            summary: "Day 6 - Day 9"
+            title: "擬態語",
+            summary: ""
         }
     ];
 
-    const daySizes = [10, 10, 10, 10, 10, 10, 10, 10, 10];
-    let cursor = 0;
+    // 声音、说话声、呼吸声或能够直接听见的声响。
+    const giseigoIds = [6, 44, 45, 53, 54, 60, 62, 76, 79, 81];
+    const gitaigoIds = Array.from({ length: 90 }, (_, index) => index)
+        .filter((wordId) => !giseigoIds.includes(wordId));
 
-    const days = daySizes.map((size, index) => {
-        const id = index + 1;
-        const groupId = id <= 5 ? 1 : 2;
-        const group = groups.find((item) => item.id === groupId);
-        const wordIds = Array.from({ length: size }, (_, offset) => cursor + offset);
-        cursor += size;
-        return {
-            id,
-            groupId,
-            groupTitle: group ? group.title : `第 ${groupId} 阶段`,
-            groupSummary: group ? group.summary : "",
-            title: `Day ${String(id).padStart(2, "0")}`,
-            wordIds
-        };
+    const groupPlans = [
+        {
+            group: groups[0],
+            wordIds: giseigoIds,
+            daySizes: [10]
+        },
+        {
+            group: groups[1],
+            wordIds: gitaigoIds,
+            daySizes: [10, 10, 10, 10, 10, 10, 10, 10]
+        }
+    ];
+
+    let nextDayId = 1;
+    const days = groupPlans.flatMap((plan) => {
+        let cursor = 0;
+        return plan.daySizes.map((size, index) => {
+            const wordIds = plan.wordIds.slice(cursor, cursor + size);
+            cursor += size;
+            return {
+                id: nextDayId++,
+                groupId: plan.group.id,
+                groupTitle: plan.group.title,
+                groupSummary: plan.group.summary,
+                dayNumber: index + 1,
+                title: `${index + 1}日目`,
+                wordIds
+            };
+        });
     });
 
-    const stages = [
-        { id: 1, groupId: 1, groupTitle: "第 1 阶段", title: "阶段 1 · Day 1 - Day 5", dayIds: [1, 2, 3, 4, 5] },
-        { id: 2, groupId: 2, groupTitle: "第 2 阶段", title: "阶段 2 · Day 6 - Day 9", dayIds: [6, 7, 8, 9] }
-    ];
+    const stages = groups.map((group) => ({
+        id: group.id,
+        groupId: group.id,
+        groupTitle: group.title,
+        title: group.title,
+        dayIds: days
+            .filter((day) => day.groupId === group.id)
+            .map((day) => day.id)
+    }));
 
     global.LAB_N1_MIMETIC_GROUPS = groups;
     global.LAB_N1_MIMETIC_DAYS = days;

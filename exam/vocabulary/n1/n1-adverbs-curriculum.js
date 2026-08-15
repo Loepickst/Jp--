@@ -1,188 +1,53 @@
-(function(global) {
-    'use strict';
-
+(function (global) {
     const groups = [
-        {
-                "id": 1,
-                "title": "N1 副詞",
-                "subtitle": "67 词"
-        }
-];
-    const days = [
-        {
-                "id": 1,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                ]
-        },
-        {
-                "id": 2,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        10,
-                        11,
-                        12,
-                        13,
-                        14,
-                        15,
-                        16,
-                        17,
-                        18,
-                        19
-                ]
-        },
-        {
-                "id": 3,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        20,
-                        21,
-                        22,
-                        23,
-                        24,
-                        25,
-                        26,
-                        27,
-                        28,
-                        29
-                ]
-        },
-        {
-                "id": 4,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        30,
-                        31,
-                        32,
-                        33,
-                        34,
-                        35,
-                        36,
-                        37,
-                        38,
-                        39
-                ]
-        },
-        {
-                "id": 5,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        40,
-                        41,
-                        42,
-                        43,
-                        44,
-                        45,
-                        46,
-                        47,
-                        48,
-                        49
-                ]
-        },
-        {
-                "id": 6,
-                "title": "N1 副詞",
-                "subtitle": "10 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        50,
-                        51,
-                        52,
-                        53,
-                        54,
-                        55,
-                        56,
-                        57,
-                        58,
-                        59
-                ]
-        },
-        {
-                "id": 7,
-                "title": "N1 副詞",
-                "subtitle": "7 词",
-                "groupId": 1,
-                "groupTitle": "N1 副詞",
-                "wordIds": [
-                        60,
-                        61,
-                        62,
-                        63,
-                        64,
-                        65,
-                        66
-                ]
-        }
-];
-    const stages = [
-        {
-                "id": 1,
-                "title": "阶段 1 · N1 副詞",
-                "subtitle": "单元 1 - 2",
-                "dayIds": [
-                        1,
-                        2
-                ],
-                "groupTitle": "N1 副詞"
-        },
-        {
-                "id": 2,
-                "title": "阶段 2 · N1 副詞",
-                "subtitle": "单元 3 - 4",
-                "dayIds": [
-                        3,
-                        4
-                ],
-                "groupTitle": "N1 副詞"
-        },
-        {
-                "id": 3,
-                "title": "阶段 3 · N1 副詞",
-                "subtitle": "单元 5 - 6",
-                "dayIds": [
-                        5,
-                        6
-                ],
-                "groupTitle": "N1 副詞"
-        },
-        {
-                "id": 4,
-                "title": "阶段 4 · N1 副詞",
-                "subtitle": "单元 7 - 7",
-                "dayIds": [
-                        7
-                ],
-                "groupTitle": "N1 副詞"
-        }
-];
+        { id: 1, title: "时间与进程", summary: "" },
+        { id: 2, title: "频率与反复", summary: "" },
+        { id: 3, title: "否定与限定", summary: "" },
+        { id: 4, title: "推测与比拟", summary: "" },
+        { id: 5, title: "假设、让步与疑问", summary: "" },
+        { id: 6, title: "选择、请求与结果", summary: "" }
+    ];
+
+    const dayPlans = [
+        { id: 1, groupId: 1, dayNumber: 1, start: 0, end: 6 },
+        { id: 2, groupId: 1, dayNumber: 2, start: 7, end: 13 },
+        { id: 3, groupId: 1, dayNumber: 3, start: 14, end: 20 },
+        { id: 4, groupId: 2, dayNumber: 1, start: 21, end: 29 },
+        { id: 5, groupId: 3, dayNumber: 1, start: 30, end: 35 },
+        { id: 6, groupId: 3, dayNumber: 2, start: 36, end: 41 },
+        { id: 7, groupId: 4, dayNumber: 1, start: 42, end: 47 },
+        { id: 8, groupId: 4, dayNumber: 2, start: 48, end: 53 },
+        { id: 9, groupId: 5, dayNumber: 1, start: 54, end: 60 },
+        { id: 10, groupId: 6, dayNumber: 1, start: 61, end: 66 }
+    ];
+
+    const days = dayPlans.map((plan) => {
+        const group = groups.find((item) => item.id === plan.groupId);
+        return {
+            id: plan.id,
+            groupId: plan.groupId,
+            groupTitle: group ? group.title : "",
+            groupSummary: group ? group.summary : "",
+            dayNumber: plan.dayNumber,
+            title: `${plan.dayNumber}日目`,
+            wordIds: Array.from(
+                { length: plan.end - plan.start + 1 },
+                (_, offset) => plan.start + offset
+            )
+        };
+    });
+
+    const stages = groups.map((group) => ({
+        id: group.id,
+        groupId: group.id,
+        groupTitle: group.title,
+        title: group.title,
+        dayIds: days
+            .filter((day) => day.groupId === group.id)
+            .map((day) => day.id)
+    }));
 
     global.LAB_N1_ADVERB_GROUPS = groups;
     global.LAB_N1_ADVERB_DAYS = days;
     global.LAB_N1_ADVERB_STAGES = stages;
-})(typeof window !== 'undefined' ? window : globalThis);
+})(typeof window !== "undefined" ? window : globalThis);

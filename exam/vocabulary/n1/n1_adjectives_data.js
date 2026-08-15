@@ -731,8 +731,8 @@ const DAY3_WORDS = [
         "practice": {
             "sentence": "都会の喧騒を離れ、<span class='ex-highlight'>____</span>空気を胸いっぱいに吸い込む。",
             "cn": "远离都市喧嚣，尽情吸入清新的空气。",
-            "options": ["きよらか", "なめらか", "やわらか", "おおらか"],
-            "answer": "きよらか"
+            "options": ["きよらかな", "なめらかな", "やわらかな", "おおらかな"],
+            "answer": "きよらかな"
         }
     },
     {
@@ -784,8 +784,8 @@ const DAY3_WORDS = [
         "practice": {
             "sentence": "彼は<span class='ex-highlight'>____</span>性格で、小さなミスは笑って許してくれる。",
             "cn": "他性格大度，小错误都会笑着原谅。",
-            "options": ["おおらか", "おだやか", "きよらか", "やわらか"],
-            "answer": "おおらか"
+            "options": ["おおらかな", "おだやかな", "きよらかな", "やわらかな"],
+            "answer": "おおらかな"
         }
     },
     {
@@ -802,8 +802,8 @@ const DAY3_WORDS = [
         "practice": {
             "sentence": "昨日の嵐が嘘のように、今日は<span class='ex-highlight'>____</span>天気だ。",
             "cn": "昨天的暴风雨像假的一样，今天天气很平静。",
-            "options": ["おだやか", "おおらか", "なめらか", "きよらか"],
-            "answer": "おだやか"
+            "options": ["おだやかな", "おおらかな", "なめらかな", "きよらかな"],
+            "answer": "おだやかな"
         }
     },
     {
@@ -1657,8 +1657,8 @@ const DAY5_WORDS = [
         "word_html": "<ruby>生<rt>なま</rt></ruby>ぬるい",
         "tone": "4",
         "pos": "い形",
-        "mean": "微温、不冷不热；若无其事、平静",
-        "nuance": "1. 温度介于冷热之间，多指让人感到不舒服的温度。\n2. 表面看起来没有什么异常，不露声色。",
+        "mean": "微温、不冷不热；温吞、不彻底、不严格",
+        "nuance": "1. 温度介于冷热之间，多指让人感到不舒服的温度。\n2. 做法、态度或处分等力度不足，不够彻底、严格。",
         "examples": [
             { "jp": "<span class='ex-highlight'><ruby>生<rt>なま</rt></ruby>ぬるい</span><ruby>風<rt>かぜ</rt></ruby>が<ruby>吹<rt>ふ</rt></ruby>いてきて<ruby>気<rt>き</rt></ruby><ruby>持<rt>も</rt></ruby>ち<ruby>悪<rt>わる</rt></ruby>い。", "cn": "吹来一阵不冷不热的风，感觉很不舒服。" },
             { "jp": "そんな<span class='ex-highlight'><ruby>生<rt>なま</rt></ruby>ぬるい</span><ruby>処<rt>しょ</rt></ruby><ruby>罰<rt>ばつ</rt></ruby>では、<ruby>誰<rt>だれ</rt></ruby>も<ruby>納<rt>なっ</rt></ruby><ruby>得<rt>とく</rt></ruby>しない。", "cn": "那么轻微的处罚，谁都不会信服。" }
@@ -2948,8 +2948,8 @@ const DAY9_WORDS = [
         "practice": {
             "sentence": "あの<ruby>社<rt>しゃ</rt></ruby><ruby>員<rt>いん</rt></ruby>は<ruby>仕<rt>し</rt></ruby><ruby>事<rt>ごと</rt></ruby>の<ruby>進<rt>しん</rt></ruby><ruby>行<rt>こう</rt></ruby>が<span class='ex-highlight'>____</span>で<ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>だ。",
             "cn": "那名员工工作推进很散漫，成了问题。",
-            "options": ["るーず", "きちんと", "たんねん", "せいぜん"],
-            "answer": "るーず"
+            "options": ["ルーズ", "きちんと", "たんねん", "せいぜん"],
+            "answer": "ルーズ"
         }
     },
     {
@@ -3036,7 +3036,7 @@ const DAY9_WORDS = [
         "practice": {
             "sentence": "あの<ruby>選<rt>せん</rt></ruby><ruby>手<rt>しゅ</rt></ruby>は<span class='ex-highlight'>____</span>に<ruby>練<rt>れん</rt></ruby><ruby>習<rt>しゅう</rt></ruby>に<ruby>打<rt>う</rt></ruby>ち<ruby>込<rt>こ</rt></ruby>んでいる。",
             "cn": "那名选手一心一意地投入训练。",
-            "options": ["ひたむき", "きがる", "るーず", "ぞんざい"],
+            "options": ["ひたむき", "きがる", "ルーズ", "ぞんざい"],
             "answer": "ひたむき"
         }
     },
