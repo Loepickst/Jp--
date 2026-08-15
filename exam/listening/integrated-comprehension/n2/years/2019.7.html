@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統合理解 - 聴解練習 (N2 STAGE)</title>
+    <!-- 使用与练习页一致的书面/印刷感字体组合 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="back-btn" id="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            戻る
+        </a>
+        <h1 id="yearLabel">統合理解 (N2)</h1>
+        <div style="width: 60px;"></div>
+    </header>
+
+    <div class="practice-container mode-practice" id="appContainer">
+        
+        <div class="card-header">
+            <div class="header-left">
+                <select id="questionSelect" class="question-select" onchange="changeQuestion(this.value)"></select>
+                <button type="button" id="markBtn" class="mark-btn" onclick="toggleMark()" title="付箋を貼る (标记/收藏)" aria-label="付箋を貼る">🐶</button>
+            </div>
+            <div class="mode-switch">
+                <button id="btnPractice" class="active" onclick="setMode('practice')">✎ 演習ノート</button>
+                <button id="btnExplanation" onclick="setMode('explanation')">✔ 赤ペン解説</button>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="right-panel" id="rightPanel">
+                
+                <!-- 听力原文与翻译区块 (练习模式下隐藏) -->
+                <div class="transcript-section sketch-box" id="transcriptBlock">
+                    <!-- 问题区块 -->
+                    <div class="question-box">
+                        <div id="questionText"></div>
+                        <div class="translation" id="questionTrans"></div>
+                    </div>
+
+                    <!-- 独白或对话区块 -->
+                    <div class="conversation-box" id="conversationText">
+                        <!-- 由JS填充独白或对话内容 -->
+                    </div>
+                </div>
+
+                <div class="question-image-area" id="questionImageArea" aria-live="polite">
+                    <img id="questionImage" alt="">
+                </div>
+
+                <!-- 选项列表 (练习模式下保持可见) -->
+                <div id="optionsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部音频播放器 -->
+    <div class="audio-wrapper">
+        <div class="custom-audio-player">
+            <div class="now-playing-box">
+                <div class="track-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </div>
+                <div class="now-playing-content">
+                    <div class="track-header-row">
+                        <div class="track-info">
+                            <div class="track-title" id="trackTitle">問題 1</div>
+                            <div class="track-subtitle" id="trackSubtitle" style="display:none;"></div>
+                        </div>
+                        <div class="time-group">
+                            <span class="time-display time-current" id="timeCurrent">0:00</span>
+                            <span class="time-display time-divider" style="margin: 0 4px;">/</span>
+                            <span class="time-display time-duration desktop-time" id="timeDurationDesktop">0:00</span>
+                            <span class="time-display time-duration mobile-time" id="timeDurationMobile" style="display: none;">-0:00</span>
+                        </div>
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 控制组 -->
+            <div class="player-controls">
+                <button id="prevBtn" class="ctrl-btn nav-btn" onclick="prevQuestion()" title="前へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h2v12H3zM13 6v12L5 12zM21 6v12L13 12z"/></svg>
+                </button>
+                <button id="rewindBtn" class="ctrl-btn skip-btn" title="6秒戻る">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><text x="12" y="16.5" font-size="8.5" font-weight="900" font-family="sans-serif" stroke-width="0" fill="currentColor" text-anchor="middle">6</text></svg>
+                </button>
+                <button class="ctrl-btn play-btn" id="playBtn">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button id="forwardBtn" class="ctrl-btn skip-btn" title="6秒進む">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><text x="12" y="16.5" font-size="8.5" font-weight="900" font-family="sans-serif" stroke-width="0" fill="currentColor" text-anchor="middle">6</text></svg>
+                </button>
+                <button id="nextBtn" class="ctrl-btn nav-btn" onclick="nextQuestion()" title="次へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6v12L11 12zM11 6v12L19 12zM19 6h2v12H19z"/></svg>
+                </button>
+                <button id="loopBtn" class="ctrl-btn loop-btn" title="ループ再生">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+                <button id="speedBtn" class="ctrl-btn speed-btn" title="再生速度">1.0x</button>
+            </div>
+            
+            <audio id="audioElement" preload="metadata"></audio>
+        </div>
+    </div>
+
+    <div id="wordTooltip" class="custom-tooltip"></div>
+
+    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/listening-progress.js"></script>
+    <script src="../../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../../shared/listening-reward-hooks.js"></script>
+    <script>
+        // --- 容错与模拟外部依赖 ---
+        if (!window.ListeningProgress) {
+            window.ListeningProgress = {
+                setLastPractice: () => {}, getMistakeIds: () => [], setMistakeIds: () => {}
+            };
+        }
+        if (!window.setupListeningPlayer) {
+            window.setupListeningPlayer = () => {};
+            window.updateListeningPlayer = () => {};
+        }
+
+        // --- Data Structure ---
+        const examData = {
+            "N2-2019-07-Integrated": {
+                        "label": "2019年7月 (N2 統合理解)",
+                        "questions": [
+                                    {
+                                                "id": 1,
+                                                "audio": "../assets/audio/2019.7-1.mp3",
+                                                "script": {
+                                                            "question": "一番：市の体育館の受付で女の人と男の職員が話しています。女の人はどの教室を見学したいと言っていますか。",
+                                                            "questionTrans": "（第一题：在市体育馆前台，女人和男职员正在交谈。女人说想参观哪个教室？）",
+                                                            "dialogue": [
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "すみません、何か軽い体操でも始めたいと思ってるんですが、こちらでそういう教室はやってますか。",
+                                                                                    "trans": "（不好意思，我想学点轻松的体操，这里有这样的课程吗？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "はい。いろいろありますよ。時間や内容のご希望はございますか。",
+                                                                                    "trans": "（有的，有好几种。您对时间或课程内容有什么要求吗？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "<span class=\"keyword\" onclick=\"showTooltip(event, '【平日の午前中で、運動が苦手な私でも続けられそう】（平日上午、不太激烈、能坚持）：这是女士最核心的筛选条件。')\">ええと、平日の午前中で、運動が苦手な私でも続けられそうな教室がいいんですけど。</span><span class=\"keyword\" onclick=\"showTooltip(event, '【他の方とも親しくなれるような雰囲気】（能和其他学员熟悉起来）：这是另一个决定性条件。')\">通ってらっしゃる他の方とも親しくなれるような雰囲気の。</span>",
+                                                                                    "trans": "（嗯，最好是平日上午的课程；我不太擅长运动，所以希望是自己也能坚持下去的。另外，氛围上也能和其他学员慢慢熟络起来。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "そうですね。軽い体操というと、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span>火曜九時半からのボール体操。これは直径50センチぐらいのゴムボールに座って体操をします。</span>",
+                                                                                    "trans": "（这样啊。说到轻松体操，有周二九点半开始的球体操。这个课程是坐在直径约50厘米的橡胶球上做体操。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "ああ。",
+                                                                                    "trans": "（哦。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "それから<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>水曜10時からの柔軟体操。体をゆっくり動かして、手足を伸ばします。こちらのクラスは時々参加者の皆さんで交流会をやってるみたいです。</span>",
+                                                                                    "trans": "（还有周三十点开始的柔软体操。课程会慢慢活动身体、伸展手脚。这个班级好像偶尔还会由学员们一起举办交流会。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "へえ、いいですね。",
+                                                                                    "trans": "（哎，挺好啊。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "それから、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span>木曜10時からのリズム運動。音楽を流してリズムに合わせた運動をします。仲のいいクラスで、去年の秋には皆さんで近くにハイキングに出かけてましたよ。</span>",
+                                                                                    "trans": "（还有周四十点开始的节奏运动。这个课程会播放音乐，配合节奏做运动。班级气氛很好，去年秋天大家还一起去附近徒步了。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "その教室、この間テレビで紹介してましたよね。音楽に合わせて体操するの、楽しそうでしたけど。<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【皆さん、汗びっしょり】（大家都满身是汗）：说明运动量偏大，不符合女士“不擅长运动、不要太激烈”的条件。')\">皆さん、汗びっしょりでした。</span></span>",
+                                                                                    "trans": "（这个课程前阵子电视上介绍过吧。跟着音乐做体操看起来很开心，不过大家都满身是汗。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "あっ、ご覧になったんですね。かなり体を動かすので、いい運動になりますよ。",
+                                                                                    "trans": "（啊，您看过啊。因为活动量相当大，所以锻炼效果很好。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "あとは、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span>土曜の午前なんですが、筋肉トレーニングもあります。</span>講師からいろんなトレーニング器具の使い方を教わりながら、筋肉を鍛えるクラスです。",
+                                                                                    "trans": "（另外，还有周六上午的肌肉训练。这个课程会一边向老师学习各种训练器材的使用方法，一边锻炼肌肉。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女",
+                                                                                    "text": "迷いますね。でも、<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【週末はあけておきたい】（周末想空出来）：排除周六上午的肌肉训练。')\">やっぱり週末はあけておきたい</span></span>んですよね。<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【あんまり激しい運動だと、自信がない】（太激烈就没信心）：排除运动量大的节奏运动。')\">あんまり激しい運動だと、できるかどうか自信がない</span></span>し、<span class=\"highlight-correct\"><span class=\"keyword\" onclick=\"showTooltip(event, '【教室以外にも仲良くなる機会】（课程外也有交流机会）：对应柔软体操班的交流会，是最终选择的关键。')\">教室以外にも仲良くなる機会がある方がいい</span></span>なあ。えっと、こちらの教室、見学できますか。",
+                                                                                    "trans": "（真让人犹豫啊。不过我还是想把周末空出来。运动太激烈的话，我也没什么信心能坚持下来；而且最好是在上课之外也有机会和大家熟络。嗯，这个课程可以参观吗？）"
+                                                                        }
+                                                            ]
+                                                },
+                                                "options": [
+                                                            {
+                                                                        "text": "ボール体操",
+                                                                        "translation": "（球体操）",
+                                                                        "correct": false,
+                                                                        "explanation": "球体操在平日上午，也属于轻松体操，但对话中没有提到学员之间交流的机会。"
+                                                            },
+                                                            {
+                                                                        "text": "柔軟体操",
+                                                                        "translation": "（柔软体操）",
+                                                                        "correct": true,
+                                                                        "explanation": "正确。它在周三上午，动作较缓慢，而且这个班级会举办交流会，符合“平日上午、运动不激烈、能和其他人熟悉”的条件。"
+                                                            },
+                                                            {
+                                                                        "text": "リズム運動",
+                                                                        "translation": "（节奏运动）",
+                                                                        "correct": false,
+                                                                        "explanation": "虽然班级关系很好，但电视介绍中大家汗流浃背，说明运动量较大，不符合女人“不擅长运动、不要太激烈”的条件。"
+                                                            },
+                                                            {
+                                                                        "text": "筋肉トレーニング",
+                                                                        "translation": "（肌肉训练）",
+                                                                        "correct": false,
+                                                                        "explanation": "这是周六上午的课程，女人明确说周末想空出来，因此排除。"
+                                                            }
+                                                ]
+                                    },
+                                    {
+                                                "id": 2,
+                                                "audio": "../assets/audio/2019.7-2.mp3",
+                                                "script": {
+                                                            "question": "二番：大学で、大学祭の係の学生三人が話しています。問題解決のために、何をすることにしましたか。",
+                                                            "questionTrans": "（第二题：在大学里，负责大学祭的三名学生正在交谈。为了解决问题，他们决定做什么？）",
+                                                            "dialogue": [
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "大学祭まであと一か月だね。去年の参加者のアンケートで、<span class=\"keyword\" onclick=\"showTooltip(event, '【ごみ箱の場所がわかりにくかった】（垃圾箱位置不好找）：这是这段讨论要解决的核心问题。')\">ごみ箱の場所がわかりにくかった</span>っていう声が多かったけど、今年どうしたらいいかまだ決めてなかったね。",
+                                                                                    "trans": "（离大学祭还有一个月了。去年参加者问卷里，很多人说垃圾箱的位置不好找；今年要怎么改，我们还没决定呢。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "あちこちにゴミが捨てられてたよね。来場者に配った会場案内のチラシにゴミ箱の場所も書いておいたんだけど、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>チラシの数が足りなかったかなあ。</span>",
+                                                                                    "trans": "（到处都有人乱扔垃圾啊。我们发给来场者的会场指南传单里也写了垃圾箱的位置，是不是传单数量不够呢？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【チラシは余ってた】（传单还有剩）：说明问题不是传单数量不足，排除选项2。')\">チラシは余ってたよ。</span></span>",
+                                                                                    "trans": "（传单还有剩哦。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "じゃあ、チラシが見にくかったかなあ。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span>もう少し字を大きくして見やすくしたらどうかなあ。</span>",
+                                                                                    "trans": "（那是不是传单不够清楚呢？把字再放大一点，让它更容易看清怎么样？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【チラシまで見ながらって難しい】（还要边看传单边走很难）：说明单纯改善传单并不能解决问题，排除选项1。')\">でも、お客さんは食べ物や荷物を持って移動するわけだよね。チラシまで見ながらって難しいんじゃない？</span></span>",
+                                                                                    "trans": "（可是客人是拿着食物和行李在会场里移动的吧？还要边看传单边走，应该挺难的吧？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "それもそうだね。うん、去年は、会場内に「ごみ箱はここです」っていう看板も立てたよね。<span class=\"keyword\" onclick=\"showTooltip(event, '【設置場所も問題なさそう】（设置地点也没问题）：问题不是看板放错了地方。')\">設置場所も問題なさそうだったけど。</span>",
+                                                                                    "trans": "（这倒也是。嗯，去年会场里也立了写着“垃圾箱在这里”的看板吧。设置的位置看起来也没什么问题。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "うん。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span>看板の文字も大きくてかなり目立ってたはずなんだけど。</span>",
+                                                                                    "trans": "（嗯。看板上的字也很大，按理说应该挺显眼的。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "込んでたからね。行列もあちこちにできてたし。",
+                                                                                    "trans": "（因为当时人太多了。到处都排着队。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "それで見えにくかったのかもしれないね。それなら、今年は<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span><span class=\"keyword\" onclick=\"showTooltip(event, '【もう少し高さがあるものにしてみよう】（做成更高的东西）：这是最终采用的解决方案，对应选项4。')\">もう少し高さがあるものにしてみよう</span></span>か。目につきやすいように。",
+                                                                                    "trans": "（所以才会不容易看见吧。那今年就试着把看板做高一点，让它更容易进入大家的视线。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "うん、なるほど。それがいいね。",
+                                                                                    "trans": "（嗯，明白了。这个办法不错。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "で、チラシは今年はどうする。見てもらえないなら配るのをやめる？",
+                                                                                    "trans": "（那今年传单怎么办？如果没人看，要不要不发了？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "見る人は見るから、あったほうがいいと思う。<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【去年ので十分見やすくできてた】（去年的传单已经足够清楚）：说明不需要再放大传单文字。')\">去年ので十分見やすくできてたと思うから、あれを使おう。</span></span>",
+                                                                                    "trans": "（会看的人还是会看，所以我觉得传单最好还是有。去年的那版已经做得够清楚了，就继续用那版吧。）"
+                                                                        }
+                                                            ]
+                                                },
+                                                "options": [
+                                                            {
+                                                                        "text": "チラシの文字を大きくする。",
+                                                                        "translation": "（把传单上的字放大。）",
+                                                                        "correct": false,
+                                                                        "explanation": "男生提出过，但女2指出客人拿着食物和行李移动，很难边看传单边走，最后没有采用。"
+                                                            },
+                                                            {
+                                                                        "text": "配るチラシの数を増やす。",
+                                                                        "translation": "（增加发放的传单数量。）",
+                                                                        "correct": false,
+                                                                        "explanation": "女2明确说传单去年有剩，所以问题不是数量不足。"
+                                                            },
+                                                            {
+                                                                        "text": "看板の文字を大きくする。",
+                                                                        "translation": "（把看板上的字放大。）",
+                                                                        "correct": false,
+                                                                        "explanation": "去年看板文字已经很大且显眼，问题在于拥挤和队伍挡住了视线。"
+                                                            },
+                                                            {
+                                                                        "text": "看板の高さを高くする。",
+                                                                        "translation": "（把看板做得更高。）",
+                                                                        "correct": true,
+                                                                        "explanation": "正确。三人判断看板可能因拥挤和队伍而看不见，于是决定今年做成更高、更容易进入视线的看板。"
+                                                            }
+                                                ]
+                                    },
+                                    {
+                                                "id": 3,
+                                                "audio": "../assets/audio/2019.7-3.mp3",
+                                                "script": {
+                                                            "question": "三番：テレビでアナウンサーが使われなくなった学校の校舎の再活用について話しています。",
+                                                            "questionTrans": "（第三题：电视节目里，播音员正在介绍停办学校校舍的再利用。）",
+                                                            "dialogue": [
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "生徒数が減り、廃止になった学校、その校舎の一部を有効活用する取り組みが各地で行われています。今日はその中から四つご紹介します。まず、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span><span class=\"keyword\" onclick=\"showTooltip(event, '【東小学校＝宿泊施設＋山歩き】（东小学＝住宿设施＋登山）：对应女人说想在学校住一次，并和登山社一起去。')\">山の中の小さな学校、東小学校は、今、宿泊施設として活用されています。豊かな自然の中で山歩きや川遊びを楽しめます。</span></span>",
+                                                                                    "trans": "（由于学生人数减少而停办的学校，各地都在尝试有效利用这些校舍。今天介绍其中四个。首先，山里的一所小学校——东小学，现在被改造成住宿设施，大家可以在自然环境中享受登山和河边游玩。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "二つ目の<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"keyword\" onclick=\"showTooltip(event, '【西中学校＝映画館】（西中学＝电影院）：对应男人说朋友自己拍电影，要去看。')\">西田市にある西中学校は、地域のイベントやコンサート、展覧会などに広く使われています。2階は映画館になっていて、昭和時代の雰囲気が残っています。</span></span>",
+                                                                                    "trans": "（第二个是位于西田市的西中学，广泛用于当地活动、音乐会和展览等。二楼改成了电影院，还保留着昭和时期的氛围。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "それから<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"keyword\" onclick=\"showTooltip(event, '【南小学校＝手作り品やアート作品の店】（南小学＝手工品和艺术作品店）：女人一开始往这里误会，但男人马上否定。')\">海に面した南小学校には、手作りのパンやアート作品の店が並んでいます。自分で作ったものを販売したいという若い人が集まってきています。</span></span>",
+                                                                                    "trans": "（接着是临海的南小学，里面开着手工面包店和艺术作品店。想出售自己作品的年轻人聚集在那里。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女1",
+                                                                                    "text": "四つ目の<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"keyword\" onclick=\"showTooltip(event, '【北中学校＝食堂】（北中学＝食堂）：男人只是说如果吃好吃的饭会乐意去，并不是本次要去的学校。')\">農村地域にある北中学校は食堂になっています。地元でとれた新鮮な野菜をたくさん使ったメニューが人気です。</span></span>",
+                                                                                    "trans": "（第四个是农村地区的北中学，现在成了食堂。大量使用当地新鲜蔬菜的菜品很受欢迎。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "今映ってた学校で、友達が今度、<span class=\"keyword\" onclick=\"showTooltip(event, '【作品を発表する】（发表作品）：这里还不能判断是哪所学校，后面才说明作品是电影。')\">作品を発表するんだ。</span>",
+                                                                                    "trans": "（刚才画面里出现的那所学校，我朋友下次要在那里发表作品。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "へえ、友達、<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【何か作って売ってるの】（做东西拿去卖吗）：这是女人把“作品”误会成南小学的手工/艺术品店。')\">何か作って売ってるの？</span></span>",
+                                                                                    "trans": "（哦？你朋友是做了什么东西拿去卖吗？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "え？ あ、<span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【その学校じゃなくて】（不是那所学校）：排除南小学。')\">その学校じゃなくて、</span></span>その友達、<span class=\"highlight-correct\"><span class=\"keyword\" onclick=\"showTooltip(event, '【映画を撮ってて、見に行く】（朋友拍电影，我要去看）：对应西中学校二楼是电影院。')\">自分で映画を撮っててね。見に行くことになってるんだ。</span></span>",
+                                                                                    "trans": "（咦？啊，不是那所学校。是那个朋友自己拍了电影，我已经约好要去看。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "そうなんだ。私は一度でいいから、<span class=\"highlight-correct\"><span class=\"keyword\" onclick=\"showTooltip(event, '【学校に泊まる＋山登りのサークル】（住学校＋登山社）：对应东小学的住宿设施和山歩き。')\">学校に泊まってみたかったんだよね。今度の夏休みに山登りのサークルのみんなで行ってみない？</span></span>",
+                                                                                    "trans": "（这样啊。我一直想住一次学校看看。这个暑假，要不要和登山社的大家一起去？）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "男",
+                                                                                    "text": "え？ 夜の学校なんて真っ暗で怖そうじゃない？ <span class=\"highlight-wrong\"><span class=\"keyword\" onclick=\"showTooltip(event, '【おいしいごはん】（好吃的饭）：对应北中学校食堂，但这只是男人的随口假设，不是女人想去的学校。')\">おいしいごはんを食べるんだったらいつでも喜んで行くけど。</span></span>",
+                                                                                    "trans": "（咦？夜里的学校不是黑漆漆的，看起来很可怕吗？如果是去吃好吃的饭，我倒是随时都很乐意去。）"
+                                                                        },
+                                                                        {
+                                                                                    "speaker": "女2",
+                                                                                    "text": "今は学校じゃないんだから大丈夫だよ。",
+                                                                                    "trans": "（现在已经不是学校了，所以没事啦。）"
+                                                                        }
+                                                            ]
+                                                },
+                                                "subQuestions": [
+                                                            {
+                                                                        "question": "男の人はどの学校に行くつもりだと言っていますか。",
+                                                                        "questionTrans": "（男人说打算去哪所学校？）",
+                                                                        "options": [
+                                                                                    {
+                                                                                                "text": "東小学校",
+                                                                                                "translation": "（东小学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "东小学是住宿设施。女生想去住宿，但男人不是去这里。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "西中学校",
+                                                                                                "translation": "（西中学）",
+                                                                                                "correct": true,
+                                                                                                "explanation": "正确。男人说朋友在那里发表作品，随后说明朋友拍的是电影；西中学二楼是电影院，因此他要去西中学。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "南小学校",
+                                                                                                "translation": "（南小学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "南小学有手工面包和艺术作品店。女生误以为男人朋友在卖作品，但男人否定了这一点。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "北中学校",
+                                                                                                "translation": "（北中学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "北中学是食堂。男人说如果是吃好吃的饭会愿意去，但这不是他已经决定要去的地方。"
+                                                                                    }
+                                                                        ]
+                                                            },
+                                                            {
+                                                                        "question": "女の人はどの学校に行きたいと言っていますか。",
+                                                                        "questionTrans": "（女人说想去哪所学校？）",
+                                                                        "options": [
+                                                                                    {
+                                                                                                "text": "東小学校",
+                                                                                                "translation": "（东小学）",
+                                                                                                "correct": true,
+                                                                                                "explanation": "正确。女人说想住一次学校，并提到暑假和登山社一起去；东小学是山中的住宿设施，能山歩き。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "西中学校",
+                                                                                                "translation": "（西中学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "西中学是电影院，是男人打算去看的地方。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "南小学校",
+                                                                                                "translation": "（南小学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "南小学是店铺聚集地，不符合女人“住学校”和登山社的愿望。"
+                                                                                    },
+                                                                                    {
+                                                                                                "text": "北中学校",
+                                                                                                "translation": "（北中学）",
+                                                                                                "correct": false,
+                                                                                                "explanation": "北中学是食堂，是男人随口说“吃好吃的饭会愿意去”的地方，不是女人想去的地方。"
+                                                                                    }
+                                                                        ]
+                                                            }
+                                                ]
+                                    }
+                        ]
+            }
+};
+
+        let currentExamKey = "N2-2019-07-Integrated"; 
+        let currentQuestionIndex = 0;
+        let preferredMode = 'practice'; 
+        const LISTENING_TYPE = 'integrated-comprehension'; 
+        const LISTENING_LEVEL = 'n2';
+
+        const listeningRewardHooks = window.StudyQuestListeningRewards && window.StudyQuestListeningRewards.create({
+            type: LISTENING_TYPE,
+            level: LISTENING_LEVEL,
+            getExamKey: () => currentExamKey,
+            getCurrentQuestionIndex: () => currentQuestionIndex,
+            getQuestions: () => (examData[currentExamKey] && examData[currentExamKey].questions) || [],
+            buildIndexUrl: () => '../index.html',
+            buildRetryUrl: (examKey) => {
+                const params = new URLSearchParams();
+                if (examKey) params.set('year', examKey);
+                return params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+            }
+        });
+
+        // --- Initialization ---
+        function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const yearParam = urlParams.get('year');
+            const modeParam = urlParams.get('mode');
+            
+            const targetKey = yearParam ? `N2-${yearParam}-Integrated` : currentExamKey;
+
+            if (examData[targetKey]) {
+                currentExamKey = targetKey;
+                window.ListeningProgress.setLastPractice(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey);
+
+                if (modeParam === 'review') {
+                    const marks = getMarks();
+                    if (marks.length === 0) {
+                        alert('付箋を貼った問題はありません。(No marked questions)');
+                    } else {
+                        const originalQuestions = examData[currentExamKey].questions;
+                        const filtered = originalQuestions.filter(q => marks.includes(q.id));
+                        if (filtered.length > 0) {
+                            examData[currentExamKey].questions = filtered;
+                            setTimeout(() => {
+                                const lbl = document.getElementById('yearLabel');
+                                if(lbl) lbl.innerHTML += ' <span style="background:var(--marker-yellow); color:var(--graphite); font-size:12px; margin-left:8px; padding:2px 8px; border-radius:2px 8px 2px 6px / 6px 2px 8px 2px; border:1.5px solid var(--graphite);">✔ 復習ノート</span>';
+                            }, 100);
+                        } else {
+                            alert('付箋を貼った問題が見つかりませんでした。');
+                        }
+                    }
+                }
+            } else if (!examData[currentExamKey]) {
+                currentExamKey = Object.keys(examData)[0];
+            }
+
+            const yearLabel = document.getElementById('yearLabel');
+            if (yearLabel && modeParam !== 'review') {
+                yearLabel.textContent = examData[currentExamKey].label;
+            }
+
+            updateQuestionSelect();
+            window.setupListeningPlayer({
+                subtitle: document.title.replace(/\s*\((N1|N2|N3)\)\s*$/, ''),
+                skipSeconds: 10
+            });
+            if (listeningRewardHooks) listeningRewardHooks.startRun();
+            renderQuestion();
+        }
+
+        // --- Mark Logic ---
+        function getMarks() {
+            return window.ListeningProgress.getMistakeIds(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey);
+        }
+
+        function saveMarks(marks) {
+            window.ListeningProgress.setMistakeIds(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey, marks);
+        }
+
+        function toggleMark() {
+            if (!examData[currentExamKey] || !examData[currentExamKey].questions[currentQuestionIndex]) return;
+
+            const marks = getMarks();
+            const qId = examData[currentExamKey].questions[currentQuestionIndex].id;
+            const index = marks.indexOf(qId);
+
+            if (index === -1) {
+                marks.push(qId);
+                saveMarks(marks);
+                updateMarkUI();
+                return;
+            }
+
+            marks.splice(index, 1);
+            saveMarks(marks);
+
+            updateMarkUI();
+        }
+
+        function updateMarkUI() {
+            if (!examData[currentExamKey] || !examData[currentExamKey].questions[currentQuestionIndex]) return;
+            const marks = getMarks();
+            const qId = examData[currentExamKey].questions[currentQuestionIndex].id;
+            const btn = document.getElementById('markBtn');
+            if (marks.includes(qId)) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+
+        function updateQuestionSelect() {
+            const select = document.getElementById('questionSelect');
+            select.innerHTML = '';
+            
+            const questions = examData[currentExamKey].questions;
+            questions.forEach((q, index) => {
+                const option = document.createElement('option');
+                option.value = index; 
+                option.textContent = `問題 ${q.id}`;
+                select.appendChild(option);
+            });
+        }
+
+        function changeQuestion(index) {
+            currentQuestionIndex = parseInt(index);
+            renderQuestion();
+        }
+
+        // --- Answer Selection ---
+        function selectOption(element) {
+            const container = document.getElementById('appContainer');
+            if (!container.classList.contains('mode-practice')) return;
+            if (element.parentElement.querySelector('.judged-correct') || element.parentElement.querySelector('.judged-wrong')) return;
+
+            const siblings = element.parentElement.children;
+            for (let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('selected');
+                const btn = siblings[i].querySelector('.inline-confirm-btn');
+                if (btn) btn.remove();
+            }
+
+            element.classList.add('selected');
+            
+            const allUls = container.querySelectorAll('.options-list');
+            const allSelected = container.querySelectorAll('.options-list li.selected');
+
+            // 只有当页面上所有的小题都选择了答案时，才显示确认按钮
+            if (allUls.length === allSelected.length) {
+                // 清除可能残留的确认按钮
+                const existingBtns = container.querySelectorAll('.inline-confirm-btn');
+                existingBtns.forEach(btn => btn.remove());
+
+                const btn = document.createElement('button');
+                btn.className = 'inline-confirm-btn';
+                btn.textContent = '確認';
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    checkAnswer();
+                };
+                element.appendChild(btn);
+            }
+        }
+
+        function checkAnswer() {
+            const container = document.getElementById('appContainer');
+            const currentMode = new URLSearchParams(window.location.search).get('mode');
+            const isChallengeMode = currentMode === 'challenge' && window.__LISTENING_RANDOM_EXAM__ === true;
+            const question = examData[currentExamKey].questions[currentQuestionIndex];
+            
+            const allUls = container.querySelectorAll('.options-list');
+            let allCorrect = true;
+
+            // 遍历并判定所有的小题
+            allUls.forEach(ulElement => {
+                const selected = ulElement.querySelector('li.selected');
+                if (!selected) return;
+
+                const qIdx = parseInt(ulElement.getAttribute('data-qidx') || "0");
+                const optsData = question.subQuestions ? question.subQuestions[qIdx].options : question.options;
+                
+                const index = parseInt(selected.getAttribute('data-index'));
+                const isCorrect = optsData[index].correct;
+
+                if (!isCorrect) allCorrect = false;
+
+                if (isChallengeMode) {
+                    ulElement.classList.add('judged');
+                    Array.from(ulElement.children).forEach((opt) => {
+                        opt.style.pointerEvents = 'none';
+                    });
+                } else {
+                    ulElement.classList.add('judged');
+                    if (isCorrect) {
+                        selected.classList.add('judged-correct');
+                    } else {
+                        selected.classList.add('judged-wrong');
+                        optsData.forEach((opt, i) => {
+                            if (opt.correct) ulElement.children[i].classList.add('judged-correct');
+                        });
+                    }
+                }
+            });
+
+            if (listeningRewardHooks) listeningRewardHooks.handleAnswer(allCorrect);
+
+            if (isChallengeMode) {
+                if (!allCorrect) {
+                    const marks = getMarks();
+                    if (!marks.includes(question.id)) {
+                        marks.push(question.id);
+                        saveMarks(marks);
+                        updateMarkUI();
+                    }
+                }
+                container.dataset.sqChallengeAnswered = '1';
+                container.classList.remove('judged');
+            } else {
+                container.classList.add('judged');
+                if (!allCorrect) {
+                    const marks = getMarks();
+                    if (!marks.includes(question.id)) {
+                        marks.push(question.id);
+                        saveMarks(marks);
+                        updateMarkUI();
+                    }
+                }
+            }
+
+            const confirmBtns = container.querySelectorAll('.inline-confirm-btn');
+            confirmBtns.forEach(btn => btn.remove());
+
+            setTimeout(() => {
+                setMode('explanation', false);
+            }, 1000);
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                setMode(preferredMode, false);
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            const questions = examData[currentExamKey].questions;
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                setMode(preferredMode, false);
+                renderQuestion();
+            }
+        }
+
+        // --- Render Content ---
+        function renderQuestion() {
+            const container = document.getElementById('appContainer');
+            if (container) container.classList.remove('judged');
+
+            const data = examData[currentExamKey].questions[currentQuestionIndex];
+            const total = examData[currentExamKey].questions.length;
+
+            updateMarkUI();
+            document.getElementById('questionSelect').value = currentQuestionIndex;
+            window.updateListeningPlayer({
+                title: `問題 ${data.id}`,
+                audioSrc: data.audio,
+                hasPrev: currentQuestionIndex > 0,
+                hasNext: currentQuestionIndex < total - 1
+            });
+
+            // Transcript Update
+            document.getElementById('questionText').innerHTML = data.script.question;
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans;
+            const questionImageArea = document.getElementById('questionImageArea');
+            const questionImage = document.getElementById('questionImage');
+            if (questionImageArea && questionImage) {
+                if (data.image) {
+                    questionImage.src = data.image;
+                    questionImage.alt = `${examData[currentExamKey].label} 問題 ${data.id} 题图`;
+                    questionImageArea.style.display = 'block';
+                } else {
+                    questionImage.removeAttribute('src');
+                    questionImage.alt = '';
+                    questionImageArea.style.display = 'none';
+                }
+            }
+            const conversationHtml = data.script.dialogue.map(line => `
+                <div class="conversation-line">
+                    <span class="speaker-name">${line.speaker}</span>
+                    <div class="speaker-text">
+                        <div>${line.text}</div>
+                        <div class="translation">${line.trans}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('conversationText').innerHTML = conversationHtml;
+
+            // Options Update (支持单题及“一拖二”题型)
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            const createOptionsList = (options, qIdx, numberOnly = false) => {
+                const ul = document.createElement('ul');
+                ul.className = numberOnly ? 'options-list number-only-options' : 'options-list';
+                ul.setAttribute('data-qidx', qIdx);
+                options.forEach((opt, idx) => {
+                    const li = document.createElement('li');
+                    if (opt.correct) li.classList.add('correct-answer');
+                    li.setAttribute('data-index', idx);
+                    li.onclick = () => selectOption(li);
+
+                    li.innerHTML = `
+                        <span class="options-num">${idx + 1}</span>
+                        <div class="option-content">
+                            <div class="option-text">${opt.text}</div>
+                            <div class="translation">${opt.translation}</div>
+                            ${opt.explanation ? `<div class="option-explanation">${opt.explanation}</div>` : ''}
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                });
+                return ul;
+            };
+
+            if (data.subQuestions) {
+                data.subQuestions.forEach((subQ, idx) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.style.marginBottom = '24px';
+                    
+                    const title = document.createElement('div');
+                    title.style.fontWeight = '700';
+                    title.style.color = 'var(--graphite)';
+                    title.style.marginBottom = '12px';
+                    title.style.fontSize = '15px';
+                    title.innerHTML = `質問 ${idx + 1}：${subQ.question}<div class="translation" style="display:block; margin-top:4px; padding-top:0; border-top:none;">${subQ.questionTrans}</div>`;
+                    
+                    wrapper.appendChild(title);
+                    wrapper.appendChild(createOptionsList(subQ.options, idx));
+                    optionsContainer.appendChild(wrapper);
+                });
+            } else {
+                optionsContainer.appendChild(createOptionsList(data.options, 0, true));
+            }
+
+            if (listeningRewardHooks) listeningRewardHooks.onQuestionRendered();
+        }
+
+        // --- Mode Switching ---
+        function setMode(mode, updatePreference = true) {
+            if (updatePreference) preferredMode = mode;
+
+            const container = document.getElementById('appContainer');
+            const btnPractice = document.getElementById('btnPractice');
+            const btnExplanation = document.getElementById('btnExplanation');
+            const tooltip = document.getElementById('wordTooltip');
+
+            const confirmBtns = document.querySelectorAll('.inline-confirm-btn');
+            confirmBtns.forEach(btn => btn.remove());
+            tooltip.style.display = 'none';
+
+            if (mode === 'practice') {
+                container.classList.remove('mode-explanation');
+                container.classList.add('mode-practice');
+                btnPractice.classList.add('active');
+                btnExplanation.classList.remove('active');
+            } else {
+                container.classList.remove('mode-practice');
+                container.classList.add('mode-explanation');
+                btnExplanation.classList.add('active');
+                btnPractice.classList.remove('active');
+
+                // 滚动至顶部以查看听力原文
+                setTimeout(() => {
+                    const transcriptSection = document.getElementById('transcriptBlock');
+                    const anchorTarget = transcriptSection || document.querySelector('.content-wrapper');
+                    if (anchorTarget) {
+                        const headerOffset = window.innerWidth <= 768 ? 112 : 132;
+                        const elementPosition = anchorTarget.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                    }
+                }, 100);
+            }
+        }
+
+        // --- Tooltip Logic ---
+        function showTooltip(event, text) {
+            event.stopPropagation();
+            const tooltip = document.getElementById('wordTooltip');
+            tooltip.innerText = text;
+            tooltip.style.display = 'block';
+            
+            const targetRect = event.target.getBoundingClientRect();
+            setTimeout(() => {
+                const width = tooltip.offsetWidth, height = tooltip.offsetHeight;
+                const top = targetRect.top + window.scrollY - height - 10; 
+                let left = targetRect.left + window.scrollX + (targetRect.width / 2) - (width / 2);
+                if (left < 10) left = 10;
+                if (left + width > window.innerWidth - 10) left = window.innerWidth - width - 10;
+                
+                const targetCenterX = targetRect.left + window.scrollX + (targetRect.width / 2);
+                tooltip.style.setProperty('--arrow-left', `${targetCenterX - left}px`);
+                tooltip.style.top = `${top}px`; tooltip.style.left = `${left}px`;
+            }, 0);
+        }
+
+        document.addEventListener('click', () => {
+            const tooltip = document.getElementById('wordTooltip');
+            if (tooltip.style.display === 'block') tooltip.style.display = 'none';
+        });
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script src="../../../../../shared/word-bank.js"></script>
+    <script src="../../../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
+</body>
+</html>

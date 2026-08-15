@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統合理解 - 聴解練習 (N2 STAGE)</title>
+    <!-- 使用与练习页一致的书面/印刷感字体组合 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="back-btn" id="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            戻る
+        </a>
+        <h1 id="yearLabel">統合理解 (N2)</h1>
+        <div style="width: 60px;"></div>
+    </header>
+
+    <div class="practice-container mode-practice" id="appContainer">
+        
+        <div class="card-header">
+            <div class="header-left">
+                <select id="questionSelect" class="question-select" onchange="changeQuestion(this.value)"></select>
+                <button type="button" id="markBtn" class="mark-btn" onclick="toggleMark()" title="付箋を貼る (标记/收藏)" aria-label="付箋を貼る">🐶</button>
+            </div>
+            <div class="mode-switch">
+                <button id="btnPractice" class="active" onclick="setMode('practice')">✎ 演習ノート</button>
+                <button id="btnExplanation" onclick="setMode('explanation')">✔ 赤ペン解説</button>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="right-panel" id="rightPanel">
+                
+                <!-- 听力原文与翻译区块 (练习模式下隐藏) -->
+                <div class="transcript-section sketch-box" id="transcriptBlock">
+                    <!-- 问题区块 -->
+                    <div class="question-box">
+                        <div id="questionText"></div>
+                        <div class="translation" id="questionTrans"></div>
+                    </div>
+
+                    <!-- 独白或对话区块 -->
+                    <div class="conversation-box" id="conversationText">
+                        <!-- 由JS填充独白或对话内容 -->
+                    </div>
+                </div>
+
+                <div class="question-image-area" id="questionImageArea" aria-live="polite">
+                    <img id="questionImage" alt="">
+                </div>
+
+                <!-- 选项列表 (练习模式下保持可见) -->
+                <div id="optionsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部音频播放器 -->
+    <div class="audio-wrapper">
+        <div class="custom-audio-player">
+            <div class="now-playing-box">
+                <div class="track-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </div>
+                <div class="now-playing-content">
+                    <div class="track-header-row">
+                        <div class="track-info">
+                            <div class="track-title" id="trackTitle">問題 1</div>
+                            <div class="track-subtitle" id="trackSubtitle" style="display:none;"></div>
+                        </div>
+                        <div class="time-group">
+                            <span class="time-display time-current" id="timeCurrent">0:00</span>
+                            <span class="time-display time-divider" style="margin: 0 4px;">/</span>
+                            <span class="time-display time-duration desktop-time" id="timeDurationDesktop">0:00</span>
+                            <span class="time-display time-duration mobile-time" id="timeDurationMobile" style="display: none;">-0:00</span>
+                        </div>
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 控制组 -->
+            <div class="player-controls">
+                <button id="prevBtn" class="ctrl-btn nav-btn" onclick="prevQuestion()" title="前へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h2v12H3zM13 6v12L5 12zM21 6v12L13 12z"/></svg>
+                </button>
+                <button id="rewindBtn" class="ctrl-btn skip-btn" title="6秒戻る">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><text x="12" y="16.5" font-size="8.5" font-weight="900" font-family="sans-serif" stroke-width="0" fill="currentColor" text-anchor="middle">6</text></svg>
+                </button>
+                <button class="ctrl-btn play-btn" id="playBtn">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button id="forwardBtn" class="ctrl-btn skip-btn" title="6秒進む">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><text x="12" y="16.5" font-size="8.5" font-weight="900" font-family="sans-serif" stroke-width="0" fill="currentColor" text-anchor="middle">6</text></svg>
+                </button>
+                <button id="nextBtn" class="ctrl-btn nav-btn" onclick="nextQuestion()" title="次へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6v12L11 12zM11 6v12L19 12zM19 6h2v12H19z"/></svg>
+                </button>
+                <button id="loopBtn" class="ctrl-btn loop-btn" title="ループ再生">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+                <button id="speedBtn" class="ctrl-btn speed-btn" title="再生速度">1.0x</button>
+            </div>
+            
+            <audio id="audioElement" preload="metadata"></audio>
+        </div>
+    </div>
+
+    <div id="wordTooltip" class="custom-tooltip"></div>
+
+    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/listening-progress.js"></script>
+    <script src="../../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../../shared/listening-reward-hooks.js"></script>
+    <script>
+        // --- 容错与模拟外部依赖 ---
+        if (!window.ListeningProgress) {
+            window.ListeningProgress = {
+                setLastPractice: () => {}, getMistakeIds: () => [], setMistakeIds: () => {}
+            };
+        }
+        if (!window.setupListeningPlayer) {
+            window.setupListeningPlayer = () => {};
+            window.updateListeningPlayer = () => {};
+        }
+
+        // --- Data Structure ---
+        const examData = {
+            "N2-2020-12-Integrated": {
+                label: "2020年12月 (N2 統合理解)",
+                questions: [
+                    {
+                        id: 1,
+                        audio: "../assets/audio/2020.12-1.mp3",
+                        script: {
+                            question: "一番：レストランで、店長と店員二人が話しています。授賞式に誰が出席することにしましたか。",
+                            questionTrans: "（第一题：在餐厅里，店长和两名店员正在交谈。决定由谁出席颁奖仪式？）",
+                            dialogue: [
+                                { 
+                                    speaker: "店長", 
+                                    text: "木村さん、山田さん、この間、地元の野菜を使った料理のコンテストにうちも応募したでしょ。なんと、うちのお店が出したアイディア、優秀賞になったんだって。", 
+                                    trans: "（木村，山田，前阵子咱们店不是也报名参加了使用本地蔬菜的料理比赛嘛。据说咱们店提出的创意，获得了优秀奖哦。）" 
+                                },
+                                { 
+                                    speaker: "女の店員", 
+                                    text: "へえ！本当ですか？", 
+                                    trans: "（哎！真的吗？）" 
+                                },
+                                { 
+                                    speaker: "男の店員", 
+                                    text: "やったね。僕たち頑張りましたもんね。", 
+                                    trans: "（太棒了。毕竟我们很努力了呢。）" 
+                                },
+                                { 
+                                    speaker: "店長", 
+                                    text: "それで、来月の一日に市民ホールで授賞式があるから、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>考えてくれた二人に是非行って欲しいんだけど。</span>お店の宣伝にもなるし。", 
+                                    trans: "（所以，下个月一号在市民大厅有颁奖仪式，我想让想出这个点子的你们两位务必去参加。也能给咱们店做做宣传。）" 
+                                },
+                                { 
+                                    speaker: "女の店員", 
+                                    text: "いいんですか。", 
+                                    trans: "（可以去吗？）" 
+                                },
+                                { 
+                                    speaker: "店長", 
+                                    text: "お店には私が残るから。", 
+                                    trans: "（店里有我留守就行了。）" 
+                                },
+                                { 
+                                    speaker: "男の店員", 
+                                    text: "えっ？店長が行かないなんてダメですよ。その時間はお店閉めて、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span>三人で行きませんか。</span>", 
+                                    trans: "（哎？店长不去可不行啊。那个时间段不如关店，咱们三个人一起去怎么样？）" 
+                                },
+                                { 
+                                    speaker: "店長", 
+                                    text: "うん、じゃあ、せっかくの機会だし、そうしようか。", 
+                                    trans: "（嗯，那，难得的机会，就这么办吧。）" 
+                                },
+                                { 
+                                    speaker: "男の店員", 
+                                    text: "はい。あっ、でも山田さんはその日、<span class=\"keyword\" onclick=\"showTooltip(event, '【業者との打ち合わせが入ってませんでしたか】（不是和供应商有个会议吗）：女员工的时间冲突。')\">業者との打ち合わせが入ってませんでしたか。</span>", 
+                                    trans: "（好的。啊，不过山田那天不是和供应商有个会议吗？）" 
+                                },
+                                { 
+                                    speaker: "女の店員", 
+                                    text: "ああ、そうだった。しかも、その時間しかダメって言われてるんです。", 
+                                    trans: "（啊，对哦。而且对方说只有那个时间有空。）" 
+                                },
+                                { 
+                                    speaker: "店長", 
+                                    text: "そう。じゃ、山田さん、悪いけど、打ち合わせはお任せしますね。", 
+                                    trans: "（这样啊。那，山田，不好意思，会议就交给你了。）" 
+                                },
+                                { 
+                                    speaker: "女の店員", 
+                                    text: "分かりました。", 
+                                    trans: "（明白了。）" 
+                                },
+                                { 
+                                    speaker: "男の店員", 
+                                    text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"keyword\" onclick=\"showTooltip(event, '【店長、授賞式の日はよろしくお願いします】（店长，颁奖仪式那天就请多关照了）：最终决定。因为女店员要开会去不了，最后变成店长和男店员两人去参加。')\">じゃあ、店長、授賞式の日はよろしくお願いします。</span></span>", 
+                                    trans: "（那，店长，颁奖仪式那天就请多关照了。）" 
+                                }
+                            ]
+                        },
+                        options: [
+                            { 
+                                text: "店長だけ。", 
+                                translation: "（只有店长。）", 
+                                correct: false,
+                                explanation: "最开始店长提议让两名店员去，自己留下，后来也没变成只让店长去。" 
+                            },
+                            { 
+                                text: "店員二人だけ。", 
+                                translation: "（只有两名店员。）", 
+                                correct: false,
+                                explanation: "这是店长最初的提议，但男店员觉得店长也该去，提议关店三人同去。" 
+                            },
+                            { 
+                                text: "店長と男の店員一人。", 
+                                translation: "（店长和一名男店员。）", 
+                                correct: true,
+                                explanation: "正确。大家本来决定三人同去，但因为女店员（山田）刚好有个无法更改时间的会议要开，所以最后决定由店长和男店员去参加颁奖仪式，女店员留下开会。" 
+                            },
+                            { 
+                                text: "店長と店員二人。", 
+                                translation: "（店长和两名店员。）", 
+                                correct: false,
+                                explanation: "男店员提议三人同去，店长也同意了，但因为女店员有会议走不开，所以没能成行。" 
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        audio: "../assets/audio/2020.12-2.mp3",
+                        script: {
+                            question: "二番：マラソン大会のボランティア説明会で説明を聞いたあと学生二人が話しています。",
+                            questionTrans: "（第二题：在马拉松大会的志愿者说明会上听完说明后，两名学生正在交谈。）",
+                            dialogue: [
+                                {
+                                    speaker: "男（説明者）",
+                                    text: "この度は緑山マラソン大会のボランティアへのご応募ありがとうございます。仕事は四種類あります。今から紙を配りますので、希望する仕事の番号に一つ丸をつけて出してください。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span>一番の仕事は道の脇に立って観客がコースに入らないように対応する仕事です。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>二番の仕事はゴールしたあとの選手にタオルを手渡す仕事です。</span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>三番の仕事は当日の通訳です。海外からも選手が大勢参加しますので、その選手たちの案内を手伝っていただきます。</span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>四番の仕事は選手用の飲み物のペットボトルを会場に運んでおく仕事です。大会が始まるまでに運び入れていただきます。</span>",
+                                    trans: "（这次非常感谢大家报名参加绿山马拉松大会的志愿者。工作共有四种。现在开始发纸，请在希望申请的工作序号上画个圈交上来。1号工作是站在路边防止观众进入赛道的差事。2号工作是给到达终点的选手递毛巾。3号工作是当天的翻译。因为会有很多海外选手参加，所以要帮忙给这些选手做向导。4号工作是把选手喝的塑料瓶饮料搬进会场。需要在比赛开始前搬完。）"
+                                },
+                                {
+                                    speaker: "女",
+                                    text: "初めてだから、どれがいいか迷っちゃうな。私にできそうなのは<span class=\"highlight-wrong\">タオル配り</span>かな？森田君去年参加したんだよね？何やったの？",
+                                    trans: "（我是第一次参加，选哪个好呢，真纠结。我能胜任的估计是发毛巾吧？森田你去年参加了对吧？做了什么？）"
+                                },
+                                {
+                                    speaker: "男",
+                                    text: "観客が入らないように<span class=\"highlight-wrong\">コースの脇に立ってる係</span>だよ。間近で選手が走ってるのを見られてよかったけど、今回は他のをやってみたいなあ。高橋さんは将来海外で仕事をしたいって言ってたよね？<span class=\"keyword\" onclick=\"showTooltip(event, '【通訳なんていい経験になるんじゃない？】（做翻译不是个很好的经验吗？）：男生的提议。鼓励将来想去海外工作的女生尝试3号翻译工作。')\">通訳なんていい経験になるんじゃない？</span>",
+                                    trans: "（我负责的是防止观众进入的赛道安保哦。虽然能近距离看到选手跑步挺好的，但这次我想尝试点别的。高桥你之前不是说将来想在海外工作吗？做翻译不是个很好的经验吗？）"
+                                },
+                                {
+                                    speaker: "女",
+                                    text: "うん、もちろん興味はあるんだけど、自信がないんだよね。",
+                                    trans: "（嗯，兴趣当然是有的，就是没自信。）"
+                                },
+                                {
+                                    speaker: "男",
+                                    text: "大丈夫だよ。せっかく勉強してるんだから、使って見ないと。",
+                                    trans: "（没关系的。好不容易学了外语，得试着用用才行呀。）"
+                                },
+                                {
+                                    speaker: "女",
+                                    text: "そうだね。うん、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"keyword\" onclick=\"showTooltip(event, '【思い切ってチャレンジしてみる】（我下定决心挑战一下）：问题1最终决定。女生接受了男生的建议，决定挑战3号翻译工作。')\">思い切ってチャレンジしてみる。</span></span>森田君もいっしょにやらない？",
+                                    trans: "（是啊。嗯，我下定决心挑战一下。森田你不一起吗？）"
+                                },
+                                {
+                                    speaker: "男",
+                                    text: "えー、僕は語学の才能ないから...今回は<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span><span class=\"keyword\" onclick=\"showTooltip(event, '【事前準備の仕事にするよ】（我就选做事前准备的活儿吧）：问题2最终决定。结合广播中“在比赛开始前搬完”，锁定4号搬饮料的工作。')\">事前準備の仕事にするよ。</span></span>先に仕事が終わってるほうが始まってから自由に選手を応援できそうだし。",
+                                    trans: "（哎，我没有语言天赋……这次我就选做事前准备的活儿吧。毕竟早点干完活，比赛开始后就能自由地给选手加油了。）"
+                                }
+                            ]
+                        },
+                        subQuestions: [
+                            {
+                                question: "女の人は何番の仕事に希望を出しますか。",
+                                questionTrans: "（问题1：女人希望申请几号工作？）",
+                                options: [
+                                    { text: "一番", translation: "（1号：赛道安保）", correct: false, explanation: "这是男生去年做过的工作。" },
+                                    { text: "二番", translation: "（2号：发毛巾）", correct: false, explanation: "女生最初觉得自己只能胜任发毛巾，但后来在男生鼓励下改变了主意。" },
+                                    { text: "三番", translation: "（3号：翻译）", correct: true, explanation: "正确。男生建议将来想在海外工作的女生尝试做翻译，女生觉得“好不容易学了外语要试着用用”，下定决心挑战这个。" },
+                                    { text: "四番", translation: "（4号：搬饮料）", correct: false, explanation: "这是男生决定申请的工作。" }
+                                ]
+                            },
+                            {
+                                question: "男の人は何番の仕事に希望を出しますか。",
+                                questionTrans: "（问题2：男人希望申请几号工作？）",
+                                options: [
+                                    { text: "一番", translation: "（1号：赛道安保）", correct: false, explanation: "男生去年做过了，表示“这次想尝试点别的”。" },
+                                    { text: "二番", translation: "（2号：发毛巾）", correct: false, explanation: "这是女生最初犹豫想选的工作，男生并没有表现出兴趣。" },
+                                    { text: "三番", translation: "（3号：翻译）", correct: false, explanation: "女生问男生要不要一起做翻译，男生以“没有语言天赋”为由拒绝了。" },
+                                    { text: "四番", translation: "（4号：搬饮料）", correct: true, explanation: "正确。男生觉得“先干完活就能自由地给选手加油了”，因此明确表示“选做事前准备的工作”，对应广播里“比赛开始前搬完”的4号搬饮料。" }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let currentExamKey = "N2-2020-12-Integrated"; 
+        let currentQuestionIndex = 0;
+        let preferredMode = 'practice'; 
+        const LISTENING_TYPE = 'integrated-comprehension'; 
+        const LISTENING_LEVEL = 'n2';
+
+        const listeningRewardHooks = window.StudyQuestListeningRewards && window.StudyQuestListeningRewards.create({
+            type: LISTENING_TYPE,
+            level: LISTENING_LEVEL,
+            getExamKey: () => currentExamKey,
+            getCurrentQuestionIndex: () => currentQuestionIndex,
+            getQuestions: () => (examData[currentExamKey] && examData[currentExamKey].questions) || [],
+            buildIndexUrl: () => '../index.html',
+            buildRetryUrl: (examKey) => {
+                const params = new URLSearchParams();
+                if (examKey) params.set('year', examKey);
+                return params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+            }
+        });
+
+        // --- Initialization ---
+        function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const yearParam = urlParams.get('year');
+            const modeParam = urlParams.get('mode');
+            
+            const targetKey = yearParam ? `N2-${yearParam}-Integrated` : currentExamKey;
+
+            if (examData[targetKey]) {
+                currentExamKey = targetKey;
+                window.ListeningProgress.setLastPractice(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey);
+
+                if (modeParam === 'review') {
+                    const marks = getMarks();
+                    if (marks.length === 0) {
+                        alert('付箋を貼った問題はありません。(No marked questions)');
+                    } else {
+                        const originalQuestions = examData[currentExamKey].questions;
+                        const filtered = originalQuestions.filter(q => marks.includes(q.id));
+                        if (filtered.length > 0) {
+                            examData[currentExamKey].questions = filtered;
+                            setTimeout(() => {
+                                const lbl = document.getElementById('yearLabel');
+                                if(lbl) lbl.innerHTML += ' <span style="background:var(--marker-yellow); color:var(--graphite); font-size:12px; margin-left:8px; padding:2px 8px; border-radius:2px 8px 2px 6px / 6px 2px 8px 2px; border:1.5px solid var(--graphite);">✔ 復習ノート</span>';
+                            }, 100);
+                        } else {
+                            alert('付箋を貼った問題が見つかりませんでした。');
+                        }
+                    }
+                }
+            } else if (!examData[currentExamKey]) {
+                currentExamKey = Object.keys(examData)[0];
+            }
+
+            const yearLabel = document.getElementById('yearLabel');
+            if (yearLabel && modeParam !== 'review') {
+                yearLabel.textContent = examData[currentExamKey].label;
+            }
+
+            updateQuestionSelect();
+            window.setupListeningPlayer({
+                subtitle: document.title.replace(/\s*\((N1|N2|N3)\)\s*$/, ''),
+                skipSeconds: 10
+            });
+            if (listeningRewardHooks) listeningRewardHooks.startRun();
+            renderQuestion();
+        }
+
+        // --- Mark Logic ---
+        function getMarks() {
+            return window.ListeningProgress.getMistakeIds(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey);
+        }
+
+        function saveMarks(marks) {
+            window.ListeningProgress.setMistakeIds(LISTENING_TYPE, LISTENING_LEVEL, currentExamKey, marks);
+        }
+
+        function toggleMark() {
+            if (!examData[currentExamKey] || !examData[currentExamKey].questions[currentQuestionIndex]) return;
+
+            const marks = getMarks();
+            const qId = examData[currentExamKey].questions[currentQuestionIndex].id;
+            const index = marks.indexOf(qId);
+
+            if (index === -1) {
+                marks.push(qId);
+                saveMarks(marks);
+                updateMarkUI();
+                return;
+            }
+
+            marks.splice(index, 1);
+            saveMarks(marks);
+
+            updateMarkUI();
+        }
+
+        function updateMarkUI() {
+            if (!examData[currentExamKey] || !examData[currentExamKey].questions[currentQuestionIndex]) return;
+            const marks = getMarks();
+            const qId = examData[currentExamKey].questions[currentQuestionIndex].id;
+            const btn = document.getElementById('markBtn');
+            if (marks.includes(qId)) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+
+        function updateQuestionSelect() {
+            const select = document.getElementById('questionSelect');
+            select.innerHTML = '';
+            
+            const questions = examData[currentExamKey].questions;
+            questions.forEach((q, index) => {
+                const option = document.createElement('option');
+                option.value = index; 
+                option.textContent = `問題 ${q.id}`;
+                select.appendChild(option);
+            });
+        }
+
+        function changeQuestion(index) {
+            currentQuestionIndex = parseInt(index);
+            renderQuestion();
+        }
+
+        // --- Answer Selection ---
+        function selectOption(element) {
+            const container = document.getElementById('appContainer');
+            if (!container.classList.contains('mode-practice')) return;
+            if (element.parentElement.querySelector('.judged-correct') || element.parentElement.querySelector('.judged-wrong')) return;
+
+            const siblings = element.parentElement.children;
+            for (let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('selected');
+                const btn = siblings[i].querySelector('.inline-confirm-btn');
+                if (btn) btn.remove();
+            }
+
+            element.classList.add('selected');
+            
+            const allUls = container.querySelectorAll('.options-list');
+            const allSelected = container.querySelectorAll('.options-list li.selected');
+
+            // 只有当页面上所有的小题都选择了答案时，才显示确认按钮
+            if (allUls.length === allSelected.length) {
+                // 清除可能残留的确认按钮
+                const existingBtns = container.querySelectorAll('.inline-confirm-btn');
+                existingBtns.forEach(btn => btn.remove());
+
+                const btn = document.createElement('button');
+                btn.className = 'inline-confirm-btn';
+                btn.textContent = '確認';
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    checkAnswer();
+                };
+                element.appendChild(btn);
+            }
+        }
+
+        function checkAnswer() {
+            const container = document.getElementById('appContainer');
+            const currentMode = new URLSearchParams(window.location.search).get('mode');
+            const isChallengeMode = currentMode === 'challenge' && window.__LISTENING_RANDOM_EXAM__ === true;
+            const question = examData[currentExamKey].questions[currentQuestionIndex];
+            
+            const allUls = container.querySelectorAll('.options-list');
+            let allCorrect = true;
+
+            // 遍历并判定所有的小题
+            allUls.forEach(ulElement => {
+                const selected = ulElement.querySelector('li.selected');
+                if (!selected) return;
+
+                const qIdx = parseInt(ulElement.getAttribute('data-qidx') || "0");
+                const optsData = question.subQuestions ? question.subQuestions[qIdx].options : question.options;
+                
+                const index = parseInt(selected.getAttribute('data-index'));
+                const isCorrect = optsData[index].correct;
+
+                if (!isCorrect) allCorrect = false;
+
+                if (isChallengeMode) {
+                    ulElement.classList.add('judged');
+                    Array.from(ulElement.children).forEach((opt) => {
+                        opt.style.pointerEvents = 'none';
+                    });
+                } else {
+                    ulElement.classList.add('judged');
+                    if (isCorrect) {
+                        selected.classList.add('judged-correct');
+                    } else {
+                        selected.classList.add('judged-wrong');
+                        optsData.forEach((opt, i) => {
+                            if (opt.correct) ulElement.children[i].classList.add('judged-correct');
+                        });
+                    }
+                }
+            });
+
+            if (listeningRewardHooks) listeningRewardHooks.handleAnswer(allCorrect);
+
+            if (isChallengeMode) {
+                if (!allCorrect) {
+                    const marks = getMarks();
+                    if (!marks.includes(question.id)) {
+                        marks.push(question.id);
+                        saveMarks(marks);
+                        updateMarkUI();
+                    }
+                }
+                container.dataset.sqChallengeAnswered = '1';
+                container.classList.remove('judged');
+            } else {
+                container.classList.add('judged');
+                if (!allCorrect) {
+                    const marks = getMarks();
+                    if (!marks.includes(question.id)) {
+                        marks.push(question.id);
+                        saveMarks(marks);
+                        updateMarkUI();
+                    }
+                }
+            }
+
+            const confirmBtns = container.querySelectorAll('.inline-confirm-btn');
+            confirmBtns.forEach(btn => btn.remove());
+
+            setTimeout(() => {
+                setMode('explanation', false);
+            }, 1000);
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                setMode(preferredMode, false);
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            const questions = examData[currentExamKey].questions;
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                setMode(preferredMode, false);
+                renderQuestion();
+            }
+        }
+
+        // --- Render Content ---
+        function renderQuestion() {
+            const container = document.getElementById('appContainer');
+            if (container) container.classList.remove('judged');
+
+            const data = examData[currentExamKey].questions[currentQuestionIndex];
+            const total = examData[currentExamKey].questions.length;
+
+            updateMarkUI();
+            document.getElementById('questionSelect').value = currentQuestionIndex;
+            window.updateListeningPlayer({
+                title: `問題 ${data.id}`,
+                audioSrc: data.audio,
+                hasPrev: currentQuestionIndex > 0,
+                hasNext: currentQuestionIndex < total - 1
+            });
+
+            // Transcript Update
+            document.getElementById('questionText').innerHTML = data.script.question;
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans;
+            const questionImageArea = document.getElementById('questionImageArea');
+            const questionImage = document.getElementById('questionImage');
+            if (questionImageArea && questionImage) {
+                if (data.image) {
+                    questionImage.src = data.image;
+                    questionImage.alt = `${examData[currentExamKey].label} 問題 ${data.id} 题图`;
+                    questionImageArea.style.display = 'block';
+                } else {
+                    questionImage.removeAttribute('src');
+                    questionImage.alt = '';
+                    questionImageArea.style.display = 'none';
+                }
+            }
+            const conversationHtml = data.script.dialogue.map(line => `
+                <div class="conversation-line">
+                    <span class="speaker-name">${line.speaker}</span>
+                    <div class="speaker-text">
+                        <div>${line.text}</div>
+                        <div class="translation">${line.trans}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('conversationText').innerHTML = conversationHtml;
+
+            // Options Update (支持单题及“一拖二”题型)
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            const createOptionsList = (options, qIdx, numberOnly = false) => {
+                const ul = document.createElement('ul');
+                ul.className = numberOnly ? 'options-list number-only-options' : 'options-list';
+                ul.setAttribute('data-qidx', qIdx);
+                options.forEach((opt, idx) => {
+                    const li = document.createElement('li');
+                    if (opt.correct) li.classList.add('correct-answer');
+                    li.setAttribute('data-index', idx);
+                    li.onclick = () => selectOption(li);
+
+                    li.innerHTML = `
+                        <span class="options-num">${idx + 1}</span>
+                        <div class="option-content">
+                            <div class="option-text">${opt.text}</div>
+                            <div class="translation">${opt.translation}</div>
+                            ${opt.explanation ? `<div class="option-explanation">${opt.explanation}</div>` : ''}
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                });
+                return ul;
+            };
+
+            if (data.subQuestions) {
+                data.subQuestions.forEach((subQ, idx) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.style.marginBottom = '24px';
+                    
+                    const title = document.createElement('div');
+                    title.style.fontWeight = '700';
+                    title.style.color = 'var(--graphite)';
+                    title.style.marginBottom = '12px';
+                    title.style.fontSize = '15px';
+                    title.innerHTML = `質問 ${idx + 1}：${subQ.question}<div class="translation" style="display:block; margin-top:4px; padding-top:0; border-top:none;">${subQ.questionTrans}</div>`;
+                    
+                    wrapper.appendChild(title);
+                    wrapper.appendChild(createOptionsList(subQ.options, idx));
+                    optionsContainer.appendChild(wrapper);
+                });
+            } else {
+                optionsContainer.appendChild(createOptionsList(data.options, 0, true));
+            }
+
+            if (listeningRewardHooks) listeningRewardHooks.onQuestionRendered();
+        }
+
+        // --- Mode Switching ---
+        function setMode(mode, updatePreference = true) {
+            if (updatePreference) preferredMode = mode;
+
+            const container = document.getElementById('appContainer');
+            const btnPractice = document.getElementById('btnPractice');
+            const btnExplanation = document.getElementById('btnExplanation');
+            const tooltip = document.getElementById('wordTooltip');
+
+            const confirmBtns = document.querySelectorAll('.inline-confirm-btn');
+            confirmBtns.forEach(btn => btn.remove());
+            tooltip.style.display = 'none';
+
+            if (mode === 'practice') {
+                container.classList.remove('mode-explanation');
+                container.classList.add('mode-practice');
+                btnPractice.classList.add('active');
+                btnExplanation.classList.remove('active');
+            } else {
+                container.classList.remove('mode-practice');
+                container.classList.add('mode-explanation');
+                btnExplanation.classList.add('active');
+                btnPractice.classList.remove('active');
+
+                // 滚动至顶部以查看听力原文
+                setTimeout(() => {
+                    const transcriptSection = document.getElementById('transcriptBlock');
+                    const anchorTarget = transcriptSection || document.querySelector('.content-wrapper');
+                    if (anchorTarget) {
+                        const headerOffset = window.innerWidth <= 768 ? 112 : 132;
+                        const elementPosition = anchorTarget.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                    }
+                }, 100);
+            }
+        }
+
+        // --- Tooltip Logic ---
+        function showTooltip(event, text) {
+            event.stopPropagation();
+            const tooltip = document.getElementById('wordTooltip');
+            tooltip.innerText = text;
+            tooltip.style.display = 'block';
+            
+            const targetRect = event.target.getBoundingClientRect();
+            setTimeout(() => {
+                const width = tooltip.offsetWidth, height = tooltip.offsetHeight;
+                const top = targetRect.top + window.scrollY - height - 10; 
+                let left = targetRect.left + window.scrollX + (targetRect.width / 2) - (width / 2);
+                if (left < 10) left = 10;
+                if (left + width > window.innerWidth - 10) left = window.innerWidth - width - 10;
+                
+                const targetCenterX = targetRect.left + window.scrollX + (targetRect.width / 2);
+                tooltip.style.setProperty('--arrow-left', `${targetCenterX - left}px`);
+                tooltip.style.top = `${top}px`; tooltip.style.left = `${left}px`;
+            }, 0);
+        }
+
+        document.addEventListener('click', () => {
+            const tooltip = document.getElementById('wordTooltip');
+            if (tooltip.style.display === 'block') tooltip.style.display = 'none';
+        });
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script src="../../../../../shared/word-bank.js"></script>
+    <script src="../../../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
+</body>
+</html>
