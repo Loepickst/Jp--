@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
     <link rel="stylesheet" href="shared/study-directory.css?v=20260810b">
+    <link rel="stylesheet" href="shared/study-plan.css?v=20260815j">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -4857,7 +4858,7 @@
             }
 
             .grammar-review-actions {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
                 gap: 6px;
             }
 
@@ -5685,7 +5686,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260811-movie2-audit1">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260815-novel-anaba1">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -10405,7 +10406,7 @@
                 bottom: 0;
                 left: 0;
                 display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
                 min-height: calc(58px + env(safe-area-inset-bottom));
                 padding: 4px 8px env(safe-area-inset-bottom);
                 border-top: 1px solid rgba(79, 85, 73, 0.15);
@@ -10413,7 +10414,8 @@
                 box-shadow: 0 -6px 20px rgba(68, 61, 49, 0.055);
             }
 
-            body.home-dashboard-redesign .mobile-bottom-nav button {
+            body.home-dashboard-redesign .mobile-bottom-nav button,
+            body.home-dashboard-redesign .mobile-bottom-nav a {
                 display: grid;
                 place-items: center;
                 align-content: center;
@@ -10429,6 +10431,7 @@
                 font-weight: 500;
                 letter-spacing: 0;
                 cursor: pointer;
+                text-decoration: none;
             }
 
             body.home-dashboard-redesign .mobile-bottom-nav .icon-slot {
@@ -10449,7 +10452,8 @@
             body.home-dashboard-redesign .mobile-home-tool:focus-visible,
             body.home-dashboard-redesign .mobile-today-sign-trigger:focus-visible,
             body.home-dashboard-redesign .mobile-today-signs button:focus-visible,
-            body.home-dashboard-redesign .mobile-bottom-nav button:focus-visible {
+            body.home-dashboard-redesign .mobile-bottom-nav button:focus-visible,
+            body.home-dashboard-redesign .mobile-bottom-nav a:focus-visible {
                 outline: 2px solid rgba(111, 138, 85, 0.45);
                 outline-offset: 2px;
             }
@@ -11888,6 +11892,7 @@
             body.home-dashboard-redesign.is-tool-content-only .content-panel,
             body.home-dashboard-redesign.is-tool-content-only .feature-panels,
             body.home-dashboard-redesign.is-tool-content-only .feature-panel[data-section="grammar-search"].is-active,
+            body.home-dashboard-redesign.is-tool-content-only .feature-panel[data-section="study-plan"].is-active,
             body.home-dashboard-redesign.is-tool-content-only .feature-panel[data-section="word-bank"].is-active,
             body.home-dashboard-redesign.is-tool-content-only .grammar-legacy-search,
             body.home-dashboard-redesign.is-tool-content-only .word-bank-board {
@@ -12162,18 +12167,23 @@
                 color: #77655e;
             }
 
+            body.home-dashboard-redesign .mobile-home-tools {
+                grid-template-columns: repeat(2, max-content);
+                gap: 5px;
+            }
+
             body.home-dashboard-redesign .mobile-home-tool {
-                grid-template-columns: 30px auto;
-                gap: 3px;
-                min-width: 70px;
-                min-height: 42px;
+                grid-template-columns: 27px auto;
+                gap: 2px;
+                min-width: 62px;
+                min-height: 38px;
                 padding: 0 2px;
                 border: 0;
                 border-radius: 0;
                 background: transparent;
                 box-shadow: none;
                 font-family: "Kaiti SC", STKaiti, KaiTi, "YuKyokasho", "Hiragino Mincho ProN", serif !important;
-                font-size: 14px;
+                font-size: 13px;
                 font-weight: 700;
                 letter-spacing: 0.08em;
                 text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
@@ -12196,7 +12206,7 @@
             body.home-dashboard-redesign .mobile-home-tool > span:nth-child(2) {
                 position: relative;
                 display: inline-block;
-                padding-bottom: 5px;
+                padding-bottom: 4px;
                 white-space: nowrap;
             }
 
@@ -12206,7 +12216,7 @@
                 right: -4px;
                 bottom: 1px;
                 left: -2px;
-                height: 3px;
+                height: 2.5px;
                 background: currentColor;
                 clip-path: polygon(0 55%, 8% 30%, 36% 6%, 72% 20%, 100% 4%, 94% 66%, 62% 82%, 22% 100%, 4% 76%);
                 opacity: 0.62;
@@ -12217,15 +12227,15 @@
 
             body.home-dashboard-redesign .mobile-home-tool--fortune .mobile-home-tool-art {
                 justify-self: center;
-                width: 25px;
-                height: 35px;
+                width: 22px;
+                height: 31px;
                 background-image: url("assets/home-redesign/fortune-omikuji-sumi-v1.webp");
             }
 
             body.home-dashboard-redesign .mobile-home-tool--support .mobile-home-tool-art {
                 justify-self: center;
-                width: 30px;
-                height: 35px;
+                width: 27px;
+                height: 31px;
                 background-image: url("assets/home-redesign/support-matcha-sumi-v1.webp");
             }
 
@@ -12342,7 +12352,8 @@
                 box-shadow: 0 -8px 22px rgba(58, 39, 34, 0.09);
             }
 
-            body.home-dashboard-redesign .mobile-bottom-nav button {
+            body.home-dashboard-redesign .mobile-bottom-nav button,
+            body.home-dashboard-redesign .mobile-bottom-nav a {
                 color: var(--autumn-ink-faint);
             }
 
@@ -12352,7 +12363,8 @@
 
             body.home-dashboard-redesign .mobile-entry-card:focus-visible,
             body.home-dashboard-redesign .mobile-home-tool:focus-visible,
-            body.home-dashboard-redesign .mobile-bottom-nav button:focus-visible {
+            body.home-dashboard-redesign .mobile-bottom-nav button:focus-visible,
+            body.home-dashboard-redesign .mobile-bottom-nav a:focus-visible {
                 outline-color: rgba(179, 13, 45, 0.52);
             }
         }
@@ -12387,7 +12399,7 @@
                     <span class="icon-slot main-chip__icon" data-icon="word-bank" aria-hidden="true"></span>
                     <span>我推の単語</span>
                 </button>
-                <button type="button" class="side-link side-link--locked" disabled aria-label="学习计划，暂未开放">
+                <button type="button" class="main-chip" data-section="study-plan" aria-controls="panel-stage" aria-selected="false">
                     <span class="icon-slot" data-icon="plan" aria-hidden="true"></span>
                     <span>学习计划</span>
                 </button>
@@ -12446,15 +12458,15 @@
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
                                                 <img src="assets/home-redesign/hero-mobile-autumn-sumi-maple-skyward-shiba-quote-v1.webp?v=20260810" alt="柴犬躺在红枫林的落叶间仰望树冠，题字为“積み上げてきたことが、君の武器になる。”">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.11.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.15.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-11.webp?v=20260811a" alt="琵琶湖畔，一位女性目送人群与最后一朵烟花远去的铅笔水彩插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-horror.webp?v=20260717a" alt="夏夜无灯的和室里，柴犬与小动物们围坐着讲怪谈的铅笔手绘插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>去りゆく夏</h2>
-                                                    <p>在渐早离去的夏天里，重新凝望烟花、青春，以及那些再也无法重来的季节。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-08-11">08.11</time></span>
+                                                    <h2>三つの怖い話</h2>
+                                                    <p>医疗AI、异常好运与扭曲的家庭之爱。三则在最后一刻翻转含义的恐怖悬疑故事。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>怪谈</span><time datetime="2026-08-15">08.15</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -12508,12 +12520,12 @@
                                                         <div class="desktop-announcement-sheet">
                                                             <article class="desktop-announcement-log">
                                                                 <header class="desktop-announcement-log-head">
-                                                                    <time class="desktop-announcement-log-date" datetime="2026-08-04">08.04</time>
+                                                                    <time class="desktop-announcement-log-date" datetime="2026-08-15">08.15</time>
                                                                     <span class="desktop-announcement-log-badge">更新</span>
-                                                                    <strong class="desktop-announcement-log-title">TRY！学习内容更新</strong>
+                                                                    <strong class="desktop-announcement-log-title">备考区更新，新添学习计划功能</strong>
                                                                 </header>
                                                                 <div class="desktop-announcement-log-body">
-                                                                    <p class="desktop-announcement-log-intro">TRY！系列添加跟读功能，并且点击课名可以查看单词以及文法的具体说明，并且添加语法收藏功能，对于不熟悉的语法条可以进行收藏，会统一收到语法搜索的收藏夹里，可以进行统一复习。</p>
+                                                                    <p class="desktop-announcement-log-intro">能力考马上又要开始啦！重做了备考区的样式，使得更加美观，完善了错题库和部分学习功能，之后会补全听力部分的精听功能。</p>
                                                                     <p class="desktop-announcement-log-ps"><strong>PS：</strong>有什么问题记得跟我说。</p>
                                                                 </div>
                                                             </article>
@@ -12694,6 +12706,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/8.15.html" aria-label="阅读：三つの怖い話">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-horror.webp?v=20260717a" alt="">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">三つの怖い話</strong>
+                                    <span class="daily-reading-item-subtitle">三则恐怖悬疑故事</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">怪谈</span>
+                                    </span>
+                                    <time datetime="2026-08-15">2026.08.15</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/8.11.html" aria-label="阅读：去りゆく夏">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-08-11.webp?v=20260811a" alt="">
@@ -12705,19 +12730,6 @@
                                         <span class="daily-reading-item-tag">随笔</span>
                                     </span>
                                     <time datetime="2026-08-11">2026.08.11</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/8.4.html" aria-label="阅读：外からの声">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-04.webp?v=20260804a" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">外からの声</strong>
-                                    <span class="daily-reading-item-subtitle">来自外面的声音</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">随笔</span>
-                                    </span>
-                                    <time datetime="2026-08-04">2026.08.04</time>
                                 </span>
                             </a>
                         </div>
@@ -12744,6 +12756,10 @@
         <button type="button" data-home-section-link="word-bank">
             <span class="icon-slot" data-icon="word-bank" aria-hidden="true"></span>
             <span>词汇收藏</span>
+        </button>
+        <button type="button" data-home-section-link="study-plan">
+            <span class="icon-slot" data-icon="plan" aria-hidden="true"></span>
+            <span>学习计划</span>
         </button>
     </nav>
 
@@ -12866,8 +12882,8 @@
     <script src="shared/grammar-learning-sources.js?v=20260804c"></script>
     <script src="shared/grammar-db-repo.js?v=20260809-no-compare"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260811-movie2-audit1"></script>
-    <script src="shared/word-bank.js?v=20260811-movie2-audit1"></script>
+    <script src="shared/word-bank-presets.js?v=20260815-novel-anaba1"></script>
+    <script src="shared/word-bank.js?v=20260815-novel-anaba1"></script>
     <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
@@ -12884,6 +12900,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-horror-8-15", file: "8.15.html", publishedAt: "2026.08.15", titleJa: "三つの怖い話", titleZh: "三则恐怖悬疑故事", summary: "嘘をつけない医療AI、他人へ不運を押し付ける先輩、歪んだ家族愛。最後の一文で意味が反転する三つの恐怖短編。", category: "horror", series: "怪谈" },
             { id: "daily-essay-8-11", file: "8.11.html", publishedAt: "2026.08.11", titleJa: "去りゆく夏", titleZh: "渐行渐远的夏日", summary: "早く去った夏とびわ湖の花火大会を振り返り、目の前の美しさを無心に楽しめる若さと、もう戻らない季節への心細さを描く随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-11.webp?v=20260811a", coverAlt: "琵琶湖畔，一位女性目送远去的人群与消散中的最后一朵烟花的铅笔水彩插画" },
             { id: "daily-essay-8-4", file: "8.4.html", publishedAt: "2026.08.04", titleJa: "外からの声", titleZh: "来自外面的声音", summary: "深夜に聞こえた歓声を妖怪の声と思った体験から、人が手持ちの知識や物差しで世界を理解していることを考える日常随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-04.webp?v=20260804a", coverAlt: "白昼的窗边，一位女生趴在窗台上侧耳倾听窗外声音的日漫水彩素描插画" },
             { id: "daily-essay-7-31", file: "7.31.html", publishedAt: "2026.07.31", titleJa: "こつのふしぎ", titleZh: "诀窍的奥妙", summary: "「こつ」という言葉へのためらいから、pointやtipsとの違い、ヴェイユの『工場日記』、語源の「骨」へと思考をたどる言葉の随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-07-31.webp?v=20260731a", coverAlt: "和室里，柴犬跪坐在矮桌前用毛笔反复练习书法的日漫水墨插画" },
@@ -12972,7 +12989,7 @@
             {
                 id: "vocab-verbs",
                 title: "动词",
-                desc: "按语义阶段学习核心动词与复合动词，并在内容页切换 N1 / N2。",
+                desc: "从常用动作到复合表达，循序掌握核心动词的含义与用法。",
                 href: "exam/vocabulary/n1/verbs_n1.html",
                 icon: "vocabulary",
                 tag: "動詞",
@@ -12981,7 +12998,7 @@
             {
                 id: "vocab-adjectives",
                 title: "形容词",
-                desc: "集中整理い形容词与な形容词，并在内容页切换 N1 / N2。",
+                desc: "结合具体语境，掌握い形容词与な形容词的含义和使用方式。",
                 href: "exam/vocabulary/n1/adjectives_n1.html",
                 icon: "vocabulary",
                 tag: "形容詞",
@@ -12990,7 +13007,7 @@
             {
                 id: "vocab-adverbs",
                 title: "副词",
-                desc: "按功能与语境整理高频副词，并在内容页切换 N1 / N2。",
+                desc: "放进句子中理解高频副词，体会语气、程度与表达重点。",
                 href: "exam/vocabulary/n1/adverbs_n1.html",
                 icon: "vocabulary",
                 tag: "副詞",
@@ -12999,7 +13016,7 @@
             {
                 id: "vocab-mimetic",
                 title: "拟声拟态词",
-                desc: "集中掌握拟声词、拟态词及其常见语境。",
+                desc: "借助声音和画面建立联想，轻松记住常见拟声拟态表达。",
                 href: "exam/vocabulary/n1/mimetic_n1.html",
                 icon: "vocabulary",
                 tag: "擬声・擬態",
@@ -13008,7 +13025,7 @@
             {
                 id: "vocab-loanwords",
                 title: "外来语",
-                desc: "整理能力考常见外来语与容易混淆的词义。",
+                desc: "结合词源和日语中的实际用法，掌握常见外来语。",
                 href: "exam/vocabulary/n1/loanwords_n1.html",
                 icon: "vocabulary",
                 tag: "外来語",
@@ -13445,7 +13462,7 @@
                     {
                         id: "exam-vocabulary",
                         title: "語彙暗記",
-                        desc: "先按词性进入学习内容，再在具体页面切换 N1 / N2。",
+                        desc: "按词性系统积累核心词汇，在例句与练习中加深理解和记忆。",
                         href: "exam/vocabulary/index.html",
                         icon: "vocabulary",
                         tag: "語彙",
@@ -13506,7 +13523,7 @@
                     {
                         id: "exam-listening",
                         title: "聴解特训",
-                        desc: "先选择听力题型，再进入对应的年度练习或分类练习。",
+                        desc: "结合历年真题与分类训练，提升听辨信息和理解语境的能力。",
                         href: "exam/listening/index.html",
                         icon: "listen",
                         tag: "聴解",
@@ -13565,6 +13582,11 @@
             "grammar-search": {
                 title: "文法検索",
                 desc: "输入想查的语法、假名或中文含义，快速找到接续、解释和例句。",
+                items: []
+            },
+            "study-plan": {
+                title: "学习计划",
+                desc: "在日历上安排备考内容，完成学习后积累能力与经验。",
                 items: []
             },
             "site-search": {
@@ -15182,6 +15204,7 @@
         const WORD_BANK_SOURCE_CATEGORIES = [
             { id: "all", label: "全部词汇" },
             { id: "movie", label: "影视作品" },
+            { id: "lyrics", label: "歌词" },
             { id: "novel", label: "小说" },
             { id: "article", label: "文章" },
             { id: "news", label: "新闻" },
@@ -15196,13 +15219,13 @@
                 id: "official",
                 label: "kiの收藏",
                 description: "官方词汇收藏",
-                categories: ["all", "movie", "novel", "article", "news", "exam", "textbook", "uncategorized"]
+                categories: ["all", "movie", "lyrics", "novel", "article", "news", "exam", "textbook", "uncategorized"]
             },
             {
                 id: "personal",
                 label: "我の收藏",
                 description: "我添加的词汇",
-                categories: ["all", "movie", "novel", "article", "news", "exam", "textbook", "custom", "uncategorized"]
+                categories: ["all", "movie", "lyrics", "novel", "article", "news", "exam", "textbook", "custom", "uncategorized"]
             }
         ];
 
@@ -15229,6 +15252,7 @@
             ].join(" ").toLowerCase();
 
             if (/(movie|anime|drama|影视|动画|动漫|电影|电视剧|ドラマ)/i.test(haystack)) return "movie";
+            if (/(lyrics|song|歌词|歌詞)/i.test(haystack)) return "lyrics";
             if (/(novel|小说|小説|文学)/i.test(haystack)) return "novel";
             if (/(news|新闻|ニュース)/i.test(haystack)) return "news";
             if (/(jlpt|past[-_ ]?exam|真题|真題|過去問|本試験)/i.test(haystack)) return "exam";
@@ -16701,8 +16725,8 @@
                 eyebrow: "VOCABULARY ACADEMY",
                 japanese: "学園語彙特訓センター",
                 title: "語彙暗記",
-                desc: "选择要学习的词性，进入内容页后再切换 N1 / N2。",
-                note: "导师们，已等候多时。",
+                desc: "和性格各异的小伙伴们，一起学习必备词汇。",
+                note: "さあ、一緒に勉強しましょう。",
                 group: "词性",
                 tone: "indigo",
                 cover: "assets/home-redesign/study-directory-vocabulary-academy-v5.webp"
@@ -16719,9 +16743,9 @@
             },
             "exam/exam-reading": {
                 eyebrow: "READING INDEX",
-                japanese: "読解の案内帳",
+                japanese: "読解小屋",
                 title: "読解特训",
-                desc: "选择想练习的阅读题型，再在内容页面切换 N1 或 N2。",
+                desc: "跟随山中修行的师徒来熟练读解的一招一式吧",
                 note: "急がず、正確に読む。",
                 group: "内容",
                 tone: "matcha",
@@ -16729,9 +16753,9 @@
             },
             "exam/exam-listening": {
                 eyebrow: "LISTENING INDEX",
-                japanese: "聴解の案内帳",
+                japanese: "音楽の舞台",
                 title: "聴解特训",
-                desc: "选择想练习的听力题型，再进入年度练习或分类练习。",
+                desc: "跟随节拍，来把握律动的轻重吧",
                 note: "音を拾い、流れをつかむ。",
                 group: "題型",
                 tone: "indigo",
@@ -17499,6 +17523,129 @@
             `;
         }
 
+        function getStudyPlanPanelMarkup() {
+            return `
+                <div class="study-plan-embedded" data-study-plan-root>
+                    <header class="plan-embedded-header">
+                        <div class="plan-embedded-heading">
+                            <span>STUDY PLAN</span>
+                            <h2>学习计划</h2>
+                        </div>
+                        <div class="plan-summary-tags" aria-label="备考目标">
+                            <span class="plan-tag plan-tag--target"><i aria-hidden="true"></i>JLPT N2 · 2026年12月6日</span>
+                            <span class="plan-tag plan-tag--stage">阶段 2 · 强化期</span>
+                        </div>
+                        <section class="plan-summary-progress" aria-label="本月计划完成进度">
+                            <span>本月</span>
+                            <strong data-month-progress-count>0 / 0</strong>
+                            <div class="plan-progress-track" aria-hidden="true"><span data-month-progress-bar></span></div>
+                        </section>
+                        <dl class="plan-summary-metrics">
+                            <div>
+                                <dt>距离考试</dt>
+                                <dd><strong data-exam-countdown>--</strong><span>天</span></dd>
+                            </div>
+                            <div>
+                                <dt>连续学习</dt>
+                                <dd><strong data-study-streak>0</strong><span>天</span></dd>
+                            </div>
+                        </dl>
+                    </header>
+
+                    <div class="plan-embedded-layout">
+                        <section class="calendar-card" aria-labelledby="calendar-title">
+                            <header class="calendar-toolbar">
+                                <h3 id="calendar-title" data-calendar-title>----</h3>
+                                <div class="calendar-controls" aria-label="切换月份">
+                                    <button type="button" data-calendar-prev aria-label="上个月">‹</button>
+                                    <button type="button" data-calendar-today>回到今天</button>
+                                    <button type="button" data-calendar-next aria-label="下个月">›</button>
+                                </div>
+                            </header>
+
+                            <div class="calendar-scroll" data-calendar-scroll>
+                                <div class="calendar-weekdays" aria-hidden="true">
+                                    <span>月曜日</span><span>火曜日</span><span>水曜日</span><span>木曜日</span><span>金曜日</span><span>土曜日</span><span>日曜日</span>
+                                </div>
+                                <div class="calendar-grid" role="grid" aria-labelledby="calendar-title" data-calendar-grid></div>
+                            </div>
+
+                            <div class="calendar-legend" aria-label="任务类型图例">
+                                <span><i class="type-dot type-vocabulary"></i>語彙</span>
+                                <span><i class="type-dot type-grammar"></i>文法</span>
+                                <span><i class="type-dot type-reading"></i>読解</span>
+                                <span><i class="type-dot type-listening"></i>聴解</span>
+                                <span><i class="type-dot type-test"></i>テスト</span>
+                            </div>
+                        </section>
+
+                        <aside class="day-panel" aria-labelledby="selected-date-title">
+                            <header class="day-panel-header">
+                                <h3 id="selected-date-title" data-selected-date>----</h3>
+                            </header>
+
+                            <section class="growth-card" aria-labelledby="character-name">
+                                <div class="preset-character" aria-hidden="true">
+                                    <img src="exam/vocabulary/n1/icon/kiki.png?v=20260515" alt="">
+                                </div>
+                                <div class="growth-profile">
+                                    <h4 id="character-name">kiki</h4>
+                                    <span>Lv. <b data-character-level>1</b></span>
+                                    <div class="growth-xp-track" aria-label="等级经验"><span data-character-xp-bar></span></div>
+                                    <small><span data-character-xp>0</span> / <span data-character-next-xp>120</span> EXP</small>
+                                </div>
+                                <div class="ability-list" aria-labelledby="ability-title">
+                                    <h4 id="ability-title">能力成长</h4>
+                                    <div class="ability-item" data-ability="vocabulary"><span>词汇</span><i><b></b></i><strong>0</strong></div>
+                                    <div class="ability-item" data-ability="grammar"><span>语法</span><i><b></b></i><strong>0</strong></div>
+                                    <div class="ability-item" data-ability="reading"><span>阅读</span><i><b></b></i><strong>0</strong></div>
+                                    <div class="ability-item" data-ability="listening"><span>听力</span><i><b></b></i><strong>0</strong></div>
+                                </div>
+                            </section>
+
+                            <section class="day-tasks" aria-labelledby="day-tasks-title">
+                                <header>
+                                    <h4 id="day-tasks-title">当天任务</h4>
+                                    <span data-day-task-summary>0 项</span>
+                                </header>
+                                <div class="day-task-list" data-day-task-list></div>
+                            </section>
+
+                            <details class="task-form-panel" data-task-form-panel>
+                                <summary><span>＋</span> 添加任务</summary>
+                                <form class="task-form" data-task-form>
+                                    <fieldset class="task-type-fieldset">
+                                        <legend>任务类型</legend>
+                                        <div class="task-type-options" data-task-type-options></div>
+                                    </fieldset>
+                                    <label class="task-field">
+                                        <span>具体内容</span>
+                                        <select data-task-content></select>
+                                    </label>
+                                    <div class="task-form-actions">
+                                        <label class="task-field">
+                                            <span>预计时间</span>
+                                            <select data-task-minutes>
+                                                <option value="15">15 分钟</option>
+                                                <option value="20">20 分钟</option>
+                                                <option value="25">25 分钟</option>
+                                                <option value="30" selected>30 分钟</option>
+                                                <option value="45">45 分钟</option>
+                                                <option value="60">60 分钟</option>
+                                            </select>
+                                        </label>
+                                        <button class="save-task-button" type="submit" data-save-task>保存任务</button>
+                                    </div>
+                                </form>
+                            </details>
+                        </aside>
+                    </div>
+
+                    <div class="plan-toast" role="status" aria-live="polite" data-plan-toast></div>
+                </div>
+            `;
+        }
+
         function getOrCreateSectionPanel(sectionKey) {
             if (sectionPanels.has(sectionKey)) {
                 return sectionPanels.get(sectionKey);
@@ -17563,6 +17710,12 @@
                 return panel;
             }
 
+            if (sectionKey === "study-plan") {
+                panel.innerHTML = getStudyPlanPanelMarkup();
+                panel.dataset.rendered = "study-plan:root";
+                return panel;
+            }
+
             if (sectionKey === "site-search") {
                 renderSiteSearchPanel();
                 return panel;
@@ -17624,7 +17777,7 @@
         }
 
         function initializeSectionPanels() {
-            ["daily", "exam", "grammar-search", "site-search", "favorites", "word-bank"].forEach((sectionKey) => {
+            ["daily", "exam", "grammar-search", "study-plan", "site-search", "favorites", "word-bank"].forEach((sectionKey) => {
                 renderSectionPanel(sectionKey, null);
                 const panel = sectionPanels.get(sectionKey);
                 if (panel) {
@@ -18003,7 +18156,7 @@
             document.body.classList.remove("is-home-view");
             document.body.classList.toggle(
                 "is-tool-content-only",
-                sectionKey === "grammar-search" || sectionKey === "word-bank"
+                sectionKey === "grammar-search" || sectionKey === "word-bank" || sectionKey === "study-plan"
             );
             document.body.classList.toggle(
                 "is-daily-reading-directory",
@@ -19571,6 +19724,7 @@
                 if (hash.startsWith("#daily")) active = "daily";
                 if (hash.startsWith("#exam")) active = "exam";
                 if (hash.startsWith("#grammar-search")) active = "grammar-search";
+                if (hash.startsWith("#study-plan")) active = "study-plan";
                 if (hash.startsWith("#word-bank")) active = "word-bank";
                 mobileNavButtons.forEach((button) => {
                     const key = button.id === "mobile-home-nav" ? "home" : button.getAttribute("data-home-section-link");
@@ -19594,6 +19748,7 @@
             syncMobileNavigation();
         })();
     </script>
+    <script src="shared/study-plan.js?v=20260815g"></script>
     <script>
         (() => {
             const carousel = document.querySelector("[data-mobile-feature-carousel]");

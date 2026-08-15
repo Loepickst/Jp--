@@ -203,19 +203,22 @@
             justify-content: center;
             overflow: hidden;
             isolation: isolate;
-            background: #FAF8F0;
+            background: #E7ECE9 url("assets/lottery-autumn-lake-backdrop.webp") center / cover no-repeat;
+        }
+
+        .lottery-stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, rgba(250, 251, 248, 0.08), rgba(231, 237, 235, 0.18)),
+                radial-gradient(ellipse at 50% 44%, rgba(255, 255, 255, 0.10), transparent 56%);
         }
 
         .reference-backdrop {
-            position: absolute;
-            top: -96px;
-            bottom: 0;
-            width: 25%;
-            background-image: url("assets/lottery-reference-backdrop.webp");
-            background-repeat: no-repeat;
-            background-size: auto 100%;
-            pointer-events: none;
-            z-index: 0;
+            display: none;
         }
 
         .reference-backdrop-left {
@@ -248,18 +251,18 @@
 
         .omikuji-container {
             position: relative;
-            width: min(100%, 600px);
+            width: min(100%, 560px);
             margin-bottom: 0;
             cursor: default;
             animation: floatIn 0.8s ease-out forwards;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px;
-            border-radius: 28px;
-            background: rgba(255, 254, 249, 0.96);
-            border: 1px solid rgba(197, 169, 110, 0.26);
-            box-shadow: 0 22px 50px rgba(91, 80, 52, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.86);
+            padding: 0;
+            border-radius: 15px;
+            background: transparent;
+            border: 0;
+            box-shadow: 0 18px 42px rgba(52, 69, 64, 0.22);
             overflow: hidden;
         }
 
@@ -272,49 +275,53 @@
         }
 
         .omikuji-container::before {
-            inset: 6px;
-            border: 1px solid rgba(197, 169, 110, 0.21);
-            border-radius: 25px;
+            display: none;
         }
 
         .omikuji-container::after {
-            display: none;
+            display: block;
+            inset: 0;
+            border: 4px solid rgba(255, 255, 255, 0.96);
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(75, 92, 86, 0.08);
+            z-index: 5;
         }
 
         /* 手绘神社主视觉 */
         .omikuji-picture {
             display: block;
             width: 100%;
-            max-width: 560px;
+            max-width: none;
             line-height: 0;
             position: relative;
             z-index: 2;
         }
 
         .omikuji-img {
+            display: block;
             width: 100%;
-            max-width: 560px;
-            aspect-ratio: 4 / 3;
+            max-width: none;
+            aspect-ratio: 1200 / 851;
             height: auto;
             object-fit: contain;
             object-position: center;
             background: #FFFEFA;
             padding: 0;
-            border: 1px solid rgba(143, 131, 91, 0.20);
-            border-radius: 21px;
-            box-shadow: 0 8px 22px rgba(74, 67, 47, 0.10);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+            border: 0;
+            border-radius: 15px;
+            box-shadow: none;
+            transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
             z-index: 2;
         }
 
         .omikuji-container:hover .omikuji-img {
             transform: none;
-            box-shadow: 0 8px 22px rgba(74, 67, 47, 0.10);
+            box-shadow: none;
         }
 
         .omikuji-container:active .omikuji-img {
             transform: none;
-            box-shadow: 0 8px 22px rgba(74, 67, 47, 0.10);
+            box-shadow: none;
         }
 
         .magic-glow {
@@ -376,6 +383,20 @@
         /* 状态驱动的动画 */
         .shaking .omikuji-img {
             animation: shake-cylinder 0.25s ease-in-out infinite;
+        }
+
+        .omikuji-container.fishing .omikuji-img {
+            animation: fishing-wait 0.72s ease-out both;
+        }
+
+        .omikuji-container.hooked .omikuji-img {
+            animation: fishing-hooked 0.9s cubic-bezier(0.18, 0.82, 0.24, 1) both;
+        }
+
+        .omikuji-container.hooked .magic-glow {
+            opacity: 0.72;
+            background: radial-gradient(circle at 31% 73%, rgba(239, 249, 247, 0.72) 0%, rgba(181, 215, 211, 0.20) 24%, transparent 52%);
+            animation: fishing-water-glow 0.9s ease-out both;
         }
 
         .shaking .magic-glow {
@@ -721,31 +742,36 @@
             min-width: 0;
             font-family: var(--font-display);
             font-size: 13px;
-            color: #4F5745;
-            background: rgba(255, 254, 248, 0.97);
-            padding: 9px 18px;
+            color: #41564F;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 252, 0.98), rgba(242, 245, 239, 0.97));
+            padding: 10px 19px;
             border-radius: 999px;
             box-shadow: 0 10px 24px rgba(92, 82, 54, 0.10);
-            border: 1px solid rgba(161, 168, 111, 0.38);
+            border: 1px solid rgba(104, 132, 123, 0.38);
             font-weight: 700;
             letter-spacing: 0.06em;
         }
 
         .status-pill::before,
         .status-pill::after {
-            color: #89A270;
-            font-size: 0.9em;
+            display: inline-block;
+            vertical-align: -0.14em;
         }
 
         .status-pill::before {
-            content: "✤";
-            margin-right: 12px;
+            content: "🐟";
+            margin-right: 11px;
+            font: 15px/1 var(--font-ui);
+            transform: none;
         }
 
         .status-pill::after {
-            content: "❀";
-            margin-left: 12px;
-            color: #E59A7C;
+            content: "≈";
+            margin-left: 11px;
+            color: #71948F;
+            font: 700 18px/1 var(--font-display);
+            letter-spacing: -0.2em;
         }
 
         .limited-event-notice {
@@ -845,32 +871,43 @@
 
         button.action-btn {
             width: auto;
-            min-width: 190px;
+            min-width: 184px;
             background:
-                radial-gradient(circle at 18% 72%, rgba(255, 255, 255, 0.07) 0 24px, transparent 25px),
-                linear-gradient(180deg, #E7785F 0%, #D85F49 100%);
-            color: #fff;
-            border: 2px solid rgba(255, 245, 226, 0.72);
-            padding: 14px 38px;
-            border-radius: 999px;
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent 28%, rgba(255, 255, 255, 0.06) 62%, transparent),
+                repeating-linear-gradient(2deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 7px),
+                linear-gradient(180deg, #7F6A50 0%, #66533E 100%);
+            color: #FFFDF7;
+            border: 2px solid rgba(240, 229, 203, 0.78);
+            padding: 13px 32px;
+            border-radius: 15px;
             font-family: var(--font-display);
             font-size: 15px;
             font-weight: 700;
             letter-spacing: 0.09em;
             cursor: pointer;
             margin-top: 18px;
-            box-shadow: 0 12px 26px rgba(192, 87, 66, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.30);
+            box-shadow: 0 10px 22px rgba(58, 55, 43, 0.23), inset 0 1px 0 rgba(255, 255, 255, 0.24);
             transition: all var(--transition);
             position: relative;
             z-index: 5;
         }
 
+        button.action-btn::before {
+            content: "🐟";
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: -0.08em;
+            font: 15px/1 var(--font-ui);
+            transform: none;
+        }
+
         button.action-btn:hover {
             background:
-                radial-gradient(circle at 18% 72%, rgba(255, 255, 255, 0.08) 0 24px, transparent 25px),
-                linear-gradient(180deg, #EC8067 0%, #D95E48 100%);
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 28%, rgba(255, 255, 255, 0.08) 62%, transparent),
+                repeating-linear-gradient(2deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 7px),
+                linear-gradient(180deg, #897359 0%, #6A5640 100%);
             transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(183, 96, 82, 0.28);
+            box-shadow: 0 12px 26px rgba(58, 55, 43, 0.27);
         }
 
         button.action-btn:active {
@@ -883,6 +920,10 @@
             cursor: not-allowed;
             box-shadow: none;
             transform: none;
+        }
+
+        button.action-btn:disabled::before {
+            opacity: 0.46;
         }
 
         .draw-label-mobile {
@@ -1938,6 +1979,24 @@
             75% { transform: rotate(-2deg) translateY(-3px) translateX(-1px); }
         }
 
+        @keyframes fishing-wait {
+            0% { transform: scale(1); filter: saturate(1); }
+            45% { transform: scale(1.004); filter: saturate(1.02); }
+            100% { transform: scale(1); filter: saturate(1); }
+        }
+
+        @keyframes fishing-hooked {
+            0% { opacity: 0.82; transform: scale(0.994) translateY(2px); filter: brightness(1.08); }
+            36% { opacity: 1; transform: scale(1.012) translateY(-2px); filter: brightness(1.03); }
+            100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+        }
+
+        @keyframes fishing-water-glow {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
+            38% { opacity: 0.72; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.08); }
+        }
+
         @keyframes stick-pop {
             0% { transform: translateY(0) scale(1); opacity: 0; }
             20% { opacity: 1; transform: translateY(-20px); }
@@ -2022,7 +2081,7 @@
             }
 
             .omikuji-container {
-                width: min(100%, 600px);
+                width: min(100%, 560px);
             }
 
         }
@@ -2271,6 +2330,7 @@
 
             body::before,
             body::after,
+            .lottery-stage::before,
             .reference-backdrop {
                 display: none;
             }
@@ -2418,6 +2478,11 @@
                 animation: shake-cylinder 0.25s ease-in-out infinite;
             }
 
+            .omikuji-container.fishing .omikuji-img,
+            .omikuji-container.hooked .omikuji-img {
+                animation: none;
+            }
+
             .status-strip {
                 width: 100%;
                 margin-top: -15px;
@@ -2485,6 +2550,10 @@
                 font-size: 14px;
                 font-weight: 600;
                 letter-spacing: 0.08em;
+            }
+
+            button.action-btn::before {
+                display: none;
             }
 
             button.action-btn:hover {
@@ -2832,7 +2901,10 @@
             .result-card,
             .new-badge,
             .drawing .omikuji-stick,
-            .shaking .omikuji-img {
+            .shaking .omikuji-img,
+            .fishing .omikuji-img,
+            .hooked .omikuji-img,
+            .hooked .magic-glow {
                 animation: none !important;
             }
 
@@ -2896,9 +2968,9 @@
             <picture class="omikuji-picture">
                 <source media="(max-width: 720px)" srcset="assets/lottery-mobile-shrine.webp">
                 <img
-                    src="assets/lottery-shrine-attendant.webp"
-                    onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/Loepickst/kiki@main/chouqian.png'; this.style.borderRadius='18px';"
-                    alt="柴犬神主在神社御神签处等待抽签"
+                    src="assets/lottery-autumn-fishing-idle.webp"
+                    onerror="this.onerror=null; this.src='assets/lottery-shrine-attendant.webp';"
+                    alt="柴犬在秋日湖畔悠然垂钓"
                     class="omikuji-img"
                     id="omikujiImg"
                     decoding="async"
@@ -2930,10 +3002,10 @@
         </div>
 
         <button class="action-btn" id="drawBtn">
-            <span class="draw-label-desktop">抽签 Start</span>
+            <span class="draw-label-desktop">垂钓 Start</span>
             <span class="draw-label-mobile">抽签</span>
         </button>
-        <p class="daily-note">每日可抽签 3 次，祝你好运！</p>
+        <p class="daily-note">每日可垂钓 3 次，愿你满载而归！</p>
         </div>
 
     </main>
@@ -3082,6 +3154,7 @@
         const rarityColors = omikujiCatalogApi ? omikujiCatalogApi.rarityColors || {} : {};
 
         const omikujiContainer = document.getElementById('omikujiContainer');
+        const omikujiImg = document.getElementById('omikujiImg');
         const resultCard = document.getElementById('resultCard');
         const resultTitle = document.getElementById('resultTitle');
         const resultIcon = document.getElementById('resultIcon');
@@ -3094,6 +3167,15 @@
         const remainCountSpan = document.getElementById('remainCount');
         const foilEventUseBtn = document.getElementById('foilEventUseBtn');
         const foilEventCount = document.getElementById('foilEventCount');
+        const desktopFishingMedia = window.matchMedia('(min-width: 721px)');
+        const DESKTOP_FISHING_IDLE_IMAGE = 'assets/lottery-autumn-fishing-idle.webp';
+        const DESKTOP_FISHING_HOOKED_IMAGE = 'assets/lottery-autumn-fishing-hooked.webp';
+
+        if (desktopFishingMedia.matches) {
+            const hookedFramePreload = new Image();
+            hookedFramePreload.decoding = 'async';
+            hookedFramePreload.src = DESKTOP_FISHING_HOOKED_IMAGE;
+        }
 
         const collectionModal = document.getElementById('collectionModal');
         const collectionModalContent = collectionModal.querySelector('.modal-content');
@@ -4656,11 +4738,19 @@
 
             if (remain > 0) {
                 drawBtn.disabled = false;
-                setActionButtonLabel('抽签 Start', '抽签');
+                setActionButtonLabel('垂钓 Start', '抽签');
             } else {
                 drawBtn.disabled = true;
                 setActionButtonLabel('明日再来');
             }
+        }
+
+        function resetDesktopFishingCover() {
+            if (!desktopFishingMedia.matches) {
+                return;
+            }
+            omikujiImg.src = DESKTOP_FISHING_IDLE_IMAGE;
+            omikujiContainer.classList.remove('fishing', 'hooked');
         }
 
         function hideResultCard() {
@@ -4680,6 +4770,7 @@
             newBadge.classList.remove('is-foil-badge');
             newBadge.textContent = 'NEW!';
             newBadge.style.display = 'none';
+            resetDesktopFishingCover();
         }
 
         function refreshLotteryUIAfterImport() {
@@ -5474,29 +5565,43 @@
                 return;
             }
 
+            const usesDesktopFishingAnimation = desktopFishingMedia.matches;
             hideResultCard();
             omikujiContainer.style.display = 'flex';
-            
-            // 阶段 1: 摇晃签筒
-            omikujiContainer.classList.add('shaking');
+
+            if (usesDesktopFishingAnimation) {
+                omikujiContainer.classList.add('fishing');
+            } else {
+                omikujiContainer.classList.add('shaking');
+            }
             drawBtn.disabled = true;
             foilEventUseBtn.disabled = true;
-            setActionButtonLabel('祈愿中...');
+            setActionButtonLabel(
+                usesDesktopFishingAnimation ? '静候鱼讯...' : '祈愿中...',
+                usesDesktopFishingAnimation ? '抽签' : '祈愿中...'
+            );
 
             window.setTimeout(() => {
                 const randomFortune = drawFortuneWithSpecialPool();
-                // 设置弹出竹签上的文字显示
                 document.getElementById('stickText').textContent = randomFortune.rarity || '吉';
 
-                // 阶段 2: 弹出竹签
-                omikujiContainer.classList.remove('shaking');
-                omikujiContainer.classList.add('drawing');
-                setActionButtonLabel('神签显现...');
+                if (usesDesktopFishingAnimation) {
+                    omikujiContainer.classList.remove('fishing');
+                    omikujiImg.src = DESKTOP_FISHING_HOOKED_IMAGE;
+                    omikujiContainer.classList.add('hooked');
+                    setActionButtonLabel('收竿中...', '抽签');
+                } else {
+                    omikujiContainer.classList.remove('shaking');
+                    omikujiContainer.classList.add('drawing');
+                    setActionButtonLabel('神签显现...');
+                }
 
                 window.setTimeout(() => {
-                    // 阶段 3: 揭晓结果 (移除竹签并展开卡片)
-                    omikujiContainer.classList.remove('drawing');
+                    omikujiContainer.classList.remove('drawing', 'hooked', 'fishing', 'shaking');
                     omikujiContainer.style.display = 'none';
+                    if (usesDesktopFishingAnimation) {
+                        omikujiImg.src = DESKTOP_FISHING_IDLE_IMAGE;
+                    }
 
                     const collectionMetaBeforeDraw = getCollectionMeta();
                     const foilResult = resolveFoilDraw(
@@ -5553,8 +5658,8 @@
                     if (collectionModal.classList.contains('active')) {
                         renderActiveModalPanel({ autoFocusLatest: currentModalTab === 'collection' });
                     }
-                }, 800); // 等待竹签弹出的动画结束
-            }, 1200); // 摇晃动作持续 1.2 秒
+                }, usesDesktopFishingAnimation ? 950 : 800);
+            }, usesDesktopFishingAnimation ? 700 : 1200);
         }
 
         openCollectionBtn.addEventListener('click', () => {
