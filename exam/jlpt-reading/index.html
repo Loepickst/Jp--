@@ -6,772 +6,134 @@
     <title>能力考阅读鉴赏</title>
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <script src="../../shared/legacy-directory-redirect.js"></script>
-    <style>
-        :root {
-            /* 纸张与铅笔色盘 - 明亮白底版 */
-            --paper: #ffffff;          
-            --paper-light: #ffffff;    
-            
-            --graphite: #333333;       
-            --graphite-sub: #666666;   
-            --graphite-faint: #cccccc; 
-            
-            --red-pencil: #e64a4a;     
-            
-            /* 水彩记号笔色系 (各模块区分) */
-            --marker-blue: rgba(129, 212, 250, 0.35);    
-            --marker-peach: rgba(253, 186, 116, 0.35);   
-            --marker-mint: rgba(134, 239, 172, 0.35);    
-            --marker-pink: rgba(244, 143, 177, 0.35);    
-            --marker-lavender: rgba(196, 181, 253, 0.35);
-            
-            --marker-yellow: rgba(255, 213, 79, 0.35);   /* 通用高亮 */
-            --marker-gray: rgba(200, 200, 200, 0.25);    /* 锁定状态 */
-
-            /* 铅笔排线背景 */
-            --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px);
-
-            --transition: all 0.2s ease-out;
-            
-            --font-sans: 'Noto Sans SC', 'Noto Sans JP', sans-serif;
-            --font-serif: 'Noto Serif SC', 'Noto Serif JP', 'Songti SC', 'SimSun', serif;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--paper);
-            color: var(--graphite);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        /* 极弱的纸张噪点纹理 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* 工具类：手绘感不规则边框 */
-        .sketch-box {
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            background: transparent;
-        }
-        
-        .sketch-circle {
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-        }
-
-        /* ================= Header ================= */
-        header {
-            width: 100%;
-            padding: 16px 20px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(4px);
-            border-bottom: 1.5px solid var(--graphite);
-            border-bottom-left-radius: 50% 2px;
-            border-bottom-right-radius: 50% 3px;
-        }
-
-        .back-btn, .home-btn {
-            text-decoration: none;
-            color: var(--graphite);
-            font-size: 14px;
-            font-weight: 700;
-            padding: 4px 12px;
-            background: transparent;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-            letter-spacing: 0.05em;
-        }
-        
-        .back-btn:hover, .home-btn:hover { 
-            background: var(--marker-yellow);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--graphite);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-        }
-        
-        h1 span {
-            color: var(--graphite);
-            background: transparent;
-            padding: 2px 8px;
-            font-size: 12px;
-            margin-left: 8px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-
-        .container {
-            width: 95%;
-            max-width: 860px;
-            padding: 40px 0 80px 0;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        /* 提示说明块 - 水彩荧光笔风格 */
-        .intro-box {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeIn 0.4s ease-out;
-        }
-        
-        .intro-box p {
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            margin: 0;
-            background: linear-gradient(transparent 50%, rgba(255, 213, 79, 0.4) 50%);
-            border-bottom: 1.5px dashed var(--graphite-faint);
-            display: inline-block;
-            padding: 4px 16px;
-            letter-spacing: 0.1em;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .level-grid, .type-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* ================= 级别/题型 卡片 ================= */
-        .selection-card {
-            background: transparent;
-            border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-            padding: 24px;
-            border: 1.5px solid var(--graphite);
-            box-sizing: border-box;
-            transition: all var(--transition);
-            text-decoration: none;
-            color: var(--graphite);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .selection-card:hover:not(.locked) {
-            transform: translate(-1px, -1px);
-            background: var(--hatching-graphite);
-        }
-        
-        .selection-card:active:not(.locked) {
-            transform: translate(1px, 1px);
-        }
-
-        /* 锁定的卡片状态 */
-        .selection-card.locked {
-            border-style: dashed;
-            border-color: var(--graphite-faint);
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
-        
-        .selection-card.locked:hover {
-            transform: none;
-            background: transparent;
-        }
-
-        .card-content {
-            flex: 1;
-            padding-right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .card-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .card-text h3 {
-            margin: 0 0 8px 0;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--graphite);
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            letter-spacing: 0.05em;
-        }
-
-        .card-text p {
-            font-family: 'Noto Sans JP', sans-serif;
-            margin: 0;
-            font-size: 13px;
-            color: var(--graphite-sub);
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        /* 左侧图标 - 随手画的方形/圆角效果 */
-        .card-icon {
-            font-size: 24px;
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            flex-shrink: 0;
-            background: #FFF;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            color: var(--graphite);
-        }
-
-        /* 动态注入水彩颜色 */
-        .selection-card[data-color="blue"] .card-icon { background: var(--marker-blue); }
-        .selection-card[data-color="peach"] .card-icon { background: var(--marker-peach); }
-        .selection-card[data-color="mint"] .card-icon { background: var(--marker-mint); }
-        .selection-card[data-color="pink"] .card-icon { background: var(--marker-pink); }
-        .selection-card[data-color="lavender"] .card-icon { background: var(--marker-lavender); }
-        
-        .selection-card.locked .card-icon {
-            background: var(--marker-gray);
-            border-color: var(--graphite-faint);
-            color: var(--graphite-sub);
-        }
-
-        .card-arrow {
-            font-size: 16px;
-            color: var(--graphite-sub);
-            font-weight: 900;
-        }
-        .selection-card.locked .card-arrow {
-            color: var(--graphite-faint);
-        }
-
-        /* ================= 模式切换 (年份 / 分类) ================= */
-        .practice-toolbar {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 32px;
-        }
-
-        .browse-mode-toggle {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .browse-mode-btn {
-            border: none;
-            background: transparent;
-            color: var(--graphite-sub);
-            padding: 6px 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            transition: var(--transition);
-            position: relative;
-            font-family: inherit;
-        }
-
-        .browse-mode-btn:hover:not(.active) {
-            color: var(--graphite);
-        }
-
-        .browse-mode-btn.active {
-            color: var(--graphite);
-            z-index: 1;
-        }
-        
-        .browse-mode-btn.active::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--marker-yellow);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            z-index: -1;
-            transform: rotate(-1deg);
-        }
-
-        /* ================= 弱点特训 (错题区) ================= */
-        .reading-review-section {
-            background: var(--marker-yellow);
-            border: 1.5px solid var(--red-pencil);
-            border-radius: 3px 255px 5px 25px / 255px 3px 225px 5px;
-            padding: 24px;
-            margin-bottom: 40px;
-            position: relative;
-            animation: slideUp 0.4s ease-out;
-        }
-
-        .review-section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .review-section-title {
-            margin: 0;
-            font-size: 18px;
-            color: var(--red-pencil);
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            background: transparent;
-            padding: 4px 12px;
-            border-bottom: 1.5px solid var(--red-pencil);
-        }
-
-        .review-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .review-btn {
-            text-decoration: none;
-            background: #fff;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: var(--transition);
-            color: var(--graphite);
-            font-weight: 700;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-
-        .review-btn:hover {
-            background: var(--paper);
-            border-color: var(--red-pencil);
-            color: var(--red-pencil);
-        }
-
-        .review-count {
-            color: var(--red-pencil);
-            font-size: 13px;
-            font-weight: 900;
-            padding: 2px 6px;
-            border: 1.5px solid var(--red-pencil);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-        }
-
-        /* ================= 笔记本列表 (年份/文章卡片) ================= */
-        .year-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .year-card {
-            background: transparent;
-            border: 1.5px solid var(--graphite);
-            border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-            padding: 24px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: var(--transition);
-            position: relative;
-            text-align: left;
-            font-family: inherit;
-            color: var(--graphite);
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .year-card:hover {
-            background: var(--hatching-graphite);
-        }
-
-        .year-card-main {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            border-bottom: 1.5px dashed var(--graphite-faint);
-            padding-bottom: 16px;
-        }
-
-        .year-title-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .year-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--graphite);
-            letter-spacing: 0.05em;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .lesson-tag {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            color: var(--graphite);
-            background: var(--marker-mint);
-            padding: 2px 8px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-        }
-
-        /* 练习中标签 */
-        .last-practice-tag {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--graphite);
-            background: var(--marker-yellow);
-            padding: 2px 8px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            letter-spacing: 0.05em;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .year-count {
-            font-size: 13px;
-            color: var(--graphite-sub);
-            font-weight: 500;
-        }
-
-        .year-card-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .year-mode-btn {
-            text-decoration: none;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 10px 16px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            color: var(--graphite);
-            background: var(--marker-blue);
-            transition: var(--transition);
-            letter-spacing: 0.05em;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .year-mode-btn.is-test {
-            background: var(--marker-pink);
-        }
-
-        .year-mode-btn:hover {
-            filter: brightness(0.95);
-            border-style: dashed;
-        }
-
-        .year-mode-btn:active {
-            transform: translate(1px, 1px);
-        }
-
-        /* 分类下的文章卡片不需要底部按钮，调整样式 */
-        .category-list-card .year-card-main,
-        .category-article-card .year-card-main {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .category-article-shell {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .secondary-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: transparent;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--graphite);
-            cursor: pointer;
-            transition: var(--transition);
-            align-self: flex-start;
-        }
-
-        .secondary-action-btn:hover {
-            background: var(--marker-yellow);
-        }
-
-        .empty-state-card {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px 24px;
-            background: transparent;
-            border: 1.5px dashed var(--graphite-faint);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            color: var(--graphite-sub);
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 30px;
-            font-size: 13px;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 500;
-            color: var(--graphite-faint);
-            text-align: center;
-            width: 100%;
-        }
-
-        .hidden { display: none !important; }
-
-        @media (max-width: 600px) {
-            .level-grid, .type-grid, .year-grid { grid-template-columns: 1fr; }
-            .selection-card, .year-card { padding: 20px; }
-            .card-text h3 { font-size: 18px; }
-            header { padding: 12px 16px; }
-        }
-    
-        @media (max-width: 720px) {
-            header { padding: 12px 14px !important; }
-            .back-btn, .home-btn { font-size: 12px !important; padding: 6px 10px !important; gap: 4px !important; }
-            h1 { font-size: 16px !important; }
-            h1 span { font-size: 10px !important; padding: 2px 6px !important; }
-            
-            .container { width: calc(100% - 32px) !important; padding: 20px 0 32px !important; }
-            .intro-box { margin-bottom: 24px !important; }
-            .intro-box p { font-size: 13px !important; padding: 4px 12px !important; }
-            
-            .card-icon { width: 48px !important; height: 48px !important; font-size: 20px !important; }
-            .card-content { gap: 16px !important; }
-        }
-        
-        @media (max-width: 520px) {
-            header { padding: 10px 12px !important; }
-            .back-btn, .home-btn { font-size: 11px !important; padding: 4px 8px !important; }
-            h1 { font-size: 15px !important; }
-            
-            .selection-card { padding: 16px !important; }
-            .card-text h3 { font-size: 16px !important; margin-bottom: 4px !important; }
-            .card-text p { font-size: 12px !important; }
-            
-            .browse-mode-btn { font-size: 13px !important; padding: 6px 10px !important; }
-            
-            .year-title { font-size: 18px !important; }
-            .lesson-tag { font-size: 11px !important; padding: 2px 6px !important; }
-            .year-mode-btn { padding: 8px 12px !important; font-size: 13px !important; }
-        }
-
-    </style>
+    <link rel="stylesheet" href="./reading-directory-redesign.css?v=20260815-n2-long-genres">
 </head>
-<body>
+<body class="reading-app">
 
-    <header>
-        <a href="../../index.html#exam" class="back-btn" id="backButton" data-back-nav>
+    <header class="reading-page-header">
+        <a href="../../index.html#exam/exam-reading" class="reading-back-link" id="backButton" data-back-nav data-kiki-unified-back data-kiki-dynamic-back>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            戻る
+            返回上一页
         </a>
-        <h1 id="pageTitle">読解鑑賞</h1>
-        <a href="../../index.html" class="home-btn hidden" id="homeButton">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            ホーム
-        </a>
+        <h1 id="pageTitle" class="reading-page-title">N1 読解特訓</h1>
+        <div class="reading-header-actions header-right-slot">
+            <button id="readingMistakeCenterBtn" type="button" class="reading-mistake-button" onclick="showMistakeCenter()">
+                <span>错题中心</span>
+                <strong id="readingMistakeCount">0</strong>
+            </button>
+        </div>
     </header>
 
-    <div id="levelSelectView" class="container">
-        <div class="intro-box">
-            <p>✎ 挑戦するレベルを選択してください</p>
-        </div>
+    <main class="reading-page-shell">
+        <div class="reading-app-main">
+            <section id="typeSelectView" class="reading-view reading-directory-view">
+                <section class="reading-character-hero" aria-label="当前阅读练习目录">
+                    <div class="reading-character-figure">
+                        <img src="../../assets/reading/reading-master-apprentice-hero-v1.webp" alt="阅读导师仁与薰">
+                    </div>
+                    <div class="reading-character-speech">
+                        <p class="reading-character-name">仁 · 読解指南</p>
+                        <h2 id="typeSectionTitle">选择今天想要进行的阅读练习吧，kiki。</h2>
+                        <button type="button" class="reading-resume-line" data-reading-resume onclick="resumeLastReading()" hidden>
+                            <span><strong>继续练习</strong>　<span data-reading-resume-copy>上次的阅读真题</span></span>
+                            <span>继续 →</span>
+                        </button>
+                    </div>
+                </section>
 
-        <div class="level-grid">
-            <div class="selection-card" onclick="selectLevel('N1')" data-color="blue">
-                <div class="card-content">
-                    <div class="card-icon">📘</div>
-                    <div class="card-text">
-                        <h3>N1 読解真題</h3>
-                        <p>高级逻辑文章、抽象评论、长篇论说</p>
+                <div class="reading-section-title">
+                    <h2 id="typePracticeMenuTitle">短文理解 · 练习目录</h2>
+                    <div class="reading-section-tools">
+                        <div class="reading-level-tabs" aria-label="切换阅读等级">
+                            <button type="button" data-reading-level="N1" onclick="switchReadingLevel('N1')">N1</button>
+                            <button type="button" data-reading-level="N2" onclick="switchReadingLevel('N2')">N2</button>
+                            <button type="button" data-reading-level="N3" disabled title="内容准备中">N3</button>
+                        </div>
                     </div>
                 </div>
-                <div class="card-arrow">＞</div>
-            </div>
 
-            <div class="selection-card" onclick="selectLevel('N2')" data-color="peach">
-                <div class="card-content">
-                    <div class="card-icon">📗</div>
-                    <div class="card-text">
-                        <h3>N2 読解真題</h3>
-                        <p>中长篇文章、统合理解、主张理解</p>
+                <section class="reading-practice-entry" aria-label="阅读练习方式">
+                    <nav class="reading-primary-routes" aria-label="主要练习入口">
+                        <button type="button" class="reading-primary-route is-year" onclick="openRoute('year')">
+                            <span class="reading-primary-route__index">01</span>
+                            <span class="reading-primary-route__copy"><strong>年度练习</strong><small>按考试年份完成真题阅读</small></span>
+                            <span class="reading-primary-route__arrow" aria-hidden="true">›</span>
+                        </button>
+                        <button id="readingCategoryRoute" type="button" class="reading-primary-route is-category" onclick="openRoute('category')">
+                            <span class="reading-primary-route__index">02</span>
+                            <span class="reading-primary-route__copy"><strong>分类练习</strong><small>按同类题目集中练习</small></span>
+                            <span class="reading-primary-route__arrow" aria-hidden="true">›</span>
+                        </button>
+                    </nav>
+                    <button type="button" class="reading-random-entry" onclick="startRandomPractice()">
+                        <span><strong>随机练习</strong><small>从当前题型随机抽取一篇文章</small></span>
+                        <span>开始随机小测　›</span>
+                    </button>
+                </section>
+            </section>
+
+            <section id="yearListView" class="reading-view hidden">
+                <section class="reading-character-hero reading-character-hero--compact" aria-label="阅读练习引导">
+                    <div class="reading-character-figure">
+                        <img src="../../assets/reading/reading-master-apprentice-hero-v1.webp" alt="阅读导师仁与薰">
+                    </div>
+                    <div class="reading-character-speech">
+                        <p class="reading-character-name">仁 · 読解指南</p>
+                        <h2 id="practiceGuideCopy">择一卷真题，静心读罢；莫急，文意自会显现，kiki。</h2>
+                    </div>
+                </section>
+
+                <div class="reading-section-title">
+                    <h2 id="practiceDirectoryTitle">短文理解</h2>
+                    <div class="reading-section-tools">
+                        <div class="reading-level-tabs" aria-label="切换阅读等级">
+                            <button type="button" data-reading-level="N1" onclick="switchReadingLevel('N1')">N1</button>
+                            <button type="button" data-reading-level="N2" onclick="switchReadingLevel('N2')">N2</button>
+                            <button type="button" data-reading-level="N3" disabled title="内容准备中">N3</button>
+                        </div>
                     </div>
                 </div>
-                <div class="card-arrow">＞</div>
-            </div>
-        </div>
-    </div>
 
-    <div id="typeSelectView" class="container hidden">
-        <div class="intro-box">
-            <p id="typeSectionTitle">✎ 練習する項目を選択してください</p>
-        </div>
+                <div id="readingReviewSection" class="hidden"><div id="readingReviewGrid"></div></div>
+                <div id="yearContainer" class="year-grid reading-year-grid"></div>
+                <div id="categoryContainer" class="year-grid reading-category-grid hidden"></div>
+                <div id="categoryArticleShell" class="category-article-shell hidden">
+                    <div class="category-article-toolbar">
+                        <button id="backToCategoryListBtn" type="button" class="reading-directory-back"><span>‹</span> 返回分类目录</button>
+                    </div>
+                    <div id="categoryArticleGrid" class="year-grid reading-category-article-grid"></div>
+                </div>
+            </section>
 
-        <div class="type-grid">
-            <div class="selection-card" onclick="selectType('short', '短文理解')" data-color="blue">
-                <div class="card-content">
-                    <div class="card-icon">📝</div>
-                    <div class="card-text">
-                        <h3>内容理解（短文）</h3>
-                        <p>约200字，把握核心论点与关键细节</p>
+            <section id="mistakeCenterView" class="reading-view hidden">
+                <section class="reading-character-hero reading-character-hero--compact" aria-label="错题复习引导">
+                    <div class="reading-character-figure">
+                        <img src="../../assets/reading/reading-master-apprentice-hero-v1.webp" alt="阅读导师仁与薰">
+                    </div>
+                    <div class="reading-character-speech">
+                        <p class="reading-character-name">薰 · 復習中</p>
+                        <h2>咦，这几招刚才没看清……没关系，再陪我走一遍吧，这次一定能抓住它！</h2>
+                    </div>
+                </section>
+                <div class="reading-section-title">
+                    <h2 id="mistakeDirectoryTitle">阅读错题分类</h2>
+                    <div class="reading-section-tools">
+                        <div class="reading-level-tabs" aria-label="切换阅读等级">
+                            <button type="button" data-reading-level="N1" onclick="switchReadingLevel('N1')">N1</button>
+                            <button type="button" data-reading-level="N2" onclick="switchReadingLevel('N2')">N2</button>
+                            <button type="button" data-reading-level="N3" disabled title="内容准备中">N3</button>
+                        </div>
+                        <button id="mistakeCategoryBack" type="button" class="reading-directory-back hidden" onclick="returnToMistakeCategories()"><span>‹</span> 返回错题分类</button>
                     </div>
                 </div>
-                <div class="card-arrow">＞</div>
-            </div>
-
-            <div class="selection-card" onclick="selectType('middle', '中篇阅读')" data-color="peach">
-                <div class="card-content">
-                    <div class="card-icon">📄</div>
-                    <div class="card-text">
-                        <h3>内容理解（中篇）</h3>
-                        <p>约500字，理清文章脉络与笔者主张</p>
-                    </div>
-                </div>
-                <div class="card-arrow">＞</div>
-            </div>
-
-            <div class="selection-card" onclick="selectType('long', '長文阅读')" data-color="mint">
-                <div class="card-content">
-                    <div class="card-icon">📚</div>
-                    <div class="card-text">
-                        <h3>内容理解（長文）</h3>
-                        <p>约1000字，考验长篇逻辑阅读耐力</p>
-                    </div>
-                </div>
-                <div class="card-arrow">＞</div>
-            </div>
-
-            <div class="selection-card" onclick="selectType('integrated', '統合理解')" data-color="pink">
-                <div class="card-content">
-                    <div class="card-icon">🧩</div>
-                    <div class="card-text">
-                        <h3>統合理解（多篇文章）</h3>
-                        <p>对比两篇以上文章，寻找异同与交叉点</p>
-                    </div>
-                </div>
-                <div class="card-arrow">＞</div>
-            </div>
-
-            <div class="selection-card" onclick="selectType('search', '情報検索')" data-color="lavender">
-                <div class="card-content">
-                    <div class="card-icon">🔍</div>
-                    <div class="card-text">
-                        <h3>情報検索（图表文）</h3>
-                        <p>快速从广告、通知书中提取关键情报</p>
-                    </div>
-                </div>
-                <div class="card-arrow">＞</div>
-            </div>
+                <div id="mistakeCenterList" class="reading-mistake-list"></div>
+            </section>
         </div>
-    </div>
+    </main>
 
-    <div id="yearListView" class="container hidden">
-        <div class="practice-toolbar">
-            <div class="mode-switch browse-mode-toggle" aria-label="练习方式切换">
-                <button type="button" class="browse-mode-btn active" data-browse-mode="year">年度別演習</button>
-                <button type="button" class="browse-mode-btn" data-browse-mode="category">テーマ別演習</button>
-            </div>
-        </div>
-
-        <div id="readingReviewSection" class="reading-review-section hidden">
-            <div class="review-section-header">
-                <h2 class="review-section-title">✔ 赤ペン復習 <span style="font-size: 12px; color: #666;">(弱点特訓)</span></h2>
-            </div>
-            <div id="readingReviewGrid" class="review-grid"></div>
-        </div>
-
-        <div id="yearContainer" class="year-grid"></div>
-        <div id="categoryContainer" class="year-grid category-list-grid hidden"></div>
-        <div id="categoryArticleShell" class="category-article-shell hidden">
-            <div class="category-article-toolbar">
-                <button id="backToCategoryListBtn" type="button" class="secondary-action-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                    分類一覧に戻る
-                </button>
-            </div>
-            <div id="categoryArticleGrid" class="year-grid category-article-grid"></div>
-        </div>
-    </div>
-
-    <footer>
-        © キキの日本語コーナー
-    </footer>
-
-<script src="shared/reading-year-system.js"></script>
-<script src="categories/index.js"></script>
-<script src="shared/reading-category-system.js"></script>
+<script src="shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+<script src="categories/index.js?v=20260815-n2-long-genres"></script>
+<script src="shared/reading-category-system.js?v=20260815-n2-long-genres"></script>
 <script src="../../shared/back-navigation.js"></script>
 <script src="../../shared/study-quest-test-boot.js"></script>
 <script>
@@ -1008,6 +370,166 @@
             title: '2013年12月 中篇',
             link: 'm/n1/2013.12.html?page=1',
             questionCount: 3
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2014.07',
+            title: '2014年7月 中篇',
+            link: 'm/n1/2014.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2014.12',
+            title: '2014年12月 中篇',
+            link: 'm/n1/2014.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2015.07',
+            title: '2015年7月 中篇',
+            link: 'm/n1/2015.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2015.12',
+            title: '2015年12月 中篇',
+            link: 'm/n1/2015.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2016.07',
+            title: '2016年7月 中篇',
+            link: 'm/n1/2016.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2016.12',
+            title: '2016年12月 中篇',
+            link: 'm/n1/2016.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2017.07',
+            title: '2017年7月 中篇',
+            link: 'm/n1/2017.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2017.12',
+            title: '2017年12月 中篇',
+            link: 'm/n1/2017.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2018.07',
+            title: '2018年7月 中篇',
+            link: 'm/n1/2018.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2018.12',
+            title: '2018年12月 中篇',
+            link: 'm/n1/2018.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2019.07',
+            title: '2019年7月 中篇',
+            link: 'm/n1/2019.7.html?page=1',
+            questionCount: 8
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2019.12',
+            title: '2019年12月 中篇',
+            link: 'm/n1/2019.12.html?page=1',
+            questionCount: 8
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2020.12',
+            title: '2020年12月 中篇',
+            link: 'm/n1/2020.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2021.07',
+            title: '2021年7月 中篇',
+            link: 'm/n1/2021.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2021.12',
+            title: '2021年12月 中篇',
+            link: 'm/n1/2021.12.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2022.07',
+            title: '2022年7月 中篇',
+            link: 'm/n1/2022.7.html?page=1',
+            questionCount: 9
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2022.12',
+            title: '2022年12月 中篇',
+            link: 'm/n1/2022.12.html?page=1',
+            questionCount: 8
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2023.07',
+            title: '2023年7月 中篇',
+            link: 'm/n1/2023.7.html?page=1',
+            questionCount: 8
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2023.12',
+            title: '2023年12月 中篇',
+            link: 'm/n1/2023.12.html?page=1',
+            questionCount: 8
+        },
+        {
+            type: 'middle',
+            level: 'N1',
+            year: '2024.07',
+            title: '2024年7月 中篇',
+            link: 'm/n1/2024.7.html?page=1',
+            questionCount: 8
         },
         // --- 長文阅读 ---
         {
@@ -2012,14 +1534,24 @@
         }
     );
 
-    const levelView = document.getElementById('levelSelectView');
     const typeView = document.getElementById('typeSelectView');
     const yearView = document.getElementById('yearListView');
+    const mistakeView = document.getElementById('mistakeCenterView');
 
     const pageTitle = document.getElementById('pageTitle');
     const backButton = document.getElementById('backButton');
-    const homeButton = document.getElementById('homeButton');
     const typeSectionTitle = document.getElementById('typeSectionTitle');
+    const typePracticeMenuTitle = document.getElementById('typePracticeMenuTitle');
+    const readingCategoryRoute = document.getElementById('readingCategoryRoute');
+    const practiceGuideCopy = document.getElementById('practiceGuideCopy');
+    const practiceDirectoryTitle = document.getElementById('practiceDirectoryTitle');
+    const mistakeDirectoryTitle = document.getElementById('mistakeDirectoryTitle');
+    const mistakeCategoryBack = document.getElementById('mistakeCategoryBack');
+    const mistakeCenterList = document.getElementById('mistakeCenterList');
+    const readingMistakeCenterBtn = document.getElementById('readingMistakeCenterBtn');
+    const readingMistakeCount = document.getElementById('readingMistakeCount');
+    const readingResumeButtons = Array.from(document.querySelectorAll('[data-reading-resume]'));
+    const readingResumeCopies = Array.from(document.querySelectorAll('[data-reading-resume-copy]'));
     const readingReviewSection = document.getElementById('readingReviewSection');
     const readingReviewGrid = document.getElementById('readingReviewGrid');
     const yearContainer = document.getElementById('yearContainer');
@@ -2038,6 +1570,9 @@
     let currentArticles = [];
     let currentBrowseMode = 'year';
     let selectedCategoryId = null;
+    let currentRouteMode = 'year';
+    let resumeTarget = null;
+    let selectedMistakeType = null;
 
     function getAllArticles() {
         return [...databaseN1, ...databaseN2];
@@ -2049,6 +1584,14 @@
         long: '長文阅读',
         integrated: '統合理解',
         search: '情報検索'
+    };
+
+    const mistakeTypeNameMap = {
+        short: '短篇阅读',
+        middle: '中篇阅读',
+        long: '长篇阅读',
+        integrated: '综合理解',
+        search: '信息检索'
     };
 
     function normalizeExamKey(value) {
@@ -2080,23 +1623,37 @@
     }
 
     function typeSupportsCategory(type) {
-        return !['integrated', 'search', 'long'].includes(normalizeReadingType(type));
+        const normalizedType = normalizeReadingType(type);
+        if (['integrated', 'search'].includes(normalizedType) || !currentLevel) {
+            return false;
+        }
+        return ReadingCategorySystem.getCategories(currentLevel, normalizedType).length > 0;
     }
 
-    function buildArticleUrl(article, examKey, reviewMode, readingMode) {
+    function getDefaultReadingType(preferredType = 'short') {
+        const normalizedPreferredType = normalizeReadingType(preferredType);
+        const availableTypes = ['short', 'middle', 'long', 'integrated', 'search']
+            .filter((type) => activeDatabase.some((article) => article.type === type));
+        return availableTypes.includes(normalizedPreferredType)
+            ? normalizedPreferredType
+            : (availableTypes[0] || null);
+    }
+
+    function buildArticleUrl(article, examKey, reviewMode, readingMode, page = 1) {
         if (!article || !article.link) {
             return null;
         }
 
         const basePath = String(article.link).split('?')[0];
         const params = new URLSearchParams();
-        params.set('page', '1');
+        params.set('page', String(Math.max(1, Number.parseInt(page, 10) || 1)));
         params.set('examKey', examKey);
         if (reviewMode) {
             params.set('mode', 'review');
         } else if (readingMode) {
             params.set('readingMode', readingMode);
         }
+        params.set('return', buildIndexStateUrl());
         return `${basePath}?${params.toString()}`;
     }
 
@@ -2111,16 +1668,27 @@
 
     function buildIndexStateUrl() {
         const params = new URLSearchParams();
+        const outerReturn = new URLSearchParams(window.location.search).get('return');
         if (currentLevel) {
             params.set('level', currentLevel);
+        }
+        if (outerReturn) {
+            params.set('return', outerReturn);
+        }
+        if (!mistakeView.classList.contains('hidden')) {
+            params.set('browse', 'mistakes');
+            if (selectedMistakeType) {
+                params.set('mistakeType', selectedMistakeType);
+            }
+            return `${window.location.pathname}?${params.toString()}`;
         }
         if (currentType) {
             params.set('type', currentType);
         }
-        if (currentType) {
+        if (currentType && !yearView.classList.contains('hidden')) {
             params.set('browse', currentBrowseMode);
         }
-        if (currentBrowseMode === 'category' && selectedCategoryId) {
+        if (!yearView.classList.contains('hidden') && currentBrowseMode === 'category' && selectedCategoryId) {
             params.set('category', selectedCategoryId);
         }
         return params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
@@ -2143,38 +1711,62 @@
         });
     }
 
+    function setActiveView(targetView) {
+        [typeView, yearView, mistakeView].forEach((view) => {
+            view.classList.toggle('hidden', view !== targetView);
+        });
+    }
+
     function updateHeaderButtons() {
-        if (!homeButton) {
-            return;
-        }
-        homeButton.classList.toggle('hidden', !levelView.classList.contains('hidden'));
+        updateMistakeCenterSummary();
+        readingMistakeCenterBtn.classList.toggle('hidden', !mistakeView.classList.contains('hidden'));
     }
 
     function renderEmptyState(container, message) {
         container.innerHTML = `<div class="empty-state-card">${escapeHtml(message)}</div>`;
     }
 
-    window.onload = function() {
+    function initializeReadingDirectory() {
         const urlParams = new URLSearchParams(window.location.search);
-        const initLevel = urlParams.get('level');
-        const initType = normalizeReadingType(urlParams.get('type'));
+        const initLevel = ['N1', 'N2'].includes(urlParams.get('level')) ? urlParams.get('level') : 'N1';
+        const requestedType = normalizeReadingType(urlParams.get('type'));
         const initYear = urlParams.get('year');
-        const initBrowse = urlParams.get('browse') === 'category' ? 'category' : 'year';
+        const requestedBrowse = urlParams.get('browse');
+        const legacyDirectory = urlParams.get('directory');
+        const initBrowse = requestedBrowse === 'category' || legacyDirectory === 'category' ? 'category' : 'year';
         const initCategory = urlParams.get('category');
+        const initMistakeType = normalizeReadingType(urlParams.get('mistakeType'));
+        const shouldOpenPracticeDirectory = ['year', 'category'].includes(requestedBrowse)
+            || ['year', 'category'].includes(legacyDirectory)
+            || Boolean(initYear || initCategory);
 
-        if (initLevel && initType) {
-            const typeName = typeNameMap[initType] || initType;
+        selectLevel(initLevel, { updateUrl: false, keepView: true });
 
-            selectLevel(initLevel);
-            selectType(initType, typeName, {
-                browseMode: initBrowse,
-                categoryId: initCategory,
+        if (urlParams.get('browse') === 'mistakes') {
+            showMistakeCenter({
+                selectedType: initMistakeType,
                 updateUrl: false
             });
+        } else {
+            const initType = getDefaultReadingType(requestedType || 'short');
+            if (!initType) {
+                returnToHomeSection();
+                return;
+            }
+            const typeName = typeNameMap[initType] || initType;
+            openTypeDirectory(initType, typeName, { updateUrl: false });
 
-            if (initBrowse !== 'category' && initYear) {
+            if (shouldOpenPracticeDirectory) {
+                openRoute(initBrowse, {
+                    categoryId: initCategory,
+                    updateUrl: false,
+                    preserveScroll: true
+                });
+            }
+
+            if (shouldOpenPracticeDirectory && initBrowse !== 'category' && initYear) {
                 const examKey = normalizeExamKey(initYear);
-                selectYear(examKey, getDisplayYear(examKey), urlParams.get('readingMode') || 'study');
+                selectYear(examKey);
                 return;
             }
 
@@ -2182,42 +1774,146 @@
         }
 
         updateHeaderButtons();
-    };
-
-    function selectLevel(level) {
-        currentLevel = level;
-
-        if (level === 'N1') activeDatabase = databaseN1;
-        else if (level === 'N2') activeDatabase = databaseN2;
-        else activeDatabase = [];
-
-        levelView.classList.add('hidden');
-        typeView.classList.remove('hidden');
-
-        pageTitle.innerText = `${level} 読解真題`;
-        typeSectionTitle.innerText = `✎ ${level} の演習項目を選択してください`;
-        updateHeaderButtons();
-        window.scrollTo(0, 0);
     }
 
-    function selectType(type, typeName, options = {}) {
-        currentType = normalizeReadingType(type);
-        currentTypeName = typeName;
-        currentArticles = activeDatabase.filter(a => a.type === currentType);
-        currentBrowseMode = options.browseMode === 'category' && typeSupportsCategory(currentType) ? 'category' : 'year';
-        selectedCategoryId = currentBrowseMode === 'category' && options.categoryId ? options.categoryId : null;
+    function selectLevel(level, options = {}) {
+        currentLevel = level === 'N2' ? 'N2' : 'N1';
 
-        renderPracticeView();
+        if (currentLevel === 'N1') activeDatabase = databaseN1;
+        else if (currentLevel === 'N2') activeDatabase = databaseN2;
+        else activeDatabase = [];
 
-        typeView.classList.add('hidden');
-        yearView.classList.remove('hidden');
+        currentType = null;
+        currentTypeName = '';
+        currentArticles = [];
+        currentYear = null;
+        selectedCategoryId = null;
 
-        pageTitle.innerText = `${currentLevel} - ${typeName}`;
+        document.querySelectorAll('[data-reading-level]').forEach((button) => {
+            button.classList.toggle('active', button.dataset.readingLevel === currentLevel);
+        });
+        pageTitle.innerText = `${currentLevel} 読解特訓`;
+        const unifiedTitle = document.querySelector('.kiki-unified-header-title');
+        if (unifiedTitle) {
+            unifiedTitle.textContent = `${currentLevel} 読解特訓`;
+        }
+        updateResumeTarget();
+        updateMistakeCenterSummary();
+
         if (options.updateUrl !== false) {
             syncIndexUrl();
         }
         updateHeaderButtons();
-        window.scrollTo(0, 0);
+    }
+
+    function switchReadingLevel(level) {
+        const scrollPosition = window.scrollY;
+        const wasTypeDirectory = !typeView.classList.contains('hidden');
+        const wasPracticeDirectory = !yearView.classList.contains('hidden');
+        const wasMistakeCenter = !mistakeView.classList.contains('hidden');
+        const retainedType = currentType;
+        const retainedTypeName = currentTypeName || typeNameMap[retainedType] || retainedType;
+        const retainedBrowseMode = currentBrowseMode;
+        const retainedCategoryId = selectedCategoryId;
+        const retainedMistakeType = selectedMistakeType;
+
+        selectLevel(level, { updateUrl: false, keepView: true });
+
+        const typeIsAvailable = retainedType && activeDatabase.some((article) => article.type === retainedType);
+        if ((wasPracticeDirectory || wasTypeDirectory) && typeIsAvailable) {
+            openTypeDirectory(retainedType, retainedTypeName, {
+                updateUrl: false,
+                preserveScroll: true
+            });
+            if (wasPracticeDirectory) {
+                openRoute(retainedBrowseMode, {
+                    categoryId: retainedCategoryId,
+                    updateUrl: false,
+                    preserveScroll: true
+                });
+            }
+        } else if (wasMistakeCenter) {
+            showMistakeCenter({
+                selectedType: activeDatabase.some((article) => article.type === retainedMistakeType)
+                    ? retainedMistakeType
+                    : null,
+                updateUrl: false
+            });
+        } else {
+            const fallbackType = getDefaultReadingType(retainedType || 'short');
+            if (fallbackType) {
+                openTypeDirectory(fallbackType, typeNameMap[fallbackType], {
+                    updateUrl: false,
+                    preserveScroll: true
+                });
+            } else {
+                returnToHomeSection();
+                return;
+            }
+        }
+
+        syncIndexUrl();
+        window.requestAnimationFrame(() => window.scrollTo(0, scrollPosition));
+    }
+
+    function openRoute(mode, options = {}) {
+        if (!currentType) {
+            const fallbackType = getDefaultReadingType('short');
+            if (!fallbackType) {
+                returnToHomeSection();
+                return;
+            }
+            openTypeDirectory(fallbackType, typeNameMap[fallbackType], {
+                updateUrl: false,
+                preserveScroll: true
+            });
+        }
+        currentRouteMode = mode === 'category' ? 'category' : 'year';
+        currentBrowseMode = currentRouteMode === 'category' && typeSupportsCategory(currentType) ? 'category' : 'year';
+        selectedCategoryId = currentBrowseMode === 'category' && options.categoryId ? options.categoryId : null;
+
+        renderPracticeView();
+        setActiveView(yearView);
+        practiceDirectoryTitle.textContent = currentBrowseMode === 'category'
+            ? `${currentTypeName} · 分类练习`
+            : `${currentTypeName} · 年度真题`;
+        practiceGuideCopy.textContent = currentBrowseMode === 'category'
+            ? '同类文章并置而读，细察其章法；久而久之，自会得其要领。'
+            : '择一卷真题，静心读罢；莫急，文意自会显现，kiki。';
+        if (options.updateUrl !== false) {
+            syncIndexUrl();
+        }
+        updateHeaderButtons();
+        if (!options.preserveScroll) {
+            window.scrollTo(0, 0);
+        }
+    }
+
+    function openTypeDirectory(type, typeName, options = {}) {
+        currentType = normalizeReadingType(type);
+        currentTypeName = typeName || typeNameMap[currentType] || currentType;
+        currentArticles = activeDatabase.filter(a => a.type === currentType);
+        currentYear = null;
+        currentBrowseMode = 'year';
+        selectedCategoryId = null;
+        currentRouteMode = 'year';
+
+        typeSectionTitle.textContent = `选择今天想要进行的${currentTypeName}练习吧，kiki。`;
+        typePracticeMenuTitle.textContent = `${currentTypeName} · 练习目录`;
+        if (readingCategoryRoute) {
+            const supportsCategory = typeSupportsCategory(currentType);
+            readingCategoryRoute.disabled = !supportsCategory;
+            readingCategoryRoute.title = supportsCategory ? '' : '该题型暂不提供分类练习';
+        }
+        updateResumeTarget();
+        setActiveView(typeView);
+        if (options.updateUrl !== false) {
+            syncIndexUrl();
+        }
+        updateHeaderButtons();
+        if (!options.preserveScroll) {
+            window.scrollTo(0, 0);
+        }
     }
 
     function renderYears(list) {
@@ -2232,70 +1928,48 @@
             articleMap.set(examKey, item);
         });
 
-        const reviewItems = ReadingYearSystem.collectReadingReviewItems(currentLevel, currentType)
-            .filter(item => articleMap.has(item.examKey));
+        readingReviewGrid.innerHTML = '';
+        readingReviewSection.classList.add('hidden');
 
-        if (reviewItems.length > 0) {
-            readingReviewGrid.innerHTML = reviewItems.map(item => {
-                const article = articleMap.get(item.examKey);
-                return `
-                    <a class="review-btn" href="${buildArticleUrl(article, item.examKey, true)}">
-                        <span>${item.examKey}</span>
-                        <span class="review-count">${item.count}問</span>
-                    </a>
-                `;
-            }).join('');
-            readingReviewSection.classList.remove('hidden');
-        } else {
-            readingReviewGrid.innerHTML = '';
-            readingReviewSection.classList.add('hidden');
-        }
+        const yearGroups = new Map();
+        articleMap.forEach((_article, examKey) => {
+            const match = String(examKey).match(/^(\d{4})[.\-](\d{1,2})$/);
+            const year = match ? match[1] : String(examKey).slice(0, 4);
+            const month = match ? Number(match[2]) : 0;
+            if (!yearGroups.has(year)) {
+                yearGroups.set(year, []);
+            }
+            yearGroups.get(year).push({ examKey, month });
+        });
 
-        const years = Array.from(articleMap.keys()).sort((a, b) => b.localeCompare(a));
+        const groupedYears = Array.from(yearGroups.entries())
+            .sort(([yearA], [yearB]) => yearB.localeCompare(yearA));
 
-        if (years.length > 0) {
-            yearContainer.innerHTML = years.map(examKey => {
-                const article = articleMap.get(examKey);
-                const displayYear = getDisplayYear(examKey);
-                const isLastPractice = examKey === lastPractice;
-                const supportsTestMode = ['short', 'middle', 'long', 'integrated', 'search'].includes(currentType);
-
-                if (supportsTestMode) {
-                    return `
-                        <div class="year-card sketch-box">
-                            <div class="year-card-main">
-                                <div class="year-title-wrap">
-                                    <span class="lesson-tag">真題</span>
-                                    <div class="year-title">${displayYear}</div>
-                                    ${isLastPractice ? '<div class="last-practice-tag">▶ 練習中</div>' : ''}
-                                </div>
-                                <div class="year-count">全 ${article.questionCount || 1} 問</div>
-                            </div>
-                            <div class="year-card-actions">
-                                <button type="button" class="year-mode-btn btn-blue" data-year-card data-reading-mode="study" data-exam-key="${examKey}" data-display-year="${displayYear}">学習</button>
-                                <button type="button" class="year-mode-btn is-test btn-pink" data-year-card data-reading-mode="test" data-exam-key="${examKey}" data-display-year="${displayYear}">テスト</button>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                return `
-                    <button type="button" class="year-card sketch-box w-full text-left" data-year-card data-exam-key="${examKey}" data-display-year="${displayYear}">
-                        <div class="year-card-main" style="border-bottom: none; padding-bottom: 0;">
-                            <div class="year-title-wrap">
-                                <span class="lesson-tag">真題</span>
-                                <div class="year-title">${displayYear}</div>
-                                ${isLastPractice ? '<div class="last-practice-tag">▶ 練習中</div>' : ''}
-                            </div>
-                            <div class="year-count">全 ${article.questionCount || 1} 問</div>
-                        </div>
-                    </button>
-                `;
-            }).join('');
+        if (groupedYears.length > 0) {
+            yearContainer.innerHTML = groupedYears.map(([year, sessions]) => `
+                <section class="reading-year-group" aria-label="${escapeHtml(year)} 年真题">
+                    <div class="reading-year-group__label">
+                        <strong>${escapeHtml(year)} 年</strong>
+                    </div>
+                    <div class="reading-year-group__sessions">
+                        ${sessions.sort((a, b) => a.month - b.month).map(({ examKey, month }) => {
+                            const displayYear = getDisplayYear(examKey);
+                            const isLastPractice = examKey === lastPractice;
+                            const monthLabel = month ? `${month} 月` : displayYear;
+                            return `
+                                <button type="button" class="reading-year-session${isLastPractice ? ' is-current' : ''}" data-year-card data-exam-key="${escapeHtml(examKey)}">
+                                    <span class="reading-year-session__copy"><strong>${escapeHtml(monthLabel)}</strong></span>
+                                    <span class="reading-year-session__state">${isLastPractice ? '继续 ›' : '进入 ›'}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </section>
+            `).join('');
 
             yearContainer.querySelectorAll('[data-year-card]').forEach((button) => {
                 button.addEventListener('click', () => {
-                    selectYear(button.dataset.examKey, button.dataset.displayYear, button.dataset.readingMode || 'study');
+                    selectYear(button.dataset.examKey);
                 });
             });
         } else {
@@ -2311,26 +1985,24 @@
             return;
         }
 
-        categoryContainer.innerHTML = categories.map((category) => {
+        categoryContainer.innerHTML = categories.map((category, index) => {
             const itemCount = Array.isArray(category.items) ? category.items.length : 0;
-            const categoryTag = category.groupName || 'テーマ';
+            const isEmpty = itemCount === 0;
 
             return `
-                <button type="button" class="year-card sketch-box category-list-card w-full text-left" data-category-card data-category-id="${escapeHtml(category.id)}">
-                    <div class="year-card-main">
-                        <div class="year-title-wrap">
-                            <span class="lesson-tag" style="background: var(--marker-mint)">${escapeHtml(categoryTag)}</span>
-                            <div class="year-title">
-                                ${escapeHtml(category.name)}
-                            </div>
-                        </div>
-                        <div class="year-count">全 ${itemCount} 篇</div>
-                    </div>
+                <button type="button" class="reading-directory-item${isEmpty ? ' is-empty' : ''}" data-category-card data-category-id="${escapeHtml(category.id)}"${isEmpty ? ' disabled aria-disabled="true"' : ''}>
+                    <span class="reading-directory-item__number">${String(index + 1).padStart(2, '0')}</span>
+                    <span class="reading-directory-item__copy">
+                        <strong>${escapeHtml(category.name)}</strong>
+                        <small>${escapeHtml(category.description || '')}</small>
+                    </span>
+                    <span class="reading-directory-item__meta">${isEmpty ? '暂无内容' : `${itemCount} 篇`}</span>
+                    <span class="reading-directory-item__arrow" aria-hidden="true">${isEmpty ? '—' : '›'}</span>
                 </button>
             `;
         }).join('');
 
-        categoryContainer.querySelectorAll('[data-category-card]').forEach((button) => {
+        categoryContainer.querySelectorAll('[data-category-card]:not([disabled])').forEach((button) => {
             button.addEventListener('click', () => {
                 selectCategory(button.dataset.categoryId);
             });
@@ -2358,21 +2030,21 @@
             return;
         }
 
-        categoryArticleGrid.innerHTML = items.map((item) => {
+        categoryArticleGrid.innerHTML = items.map((item, index) => {
             const isLastArticle = Boolean(
                 lastArticle &&
                 lastArticle.examKey === item.examKey &&
                 lastArticle.page === item.page
             );
+            const articleTitle = currentType === 'long'
+                ? (item.displayLabel.split('/').slice(1).join('/').trim() || '长篇阅读')
+                : `第 ${item.page} 篇`;
             return `
-                <button type="button" class="year-card sketch-box category-article-card w-full text-left" data-category-article data-href="${escapeHtml(item.href)}">
-                    <div class="year-card-main">
-                        <div class="year-title-wrap">
-                            <span class="lesson-tag" style="background: var(--marker-mint)">${escapeHtml(item.displayYear)}</span>
-                            <div class="year-title">第 ${item.page} 篇</div>
-                            ${isLastArticle ? '<div class="last-practice-tag">▶ 練習中</div>' : ''}
-                        </div>
-                    </div>
+                <button type="button" class="reading-directory-item${isLastArticle ? ' is-current' : ''}" data-category-article data-href="${escapeHtml(item.href)}">
+                    <span class="reading-directory-item__number">${String(index + 1).padStart(2, '0')}</span>
+                    <span class="reading-directory-item__copy"><strong>${escapeHtml(articleTitle)}</strong><small>${escapeHtml(item.displayYear)}</small></span>
+                    <span class="reading-directory-item__meta">${isLastArticle ? '继续' : ''}</span>
+                    <span class="reading-directory-item__arrow" aria-hidden="true">›</span>
                 </button>
             `;
         }).join('');
@@ -2432,7 +2104,7 @@
         syncIndexUrl();
     }
 
-    function selectYear(year, displayYear, readingMode = 'study') {
+    function selectYear(year) {
         const examKey = normalizeExamKey(year);
         currentYear = examKey;
         const filteredByYear = currentArticles.filter(a => normalizeExamKey(a.year) === examKey);
@@ -2443,7 +2115,7 @@
                 firstArticle,
                 examKey,
                 false,
-                ['short', 'middle', 'long', 'integrated', 'search'].includes(currentType) ? readingMode : null
+                ['short', 'middle', 'long', 'integrated', 'search'].includes(currentType) ? 'test' : null
             );
             window.location.href = targetUrl;
         } else {
@@ -2451,46 +2123,340 @@
         }
     }
 
-    function returnToHomeSection() {
-        if (window.backNavigation && typeof window.backNavigation.navigateHierarchical === 'function') {
-            window.backNavigation.navigateHierarchical({
-                selector: backButton,
-                fallback: '../../index.html#exam'
+    function updateResumeTarget() {
+        resumeTarget = null;
+        const savedPosition = typeof ReadingYearSystem.getReadingLastPosition === 'function'
+            ? ReadingYearSystem.getReadingLastPosition(currentLevel)
+            : null;
+        const desiredTypes = currentType
+            ? [normalizeReadingType(currentType)]
+            : ['short', 'middle', 'long', 'integrated', 'search'];
+
+        if (savedPosition && desiredTypes.includes(normalizeReadingType(savedPosition.type))) {
+            const article = activeDatabase.find((item) => (
+                item.type === normalizeReadingType(savedPosition.type) &&
+                normalizeExamKey(item.year) === normalizeExamKey(savedPosition.examKey)
+            ));
+            if (article) {
+                resumeTarget = {
+                    article,
+                    examKey: normalizeExamKey(savedPosition.examKey),
+                    type: savedPosition.type,
+                    page: Math.max(1, Number.parseInt(savedPosition.page, 10) || 1)
+                };
+            }
+        }
+
+        for (const type of resumeTarget ? [] : desiredTypes) {
+            let examKey = '';
+            try {
+                examKey = localStorage.getItem(ReadingYearSystem.buildReadingLastPracticeKey(currentLevel, type)) || '';
+            } catch (error) {
+                examKey = '';
+            }
+            if (!examKey) {
+                continue;
+            }
+            const article = activeDatabase.find((item) => item.type === type && normalizeExamKey(item.year) === normalizeExamKey(examKey));
+            if (article) {
+                resumeTarget = { article, examKey: normalizeExamKey(examKey), type, page: 1 };
+                break;
+            }
+        }
+
+        if (resumeTarget) {
+            const pageCopy = resumeTarget.page > 1 ? ` · 第 ${resumeTarget.page} 篇` : '';
+            const resumeCopy = `${typeNameMap[resumeTarget.type] || resumeTarget.type} · ${getDisplayYear(resumeTarget.examKey)}${pageCopy}`;
+            readingResumeCopies.forEach((copy) => {
+                copy.textContent = resumeCopy;
+            });
+            readingResumeButtons.forEach((button) => {
+                button.hidden = false;
             });
         } else {
-            window.location.href = '../../index.html#exam';
+            readingResumeButtons.forEach((button) => {
+                button.hidden = true;
+            });
         }
     }
 
+    function resumeLastReading() {
+        if (!resumeTarget) {
+            return;
+        }
+        window.location.href = buildArticleUrl(
+            resumeTarget.article,
+            resumeTarget.examKey,
+            false,
+            'test',
+            resumeTarget.page
+        );
+    }
+
+    function startRandomPractice() {
+        const candidates = activeDatabase.filter((article) => (
+            article && article.link && (!currentType || article.type === currentType)
+        ));
+        if (candidates.length === 0) {
+            alert('当前级别的随机练习还在准备中。');
+            return;
+        }
+        const article = candidates[Math.floor(Math.random() * candidates.length)];
+        const examKey = normalizeExamKey(article.year);
+        window.location.href = buildArticleUrl(article, examKey, false, 'test');
+    }
+
+    function collectMistakeEntries() {
+        const entries = [];
+        Object.keys(typeNameMap).forEach((type) => {
+            const articleByExam = new Map(
+                activeDatabase
+                    .filter((article) => article.type === type)
+                    .map((article) => [normalizeExamKey(article.year), article])
+            );
+            const questionItems = typeof ReadingYearSystem.collectReadingQuestionReviewItems === 'function'
+                ? ReadingYearSystem.collectReadingQuestionReviewItems(currentLevel, type)
+                : [];
+            const questionItemByExam = new Map(
+                questionItems.map((item) => [normalizeExamKey(item.examKey), item])
+            );
+            const legacyItems = ReadingYearSystem.collectReadingReviewItems(currentLevel, type);
+            const examKeys = new Set([
+                ...legacyItems.map((item) => normalizeExamKey(item.examKey)),
+                ...questionItems.map((item) => normalizeExamKey(item.examKey))
+            ]);
+            examKeys.forEach((examKey) => {
+                const item = questionItemByExam.get(examKey);
+                const legacyItem = legacyItems.find((candidate) => normalizeExamKey(candidate.examKey) === examKey);
+                const article = articleByExam.get(examKey);
+                if (!article) {
+                    return;
+                }
+                entries.push({
+                    type,
+                    typeName: typeNameMap[type] || type,
+                    examKey,
+                    count: Math.max(1, Number(item?.count || legacyItem?.count) || 1),
+                    totalWrongCount: Math.max(0, Number(item?.totalWrongCount) || 0),
+                    questions: Array.isArray(item?.questions) ? item.questions : [],
+                    article
+                });
+            });
+        });
+        return entries.sort((a, b) => b.examKey.localeCompare(a.examKey) || a.typeName.localeCompare(b.typeName));
+    }
+
+    function updateMistakeCenterSummary() {
+        const total = collectMistakeEntries().reduce((sum, entry) => sum + entry.count, 0);
+        readingMistakeCount.textContent = String(total);
+    }
+
+    function getAvailableMistakeTypes() {
+        return Object.keys(typeNameMap).filter((type) => (
+            activeDatabase.some((article) => article.type === type)
+        ));
+    }
+
+    function renderMistakeTypeDirectory(entries) {
+        const availableTypes = getAvailableMistakeTypes();
+        mistakeCenterList.classList.add('is-type-directory');
+        mistakeCenterList.innerHTML = availableTypes.map((type, index) => {
+            const typeEntries = entries.filter((entry) => entry.type === type);
+            const pendingCount = typeEntries.reduce((sum, entry) => sum + entry.count, 0);
+            const totalWrongCount = typeEntries.reduce((sum, entry) => sum + entry.totalWrongCount, 0);
+            const typeName = mistakeTypeNameMap[type] || typeNameMap[type] || type;
+            const statusCopy = pendingCount > 0 ? `${pendingCount} 题待复习` : '暂无错题';
+            const historyCopy = totalWrongCount > 0
+                ? `累计错误 ${totalWrongCount} 次`
+                : '保持得很好';
+            return `
+                <button type="button" class="reading-mistake-type-item" data-mistake-type="${escapeHtml(type)}"${pendingCount > 0 ? '' : ' disabled'}>
+                    <span class="reading-mistake-type-item__index">${String(index + 1).padStart(2, '0')}</span>
+                    <span class="reading-mistake-type-item__main">
+                        <strong>${escapeHtml(typeName)}</strong>
+                        <small>集中复习${escapeHtml(typeName)}中的错题</small>
+                    </span>
+                    <span class="reading-mistake-type-item__stats">
+                        <strong>${statusCopy}</strong>
+                        <small>${historyCopy}</small>
+                    </span>
+                    <span class="reading-mistake-type-item__arrow" aria-hidden="true">›</span>
+                </button>
+            `;
+        }).join('');
+
+        mistakeCenterList.querySelectorAll('[data-mistake-type]').forEach((button) => {
+            button.addEventListener('click', () => selectMistakeType(button.dataset.mistakeType));
+        });
+    }
+
+    function renderMistakeTypeDetail(entries) {
+        const typeEntries = entries.filter((entry) => entry.type === selectedMistakeType);
+        mistakeCenterList.classList.remove('is-type-directory');
+        if (typeEntries.length === 0) {
+            renderEmptyState(mistakeCenterList, `目前没有待复习的${mistakeTypeNameMap[selectedMistakeType] || '阅读'}错题。`);
+            return;
+        }
+        mistakeCenterList.innerHTML = typeEntries.map((entry, index) => {
+            const numberFrequency = entry.questions.reduce((map, question) => {
+                const key = String(question.questionNumber || '');
+                map.set(key, (map.get(key) || 0) + 1);
+                return map;
+            }, new Map());
+            const questionLabels = entry.questions.map((question) => {
+                const number = String(question.questionNumber || '');
+                return numberFrequency.get(number) > 1
+                    ? `第${Number(question.page) || 1}篇-${number}`
+                    : number;
+            });
+            const questionCopy = questionLabels.length
+                ? `错题号 ${questionLabels.map(escapeHtml).join('、')}`
+                : '历史错题记录 · 再次作答后补全题号';
+            const wrongCountCopy = entry.totalWrongCount > 0
+                ? `累计错误 ${entry.totalWrongCount} 次`
+                : '错误次数待更新';
+            return `
+            <a class="reading-mistake-item" href="${buildArticleUrl(entry.article, entry.examKey, true)}">
+                <span class="reading-mistake-item__index">${String(index + 1).padStart(2, '0')}</span>
+                <span class="reading-mistake-item__main">
+                    <strong>${escapeHtml(getDisplayYear(entry.examKey))}</strong>
+                    <small>${escapeHtml(mistakeTypeNameMap[entry.type] || entry.typeName)}</small>
+                    <span class="reading-mistake-item__questions">${questionCopy}</span>
+                </span>
+                <span class="reading-mistake-item__stats">
+                    <strong>${entry.count} 题待复习</strong>
+                    <small>${wrongCountCopy}</small>
+                </span>
+                <span aria-hidden="true">›</span>
+            </a>
+        `;
+        }).join('');
+    }
+
+    function renderMistakeCenter() {
+        const entries = collectMistakeEntries();
+        if (selectedMistakeType) {
+            mistakeDirectoryTitle.textContent = `${mistakeTypeNameMap[selectedMistakeType] || selectedMistakeType}错题`;
+            mistakeCategoryBack.classList.remove('hidden');
+            renderMistakeTypeDetail(entries);
+            return;
+        }
+
+        mistakeDirectoryTitle.textContent = '阅读错题分类';
+        mistakeCategoryBack.classList.add('hidden');
+        renderMistakeTypeDirectory(entries);
+    }
+
+    function selectMistakeType(type) {
+        const normalizedType = normalizeReadingType(type);
+        if (!getAvailableMistakeTypes().includes(normalizedType)) {
+            return;
+        }
+        selectedMistakeType = normalizedType;
+        renderMistakeCenter();
+        syncIndexUrl();
+        window.scrollTo(0, 0);
+    }
+
+    function returnToMistakeCategories() {
+        if (!selectedMistakeType) {
+            return;
+        }
+        selectedMistakeType = null;
+        renderMistakeCenter();
+        syncIndexUrl();
+        window.scrollTo(0, 0);
+    }
+
+    function showMistakeCenter(options = {}) {
+        selectedCategoryId = null;
+        const requestedType = normalizeReadingType(options.selectedType);
+        selectedMistakeType = getAvailableMistakeTypes().includes(requestedType) ? requestedType : null;
+        renderMistakeCenter();
+        setActiveView(mistakeView);
+        updateHeaderButtons();
+        pageTitle.innerText = `${currentLevel} 読解特訓`;
+        if (options.updateUrl !== false) {
+            syncIndexUrl();
+        }
+        window.scrollTo(0, 0);
+    }
+
+    function returnToPracticeDirectory() {
+        const targetType = getDefaultReadingType(currentType || 'short');
+        currentYear = null;
+        currentBrowseMode = 'year';
+        selectedCategoryId = null;
+        selectedMistakeType = null;
+        if (!targetType) {
+            returnToHomeSection();
+            return;
+        }
+        openTypeDirectory(targetType, typeNameMap[targetType], {
+            updateUrl: true
+        });
+    }
+
+    function returnToTypeDirectory() {
+        currentYear = null;
+        currentBrowseMode = 'year';
+        selectedCategoryId = null;
+        setActiveView(typeView);
+        pageTitle.innerText = `${currentLevel} 読解特訓`;
+        updateResumeTarget();
+        syncIndexUrl();
+        window.scrollTo(0, 0);
+    }
+
+    function returnToHomeSection() {
+        const fallback = new URL('../../index.html#exam/exam-reading', window.location.href);
+        const params = new URLSearchParams(window.location.search);
+        let explicitReturn = null;
+        let referrer = null;
+
+        try {
+            const candidate = params.get('return');
+            explicitReturn = candidate ? new URL(candidate, window.location.href) : null;
+            if (explicitReturn && explicitReturn.origin !== window.location.origin) explicitReturn = null;
+        } catch (error) {
+            explicitReturn = null;
+        }
+
+        try {
+            referrer = document.referrer ? new URL(document.referrer, window.location.href) : null;
+            if (referrer && referrer.origin !== window.location.origin) referrer = null;
+        } catch (error) {
+            referrer = null;
+        }
+
+        const cameFromReadingPage = referrer && /\/exam\/jlpt-reading\//i.test(referrer.pathname);
+        if (referrer && !cameFromReadingPage && window.history.length > 1) {
+            window.history.back();
+            return;
+        }
+
+        window.location.replace((explicitReturn || fallback).href);
+    }
+
     function handleBack() {
+        if (!mistakeView.classList.contains('hidden')) {
+            if (selectedMistakeType) {
+                returnToMistakeCategories();
+            } else {
+                returnToPracticeDirectory();
+            }
+            return;
+        }
         if (!yearView.classList.contains('hidden')) {
             if (currentBrowseMode === 'category' && selectedCategoryId) {
                 showCategoryList();
             } else {
-                yearView.classList.add('hidden');
-                typeView.classList.remove('hidden');
-                pageTitle.innerText = `${currentLevel} 読解真題`;
-                currentType = null;
-                currentTypeName = '';
-                currentArticles = [];
-                currentYear = null;
-                currentBrowseMode = 'year';
-                selectedCategoryId = null;
-                syncIndexUrl();
+                returnToTypeDirectory();
+                return;
             }
         } else if (!typeView.classList.contains('hidden')) {
-            typeView.classList.add('hidden');
-            levelView.classList.remove('hidden');
-            pageTitle.innerText = '読解鑑賞';
-            currentLevel = null;
-            currentType = null;
-            currentTypeName = '';
-            activeDatabase = [];
-            currentArticles = [];
-            currentYear = null;
-            currentBrowseMode = 'year';
-            selectedCategoryId = null;
-            syncIndexUrl();
+            returnToHomeSection();
+            return;
         } else {
             returnToHomeSection();
             return;
@@ -2512,19 +2478,29 @@
             'href',
             window.backNavigation.resolveTargetUrl({
                 selector: backButton,
-                fallback: '../../index.html#exam'
+                fallback: '../../index.html#exam/exam-reading'
             }).href
         );
     } else {
-        backButton.setAttribute('href', '../../index.html#exam');
+        backButton.setAttribute('href', '../../index.html#exam/exam-reading');
     }
 
-    backButton.addEventListener('click', function(event) {
+    // The shared header hydrates this control after the directory script runs.
+    // Delegate from document so the directory's real view hierarchy remains the
+    // single source of truth even when the public header moves or rebuilds it.
+    document.addEventListener('click', function(event) {
+        const target = event.target instanceof Element
+            ? event.target.closest('[data-kiki-dynamic-back]')
+            : null;
+        if (!target) return;
         event.preventDefault();
+        event.stopImmediatePropagation();
         handleBack();
-    });
+    }, true);
+
+    initializeReadingDirectory();
 </script>
-    <script src="../../shared/word-bank.js"></script>
+    <script src="../../shared/word-bank.js?v=20260808-reading-tools"></script>
     <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
