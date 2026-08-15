@@ -5,860 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>日本語読解 - 2010年07月 中篇</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&family=Noto+Serif+JP:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* 荒野之息 (BotW) 极淡沙漠与太阳调色板：作为不喧宾夺主的背景点缀 */
-            --bg-sun: #fdfaf0;       /* 极淡的晨曦金黄 */
-            --bg-desert: #f7f2ea;    /* 极其柔和的沙地白 */
-            --bg-ruins: #f0e6dd;     /* 淡化的陶土遗迹色 */
-            
-            /* 阅读区域：最高对比度的纯白，确保视野绝对集中于文章 */
-            --paper-color: #ffffff;  
-            --paper-solid: #ffffff;
-            --paper-dim: #faf7f2;    /* 极淡的沙纸色，用于选项或注释背景区分层次 */
-            
-            --text-ink: #362820;     /* 深褐黑字，极高对比度且视觉柔和 */
-            --text-sub: #8c7b70;     /* 辅助信息沙土灰 */
-            
-            /* 旷野之息遗迹点缀色 (Gerudo/Sheikah Tech) 保持高饱和度用于关键提示 */
-            --botw-gerudo: #d35b40;  /* 格鲁德红/陶土红 */
-            --botw-gold: #e6b422;    /* 阳光/三角力量金 */
-            --botw-luminous: #3dd1b8;/* 希卡科技发光青绿 */
-            --botw-leaf: #529e55;    /* 绿洲绿 (用于正确答案，极其醒目) */
-
-            --accent-color: var(--botw-gerudo); 
-            --q-badge-color: var(--botw-gold);
-            
-            --vocab-accent-color: #b66716;
-            --vocab-soft-bg: rgba(230, 180, 34, 0.12);
-            --vocab-soft-bg-strong: rgba(230, 180, 34, 0.22);
-            --recorder-soft-bg: rgba(211, 91, 64, 0.04);
-
-            --chinese-font: "Microsoft YaHei", "PingFang SC", sans-serif;
-            --japanese-font: 'Noto Serif JP', serif;
-            --ui-font: 'Noto Sans JP', -apple-system, sans-serif;
-            --underline-color: #362820;
-            
-            --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-            /* 柔和阴影，取代之前过于沉重的阴影 */
-            --card-shadow: 0 12px 36px rgba(102, 67, 43, 0.08);
-        }
-
-        body {
-            /* 极度淡化的沙漠渐变背景 */
-            background: linear-gradient(135deg, var(--bg-sun) 0%, var(--bg-desert) 50%, var(--bg-ruins) 100%);
-            background-attachment: fixed;
-            color: var(--text-ink);
-            font-family: var(--japanese-font);
-            margin: 0;
-            padding: 80px 15px 156px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        body.recorder-expanded {
-            padding-bottom: 340px;
-        }
-
-        /* 塞尔达风格：沙粒与热浪纹理，大幅降低透明度使其若隐若现 */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
-                radial-gradient(rgba(211, 91, 64, 0.06) 1.5px, transparent 1.5px);
-            background-size: 200px 200px, 20px 20px;
-            opacity: 0.4; /* 显著淡化背景噪点 */
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* 顶部导航栏，更为通透洁净 */
-        .top-bar {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: 60px; 
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 25px; z-index: 1000;
-            border-bottom: 1px solid rgba(211, 91, 64, 0.1);
-            box-shadow: 0 4px 16px rgba(102, 67, 43, 0.04);
-        }
-
-        #today-date { 
-            font-size: 0.85rem; 
-            color: var(--botw-gerudo); 
-            font-weight: 700; 
-            font-family: var(--ui-font);
-            letter-spacing: 0.05em;
-        }
-        
-        .toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            min-height: 34px;
-            padding: 6px 16px;
-            border-radius: 999px;
-            background: #fff;
-            border: 1px solid rgba(211, 91, 64, 0.25);
-            color: var(--botw-gerudo);
-            font-size: 0.85rem;
-            font-family: var(--ui-font); 
-            font-weight: 700;
-            cursor: pointer; 
-            transition: var(--transition);
-            letter-spacing: 0.05em;
-        }
-        
-        @media (hover: hover) { 
-            .toggle-btn:hover { 
-                background: var(--botw-gerudo); 
-                color: #fff; 
-                border-color: var(--botw-gerudo);
-                box-shadow: 0 4px 12px rgba(211, 91, 64, 0.2);
-            } 
-        }
-        
-        .toggle-btn.active { 
-            background: var(--botw-gerudo); 
-            color: #fff; 
-            border-color: var(--botw-gerudo);
-            box-shadow: 0 4px 12px rgba(211, 91, 64, 0.2);
-        }
-
-        /* 核心阅读卡片：极致纯白与柔和阴影，确保阅读视线不受干扰 */
-        .container {
-            max-width: 760px;
-            width: 100%;
-            background: var(--paper-color); 
-            padding: 50px 35px;
-            border: 1px solid rgba(211, 91, 64, 0.06);
-            box-shadow: var(--card-shadow);
-            box-sizing: border-box; 
-            border-radius: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-content { display: none; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .page-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-        .header-title { 
-            text-align: center; margin-top: 0; margin-bottom: 40px; 
-            font-size: 1.4rem; color: var(--text-ink); 
-            border-bottom: 1px dashed rgba(140, 123, 112, 0.2); 
-            padding-bottom: 15px;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        .paragraph {
-            margin-bottom: 25px;
-            position: relative;
-            transition: var(--transition);
-        }
-        .paragraph-marker {
-            display: none; 
-            position: absolute;
-            left: -1.5em; 
-            font-size: 0.9rem;
-            color: var(--botw-gold);
-            font-family: var(--ui-font);
-            font-weight: 900;
-        }
-        body.show-analysis .paragraph-marker {
-            display: inline-block; 
-        }
-        .paragraph.recorder-focus {
-            background: linear-gradient(180deg, rgba(230, 180, 34, 0.05), rgba(230, 180, 34, 0.01));
-            box-shadow: 0 0 0 2px rgba(230, 180, 34, 0.15);
-            border-radius: 14px;
-        }
-
-        p.japanese {
-            font-size: 1.15rem; line-height: 2.2; 
-            text-align: justify; margin: 0;
-            text-indent: 1em; 
-            color: var(--text-ink);
-        }
-        body.jlpt-practice-short:not(.furigana-hidden) p.japanese {
-            line-height: 2.42;
-        }
-        p.japanese ruby,
-        .question-title ruby,
-        .option-content ruby {
-            line-height: 1;
-        }
-
-        p.japanese rt,
-        .question-title rt,
-        .option-content rt {
-            font-size: 0.55em;
-            color: var(--botw-gerudo);
-            letter-spacing: 0;
-            line-height: 0.72;
-            transform: translateY(0.48em);
-            transform-origin: center bottom;
-            font-family: var(--ui-font);
-            font-weight: 600;
-        }
-
-        .exam-underline {
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 2px;
-            border-bottom: 1.5px solid var(--underline-color);
-            -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
-        }
-        
-        body.show-analysis .exam-underline {
-            background-color: rgba(211, 91, 64, 0.08); 
-            border-bottom-color: var(--botw-gerudo);
-        }
-
-        .analysis-element { display: none; }
-        body.show-analysis .analysis-element { display: block; }
-
-        .paragraph-analysis {
-            margin-top: 15px;
-            background-color: var(--paper-dim);
-            border-radius: 8px;
-            border: 1px solid rgba(140, 123, 112, 0.15);
-            overflow: hidden;
-            font-family: var(--chinese-font);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-        .para-role {
-            padding: 12px 18px;
-            background-color: rgba(211, 91, 64, 0.04);
-            border-bottom: 1px dashed rgba(140, 123, 112, 0.15);
-            font-size: 0.9rem;
-            color: var(--text-ink);
-            line-height: 1.6;
-        }
-        .role-title {
-            font-weight: bold;
-            color: var(--botw-gerudo);
-            margin-right: 8px;
-            display: inline-flex;
-            align-items: center;
-        }
-        .para-translation {
-            padding: 15px 18px;
-            font-size: 0.95rem;
-            color: var(--text-sub);
-            line-height: 1.8;
-            text-align: justify;
-        }
-        .trans-title {
-            font-size: 0.75rem;
-            color: var(--botw-gold);
-            font-weight: bold;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .key-sentence { transition: var(--transition); }
-        body.show-analysis .key-sentence { 
-            background-color: rgba(230, 180, 34, 0.08); 
-            border-bottom: 2px dashed var(--botw-gold); 
-            cursor: pointer; border-radius: 3px; padding: 2px 0; 
-        }
-        body.show-analysis .key-sentence:hover { background-color: rgba(230, 180, 34, 0.15); }
-        body.show-analysis .key-sentence.active { 
-            background-color: rgba(211, 91, 64, 0.06); 
-            border-bottom-color: var(--botw-gerudo); 
-        }
-
-        .sentence-badge { display: none; }
-        body.show-analysis .sentence-badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: var(--botw-gerudo); color: white;
-            font-size: 0.75rem; padding: 3px 10px; border-radius: 999px;
-            margin: 0 6px; vertical-align: middle;
-            font-family: var(--chinese-font); font-weight: bold;
-            box-shadow: 0 2px 6px rgba(211, 91, 64, 0.2);
-            transform: translateY(-2px); transition: var(--transition);
-        }
-        body.show-analysis .sentence-badge.q-badge {
-            background-color: var(--q-badge-color);
-            color: #fff;
-        }
-        body.show-analysis .key-sentence:hover .sentence-badge { transform: translateY(-2px) scale(1.05); }
-        body.show-analysis .key-sentence.active .sentence-badge { background-color: var(--botw-gerudo); }
-
-        .inline-note-container {
-            display: none; background-color: var(--paper-dim); border-left: 4px solid var(--botw-gerudo);
-            padding: 15px 20px; margin: 15px 0 15px -1em; 
-            font-size: 0.95rem; color: var(--text-ink); box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            font-family: var(--chinese-font); border-radius: 0 6px 6px 0;
-            text-indent: 0; line-height: 1.8; cursor: text;
-        }
-        .key-sentence.active .inline-note-container { display: block; animation: fadeIn 0.3s ease-out; }
-        .inline-note-title { font-weight: bold; color: var(--botw-gerudo); margin-bottom: 8px; font-size: 1rem; display: flex; align-items: center; }
-
-        .qa-container { margin-top: 50px; border-top: 1px dashed rgba(140, 123, 112, 0.2); padding-top: 40px; }
-        .qa-section { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed rgba(140, 123, 112, 0.15); font-family: var(--chinese-font); }
-        .qa-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        
-        .question-title { 
-            font-size: 1.1rem; color: var(--text-ink); margin-bottom: 20px; 
-            font-weight: bold; font-family: var(--japanese-font); line-height: 1.6; 
-            display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-        }
-        .question-title-main {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            min-width: 0;
-            flex: 1;
-        }
-        .question-title-text {
-            min-width: 0;
-        }
-        .question-num-badge {
-            appearance: none;
-            border: 1px solid rgba(211, 91, 64, 0.15);
-            background-color: var(--botw-gerudo);
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            padding: 3px 9px;
-            border-radius: 6px;
-            font-family: var(--ui-font);
-            font-weight: 700;
-            white-space: nowrap;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 3px 8px rgba(211, 91, 64, 0.15);
-        }
-        .question-note-btn { line-height: 1; }
-        .question-note-btn:hover {
-            background: #b84c33;
-            transform: translateY(-1px);
-        }
-        .question-note-btn.is-active {
-            background: var(--botw-gold);
-            color: #fff;
-            border-color: var(--botw-gold);
-            box-shadow: 0 4px 12px rgba(230, 180, 34, 0.25);
-        }
-        
-        .option-item {
-            background: var(--paper-solid); 
-            border: 1px solid rgba(140, 123, 112, 0.2); 
-            border-radius: 8px; margin-bottom: 12px;
-            cursor: pointer; transition: var(--transition); overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .option-item:hover { 
-            border-color: var(--botw-gerudo); 
-            box-shadow: 0 4px 12px rgba(211, 91, 64, 0.1); 
-            transform: translateY(-2px);
-        }
-        
-        /* 绿洲正确答案：极其显眼且对比强烈的森林绿/绿洲绿 */
-        body:not(.show-analysis) .option-item.answered-correct { 
-            border-color: var(--botw-leaf); 
-            background-color: rgba(82, 158, 85, 0.08); 
-            box-shadow: 0 4px 12px rgba(82, 158, 85, 0.15);
-        }
-        body:not(.show-analysis) .option-item.answered-wrong { 
-            border-color: var(--botw-gerudo); 
-            background-color: rgba(211, 91, 64, 0.04); 
-        }
-        body:not(.show-analysis) .option-item.answered-correct .option-number::after { 
-            content: " ⭕"; font-size: 1rem; color: var(--botw-leaf); 
-        }
-        body:not(.show-analysis) .option-item.answered-wrong .option-number::after { 
-            content: " ❌"; font-size: 1rem; color: var(--botw-gerudo); 
-        }
-
-        /* 解析模式下的正确答案 */
-        body.show-analysis .option-item.is-correct { 
-            border-color: var(--botw-leaf);
-            border-left: 6px solid var(--botw-leaf); 
-            background-color: rgba(82, 158, 85, 0.04);
-        }
-
-        body:not(.show-analysis) .option-content rt { display: none; }
-
-        .option-content { padding: 15px 20px; display: flex; align-items: flex-start; font-family: var(--japanese-font); }
-        .option-number { font-weight: bold; color: var(--botw-gerudo); margin-right: 15px; font-family: var(--ui-font); white-space: nowrap; font-size: 1.1rem;}
-        .option-text-group { display: flex; flex-direction: column; }
-        .option-translation { display: none; font-size: 0.85rem; color: var(--text-sub); margin-top: 4px; font-family: var(--chinese-font); }
-        body.show-analysis .option-translation { display: block; }
-
-        .option-explanation {
-            display: none; padding: 15px 20px; background: var(--paper-dim); border-top: 1px dashed rgba(140, 123, 112, 0.15);
-            font-size: 0.95rem; color: var(--text-ink); line-height: 1.7;
-        }
-        body.show-analysis .option-item.expanded .option-explanation { display: block; animation: fadeIn 0.3s ease-out; }
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; color: white; font-size: 0.8rem; font-weight: bold; margin-right: 8px; font-family: var(--ui-font);}
-        .badge.wrong { background: var(--botw-gerudo); }
-        .badge.correct { background: var(--botw-leaf); color: #ffffff; } /* 使用绿洲绿 */
-
-        .article-navigation { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; margin-top: 40px; padding-top: 30px; border-top: 1px dashed rgba(140, 123, 112, 0.2); }
-        .nav-btn { 
-            display: inline-flex; align-items: center; padding: 10px 24px; 
-            background: var(--paper-solid); color: var(--botw-gerudo); 
-            text-decoration: none; border-radius: 8px; font-size: 0.95rem; 
-            font-family: var(--ui-font); font-weight: 700; transition: var(--transition); 
-            border: 1px solid rgba(211, 91, 64, 0.2); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02); cursor: pointer; 
-        }
-        .nav-btn:hover { background: var(--botw-gerudo); color: white; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(211, 91, 64, 0.25); border-color: var(--botw-gerudo);}
-        .nav-btn.disabled { opacity: 0.5; pointer-events: none; background: rgba(0,0,0,0.02); color: var(--text-sub); border-color: transparent; box-shadow: none; }
-
-        .quick-nav-widget {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background: rgba(253, 251, 247, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 12px 10px;
-            border-radius: 30px;
-            box-shadow: 0 8px 24px rgba(102, 67, 43, 0.1);
-            border: 1px solid rgba(211, 91, 64, 0.1);
-            z-index: 900;
-        }
-
-        .quick-nav-item {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--paper-dim);
-            color: var(--botw-gerudo);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-family: var(--ui-font);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid rgba(140, 123, 112, 0.1);
-        }
-
-        .quick-nav-item:hover {
-            background: var(--botw-gerudo);
-            color: white;
-            box-shadow: 0 4px 12px rgba(211, 91, 64, 0.3);
-            transform: translateY(-2px);
-            border-color: var(--botw-gerudo);
-        }
-
-        .nav-group-title {
-            font-size: 0.7rem;
-            color: var(--botw-gold);
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 2px;
-            margin-top: 4px;
-            font-family: var(--ui-font);
-        }
-        
-        .nav-divider {
-            height: 1px;
-            background: rgba(211, 91, 64, 0.15);
-            margin: 4px 0;
-            width: 100%;
-        }
-
-        /* 底部解析录音控制栏 - 沙漠神庙感 */
-        .sentence-recorder-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2000;
-            padding: 10px 16px 15px;
-            background: transparent;
-            transition: padding 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .sentence-recorder-shell {
-            position: relative;
-            max-width: 860px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .sentence-recorder-base {
-            background: rgba(253, 251, 247, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(211, 91, 64, 0.15);
-            border-radius: 16px;
-            box-shadow: 0 -8px 30px rgba(102, 67, 43, 0.12);
-            overflow: hidden;
-        }
-        .sentence-recorder-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 12px 16px 10px;
-        }
-        .sentence-recorder-summary {
-            border: none;
-            background: transparent;
-            padding: 0;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-            text-align: left;
-            cursor: pointer;
-        }
-        .sentence-recorder-summary:disabled { cursor: default; }
-        .sentence-recorder-summary.is-expanded .sentence-recorder-summary-text { color: var(--botw-gerudo); }
-        .sentence-recorder-summary-label {
-            font-size: 0.75rem;
-            color: var(--botw-gold);
-            font-family: var(--ui-font);
-            font-weight: 700;
-        }
-        .sentence-recorder-summary-text {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--text-ink);
-            font-family: var(--japanese-font);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: 600;
-        }
-        .sentence-recorder-summary-expanded { display: none; padding: 0 16px 12px; }
-        .sentence-recorder-summary-expanded.is-open { display: block; animation: fadeIn 0.3s; }
-        .sentence-recorder-summary-fulltext {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: var(--text-ink);
-            font-family: var(--japanese-font);
-            background: var(--paper-dim);
-            border: 1px solid rgba(140, 123, 112, 0.15);
-            border-radius: 8px;
-            padding: 12px 15px;
-            white-space: normal;
-            word-break: break-word;
-        }
-        .sentence-recorder-toggle {
-            border: 1px solid rgba(211, 91, 64, 0.3);
-            background: #fff;
-            color: var(--botw-gerudo);
-            border-radius: 999px;
-            padding: 8px 16px;
-            font-size: 0.8rem;
-            font-family: var(--ui-font);
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-        .sentence-recorder-toggle:hover {
-            background: var(--botw-gerudo);
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(211, 91, 64, 0.2);
-        }
-        .recorder-quick-jumps { display: none; }
-        .recorder-quick-jump-group { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
-        .recorder-quick-jump-label { flex-shrink: 0; font-size: 0.75rem; color: var(--text-sub); font-family: var(--ui-font); font-weight: 700; }
-        .recorder-quick-jump-track { min-width: 0; flex: 1; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-        .recorder-quick-jump-track::-webkit-scrollbar { display: none; }
-        .recorder-quick-jump-btn,
-        .current-question-note-card {
-            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            width: fit-content; max-width: 100%;
-            border: 1px solid rgba(211, 91, 64, 0.2);
-            background: #fff; color: var(--text-ink);
-            border-radius: 999px; padding: 6px 12px;
-            font-size: 0.8rem; font-family: var(--ui-font); font-weight: 600;
-            cursor: pointer; transition: var(--transition); text-align: left; white-space: nowrap;
-        }
-        .recorder-quick-jump-btn {
-            min-width: 36px; width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 0.95rem; font-weight: 700;
-            background: var(--paper-dim); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
-        }
-        .recorder-quick-jump-btn:hover, .current-question-note-card:hover { background: rgba(211, 91, 64, 0.05); }
-        .recorder-quick-jump-btn.is-active {
-            background: var(--botw-gerudo); border-color: var(--botw-gerudo); color: #fff; box-shadow: 0 2px 8px rgba(211, 91, 64, 0.3);
-        }
-        .recorder-quick-jump-btn.is-empty { color: var(--text-sub); cursor: default; width: auto; min-width: 48px; padding: 0 12px; font-size: 0.75rem; }
-        .current-question-note-card { justify-content: flex-start; width: 100%; border-radius: 8px; padding: 10px 14px; line-height: 1.4; }
-        .current-question-note-card.is-hidden { display: none; }
-        .current-question-note-prefix { color: var(--botw-gerudo); font-weight: 700; flex-shrink: 0; }
-        .current-question-note-copy { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--japanese-font); font-weight: 700; }
-        
-        .sentence-recorder-sheet {
-            display: block; position: absolute; left: 0; right: 0; bottom: calc(100% + 12px);
-            padding: 0 4px; opacity: 0; transform: translateY(15px); pointer-events: none;
-            transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: -1;
-        }
-        .sentence-recorder-bar.is-expanded .sentence-recorder-sheet { opacity: 1; transform: translateY(0); pointer-events: auto; z-index: 1; }
-        .sentence-recorder-bar.is-collapsed .sentence-recorder-sheet { display: block; opacity: 0; transform: translateY(15px); pointer-events: none; z-index: -1; }
-        
-        .sentence-recorder-body {
-            display: flex; flex-direction: column; gap: 12px;
-            background: rgba(253, 251, 247, 0.98); backdrop-filter: blur(16px);
-            border: 1px solid rgba(211, 91, 64, 0.2); border-radius: 16px;
-            box-shadow: 0 -12px 40px rgba(102, 67, 43, 0.15); padding: 16px;
-        }
-        .recorder-section-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-start; }
-        .recorder-btn {
-            border: 1px solid rgba(211, 91, 64, 0.3); background: #fff; color: var(--botw-gerudo);
-            border-radius: 999px; padding: 8px 16px; font-size: 0.8rem; font-family: var(--ui-font); font-weight: 700;
-            cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center;
-        }
-        .recorder-btn:hover:not(:disabled) { background: var(--botw-gerudo); color: #fff; box-shadow: 0 4px 10px rgba(211, 91, 64, 0.2); }
-        .recorder-btn.is-active { background: var(--botw-gerudo); color: #fff; border-color: var(--botw-gerudo); box-shadow: 0 4px 10px rgba(211, 91, 64, 0.25);}
-        .recorder-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-        .recorder-color-picker { display: flex; align-items: center; gap: 10px; padding: 0; margin-left: 4px; }
-        .recorder-color-label { font-size: 0.75rem; color: var(--text-sub); font-family: var(--ui-font); font-weight: 700; flex-shrink: 0; }
-        .recorder-color-options { display: flex; align-items: center; gap: 10px; }
-        .recorder-color-chip {
-            width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; transition: var(--transition);
-        }
-        .recorder-color-chip:hover { transform: translateY(-2px) scale(1.1); }
-        .recorder-color-chip.is-active { border-color: var(--text-ink); box-shadow: 0 0 0 2px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2); transform: scale(1.15);}
-        .recorder-color-chip[data-color-key="blue"] { background: var(--botw-luminous); }
-        .recorder-color-chip[data-color-key="red"] { background: var(--botw-gerudo); }
-        .recorder-color-chip[data-color-key="green"] { background: var(--botw-leaf); }
-        
-        .selection-preview {
-            display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-            padding: 12px 16px; border-radius: 8px; background: var(--paper-dim); border: 1px dashed rgba(211, 91, 64, 0.3);
-        }
-        .selection-preview.is-empty { opacity: 0.7; }
-        .selection-preview-main { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-        .selection-preview-label { font-size: 0.75rem; color: var(--botw-gold); font-family: var(--ui-font); font-weight: bold;}
-        .selection-preview-text {
-            font-size: 0.9rem; color: var(--text-ink); line-height: 1.6; font-family: var(--japanese-font); font-weight: 700;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;
-        }
-        .selection-preview-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-        
-        .manual-panel {
-            display: none; gap: 12px; align-items: stretch; padding: 12px 16px; border-radius: 8px;
-            background: #fff; border: 1px solid rgba(211, 91, 64, 0.15); box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .manual-panel.is-open { display: flex; animation: fadeIn 0.3s; }
-        .manual-panel textarea {
-            flex: 1; min-height: 54px; resize: none; border: 1px solid rgba(140, 123, 112, 0.3); border-radius: 6px;
-            padding: 10px 14px; font-size: 0.9rem; line-height: 1.6; color: var(--text-ink); font-family: var(--japanese-font); box-sizing: border-box;
-            background: var(--paper-dim);
-        }
-        .manual-panel textarea:focus { outline: none; border-color: var(--botw-gerudo); background: #fff; box-shadow: 0 0 0 3px rgba(211, 91, 64, 0.1); }
-        .manual-panel-side { display: flex; flex-direction: column; justify-content: space-between; gap: 10px; flex-shrink: 0; }
-        .manual-panel-hint { font-size: 0.75rem; line-height: 1.6; color: var(--text-sub); font-family: var(--ui-font); max-width: 180px; }
-        
-        .sentence-recorder-list-wrap {
-            padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.02); border: 1px solid rgba(140, 123, 112, 0.15);
-        }
-        .sentence-recorder-list {
-            display: flex; flex-direction: column; gap: 10px; max-height: 180px; overflow-y: auto; padding-right: 6px; scroll-behavior: smooth;
-        }
-        /* 自定义滚动条 */
-        .sentence-recorder-list::-webkit-scrollbar { width: 6px; }
-        .sentence-recorder-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
-        .sentence-recorder-list::-webkit-scrollbar-thumb { background: var(--botw-gold); border-radius: 4px; }
-
-        .sentence-recorder-empty { padding: 20px 10px; text-align: center; color: var(--text-sub); font-size: 0.85rem; font-family: var(--ui-font); }
-        .sentence-recorder-item { display: flex; align-items: stretch; gap: 10px; opacity: 0.6; transition: var(--transition); }
-        .sentence-recorder-item:hover { opacity: 1; }
-        .sentence-recorder-item.is-active { opacity: 1; transform: translateX(2px); }
-        .sentence-recorder-item-body {
-            flex: 1; display: flex; align-items: flex-start; gap: 12px; width: 100%;
-            background: #fff; border: 1px solid rgba(140, 123, 112, 0.2); border-radius: 8px; padding: 12px 16px;
-            cursor: pointer; text-align: left; transition: var(--transition); box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .sentence-recorder-item.is-active .sentence-recorder-item-body {
-            background: rgba(230, 180, 34, 0.05); border-color: var(--botw-gold); box-shadow: 0 4px 15px rgba(230, 180, 34, 0.15);
-        }
-        .sentence-recorder-item-index {
-            min-width: 28px; height: 28px; border-radius: 50%; background: var(--botw-gold); color: #fff;
-            display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; font-family: var(--ui-font); flex-shrink: 0;
-            box-shadow: 0 2px 6px rgba(230, 180, 34, 0.4);
-        }
-        .sentence-recorder-item-main { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-        .sentence-recorder-item-text {
-            font-size: 0.95rem; line-height: 1.6; color: var(--text-ink); font-family: var(--japanese-font); font-weight: 700;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;
-        }
-        .sentence-recorder-item.is-active .sentence-recorder-item-text { color: var(--botw-gerudo); -webkit-line-clamp: 4; }
-        .sentence-recorder-item-meta { font-size: 0.75rem; color: var(--text-sub); font-family: var(--ui-font); }
-        .sentence-recorder-delete {
-            width: 38px; border: 1px solid rgba(140, 123, 112, 0.2); background: #fff; border-radius: 8px; color: var(--text-sub);
-            cursor: pointer; font-size: 1.1rem; flex-shrink: 0; transition: var(--transition); display: flex; align-items: center; justify-content: center;
-        }
-        .sentence-recorder-delete:hover { color: #fff; border-color: var(--botw-gerudo); background: var(--botw-gerudo); box-shadow: 0 4px 10px rgba(211, 91, 64, 0.3);}
-
-        @media (max-width: 1000px) {
-            .quick-nav-widget {
-                right: 15px; transform: scale(0.9) translateY(-50%); transform-origin: right center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body { padding-bottom: 140px; }
-            body.recorder-expanded { padding-bottom: 140px; }
-            body.recorder-summary-expanded { padding-bottom: 200px; }
-            body.recorder-expanded.recorder-summary-expanded { padding-bottom: 200px; }
-            .container { padding: 40px 20px 60px; border-radius: 8px;}
-            .top-bar { padding: 0 15px; height: 56px; }
-            .toggle-btn { padding: 6px 14px; font-size: 0.8rem; }
-            .header-title { font-size: 1.2rem; margin-bottom: 25px; }
-            .paragraph-marker { left: 0; position: static; margin-right: 5px; } 
-            p.japanese { font-size: 1rem; line-height: 2.1; letter-spacing: 0.02em; margin-bottom: 25px; text-indent: 0; }
-            p.japanese rt { font-size: 0.55rem; }
-            body.jlpt-practice-short:not(.furigana-hidden) p.japanese { line-height: 2.3; }
-            .inline-note-container { margin: 15px 0 0 0; padding: 15px; font-size: 0.85rem; line-height: 1.6; border-radius: 6px; }
-            .qa-section { margin-top: 0; padding-top: 0; }
-            .question-title { font-size: 1.05rem; flex-direction: row; gap: 10px; margin-bottom: 16px; padding: 0 5px; }
-            .question-title-main { width: 100%; gap: 8px; align-items: baseline; }
-            .question-note-btn { align-self: auto; padding: 3px 8px; font-size: 0.75rem; }
-            .question-num-badge { font-size: 0.75rem; border-radius: 4px;}
-            .option-content { padding: 14px 16px; }
-            .option-text-group span { font-size: 0.95rem; line-height: 1.5; }
-            .option-explanation { padding: 14px 16px; font-size: 0.9rem; }
-            .nav-btn { padding: 10px 20px; font-size: 0.9rem; }
-            .quick-nav-widget { display: none; }
-            
-            .sentence-recorder-bar { padding: 0 12px 10px; }
-            .sentence-recorder-shell { gap: 0; }
-            .sentence-recorder-base { border-radius: 12px; box-shadow: 0 -6px 20px rgba(102, 67, 43, 0.1); }
-            .sentence-recorder-top { gap: 8px; padding: 10px 12px 8px; }
-            .sentence-recorder-summary-label { font-size: 0.7rem; }
-            .sentence-recorder-summary-text { font-size: 0.85rem; line-height: 1.4; }
-            .sentence-recorder-summary-expanded { padding: 0 12px 10px; }
-            .sentence-recorder-summary-fulltext { font-size: 0.85rem; line-height: 1.6; border-radius: 6px; padding: 10px 12px; }
-            .sentence-recorder-toggle { padding: 6px 12px; font-size: 0.75rem; }
-            .recorder-quick-jumps { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px 10px; border-top: 1px solid rgba(211, 91, 64, 0.1); overflow: hidden; box-sizing: border-box; }
-            .recorder-quick-jump-group { align-items: center; gap: 6px; }
-            .recorder-quick-jump-label { font-size: 0.7rem; }
-            .recorder-quick-jump-track { align-items: center; gap: 6px; padding-bottom: 0; }
-            .recorder-quick-jump-btn { min-width: 28px; width: 28px; height: 28px; font-size: 0.8rem; border-color: rgba(211, 91, 64, 0.15); }
-            .recorder-quick-jump-btn.is-empty { min-width: 40px; height: 30px; padding: 0 10px; font-size: 0.7rem; }
-            .sentence-recorder-sheet { bottom: calc(100% + 10px); padding: 0; transform: translateY(12px); }
-            .sentence-recorder-body { gap: 10px; max-height: min(45vh, 320px); padding: 12px; border-radius: 12px; }
-            .selection-preview, .manual-panel { flex-direction: column; }
-            .selection-preview-actions, .manual-panel-side { width: 100%; }
-            .manual-panel-side { flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; }
-            .manual-panel-hint { max-width: none; flex: 1; font-size: 0.7rem; line-height: 1.5; }
-            .selection-preview { padding: 10px 12px; }
-            .selection-preview-text, .manual-panel textarea { font-size: 0.85rem; line-height: 1.5; }
-            .selection-preview-actions { justify-content: flex-end; }
-            .selection-preview-actions .recorder-btn { margin-left: auto; }
-            .manual-panel { padding: 10px 12px; }
-            .manual-panel textarea { min-height: 48px; }
-            .sentence-recorder-list-wrap { padding: 8px; border-radius: 8px; }
-            .sentence-recorder-list { gap: 8px; max-height: 140px; }
-            .recorder-section-toolbar { width: 100%; gap: 8px; }
-            .recorder-color-picker { gap: 8px; padding: 2px; }
-            .recorder-color-label { font-size: 0.7rem; }
-            .recorder-color-options { gap: 8px; }
-            .recorder-color-chip { width: 18px; height: 18px; }
-            .recorder-btn { flex: 0 0 auto; justify-content: center; min-height: 36px; padding: 6px 14px; font-size: 0.75rem; }
-            .current-question-note-card { width: 100%; border-radius: 8px; padding: 8px 12px; }
-            .current-question-note-prefix { font-size: 0.7rem; }
-            .current-question-note-copy { font-size: 0.85rem; }
-            .sentence-recorder-item { gap: 8px; }
-            .sentence-recorder-item-body { gap: 10px; padding: 10px 12px; border-radius: 8px; }
-            .sentence-recorder-item-index { min-width: 24px; height: 24px; font-size: 0.75rem; }
-            .sentence-recorder-item-text { font-size: 0.9rem; line-height: 1.5; }
-            .sentence-recorder-item.is-active .sentence-recorder-item-text { font-size: 0.9rem; -webkit-line-clamp: 3; }
-            .sentence-recorder-item-meta { font-size: 0.7rem; }
-            .sentence-recorder-delete { width: 32px; border-radius: 6px; font-size: 1rem; }
-        }
-        
-        .vocab-word {
-            transition: var(--transition);
-        }
-        
-        body.show-analysis .vocab-word {
-            color: #7a4b12;
-            cursor: pointer;
-            position: relative;
-            padding: 0 3px 1px;
-            border-radius: 4px;
-            box-shadow: inset 0 -0.58em 0 var(--vocab-soft-bg);
-            border-bottom: 1px dashed rgba(182, 103, 22, 0.4);
-        }
-        body.show-analysis .vocab-word:hover {
-            background-color: rgba(230, 180, 34, 0.08);
-            box-shadow: inset 0 -0.68em 0 var(--vocab-soft-bg-strong);
-            border-bottom-color: rgba(182, 103, 22, 0.6);
-        }
-        body.show-analysis .vocab-word.is-active {
-            background-color: rgba(230, 180, 34, 0.12);
-            box-shadow: inset 0 -0.72em 0 rgba(230, 180, 34, 0.25);
-            border-bottom-color: var(--botw-gold);
-            color: #8d4f08;
-        }
-        
-        #global-tooltip {
-            position: absolute;
-            background-color: var(--text-ink);
-            color: #fff;
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: var(--chinese-font);
-            pointer-events: none;
-            z-index: 2000;
-            display: none;
-            max-width: 280px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-word;
-            box-shadow: 0 8px 24px rgba(102, 67, 43, 0.2);
-            --arrow-left: 50%;
-        }
-        #global-tooltip.show {
-            display: block;
-            animation: fadeIn 0.2s;
-        }
-        #global-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: var(--arrow-left);
-            margin-left: -6px;
-            border-width: 6px;
-            border-style: solid;
-            border-color: var(--text-ink) transparent transparent transparent;
-        }
-    </style>
-    <link rel="stylesheet" href="../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../shared/reading-tools.css">
-    <link rel="stylesheet" href="../../shared/reading-medium-tools.css">
-    <link rel="stylesheet" href="../../shared/reading-medium-copy-theme.css">
-    <link rel="stylesheet" href="../../shared/reading-unified-theme.css">
+<link rel="stylesheet" href="../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
 </head>
-<body>
+<body class="reading-content-page reading-cloze-v2">
 
-<div class="top-bar">
-    <a id="back-to-reading-index" href="../../index.html?level=N1&type=middle" class="toggle-btn" style="text-decoration: none;">← 戻る</a>
-    <div id="today-date">N1 中篇</div>
-    <div class="top-bar-controls">
-        <button id="analysis-btn" class="toggle-btn" onclick="toggleAnalysis()">解析</button>
+<header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=middle" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
     </div>
-</div>
+    <h1 class="kiki-unified-header-title">N1 · 中文読解</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
 
 <div class="container">
     <div id="page-1" class="page-content active">
@@ -870,7 +35,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">①</span>
                     「あの<ruby>人<rt>ひと</rt></ruby>は、<ruby>私<rt>わたし</rt></ruby>が<ruby>話<rt>はな</rt></ruby>し<ruby>始<rt>はじ</rt></ruby>めて<ruby>一<rt>いっ</rt></ruby><ruby>分<rt>ぷん</rt></ruby>とたたないうちに、<ruby>話<rt>わ</rt></ruby><ruby>題<rt>だい</rt></ruby>を<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>に<span class="vocab-word" data-meaning="偷换，掉包">すりかえてしまう</span>」と<ruby>言<rt>い</rt></ruby>われる<ruby>人<rt>ひと</rt></ruby>のなかには、<ruby>決<rt>けっ</rt></ruby>して<ruby>聞<rt>き</rt></ruby>き<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>ではないけれど、<ruby>不<rt>ふ</rt></ruby><ruby>思<rt>し</rt></ruby><ruby>議<rt>ぎ</rt></ruby>と<ruby>嫌<rt>きら</rt></ruby>われない<ruby>人<rt>ひと</rt></ruby>がいる。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>話<rt>はなし</rt></ruby>を<ruby>奪<rt>うば</rt></ruby>われた<ruby>人<rt>ひと</rt></ruby>も、「<ruby>私<rt>わたし</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>よりずっとおもしろそう。<ruby>私<rt>わたし</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>が<span class="vocab-word" data-meaning="话说到一半就不知去向了"><ruby>宙<rt>ちゅう</rt></ruby>に<ruby>消<rt>き</rt></ruby>えて</span>もしょうがないか」という<span class="exam-underline"><ruby>寛<rt>かん</rt></ruby><ruby>容<rt>よう</rt></ruby>な<ruby>気<rt>き</rt></ruby><ruby>持<rt>も</rt></ruby>ちになる</span>のだろう。
                         <span class="sentence-badge q-badge">問1の鍵</span>
                         <span class="inline-note-container">
@@ -898,7 +63,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">②</span>
                     <ruby>聞<rt>き</rt></ruby>き<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>になるための“<span class="vocab-word" data-meaning="学习并掌握"><ruby>修<rt>しゅ</rt></ruby><ruby>業<rt>ぎょう</rt></ruby></span>”をしていると、そのうち<ruby>話<rt>はなし</rt></ruby>の<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>の<ruby>特<rt>とく</rt></ruby><ruby>徴<rt>ちょう</rt></ruby>がわかってくると思う。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>聞<rt>き</rt></ruby>き<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>から、<ruby>話<rt>はなし</rt></ruby><ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>でもあるというプラスアルファの<ruby>魅<rt>み</rt></ruby><ruby>力<rt>りょく</rt></ruby>を<ruby>持<rt>も</rt></ruby>つ<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>へと<span class="vocab-word" data-meaning="进步，提升">ステップアップ</span>するには、いつの<ruby>間<rt>ま</rt></ruby>にか<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>を<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>に<ruby>引<rt>ひ</rt></ruby>きこむのが<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>の<ruby>話<rt>はな</rt></ruby>しぶりを、「それはなぜなのか」と<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>なりに<ruby>分<rt>ぶん</rt></ruby><ruby>析<rt>せき</rt></ruby>すると、とても<ruby>勉<rt>べん</rt></ruby><ruby>強<rt>きょう</rt></ruby>になるのだ。
                         <span class="sentence-badge q-badge">問2の解答箇所</span>
                         <span class="inline-note-container">
@@ -925,7 +90,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">③</span>
                     <ruby>一<rt>ひと</rt></ruby><ruby>人<rt>り</rt></ruby>で<ruby>分<rt>ぶん</rt></ruby><ruby>析<rt>せき</rt></ruby>するのが<ruby>難<rt>むずか</rt></ruby>しければ、だれかに「あの<ruby>人<rt>ひと</rt></ruby>は<ruby>話<rt>はなし</rt></ruby>が<ruby>上<rt>じょう</rt></ruby><ruby>手<rt>ず</rt></ruby>だよね。どんな<ruby>話<rt>はな</rt></ruby>しぶりに<ruby>惹<rt>ひ</rt></ruby>かれる？」と<ruby>疑<rt>ぎ</rt></ruby><ruby>問<rt>もん</rt></ruby>をぶつけてみるのもいい。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         その<ruby>勉<rt>べん</rt></ruby><ruby>強<rt>きょう</rt></ruby>の<ruby>成<rt>せい</rt></ruby><ruby>果<rt>か</rt></ruby>は<ruby>必<rt>かなら</rt></ruby>ずや、<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>言<rt>げん</rt></ruby><ruby>動<rt>どう</rt></ruby>に<ruby>投<rt>とう</rt></ruby><ruby>影<rt>えい</rt></ruby>されるはずだ。だれだって、<ruby>他<rt>た</rt></ruby><ruby>人<rt>にん</rt></ruby>のいいところは<ruby>真<rt>ま</rt></ruby><ruby>似<rt>まね</rt></ruby>したいと<ruby>思<rt>おも</rt></ruby>うから。
                         <span class="sentence-badge q-badge">問3の鍵</span>
                         <span class="inline-note-container">
@@ -959,7 +124,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -973,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -987,7 +152,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1001,7 +166,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1025,7 +190,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1039,7 +204,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1053,7 +218,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1067,7 +232,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1091,7 +256,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1105,7 +270,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1119,7 +284,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1133,7 +298,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1161,7 +326,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">①</span>
                     ツバメは<ruby>季<rt>き</rt></ruby><ruby>節<rt>せつ</rt></ruby>の<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>にあわせて、<ruby>暮<rt>く</rt></ruby>らす<ruby>場<rt>ば</rt></ruby><ruby>所<rt>しょ</rt></ruby>をかえる<ruby>渡<rt>わた</rt></ruby>り<ruby>鳥<rt>どり</rt></ruby>です。<ruby>日<rt>に</rt></ruby><ruby>本<rt>ほん</rt></ruby>が<ruby>冬<rt>ふゆ</rt></ruby>の<ruby>時<rt>じ</rt></ruby><ruby>期<rt>き</rt></ruby>は、<ruby>暖<rt>あたた</rt></ruby>かくてえさの<ruby>豊<rt>ほう</rt></ruby><ruby>富<rt>ふ</rt></ruby>なオーストラリアや<ruby>東<rt>とう</rt></ruby><ruby>南<rt>なん</rt></ruby>アジアで<ruby>暮<rt>く</rt></ruby>らしています。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         たまごを<ruby>産<rt>う</rt></ruby>んでひなを<ruby>育<rt>そだ</rt></ruby>てる<ruby>繁<rt>はん</rt></ruby><ruby>殖<rt>しょく</rt></ruby><ruby>期<rt>き</rt></ruby>が<ruby>近<rt>ちか</rt></ruby>づくと、<ruby>春<rt>はる</rt></ruby>になってえさとなる<ruby>昆<rt>こん</rt></ruby><ruby>虫<rt>ちゅう</rt></ruby>が<ruby>一<rt>いっ</rt></ruby><ruby>気<rt>き</rt></ruby>にふえる<ruby>日<rt>に</rt></ruby><ruby>本<rt>ほん</rt></ruby>へ<ruby>向<rt>む</rt></ruby>けて、いのちがけで<ruby>海<rt>うみ</rt></ruby>を<ruby>渡<rt>わた</rt></ruby>ってきます。
                         <span class="sentence-badge q-badge">問1の鍵</span>
                         <span class="inline-note-container">
@@ -1188,7 +353,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">②</span>
                     ツバメの<ruby>渡<rt>わた</rt></ruby>りは<ruby>地<rt>ち</rt></ruby><ruby>球<rt>きゅう</rt></ruby>の<ruby>南<rt>みなみ</rt></ruby><ruby>半<rt>はん</rt></ruby><ruby>球<rt>きゅう</rt></ruby>から<ruby>北<rt>きた</rt></ruby><ruby>半<rt>はん</rt></ruby><ruby>球<rt>きゅう</rt></ruby>へと、<ruby>何<rt>なん</rt></ruby><ruby>千<rt>ぜん</rt></ruby>キロメートルにもなります。ツバメがいつ<ruby>渡<rt>わた</rt></ruby>ってきたかで、ツバメが<ruby>暮<rt>く</rt></ruby>らしていた<ruby>地<rt>ち</rt></ruby><ruby>域<rt>いき</rt></ruby>や、<ruby>渡<rt>わた</rt></ruby>りのルートの<ruby>気<rt>き</rt></ruby><ruby>象<rt>しょう</rt></ruby>の<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>や<ruby>環<rt>かん</rt></ruby><ruby>境<rt>きょう</rt></ruby>の<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>を<span class="vocab-word" data-meaning="推测，揣测"><ruby>推<rt>お</rt></ruby>し<ruby>量<rt>はか</rt></ruby>る</span>ことができます。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         そして、その<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>を<ruby>長<rt>ちょう</rt></ruby><ruby>期<rt>き</rt></ruby><ruby>間<rt>かん</rt></ruby>にわたって<ruby>観<rt>かん</rt></ruby><ruby>察<rt>さつ</rt></ruby>をつづけることで、<ruby>地<rt>ち</rt></ruby><ruby>球<rt>きゅう</rt></ruby><ruby>全<rt>ぜん</rt></ruby><ruby>体<rt>たい</rt></ruby>の<ruby>気<rt>き</rt></ruby><ruby>象<rt>しょう</rt></ruby>の<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>を<ruby>予<rt>よ</rt></ruby><ruby>測<rt>そく</rt></ruby>する<ruby>手<rt>て</rt></ruby>がかりにもなるので、<ruby>気<rt>き</rt></ruby><ruby>象<rt>しょう</rt></ruby><ruby>庁<rt>ちょう</rt></ruby>では、その<ruby>年<rt>とし</rt></ruby>にはじめてツバメを<ruby>見<rt>み</rt></ruby>た<ruby>日<rt>ひ</rt></ruby>「ツバメの<ruby>初<rt>しょ</rt></ruby><ruby>見<rt>けん</rt></ruby><ruby>日<rt>び</rt></ruby>」を、<ruby>各<rt>かく</rt></ruby><ruby>地<rt>ち</rt></ruby>の<ruby>観<rt>かん</rt></ruby><ruby>察<rt>さつ</rt></ruby><ruby>者<rt>しゃ</rt></ruby>や<ruby>研<rt>けん</rt></ruby><ruby>究<rt>きゅう</rt></ruby><ruby>者<rt>しゃ</rt></ruby>からの<ruby>報<rt>ほう</rt></ruby><ruby>告<rt>こく</rt></ruby>をもとに、<ruby>記<rt>き</rt></ruby><ruby>録<rt>ろく</rt></ruby>をとっているのです。
                         <span class="sentence-badge q-badge">問2の解答箇所</span>
                         <span class="inline-note-container">
@@ -1234,7 +399,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">④</span>
                     <ruby>日<rt>にっ</rt></ruby><ruby>照<rt>しょう</rt></ruby><ruby>時<rt>じ</rt></ruby><ruby>間<rt>かん</rt></ruby>は<ruby>年<rt>とし</rt></ruby>ごとの<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>が<ruby>比<rt>ひ</rt></ruby><ruby>較<rt>かく</rt></ruby><ruby>的<rt>てき</rt></ruby><ruby>少<rt>すく</rt></ruby>ないので、<ruby>日<rt>にち</rt></ruby><ruby>時<rt>じ</rt></ruby>がそれほどずれることがありませんでした。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         ところが<ruby>長<rt>なが</rt></ruby><ruby>年<rt>ねん</rt></ruby><ruby>蓄<rt>ちく</rt></ruby><ruby>積<rt>せき</rt></ruby>された<ruby>記<rt>き</rt></ruby><ruby>録<rt>ろく</rt></ruby>を<ruby>調<rt>しら</rt></ruby>べてみると、<ruby>近<rt>きん</rt></ruby><ruby>年<rt>ねん</rt></ruby>、<ruby>各<rt>かく</rt></ruby><ruby>地<rt>ち</rt></ruby>のツバメの<ruby>初<rt>しょ</rt></ruby><ruby>見<rt>けん</rt></ruby><ruby>日<rt>び</rt></ruby>が<ruby>早<rt>はや</rt></ruby>まってきていることがわかってきました。
                         <span class="sentence-badge q-badge">問3の鍵（1）</span>
                         <span class="inline-note-container">
@@ -1260,7 +425,7 @@
             <div class="paragraph" id="page2-para-5">
                 <p class="japanese">
                     <span class="paragraph-marker">⑤</span>
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         その<ruby>原<rt>げん</rt></ruby><ruby>因<rt>いん</rt></ruby>はまだはっきりとつきとめられてはいませんが、<ruby>地<rt>ち</rt></ruby><ruby>球<rt>きゅう</rt></ruby><ruby>温<rt>おん</rt></ruby><ruby>暖<rt>だん</rt></ruby><ruby>化<rt>か</rt></ruby>によっておこる<ruby>気<rt>き</rt></ruby><ruby>象<rt>しょう</rt></ruby>の<ruby>変<rt>へん</rt></ruby><ruby>化<rt>か</rt></ruby>で、オーストラリアや<ruby>東<rt>とう</rt></ruby><ruby>南<rt>なん</rt></ruby>アジア<ruby>地<rt>ち</rt></ruby><ruby>方<rt>ほう</rt></ruby>の<ruby>晴<rt>せい</rt></ruby><ruby>雨<rt>う</rt></ruby><ruby>天<rt>てん</rt></ruby>のバランスがくずれ、<ruby>日<rt>にっ</rt></ruby><ruby>照<rt>しょう</rt></ruby><ruby>時<rt>じ</rt></ruby><ruby>間<rt>かん</rt></ruby>にまでくるいがでてきているのかもしれません。
                         <span class="sentence-badge q-badge">問3の鍵（2）</span>
                         <span class="inline-note-container">
@@ -1294,7 +459,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1308,7 +473,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1322,7 +487,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1336,7 +501,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1360,7 +525,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1374,7 +539,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1388,7 +553,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1402,7 +567,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1426,7 +591,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1440,7 +605,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1454,7 +619,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1468,7 +633,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1494,7 +659,7 @@
             <div class="paragraph" id="page3-para-1">
                 <p class="japanese">
                     <span class="paragraph-marker">①</span>
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>消<rt>け</rt></ruby>して<ruby>費<rt>ついや</rt></ruby>やしてしまう、<ruby>使<rt>つか</rt></ruby>って<ruby>無<rt>な</rt></ruby>くしてしまうーーどうも<ruby>消<rt>しょう</rt></ruby><ruby>費<rt>ひ</rt></ruby>という<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>のイメージは<ruby>前<rt>まえ</rt></ruby><ruby>向<rt>む</rt></ruby>きではないですね。<ruby>消<rt>しょう</rt></ruby><ruby>費<rt>ひ</rt></ruby><ruby>者<rt>しゃ</rt></ruby>という<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>も、そう。<ruby>生<rt>せい</rt></ruby><ruby>産<rt>さん</rt></ruby><ruby>者<rt>しゃ</rt></ruby>と<ruby>対<rt>たい</rt></ruby><ruby>比<rt>ひ</rt></ruby>して、<ruby>消<rt>しょう</rt></ruby><ruby>極<rt>きょく</rt></ruby><ruby>的<rt>てき</rt></ruby>イメージがつきまとう。<ruby>消<rt>しょう</rt></ruby><ruby>費<rt>ひ</rt></ruby><ruby>者<rt>しゃ</rt></ruby>という<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>は、<ruby>経<rt>けい</rt></ruby><ruby>済<rt>ざい</rt></ruby><ruby>用<rt>よう</rt></ruby><ruby>語<rt>ご</rt></ruby>のなかでもっとも<ruby>不<rt>ふ</rt></ruby><ruby>適<rt>てき</rt></ruby><ruby>切<rt>せつ</rt></ruby>な<ruby>一<rt>ひと</rt></ruby>つだと<ruby>私<rt>わたし</rt></ruby>は<ruby>思<rt>おも</rt></ruby>います。<span class="exam-underline"><ruby>行<rt>こう</rt></ruby><ruby>為<rt>い</rt></ruby>の<ruby>中<rt>なか</rt></ruby><ruby>身<rt>み</rt></ruby>からひどくズレています</span>。
                         <span class="sentence-badge q-badge">問3の鍵</span>
                         <span class="inline-note-container">
@@ -1521,7 +686,7 @@
                 <p class="japanese">
                     <span class="paragraph-marker">②</span>
                     <ruby>消<rt>しょう</rt></ruby><ruby>費<rt>ひ</rt></ruby>と<ruby>呼<rt>よ</rt></ruby>ばれている<ruby>行<rt>こう</rt></ruby><ruby>為<rt>い</rt></ruby>は、その<ruby>中<rt>なか</rt></ruby><ruby>身<rt>み</rt></ruby>から<ruby>言<rt>い</rt></ruby>えば、<ruby>生<rt>い</rt></ruby>きていくのに<ruby>必<rt>ひつ</rt></ruby><ruby>要<rt>よう</rt></ruby>なものを<ruby>使<rt>つか</rt></ruby>ことですね。<ruby>私<rt>わたし</rt></ruby>たちは<ruby>衣<rt>い</rt></ruby><ruby>食<rt>しょく</rt></ruby><ruby>住<rt>じゅう</rt></ruby>その<ruby>他<rt>た</rt></ruby>に、さまざまなものを<ruby>使<rt>つか</rt></ruby>います。しかし、そのことを「<ruby>消<rt>しょう</rt></ruby><ruby>費<rt>ひ</rt></ruby>」と<ruby>呼<rt>よ</rt></ruby>ぶのは<ruby>正<rt>ただ</rt></ruby>しいか。<ruby>正<rt>ただ</rt></ruby>しくないと、<ruby>言<rt>い</rt></ruby>うべきです。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         なぜなら、<ruby>人<rt>ひと</rt></ruby>は<ruby>食<rt>た</rt></ruby>べ<ruby>物<rt>もの</rt></ruby>を<ruby>食<rt>た</rt></ruby>べることによって、<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>身<rt>しん</rt></ruby><ruby>体<rt>たい</rt></ruby>を<ruby>生<rt>せい</rt></ruby><ruby>産<rt>さん</rt></ruby>しているのです。なるほど、<ruby>食<rt>た</rt></ruby>べ<ruby>物<rt>もの</rt></ruby>の<ruby>形<rt>かたち</rt></ruby>は<ruby>消<rt>き</rt></ruby>えてしまいます。しかし、それは<ruby>私<rt>わたし</rt></ruby>たちの<ruby>生<rt>せい</rt></ruby><ruby>命<rt>めい</rt></ruby>としてよみがえっているのです。
                         <span class="sentence-badge q-badge">問1の鍵</span>
                         <span class="inline-note-container">
@@ -1529,7 +694,7 @@
                             本题探讨作者对“消费行为实质”的解释。此处作者以食物为例，说明我们吃掉食物（使用物品）虽然让物品形状消失了，但实际上是在“生产出自己的身体”（「自分の身体を生産しているのです」）。
                         </span>
                     </span>
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>衣<rt>い</rt></ruby><ruby>服<rt>ふく</rt></ruby>を<ruby>身<rt>み</rt></ruby>につけることはどうか。それは<ruby>体<rt>たい</rt></ruby><ruby>温<rt>おん</rt></ruby>を<ruby>維<rt>い</rt></ruby><ruby>持<rt>じ</rt></ruby>させることによって<ruby>命<rt>いのち</rt></ruby>をつくり<ruby>出<rt>だ</rt></ruby>すだけでなく、<ruby>他<rt>た</rt></ruby><ruby>人<rt>にん</rt></ruby>にあたえる<ruby>私<rt>わたし</rt></ruby>たちの<ruby>印<rt>いん</rt></ruby><ruby>象<rt>しょう</rt></ruby>を<ruby>生<rt>せい</rt></ruby><ruby>産<rt>さん</rt></ruby>しています。
                         <span class="sentence-badge q-badge">問2の解答箇所</span>
                         <span class="inline-note-container">
@@ -1563,7 +728,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1577,7 +742,7 @@
                     </div>
                 </div>
 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1591,7 +756,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1605,7 +770,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1629,7 +794,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1643,7 +808,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1657,7 +822,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1671,7 +836,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1695,7 +860,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1709,7 +874,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1723,7 +888,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1737,7 +902,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1756,341 +921,19 @@
     </div>
     <!-- Navigation -->
     <div class="article-navigation">
-        <button id="prev-btn" class="nav-btn disabled" onclick="prevPage()">← 上一篇</button>
-        <button id="study-submit-btn" class="submit-btn" type="button" onclick="submitCurrentStudyPage()" hidden disabled>答え合わせ</button>
-        <button id="next-btn" class="nav-btn disabled" onclick="nextPage()">下一篇 →</button>
+        <button id="prev-btn" class="nav-btn disabled">← 上一篇</button>
+        <button id="study-submit-btn" class="submit-btn" type="button" hidden disabled>答え合わせ</button>
+        <button id="next-btn" class="nav-btn disabled">下一篇 →</button>
     </div>
 </div>
-
-<script src="../../shared/reading-medium-tools.js"></script>
-<script>
-    function toggleAnalysis() {
-        const btn = document.getElementById('analysis-btn');
-        btn.classList.toggle('active');
-        document.body.classList.toggle('show-analysis');
-        
-        if (!document.body.classList.contains('show-analysis')) {
-            document.querySelectorAll('.option-item.expanded').forEach(item => item.classList.remove('expanded'));
-            document.querySelectorAll('.key-sentence.active').forEach(item => item.classList.remove('active'));
-            if (typeof hideGlobalTooltip === 'function') hideGlobalTooltip();
-            if (typeof clearActiveVocabWords === 'function') clearActiveVocabWords();
-        }
-    }
-
-    function toggleInlineNote(event, element) {
-        if (!document.body.classList.contains('show-analysis')) return;
-        if (event.target.closest('.inline-note-container')) return;
-        // 点击词汇时，直接返回，不触发父级句子的折叠/展开
-        if (event.target.closest('.vocab-word')) return; 
-        element.classList.toggle('active');
-    }
-</script>
-
-<script src="../../shared/reading-year-system.js"></script>
-<script src="../../categories/index.js"></script>
-<script src="../../shared/reading-category-system.js"></script>
-<script>
-    const ARTICLE_LEVEL = 'N1';
-    const ARTICLE_TYPE = 'middle';
-    const ARTICLE_YEAR = '2010.07';
-    const ARTICLE_ID = 'n1-2010-07-mid';
-    const ARTICLE_LINK = 'm/n1/2010.7.html';
-    const totalPages = 3;
-    
-    // エラー回避用フォールバック（外部スクリプト未読み込み時）
-    let readingSession = {
-        isReviewMode: false,
-        getReviewPages: () => [],
-        recordAnswer: () => {},
-        redirectToIndex: () => {},
-        getInitialPage: (p) => p || 1,
-        getNavState: (p) => ({ prevDisabled: p <= 1, nextDisabled: p >= totalPages }),
-        replacePageUrl: () => {},
-        getMoveTarget: () => ({})
-    };
-
-    let categorySession = {
-        isCategoryMode: false,
-        getInitialTarget: () => ({ empty: false }),
-        buildBackUrl: () => '../../index.html',
-        getNavState: (p) => ({ prevDisabled: p <= 1, nextDisabled: p >= totalPages }),
-        rememberProgress: () => {},
-        replacePageUrl: () => {},
-        getMoveTarget: () => ({})
-    };
-
-    const backLink = document.getElementById('back-to-reading-index');
-    const urlParams = new URLSearchParams(window.location.search);
-    const requestedPage = parseInt(urlParams.get('page'), 10);
-
-    try {
-        if (typeof ReadingYearSystem !== 'undefined') {
-            readingSession = ReadingYearSystem.createReadingYearSession({
-                level: ARTICLE_LEVEL,
-                type: ARTICLE_TYPE,
-                examKey: urlParams.get('examKey') || ARTICLE_YEAR,
-                totalPages,
-                indexPath: '../../index.html',
-                urlParams
-            });
-        }
-        
-        if (typeof ReadingCategorySystem !== 'undefined') {
-            categorySession = ReadingCategorySystem.createCategorySession({
-                level: ARTICLE_LEVEL,
-                type: ARTICLE_TYPE,
-                categoryId: urlParams.get('category'),
-                practiceMode: urlParams.get('practiceMode'),
-                examKey: urlParams.get('examKey') || ARTICLE_YEAR
-            });
-        }
-    } catch (e) {
-        console.warn("External systems not loaded properly. Using fallbacks.", e);
-    }
-
-    function toggleOption(element) {
-        if (document.body.classList.contains('show-analysis')) {
-            element.classList.toggle('expanded');
-            return;
-        }
-        
-        const qaSection = element.closest('.qa-section');
-        if (qaSection.hasAttribute('data-answered')) return;
-        
-        const isCorrect = element.classList.contains('is-correct');
-        element.classList.add('selected');
-        
-        if (isCorrect) {
-            element.classList.add('answered-correct');
-        } else {
-            element.classList.add('answered-wrong');
-            const correctOpt = qaSection.querySelector('.is-correct');
-            if (correctOpt) correctOpt.classList.add('answered-correct');
-        }
-
-        qaSection.setAttribute('data-answered', 'true');
-        recordAnswer(isCorrect);
-        checkAllAnsweredOnPage();
-    }
-
-    function checkAllAnsweredOnPage() {
-        const totalQuestions = document.querySelectorAll('.page-content.active .qa-section').length;
-        const answeredQuestions = document.querySelectorAll('.page-content.active .qa-section[data-answered="true"]').length;
-        
-        if (totalQuestions > 0 && totalQuestions === answeredQuestions) {
-            console.log("当前文章的所有题目已作答完毕。");
-        }
-    }
-
-    function handleReviewCompletionIfNeeded(isCorrect) {
-        if (!readingSession.isReviewMode || !isCorrect) {
-            return;
-        }
-
-        if (readingSession.getReviewPages().length === 0) {
-            window.setTimeout(() => {
-                alert('🎉 太棒了！这一年的错题已经复习完毕！');
-                readingSession.redirectToIndex();
-            }, 160);
-        }
-    }
-
-    function recordAnswer(isCorrect) {
-        readingSession.recordAnswer(currentPage, isCorrect);
-        handleReviewCompletionIfNeeded(isCorrect);
-    }
-
-    const isCategoryPractice = categorySession.isCategoryMode && !readingSession.isReviewMode;
-    const categoryTarget = isCategoryPractice
-        ? categorySession.getInitialTarget(requestedPage)
-        : { empty: false };
-
-    if (isCategoryPractice) {
-        backLink.href = categorySession.buildBackUrl();
-    }
-
-    const reviewModeHasNoPages = readingSession.isReviewMode && readingSession.getReviewPages().length === 0;
-    if (reviewModeHasNoPages) {
-        alert('当前年份还没有错题记录，先去正常练习一轮吧。');
-        readingSession.redirectToIndex();
-    }
-
-    if (isCategoryPractice && categoryTarget.empty) {
-        alert('这个文章分类里还没有可练习的内容。');
-        window.location.href = categorySession.buildBackUrl();
-    }
-
-    if (isCategoryPractice && categoryTarget.redirectUrl) {
-        window.location.href = categoryTarget.redirectUrl;
-    }
-
-    let currentPage = isCategoryPractice && typeof categoryTarget.page === 'number'
-        ? categoryTarget.page
-        : readingSession.getInitialPage(requestedPage);
-    window.currentPage = currentPage;
-    window.totalPages = totalPages;
-
-    function syncHeaderTitles(activePage) {
-        document.querySelectorAll('.header-title').forEach(titleEl => {
-            if (!titleEl.dataset.baseTitle) {
-                titleEl.dataset.baseTitle = titleEl.textContent.replace(/\s*（🐶 復習モード）$/, '').trim();
-            }
-
-            const isActive = Boolean(activePage && activePage.contains(titleEl));
-            titleEl.textContent = isActive && readingSession.isReviewMode
-                ? `${titleEl.dataset.baseTitle}（🐶 復習モード）`
-                : titleEl.dataset.baseTitle;
-        });
-    }
-
-    function showPage(page) {
-        document.querySelectorAll('.page-content').forEach(el => {
-            el.style.display = 'none';
-            el.classList.remove('active');
-        });
-
-        const currentEl = document.getElementById('page-' + page);
-        if (currentEl) {
-            currentEl.style.display = 'block';
-            currentEl.classList.add('active');
-        }
-
-        syncHeaderTitles(currentEl);
-
-        document.querySelectorAll('.qa-section').forEach(section => {
-            section.removeAttribute('data-answered');
-        });
-
-        document.querySelectorAll('.option-item').forEach(item => {
-            item.classList.remove('selected', 'answered-correct', 'answered-wrong', 'expanded');
-        });
-
-        document.querySelectorAll('.key-sentence').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelectorAll('.paragraph.recorder-focus').forEach(paragraph => {
-            paragraph.classList.remove('recorder-focus');
-        });
-        if (typeof hideGlobalTooltip === 'function') hideGlobalTooltip();
-        if (typeof clearActiveVocabWords === 'function') clearActiveVocabWords();
-        if (typeof window.clearDraftSelection === 'function') {
-            window.clearDraftSelection(true);
-        }
-
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const navState = isCategoryPractice
-            ? categorySession.getNavState(page)
-            : readingSession.getNavState(page);
-
-        prevBtn.classList.toggle('disabled', navState.prevDisabled);
-        nextBtn.classList.toggle('disabled', navState.nextDisabled);
-
-        currentPage = page;
-        window.currentPage = currentPage;
-        if (isCategoryPractice) {
-            categorySession.rememberProgress(page);
-            categorySession.replacePageUrl(page);
-        } else {
-            readingSession.replacePageUrl(page);
-        }
-        if (typeof window.renderSentenceRecorder === 'function') {
-            window.renderSentenceRecorder();
-        }
-        if (typeof window.renderMediumQuickNav === 'function') {
-            window.renderMediumQuickNav();
-        }
-        window.scrollTo(0, 0);
-    }
-
-    window.showPage = showPage;
-
-    function navigateCategory(direction) {
-        const target = categorySession.getMoveTarget(currentPage, direction);
-
-        if (target.sameExamKey && typeof target.page === 'number') {
-            showPage(target.page);
-            return;
-        }
-
-        if (target.href) {
-            window.location.href = target.href;
-            return;
-        }
-
-        if (target.done) {
-            alert('已经是这个分类的最后一篇了！');
-            return;
-        }
-
-        alert('已经是这个分类的第一篇了！');
-    }
-
-    function navigateReview(direction) {
-        const target = readingSession.getMoveTarget(currentPage, direction);
-
-        if (typeof target.page === 'number') {
-            showPage(target.page);
-            return;
-        }
-
-        if (target.done) {
-            alert('🎉 太棒了！这一年的错题已经复习完毕！');
-            readingSession.redirectToIndex();
-            return;
-        }
-
-        alert('已经是这一年错题的第一题了！');
-    }
-
-    function prevPage() {
-        if (readingSession.isReviewMode) {
-            navigateReview(-1);
-            return;
-        }
-        if (isCategoryPractice) {
-            navigateCategory(-1);
-            return;
-        }
-        if (currentPage > 1) {
-            showPage(currentPage - 1);
-        }
-    }
-
-    function nextPage() {
-        if (readingSession.isReviewMode) {
-            navigateReview(1);
-            return;
-        }
-        if (isCategoryPractice) {
-            navigateCategory(1);
-            return;
-        }
-        if (currentPage < totalPages) {
-            showPage(currentPage + 1);
-        } else {
-            alert('已经是该年份的最后一篇了！');
-        }
-    }
-
-    if (!reviewModeHasNoPages && !(isCategoryPractice && categoryTarget.redirectUrl) && !(isCategoryPractice && categoryTarget.empty)) {
-        showPage(currentPage);
-    }
-</script>
-<script>
-    window.readingMediumToolsConfig = {
-        manageVocabTooltip: false
-    };
-    window.readingMediumRuntimeConfig = {
-        studyBatchSubmit: true,
-        lockAnalysisUntilSubmitted: true
-    };
-</script>
 <script src="../../../../shared/study-quest-test-runtime.js"></script>
 <script src="../../../../shared/study-quest-test-boot.js"></script>
-<script src="../../shared/reading-medium-tools.js"></script>
-<script src="../../shared/reading-tools.js"></script>
-<script src="../../shared/reading-medium-runtime.js"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
 
+<script src="../../shared/reading-analysis-n1-middle.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
 </body>
 </html>

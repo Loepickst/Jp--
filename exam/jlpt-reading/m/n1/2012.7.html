@@ -4,446 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>日本語読解 - 2012年07月 中長文</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500;700&display=swap');
-
-        :root {
-            --bg-color: #fdfaf5;
-            --paper-color: #ffffff;
-            --text-color: #2c2c2c;
-            --accent-color: #3b5998; 
-            --sub-color: #787878;
-            --note-bg: #f4f6f9; 
-            --chinese-font: "Microsoft YaHei", "PingFang SC", sans-serif;
-            --japanese-font: 'Noto Serif JP', serif;
-            --underline-color: #2c2c2c;
-            --q-badge-color: #e67e22; 
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--japanese-font);
-            margin: 0;
-            padding: 80px 15px 120px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .top-bar {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: 60px; background: rgba(253, 250, 245, 0.95);
-            backdrop-filter: blur(8px);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 25px; z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        #today-date { font-size: 0.85rem; color: var(--accent-color); font-weight: 500; }
-        .toggle-btn {
-            background: white; color: var(--accent-color); border: 1px solid var(--accent-color);
-            padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;
-            font-family: var(--chinese-font); cursor: pointer; transition: 0.3s;
-        }
-        @media (hover: hover) { .toggle-btn:hover { background: var(--accent-color); color: white; } }
-        .toggle-btn.active { background: var(--accent-color); color: white; }
-
-        .container {
-            max-width: 760px;
-            width: 100%;
-            background: var(--paper-color); padding: 50px 35px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            box-sizing: border-box; border-radius: 8px;
-        }
-
-        .page-content { display: none; animation: fadeIn 0.35s ease-out; }
-        .page-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-        .header-title { 
-            text-align: center; margin-top: 0; margin-bottom: 40px; 
-            font-size: 1.3rem; color: var(--text-color); border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .paragraph {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        p.japanese {
-            font-size: 1.15rem; line-height: 2.2; 
-            text-align: justify; margin: 0;
-            text-indent: 1em; 
-        }
-        ruby rt { font-size: 0.55em; color: var(--sub-color); letter-spacing: 0; }
-
-        .exam-underline {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            text-decoration-thickness: 1.5px;
-            text-decoration-color: var(--underline-color);
-            position: relative;
-            padding-bottom: 2px;
-        }
-        
-        body.show-analysis .exam-underline {
-            background-color: rgba(231, 76, 60, 0.1); 
-            text-decoration-color: #e74c3c;
-        }
-
-        .analysis-element { display: none; }
-        body.show-analysis .analysis-element { display: block; }
-
-        .paragraph-analysis {
-            margin-top: 15px;
-            background-color: #f8fafc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            overflow: hidden;
-            font-family: var(--chinese-font);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-        .para-role {
-            padding: 12px 18px;
-            background-color: rgba(59, 89, 152, 0.05);
-            border-bottom: 1px dashed #cbd5e1;
-            font-size: 0.9rem;
-            color: #334155;
-            line-height: 1.6;
-        }
-        .role-title {
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-right: 8px;
-            display: inline-flex;
-            align-items: center;
-        }
-        .para-translation {
-            padding: 15px 18px;
-            font-size: 0.95rem;
-            color: #475569;
-            line-height: 1.8;
-            text-align: justify;
-        }
-        .trans-title {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            font-weight: bold;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .key-sentence { transition: 0.3s ease; }
-        body.show-analysis .key-sentence { background-color: rgba(59, 89, 152, 0.06); border-bottom: 2px dashed #baccf1; cursor: pointer; border-radius: 3px; padding: 2px 0; }
-        body.show-analysis .key-sentence:hover { background-color: rgba(59, 89, 152, 0.12); }
-        body.show-analysis .key-sentence.active { background-color: rgba(216, 67, 21, 0.08); border-bottom-color: #e74c3c; }
-
-        .sentence-badge { display: none; }
-        body.show-analysis .sentence-badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: var(--accent-color); color: white;
-            font-size: 0.75rem; padding: 2px 8px; border-radius: 12px;
-            margin: 0 6px; vertical-align: middle;
-            font-family: var(--chinese-font); font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transform: translateY(-2px); transition: 0.3s;
-        }
-        body.show-analysis .sentence-badge.q-badge {
-            background-color: var(--q-badge-color);
-        }
-        body.show-analysis .key-sentence:hover .sentence-badge { transform: translateY(-2px) scale(1.05); }
-        body.show-analysis .key-sentence.active .sentence-badge { background-color: #e74c3c; }
-
-        .inline-note-container {
-            display: none; background-color: #fff; border-left: 4px solid #e74c3c;
-            padding: 15px 20px; margin: 15px 0 15px -1em; 
-            font-size: 0.95rem; color: #444; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            font-family: var(--chinese-font); border-radius: 0 6px 6px 0;
-            text-indent: 0; line-height: 1.8; cursor: text;
-        }
-        .key-sentence.active .inline-note-container { display: block; }
-        .inline-note-title { font-weight: bold; color: #e74c3c; margin-bottom: 8px; font-size: 1rem; display: flex; align-items: center; }
-
-        .qa-container { margin-top: 50px; border-top: 2px solid #f0f0f0; padding-top: 20px; }
-        .qa-section { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #e2e8f0; font-family: var(--chinese-font); }
-        .qa-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        
-        .question-title { 
-            font-size: 1.1rem; color: var(--text-color); margin-bottom: 20px; 
-            font-weight: bold; font-family: var(--japanese-font); line-height: 1.8; 
-        }
-        .question-num-badge {
-            background-color: var(--accent-color); color: white;
-            font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;
-            margin-right: 8px; font-family: var(--chinese-font);
-            white-space: nowrap; 
-            display: inline-block;
-            vertical-align: baseline;
-            position: relative;
-            top: -2px; 
-        }
-        
-        .option-item {
-            background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px;
-            cursor: pointer; transition: 0.2s; overflow: hidden;
-        }
-        .option-item:hover { border-color: var(--accent-color); box-shadow: 0 2px 10px rgba(59, 89, 152, 0.1); }
-        
-        body:not(.show-analysis) .option-item.answered-correct { border-color: #38a169; background-color: rgba(56, 161, 105, 0.05); }
-        body:not(.show-analysis) .option-item.answered-wrong { border-color: #e53e3e; background-color: rgba(229, 62, 62, 0.05); }
-        body:not(.show-analysis) .option-item.answered-correct .option-number::after { content: " ⭕"; font-size: 1rem; color: #38a169; }
-        body:not(.show-analysis) .option-item.answered-wrong .option-number::after { content: " ❌"; font-size: 1rem; color: #e53e3e; }
-        body.show-analysis .option-item.is-correct { border-left: 4px solid #38a169; }
-        body:not(.show-analysis) .option-content rt { display: none; }
-
-        /* 選択肢の番号とテキストが揃うように修正 */
-        .option-content { padding: 15px 20px; display: flex; align-items: flex-start; font-family: var(--japanese-font); line-height: 1.6; }
-        .option-number { font-weight: bold; color: var(--accent-color); margin-right: 15px; font-family: var(--chinese-font); white-space: nowrap; flex-shrink: 0; line-height: 1.6; }
-        .option-text-group { display: flex; flex-direction: column; line-height: 1.6; }
-        
-        .option-translation { display: none; font-size: 0.85rem; color: #718096; margin-top: 4px; font-family: var(--chinese-font); }
-        body.show-analysis .option-translation { display: block; }
-
-        .option-explanation {
-            display: none; padding: 15px 20px; background: #f8fafc; border-top: 1px dashed #e2e8f0;
-            font-size: 0.95rem; color: #4a5568; line-height: 1.7;
-        }
-        body.show-analysis .option-item.expanded .option-explanation { display: block; }
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; color: white; font-size: 0.8rem; font-weight: bold; margin-right: 8px; }
-        .badge.wrong { background: #e53e3e; }
-        .badge.correct { background: #38a169; }
-
-        .article-navigation { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 30px; border-top: 2px dashed #f0f0f0; }
-        .nav-btn { display: inline-flex; align-items: center; padding: 10px 20px; background: #ffffff; color: var(--accent-color); text-decoration: none; border-radius: 8px; font-size: 0.95rem; font-family: var(--chinese-font); font-weight: bold; transition: all 0.3s ease; border: 1px solid #d0dcf2; box-shadow: 0 2px 4px rgba(59, 89, 152, 0.05); cursor: pointer; }
-        .nav-btn:hover { background: var(--accent-color); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(59, 89, 152, 0.15); }
-        .nav-btn.disabled { opacity: 0.5; pointer-events: none; background: #f8fafc; color: #a0aec0; border-color: #e2e8f0; box-shadow: none; }
-
-        .quick-nav-widget {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(6px);
-            padding: 12px 10px;
-            border-radius: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(59, 89, 152, 0.1);
-            z-index: 900;
-        }
-
-        .quick-nav-item {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--note-bg);
-            color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-family: var(--chinese-font);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .quick-nav-item:hover {
-            background: var(--accent-color);
-            color: white;
-            box-shadow: 0 4px 10px rgba(59, 89, 152, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .nav-group-title {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 2px;
-            margin-top: 4px;
-            font-family: var(--chinese-font);
-        }
-        
-        .nav-divider {
-            height: 1px;
-            background: rgba(59, 89, 152, 0.15);
-            margin: 4px 0;
-            width: 100%;
-        }
-
-        .audio-wrapper { position: fixed; bottom: 0; left: 0; right: 0; z-index: 2000; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); padding: 15px 20px 25px 20px; display: flex; justify-content: center; border-top: 1px solid rgba(0,0,0,0.05); box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
-        .audio-player { display: flex; align-items: center; width: 100%; max-width: 600px; }
-        .play-btn { width: 36px; height: 36px; border-radius: 50%; background-color: var(--accent-color); color: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 12px; flex-shrink: 0; transition: transform 0.2s; padding: 0; }
-        .play-btn:active { transform: scale(0.95); }
-        .play-btn svg { width: 14px; height: 14px; fill: white; margin-left: 2px; }
-        .play-btn.playing svg { margin-left: 0; }
-        .progress-container { flex-grow: 1; height: 20px; display: flex; align-items: center; margin-right: 12px; cursor: pointer; position: relative; }
-        .progress-bg { width: 100%; height: 4px; background-color: #f0f0f0; border-radius: 2px; position: relative; }
-        .progress-bar { height: 100%; background-color: var(--accent-color); width: 0%; border-radius: 2px; position: relative; }
-        .progress-bar::after { content: ""; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; background-color: white; border: 2px solid var(--accent-color); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .time-display { font-size: 0.7rem; color: #999; width: 70px; text-align: right; font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
-        .loop-btn { background: none; border: none; cursor: pointer; padding: 8px; margin-left: 8px; opacity: 0.5; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .loop-btn.active { opacity: 1; color: var(--accent-color); }
-        .loop-btn svg { width: 18px; height: 18px; fill: currentColor; }
-        
-        .speed-btn {
-            background: none; border: 1px solid #ccc; border-radius: 4px;
-            cursor: pointer; padding: 2px 6px; margin-left: 8px;
-            font-size: 0.75rem; color: #787878; transition: all 0.2s;
-            font-family: var(--chinese-font); font-variant-numeric: tabular-nums;
-            font-weight: 500;
-        }
-        .speed-btn.active {
-            color: var(--accent-color); border-color: var(--accent-color); background: rgba(59, 89, 152, 0.05);
-        }
-
-        @media (max-width: 1000px) {
-            .quick-nav-widget {
-                right: 15px;
-                transform: scale(0.85) translateY(-50%);
-                transform-origin: right center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 30px 20px 90px; }
-            p.japanese { text-indent: 0; } 
-            
-            .quick-nav-widget {
-                display: none;
-            }
-        }
-        
-        /* =========================================
-           1. 試験の公式注釈（解析モードオフ時に目立つ）
-           ========================================= */
-        body:not(.show-analysis) .exam-note {
-            border-bottom: 1px dashed #e74c3c;
-            cursor: help;
-            position: relative;
-            color: inherit;
-            transition: background-color 0.2s;
-            border-radius: 2px;
-            padding: 0 2px;
-        }
-        body:not(.show-analysis) .exam-note:hover {
-            background-color: rgba(231, 76, 60, 0.08);
-        }
-        body:not(.show-analysis) .exam-note::after {
-            content: '*注';
-            font-size: 0.65rem;
-            color: #e74c3c;
-            vertical-align: super;
-            margin-left: 2px;
-            font-weight: bold;
-            font-family: var(--chinese-font);
-        }
-        /* 解析モード時は公式注釈の強調を控えめに（同化させる） */
-        body.show-analysis .exam-note {
-            border-bottom: none;
-            cursor: text;
-        }
-        body.show-analysis .exam-note::after {
-            display: none;
-        }
-
-        /* =========================================
-           2. N1語彙解説（解析モード時のみ表示）
-           ========================================= */
-        .vocab-word {
-            transition: all 0.2s ease;
-        }
-        body.show-analysis .vocab-word {
-            background-color: rgba(16, 185, 129, 0.15); 
-            color: #059669; 
-            font-weight: bold; 
-            border-bottom: 2px dashed #10b981; 
-            cursor: help; 
-            position: relative;
-            padding: 2px 4px;
-            margin: 0 2px;
-            border-radius: 4px;
-            text-decoration: none; 
-        }
-        body.show-analysis .vocab-word:hover {
-            background-color: rgba(16, 185, 129, 0.25);
-            border-bottom-style: solid;
-        }
-        
-        /* ツールチップ（気泡）スタイル */
-        #global-tooltip {
-            position: fixed;
-            background-color: rgba(44, 44, 44, 0.95);
-            color: #fff;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-family: var(--chinese-font);
-            pointer-events: none;
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.2s ease, margin-top 0.2s ease;
-            transform: translate(-50%, -100%);
-            margin-top: 0;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        #global-tooltip.show {
-            opacity: 1;
-            margin-top: -8px;
-        }
-        #global-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -6px;
-            border-width: 6px;
-            border-style: solid;
-            border-color: rgba(44, 44, 44, 0.95) transparent transparent transparent;
-        }
-        /* 注釈エリア */
-        .article-notes {
-            margin-top: 30px;
-            padding: 15px 20px;
-            background-color: #fcfcfc;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: #555;
-            font-family: var(--japanese-font);
-            border: 1px solid #eee;
-        }
-        .article-notes .note-item {
-            margin-bottom: 5px;
-            line-height: 1.6;
-        }
-        .article-notes .note-mark {
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-    </style>
-    <link rel="stylesheet" href="../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../shared/reading-tools.css">
-    <link rel="stylesheet" href="../../shared/reading-medium-tools.css">
-    <link rel="stylesheet" href="../../shared/reading-medium-copy-theme.css">
-    <link rel="stylesheet" href="../../shared/reading-unified-theme.css">
+<link rel="stylesheet" href="../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
 </head>
-<body>
+<body class="reading-content-page reading-cloze-v2">
 
-<div class="top-bar">
-    <a id="back-to-reading-index" href="../../index.html?level=N1&type=middle" class="toggle-btn" style="text-decoration: none;">← 戻る</a>
-    <div id="today-date">N1 中篇</div>
-    <div class="top-bar-controls">
-        <button id="analysis-btn" class="toggle-btn" onclick="toggleAnalysis()">解析</button>
+<header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=middle" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
     </div>
-</div>
+    <h1 class="kiki-unified-header-title">N1 · 中文読解</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
 
 <div class="container">
     <!-- PAGE 1: 会社人間の「その後」 -->
@@ -454,7 +33,7 @@
             <!-- 段落 1 -->
             <div class="paragraph" id="page1-para-1" data-para-id="1">
                 <p class="japanese">
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>定<rt>てい</rt></ruby><ruby>年<rt>ねん</rt></ruby>に<span class="vocab-word" data-meaning="防备，准备"><ruby>備<rt>そな</rt></ruby>えた</span><ruby>企<rt>き</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>の<ruby>研<rt>けん</rt></ruby><ruby>修<rt>しゅう</rt></ruby><ruby>資<rt>し</rt></ruby><ruby>料<rt>りょう</rt></ruby>に＜「<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>」－「<ruby>仕<rt>し</rt></ruby><ruby>事<rt>ごと</rt></ruby>」＝？＞とあるのを<ruby>見<rt>み</rt></ruby>て、<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby><span class="vocab-word" data-meaning="一心一意，全心全意"><ruby>一<rt>ひと</rt></ruby><ruby>筋<rt>すじ</rt></ruby></span>に<ruby>働<rt>はたら</rt></ruby>いてきた<ruby>人<rt>ひと</rt></ruby>には<ruby>厳<rt>きび</rt></ruby>しい<ruby>設<rt>せつ</rt></ruby><ruby>問<rt>もん</rt></ruby>だなぁ、と<ruby>思<rt>おも</rt></ruby>ったことがある。
                         <span class="sentence-badge q-badge">問1の鍵（1）</span>
                         <span class="inline-note-container">
@@ -497,7 +76,7 @@
             <!-- 段落 3 -->
             <div class="paragraph" id="page1-para-3" data-para-id="3">
                 <p class="japanese">
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         「<ruby>女<rt>にょう</rt></ruby><ruby>房<rt>ぼう</rt></ruby>が<ruby>出<rt>で</rt></ruby><ruby>掛<rt>か</rt></ruby>けようとすると、ワシ（注）も<ruby>行<rt>い</rt></ruby>くと<ruby>言<rt>い</rt></ruby>うもんやから、<span class="vocab-word" data-meaning="完全地，彻底地">すっかり</span><span class="vocab-word" data-meaning="被讨厌，被嫌弃"><ruby>嫌<rt>いや</rt></ruby>がられて</span>るよ」
                         <span class="sentence-badge q-badge">問1の鍵（2）/ 問2の解答箇所</span>
                         <span class="inline-note-container">
@@ -578,7 +157,7 @@
             <!-- 段落 7 -->
             <div class="paragraph" id="page1-para-7" data-para-id="7">
                 <p class="japanese">
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         これなどは<ruby>極<rt>きょく</rt></ruby><ruby>端<rt>たん</rt></ruby>なケースだとしても、＜「<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby>」のために<ruby>頑<rt>がん</rt></ruby><ruby>張<rt>ば</rt></ruby>る<ruby>価<rt>か</rt></ruby><ruby>値<rt>ち</rt></ruby><ruby>観<rt>かん</rt></ruby>は、「<ruby>社<rt>しゃ</rt></ruby><ruby>会<rt>かい</rt></ruby>」のために<ruby>頑<rt>がん</rt></ruby><ruby>張<rt>ば</rt></ruby>る<ruby>価<rt>か</rt></ruby><ruby>値<rt>ち</rt></ruby><ruby>観<rt>かん</rt></ruby>と<span class="vocab-word" data-meaning="一致，吻合"><ruby>合<rt>がっ</rt></ruby><ruby>致<rt>ち</rt></ruby>する</span>かもしれない＞と<ruby>分<rt>ぶん</rt></ruby><ruby>析<rt>せき</rt></ruby>される<ruby>先<rt>さき</rt></ruby>の<ruby>調<rt>ちょう</rt></ruby><ruby>査<rt>さ</rt></ruby><ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby>などは、<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby><ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>の「その<ruby>後<rt>ご</rt></ruby>」に②<span class="exam-underline"><ruby>新<rt>あたら</rt></ruby>しい<ruby>視<rt>し</rt></ruby><ruby>点<rt>てん</rt></ruby>を<span class="vocab-word" data-meaning="带来，招致">もたらす</span></span>ものだろう。
                         <span class="sentence-badge q-badge">問3の鍵</span>
                         <span class="inline-note-container">
@@ -617,7 +196,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -631,7 +210,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -645,7 +224,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -659,7 +238,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -683,7 +262,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -697,7 +276,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -711,7 +290,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -725,7 +304,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -749,7 +328,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -763,7 +342,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -777,7 +356,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -791,7 +370,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -836,7 +415,7 @@
             <div class="paragraph" id="page2-para-2" data-para-id="2">
                 <p class="japanese">
                     それはそうだろう。<ruby>市<rt>し</rt></ruby><ruby>販<rt>はん</rt></ruby><ruby>車<rt>しゃ</rt></ruby>の<ruby>開<rt>かい</rt></ruby><ruby>発<rt>はつ</rt></ruby>であれば、コストのことや<ruby>工<rt>こう</rt></ruby><ruby>場<rt>じょう</rt></ruby>のことを<ruby>考<rt>かんが</rt></ruby>えなければいけないので、<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>考<rt>かんが</rt></ruby>え<ruby>出<rt>だ</rt></ruby>した<ruby>創<rt>そう</rt></ruby><ruby>意<rt>い</rt></ruby><ruby>工<rt>く</rt></ruby><ruby>夫<rt>ふう</rt></ruby>を<ruby>必<rt>かなら</rt></ruby>ずしも<ruby>反<rt>はん</rt></ruby><ruby>映<rt>えい</rt></ruby>できるわけではない。いいモデルを<ruby>出<rt>だ</rt></ruby>したからといって、<ruby>営<rt>えい</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>の<ruby>力<rt>りょく</rt></ruby>が<ruby>弱<rt>よわ</rt></ruby>ければ<ruby>売<rt>う</rt></ruby>れるとは<ruby>限<rt>かぎ</rt></ruby>らない（<ruby>少<rt>すく</rt></ruby>なくとも、<ruby>多<rt>おお</rt></ruby>くの<ruby>開<rt>かい</rt></ruby><ruby>発<rt>はつ</rt></ruby><ruby>技<rt>ぎ</rt></ruby><ruby>術<rt>じゅつ</rt></ruby><ruby>者<rt>しゃ</rt></ruby>はそう<ruby>思<rt>おも</rt></ruby>って<span class="exam-note" data-meaning="【注】ここでは、悔しく思う"><ruby>歯<rt>は</rt></ruby><ruby>軋<rt>ぎし</rt></ruby>り</span>をしているに<ruby>違<rt>ちが</rt></ruby>いない）。しかし、レース<ruby>車<rt>しゃ</rt></ruby>であれば、ある<ruby>程<rt>てい</rt></ruby><ruby>度<rt>ど</rt></ruby>、<ruby>採<rt>さい</rt></ruby><ruby>算<rt>さん</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>視<rt>し</rt></ruby>で<ruby>色<rt>いろ</rt></ruby>んなことにトライできる。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>何<rt>なに</rt></ruby>よりも、<ruby>営<rt>えい</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>力<rt>りょく</rt></ruby>とか<ruby>他<rt>ほか</rt></ruby>の<ruby>要<rt>よう</rt></ruby><ruby>素<rt>そ</rt></ruby>に<span class="vocab-word" data-meaning="被妨碍，被阻碍"><ruby>邪<rt>じゃ</rt></ruby><ruby>魔<rt>ま</rt></ruby>される</span>ことなく、<span class="exam-underline">①どんな<ruby>大<rt>だい</rt></ruby>メーカーを<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>にも<ruby>対<rt>たい</rt></ruby><ruby>等<rt>とう</rt></ruby>に<ruby>優<rt>ゆう</rt></ruby><ruby>劣<rt>れつ</rt></ruby>を<ruby>争<rt>あらそ</rt></ruby>うことができる</span>わけだ。
                         <span class="sentence-badge q-badge">問1の解答箇所</span>
                         <span class="inline-note-container">
@@ -880,7 +459,7 @@
             <div class="paragraph" id="page2-para-4" data-para-id="4">
                 <p class="japanese">
                     <ruby>目<rt>もく</rt></ruby><ruby>標<rt>ひょう</rt></ruby><ruby>設<rt>せつ</rt></ruby><ruby>定<rt>てい</rt></ruby>も<ruby>単<rt>たん</rt></ruby><ruby>純<rt>じゅん</rt></ruby>だ。<ruby>市<rt>し</rt></ruby><ruby>販<rt>はん</rt></ruby><ruby>車<rt>しゃ</rt></ruby><ruby>開<rt>かい</rt></ruby><ruby>発<rt>はつ</rt></ruby>なら、<ruby>時<rt>とき</rt></ruby>にはアメリカと<ruby>欧<rt>おう</rt></ruby><ruby>州<rt>しゅう</rt></ruby>の<ruby>両<rt>りょう</rt></ruby><ruby>市<rt>し</rt></ruby><ruby>場<rt>じょう</rt></ruby>で<ruby>売<rt>う</rt></ruby>れる<ruby>車<rt>くるま</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ってくれと<ruby>営<rt>えい</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>から<ruby>要<rt>よう</rt></ruby><ruby>求<rt>きゅう</rt></ruby>されたりする。そこでは<ruby>技<rt>ぎ</rt></ruby><ruby>術<rt>じゅつ</rt></ruby><ruby>的<rt>てき</rt></ruby>に<span class="vocab-word" data-meaning="不得不妥协"><ruby>妥<rt>だ</rt></ruby><ruby>協<rt>きょう</rt></ruby>せざるを<ruby>得<rt>え</rt></ruby>ない</span>が、レースは<ruby>絶<rt>ぜっ</rt></ruby><ruby>対<rt>たい</rt></ruby><ruby>的<rt>てき</rt></ruby>な<ruby>速<rt>はや</rt></ruby>さだけを<ruby>目<rt>め</rt></ruby><ruby>指<rt>ざ</rt></ruby>せばいいのだ。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         その<ruby>代<rt>か</rt></ruby>わり、<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>実<rt>じつ</rt></ruby><ruby>力<rt>りょく</rt></ruby>が<ruby>今<rt>いま</rt></ruby>どうであれ、<ruby>敵<rt>てき</rt></ruby>の<ruby>車<rt>くるま</rt></ruby>が75<ruby>秒<rt>びょう</rt></ruby>で（注2）サーキットを1<ruby>周<rt>しゅう</rt></ruby>していれば、それより<ruby>速<rt>はや</rt></ruby>いタイムで<ruby>走<rt>はし</rt></ruby>る<ruby>車<rt>くるま</rt></ruby>をつくらないと<ruby>意<rt>い</rt></ruby><ruby>味<rt>み</rt></ruby>がないのだ。<span class="exam-underline">②<ruby>出<rt>で</rt></ruby><ruby>来<rt>き</rt></ruby>る、<ruby>出<rt>で</rt></ruby><ruby>来<rt>き</rt></ruby>ないを<ruby>論<rt>ろん</rt></ruby>じる<ruby>余<rt>よ</rt></ruby><ruby>地<rt>ち</rt></ruby>は<ruby>全<rt>まった</rt></ruby>くない</span>。
                         <span class="sentence-badge q-badge">問2の解答箇所</span>
                         <span class="inline-note-container">
@@ -888,7 +467,7 @@
                             本题要求明确“做得到还是做不到”具体指的是什么。根据前一句的内容：“无论自己现在的实力如何，如果对手的车跑一圈需要75秒，如果不造出比它跑得更快时间的车就没有意义”。紧接着的“完全没有讨论做得到或做不到的余地”正是针对这一严苛的现实而言的，即没有讨价还价的余地，必须造出比竞争对手跑得更快的车。选项3准确还原了这一内容。
                         </span>
                     </span>
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         また、お<ruby>分<rt>わ</rt></ruby>かりのように、<ruby>他<rt>た</rt></ruby>チームの<ruby>車<rt>くるま</rt></ruby>の<ruby>真<rt>ま</rt></ruby><ruby>似<rt>ね</rt></ruby>だけをしていれば、<ruby>決<rt>けっ</rt></ruby>して「<ruby>最<rt>さい</rt></ruby><ruby>速<rt>そく</rt></ruby>」にはならないのも<ruby>真<rt>しん</rt></ruby><ruby>実<rt>じつ</rt></ruby>なのだ。
                         <span class="sentence-badge q-badge">問3の鍵</span>
                         <span class="inline-note-container">
@@ -928,7 +507,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -942,7 +521,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -956,7 +535,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -970,7 +549,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -994,7 +573,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1008,7 +587,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1022,7 +601,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1036,7 +615,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1060,7 +639,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1074,7 +653,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1088,7 +667,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1102,7 +681,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1147,7 +726,7 @@
             <div class="paragraph" id="page3-para-2" data-para-id="2">
                 <p class="japanese">
                     <ruby>柳<rt>やなぎ</rt></ruby><ruby>田<rt>た</rt></ruby>は、それと<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>・<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>するという<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>とを<ruby>区<rt>く</rt></ruby><ruby>別<rt>べつ</rt></ruby>しようとした。
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         その<ruby>文<rt>ぶん</rt></ruby><ruby>章<rt>しょう</rt></ruby>の<ruby>執<rt>しっ</rt></ruby><ruby>筆<rt>ぴつ</rt></ruby>の<ruby>時<rt>じ</rt></ruby><ruby>期<rt>き</rt></ruby>や、<span class="vocab-word" data-meaning="处理，对待"><ruby>あつかう</rt></ruby></span><ruby>対<rt>たい</rt></ruby><ruby>象<rt>しょう</rt></ruby>、また<ruby>語<rt>かた</rt></ruby>りかける<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>のちがいに<span class="vocab-word" data-meaning="伴随，随着"><ruby>つれて</rt></ruby></span>、<ruby>柳<rt>やなぎ</rt></ruby><ruby>田<rt>た</rt></ruby>の<ruby>行<rt>おこな</rt></ruby>なった<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>・<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>すると、<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>・<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>するの<ruby>区<rt>く</rt></ruby><ruby>別<rt>べつ</rt></ruby>には、<span class="vocab-word" data-meaning="确实，显然"><ruby>いかにも</rt></ruby></span>はっきりしている<ruby>際<rt>さい</rt></ruby>と、そうでない<ruby>場<rt>ば</rt></ruby><ruby>合<rt>あい</rt></ruby>がある。しかし<ruby>後<rt>のち</rt></ruby>の<ruby>場<rt>ば</rt></ruby><ruby>合<rt>あい</rt></ruby>も、<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>・<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>することを<span class="vocab-word" data-meaning="逐渐地，渐渐地"><ruby>しだいに</rt></ruby></span><ruby>正<rt>せい</rt></ruby><ruby>確<rt>かく</rt></ruby>にしてゆけば、<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>・<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>するにいたるという、<ruby>段<rt>だん</rt></ruby><ruby>階<rt>かい</rt></ruby><ruby>的<rt>てき</rt></ruby>なつながりにおいてーー<span class="exam-note" data-meaning="【注】互いに接し">あい<ruby>接<rt>せっ</rt></ruby>し</span>、<ruby>境<rt>きょう</rt></ruby><ruby>界<rt>かい</rt></ruby>が<span class="vocab-word" data-meaning="模糊不清"><ruby>ぼやけて</rt></ruby>いる</span>ことはあるにしても、その<ruby>上<rt>じょう</rt></ruby><ruby>辺<rt>へん</rt></ruby>と<ruby>下<rt>か</rt></ruby><ruby>辺<rt>へん</rt></ruby>では、ちがいがはっきりしている、という<ruby>仕<rt>し</rt></ruby><ruby>方<rt>かた</rt></ruby>でーー<ruby>使<rt>つか</rt></ruby>われている。
                         <span class="sentence-badge q-badge">問1の解答箇所</span>
                         <span class="inline-note-container">
@@ -1172,7 +751,7 @@
             <!-- 段落 3 -->
             <div class="paragraph" id="page3-para-3" data-para-id="3">
                 <p class="japanese">
-                    <span class="key-sentence" onclick="toggleInlineNote(event, this)">
+                    <span class="key-sentence">
                         <ruby>具<rt>ぐ</rt></ruby><ruby>体<rt>たい</rt></ruby><ruby>的<rt>てき</rt></ruby>な<ruby>根<rt>こん</rt></ruby><ruby>拠<rt>きょ</rt></ruby>のない、あるいはあっても<span class="vocab-word" data-meaning="含糊，暧昧">あいまい</span>なものにたって<ruby>行<rt>おこな</rt></ruby>なう<ruby>古<rt>こ</rt></ruby><ruby>層<rt>そう</rt></ruby>への<ruby>心<rt>こころ</rt></ruby>の<ruby>動<rt>うご</rt></ruby>きを、<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>・<ruby>空<rt>くう</rt></ruby><ruby>想<rt>そう</rt></ruby>するとし、よりはっきりした<ruby>根<rt>こん</rt></ruby><ruby>拠<rt>きょ</rt></ruby>にたつ、しっかりした<ruby>心<rt>こころ</rt></ruby>の<ruby>働<rt>はたら</rt></ruby>きを、<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>・<ruby>想<rt>そう</rt></ruby><ruby>像<rt>ぞう</rt></ruby>するとして、<ruby>柳<rt>やなぎ</rt></ruby><ruby>田<rt>た</rt></ruby>は<span class="vocab-word" data-meaning="区分使用，分别使用"><ruby>使<rt>つか</rt></ruby>いわけている</span>のである。
                         <span class="sentence-badge q-badge">問2・問3の解答箇所</span>
                         <span class="inline-note-container">
@@ -1215,7 +794,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1229,7 +808,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1243,7 +822,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1257,7 +836,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1281,7 +860,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1295,7 +874,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1309,7 +888,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1323,7 +902,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1347,7 +926,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">1</span>
                         <div class="option-text-group">
@@ -1361,7 +940,7 @@
                     </div>
                 </div>
 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">2</span>
                         <div class="option-text-group">
@@ -1375,7 +954,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item" onclick="toggleOption(this)">
+                <div class="option-item">
                     <div class="option-content">
                         <span class="option-number">3</span>
                         <div class="option-text-group">
@@ -1389,7 +968,7 @@
                     </div>
                 </div>
                 
-                <div class="option-item is-correct" onclick="toggleOption(this)">
+                <div class="option-item is-correct">
                     <div class="option-content">
                         <span class="option-number">4</span>
                         <div class="option-text-group">
@@ -1409,409 +988,21 @@
 
     <!-- Navigation -->
     <div class="article-navigation">
-        <button id="prev-btn" class="nav-btn disabled" onclick="prevPage()">← 上一篇</button>
-        <button id="study-submit-btn" class="submit-btn" type="button" onclick="submitCurrentStudyPage()" hidden disabled>答え合わせ</button>
-        <button id="next-btn" class="nav-btn disabled" onclick="nextPage()">下一篇 →</button>
+        <button id="prev-btn" class="nav-btn disabled">← 上一篇</button>
+        <button id="study-submit-btn" class="submit-btn" type="button" hidden disabled>答え合わせ</button>
+        <button id="next-btn" class="nav-btn disabled">下一篇 →</button>
     </div>
 </div>
 
 <div id="global-tooltip"></div>
-
-<script>
-    function toggleAnalysis() {
-        const btn = document.getElementById('analysis-btn');
-        btn.classList.toggle('active');
-        document.body.classList.toggle('show-analysis');
-        
-        if (!document.body.classList.contains('show-analysis')) {
-            document.querySelectorAll('.option-item.expanded').forEach(item => item.classList.remove('expanded'));
-            document.querySelectorAll('.key-sentence.active').forEach(item => item.classList.remove('active'));
-            const tooltip = document.getElementById('global-tooltip');
-            if (tooltip) tooltip.classList.remove('show');
-        }
-    }
-
-    function toggleInlineNote(event, element) {
-        if (!document.body.classList.contains('show-analysis')) return;
-        if (event.target.closest('.inline-note-container')) return;
-        
-        // 注釈や語彙をクリックした場合は、文の展開を妨げる
-        if (event.target.closest('.vocab-word') || event.target.closest('.exam-note')) return; 
-        
-        element.classList.toggle('active');
-    }
-
-    document.addEventListener('click', function(e) {
-        const tooltip = document.getElementById('global-tooltip');
-        if (!tooltip) return;
-
-        // 公式の注釈（exam-note）は解析モードのオンオフに関わらず動作する
-        const examNote = e.target.closest('.exam-note');
-        
-        // 独自の語彙（vocab-word）は解析モードがオンの時だけ動作する
-        const vocabWord = e.target.closest('.vocab-word');
-        const isAnalysisMode = document.body.classList.contains('show-analysis');
-
-        let targetWord = null;
-        if (!isAnalysisMode && examNote) {
-            targetWord = examNote;
-        } else if (isAnalysisMode && vocabWord) {
-            targetWord = vocabWord;
-        } else if (isAnalysisMode && examNote) {
-            // 解析モードでは公式注釈は一般テキストと同化するため動作しない
-            targetWord = null;
-        }
-
-        if (targetWord) {
-            const meaning = targetWord.getAttribute('data-meaning');
-            tooltip.innerHTML = meaning; 
-            
-            const rect = targetWord.getBoundingClientRect();
-            let left = rect.left + (rect.width / 2);
-            let top = rect.top;
-
-            tooltip.style.left = left + 'px';
-            tooltip.style.top = top + 'px';
-            tooltip.classList.add('show');
-            e.stopPropagation();
-        } else {
-            tooltip.classList.remove('show');
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        const tooltip = document.getElementById('global-tooltip');
-        if (tooltip) tooltip.classList.remove('show');
-    });
-
-    function scrollToElement(selector) {
-        const element = document.querySelector(selector);
-        if (element) {
-            const topBarOffset = 80; 
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.scrollY - topBarOffset;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    }
-</script>
-
-<script src="../../shared/reading-year-system.js"></script>
-<script src="../../categories/index.js"></script>
-<script src="../../shared/reading-category-system.js"></script>
-<script>
-    const ARTICLE_LEVEL = 'N1';
-    const ARTICLE_TYPE = 'middle';
-    const ARTICLE_YEAR = '2012.07';
-    const ARTICLE_ID = 'n1-2012-07-middle';
-    const ARTICLE_LINK = 'm/n1/2012.7.html';
-    const totalPages = 3; // 記事数を更新
-    
-    let readingSession = {
-        isReviewMode: false,
-        getReviewPages: () => [],
-        recordAnswer: () => {},
-        redirectToIndex: () => {},
-        getInitialPage: (p) => p || 1,
-        getNavState: (p) => ({ prevDisabled: p <= 1, nextDisabled: p >= totalPages }),
-        replacePageUrl: () => {},
-        getMoveTarget: () => ({})
-    };
-
-    let categorySession = {
-        isCategoryMode: false,
-        getInitialTarget: () => ({ empty: false }),
-        buildBackUrl: () => '../../index.html',
-        getNavState: (p) => ({ prevDisabled: p <= 1, nextDisabled: p >= totalPages }),
-        rememberProgress: () => {},
-        replacePageUrl: () => {},
-        getMoveTarget: () => ({})
-    };
-
-    const backLink = document.getElementById('back-to-reading-index');
-    const urlParams = new URLSearchParams(window.location.search);
-    const requestedPage = parseInt(urlParams.get('page'), 10);
-
-    try {
-        if (typeof ReadingYearSystem !== 'undefined') {
-            readingSession = ReadingYearSystem.createReadingYearSession({
-                level: ARTICLE_LEVEL,
-                type: ARTICLE_TYPE,
-                examKey: urlParams.get('examKey') || ARTICLE_YEAR,
-                totalPages,
-                indexPath: '../../index.html',
-                urlParams
-            });
-        }
-        
-        if (typeof ReadingCategorySystem !== 'undefined') {
-            categorySession = ReadingCategorySystem.createCategorySession({
-                level: ARTICLE_LEVEL,
-                type: ARTICLE_TYPE,
-                categoryId: urlParams.get('category'),
-                practiceMode: urlParams.get('practiceMode'),
-                examKey: urlParams.get('examKey') || ARTICLE_YEAR
-            });
-        }
-    } catch (e) {
-        console.warn("External systems not loaded properly. Using fallbacks.", e);
-    }
-
-    function toggleOption(element) {
-        if (document.body.classList.contains('show-analysis')) {
-            element.classList.toggle('expanded');
-            return;
-        }
-        
-        const qaSection = element.closest('.qa-section');
-        if (qaSection.hasAttribute('data-answered')) return;
-        
-        const isCorrect = element.classList.contains('is-correct');
-        element.classList.add('selected');
-        
-        if (isCorrect) {
-            element.classList.add('answered-correct');
-        } else {
-            element.classList.add('answered-wrong');
-            const correctOpt = qaSection.querySelector('.is-correct');
-            if (correctOpt) correctOpt.classList.add('answered-correct');
-        }
-
-        qaSection.setAttribute('data-answered', 'true');
-        recordAnswer(isCorrect);
-        checkAllAnsweredOnPage();
-    }
-
-    function checkAllAnsweredOnPage() {
-        const totalQuestions = document.querySelectorAll('.page-content.active .qa-section').length;
-        const answeredQuestions = document.querySelectorAll('.page-content.active .qa-section[data-answered="true"]').length;
-        
-        if (totalQuestions > 0 && totalQuestions === answeredQuestions) {
-            console.log("当前文章的所有题目已作答完毕。");
-        }
-    }
-
-    function handleReviewCompletionIfNeeded(isCorrect) {
-        if (!readingSession.isReviewMode || !isCorrect) {
-            return;
-        }
-
-        if (readingSession.getReviewPages().length === 0) {
-            window.setTimeout(() => {
-                alert('🎉 太棒了！这一年の錯題（間違えた問題）は復習完了です！');
-                readingSession.redirectToIndex();
-            }, 160);
-        }
-    }
-
-    function recordAnswer(isCorrect) {
-        readingSession.recordAnswer(currentPage, isCorrect);
-        handleReviewCompletionIfNeeded(isCorrect);
-    }
-
-    const isCategoryPractice = categorySession.isCategoryMode && !readingSession.isReviewMode;
-    const categoryTarget = isCategoryPractice
-        ? categorySession.getInitialTarget(requestedPage)
-        : { empty: false };
-
-    if (isCategoryPractice) {
-        backLink.href = categorySession.buildBackUrl();
-    }
-
-    const reviewModeHasNoPages = readingSession.isReviewMode && readingSession.getReviewPages().length === 0;
-    if (reviewModeHasNoPages) {
-        alert('当前年份还没有错题记录，先去正常练习一轮吧。');
-        readingSession.redirectToIndex();
-    }
-
-    if (isCategoryPractice && categoryTarget.empty) {
-        alert('这个文章分类里还没有可练习的内容。');
-        window.location.href = categorySession.buildBackUrl();
-    }
-
-    if (isCategoryPractice && categoryTarget.redirectUrl) {
-        window.location.href = categoryTarget.redirectUrl;
-    }
-
-    let currentPage = isCategoryPractice && typeof categoryTarget.page === 'number'
-        ? categoryTarget.page
-        : readingSession.getInitialPage(requestedPage);
-    window.currentPage = currentPage;
-    window.totalPages = totalPages;
-
-    function syncHeaderTitles(activePage) {
-        document.querySelectorAll('.header-title').forEach(titleEl => {
-            if (!titleEl.dataset.baseTitle) {
-                titleEl.dataset.baseTitle = titleEl.textContent.replace(/\s*（🐶 復習モード）$/, '').trim();
-            }
-
-            const isActive = Boolean(activePage && activePage.contains(titleEl));
-            titleEl.textContent = isActive && readingSession.isReviewMode
-                ? `${titleEl.dataset.baseTitle}（🐶 復習モード）`
-                : titleEl.dataset.baseTitle;
-        });
-    }
-
-    function showPage(page) {
-        document.querySelectorAll('.page-content').forEach(el => {
-            el.style.display = 'none';
-            el.classList.remove('active');
-        });
-
-        const currentEl = document.getElementById('page-' + page);
-        if (currentEl) {
-            currentEl.style.display = 'block';
-            currentEl.classList.add('active');
-        }
-
-        syncHeaderTitles(currentEl);
-
-        document.querySelectorAll('.qa-section').forEach(section => {
-            section.removeAttribute('data-answered');
-        });
-
-        document.querySelectorAll('.option-item').forEach(item => {
-            item.classList.remove('selected', 'answered-correct', 'answered-wrong', 'expanded');
-        });
-
-        document.querySelectorAll('.key-sentence').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelectorAll('.paragraph.recorder-focus').forEach(paragraph => {
-            paragraph.classList.remove('recorder-focus');
-        });
-        if (typeof window.hideGlobalTooltip === 'function') {
-            window.hideGlobalTooltip();
-        } else {
-            const tooltip = document.getElementById('global-tooltip');
-            if (tooltip) {
-                tooltip.classList.remove('show');
-            }
-        }
-        if (typeof window.clearActiveVocabWords === 'function') {
-            window.clearActiveVocabWords();
-        }
-        if (typeof window.clearDraftSelection === 'function') {
-            window.clearDraftSelection(true);
-        }
-
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const navState = isCategoryPractice
-            ? categorySession.getNavState(page)
-            : readingSession.getNavState(page);
-
-        prevBtn.classList.toggle('disabled', navState.prevDisabled);
-        nextBtn.classList.toggle('disabled', navState.nextDisabled);
-
-        currentPage = page;
-        window.currentPage = currentPage;
-        if (isCategoryPractice) {
-            categorySession.rememberProgress(page);
-            categorySession.replacePageUrl(page);
-        } else {
-            readingSession.replacePageUrl(page);
-        }
-        if (typeof window.renderSentenceRecorder === 'function') {
-            window.renderSentenceRecorder();
-        }
-        if (typeof window.renderMediumQuickNav === 'function') {
-            window.renderMediumQuickNav();
-        }
-        window.scrollTo(0, 0);
-    }
-
-    window.showPage = showPage;
-
-    function navigateCategory(direction) {
-        const target = categorySession.getMoveTarget(currentPage, direction);
-
-        if (target.sameExamKey && typeof target.page === 'number') {
-            showPage(target.page);
-            return;
-        }
-
-        if (target.href) {
-            window.location.href = target.href;
-            return;
-        }
-
-        if (target.done) {
-            alert('已经是这个分类的最后一篇了！');
-            return;
-        }
-
-        alert('已经是这个分类的第一篇了！');
-    }
-
-    function navigateReview(direction) {
-        const target = readingSession.getMoveTarget(currentPage, direction);
-
-        if (typeof target.page === 'number') {
-            showPage(target.page);
-            return;
-        }
-
-        if (target.done) {
-            alert('🎉 太棒了！这一年の錯題（間違えた問題）は復習完了です！');
-            readingSession.redirectToIndex();
-            return;
-        }
-
-        alert('已经是这一年错题的第一题了！');
-    }
-
-    function prevPage() {
-        if (readingSession.isReviewMode) {
-            navigateReview(-1);
-            return;
-        }
-        if (isCategoryPractice) {
-            navigateCategory(-1);
-            return;
-        }
-        if (currentPage > 1) {
-            showPage(currentPage - 1);
-        }
-    }
-
-    function nextPage() {
-        if (readingSession.isReviewMode) {
-            navigateReview(1);
-            return;
-        }
-        if (isCategoryPractice) {
-            navigateCategory(1);
-            return;
-        }
-        if (currentPage < totalPages) {
-            showPage(currentPage + 1);
-        } else {
-            alert('已经是該年份の最后一篇了！');
-        }
-    }
-
-    if (!reviewModeHasNoPages && !(isCategoryPractice && categoryTarget.redirectUrl) && !(isCategoryPractice && categoryTarget.empty)) {
-        showPage(currentPage);
-    }
-</script>
-<script>
-    window.readingMediumToolsConfig = {
-        manageVocabTooltip: false
-    };
-    window.readingMediumRuntimeConfig = {
-        studyBatchSubmit: true,
-        lockAnalysisUntilSubmitted: true
-    };
-</script>
 <script src="../../../../shared/study-quest-test-runtime.js"></script>
 <script src="../../../../shared/study-quest-test-boot.js"></script>
-<script src="../../shared/reading-medium-tools.js"></script>
-<script src="../../shared/reading-tools.js"></script>
-<script src="../../shared/reading-medium-runtime.js"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
 
+<script src="../../shared/reading-analysis-n1-middle.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
 </body>
 </html>
