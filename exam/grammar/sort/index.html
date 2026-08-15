@@ -3,1543 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLPT 文法排序 - 水彩笔记特训</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>JLPT 文法排序练习</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <script>
-        // 重写 Tailwind 配置表，注入水彩素描本风格配色
-        window.tailwind = window.tailwind || {};
-        window.tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['"Noto Sans SC"', '"Noto Sans JP"', 'sans-serif'],
-                        'serif-jp': ['"Noto Serif SC"', '"Noto Serif JP"', '"Songti SC"', '"SimSun"', 'serif'],
-                        'serif-sc': ['"Noto Serif SC"', '"Noto Serif JP"', '"Songti SC"', '"SimSun"', 'serif'],
-                    },
-                    colors: {
-                        // 素描本底色
-                        bgMain: '#ffffff',        
-                        bgCard: '#ffffff',        
-                        
-                        // 铅笔字色
-                        textMain: '#333333',      
-                        textSub: '#666666',       
-                        textMuted: '#999999',     
-                        
-                        // 铅笔线框
-                        borderMain: '#e5e5e5',    
-                        borderDark: '#cccccc',    
-                        borderStrong: '#333333',  
-                        
-                        // 强调色 (红铅笔)
-                        accentRed: '#e64a4a',     
-                        accentGold: '#e64a4a',    /* 星号标红 */
-                        
-                        // 水彩记号笔 (Marker)
-                        markerYellow: 'rgba(255, 213, 79, 0.25)',
-                        markerBlue: 'rgba(129, 212, 250, 0.25)',
-                        markerMint: 'rgba(134, 239, 172, 0.25)',
-                        markerPink: 'rgba(244, 143, 177, 0.25)',
-                        markerGray: 'rgba(200, 200, 200, 0.2)',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* ==============================================================
-           纸张底座：噪点纹理与明亮背景
-           ============================================================== */
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background-color: var(--bgMain);
-            color: var(--textMain);
-            position: relative;
-        }
-
-        /* 极弱的纸张噪点纹理 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* 工具类：手绘感不规则边框 (Sketchy Border) */
-        .sketch-box {
-            border: 1.5px solid #333333 !important;
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px !important;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.02) !important;
-            transition: all 0.2s ease;
-        }
-
-        .sketch-btn {
-            border: 1.5px solid #333333 !important;
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px !important;
-            transition: all 0.2s ease;
-        }
-        
-        /* 铅笔排线背景 (Hatching) */
-        .hatching-bg {
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px) !important;
-        }
-
-        /* ==============================================================
-           排序专有：填空槽位与选项卡片 (视觉重塑)
-           ============================================================== */
-        
-        /* 1. 填空槽位 (Sort Slots) 变成试卷上的下划虚线。增加固定高度防止排版跳动 */
-        .question-block .sort-slot {
-            border: none !important;
-            border-bottom: 2px dashed #cccccc !important;
-            background: transparent !important;
-            color: #333333 !important;
-            box-shadow: none !important;
-            transition: all 0.2s ease;
-            position: relative;
-            min-width: 48px;
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 4px;
-            vertical-align: bottom;
-        }
-        
-        /* 关键位靶槽 */
-        .question-block .sort-slot.star-slot {
-            border-bottom-color: #e64a4a !important;
-        }
-
-        .question-block .sort-slot .slot-marker {
-            position: absolute;
-            left: 50%;
-            bottom: -1px;
-            transform: translateX(-50%);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 14px;
-            height: 14px;
-            padding: 0;
-            border-radius: 0;
-            background: transparent;
-            border: none;
-            color: #e64a4a;
-            font-size: 10px;
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: 0;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        /* 选中槽位：文字浮现在线上，淡淡黄底 */
-        .question-block .sort-slot.slot-filled { 
-            border-bottom-style: solid !important;
-            border-bottom-color: #333333 !important;
-            background: rgba(255, 213, 79, 0.25) !important; /* markerYellow */
-            color: #333333 !important; 
-            border-radius: 4px 4px 0 0;
-        }
-        
-        /* 星号槽位选中：粉底红字 */
-        .question-block .sort-slot.slot-star-filled { 
-            border-bottom-style: solid !important;
-            border-bottom-color: #e64a4a !important;
-            background: rgba(244, 143, 177, 0.25) !important; /* markerPink */
-            color: #e64a4a !important; 
-            border-radius: 4px 4px 0 0;
-        }
-
-        /* JS判题后的样式强制覆盖：红笔批改风 (与截图一致的浅绿底+红边) */
-        .question-block .sort-slot.judged-correct {
-            background: #eaf6ea !important; /* 浅绿底 */
-            border-bottom-color: #e64a4a !important; /* 红色底线 */
-            border-bottom-style: solid !important;
-            color: #333333 !important;
-            border-radius: 4px 4px 0 0;
-        }
-        .question-block .sort-slot.judged-wrong {
-            background: #fdfdfd !important; 
-            border-bottom-color: #cccccc !important; 
-            border-bottom-style: dashed !important;
-            color: #999999 !important;
-            border-radius: 4px 4px 0 0;
-        }
-
-        /* 槽位里的文字字体保障 */
-        .question-block .sort-slot .slot-text {
-            font-size: 1.1rem;
-            font-weight: 700;
-            line-height: 1;
-            font-family: "Noto Sans SC", "Noto Sans JP", sans-serif;
-        }
-
-        /* 2. 选项木牌 -> 虚线字条卡片 (贴合截图) */
-        .question-block .sort-option-btn {
-            border: 1.5px dashed #e0e0e0 !important;
-            background: #ffffff !important;
-            border-radius: 4px !important; 
-            box-shadow: none !important;
-            position: relative;
-            transition: all 0.2s ease;
-            transform: translate(0, 0);
-            padding: 12px 16px !important;
-            display: flex;
-            align-items: center;
-            text-align: left;
-            width: 100%;
-        }
-
-        .question-block .sort-option-btn:hover:not(.option-used) {
-            border-style: solid !important;
-            border-color: #cccccc !important;
-            background: rgba(129, 212, 250, 0.1) !important; /* 淡水彩蓝悬停 */
-            transform: translateY(-1px) !important;
-            box-shadow: 2px 2px 6px rgba(0,0,0,0.02) !important;
-        }
-
-        /* 选项被使用后，变透明且不可点 */
-        .question-block .sort-option-btn.option-used {
-            opacity: 0.35;
-            pointer-events: none;
-            background-color: transparent !important;
-            border-color: #e0e0e0 !important;
-            border-style: dashed !important;
-            box-shadow: none !important;
-            transform: none !important;
-        }
-
-        /* 选项左侧标识字母：细线圆圈包裹 (贴合截图) */
-        .question-block .option-letter {
-            background: #ffffff !important;
-            color: #666666 !important;
-            border: 1.2px solid #999999 !important;
-            border-radius: 50% !important; 
-            box-shadow: none !important;
-            width: 22px;
-            height: 22px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px !important;
-            margin-right: 12px !important;
-            flex-shrink: 0;
-            font-weight: 500 !important;
-        }
-
-        .question-block .sort-option-btn:hover:not(.option-used) .option-letter {
-            border-color: #333333 !important;
-            color: #333333 !important;
-        }
-
-        /* ==============================================================
-           容器与面板：轻量化笔记本排版
-           ============================================================== */
-        
-        .font-title-unified {
-            font-family: "Noto Serif SC", "Noto Serif JP", "Songti SC", "SimSun", serif;
-            letter-spacing: 0.1em;
-        }
-
-        /* 题目卡片外框 */
-        .question-block > .bg-bgCard {
-            background: #ffffff !important;
-            border: 1.5px solid #333333 !important;
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px !important;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.02) !important;
-            position: relative;
-            padding: 28px 32px !important;
-        }
-
-        /* 顶部导航与按钮板 */
-        .timer-toolbar-btn, .timer-chip-btn, .timer-control-btn, .timer-hide-btn, .random-target-btn {
-            border: 1.5px solid #333333;
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            background: transparent;
-            color: #333333;
-            transition: all 0.2s ease;
-        }
-
-        .timer-toolbar-btn:hover:not(:disabled), .timer-chip-btn:hover:not(:disabled), 
-        .timer-control-btn:hover:not(:disabled), .timer-hide-btn:hover:not(:disabled), 
-        .random-target-btn:hover:not(:disabled) {
-            background: rgba(255, 213, 79, 0.25); /* markerYellow */
-        }
-
-        /* 主状态按钮 */
-        .timer-toolbar-btn.is-primary, .timer-chip-btn.is-selected, 
-        .timer-control-btn.is-primary, .timer-hide-btn.is-selected, .random-target-btn.is-primary {
-            background: #333333;
-            color: #ffffff;
-        }
-        .timer-toolbar-btn.is-primary:hover, .timer-control-btn.is-primary:hover {
-            background: #e64a4a;
-            border-color: #e64a4a;
-        }
-
-        /* 主界面级别与模式选择按钮 */
-        #view-level-select button,
-        #view-mode-select button,
-        #view-year-select button {
-            border: 1.5px solid #333333 !important;
-            border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px !important;
-            box-shadow: none !important;
-            background-color: transparent;
-            transition: all 0.2s ease;
-        }
-
-        #view-level-select button:hover:not(:disabled),
-        #view-mode-select button:hover:not(:disabled),
-        #view-year-select button:hover:not(:disabled) {
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.03) 3px, rgba(51, 51, 51, 0.03) 4px) !important;
-            background-color: #fafafa !important;
-            transform: translate(-1px, -1px);
-        }
-        
-        #view-year-select .bg-bgMain { background-color: transparent !important; }
-
-        /* 提交与下一题按钮：深灰底圆角 (贴合截图) */
-        .question-block .submit-btn,
-        .question-block .next-question-btn {
-            background: #3a3a3a !important;
-            color: #ffffff !important;
-            border: none !important;
-            border-radius: 6px !important;
-            box-shadow: 0px 2px 4px rgba(0,0,0,0.1) !important;
-            transition: all 0.2s ease;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-
-        .question-block .submit-btn:hover:not(:disabled),
-        .question-block .next-question-btn:hover {
-            background: #222222 !important; 
-            transform: translateY(-1px);
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.15) !important;
-        }
-
-        .question-block .submit-btn:disabled {
-            background: transparent !important;
-            border: 1.5px dashed #cccccc !important;
-            color: #999999 !important;
-            box-shadow: none !important;
-        }
-
-        /* 解析区 */
-        .question-block .explanation-area {
-            border: 1.5px solid #333333;
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            background: #fdfdfd;
-            margin-top: 16px;
-            padding: 24px;
-        }
-        .explanation-stack {
-            gap: 20px;
-        }
-        .explanation-group-title {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        .correct-answer-box {
-            padding: 14px 16px;
-            border: 1px solid #e5e5e5;
-            border-radius: 10px;
-            background: #ffffff;
-        }
-        .correct-answer-line {
-            font-family: "Noto Serif SC", "Noto Serif JP", "Songti SC", "SimSun", serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            letter-spacing: 0.01em;
-            color: #333;
-            font-weight: 500;
-        }
-        .correct-answer-token {
-            font-weight: 600;
-            color: #333;
-            vertical-align: middle;
-        }
-        .correct-answer-token.is-accent {
-            color: #e64a4a;
-            font-weight: 700;
-        }
-        .correct-answer-index {
-            width: 20px;
-            height: 20px;
-            margin-right: 6px;
-            font-size: 10px;
-            flex-shrink: 0;
-        }
-        .correct-answer-divider {
-            margin: 0 6px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #999;
-            vertical-align: middle;
-        }
-        .explanation-copy {
-            font-size: 0.96rem;
-            line-height: 1.9;
-            font-weight: 500;
-            color: #555;
-        }
-        .explanation-copy strong,
-        .explanation-copy b {
-            font-weight: 700;
-            color: #333;
-        }
-
-        /* ==============================================================
-           视图切换逻辑
-           ============================================================== */
-        .view-section {
-            display: none;
-            animation: fadeInView 0.3s ease-out forwards;
-        }
-        .view-section.active {
-            display: block;
-        }
-        @keyframes fadeInView {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeInView 0.3s ease-out forwards;
-        }
-
-        /* ==============================================================
-           判卷结果：右上角红色小字 (如截图的"差点")
-           ============================================================== */
-        .status-badge {
-            position: absolute;
-            top: 24px;
-            right: 32px;
-            font-size: 15px !important;
-            font-weight: 700 !important;
-            color: #e64a4a !important; /* 统一为柔和红色 */
-            letter-spacing: 0.1em;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-
-        .status-badge.hidden {
-            display: none !important; 
-        }
-
-        /* 响应式调整及其他 */
-        .page-shell {
-            width: min(100%, 1000px);
-            margin: 0 auto;
-            padding: 32px 16px 48px;
-            box-sizing: border-box;
-        }
-
-        #view-practice.has-bottom-toolbar #practice-question-container {
-            margin-bottom: 0 !important;
-            padding-bottom: calc(8rem + env(safe-area-inset-bottom));
-        }
-
-        .selection-view-shell { width: min(100%, 700px); margin-left: auto; margin-right: auto; }
-        
-        /* 训练模式弹窗覆盖 */
-        .training-mode-overlay {
-            position: fixed; inset: 0; z-index: 2100; display: flex; align-items: center; justify-content: center;
-            padding: 20px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px);
-        }
-        .training-mode-overlay[hidden] { display: none; }
-        .training-mode-modal {
-            width: min(100%, 580px); padding: 32px; border: 1.5px solid #333; background: #fff;
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            box-shadow: 2px 4px 12px rgba(0,0,0,0.05); box-sizing: border-box;
-        }
-        .training-mode-title { font-size: 1.4rem; font-weight: 700; color: #333; letter-spacing: 0.1em; }
-        .training-mode-subtitle { margin-top: 8px; color: #666; font-size: 0.95rem; }
-        .training-mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-        .training-mode-card {
-            appearance: none; border: 1.5px solid #ccc; border-radius: 8px; background: #fff; padding: 20px 18px; text-align: left; transition: all 0.2s ease; cursor: pointer;
-        }
-        .training-mode-card:hover { border-color: #333; background: rgba(129, 212, 250, 0.1); }
-        .training-mode-card.is-selected { background: rgba(129, 212, 250, 0.25); border-color: #333; }
-        .training-mode-card-title { font-size: 1.1rem; font-weight: 700; color: #333; }
-        .training-mode-card-copy { margin-top: 10px; color: #666; font-size: 0.85rem; line-height: 1.6; }
-        .training-mode-card-tag { display: inline-flex; padding: 2px 8px; border: 1px solid #333; border-radius: 4px; font-size: 0.72rem; margin-top: 12px;}
-        
-        .training-mode-chip, .training-mode-action {
-            border: 1.5px solid #333; border-radius: 6px; padding: 8px 16px; background: transparent; font-size: 0.9rem; font-weight: 700;
-        }
-        .training-mode-chip.is-selected, .training-mode-action.is-primary { background: #333 !important; color: #fff !important; }
-        .training-mode-timer, .training-mode-random-settings { margin-top: 24px; padding: 20px; border: 1.5px dashed #ccc; border-radius: 8px; }
-
-        /* 底部悬浮计时器栏 */
-        .practice-bottom-toolbar {
-            position: fixed; left: 0; right: 0; bottom: 0;
-            z-index: 1600; padding: 0 12px calc(env(safe-area-inset-bottom));
-            display: none; pointer-events: none;
-        }
-        .practice-bottom-toolbar.is-visible { display: block; }
-        .practice-toolbar-main {
-            display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 10px 16px;
-            border: 1.5px solid #333; border-radius: 8px 8px 0 0;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
-            pointer-events: auto; max-width: 800px; margin: 0 auto;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
-        }
-        .practice-bottom-toolbar__inner {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .practice-toolbar-slot {
-            position: relative;
-        }
-        .practice-toolbar-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(3px);
-        }
-        .timer-drawer {
-            position: absolute;
-            right: 0;
-            bottom: calc(100% + 10px);
-            width: min(100vw - 24px, 340px);
-            padding: 18px;
-            border: 1.5px solid #333;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            box-sizing: border-box;
-            pointer-events: auto;
-        }
-        .timer-drawer-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .timer-drawer-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            color: #333;
-        }
-        .timer-drawer-close {
-            width: 28px;
-            height: 28px;
-            border: 1.5px solid #333;
-            border-radius: 6px;
-            background: #fff;
-            color: #333;
-            font-size: 16px;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .timer-drawer-display {
-            font-family: "Noto Sans SC", "Noto Sans JP", sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1;
-            color: #333;
-            margin-bottom: 16px;
-        }
-        .timer-control-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .timer-status-text {
-            margin-top: 12px;
-            font-size: 0.78rem;
-            line-height: 1.6;
-            color: #666;
-            font-weight: 700;
-        }
-        .practice-toolbar-meta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .timer-status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #9ca3af;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-        #timer-toolbar-main[data-timer-status="running"] .timer-status-dot,
-        .random-toolbar-main .timer-status-dot {
-            background: #10B981;
-        }
-        #timer-toolbar-main[data-timer-status="paused"] .timer-status-dot {
-            background: #F59E0B;
-        }
-        .practice-toolbar-label {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.16em;
-            color: #666;
-            white-space: nowrap;
-        }
-        .practice-toolbar-time {
-            min-width: 68px;
-            font-size: 1.2rem;
-            line-height: 1;
-            font-weight: 800;
-            font-family: "Noto Sans SC", "Noto Sans JP", sans-serif;
-            color: #333;
-        }
-        .timer-action-group {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-left: auto;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-        .timer-toolbar-btn,
-        .timer-control-btn,
-        .training-mode-chip,
-        .training-mode-action {
-            min-height: 36px;
-            padding: 0 14px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            line-height: 1;
-            white-space: nowrap;
-        }
-        .random-toolbar-main {
-            justify-content: space-between;
-        }
-        .random-toolbar-summary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 18px;
-            flex: 1 1 auto;
-            min-width: 0;
-        }
-        .random-toolbar-metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            min-width: 58px;
-        }
-        .random-toolbar-metric-label {
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            color: #666;
-            white-space: nowrap;
-        }
-        .random-toolbar-metric-value {
-            font-size: 1rem;
-            line-height: 1;
-            font-weight: 800;
-            color: #333;
-            font-family: "Noto Sans SC", "Noto Sans JP", sans-serif;
-        }
-
-        .sort-page-header {
-            width: 100%;
-            padding: 16px 20px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(4px);
-            border-bottom: 1.5px solid #333333;
-            border-bottom-left-radius: 50% 2px;
-            border-bottom-right-radius: 50% 3px;
-        }
-
-        .back-btn {
-            text-decoration: none;
-            color: #333333;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 4px 12px;
-            background: transparent;
-            border: 1.5px solid #333333;
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-            letter-spacing: 0.05em;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 213, 79, 0.4);
-        }
-
-        .sort-page-header-title {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: #333333;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-        }
-
-        .sort-page-header-title span {
-            color: #333333;
-            background: transparent;
-            padding: 2px 8px;
-            font-size: 12px;
-            margin-left: 8px;
-            border: 1.5px solid #333333;
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            font-family: "Noto Sans JP", sans-serif;
-        }
-
-        .sort-page-header-spacer {
-            width: 70px;
-            flex-shrink: 0;
-        }
-
-        .home-btn {
-            min-width: 56px;
-            justify-content: center;
-        }
-
-        .header-right-slot {
-            min-width: 70px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .study-elapsed-display {
-            min-width: 86px;
-            justify-content: center;
-            font-family: "Noto Sans SC", "Noto Sans JP", sans-serif;
-            white-space: nowrap;
-            background: rgba(255, 213, 79, 0.28);
-        }
-
-        .study-elapsed-display[hidden] {
-            display: none !important;
-        }
-
-        .review-panel {
-            background: rgba(255, 213, 79, 0.15);
-        }
-
-        .review-panel > summary {
-            list-style: none;
-        }
-
-        .review-panel > summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .review-summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            cursor: pointer;
-            border-bottom: 1.5px dashed transparent;
-        }
-
-        .review-panel[open] .review-summary {
-            padding-bottom: 12px;
-            border-bottom-color: #cccccc;
-        }
-
-        .review-summary-main {
-            min-width: 0;
-        }
-
-        .review-summary-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #333333;
-            letter-spacing: 0.08em;
-        }
-
-        .review-summary-meta {
-            margin-top: 4px;
-            font-size: 0.74rem;
-            font-weight: 700;
-            color: #666666;
-            line-height: 1.5;
-        }
-
-        .review-summary-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .review-status-pill,
-        .review-count-pill {
-            border: 1.5px solid #333333;
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            padding: 4px 8px;
-            font-size: 0.72rem;
-            font-weight: 800;
-            white-space: nowrap;
-            background: #ffffff;
-        }
-
-        .review-status-pill.has-items {
-            color: #e64a4a;
-            background: rgba(255, 213, 79, 0.28);
-        }
-
-        .review-summary-action::after {
-            content: "展开";
-        }
-
-        .review-panel[open] .review-summary-action::after {
-            content: "收起";
-        }
-
-        .review-empty {
-            color: #666666;
-            font-size: 0.82rem;
-            font-weight: 700;
-            line-height: 1.7;
-        }
-
-        .sort-question-top {
-            margin-bottom: 1.5rem;
-        }
-
-        .sort-question-meta {
-            flex-wrap: wrap;
-        }
-
-        .sort-question-label {
-            white-space: nowrap;
-        }
-
-        .sort-question-count {
-            white-space: nowrap;
-        }
-
-        .sort-sentence {
-            font-size: 1.2rem;
-            line-height: 1.95;
-            margin-bottom: 2rem;
-        }
-
-        .sort-options-grid {
-            gap: 1rem;
-        }
-
-        .question-block .sort-option-btn .leading-relaxed {
-            line-height: 1.55 !important;
-        }
-
-        /* Responsive Fixes */
-        @media (max-width: 768px) {
-            .sort-page-header {
-                padding: 12px 16px;
-            }
-            .sort-page-header-title {
-                font-size: 16px;
-            }
-            .back-btn {
-                font-size: 12px;
-                padding: 4px 10px;
-            }
-            .home-btn {
-                min-width: 50px;
-            }
-            .header-right-slot {
-                min-width: 64px;
-            }
-            .study-elapsed-display {
-                min-width: 76px;
-                padding: 4px 8px;
-                font-size: 12px;
-                letter-spacing: 0.02em;
-            }
-            .page-shell {
-                padding: 18px 12px 36px;
-            }
-            .selection-view-shell {
-                width: min(100%, 680px);
-            }
-            #view-level-select .mb-10 {
-                margin-bottom: 2rem !important;
-            }
-            #view-level-select .text-2xl,
-            #view-mode-select .text-xl,
-            #view-year-select .text-xl {
-                font-size: 1.45rem !important;
-            }
-            #view-level-select button,
-            #view-mode-select button {
-                padding: 18px 16px !important;
-            }
-            #view-level-select .text-3xl {
-                font-size: 1.9rem !important;
-            }
-            #view-year-select #year-review-section {
-                padding: 16px !important;
-                margin-bottom: 1.25rem !important;
-            }
-            .review-summary {
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .review-summary-status {
-                gap: 6px;
-                flex-wrap: wrap;
-                justify-content: flex-end;
-            }
-            .review-status-pill,
-            .review-count-pill {
-                font-size: 0.68rem;
-                padding: 3px 7px;
-            }
-            #year-list-container {
-                gap: 14px !important;
-            }
-            #view-practice > header {
-                margin-bottom: 1.5rem !important;
-                padding-bottom: 0.85rem !important;
-            }
-            #practice-title {
-                font-size: 1.15rem !important;
-                line-height: 1.25 !important;
-            }
-            #practice-subtitle {
-                margin-top: 0.4rem !important;
-                font-size: 0.72rem !important;
-                line-height: 1.6 !important;
-                letter-spacing: 0.04em !important;
-            }
-            #practice-question-container {
-                margin-bottom: 6rem !important;
-            }
-            #view-practice.has-bottom-toolbar #practice-question-container {
-                margin-bottom: 0 !important;
-                padding-bottom: calc(8.5rem + env(safe-area-inset-bottom));
-            }
-            .question-block {
-                gap: 0.8rem !important;
-                margin-bottom: 1.25rem !important;
-            }
-            .question-block > .bg-bgCard {
-                padding: 18px 14px !important;
-            }
-            .sort-question-top {
-                margin-bottom: 1.1rem !important;
-                padding-bottom: 0.75rem !important;
-                align-items: flex-start !important;
-            }
-            .sort-question-meta {
-                gap: 6px !important;
-            }
-            .sort-question-label {
-                padding: 4px 10px !important;
-                font-size: 0.72rem !important;
-            }
-            .sort-question-count {
-                font-size: 0.72rem !important;
-            }
-            .sort-sentence {
-                font-size: 1rem !important;
-                line-height: 1.82 !important;
-                margin-bottom: 1.35rem !important;
-            }
-            .sort-sentence ruby rt {
-                font-size: 0.52em !important;
-            }
-            .question-block .sort-slot {
-                min-width: 34px;
-                height: 30px !important;
-                margin: 0 2px;
-            }
-            .question-block .sort-slot .slot-text {
-                font-size: 0.9rem;
-            }
-            .question-block .sort-slot .slot-marker {
-                width: 12px;
-                height: 12px;
-                bottom: -1px;
-                font-size: 9px !important;
-            }
-            .sort-options-grid {
-                gap: 10px !important;
-                margin-bottom: 1.15rem !important;
-            }
-            .question-block .sort-option-btn {
-                padding: 9px 11px !important;
-                min-height: 46px;
-            }
-            .question-block .option-letter {
-                width: 20px;
-                height: 20px;
-                font-size: 10px !important;
-                margin-right: 10px !important;
-            }
-            .question-block .sort-option-btn .leading-relaxed {
-                font-size: 0.95rem !important;
-            }
-            .question-block .submit-btn,
-            .question-block .next-question-btn {
-                min-height: 42px;
-                padding: 0 20px !important;
-                font-size: 0.86rem !important;
-            }
-            .question-block .explanation-area {
-                margin-top: 12px !important;
-                padding: 18px !important;
-            }
-            .explanation-stack {
-                gap: 16px;
-            }
-            .explanation-group-title {
-                font-size: 10px;
-                margin-bottom: 8px;
-            }
-            .correct-answer-box {
-                padding: 12px 14px;
-            }
-            .correct-answer-line {
-                font-size: 0.9rem;
-                line-height: 1.7;
-            }
-            .correct-answer-index {
-                width: 18px;
-                height: 18px;
-                margin-right: 5px;
-                font-size: 9px;
-            }
-            .correct-answer-divider {
-                margin: 0 5px;
-                font-size: 12px;
-            }
-            .explanation-copy {
-                font-size: 0.88rem;
-                line-height: 1.8;
-            }
-            .status-badge {
-                top: 14px;
-                right: 14px;
-                font-size: 12px !important;
-            }
-            .training-mode-overlay {
-                padding: 16px;
-            }
-            .training-mode-modal {
-                width: min(100%, 520px);
-                padding: 24px 20px;
-            }
-            .training-mode-title {
-                font-size: 1.15rem;
-            }
-            .training-mode-subtitle {
-                font-size: 0.84rem;
-                margin-top: 6px;
-            }
-            .training-mode-grid {
-                gap: 12px;
-                margin-top: 18px;
-            }
-            .training-mode-card {
-                padding: 16px 14px;
-            }
-            .training-mode-card-title {
-                font-size: 1rem;
-            }
-            .training-mode-card-copy {
-                margin-top: 8px;
-                font-size: 0.78rem;
-                line-height: 1.55;
-            }
-            .training-mode-card-tag {
-                margin-top: 10px;
-                font-size: 0.68rem;
-            }
-            .training-mode-timer,
-            .training-mode-random-settings {
-                margin-top: 18px;
-                padding: 16px;
-            }
-            .training-mode-chip,
-            .training-mode-action {
-                min-height: 34px;
-                padding: 0 12px;
-                font-size: 0.82rem;
-            }
-            .practice-bottom-toolbar {
-                padding: 0 10px calc(env(safe-area-inset-bottom));
-            }
-            .practice-bottom-toolbar__inner {
-                max-width: 680px;
-            }
-            .practice-toolbar-main {
-                min-height: 54px;
-                padding: 8px 12px;
-                gap: 10px;
-            }
-            .practice-toolbar-time {
-                min-width: 58px;
-                font-size: 1.08rem;
-            }
-            .practice-toolbar-label {
-                font-size: 10px;
-            }
-            .timer-action-group {
-                gap: 6px;
-            }
-            .timer-toolbar-btn,
-            .timer-control-btn {
-                min-height: 34px;
-                padding: 0 12px;
-                font-size: 0.78rem;
-            }
-            .random-toolbar-summary {
-                gap: 12px;
-            }
-            .random-toolbar-metric-label {
-                font-size: 9px;
-            }
-            .random-toolbar-metric-value {
-                font-size: 0.92rem;
-            }
-            .timer-drawer {
-                width: min(100vw - 20px, 320px);
-                padding: 16px;
-                bottom: calc(100% + 8px);
-            }
-            .timer-drawer-display {
-                font-size: 1.7rem;
-                margin-bottom: 14px;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .sort-page-header {
-                padding: 10px 12px;
-            }
-            .back-btn {
-                font-size: 11px;
-                padding: 4px 8px;
-            }
-            .home-btn {
-                min-width: 46px;
-            }
-            .header-right-slot {
-                min-width: 58px;
-            }
-            .study-elapsed-display {
-                min-width: 70px;
-                padding: 3px 7px;
-                font-size: 11px;
-            }
-            .sort-page-header-title {
-                font-size: 15px;
-            }
-            .sort-page-header-title span {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-            .page-shell {
-                padding: 14px 8px 32px;
-            }
-            #view-level-select .mb-10,
-            #view-mode-select .mb-8 {
-                margin-bottom: 1.5rem !important;
-            }
-            #view-level-select button,
-            #view-mode-select button {
-                padding: 16px 14px !important;
-            }
-            #view-level-select .text-3xl {
-                font-size: 1.7rem !important;
-            }
-            #view-practice > header {
-                margin-bottom: 1.15rem !important;
-                padding-bottom: 0.7rem !important;
-            }
-            #practice-title {
-                font-size: 1.02rem !important;
-            }
-            #practice-subtitle {
-                font-size: 0.68rem !important;
-                line-height: 1.55 !important;
-                letter-spacing: 0.02em !important;
-            }
-            #practice-question-container {
-                margin-bottom: 5.25rem !important;
-            }
-            #view-practice.has-bottom-toolbar #practice-question-container {
-                margin-bottom: 0 !important;
-                padding-bottom: calc(9.5rem + env(safe-area-inset-bottom));
-            }
-            .question-block > .bg-bgCard {
-                padding: 16px 12px !important;
-            }
-            .sort-question-top {
-                margin-bottom: 1rem !important;
-                padding-bottom: 0.65rem !important;
-            }
-            .sort-question-meta {
-                gap: 5px !important;
-            }
-            .sort-question-label {
-                padding: 3px 8px !important;
-                font-size: 0.68rem !important;
-            }
-            .sort-question-count {
-                font-size: 0.68rem !important;
-            }
-            .sort-sentence {
-                font-size: 0.92rem !important;
-                line-height: 1.72 !important;
-                margin-bottom: 1.1rem !important;
-            }
-            .sort-sentence ruby rt {
-                font-size: 0.48em !important;
-            }
-            .question-block .sort-slot {
-                min-width: 30px;
-                height: 28px !important;
-                margin: 0 1px;
-            }
-            .question-block .sort-slot .slot-text {
-                font-size: 0.82rem;
-            }
-            .question-block .sort-slot .slot-marker {
-                width: 10px;
-                height: 10px;
-                bottom: -1px;
-                font-size: 8px !important;
-            }
-            .sort-options-grid {
-                gap: 8px !important;
-                margin-bottom: 1rem !important;
-            }
-            .question-block .sort-option-btn {
-                padding: 8px 10px !important;
-                min-height: 42px;
-            }
-            .question-block .option-letter {
-                width: 18px;
-                height: 18px;
-                font-size: 9px !important;
-                margin-right: 8px !important;
-            }
-            .question-block .sort-option-btn .leading-relaxed {
-                font-size: 0.88rem !important;
-                line-height: 1.5 !important;
-            }
-            .question-block .submit-btn,
-            .question-block .next-question-btn {
-                min-height: 40px;
-                padding: 0 18px !important;
-                font-size: 0.82rem !important;
-            }
-            .question-block .explanation-area {
-                padding: 16px !important;
-            }
-            .explanation-stack {
-                gap: 14px;
-            }
-            .explanation-group-title {
-                font-size: 9px;
-                margin-bottom: 7px;
-            }
-            .correct-answer-box {
-                padding: 10px 12px;
-                border-radius: 8px;
-            }
-            .correct-answer-line {
-                font-size: 0.82rem;
-                line-height: 1.65;
-            }
-            .correct-answer-index {
-                width: 16px;
-                height: 16px;
-                margin-right: 4px;
-                font-size: 8px;
-            }
-            .correct-answer-divider {
-                margin: 0 4px;
-                font-size: 11px;
-            }
-            .explanation-copy {
-                font-size: 0.8rem;
-                line-height: 1.72;
-            }
-            .status-badge {
-                top: 12px;
-                right: 12px;
-                font-size: 11px !important;
-            }
-            .training-mode-overlay {
-                padding: 12px;
-            }
-            .training-mode-modal {
-                padding: 20px 16px;
-            }
-            .training-mode-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                margin-top: 16px;
-            }
-            .training-mode-card {
-                padding: 14px 12px;
-            }
-            .training-mode-timer,
-            .training-mode-random-settings {
-                padding: 14px;
-            }
-            .training-mode-chip,
-            .training-mode-action {
-                min-height: 32px;
-                padding: 0 10px;
-                font-size: 0.78rem;
-            }
-            .practice-bottom-toolbar {
-                padding: 0 8px calc(env(safe-area-inset-bottom));
-            }
-            .practice-toolbar-main {
-                min-height: 50px;
-                padding: 8px 10px;
-                gap: 8px;
-            }
-            .practice-toolbar-meta {
-                gap: 6px;
-            }
-            .practice-toolbar-label {
-                font-size: 9px;
-                letter-spacing: 0.1em;
-            }
-            .practice-toolbar-time {
-                min-width: 52px;
-                font-size: 0.98rem;
-            }
-            .timer-action-group {
-                gap: 5px;
-            }
-            .timer-toolbar-btn,
-            .timer-control-btn {
-                min-height: 32px;
-                padding: 0 10px;
-                font-size: 0.74rem;
-            }
-            .random-toolbar-summary {
-                gap: 8px;
-            }
-            .random-toolbar-metric {
-                min-width: 48px;
-            }
-            .random-toolbar-metric-label {
-                font-size: 8px;
-            }
-            .random-toolbar-metric-value {
-                font-size: 0.86rem;
-            }
-            .timer-drawer {
-                width: min(100vw - 16px, 292px);
-                padding: 14px;
-            }
-            .timer-drawer-title {
-                font-size: 0.88rem;
-            }
-            .timer-drawer-display {
-                font-size: 1.48rem;
-                margin-bottom: 12px;
-            }
-            .timer-control-row {
-                gap: 8px;
-            }
-            .timer-status-text {
-                font-size: 0.72rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../grammar/grammar-redesign.css">
+    <link rel="stylesheet" href="./sort-redesign.css">
 </head>
-<body class="font-sans antialiased min-h-screen">
+<body class="grammar-app sort-app">
 
     <header class="sort-page-header">
-        <button type="button" id="page-back-btn" class="back-btn">
+        <a href="../index.html" id="page-back-btn" class="grammar-back-link" data-kiki-unified-back data-kiki-dynamic-back aria-label="返回上一页" onclick="event.preventDefault(); app.handleHeaderBack(); return false;">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            戻る
-        </button>
-        <h1 class="sort-page-header-title">文法 <span>排序题</span></h1>
+            <span id="page-back-label">返回语法专项</span>
+        </a>
+        <h1 id="page-header-title" class="sort-page-header-title">JLPT 文法排序题</h1>
         <div id="header-right-slot" class="header-right-slot">
-            <a id="header-home-btn" href="../../../index.html" class="back-btn home-btn">主页</a>
-            <div id="study-elapsed-display" class="back-btn study-elapsed-display" hidden>用时 00:00</div>
+            <button id="header-sort-mistake-btn" type="button" class="header-mistake-center-btn" onclick="app.showMistakeCenter()" hidden>
+                <span>错题中心</span>
+                <strong id="header-sort-mistake-count">0</strong>
+            </button>
+            <div id="study-elapsed-display" class="study-elapsed-display" hidden>用时 00:00</div>
         </div>
     </header>
 
-    <div class="page-shell">
-    <div class="max-w-4xl mx-auto">
+    <main class="page-shell">
+    <div class="grammar-app-main">
         
-        <div id="view-level-select" class="view-section active selection-view-shell selection-view-hero">
-            <div class="text-center mb-10 pt-4">
-                <div style="display:inline-block; font-size: 12px; font-weight: 700; background: rgba(129, 212, 250, 0.25); padding: 4px 12px; border-radius: 4px; border: 1px solid #333; margin-bottom: 16px;">✎ 排序题练习笔记</div>
-                <h1 class="text-2xl md:text-3xl font-title-unified font-bold text-textMain tracking-[0.05em] mb-4">文法：排序题特训</h1>
-                <p class="text-textSub font-bold text-sm">请选择要挑战的级别</p>
-            </div>
-
-            <div class="flex flex-col md:flex-row justify-center gap-6 mb-6">
-                <button onclick="app.selectLevel('N1')" class="flex-1 flex flex-col items-center group relative overflow-hidden bg-white py-8 px-6 sketch-box">
-                    <span class="text-3xl font-bold font-sans text-textMain mb-2 group-hover:scale-105 transition-transform">N1</span>
-                    <span class="text-xs text-textSub font-bold tracking-widest">真题练习</span>
-                </button>
-                <button onclick="app.selectLevel('N2')" class="flex-1 flex flex-col items-center group bg-white py-8 px-6 sketch-box">
-                    <span class="text-3xl font-bold font-sans text-textMain mb-2 group-hover:scale-105 transition-transform">N2</span>
-                    <span class="text-xs text-textSub font-bold tracking-widest">真题练习</span>
-                </button>
-                <button id="level-btn-N3" type="button" onclick="app.selectLevel('N3')" class="flex-1 flex flex-col items-center group bg-white py-8 px-6 sketch-box">
-                    <span class="text-3xl font-bold font-sans text-textMain mb-2 group-hover:scale-105 transition-transform">N3</span>
-                    <span id="level-btn-N3-status" class="text-xs text-textSub font-bold tracking-widest">真题练习</span>
-                </button>
-            </div>
-
-            <div class="mt-8">
-                <button onclick="app.startGlobalRandomPractice()" class="w-full group flex items-center justify-between bg-white p-5 relative overflow-hidden sketch-box hover:bg-gray-50">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 border border-borderStrong rounded-full flex items-center justify-center shrink-0" style="background: rgba(255, 213, 79, 0.25);">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-textMain"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
-                        </div>
-                        <div class="text-left">
-                            <h3 class="text-lg font-bold text-textMain tracking-wide">全级别随机特训</h3>
-                            <p class="text-xs text-textSub font-bold mt-1">从 N1 / N2 / N3 中随机抽题</p>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <div id="view-mode-select" class="view-section selection-view-shell selection-view-standard">
-            <div class="mb-8 text-center">
-                <h2 class="text-xl font-bold text-textMain tracking-widest">
-                    <span id="display-selected-level" style="background: rgba(244, 143, 177, 0.25); padding: 2px 8px; border: 1px solid #333; border-radius: 4px;" class="text-lg mr-2">N?</span>练习模式
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onclick="app.showYearList()" class="group text-left bg-white p-6 relative overflow-hidden flex flex-col items-start sketch-box">
-                    <div class="w-10 h-10 border border-borderStrong rounded-md flex items-center justify-center mb-4" style="background: rgba(129, 212, 250, 0.25);">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-textMain"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-textMain mb-2 tracking-wide">年度练习</h3>
-                    <p class="text-xs text-textSub font-bold leading-relaxed">按年份顺序练习历年真题。</p>
-                </button>
-
-                <button onclick="app.startRandomPractice()" class="group text-left bg-white p-6 relative overflow-hidden flex flex-col items-start sketch-box">
-                    <div class="w-10 h-10 border border-borderStrong rounded-md flex items-center justify-center mb-4" style="background: rgba(134, 239, 172, 0.25);">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-textMain"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-textMain mb-2 tracking-wide">随机练习</h3>
-                    <p class="text-xs text-textSub font-bold leading-relaxed">随机抽取题目，快速测试当前掌握程度。</p>
-                </button>
-            </div>
-        </div>
-
-        <div id="view-year-select" class="view-section selection-view-shell selection-view-standard">
-            <details id="year-review-section" class="review-panel mb-8 p-5 sketch-box">
-                <summary class="review-summary">
-                    <div class="review-summary-main">
-                        <div class="review-summary-title">✔ 错题复习</div>
-                    </div>
-                    <div class="review-summary-status">
-                        <span id="year-review-status" class="review-status-pill">暂无错题</span>
-                        <span id="year-review-count" class="review-count-pill">0 题</span>
-                        <span class="review-count-pill review-summary-action" aria-hidden="true"></span>
-                    </div>
-                </summary>
-                <div id="year-review-grid" class="mt-4 flex flex-wrap gap-3">
+        <div id="view-level-select" class="view-section active selection-view-shell grammar-directory-view">
+            <section class="grammar-character-hero" aria-label="智的排序练习引导">
+                <div class="grammar-character-figure sort-satoshi-figure">
+                    <img src="../../../assets/grammar/grammar-sort-mentor-satoshi-full.webp" alt="排序练习导师智（さとし）">
                 </div>
-            </details>
+                <div class="grammar-character-speech">
+                    <p class="grammar-character-name">智（さとし） · 句子结构导师</p>
+                    <h2 id="sort-main-greeting">选择今天想要进行的排序练习吧</h2>
+                    <button id="sort-resume-button" type="button" class="grammar-resume-line" onclick="app.resumeLastYearPractice()" hidden>
+                        <span><strong>继续练习</strong>　<span id="sort-resume-copy">上次的年度真题</span></span>
+                        <span>继续 →</span>
+                    </button>
+                </div>
+            </section>
 
-            <div id="year-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="grammar-section-title">
+                <h2>练习目录</h2>
+                <div class="grammar-level-tabs grammar-main-level-tabs" aria-label="切换练习等级">
+                    <button type="button" data-sort-level="N1" onclick="app.selectLevel('N1')">N1</button>
+                    <button type="button" data-sort-level="N2" onclick="app.selectLevel('N2')">N2</button>
+                    <button id="level-btn-N3" type="button" data-sort-level="N3" onclick="app.selectLevel('N3')">N3</button>
+                </div>
             </div>
+
+            <section class="grammar-practice-entry" aria-label="排序题练习入口">
+                <nav class="grammar-primary-routes" aria-label="主要练习方式">
+                    <button type="button" onclick="app.showYearList()" class="grammar-primary-route is-year">
+                        <span class="grammar-primary-route__index">01</span>
+                        <span class="grammar-primary-route__copy"><strong>年度练习</strong><small>按考试年份完成真题排序</small></span>
+                        <span class="grammar-primary-route__arrow" aria-hidden="true">›</span>
+                    </button>
+                    <button type="button" onclick="app.startRandomPractice()" class="grammar-primary-route is-category">
+                        <span class="grammar-primary-route__index">02</span>
+                        <span class="grammar-primary-route__copy"><strong>随机练习</strong><small>从当前级别随机抽取句子</small></span>
+                        <span class="grammar-primary-route__arrow" aria-hidden="true">›</span>
+                    </button>
+                </nav>
+                <button type="button" onclick="app.startGlobalRandomPractice()" class="grammar-random-entry">
+                    <span><strong>跨级别随机小测</strong><small>混合 N1 / N2 / N3，集中检查语序判断</small></span>
+                    <span>开始小测　›</span>
+                </button>
+            </section>
+        </div>
+
+        <div id="view-mode-select" class="view-section" aria-hidden="true"></div>
+
+        <div id="view-year-select" class="view-section selection-view-shell">
+            <section class="grammar-character-hero" aria-label="智的年度练习引导">
+                <div class="grammar-character-figure sort-satoshi-figure">
+                    <img src="../../../assets/grammar/grammar-sort-mentor-satoshi-full.webp" alt="排序练习导师智（さとし）">
+                </div>
+                <div class="grammar-character-speech">
+                    <p class="grammar-character-name">智（さとし） · 句子结构导师</p>
+                    <h2 id="sort-year-greeting">选一套真题，我们把句子的骨架慢慢排清楚吧。</h2>
+                </div>
+            </section>
+            <div class="grammar-section-title grammar-year-title">
+                <h2><span id="sort-year-level">N?</span> 年度排序真题</h2>
+                <button type="button" class="grammar-directory-back" onclick="app.backToModeSelect()"><span aria-hidden="true">‹</span> 返回练习目录</button>
+            </div>
+            <div id="year-list-container" class="exam-year-list"></div>
+            <footer class="grammar-level-switcher grammar-year-level-switcher">
+                <span>切换级别</span>
+                <div class="grammar-level-tabs" aria-label="切换年度排序真题级别">
+                    <button type="button" data-sort-year-level="N1" onclick="app.selectYearLevel('N1')">N1</button>
+                    <button type="button" data-sort-year-level="N2" onclick="app.selectYearLevel('N2')">N2</button>
+                    <button type="button" data-sort-year-level="N3" onclick="app.selectYearLevel('N3')">N3</button>
+                </div>
+            </footer>
+        </div>
+
+        <div id="view-mistake-center" class="view-section selection-view-shell mistake-center-view">
+            <section class="mistake-mentor-strip sort-satoshi-strip" aria-label="智的错题复习建议">
+                <span class="sort-satoshi-strip-figure">
+                    <img src="../../../assets/grammar/grammar-sort-mentor-satoshi-full.webp" alt="智（さとし）">
+                </span>
+                <div>
+                    <span>智（さとし） · 错题复习</span>
+                    <h2>从反复排错的句子开始，重新确认它们的骨架吧。</h2>
+                </div>
+            </section>
+            <div class="grammar-section-title mistake-center-title">
+                <h2><span id="sort-mistake-level">N?</span> 排序错题中心</h2>
+                <div class="grammar-level-tabs grammar-main-level-tabs" aria-label="切换错题级别">
+                    <button type="button" data-sort-mistake-level="N1" onclick="app.selectMistakeLevel('N1')">N1</button>
+                    <button type="button" data-sort-mistake-level="N2" onclick="app.selectMistakeLevel('N2')">N2</button>
+                    <button type="button" data-sort-mistake-level="N3" onclick="app.selectMistakeLevel('N3')">N3</button>
+                </div>
+            </div>
+            <section class="mistake-overview-line" aria-label="排序错题概览">
+                <div><span>待复习</span><strong><b id="sort-mistake-total">0</b> 题</strong></div>
+                <div><span>复习方式</span><strong>按年份</strong></div>
+                <div class="mistake-overview-weak"><span>学习目标</span><strong>重建句子骨架</strong></div>
+            </section>
+            <div id="sort-mistake-list" class="mistake-group-list"></div>
         </div>
 
         <div id="training-mode-overlay" class="training-mode-overlay" hidden>
             <div class="training-mode-modal" role="dialog" aria-modal="true" aria-labelledby="training-mode-title">
-                <div id="training-mode-title" class="training-mode-title">选择练习方式</div>
-                <div id="training-mode-subtitle" class="training-mode-subtitle">慢慢学习，还是计时挑战。</div>
-                <div class="training-mode-grid">
+                <header class="training-mode-header">
+                    <span class="sort-satoshi-modal-avatar">
+                        <img src="../../../assets/grammar/grammar-sort-mentor-satoshi-full.webp" alt="智（さとし）">
+                    </span>
+                    <div>
+                        <span id="training-mode-eyebrow">智的练习建议</span>
+                        <div id="training-mode-title" class="training-mode-title">选择练习方式</div>
+                        <div id="training-mode-subtitle" class="training-mode-subtitle">请选择答题与批改方式。</div>
+                    </div>
+                </header>
+                <div id="training-mode-grid" class="training-mode-grid">
                     <button type="button" class="training-mode-card" data-training-mode="study">
-                        <div class="training-mode-card-title">学习模式</div>
-                        <div class="training-mode-card-copy">逐题确认答案，慢慢理解句子重组逻辑。</div>
-                        <div class="training-mode-card-tag">即时解析</div>
+                        <span class="training-mode-number">01</span>
+                        <span><b class="training-mode-card-title">学习模式</b><small class="training-mode-card-copy">逐题批改并查看语序解析</small></span>
+                        <span class="training-mode-mark" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="training-mode-card" data-training-mode="challenge">
-                        <div class="training-mode-card-title">测试模式</div>
-                        <div class="training-mode-card-copy">设置时间，一次完成整组题目，更接近考试节奏。</div>
-                        <div class="training-mode-card-tag">统一批改</div>
+                        <span class="training-mode-number">02</span>
+                        <span><b class="training-mode-card-title">测试模式</b><small class="training-mode-card-copy">限时完成后统一批改</small></span>
+                        <span class="training-mode-mark" aria-hidden="true"></span>
                     </button>
                 </div>
                 <div id="training-mode-timer" class="training-mode-timer" hidden>
-                    <div class="text-sm font-bold mb-3">设置限时</div>
-                    <div class="flex flex-wrap gap-3">
+                    <div class="training-setting-title">设置限时</div>
+                    <div class="training-chip-row">
                         <button type="button" class="training-mode-chip" data-training-minutes="5">5 分</button>
                         <button type="button" class="training-mode-chip" data-training-minutes="10">10 分</button>
                         <button type="button" class="training-mode-chip" data-training-minutes="15">15 分</button>
-                        <label class="inline-flex items-center gap-2 border border-borderStrong rounded-md px-3 bg-white text-sm font-bold">
+                        <label class="training-custom-time">
                             自定义
-                            <input id="training-mode-custom-input" type="number" min="1" max="180" step="1" value="10" style="width: 40px; border:none; text-align:center; outline:none;">
+                            <input id="training-mode-custom-input" type="number" min="1" max="180" step="1" value="10">
                             分
                         </label>
                     </div>
                 </div>
                 <div id="training-mode-random-settings" class="training-mode-random-settings" hidden>
-                    <div class="text-sm font-bold mb-3">设置题数</div>
-                    <div class="flex flex-wrap gap-3">
-                        <button type="button" class="training-mode-chip" data-training-random-target="5">5 题</button>
-                        <button type="button" class="training-mode-chip" data-training-random-target="10">10 题</button>
-                        <button type="button" class="training-mode-chip" data-training-random-target="20">20 题</button>
+                    <div class="training-setting-title">设置题数</div>
+                    <div class="training-chip-row">
+                        <button type="button" class="training-mode-chip" data-training-random-target="5">5 題</button>
+                        <button type="button" class="training-mode-chip" data-training-random-target="10">10 題</button>
+                        <button type="button" class="training-mode-chip" data-training-random-target="20">20 題</button>
                     </div>
                 </div>
-                <div class="flex justify-end gap-3 mt-6">
-                    <button type="button" id="training-mode-cancel-btn" class="training-mode-action" style="background:transparent; border:none; text-decoration:underline;">取消</button>
+                <div class="training-mode-actions">
+                    <button type="button" id="training-mode-cancel-btn" class="training-mode-action is-cancel">取消</button>
                     <button type="button" id="training-mode-confirm-btn" class="training-mode-action is-primary">开始</button>
                 </div>
             </div>
         </div>
 
         <div id="view-practice" class="view-section">
-            <header class="mb-8 border-b-2 border-dashed border-borderDark pb-4">
-                <div>
-                    <h1 id="practice-title" class="text-xl md:text-2xl font-bold text-textMain tracking-wide">练习笔记</h1>
-                    <p id="practice-subtitle" class="text-xs font-bold text-textSub mt-2 tracking-wider">点击选项填入空格；点击已填空格可以取消选择。</p>
+            <header class="grammar-practice-header">
+                <div class="grammar-practice-context">
+                    <div class="grammar-practice-heading">
+                        <span id="practice-kicker" class="grammar-practice-kicker">日本語能力試験 · N1 · 年度练习</span>
+                        <h1 id="practice-title">排序练习</h1>
+                    </div>
+                    <div class="grammar-practice-progress" aria-label="练习进度">
+                        <span>問題番号</span>
+                        <strong id="practice-progress-count">1 / 10</strong>
+                        <span class="grammar-practice-progress-track"><i id="practice-progress-bar"></i></span>
+                    </div>
                 </div>
+                <p id="practice-subtitle">選択肢を並べ替えて、正しい文を完成させてください。</p>
             </header>
             
-            <div id="practice-question-container" class="space-y-12 mb-16">
+            <div id="practice-question-container">
             </div>
 
             <div id="practice-bottom-toolbar" class="practice-bottom-toolbar" aria-live="polite">
@@ -1601,7 +255,7 @@
         </div>
 
     </div>
-    </div>
+    </main>
 
     <script src="./n1/data-sort-n1.js"></script>
     <script src="./n2/data-sort-n2.js"></script>
@@ -1634,8 +288,7 @@
             if (!n3Button) return;
             const enabled = isEnabledSortLevel('N3');
             n3Button.disabled = !enabled;
-            n3Button.classList.toggle('opacity-50', !enabled);
-            n3Button.classList.toggle('cursor-not-allowed', !enabled);
+            n3Button.classList.toggle('is-disabled', !enabled);
             if (n3Status) n3Status.textContent = enabled ? '真题练习' : '准备中';
         }
 
@@ -1764,6 +417,44 @@
             }
         }
 
+        function getSortUserName() {
+            if (window.HomePetSystem && typeof window.HomePetSystem.getUserName === 'function') {
+                const systemName = String(window.HomePetSystem.getUserName() || '').trim();
+                if (systemName) return Array.from(systemName).slice(0, 16).join('');
+            }
+            try {
+                const settings = JSON.parse(localStorage.getItem('study_quest_test_v1_kiki_pet_settings_v1') || '{}');
+                return Array.from(String(settings?.userName || '').trim()).slice(0, 16).join('');
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function updateSortCharacterCopy() {
+            const userName = getSortUserName();
+            const mainGreeting = document.getElementById('sort-main-greeting');
+            const yearGreeting = document.getElementById('sort-year-greeting');
+            if (mainGreeting) {
+                mainGreeting.textContent = userName
+                    ? `选择今天想要进行的排序练习吧，${userName}。`
+                    : '选择今天想要进行的排序练习吧。';
+            }
+            if (yearGreeting) {
+                yearGreeting.textContent = userName
+                    ? `选一套真题，我们把句子的骨架慢慢排清楚吧，${userName}。`
+                    : '选一套真题，我们把句子的骨架慢慢排清楚吧。';
+            }
+        }
+
         const testServer = window.StudyQuestTestServer;
 
         function isGrammarChallengeMode() {
@@ -1876,7 +567,8 @@
             
             questionQueue: [], // 当前需要练习的题目队列
             currentIndex: 0,
-            stats: { correct: 0, incorrect: 0 }, // 记录单次练习的数据
+            stats: { correct: 0, incorrect: 0, fullOrderCorrect: 0 }, // 记录单次练习的数据
+            sessionResults: [],
             randomTargetCount: RANDOM_TARGET_PRESETS[1],
             randomRoundTarget: RANDOM_TARGET_PRESETS[1],
             randomAnsweredCount: 0,
@@ -1912,19 +604,18 @@
                 const params = new URLSearchParams(window.location.search);
                 const level = params.get('level');
                 const year = params.get('year');
+                const browse = params.get('browse');
                 const mode = params.get('mode');
                 const training = params.get('training');
                 const timer = params.get('timer');
 
-                if (!['N1', 'N2', 'N3'].includes(level) || !isEnabledSortLevel(level)) {
-                    replaceAppUrl({});
-                    return;
-                }
+                this.currentLevel = ['N1', 'N2', 'N3'].includes(level) && isEnabledSortLevel(level) ? level : 'N1';
+                const selectedLevelDisplay = document.getElementById('display-selected-level');
+                if (selectedLevelDisplay) selectedLevelDisplay.textContent = this.currentLevel;
+                updateSortCharacterCopy();
+                this.updateDirectoryUI();
 
-                this.currentLevel = level;
-                document.getElementById('display-selected-level').textContent = level;
-
-                const hasYear = year && isEnabledSortYear(level, year) && questionDatabase.some(q => q.level === level && q.year === year);
+                const hasYear = year && isEnabledSortYear(this.currentLevel, year) && questionDatabase.some(q => q.level === this.currentLevel && q.year === year);
                 if (hasYear) {
                     const initTrainingMode = training === 'challenge' ? 'challenge' : 'study';
                     const initChallengeMinutes = clampTimerMinutes(timer || this.trainingPicker.selectedMinutes);
@@ -1947,8 +638,133 @@
                     return;
                 }
 
-                replaceAppUrl({ level });
-                this.showYearList({ updateUrl: false });
+                if (browse === 'years') {
+                    this.showYearList({ updateUrl: false });
+                    return;
+                }
+                if (browse === 'mistakes') {
+                    this.showMistakeCenter({ updateUrl: false });
+                    return;
+                }
+
+                replaceAppUrl({});
+                this.switchView('view-level-select');
+            },
+
+            updateHeaderTitle() {
+                const titleCopy = !this.currentLevel
+                    ? 'JLPT 文法排序题'
+                    : `${this.currentLevel === 'ALL' ? 'JLPT' : this.currentLevel} 文法排序题`;
+                const headerTitle = document.getElementById('page-header-title');
+                if (headerTitle) headerTitle.textContent = titleCopy;
+                document.querySelectorAll('.kiki-unified-header-title').forEach((title) => {
+                    title.textContent = titleCopy;
+                });
+            },
+
+            updateDirectoryUI() {
+                this.updateHeaderTitle();
+                document.querySelectorAll('[data-sort-level]').forEach((button) => {
+                    const enabled = isEnabledSortLevel(button.dataset.sortLevel);
+                    button.disabled = !enabled;
+                    button.classList.toggle('is-active', button.dataset.sortLevel === this.currentLevel);
+                });
+                document.querySelectorAll('[data-sort-year-level]').forEach((button) => {
+                    const enabled = isEnabledSortLevel(button.dataset.sortYearLevel);
+                    button.disabled = !enabled;
+                    button.classList.toggle('is-active', button.dataset.sortYearLevel === this.currentLevel);
+                });
+                document.querySelectorAll('[data-sort-mistake-level]').forEach((button) => {
+                    const enabled = isEnabledSortLevel(button.dataset.sortMistakeLevel);
+                    button.disabled = !enabled;
+                    button.classList.toggle('is-active', button.dataset.sortMistakeLevel === this.currentLevel);
+                });
+                const yearLevel = document.getElementById('sort-year-level');
+                if (yearLevel) yearLevel.textContent = this.currentLevel || 'N1';
+                const mistakeLevel = document.getElementById('sort-mistake-level');
+                if (mistakeLevel) mistakeLevel.textContent = this.currentLevel || 'N1';
+
+                const lastPractice = this.currentLevel
+                    ? localStorage.getItem(getGrammarSortLastPracticeKey(this.currentLevel)) || ''
+                    : '';
+                const resumeButton = document.getElementById('sort-resume-button');
+                const resumeCopy = document.getElementById('sort-resume-copy');
+                if (resumeButton) resumeButton.hidden = !lastPractice || !isEnabledSortYear(this.currentLevel, lastPractice);
+                if (resumeCopy && lastPractice) resumeCopy.textContent = `${this.currentLevel} · ${lastPractice}`;
+                this.updateMistakeHeaderCount();
+            },
+
+            updateMistakeHeaderCount() {
+                const count = collectYearReviewItems(this.currentLevel)
+                    .reduce((sum, item) => sum + item.count, 0);
+                const badge = document.getElementById('header-sort-mistake-count');
+                if (badge) badge.textContent = String(count);
+            },
+
+            showMistakeCenter(options = {}) {
+                const { updateUrl = true } = options;
+                if (updateUrl) replaceAppUrl({ level: this.currentLevel, browse: 'mistakes' });
+                const items = collectYearReviewItems(this.currentLevel)
+                    .filter(item => isEnabledSortYear(this.currentLevel, item.year));
+                const total = items.reduce((sum, item) => sum + item.count, 0);
+                const totalEl = document.getElementById('sort-mistake-total');
+                const list = document.getElementById('sort-mistake-list');
+                if (totalEl) totalEl.textContent = String(total);
+                if (list) {
+                    list.innerHTML = items.length
+                        ? items.map((item, index) => `
+                            <button type="button" onclick="app.startMistakePractice('${item.year}')" class="mistake-group-row">
+                                <span class="mistake-group-index">${String(index + 1).padStart(2, '0')}</span>
+                                <span class="mistake-group-copy"><strong>${item.year}</strong><small>年度排序真题</small></span>
+                                <span class="mistake-weakness-meter"><span><b>复习进度</b><em>${item.count} 题</em></span><i><u></u></i></span>
+                                <span class="mistake-group-metrics"><span><b>${item.count}</b> 待复习</span></span>
+                                <span class="mistake-group-enter">进入 ›</span>
+                            </button>
+                        `).join('')
+                        : `<div class="mistake-empty-state"><strong>目前没有待复习的排序题</strong><span>新的错题会自动出现在这里。</span></div>`;
+                }
+                this.updateDirectoryUI();
+                this.switchView('view-mistake-center');
+            },
+
+            selectMistakeLevel(level) {
+                if (!isEnabledSortLevel(level)) return;
+                this.currentLevel = level;
+                this.showMistakeCenter();
+            },
+
+            resumeLastYearPractice() {
+                const lastPractice = localStorage.getItem(getGrammarSortLastPracticeKey(this.currentLevel)) || '';
+                if (!lastPractice || !isEnabledSortYear(this.currentLevel, lastPractice)) {
+                    this.showYearList();
+                    return;
+                }
+                this.startYearPractice(lastPractice);
+            },
+
+            getSortMentorThinkingCopy(index = 0) {
+                const copies = [
+                    '先找句子的谓语，再判断其他词块和它的关系。',
+                    '别急着按编号，先把修饰语和被修饰的部分连起来。',
+                    '把四个词块默读成一句话，最自然的停顿会给你线索。',
+                    '先确定固定搭配，再看剩下的词块应该放在哪里。'
+                ];
+                return copies[index % copies.length];
+            },
+
+            getSortMentorResultCopy(isCorrect, index = 0) {
+                const correctCopies = [
+                    '很好，句子的骨架和修饰关系都排对了。',
+                    '漂亮，这个语序读起来很自然。',
+                    '答得很稳，你已经抓到这句话的结构了。'
+                ];
+                const wrongCopies = [
+                    '差一点。先看谓语前面需要接哪一块，再重新顺一遍。',
+                    '可惜，词块都认识；下一次先把固定搭配连起来。',
+                    '没关系，按照解析把整句读一遍，语序会更清楚。'
+                ];
+                const copies = isCorrect ? correctCopies : wrongCopies;
+                return copies[index % copies.length];
             },
 
             getTrainingSummary() {
@@ -1969,44 +785,46 @@
             renderTrainingModePicker() {
                 const overlay = document.getElementById('training-mode-overlay');
                 const subtitle = document.getElementById('training-mode-subtitle');
+                const title = document.getElementById('training-mode-title');
+                const eyebrow = document.getElementById('training-mode-eyebrow');
+                const modeGrid = document.getElementById('training-mode-grid');
                 const timerPanel = document.getElementById('training-mode-timer');
                 const randomSettingsPanel = document.getElementById('training-mode-random-settings');
                 const confirmBtn = document.getElementById('training-mode-confirm-btn');
                 const customInput = document.getElementById('training-mode-custom-input');
-                if (!overlay || !subtitle || !timerPanel || !randomSettingsPanel || !confirmBtn) return;
+                if (!overlay) return;
+
+                const isRandomEntry = this.pendingPracticeEntry?.kind === 'random' || this.pendingPracticeEntry?.kind === 'global-random';
+                if (isRandomEntry) this.trainingPicker.selectedMode = 'challenge';
 
                 subtitle.textContent = this.getTrainingEntrySubtitle(this.pendingPracticeEntry);
+                if (title) title.textContent = isRandomEntry ? '随机测试设置' : '选择练习方式';
+                if (eyebrow) eyebrow.textContent = isRandomEntry ? '智的测试设置' : '智的练习建议';
                 overlay.hidden = !this.trainingPicker.open;
                 document.body.style.overflow = this.trainingPicker.open ? 'hidden' : '';
 
-                document.querySelectorAll('[data-training-mode]').forEach((button) => {
-                    button.classList.toggle('is-selected', button.dataset.trainingMode === this.trainingPicker.selectedMode);
-                });
+                document.querySelectorAll('[data-training-mode]').forEach((button) => button.classList.toggle('is-selected', button.dataset.trainingMode === this.trainingPicker.selectedMode));
+                document.querySelectorAll('[data-training-minutes]').forEach((button) => button.classList.toggle('is-selected', Number(button.dataset.trainingMinutes) === this.trainingPicker.selectedMinutes));
 
-                document.querySelectorAll('[data-training-minutes]').forEach((button) => {
-                    button.classList.toggle('is-selected', Number(button.dataset.trainingMinutes) === this.trainingPicker.selectedMinutes);
-                });
-
-                if (customInput) {
-                    customInput.value = String(this.trainingPicker.selectedMinutes);
-                }
+                if (customInput) customInput.value = String(this.trainingPicker.selectedMinutes);
 
                 const isChallenge = this.trainingPicker.selectedMode === 'challenge';
-                const isRandomEntry = this.pendingPracticeEntry?.kind === 'random' || this.pendingPracticeEntry?.kind === 'global-random';
+                if (modeGrid) modeGrid.hidden = isRandomEntry;
                 timerPanel.hidden = !isChallenge;
                 randomSettingsPanel.hidden = !isRandomEntry;
-                confirmBtn.textContent = isChallenge ? '开始测试' : '开始学习';
+                confirmBtn.textContent = isRandomEntry ? '开始随机测试' : (isChallenge ? 'テスト開始' : '学習開始');
 
-                document.querySelectorAll('[data-training-random-target]').forEach((button) => {
-                    button.classList.toggle('is-selected', Number(button.dataset.trainingRandomTarget) === this.randomTargetCount);
-                });
+                document.querySelectorAll('[data-training-random-target]').forEach((button) => button.classList.toggle('is-selected', Number(button.dataset.trainingRandomTarget) === this.randomTargetCount));
             },
 
             openTrainingModePicker(entry) {
                 this.pendingPracticeEntry = entry;
                 this.trainingPicker.open = true;
-                this.trainingPicker.selectedMode = localStorage.getItem(getGrammarSortTrainingModeKey()) === 'challenge' ? 'challenge' : 'study';
-                this.trainingPicker.selectedMinutes = clampTimerMinutes(localStorage.getItem(getGrammarSortChallengeMinutesKey()) || this.trainingPicker.selectedMinutes || TIMER_PRESETS[1]);
+                const isRandomEntry = entry?.kind === 'random' || entry?.kind === 'global-random';
+                this.trainingPicker.selectedMode = isRandomEntry
+                    ? 'challenge'
+                    : (localStorage.getItem(getGrammarSortTrainingModeKey()) === 'challenge' ? 'challenge' : 'study');
+                this.trainingPicker.selectedMinutes = clampTimerMinutes(localStorage.getItem(getGrammarSortChallengeMinutesKey()) || TIMER_PRESETS[1]);
                 this.renderTrainingModePicker();
             },
 
@@ -2083,11 +901,15 @@
                     return;
                 }
                 if (activeViewId === 'view-mode-select') {
-                    this.goHome();
+                    this.returnToLevelSelect();
                     return;
                 }
                 if (activeViewId === 'view-year-select') {
                     this.backToModeSelect();
+                    return;
+                }
+                if (activeViewId === 'view-mistake-center') {
+                    this.returnToLevelSelect();
                     return;
                 }
                 if (activeViewId === 'view-practice') {
@@ -2101,45 +923,50 @@
                 this.closeTrainingModePicker();
                 this.resetTimerForPractice();
                 this.setPracticeToolbarMode(null);
-                this.currentLevel = null;
+                this.currentLevel = this.currentLevel && isEnabledSortLevel(this.currentLevel) ? this.currentLevel : 'N1';
                 this.practiceMode = null;
                 this.trainingMode = 'study';
                 this.currentYear = null;
                 replaceAppUrl({});
                 this.switchView('view-level-select');
+                this.updateDirectoryUI();
             },
 
             backToModeSelect() {
                 this.closeTrainingModePicker();
                 this.practiceMode = null;
                 this.currentYear = null;
-                replaceAppUrl({ level: this.currentLevel });
-                this.switchView('view-mode-select');
+                replaceAppUrl({});
+                this.switchView('view-level-select');
+                this.updateDirectoryUI();
             },
 
             returnToLevelSelect() {
                 this.closeTrainingModePicker();
                 this.resetTimerForPractice();
                 this.setPracticeToolbarMode(null);
-                this.currentLevel = null;
+                this.currentLevel = this.currentLevel && isEnabledSortLevel(this.currentLevel) ? this.currentLevel : 'N1';
                 this.practiceMode = null;
                 this.trainingMode = 'study';
                 this.currentYear = null;
                 replaceAppUrl({});
                 this.switchView('view-level-select');
+                this.updateDirectoryUI();
             },
 
             handleBackFromPractice() {
                 this.resetTimerForPractice();
                 this.setPracticeToolbarMode(null);
                 
-                if (this.practiceMode === 'year' || this.practiceMode === 'mistake') {
+                if (this.practiceMode === 'year') {
                     this.showYearList();
+                } else if (this.practiceMode === 'mistake') {
+                    this.showMistakeCenter();
                 } else if (this.currentLevel === 'ALL') {
+                    this.currentLevel = 'N1';
                     this.returnToLevelSelect();
                 } else {
-                    replaceAppUrl({ level: this.currentLevel });
-                    this.switchView('view-mode-select');
+                    this.returnToLevelSelect();
                 }
             },
 
@@ -2166,13 +993,16 @@
             },
 
             updateHeaderRightSlot() {
-                const homeBtn = document.getElementById('header-home-btn');
                 const elapsedDisplay = document.getElementById('study-elapsed-display');
-                if (!homeBtn || !elapsedDisplay) return;
                 const showElapsed = this.isStudyElapsedHeaderActive();
-                homeBtn.hidden = showElapsed;
-                elapsedDisplay.hidden = !showElapsed;
-                if (showElapsed) {
+                if (elapsedDisplay) elapsedDisplay.hidden = !showElapsed;
+                const mistakeButton = document.getElementById('header-sort-mistake-btn');
+                if (mistakeButton) {
+                    const mistakeEntryViews = new Set(['view-level-select', 'view-year-select']);
+                    const showMistakeButton = mistakeEntryViews.has(this.getActiveViewId()) && !showElapsed && this.currentLevel && this.currentLevel !== 'ALL';
+                    mistakeButton.hidden = !showMistakeButton;
+                }
+                if (showElapsed && elapsedDisplay) {
                     elapsedDisplay.textContent = `用时 ${formatTimerClock(this.timer.elapsedSeconds)}`;
                 }
             },
@@ -2551,28 +1381,59 @@
             },
 
             // View Management
-            switchView(viewId) {
+            switchView(viewId, options = {}) {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
                 const view = document.getElementById(viewId);
                 if (view) view.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'instant' });
+                this.updateHeaderTitle();
+                const targetScroll = options.preserveScroll ? Number(options.scrollTop || 0) : 0;
+                window.scrollTo({ top: targetScroll, behavior: 'instant' });
+                this.updateHeaderBackLabel(viewId);
+                this.updateHeaderRightSlot();
                 this.updateTimerUI();
+            },
+
+            updateHeaderBackLabel(viewId = this.getActiveViewId()) {
+                const back = document.getElementById('page-back-btn');
+                if (!back) return;
+                const label = viewId === 'view-level-select'
+                    ? '返回语法专项'
+                    : (viewId === 'view-practice' && this.practiceMode === 'mistake'
+                        ? '返回错题中心'
+                        : '返回练习目录');
+                back.setAttribute('aria-label', label);
+                const ownLabel = back.querySelector('#page-back-label');
+                const desktopLabel = back.querySelector('.kiki-unified-back-label');
+                const mobileLabel = back.querySelector('.kiki-unified-back-label-mobile');
+                if (ownLabel) ownLabel.textContent = label;
+                if (desktopLabel) desktopLabel.textContent = label;
+                if (mobileLabel) mobileLabel.textContent = '返回';
             },
 
             // Step 1: 选择级别
             selectLevel(level) {
                 if (!isEnabledSortLevel(level)) return;
                 this.currentLevel = level;
-                document.getElementById('display-selected-level').textContent = level;
-                replaceAppUrl({ level });
-                this.switchView('view-mode-select');
+                const selectedLevelDisplay = document.getElementById('display-selected-level');
+                if (selectedLevelDisplay) selectedLevelDisplay.textContent = level;
+                replaceAppUrl({});
+                this.updateDirectoryUI();
+            },
+
+            selectYearLevel(level) {
+                if (!isEnabledSortLevel(level)) return;
+                const scrollTop = window.scrollY;
+                this.currentLevel = level;
+                this.updateDirectoryUI();
+                this.showYearList({ preserveScroll: true, scrollTop });
             },
 
             // Step 2-A: 显示年份列表
             showYearList(options = {}) {
                 const { updateUrl = true } = options;
                 this.practiceMode = 'year';
-                if (updateUrl) replaceAppUrl({ level: this.currentLevel });
+                if (updateUrl) replaceAppUrl({ level: this.currentLevel, browse: 'years' });
+                this.updateDirectoryUI();
                 
                 const availableYears = [...new Set(questionDatabase
                     .filter(q => q.level === this.currentLevel)
@@ -2580,54 +1441,51 @@
                 )].sort((left, right) => getYearSortValue(right) - getYearSortValue(left));
 
                 const container = document.getElementById('year-list-container');
-                const reviewSection = document.getElementById('year-review-section');
-                const reviewGrid = document.getElementById('year-review-grid');
-                const reviewStatus = document.getElementById('year-review-status');
-                const reviewCount = document.getElementById('year-review-count');
                 container.innerHTML = '';
-                reviewGrid.innerHTML = '';
-
-                const reviewItems = collectYearReviewItems(this.currentLevel).filter(item => isEnabledSortYear(this.currentLevel, item.year));
-                const totalReviewCount = reviewItems.reduce((sum, item) => sum + item.count, 0);
-                if (reviewStatus) {
-                    reviewStatus.textContent = totalReviewCount > 0 ? '有待复习' : '暂无错题';
-                    reviewStatus.classList.toggle('has-items', totalReviewCount > 0);
-                }
-                if (reviewCount) reviewCount.textContent = `${totalReviewCount} 题`;
-                reviewGrid.hidden = reviewItems.length === 0;
-                if (reviewItems.length > 0) {
-                    reviewGrid.innerHTML = reviewItems.map(item => `
-                        <button onclick="app.startMistakePractice('${item.year}')" class="group inline-flex items-center gap-2 px-4 py-2 border-[1.5px] border-borderStrong bg-white text-textMain text-sm font-bold hover:bg-red-50 hover:text-accentRed transition-all sketch-btn">
-                            <span>${item.year}</span>
-                            <span class="text-xs px-2 py-0.5 border border-borderStrong bg-red-50 text-accentRed rounded-sm">待复习 ${item.count} 题</span>
-                        </button>
-                    `).join('');
-                }
 
                 const lastPractice = localStorage.getItem(getGrammarSortLastPracticeKey(this.currentLevel)) || '';
 
                 if (availableYears.length === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center py-12 text-textSub bg-white border-[1.5px] border-borderMain sketch-box">暂无数据</div>`;
+                    container.innerHTML = `<div class="grammar-year-empty">暂无可练习的年度排序真题</div>`;
                 } else {
-                    container.innerHTML = availableYears.map(year => {
-                        const qCount = questionDatabase.filter(q => q.level === this.currentLevel && q.year === year).length;
-                        const isLastPractice = year === lastPractice;
-                        const isEnabled = isEnabledSortYear(this.currentLevel, year);
+                    const groupedYears = availableYears.reduce((groups, session) => {
+                        const match = String(session).match(/^(\d{4})年(\d{1,2})月$/);
+                        const calendarYear = match ? match[1] : String(session);
+                        const month = match ? Number(match[2]) : null;
+                        if (!groups.has(calendarYear)) groups.set(calendarYear, []);
+                        groups.get(calendarYear).push({ session, month });
+                        return groups;
+                    }, new Map());
 
+                    container.innerHTML = Array.from(groupedYears.entries()).map(([calendarYear, sessions]) => {
+                        const orderedSessions = sessions.sort((left, right) => (left.month || 0) - (right.month || 0));
                         return `
-                            <button ${isEnabled ? `onclick="app.startYearPractice('${year}')"` : 'type="button" disabled'} class="flex items-center justify-between p-5 bg-white border-[1.5px] border-borderStrong transition-all group text-left sketch-box ${isEnabled ? 'hover:bg-blue-50' : 'opacity-50 cursor-not-allowed'}">
-                                <div class="flex items-center gap-3">
-                                    <div class="font-bold text-lg text-textMain tracking-wider">${year}</div>
+                            <section class="grammar-year-stage" aria-label="${calendarYear} 年排序真题">
+                                <header class="grammar-year-stage-header">
+                                    <span class="grammar-year-stage-title"><strong>${calendarYear} 年</strong></span>
+                                </header>
+                                <div class="grammar-year-sessions">
+                                    ${orderedSessions.map((entry) => {
+                                        const qCount = questionDatabase.filter(q => q.level === this.currentLevel && q.year === entry.session).length;
+                                        const isLastPractice = entry.session === lastPractice;
+                                        const isEnabled = isEnabledSortYear(this.currentLevel, entry.session);
+                                        const monthLabel = entry.month ? `${entry.month} 月` : entry.session;
+                                        return `
+                                            <button ${isEnabled ? `onclick="app.startYearPractice('${entry.session}')"` : 'type="button" disabled'} class="exam-year-item grammar-year-session ${isLastPractice ? 'is-current' : ''} ${isEnabled ? '' : 'is-disabled'}">
+                                                <span class="grammar-year-session-copy"><strong>${monthLabel}</strong><small>${qCount} 题</small></span>
+                                                <span class="grammar-year-session-state">${isLastPractice ? '继续 ›' : '进入 ›'}</span>
+                                            </button>
+                                        `;
+                                    }).join('')}
                                 </div>
-                                <div class="flex items-center gap-2 shrink-0">
-                                    ${isLastPractice ? '<span class="text-[10px] font-bold text-textMain bg-yellow-100 px-2 py-1 border border-borderStrong rounded-sm">前回</span>' : ''}
-                                    <div class="text-sm text-textSub font-sans bg-white px-2 py-1 border-[1px] border-borderStrong rounded-sm">全 ${qCount} 题</div>
-                                </div>
-                            </button>
+                            </section>
                         `;
                     }).join('');
                 }
-                this.switchView('view-year-select');
+                this.switchView('view-year-select', {
+                    preserveScroll: options.preserveScroll === true,
+                    scrollTop: options.scrollTop
+                });
             },
 
             // Step 2-B: 启动随机乱序练习
@@ -2663,7 +1521,8 @@
                 this.randomTargetCount = RANDOM_TARGET_PRESETS.includes(Number(randomTargetCount)) ? Number(randomTargetCount) : RANDOM_TARGET_PRESETS[1];
                 this.practiceMode = 'random';
                 this.currentYear = '随机练习';
-                this.stats = { correct: 0, incorrect: 0 };
+                this.stats = { correct: 0, incorrect: 0, fullOrderCorrect: 0 };
+                this.sessionResults = [];
                 this.randomStreak = 0;
                 this.randomBestStreak = 0;
                 replaceAppUrl({ level: this.currentLevel });
@@ -2689,7 +1548,8 @@
                 this.currentLevel = 'ALL';
                 this.practiceMode = 'random';
                 this.currentYear = '全级别随机';
-                this.stats = { correct: 0, incorrect: 0 };
+                this.stats = { correct: 0, incorrect: 0, fullOrderCorrect: 0 };
+                this.sessionResults = [];
                 this.randomStreak = 0;
                 this.randomBestStreak = 0;
                 replaceAppUrl({});
@@ -2714,7 +1574,8 @@
                 this.prepareTrainingForRun(trainingMode, challengeMinutes);
                 this.practiceMode = 'mistake';
                 this.currentYear = year;
-                this.stats = { correct: 0, incorrect: 0 };
+                this.stats = { correct: 0, incorrect: 0, fullOrderCorrect: 0 };
+                this.sessionResults = [];
                 this.randomStreak = 0;
                 this.randomBestStreak = 0;
 
@@ -2723,7 +1584,7 @@
                 if (pool.length === 0) {
                     alert('错题复习の対象暂无题目。');
                     if (fromInit) replaceAppUrl({ level: this.currentLevel });
-                    this.showYearList({ updateUrl });
+                    this.showMistakeCenter({ updateUrl });
                     return;
                 }
 
@@ -2756,7 +1617,8 @@
                 this.prepareTrainingForRun(trainingMode, challengeMinutes);
                 this.practiceMode = 'year';
                 this.currentYear = year;
-                this.stats = { correct: 0, incorrect: 0 };
+                this.stats = { correct: 0, incorrect: 0, fullOrderCorrect: 0 };
+                this.sessionResults = [];
                 this.randomStreak = 0;
                 this.randomBestStreak = 0;
                 localStorage.setItem(getGrammarSortLastPracticeKey(this.currentLevel), year);
@@ -2786,39 +1648,121 @@
                     const optText = targetOpt ? targetOpt.text : id;
                     
                     if (idx === q.starIndex) {
-                        correctOrderStrHtml += `<span class="correct-answer-index inline-flex items-center justify-center border border-accentRed text-accentRed bg-red-50 rounded-full">★${id}</span><span class="correct-answer-token is-accent align-middle">${optText}</span>`;
+                        correctOrderStrHtml += `<span class="correct-answer-index is-accent">★${id}</span><span class="correct-answer-token is-accent">${optText}</span>`;
                     } else {
-                        correctOrderStrHtml += `<span class="correct-answer-index inline-flex items-center justify-center border border-borderStrong bg-white text-textMain rounded-full">${id}</span><span class="correct-answer-token align-middle">${optText}</span>`;
+                        correctOrderStrHtml += `<span class="correct-answer-index">${id}</span><span class="correct-answer-token">${optText}</span>`;
                     }
                     if (idx < q.correctOrder.length - 1) {
-                        correctOrderStrHtml += ` <span class="correct-answer-divider align-middle">/</span> `;
+                        correctOrderStrHtml += ` <span class="correct-answer-divider">/</span> `;
                     }
                 });
                 return correctOrderStrHtml;
             },
 
-            buildChallengeExplanationCards() {
-                return this.questionQueue.map((q, index) => `
-                    <div class="bg-white border-[1.5px] border-borderStrong p-5 md:p-6 mb-6 rounded-lg shadow-sm">
-                        <div class="flex items-center justify-between gap-3 border-b border-dashed border-borderMain pb-3 mb-4">
-                            <div class="text-sm font-bold text-textMain tracking-wide">${q.label || `Q${index + 1}`}</div>
+            getSessionReviewResults() {
+                const seen = new Set();
+                return this.sessionResults.filter((result) => {
+                    if (result.isAllCorrect || seen.has(result.question.id)) return false;
+                    seen.add(result.question.id);
+                    return true;
+                });
+            },
+
+            buildSortResultReviewMarkup() {
+                const reviewResults = this.getSessionReviewResults();
+                if (reviewResults.length === 0) {
+                    return `
+                        <div class="grammar-result-empty">
+                            <strong>本次没有需要复盘的题目</strong>
+                            <span>★位置与完整顺序均正确，可以继续选择下一组练习。</span>
                         </div>
-                        <div class="text-textMain font-serif-jp text-lg md:text-xl font-bold leading-loose bg-gray-50 p-4 border-[1.5px] border-borderStrong mb-5 rounded-md">
+                    `;
+                }
+
+                return reviewResults.map((result, index) => {
+                    const question = result.question;
+                    const questionId = JSON.stringify(String(question.id));
+                    const status = result.isStarCorrect ? '★正确 · 完整顺序有误' : '★位置答案错误';
+                    const countLabel = result.isStarCorrect ? '错序 1 题' : '错 1 题';
+                    return `
+                        <article class="grammar-result-topic-row">
+                            <span class="grammar-result-topic-number">${String(index + 1).padStart(2, '0')}</span>
+                            <div class="grammar-result-topic-copy">
+                                <strong>[${escapeHtml(question.level)}] ${escapeHtml(question.year)} · ${escapeHtml(question.label || `問題 ${index + 1}`)}</strong>
+                                <span>${status}</span>
+                            </div>
+                            <span class="grammar-result-topic-count">${countLabel}</span>
+                            <button type="button" class="grammar-result-topic-link" onclick='app.openResultQuestionAnalysis(${questionId})'>
+                                <span>查看排列</span><span aria-hidden="true">→</span>
+                            </button>
+                        </article>
+                    `;
+                }).join('');
+            },
+
+            reviewCurrentSessionMistakes() {
+                const reviewQuestions = this.getSessionReviewResults().map((result) => result.question);
+                if (reviewQuestions.length === 0) {
+                    this.restartCurrentPractice();
+                    return;
+                }
+
+                this.prepareTrainingForRun('study');
+                this.stats = { correct: 0, incorrect: 0, fullOrderCorrect: 0 };
+                this.sessionResults = [];
+                this.randomAnsweredCount = 0;
+                this.randomStreak = 0;
+                this.randomBestStreak = 0;
+                this.questionQueue = reviewQuestions;
+                this.currentIndex = 0;
+                this.renderPracticeQuestion();
+                this.switchView('view-practice');
+                this.startPracticeClock();
+            },
+
+            openResultQuestionAnalysis(questionId) {
+                const result = this.sessionResults.find((entry) => String(entry.question.id) === String(questionId));
+                if (!result) return;
+                const container = document.getElementById('practice-question-container');
+                if (!container) return;
+
+                container.innerHTML = `
+                    <section class="exam-analysis-sheet fade-in">
+                        <header class="exam-result-heading">
+                            <div><span>RED PEN REVIEW</span><h2>排列复盘</h2></div>
+                        </header>
+                        <div class="exam-analysis-list">
+                            ${this.buildChallengeExplanationCards([result.question])}
+                        </div>
+                        <div class="exam-result-actions">
+                            <button type="button" onclick="app.renderPracticeQuestion()">返回结算</button>
+                            <button type="button" class="is-primary" onclick="app.reviewCurrentSessionMistakes()">复习本次题目</button>
+                        </div>
+                    </section>
+                `;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            buildChallengeExplanationCards(questions = this.questionQueue) {
+                return questions.map((q, index) => `
+                    <article class="exam-analysis-question">
+                        <header>
+                            <span>問題 ${String(index + 1).padStart(2, '0')}</span>
+                            <b>${q.label || `Q${index + 1}`}</b>
+                        </header>
+                        <div class="sort-analysis-sentence">
                             ${q.prefix}
-                            <span class="inline-flex items-end gap-2 mx-1 align-bottom">
+                            <span class="sort-analysis-order">
                                 ${Array.from({ length: 4 }, (_, slotIndex) => {
                                     const answerId = q.correctOrder[slotIndex];
-                                    if (slotIndex === q.starIndex) {
-                                        return `<span class="inline-flex w-8 h-8 items-center justify-center border-b-[2px] border-accentRed text-accentRed font-bold font-sans relative"><span class="slot-marker">★</span>${answerId}</span>`;
-                                    }
-                                    return `<span class="inline-flex w-8 h-8 items-center justify-center border-b-[2px] border-textMain text-textMain font-bold font-sans">${answerId}</span>`;
+                                    return `<span class="sort-analysis-slot ${slotIndex === q.starIndex ? 'is-star' : ''}">${slotIndex === q.starIndex ? '<i>★</i>' : ''}${answerId}</span>`;
                                 }).join('')}
                             </span>
                             ${q.suffix}
                         </div>
-                        <div class="space-y-5 explanation-stack">
+                        <div class="explanation-stack">
                             <div>
-                                <h4 class="explanation-group-title">【正解】</h4>
+                                <h4 class="explanation-group-title">01　正确语序</h4>
                                 <div class="correct-answer-box">
                                     <div class="correct-answer-line">
                                         ${this.buildCorrectOrderMarkup(q)}
@@ -2826,13 +1770,13 @@
                                 </div>
                             </div>
                             <div>
-                                <h4 class="explanation-group-title">【解析】</h4>
-                                <div class="space-y-3 explanation-copy">
+                                <h4 class="explanation-group-title">02　排序解析</h4>
+                                <div class="explanation-copy">
                                     ${q.explanation}
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 `).join('');
             },
 
@@ -2846,18 +1790,18 @@
                     subtitleEl.textContent = '测试模式已结束，请通过解析复盘薄弱点。';
                 }
                 container.innerHTML = `
-                    <div class="bg-white border-[1.5px] border-borderStrong p-6 md:p-8 rounded-xl shadow-sm fade-in sketch-box">
-                        <div class="text-center border-b border-dashed border-borderMain pb-4 mb-6">
-                            <h2 class="text-2xl font-title-unified font-bold text-textMain tracking-wide">统一批改与解析</h2>
-                        </div>
-                        <div class="space-y-6">
+                    <section class="exam-analysis-sheet fade-in">
+                        <header class="exam-result-heading">
+                            <div><span>RED PEN REVIEW</span><h2>统一批改与解析</h2></div>
+                        </header>
+                        <div class="exam-analysis-list">
                             ${this.buildChallengeExplanationCards()}
                         </div>
-                        <div class="mt-8 flex flex-wrap justify-center gap-3">
-                            <button onclick="app.renderPracticeQuestion()" class="px-5 py-2.5 bg-white text-textMain border-[1.5px] border-borderStrong rounded-md text-sm font-bold hover:bg-gray-50 transition-all">返回批改结果</button>
-                            <button onclick="app.restartCurrentPractice()" class="px-5 py-2.5 bg-textMain text-white border-[1.5px] border-borderStrong rounded-md text-sm font-bold hover:bg-accentRed hover:border-accentRed transition-all">再练一次</button>
+                        <div class="exam-result-actions">
+                            <button onclick="app.renderPracticeQuestion()">返回批改结果</button>
+                            <button onclick="app.restartCurrentPractice()" class="is-primary">再练一次</button>
                         </div>
-                    </div>
+                    </section>
                 `;
             },
 
@@ -2865,6 +1809,10 @@
             renderPracticeQuestion() {
                 const container = document.getElementById('practice-question-container');
                 container.innerHTML = ''; 
+
+                const isResultView = this.currentIndex >= this.questionQueue.length;
+                const practiceView = document.getElementById('view-practice');
+                if (practiceView) practiceView.classList.toggle('is-result-view', isResultView);
                 
                 const headerTitle = this.currentLevel === 'ALL'
                     ? '全级别随机'
@@ -2873,33 +1821,35 @@
                 const subtitleEl = document.getElementById('practice-subtitle');
                 if (subtitleEl) {
                     subtitleEl.textContent = this.trainingMode === 'challenge'
-                        ? `测试模式 · 剩余 ${this.timer.selectedMinutes} 分 · 统一批改`
-                        : '学习模式 · 選択肢をクリックして空欄を埋めてください。';
+                        ? `テストモード · 制限時間 ${this.timer.selectedMinutes} 分 · 全問終了後に採点します。`
+                        : '選択肢を並べ替えて、正しい文を完成させてください。';
                 }
+                const kicker = document.getElementById('practice-kicker');
+                const progressCount = document.getElementById('practice-progress-count');
+                const progressBar = document.getElementById('practice-progress-bar');
+                const totalQuestions = this.questionQueue.length;
+                const displayedIndex = totalQuestions > 0 ? Math.min(this.currentIndex + 1, totalQuestions) : 0;
+                if (kicker) {
+                    const modeLabel = this.practiceMode === 'year' ? '年度练习' : (this.practiceMode === 'mistake' ? '错题复习' : '随机练习');
+                    kicker.textContent = `日本語能力試験 · ${this.currentLevel === 'ALL' ? '全级别' : this.currentLevel} · ${modeLabel}`;
+                }
+                if (progressCount) progressCount.textContent = `${displayedIndex} / ${totalQuestions}`;
+                if (progressBar) progressBar.style.width = `${totalQuestions > 0 ? Math.min(100, (displayedIndex / totalQuestions) * 100) : 0}%`;
 
                 // 完成所有题目后的结算页
-                if (this.currentIndex >= this.questionQueue.length) {
+                if (isResultView) {
                     updateGrammarPracticeTestTools(false);
                     if (this.trainingMode === 'challenge') {
                         this.finalizeTimerForResult({ timedOut: this.timer.timeoutTriggered });
                     } else {
                         this.finalizeTimerForResult();
                     }
-                    const restartAction = 'app.restartCurrentPractice()';
-
                     const totalQ = this.stats.correct + this.stats.incorrect;
-                    const reward = this.trainingMode === 'challenge' ? ensureGrammarRewardResult() : null;
-                    const drawAffordance = this.trainingMode === 'challenge' ? buildGrammarDrawMarkup(reward) : '';
-
-                    let completeMsg = '';
-                    if (this.practiceMode === 'year') {
-                        completeMsg = `练习完成！ <strong class="text-textMain">${headerTitle}</strong> の ${totalQ} 题が完了しました。<br>答错的题目会自动加入错题复习。`;
-                    } else if (this.practiceMode === 'mistake') {
-                        completeMsg = `练习完成！ <strong class="text-textMain">[${this.currentLevel}] ${this.currentYear}</strong> の错题复习が完了しました。<br>答对的题目会自动从错题记录中移除。`;
-                    } else {
-                        completeMsg = `练习完成！ <strong class="text-textMain">${headerTitle}</strong> の ${totalQ} 题が完了しました。`;
-                    }
-                    dispatchGrammarPracticeState(this.stats.incorrect === 0 ? 'perfect_clear' : 'clear', {
+                    if (this.trainingMode === 'challenge') ensureGrammarRewardResult();
+                    const score = totalQ ? Math.round((this.stats.correct / totalQ) * 100) : 0;
+                    const reviewResults = this.getSessionReviewResults();
+                    const hasPerfectOrder = totalQ > 0 && this.stats.fullOrderCorrect === totalQ;
+                    dispatchGrammarPracticeState(hasPerfectOrder ? 'perfect_clear' : 'clear', {
                         isCorrect: true,
                         streak: this.randomBestStreak,
                         questionIndex: this.questionQueue.length,
@@ -2907,66 +1857,34 @@
                         accuracy: totalQ > 0 ? this.stats.correct / totalQ : 0
                     });
 
-                    const timerSummaryHtml = this.trainingMode === 'challenge' ? `
-                        <div class="max-w-xs mx-auto mb-6 bg-white border-[1.5px] border-borderStrong rounded-lg px-4 py-4 shadow-sm">
-                            <div class="text-xs font-bold tracking-widest text-textSub">所要時間</div>
-                            <div class="mt-2 text-2xl font-bold text-textMain font-sans">${this.getResultTimerText()}</div>
-                            ${this.timer.resultTimeout ? '<p class="mt-3 text-sm font-bold text-accentRed">タイムアップ</p>' : ''}
-                        </div>
-                    ` : this.timer.resultHasRun ? `
-                        <div class="max-w-xs mx-auto mb-6 bg-white border-[1.5px] border-borderStrong rounded-lg px-4 py-4 shadow-sm">
-                            <div class="text-xs font-bold tracking-widest text-textSub">所用时间</div>
-                            <div class="mt-2 text-2xl font-bold text-textMain font-sans">${this.getResultTimerText()}</div>
-                        </div>
-                    ` : '';
-
-                    const randomSummaryHtml = this.practiceMode === 'random' ? `
-                        <div class="max-w-sm mx-auto mb-6 bg-white border-[1.5px] border-borderStrong rounded-lg px-5 py-4 shadow-sm">
-                            <div class="grid grid-cols-2 gap-4 text-center">
-                                <div>
-                                    <div class="text-xs font-bold tracking-widest text-textSub">解答数</div>
-                                    <div class="mt-2 text-2xl font-bold text-textMain font-sans">${this.randomRoundTarget}</div>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold tracking-widest text-textSub">最大連続正解</div>
-                                    <div class="mt-2 text-2xl font-bold text-textMain font-sans">${this.randomBestStreak}</div>
-                                </div>
-                            </div>
-                        </div>
-                    ` : '';
-
                     container.innerHTML = `
-                        <div class="text-center bg-white border-[1.5px] border-borderStrong rounded-xl p-8 md:p-12 shadow-sm fade-in relative sketch-box">
-                            <div class="w-16 h-16 bg-green-100 border-[1.5px] border-green-600 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                ${getIconSvg('check-circle', 'w-8 h-8')}
-                            </div>
-                            <div class="lab-result-heading-row mb-6">
-                                <h2 class="text-2xl font-bold text-textMain tracking-wide">练习完成</h2>
-                                ${drawAffordance}
-                            </div>
-                            
-                            <div class="flex justify-center gap-8 mb-8 border-y-[1.5px] border-dashed border-borderMain py-6 max-w-sm mx-auto">
-                                <div class="text-center w-24">
-                                    <div class="text-3xl font-bold text-textMain mb-2 font-sans">${this.stats.correct}</div>
-                                    <div class="text-xs text-textMain font-bold border border-borderStrong bg-green-50 rounded-md py-1 px-2">正解</div>
+                        <section class="grammar-result-sheet fade-in">
+                            <header class="grammar-result-heading">
+                                <div>
+                                    <span>RESULT</span>
+                                    <h2>本次练习总结</h2>
                                 </div>
-                                <div class="text-center w-24">
-                                    <div class="text-3xl font-bold text-accentRed mb-2 font-sans">${this.stats.incorrect}</div>
-                                    <div class="text-xs text-accentRed font-bold border border-accentRed bg-red-50 rounded-md py-1 px-2">不正解</div>
+                            </header>
+                            <dl class="grammar-result-summary" aria-label="本次排序成绩摘要">
+                                <div><dt>得分</dt><dd><strong>${score}</strong><span>/ 100</span></dd></div>
+                                <div><dt>用时</dt><dd><strong>${this.getResultTimerText()}</strong></dd></div>
+                                <div><dt>答案正确</dt><dd><strong>${this.stats.correct}</strong><span>/ ${totalQ}</span></dd></div>
+                                <div><dt>顺序完全正确</dt><dd><strong>${this.stats.fullOrderCorrect}</strong><span>/ ${totalQ}</span></dd></div>
+                            </dl>
+                            <section class="grammar-result-review">
+                                <header>
+                                    <h3>本次需要复盘的题目</h3>
+                                    <span>根据本次未完全正确的题目整理</span>
+                                </header>
+                                <div class="grammar-result-topic-list">
+                                    ${this.buildSortResultReviewMarkup()}
                                 </div>
-                            </div>
-
-                            ${timerSummaryHtml}
-                            ${randomSummaryHtml}
-
-                            <p class="text-textSub mb-8 text-sm font-bold leading-relaxed">${completeMsg}</p>
-                            
-                            <div class="flex flex-wrap justify-center gap-3">
-                                ${this.trainingMode === 'challenge' ? '<button onclick="app.openChallengeAnalysisView()" class="px-6 py-2.5 bg-white text-textMain border-[1.5px] border-borderStrong rounded-md text-sm font-bold hover:bg-gray-50 transition-all">查看解析</button>' : ''}
-                                <button onclick="${restartAction}" class="px-6 py-2.5 bg-textMain text-white border-[1.5px] border-borderStrong rounded-md text-sm font-bold hover:bg-accentRed hover:border-accentRed transition-all">再练一次</button>
-                                <button onclick="app.handleBackFromPractice()" class="px-6 py-2.5 bg-white text-textMain border-[1.5px] border-borderStrong rounded-md text-sm font-bold hover:bg-gray-50 transition-all">返回列表</button>
-                            </div>
-                        </div>
+                            </section>
+                            <footer class="grammar-result-actions">
+                                <button type="button" onclick="app.handleBackFromPractice()">返回练习目录</button>
+                                <button type="button" class="is-primary" onclick="${reviewResults.length ? 'app.reviewCurrentSessionMistakes()' : 'app.restartCurrentPractice()'}">${reviewResults.length ? '复习本次题目' : '再练一次'}</button>
+                            </footer>
+                        </section>
                     `;
                     return;
                 }
@@ -2977,21 +1895,22 @@
                 this.updateTimerUI();
             },
 
-            // 生成题目的 HTML 模板 (还原水彩笔记截图)
+            // 生成排序题专用的题目结构
             generateQuestionHTML(q, index, total) {
+                const mentorThinkingCopy = this.getSortMentorThinkingCopy(index);
                 // 生成下划线槽位 (虚线)
                 let slotsHtml = '';
                 for(let i=0; i<4; i++) {
                     if (i === q.starIndex) {
                         slotsHtml += `
-                            <button class="sort-slot star-slot focus:outline-none" data-index="${i}">
+                            <button class="sort-slot star-slot" data-index="${i}">
                                 <span class="slot-text"></span>
                                 <span class="slot-marker">★</span>
                             </button>
                         `;
                     } else {
                         slotsHtml += `
-                            <button class="sort-slot focus:outline-none" data-index="${i}">
+                            <button class="sort-slot" data-index="${i}">
                                 <span class="slot-text"></span>
                             </button>
                         `;
@@ -3002,56 +1921,67 @@
                 let optionsHtml = '';
                 q.options.forEach(opt => {
                     optionsHtml += `
-                        <button class="sort-option-btn focus:outline-none" data-id="${opt.id}">
+                        <button class="choice-option-btn sort-option-btn" data-id="${opt.id}">
                             <span class="option-letter">${opt.id}</span>
-                            <span class="leading-relaxed font-bold text-textMain text-base">${opt.text}</span>
+                            <span class="sort-option-text">${opt.text}</span>
                         </button>
                     `;
                 });
 
                 let qLabel = '';
                 if (this.practiceMode === 'year') {
-                    qLabel = q.label;
+                    qLabel = '';
                 } else if (this.practiceMode === 'mistake') {
-                    qLabel = `[${q.year}] ${q.label}`;
+                    qLabel = `[${q.year}]`;
                 } else if (this.currentLevel === 'ALL') {
-                    qLabel = `[${q.level}] Q${index + 1}`;
-                } else {
-                    qLabel = `Q${index + 1}`;
+                    qLabel = `[${q.level}]`;
                 }
 
                 return `
-                <div class="flex flex-col gap-3 md:gap-4 question-block mb-8 fade-in" data-correct-order="${q.correctOrder.join(',')}" data-star-index="${q.starIndex}">
-                    <div class="bg-bgCard border-[1.5px] border-borderStrong rounded-xl shadow-sm relative p-6 md:p-8 sketch-box">
-                        <div class="sort-question-top flex items-center justify-between mb-6 border-b border-dashed border-borderMain pb-4">
-                            <div class="sort-question-meta flex items-center gap-2 text-textMain">
-                                <span class="sort-question-label text-xs font-bold border border-borderStrong rounded-md px-3 py-1">${qLabel}</span>
-                                <span class="sort-question-count text-xs font-bold text-textSub">(${index + 1}/${total})</span>
+                <div class="question-block fade-in" data-correct-order="${q.correctOrder.join(',')}" data-star-index="${q.starIndex}">
+                    <article class="question-sheet-card">
+                        <header class="exam-question-heading">
+                            <div><span>問題</span><strong>${String(index + 1).padStart(2, '0')}</strong></div>
+                            <div class="exam-question-meta">
+                                <span>${escapeHtml(q.label || '文の組み立て')}</span>
+                                ${qLabel ? `<small>${escapeHtml(qLabel)}</small>` : ''}
                             </div>
-                            <span class="status-badge hidden text-sm font-bold text-accentRed"></span>
+                            <div class="question-mentor-feedback is-thinking" role="status" aria-live="polite" aria-label="智的做题提示">
+                                <span class="question-mentor-feedback__avatar sort-satoshi-avatar" aria-hidden="true">
+                                    <img src="../../../assets/grammar/grammar-sort-mentor-satoshi-full.webp" alt="">
+                                </span>
+                                <div class="question-mentor-feedback__copy">
+                                    <span>智（さとし）</span>
+                                    <p>「${escapeHtml(mentorThinkingCopy)}」</p>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div class="question-prompt-area">
+                            <div class="choice-sentence sort-sentence">
+                                ${q.prefix}
+                                <span class="sort-slot-group">
+                                    ${slotsHtml}
+                                </span>
+                                ${q.suffix}
+                            </div>
                         </div>
 
-                        <div class="sort-sentence text-lg md:text-xl font-serif-jp font-bold text-textMain leading-loose mb-8">
-                            ${q.prefix}
-                            <span class="inline-flex items-end gap-2 mx-1 align-bottom">
-                                ${slotsHtml}
-                            </span>
-                            ${q.suffix}
-                        </div>
-
-                        <div class="sort-options-grid grid grid-cols-1 sm:grid-cols-2 gap-4 font-serif-jp mb-6">
+                        <div class="choice-options-grid sort-options-grid">
                             ${optionsHtml}
                         </div>
 
-                        <div class="flex justify-end pt-2 action-area">
-                            <button class="submit-btn px-6 py-2.5 bg-textMain text-white rounded-md text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-colors">決定</button>
+                        <div class="question-action-row action-area">
+                            <span class="question-action-note">依次填满四个空格后再确认答案</span>
+                            <button class="submit-btn" disabled>答案を確認</button>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="explanation-area hidden flex-col mt-4 p-6 bg-[#fdfdfd] border-[1.5px] border-[#333] rounded-xl sketch-box">
-                        <div class="space-y-6 explanation-stack">
+                    <section class="explanation-area" hidden>
+                        <header class="exam-explanation-heading"><span>RED PEN REVIEW</span><h3>解答・解説</h3></header>
+                        <div class="explanation-stack">
                             <div>
-                                <h4 class="explanation-group-title">【正解】</h4>
+                                <h4 class="explanation-group-title">01　正确语序</h4>
                                 <div class="correct-answer-box">
                                     <div class="correct-answer-line">
                                         ${this.buildCorrectOrderMarkup(q)}
@@ -3059,13 +1989,13 @@
                                 </div>
                             </div>
                             <div>
-                                <h4 class="explanation-group-title">【解析】</h4>
+                                <h4 class="explanation-group-title">02　排序解析</h4>
                                 <div class="explanation-copy">
                                     ${q.explanation}
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
                 `;
             }
@@ -3075,8 +2005,13 @@
         updateOptionalLevelButtons();
         app.init();
         app.updateTimerUI();
+        window.addEventListener('kiki-user-profile:changed', updateSortCharacterCopy);
+        window.addEventListener('kiki-unified-header:ready', () => {
+            app.updateHeaderTitle();
+            app.updateHeaderBackLabel();
+            app.updateHeaderRightSlot();
+        });
 
-        document.getElementById('page-back-btn')?.addEventListener('click', () => app.handleHeaderBack());
         document.getElementById('timer-toolbar-toggle-btn')?.addEventListener('click', () => app.toggleTimerRun());
         document.getElementById('timer-toolbar-reset-btn')?.addEventListener('click', () => app.resetTimer());
         document.getElementById('timer-toolbar-settings-btn')?.addEventListener('click', () => app.toggleTimerDrawer());
@@ -3124,7 +2059,7 @@
 
             // 点击选项 -> 填入横线
             const optBtn = e.target.closest('.sort-option-btn');
-            if (optBtn && !optBtn.classList.contains('option-used') && submitBtn.textContent === '決定') {
+            if (optBtn && !optBtn.classList.contains('option-used') && submitBtn.textContent === '答案を確認') {
                 const val = optBtn.dataset.id;
                 const emptySlot = slots.find(s => !s.dataset.val);
                 if (emptySlot) {
@@ -3139,7 +2074,7 @@
 
             // 点击横线 -> 取消填入
             const slotBtn = e.target.closest('.sort-slot');
-            if (slotBtn && slotBtn.dataset.val && submitBtn.textContent === '決定') {
+            if (slotBtn && slotBtn.dataset.val && submitBtn.textContent === '答案を確認') {
                 const val = slotBtn.dataset.val;
                 slotBtn.removeAttribute('data-val');
                 slotBtn.querySelector('.slot-text').textContent = '';
@@ -3163,6 +2098,14 @@
 
                 if (isStarCorrect) app.stats.correct++;
                 else app.stats.incorrect++;
+                if (isAllCorrect) app.stats.fullOrderCorrect++;
+                app.sessionResults.push({
+                    question: currentQuestion,
+                    isStarCorrect,
+                    isAllCorrect,
+                    currentOrder: [...currentOrder],
+                    correctOrder: [...correctOrder]
+                });
 
                 if (app.practiceMode === 'year' || app.practiceMode === 'mistake') {
                     let yearMistakes = getYearMistakes(app.currentLevel, app.currentYear);
@@ -3175,6 +2118,7 @@
                         yearMistakes = yearMistakes.filter(id => id !== currentQuestion.id);
                         saveYearMistakes(app.currentLevel, app.currentYear, yearMistakes);
                     }
+                    app.updateMistakeHeaderCount();
                 }
 
                 app.updateRandomProgressAfterAnswer(isStarCorrect);
@@ -3199,18 +2143,11 @@
                     }
                 }
 
-                const statusBadge = block.querySelector('.status-badge');
                 if (app.trainingMode === 'challenge') {
-                    statusBadge.classList.add('hidden');
+                    // 测试模式只记录作答，统一在结算后批改。
                 } else if (isAllCorrect) {
-                    statusBadge.classList.remove('hidden');
-                    statusBadge.textContent = '正解';
-                    statusBadge.className = 'status-badge text-sm font-bold text-[#10B981]';
                     slots.forEach(slot => slot.classList.add('judged-correct'));
                 } else if (isStarCorrect) {
-                    statusBadge.classList.remove('hidden');
-                    statusBadge.textContent = '差点';
-                    statusBadge.className = 'status-badge text-sm font-bold text-accentRed';
                     slots.forEach((slot, idx) => {
                         if (currentOrder[idx] === correctOrder[idx]) {
                             slot.classList.add('judged-correct');
@@ -3219,9 +2156,6 @@
                         }
                     });
                 } else {
-                    statusBadge.classList.remove('hidden');
-                    statusBadge.textContent = '不正解';
-                    statusBadge.className = 'status-badge text-sm font-bold text-accentRed';
                     slots.forEach((slot, idx) => {
                         if (currentOrder[idx] === correctOrder[idx]) {
                             slot.classList.add('judged-correct');
@@ -3230,11 +2164,24 @@
                         }
                     });
                 }
+
+                const mentorFeedback = block.querySelector('.question-mentor-feedback');
+                const mentorCopy = mentorFeedback?.querySelector('p');
+                if (mentorFeedback && mentorCopy) {
+                    mentorFeedback.classList.remove('is-thinking', 'is-correct', 'is-wrong', 'is-pending-review');
+                    if (app.trainingMode === 'challenge') {
+                        mentorFeedback.classList.add('is-pending-review');
+                        mentorCopy.textContent = '「先记下这道题，整组完成后我们再一起核对语序。」';
+                    } else {
+                        mentorFeedback.classList.add(isAllCorrect ? 'is-correct' : 'is-wrong');
+                        mentorCopy.textContent = `「${app.getSortMentorResultCopy(isAllCorrect, app.currentIndex)}」`;
+                    }
+                }
                 
                 const explanationArea = block.querySelector('.explanation-area');
                 if (explanationArea && app.trainingMode !== 'challenge') {
-                    explanationArea.classList.remove('hidden');
-                    explanationArea.classList.add('flex', 'fade-in');
+                    explanationArea.hidden = false;
+                    explanationArea.classList.add('fade-in');
                 }
 
                 const actionArea = block.querySelector('.action-area');
@@ -3243,11 +2190,13 @@
                 const shouldOpenSummaryNext = hasReachedRandomTarget || hasReachedFinalQuestion;
                 const nextLabel = shouldOpenSummaryNext ? '查看结果' : '下一题';
                 
-                actionArea.innerHTML = `<button class="next-question-btn bg-textMain text-white px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-opacity-80">${nextLabel}</button>`;
+                actionArea.innerHTML = `<span class="question-action-note">解析已展开，确认后继续</span><button class="next-question-btn">${nextLabel}</button>`;
                 app.updateTimerUI();
                 return;
             }
         });
     </script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

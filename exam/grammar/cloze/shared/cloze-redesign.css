@@ -1,0 +1,911 @@
+/*
+ * 完形填空视觉扩展。
+ * 目录、年份、错题、弹窗和结算骨架来自 grammar-redesign.css；
+ * 本文件是 N1 / N2 共用的唯一完形填空样式层：包含小野的裁切、
+ * 练习页骨架，以及篇章、空位、选项、解析和结算所需的交互状态。
+ */
+
+.cloze-app {
+    --cloze-focus: #6d7f67;
+    --cloze-focus-soft: #eef2eb;
+    --cloze-warm: #b88442;
+    --kiki-header-bg: rgba(255, 255, 255, .98);
+}
+
+.cloze-ono-figure {
+    position: relative;
+    align-self: center;
+    align-items: flex-start;
+    height: 136px;
+    min-height: 136px;
+    overflow: hidden;
+}
+
+.cloze-ono-figure img {
+    width: 170px;
+    max-width: none;
+    height: auto;
+    object-fit: initial;
+    transform: translateY(-2px);
+}
+
+.cloze-ono-strip-figure,
+.cloze-ono-modal-avatar,
+.cloze-ono-question-avatar {
+    display: block;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--cloze-focus-soft);
+}
+
+.cloze-ono-strip-figure {
+    width: 68px;
+    height: 68px;
+}
+
+.cloze-ono-strip-figure img {
+    display: block;
+    width: 142px;
+    max-width: none;
+    height: auto;
+    transform: translate(-37px, -16px);
+}
+
+.cloze-ono-modal-avatar {
+    width: 64px;
+    height: 64px;
+}
+
+.cloze-ono-modal-avatar img {
+    display: block;
+    width: 140px;
+    max-width: none;
+    height: auto;
+    transform: translate(-38px, -16px);
+}
+
+.cloze-ono-question-avatar {
+    width: 42px;
+    height: 42px;
+}
+
+.cloze-ono-question-avatar img {
+    display: block;
+    width: 94px;
+    max-width: none;
+    height: auto;
+    transform: translate(-26px, -11px);
+}
+
+.grammar-year-session-copy small {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Practice page -------------------------------------------------------- */
+body.cloze-practice-page.cloze-modernized {
+    --cloze-focus: #6d7f67;
+    --cloze-focus-soft: #eef2eb;
+    --cloze-warm: #b88442;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--grammar-ink);
+    background: var(--grammar-background) !important;
+    background-image: none !important;
+    font-family: var(--grammar-font-ui) !important;
+}
+
+body.cloze-practice-page.cloze-modernized::before {
+    display: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .sketch-box,
+body.cloze-practice-page.cloze-modernized .sketch-btn {
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-passage p {
+    margin: 0 0 1.15em;
+    text-indent: 2em;
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-passage :is(h2,h3),
+body.cloze-practice-page.cloze-modernized .cloze-passage :is(.passage-translation,.text-indent-0) {
+    text-indent: 0;
+}
+
+/* N1 / N2 共用文章标题排版：旧页面残留的 text-center 不再生效。 */
+body.cloze-practice-page.cloze-modernized #article-title,
+body.cloze-practice-page.cloze-modernized .cloze-passage :is(h2,h3) {
+    width: 100%;
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-passage > :first-child,
+body.cloze-practice-page.cloze-modernized .cloze-passage > :first-child > :first-child {
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .annotation-word {
+    position: relative;
+    padding-bottom: 1px;
+    border-bottom: 1px dotted var(--grammar-muted);
+    color: inherit;
+    cursor: help;
+}
+
+body.cloze-practice-page.cloze-modernized .annotation-word:hover {
+    border-bottom-color: var(--cloze-focus);
+    background: var(--cloze-focus-soft);
+}
+
+body.cloze-practice-page.cloze-modernized .annotation-bubble {
+    position: absolute;
+    z-index: 9999;
+    visibility: hidden;
+    max-width: 300px;
+    padding: 11px 14px;
+    border: 1px solid var(--grammar-line-strong);
+    border-radius: 9px;
+    color: var(--grammar-ink-soft);
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 12px 32px rgba(35,45,68,.14);
+    font-family: var(--grammar-font-ui);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.7;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(4px);
+    transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+}
+
+body.cloze-practice-page.cloze-modernized .annotation-bubble.is-visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-blank-inline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: baseline;
+    text-indent: 0;
+    cursor: pointer;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-option-btn,
+body.cloze-practice-page.cloze-modernized .submit-btn {
+    cursor: pointer;
+}
+
+body.cloze-practice-page.cloze-modernized .submit-btn:disabled {
+    cursor: not-allowed;
+}
+
+body.cloze-practice-page.cloze-modernized .explanation-box {
+    display: none;
+}
+
+body.cloze-practice-page.cloze-modernized .explanation-box.is-visible {
+    display: block;
+}
+
+body.cloze-practice-page.cloze-modernized .flash-highlight {
+    animation: cloze-focus-flash 1.15s ease-out;
+}
+
+@keyframes cloze-focus-flash {
+    0% { background-color: var(--grammar-accent-faint); }
+    100% { background-color: transparent; }
+}
+
+.cloze-review-notice {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 18px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--grammar-accent);
+    color: var(--grammar-ink-soft);
+    background: var(--grammar-surface);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.cloze-review-notice strong {
+    flex: 0 0 auto;
+    color: var(--grammar-accent-strong);
+    font-size: 11px;
+}
+
+body.cloze-practice-page.cloze-modernized .page-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: grid !important;
+    grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+    align-items: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 0 26px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--grammar-line) !important;
+    border-radius: 0 !important;
+    background: rgba(255,255,255,.96) !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(10px);
+}
+
+/* The original header only remains briefly so reading-tools can initialise.
+   The unified header owns the visible navigation and utility controls. */
+body.cloze-practice-page.cloze-modernized .page-header[data-kiki-header-source-hidden="true"] {
+    display: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .page-header > div:first-child {
+    width: auto !important;
+}
+
+body.cloze-practice-page.cloze-modernized #page-back-btn {
+    min-height: 40px;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--grammar-ink-soft) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+}
+
+body.cloze-practice-page.cloze-modernized #page-back-btn:hover {
+    color: var(--grammar-accent-strong) !important;
+    transform: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .top-title {
+    justify-self: center;
+    color: var(--grammar-ink) !important;
+    font-family: var(--grammar-font-serif) !important;
+    font-size: 16px !important;
+    font-weight: 650 !important;
+    letter-spacing: .03em !important;
+    white-space: nowrap;
+}
+
+body.cloze-practice-page.cloze-modernized .top-title span {
+    display: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .top-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    min-width: 0;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions > :is(button, .cloze-study-elapsed-display) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 38px;
+    padding: 0 12px !important;
+    border: 1px solid var(--grammar-line-strong) !important;
+    border-radius: 9px !important;
+    color: var(--grammar-ink-soft) !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+    font-family: var(--grammar-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: .02em !important;
+    white-space: nowrap;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions > button:hover,
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions > button:is(.is-selected,.is-running,.is-open) {
+    border-color: color-mix(in srgb, var(--cloze-focus) 45%, var(--grammar-line)) !important;
+    color: var(--cloze-focus) !important;
+    background: var(--cloze-focus-soft) !important;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions > [hidden] {
+    display: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right #timer-panel-toggle-btn {
+    gap: 7px;
+    min-width: 104px;
+    border-color: color-mix(in srgb, var(--cloze-focus) 42%, var(--grammar-line)) !important;
+    color: var(--grammar-ink-soft) !important;
+    background: var(--cloze-focus-soft) !important;
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right #timer-panel-toggle-btn .timer-tool-label {
+    color: var(--cloze-focus);
+}
+
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right #timer-tool-indicator,
+body.cloze-practice-page.cloze-modernized .kiki-unified-header-right #timer-tool-indicator[hidden] {
+    position: static !important;
+    display: inline !important;
+    min-width: 42px;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--grammar-ink-soft) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    line-height: 1 !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Unified timer drawer: preserve the complete count-up/countdown behaviour,
+   replace only the legacy reading-tool presentation. */
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel {
+    width: min(360px, calc(100vw - 24px)) !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 14px !important;
+    color: var(--grammar-ink-soft) !important;
+    background: rgba(255,255,255,.98) !important;
+    box-shadow: 0 18px 48px rgba(35,45,68,.13) !important;
+    backdrop-filter: blur(14px);
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-header {
+    min-height: 58px;
+    margin: 0 !important;
+    padding: 0 18px;
+    border-bottom: 1px solid var(--grammar-line);
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-title {
+    color: var(--grammar-ink) !important;
+    font-family: var(--grammar-font-serif) !important;
+    font-size: 14px !important;
+    font-weight: 750 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-close {
+    width: 32px;
+    height: 32px;
+    border: 0 !important;
+    border-radius: 8px !important;
+    color: var(--grammar-muted) !important;
+    background: var(--grammar-surface-subtle) !important;
+    box-shadow: none !important;
+    font-size: 16px;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+    margin: 0 !important;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--grammar-line);
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-section:first-of-type {
+    display: block;
+    padding: 18px;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-label {
+    grid-column: 1 / -1;
+    width: auto;
+    color: var(--grammar-muted) !important;
+    font-family: var(--grammar-font-ui) !important;
+    font-size: 8px !important;
+    font-weight: 850;
+    letter-spacing: .1em;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-display-pill {
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--grammar-ink) !important;
+    background: transparent !important;
+    font-family: var(--grammar-font-ui) !important;
+    font-size: 30px !important;
+    font-weight: 750 !important;
+    letter-spacing: .06em;
+    text-align: left;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .toggle-btn.timer-panel-btn {
+    min-height: 40px;
+    padding: 0 12px !important;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 8px !important;
+    color: var(--grammar-ink-soft) !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+    font-family: var(--grammar-font-ui) !important;
+    font-size: 10px !important;
+    font-weight: 750 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .toggle-btn.timer-panel-btn:is(.is-selected,:hover) {
+    border-color: color-mix(in srgb, var(--cloze-focus) 45%, var(--grammar-line)) !important;
+    color: var(--cloze-focus) !important;
+    background: var(--cloze-focus-soft) !important;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-countdown-section {
+    display: none;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel.countdown-mode .timer-panel-countdown-section {
+    display: grid;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-custom-wrap {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(70px,1fr) auto;
+    align-items: center;
+    gap: 8px;
+    color: var(--grammar-muted) !important;
+    font-size: 9px !important;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-custom-input {
+    width: 100%;
+    min-height: 38px;
+    padding: 0 10px !important;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 8px !important;
+    color: var(--grammar-ink) !important;
+    background: var(--grammar-surface-subtle) !important;
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .timer-panel.cloze-modern-timer-panel .timer-panel-status {
+    min-height: 38px;
+    padding: 11px 18px;
+    color: var(--grammar-muted) !important;
+    background: var(--grammar-surface-subtle);
+    font-size: 9px !important;
+    line-height: 1.6;
+}
+
+body.cloze-practice-page.cloze-modernized #translation-toggle-btn,
+body.cloze-practice-page.cloze-modernized .cloze-study-elapsed-display {
+    min-width: 88px;
+    min-height: 38px;
+    padding: 0 13px !important;
+    border: 1px solid var(--grammar-line-strong) !important;
+    border-radius: 9px !important;
+    color: var(--grammar-ink-soft) !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .page-shell {
+    width: min(1180px, calc(100% - 48px)) !important;
+    margin: 0 auto !important;
+    padding: 34px 0 72px !important;
+}
+
+.cloze-practice-context {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 18px;
+}
+
+.cloze-practice-context__kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--grammar-rose);
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .11em;
+}
+
+.cloze-practice-context h1 {
+    margin: 0;
+    color: var(--grammar-ink);
+    font-family: var(--grammar-font-serif);
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 750;
+}
+
+.cloze-practice-context__meta {
+    display: grid;
+    gap: 4px;
+    color: var(--grammar-muted);
+    font-size: 9px;
+    font-weight: 750;
+    text-align: right;
+}
+
+.cloze-practice-context__meta strong {
+    color: var(--grammar-ink-soft);
+    font-size: 11px;
+}
+
+body.cloze-practice-page.cloze-modernized .page-shell > .sketch-box:first-of-type {
+    overflow: hidden;
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 14px !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+}
+
+.cloze-article-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 370px);
+    align-items: center;
+    gap: 22px;
+    min-height: 76px;
+    padding: 10px 28px;
+    border-bottom: 1px solid var(--grammar-line);
+}
+
+body.cloze-practice-page.cloze-modernized #article-title {
+    margin: 0 !important;
+    color: var(--grammar-ink) !important;
+    font-family: var(--grammar-font-serif) !important;
+    font-size: 18px !important;
+    font-weight: 750 !important;
+    letter-spacing: .02em !important;
+}
+
+.cloze-mentor-feedback {
+    --mentor-state-color: var(--cloze-focus);
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: center;
+    gap: 9px;
+    min-height: 52px;
+    color: var(--mentor-state-color);
+}
+
+.cloze-mentor-feedback__copy {
+    min-width: 0;
+    padding-left: 10px;
+    border-left: 2px solid color-mix(in srgb, var(--mentor-state-color) 62%, transparent);
+}
+
+.cloze-mentor-feedback__copy span {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--mentor-state-color);
+    font-size: 8px;
+    font-weight: 850;
+}
+
+.cloze-mentor-feedback__copy p {
+    margin: 0;
+    color: var(--grammar-ink-soft);
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.55;
+}
+
+.cloze-mentor-feedback.is-correct { --mentor-state-color: var(--grammar-sage); }
+.cloze-mentor-feedback.is-wrong { --mentor-state-color: var(--grammar-error); }
+
+body.cloze-practice-page.cloze-modernized #passage-container {
+    margin: 0 !important;
+    padding: 28px 34px 32px;
+    color: var(--grammar-ink) !important;
+    font-family: var(--grammar-font-serif) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 2.15 !important;
+    letter-spacing: .025em !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-passage p:not(.passage-translation) {
+    color: var(--grammar-ink) !important;
+    font-weight: 500 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .passage-translation {
+    margin-top: 8px !important;
+    padding: 10px 14px !important;
+    border: 0 !important;
+    border-left: 3px solid var(--cloze-focus) !important;
+    border-radius: 0 8px 8px 0 !important;
+    color: var(--grammar-muted) !important;
+    background: var(--cloze-focus-soft) !important;
+    font-size: 11px !important;
+    line-height: 1.75 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-blank-inline {
+    min-width: 56px;
+    height: 30px;
+    margin: 0 4px;
+    padding: 0 10px;
+    border: 0 !important;
+    border-bottom: 2px solid var(--grammar-accent) !important;
+    border-radius: 5px 5px 0 0 !important;
+    color: var(--grammar-accent-strong) !important;
+    background: var(--grammar-accent-faint) !important;
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-blank-num {
+    top: -9px;
+    left: 2px;
+    padding: 0;
+    border: 0 !important;
+    color: var(--grammar-rose) !important;
+    background: transparent !important;
+    font-size: 8px;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-blank-inline.judged-correct {
+    border-bottom-color: var(--grammar-sage) !important;
+    color: var(--grammar-sage) !important;
+    background: var(--grammar-sage-soft) !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-blank-inline.judged-wrong {
+    border-bottom-color: var(--grammar-error) !important;
+    color: var(--grammar-error) !important;
+    background: var(--grammar-error-soft) !important;
+    text-decoration: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized #questions-container {
+    display: grid;
+    gap: 12px !important;
+    margin: 0 0 20px !important;
+}
+
+body.cloze-practice-page.cloze-modernized .question-block {
+    overflow: hidden;
+    padding: 0 !important;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 12px !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .question-block > div:first-child {
+    min-height: 54px;
+    margin: 0 !important;
+    padding: 0 20px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--grammar-line) !important;
+}
+
+body.cloze-practice-page.cloze-modernized .question-block h3 {
+    color: var(--grammar-ink-soft) !important;
+    font-size: 10px !important;
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .question-block [onclick^="scrollToPassageBlank"] {
+    min-height: 36px;
+    padding: 0 10px !important;
+    border: 1px solid var(--grammar-line) !important;
+    border-radius: 8px !important;
+    color: var(--grammar-muted) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .question-block > .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: 0 !important;
+    margin: 0 !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-option-btn {
+    display: grid;
+    grid-template-columns: 34px minmax(0,1fr);
+    align-items: center;
+    gap: 12px;
+    min-height: 66px;
+    padding: 12px 20px !important;
+    border: 0 !important;
+    border-right: 1px solid var(--grammar-line) !important;
+    border-bottom: 1px solid var(--grammar-line) !important;
+    border-radius: 0 !important;
+    color: var(--grammar-ink) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-option-btn:nth-child(2n) { border-right: 0 !important; }
+body.cloze-practice-page.cloze-modernized .cloze-option-btn:hover { background: var(--grammar-accent-faint) !important; }
+body.cloze-practice-page.cloze-modernized .cloze-option-btn.is-selected { background: var(--cloze-focus-soft) !important; box-shadow: inset 3px 0 0 var(--cloze-focus) !important; }
+body.cloze-practice-page.cloze-modernized .cloze-option-btn.is-correct-answer { background: var(--grammar-sage-soft) !important; box-shadow: inset 3px 0 0 var(--grammar-sage) !important; }
+body.cloze-practice-page.cloze-modernized .cloze-option-btn.is-wrong-answer { background: var(--grammar-error-soft) !important; box-shadow: inset 3px 0 0 var(--grammar-error) !important; }
+
+body.cloze-practice-page.cloze-modernized .option-marker {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    border: 0 !important;
+    border-radius: 50% !important;
+    color: var(--grammar-muted) !important;
+    background: var(--grammar-surface-subtle) !important;
+    font-size: 10px;
+}
+
+body.cloze-practice-page.cloze-modernized .option-text {
+    display: block;
+    width: 100%;
+    color: inherit !important;
+    font-family: var(--grammar-font-serif) !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    text-align: left !important;
+}
+
+body.cloze-practice-page.cloze-modernized .explanation-box {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-top: 1px solid var(--grammar-line) !important;
+    border-radius: 0 !important;
+    background: var(--grammar-surface) !important;
+    box-shadow: none !important;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-card {
+    display: block;
+    color: var(--grammar-ink-soft);
+    font-family: var(--grammar-font-ui);
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-heading {
+    padding: 15px 22px;
+    border-bottom: 1px solid var(--grammar-line);
+    background: var(--grammar-surface-subtle);
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-heading strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--cloze-focus);
+    font-family: var(--grammar-font-ui);
+    font-size: 13px;
+    font-weight: 850;
+    line-height: 1.4;
+    letter-spacing: .06em;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-heading strong::before {
+    content: "";
+    width: 3px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--cloze-focus);
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-primary {
+    padding: 22px 24px;
+    color: var(--grammar-ink);
+    font-size: 14px;
+    font-weight: 520;
+    line-height: 1.95;
+    letter-spacing: .012em;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-alternatives {
+    margin: 0 24px;
+    padding: 18px 0 22px;
+    border-top: 1px solid var(--grammar-line);
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-alternatives h4 {
+    margin: 0 0 11px;
+    color: var(--grammar-ink-soft);
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: .04em;
+}
+
+body.cloze-practice-page.cloze-modernized .cloze-explanation-alternatives div {
+    color: var(--grammar-ink-soft);
+    font-size: 13px;
+    font-weight: 520;
+    line-height: 1.95;
+    letter-spacing: .01em;
+}
+
+body.cloze-practice-page.cloze-modernized #bottom-action-area {
+    align-items: flex-end !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+body.cloze-practice-page.cloze-modernized #submit-btn {
+    min-height: 44px;
+    padding: 0 22px !important;
+    border: 1px solid var(--grammar-accent-strong) !important;
+    border-radius: 9px !important;
+    color: #fff !important;
+    background: var(--grammar-accent-strong) !important;
+    box-shadow: none !important;
+    font-size: 10px !important;
+}
+
+body.cloze-practice-page.cloze-modernized #submit-btn:disabled {
+    border-color: var(--grammar-line) !important;
+    color: var(--grammar-faint) !important;
+    background: var(--grammar-surface-subtle) !important;
+}
+
+body.cloze-practice-page.cloze-modernized #result-section {
+    margin: 20px 0 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.cloze-result-answer {
+    color: var(--grammar-muted);
+    font-size: 9px;
+}
+
+@media (max-width: 720px) {
+    .cloze-ono-figure { height: 116px; min-height: 116px; }
+    .cloze-ono-figure img { width: 132px; transform: translateY(-1px); }
+    .cloze-ono-strip-figure { width: 52px; height: 52px; }
+    .cloze-ono-strip-figure img { width: 110px; transform: translate(-29px,-12px); }
+    .cloze-ono-modal-avatar { width: 52px; height: 52px; }
+    .cloze-ono-modal-avatar img { width: 112px; transform: translate(-30px,-13px); }
+    body.cloze-practice-page.cloze-modernized .page-header { grid-template-columns: auto 1fr auto; padding: 0 12px !important; }
+    body.cloze-practice-page.cloze-modernized .top-title { font-size: 13px !important; }
+    body.cloze-practice-page.cloze-modernized #page-back-btn { font-size: 0 !important; }
+    body.cloze-practice-page.cloze-modernized #page-back-btn svg { width: 18px; height: 18px; }
+    body.cloze-practice-page.cloze-modernized .page-shell { width: calc(100% - 24px) !important; padding-top: 20px !important; }
+    .cloze-practice-context { grid-template-columns: 1fr; align-items: start; gap: 8px; }
+    .cloze-practice-context__meta { text-align: left; }
+    .cloze-article-heading { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
+    body.cloze-practice-page.cloze-modernized #passage-container { padding: 20px 16px 24px; font-size: 14px !important; }
+    body.cloze-practice-page.cloze-modernized .question-block > .grid { grid-template-columns: 1fr !important; }
+    body.cloze-practice-page.cloze-modernized .cloze-option-btn { border-right: 0 !important; }
+    body.cloze-practice-page.cloze-modernized .cloze-explanation-heading { padding: 14px 16px; }
+    body.cloze-practice-page.cloze-modernized .cloze-explanation-primary { padding: 18px 16px; font-size: 13px; }
+    body.cloze-practice-page.cloze-modernized .cloze-explanation-alternatives { margin: 0 16px; }
+    body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions { gap: 5px; }
+    body.cloze-practice-page.cloze-modernized .kiki-unified-header-right .top-actions > :is(button, .cloze-study-elapsed-display) { min-height: 36px; padding: 0 9px !important; font-size: 9px !important; }
+    body.cloze-practice-page.cloze-modernized .grammar-result-summary { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}

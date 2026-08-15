@@ -1,0 +1,322 @@
+/*
+ * Sorting-practice extension.
+ *
+ * Page shell, directories, modal, question sheet, explanation and result views
+ * intentionally come from ../grammar/grammar-redesign.css so the two practice
+ * types stay visually identical. This file only describes Satoshi's image crop
+ * and controls that exist exclusively in ordering questions.
+ */
+
+/* Match the grammar-choice header instead of the warmer global site header. */
+.sort-app {
+    --kiki-header-bg: rgba(255, 255, 255, .98);
+}
+
+/* Use one high-resolution transparent figure with context-specific crops. */
+.sort-satoshi-figure {
+    position: relative;
+    align-self: center;
+    height: 136px;
+    min-height: 136px;
+}
+
+.sort-satoshi-figure img {
+    align-self: flex-start;
+    width: 166px;
+    max-width: none;
+    height: auto;
+    border-radius: 0;
+    object-fit: initial;
+    transform: translateY(-2px);
+}
+
+.sort-satoshi-strip-figure {
+    display: block;
+    width: 68px;
+    height: 68px;
+    overflow: hidden;
+}
+
+.sort-satoshi-strip-figure img {
+    display: block;
+    width: 83px;
+    max-width: none;
+    height: auto;
+    border-radius: 0;
+    object-fit: initial;
+    transform: translate(-7.5px, -1px);
+}
+
+.sort-satoshi-modal-avatar {
+    display: block;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--grammar-accent-faint);
+}
+
+.sort-satoshi-modal-avatar img {
+    display: block;
+    width: 194%;
+    max-width: none;
+    height: auto;
+    border-radius: 0;
+    object-fit: initial;
+    transform: translate(-24%, -4%);
+}
+
+.sort-satoshi-avatar img {
+    width: 82px;
+    max-width: none;
+    height: auto;
+    object-fit: initial;
+    object-position: initial;
+    transform: translate(-20px, -5px);
+}
+
+/* Sentence-building prompt */
+.sort-sentence {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 5px;
+}
+
+.sort-slot-group {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 7px;
+    margin: 0 5px;
+}
+
+.sort-slot {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 52px;
+    height: 50px;
+    padding: 0 0 5px;
+    border: 0;
+    border-bottom: 2px solid var(--grammar-line-strong);
+    color: var(--grammar-accent-strong);
+    background: transparent;
+    font-family: var(--grammar-font-ui);
+    font-size: 13px;
+    font-weight: 850;
+    cursor: pointer;
+    transition: border-color .16s ease, background-color .16s ease, color .16s ease;
+}
+
+.sort-slot:hover {
+    border-bottom-color: var(--grammar-accent);
+    background: var(--grammar-accent-faint);
+}
+
+.sort-slot.star-slot {
+    border-bottom-color: color-mix(in srgb, var(--grammar-rose) 55%, var(--grammar-line));
+}
+
+.sort-slot .slot-marker {
+    position: absolute;
+    right: auto;
+    bottom: 7px;
+    left: 50%;
+    color: var(--grammar-rose);
+    font-size: 9px;
+    line-height: 1;
+    transform: translateX(-50%);
+}
+
+.sort-slot.slot-filled,
+.sort-slot.slot-star-filled {
+    border-bottom-color: var(--grammar-accent-strong);
+    background: var(--grammar-accent-faint);
+}
+
+.sort-slot.slot-star-filled {
+    border-bottom-color: var(--grammar-rose);
+    color: var(--grammar-rose);
+}
+
+.sort-slot.judged-correct {
+    border-bottom-color: var(--grammar-sage);
+    color: var(--grammar-sage);
+    background: var(--grammar-sage-soft);
+}
+
+.sort-slot.judged-wrong {
+    border-bottom-color: var(--grammar-error);
+    color: var(--grammar-error);
+    background: var(--grammar-error-soft);
+}
+
+/* Options deliberately inherit the grammar two-column answer sheet. */
+.sort-option-btn.option-used {
+    color: var(--grammar-faint);
+    background: var(--grammar-surface-subtle);
+    cursor: default;
+    opacity: .54;
+}
+
+.sort-option-btn.option-used .option-letter {
+    color: var(--grammar-faint);
+    background: var(--grammar-line);
+}
+
+.sort-option-text {
+    min-width: 0;
+    line-height: 1.7;
+}
+
+/* Correct-order strip in study feedback. */
+.correct-answer-box {
+    padding: 14px 16px;
+    border: 1px solid var(--grammar-line);
+    border-radius: 9px;
+    background: var(--grammar-accent-faint);
+}
+
+.correct-answer-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.correct-answer-index {
+    display: inline-grid;
+    place-items: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 5px;
+    border-radius: 50%;
+    color: var(--grammar-muted);
+    background: var(--grammar-surface);
+    font-size: 8px;
+    font-weight: 850;
+}
+
+.correct-answer-token {
+    color: var(--grammar-ink);
+    font-family: var(--grammar-font-serif);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.correct-answer-index.is-accent,
+.correct-answer-token.is-accent {
+    color: var(--grammar-rose);
+}
+
+.correct-answer-divider {
+    color: var(--grammar-faint);
+    font-size: 10px;
+}
+
+.explanation-copy p {
+    margin: 0 0 12px;
+}
+
+.explanation-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.explanation-copy strong {
+    color: var(--grammar-ink);
+}
+
+/* Challenge review uses the grammar analysis sheet with a compact order diagram. */
+.sort-analysis-sentence {
+    margin-top: 18px;
+    color: var(--grammar-ink);
+    font-family: var(--grammar-font-serif);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.sort-analysis-order {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 6px;
+}
+
+.sort-analysis-slot {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-bottom: 2px solid var(--grammar-accent);
+    color: var(--grammar-accent-strong);
+    background: var(--grammar-accent-faint);
+    font-family: var(--grammar-font-ui);
+    font-size: 9px;
+    font-weight: 850;
+}
+
+.sort-analysis-slot.is-star {
+    border-bottom-color: var(--grammar-rose);
+    color: var(--grammar-rose);
+    background: var(--grammar-rose-soft);
+}
+
+.sort-analysis-slot i {
+    position: absolute;
+    top: -9px;
+    right: 0;
+    font-size: 7px;
+    font-style: normal;
+}
+
+@media (max-width: 720px) {
+    .sort-satoshi-figure {
+        height: 116px;
+        min-height: 116px;
+    }
+
+    .sort-satoshi-figure img {
+        width: 140px;
+        height: auto;
+        transform: translateY(0);
+    }
+
+    .sort-satoshi-modal-avatar {
+        width: 52px;
+        height: 52px;
+    }
+
+    .sort-satoshi-strip-figure {
+        width: 52px;
+        height: 52px;
+    }
+
+    .sort-satoshi-strip-figure img {
+        width: 64px;
+        transform: translate(-6px, 0);
+    }
+
+    .exam-question-meta {
+        flex-wrap: wrap;
+    }
+
+    .sort-sentence {
+        gap: 6px 3px;
+    }
+
+    .sort-slot-group {
+        width: 100%;
+        justify-content: center;
+        margin: 8px 0;
+    }
+
+    .sort-slot {
+        width: min(52px, 20vw);
+        height: 46px;
+    }
+
+    .correct-answer-divider {
+        display: none;
+    }
+}
