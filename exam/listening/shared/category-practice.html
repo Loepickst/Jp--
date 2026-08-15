@@ -3,1344 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>听力分类练习</title>
+    <title>聴解分類練習</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../shared/site-fonts.css">
-    <style>
-        :root {
-            --paper: #ffffff;
-            --graphite: #333333;
-            --graphite-sub: #666666;
-            --graphite-faint: #cccccc;
-            --red-pencil: #e64a4a;
-            --marker-mint: rgba(134, 239, 172, 0.35);
-            --marker-peach: rgba(253, 186, 116, 0.35);
-            --marker-lavender: rgba(196, 181, 253, 0.35);
-            --marker-blue: rgba(129, 212, 250, 0.35);
-            --marker-pink: rgba(244, 143, 177, 0.35);
-            --marker-yellow: rgba(255, 213, 79, 0.4);
-            --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.06) 3px, rgba(51, 51, 51, 0.06) 4px);
-            --transition: all 0.2s ease-out;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: var(--paper);
-            color: var(--graphite);
-            font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        header {
-            width: 100%;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(4px);
-            border-bottom: 1.5px solid var(--graphite);
-            border-bottom-left-radius: 50% 2px;
-            border-bottom-right-radius: 50% 3px;
-        }
-
-        .back-btn,
-        .home-btn,
-        .action-btn {
-            text-decoration: none;
-            color: var(--graphite);
-            font-size: 14px;
-            font-weight: 700;
-            padding: 7px 13px;
-            background: transparent;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: var(--transition);
-            letter-spacing: 0.05em;
-            font-family: 'Noto Sans JP', sans-serif;
-            cursor: pointer;
-        }
-
-        .back-btn:hover,
-        .home-btn:hover,
-        .action-btn:hover { background: var(--marker-mint); }
-
-        .action-btn:disabled {
-            border-color: var(--graphite-faint);
-            color: var(--graphite-faint);
-            border-style: dashed;
-            cursor: not-allowed;
-            background: transparent;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        h1 span {
-            padding: 2px 8px;
-            font-size: 12px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-
-        main {
-            width: min(95%, 920px);
-            padding: 34px 0 70px;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-
-        .meta-card,
-        .practice-card,
-        .result-panel,
-        .error-card {
-            border: 1.5px solid var(--graphite);
-            border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-            background: transparent;
-            padding: 22px 24px;
-            animation: slideUp 0.35s ease-out;
-        }
-
-        .meta-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .meta-title {
-            margin: 0 0 6px;
-            font-size: 22px;
-            letter-spacing: 0.06em;
-        }
-
-        .meta-copy {
-            margin: 0;
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13px;
-            line-height: 1.7;
-            font-weight: 700;
-        }
-
-        .pill-row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 28px;
-            padding: 4px 9px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            background: #fff;
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            font-weight: 900;
-            line-height: 1;
-            white-space: nowrap;
-        }
-
-        .pill.is-source { background: var(--marker-lavender); }
-        .pill.is-count { background: var(--marker-peach); }
-
-        body.is-task-comprehension .meta-card ,
-        body.is-point-comprehension .meta-card {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            grid-template-areas:
-                "title source"
-                "copy count";
-            align-items: center;
-            column-gap: 16px;
-            row-gap: 10px;
-        }
-
-        body.is-task-comprehension .meta-text,
-        body.is-point-comprehension .meta-text,
-        body.is-task-comprehension .pill-row ,
-        body.is-point-comprehension .pill-row {
-            display: contents;
-        }
-
-        body.is-task-comprehension .pill-row .pill ,
-        body.is-point-comprehension .pill-row .pill {
-            min-height: 30px;
-            padding: 5px 10px;
-            font-size: 12px;
-        }
-
-        body.is-task-comprehension .meta-title ,
-        body.is-point-comprehension .meta-title {
-            grid-area: title;
-            margin: 0;
-        }
-
-        body.is-task-comprehension .meta-copy ,
-        body.is-point-comprehension .meta-copy {
-            grid-area: copy;
-            margin: 0;
-        }
-
-        body.is-task-comprehension #sourceBadge,
-        body.is-point-comprehension #sourceBadge,
-        body.is-task-comprehension #countBadge ,
-        body.is-point-comprehension #countBadge {
-            justify-self: end;
-        }
-
-        body.is-task-comprehension #sourceBadge ,
-        body.is-point-comprehension #sourceBadge {
-            grid-area: source;
-        }
-
-        body.is-task-comprehension #countBadge ,
-        body.is-point-comprehension #countBadge {
-            grid-area: count;
-        }
-
-        body.is-task-comprehension .pill.is-count ,
-        body.is-point-comprehension .pill.is-count {
-            background: #fff;
-        }
-
-        body.is-task-comprehension #questionCounter ,
-        body.is-point-comprehension #questionCounter {
-            display: none;
-        }
-
-        body.is-task-comprehension .question-topline {
-            display: block;
-        }
-
-        body.is-task-comprehension.is-level-n1 .question-topline,
-        body.is-point-comprehension .question-topline {
-            display: none;
-        }
-
-        .question-topline {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding-bottom: 16px;
-            border-bottom: 1.5px dashed var(--graphite-faint);
-        }
-
-        .question-title {
-            margin: 0;
-            font-size: 20px;
-            letter-spacing: 0.06em;
-        }
-
-        .audio-box {
-            margin: 22px 0 24px;
-            padding: 0;
-            border: 0;
-            background: transparent;
-        }
-
-        body.is-task-comprehension .audio-box,
-        body.is-point-comprehension .audio-box {
-            margin: 20px 0 22px;
-            padding: 0;
-            border: 0;
-            background: transparent;
-            box-shadow: none;
-        }
-
-        audio {
-            display: none;
-        }
-
-        body.is-task-comprehension audio,
-        body.is-point-comprehension audio {
-            min-height: 0;
-        }
-
-        .custom-audio-player {
-            --audio-progress: 0%;
-            display: grid;
-            grid-template-columns: 40px minmax(0, 1fr) max-content;
-            align-items: center;
-            gap: 16px;
-            min-height: 56px;
-            padding: 10px 18px;
-            border: 1px solid rgba(210, 210, 215, 0.68);
-            border-radius: 999px;
-            background: rgba(245, 245, 247, 0.96);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.82);
-        }
-
-        .audio-play-btn {
-            appearance: none;
-            width: 40px;
-            height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            border-radius: 999px;
-            background: transparent;
-            color: #202124;
-            cursor: pointer;
-        }
-
-        .audio-play-btn:focus-visible {
-            outline: 2px solid rgba(32, 33, 36, 0.38);
-            outline-offset: 2px;
-        }
-
-        .audio-play-icon {
-            width: 0;
-            height: 0;
-            margin-left: 4px;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-left: 19px solid currentColor;
-        }
-
-        .audio-play-btn.is-playing .audio-play-icon {
-            width: 18px;
-            height: 24px;
-            margin-left: 0;
-            border: 0;
-            background:
-                linear-gradient(currentColor, currentColor) left center / 6px 100% no-repeat,
-                linear-gradient(currentColor, currentColor) right center / 6px 100% no-repeat;
-        }
-
-        .audio-seek {
-            appearance: none;
-            width: 100%;
-            min-width: 0;
-            height: 20px;
-            margin: 0;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .audio-seek:disabled {
-            cursor: default;
-            opacity: 0.72;
-        }
-
-        .audio-seek::-webkit-slider-runnable-track {
-            height: 4px;
-            border-radius: 999px;
-            background:
-                linear-gradient(90deg, #7d7d83 0 var(--audio-progress), #d4d4d9 var(--audio-progress) 100%);
-        }
-
-        .audio-seek::-webkit-slider-thumb {
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            margin-top: -4px;
-            border: 0;
-            border-radius: 50%;
-            background: #77777c;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
-        }
-
-        .audio-seek::-moz-range-track {
-            height: 4px;
-            border-radius: 999px;
-            background: #d4d4d9;
-        }
-
-        .audio-seek::-moz-range-progress {
-            height: 4px;
-            border-radius: 999px;
-            background: #7d7d83;
-        }
-
-        .audio-seek::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            border: 0;
-            border-radius: 50%;
-            background: #77777c;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
-        }
-
-        .audio-time {
-            min-width: 70px;
-            color: #77777d;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        .status-box {
-            margin: 0 0 16px;
-            padding: 10px 14px;
-            border: 1.5px dashed var(--graphite-faint);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.6;
-        }
-
-        .status-box.is-ready { background: rgba(129, 212, 250, 0.16); color: var(--graphite); }
-        .status-box.is-correct { background: var(--marker-mint); color: var(--graphite); }
-        .status-box.is-wrong { background: var(--marker-pink); color: var(--graphite); }
-
-        .options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .option-item {
-            min-height: 88px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            background: transparent;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .option-item:hover { background: var(--hatching-graphite); }
-        .option-item.is-selected { background: var(--marker-blue); }
-        .option-item.is-correct { background: var(--marker-mint); }
-        .option-item.is-wrong { background: var(--marker-pink); }
-        .option-item.is-locked { cursor: default; }
-
-        .option-index {
-            flex: 0 0 auto;
-            width: 34px;
-            height: 34px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 900;
-            font-family: 'Noto Sans JP', sans-serif;
-            background: #fff;
-        }
-
-        .option-placeholder {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13px;
-            font-weight: 900;
-            letter-spacing: 0.08em;
-            color: var(--graphite-sub);
-        }
-
-        .option-body {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            min-width: 0;
-        }
-
-        .option-text {
-            font-size: 15px;
-            line-height: 1.7;
-            font-weight: 700;
-        }
-
-        .option-translation,
-        .dialogue-translation {
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            line-height: 1.65;
-            font-weight: 700;
-        }
-
-        body.is-overview-comprehension .options-list {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        body.is-overview-comprehension .option-item {
-            min-height: 64px;
-            justify-content: flex-start;
-            padding: 12px;
-        }
-
-        body.is-overview-comprehension .option-index {
-            width: 38px;
-            height: 38px;
-            font-size: 17px;
-            background: #fff;
-        }
-
-        body.is-overview-comprehension .option-item.is-selected {
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0 rgba(51, 51, 51, 0.12);
-        }
-
-        body.is-overview-comprehension .option-item.is-locked {
-            min-height: 72px;
-            justify-content: flex-start;
-        }
-
-        body.is-overview-comprehension .option-item.is-locked .option-index {
-            width: 32px;
-            height: 32px;
-            font-size: 15px;
-        }
-
-        body.is-overview-comprehension .option-text {
-            font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
-            font-size: 13px;
-            line-height: 1.55;
-            letter-spacing: 0.01em;
-            font-weight: 800;
-        }
-
-        body.is-overview-comprehension .option-translation {
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        body.is-task-comprehension .question-title ,
-        body.is-point-comprehension .question-title {
-            font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
-            font-size: 17px;
-            line-height: 1.55;
-            letter-spacing: 0.025em;
-            font-weight: 800;
-        }
-
-        body.is-task-comprehension .options-list ,
-        body.is-point-comprehension .options-list {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        body.is-task-comprehension .option-item ,
-        body.is-point-comprehension .option-item {
-            min-height: 66px;
-            padding: 10px 12px;
-            gap: 10px;
-        }
-
-        body.is-task-comprehension .option-index ,
-        body.is-point-comprehension .option-index {
-            width: 30px;
-            height: 30px;
-            font-size: 14px;
-        }
-
-        body.is-task-comprehension .option-text ,
-        body.is-point-comprehension .option-text {
-            font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
-            font-size: 13px;
-            line-height: 1.55;
-            letter-spacing: 0.01em;
-            font-weight: 800;
-        }
-
-        body.is-task-comprehension .option-translation ,
-        body.is-point-comprehension .option-translation {
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        .actions-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 18px;
-        }
-
-        .nav-actions,
-        .answer-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .result-panel[hidden] { display: none; }
-
-        .result-panel {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        .result-title {
-            margin: 0 0 14px;
-            font-size: 18px;
-            letter-spacing: 0.06em;
-        }
-
-        .dialogue-block {
-            border: 1.5px dashed var(--graphite-faint);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            line-height: 1.85;
-            font-size: 15px;
-        }
-
-        .dialogue-block-section {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        body.is-overview-comprehension .dialogue-block {
-            gap: 0;
-            padding: 0 0 16px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            background: transparent;
-            font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        body.is-overview-comprehension .question-box {
-            position: relative;
-            padding: 34px 22px 16px;
-            border-bottom: 1.5px dashed var(--graphite);
-            background-color: var(--marker-blue);
-            color: var(--graphite);
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.8;
-        }
-
-        body.is-overview-comprehension .question-box::before {
-            content: '問題';
-            position: absolute;
-            top: 8px;
-            left: 18px;
-            padding: 2px 10px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
-            background: var(--paper);
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-        }
-
-        body.is-overview-comprehension .conversation-box {
-            padding: 28px 22px 4px;
-            color: var(--graphite);
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1.8;
-        }
-
-        body.is-overview-comprehension .conversation-line {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-        }
-
-        body.is-overview-comprehension .speaker-name {
-            flex: 0 0 auto;
-            margin-right: 12px;
-            padding: 2px 8px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 6px 3px 5px / 5px 3px 6px 2px;
-            background-color: var(--marker-yellow);
-            color: var(--graphite);
-            font-size: 13px;
-            font-weight: 900;
-            line-height: 1.6;
-            white-space: nowrap;
-        }
-
-        body.is-overview-comprehension .speaker-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        body.is-overview-comprehension .translation {
-            display: block;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1.5px dashed var(--graphite-faint);
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif;
-            font-size: 13px;
-            line-height: 1.6;
-            font-weight: 700;
-        }
-
-        body.is-overview-comprehension .highlight-correct {
-            background-color: var(--marker-mint);
-            color: var(--graphite);
-            padding: 2px 6px;
-            border-bottom: 2px solid var(--graphite);
-            font-weight: 700;
-        }
-
-        body.is-overview-comprehension .highlight-wrong {
-            background-color: var(--marker-pink);
-            color: var(--graphite);
-            padding: 2px 6px;
-            border-bottom: 2px dashed var(--graphite);
-            font-weight: 700;
-        }
-
-        body.is-overview-comprehension .opt-tag {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            margin-right: 6px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-            background: #fff;
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 11px;
-            font-weight: 900;
-            line-height: 16px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        body.is-task-comprehension .dialogue-block ,
-        body.is-point-comprehension .dialogue-block {
-            gap: 0;
-            padding: 0 0 16px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            background: transparent;
-            font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        body.is-task-comprehension .question-box ,
-        body.is-point-comprehension .question-box {
-            position: relative;
-            padding: 34px 22px 16px;
-            border-bottom: 1.5px dashed var(--graphite);
-            background-color: var(--marker-blue);
-            color: var(--graphite);
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.8;
-        }
-
-        body.is-task-comprehension .question-box::before ,
-        body.is-point-comprehension .question-box::before {
-            content: '問題';
-            position: absolute;
-            top: 8px;
-            left: 18px;
-            padding: 2px 10px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
-            background: var(--paper);
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 0.04em;
-        }
-
-        body.is-task-comprehension .conversation-box ,
-        body.is-point-comprehension .conversation-box {
-            padding: 28px 22px 4px;
-            color: var(--graphite);
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1.8;
-        }
-
-        body.is-task-comprehension .conversation-line ,
-        body.is-point-comprehension .conversation-line {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-        }
-
-        body.is-task-comprehension .speaker-name ,
-        body.is-point-comprehension .speaker-name {
-            flex: 0 0 auto;
-            margin-right: 12px;
-            padding: 2px 8px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 6px 3px 5px / 5px 3px 6px 2px;
-            background-color: var(--marker-yellow);
-            color: var(--graphite);
-            font-size: 13px;
-            font-weight: 900;
-            line-height: 1.6;
-            white-space: nowrap;
-        }
-
-        body.is-task-comprehension .speaker-text ,
-        body.is-point-comprehension .speaker-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        body.is-task-comprehension .translation ,
-        body.is-point-comprehension .translation {
-            display: block;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1.5px dashed var(--graphite-faint);
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif;
-            font-size: 13px;
-            line-height: 1.6;
-            font-weight: 700;
-        }
-
-        body.is-task-comprehension .highlight-correct ,
-        body.is-point-comprehension .highlight-correct {
-            background-color: var(--marker-mint);
-            color: var(--graphite);
-            padding: 2px 6px;
-            border-bottom: 2px solid var(--graphite);
-            font-weight: 700;
-        }
-
-        body.is-task-comprehension .highlight-wrong ,
-        body.is-point-comprehension .highlight-wrong {
-            background-color: var(--marker-pink);
-            color: var(--graphite);
-            padding: 2px 6px;
-            border-bottom: 2px dashed var(--graphite);
-            font-weight: 700;
-        }
-
-        body.is-task-comprehension .opt-tag ,
-        body.is-point-comprehension .opt-tag {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            margin-right: 6px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-            background: #fff;
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 11px;
-            font-weight: 900;
-            line-height: 16px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        body.is-task-comprehension .tag-wrong ,
-        body.is-point-comprehension .tag-wrong { background-color: var(--marker-pink); }
-        body.is-task-comprehension .tag-correct ,
-        body.is-point-comprehension .tag-correct { background-color: var(--marker-mint); }
-
-        body.is-task-comprehension .keyword ,
-        body.is-point-comprehension .keyword {
-            color: var(--graphite);
-            background: linear-gradient(transparent 50%, var(--marker-yellow) 50%);
-            border-bottom: 1.5px solid var(--graphite);
-            padding: 0 2px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .keyword {
-            border-bottom: 2px solid var(--marker-peach);
-            cursor: help;
-            font-weight: 900;
-        }
-
-        .tooltip {
-            position: absolute;
-            z-index: 1000;
-            display: none;
-            max-width: min(320px, calc(100vw - 24px));
-            padding: 10px 12px;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 3px 3px 0 rgba(51, 51, 51, 0.12);
-            color: var(--graphite);
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            line-height: 1.7;
-            white-space: pre-line;
-        }
-
-        .hidden { display: none !important; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 720px) {
-            header { padding: 12px 14px; }
-            .back-btn, .home-btn, .action-btn { font-size: 12px; padding: 6px 10px; }
-            h1 { font-size: 16px; }
-            h1 span { font-size: 10px; padding: 2px 6px; }
-            main { width: calc(100% - 28px); padding: 22px 0 46px; gap: 16px; }
-            .meta-card, .practice-card, .result-panel, .error-card { padding: 16px; }
-            .meta-title { font-size: 18px; }
-            body.is-task-comprehension .meta-card ,
-        body.is-point-comprehension .meta-card {
-                grid-template-columns: minmax(0, 1fr) max-content;
-                column-gap: 8px;
-                row-gap: 8px;
-            }
-            body.is-task-comprehension .meta-copy ,
-        body.is-point-comprehension .meta-copy {
-                font-size: 12px;
-                line-height: 1.45;
-            }
-            body.is-task-comprehension .pill-row .pill ,
-        body.is-point-comprehension .pill-row .pill {
-                min-height: 26px;
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-            .question-topline { gap: 10px; padding-bottom: 12px; }
-            .question-title {
-                flex: 1 1 190px;
-                font-size: 18px;
-                line-height: 1.45;
-                letter-spacing: 0.03em;
-            }
-            #questionCounter {
-                min-height: 30px;
-                padding: 5px 9px;
-                font-size: 12px;
-            }
-            .audio-box {
-                margin: 14px 0;
-                padding: 0;
-            }
-            body.is-task-comprehension .audio-box,
-            body.is-point-comprehension .audio-box {
-                margin: 12px 0 14px;
-                padding: 0;
-            }
-            audio { min-height: 0; }
-            .custom-audio-player {
-                grid-template-columns: 34px minmax(0, 1fr) max-content;
-                gap: 10px;
-                min-height: 50px;
-                padding: 8px 12px;
-            }
-            .audio-play-btn {
-                width: 34px;
-                height: 34px;
-            }
-            .audio-play-icon {
-                border-top-width: 10px;
-                border-bottom-width: 10px;
-                border-left-width: 16px;
-            }
-            .audio-play-btn.is-playing .audio-play-icon {
-                width: 16px;
-                height: 22px;
-                background:
-                    linear-gradient(currentColor, currentColor) left center / 5px 100% no-repeat,
-                    linear-gradient(currentColor, currentColor) right center / 5px 100% no-repeat;
-            }
-            .audio-seek::-webkit-slider-thumb {
-                width: 12px;
-                height: 12px;
-                margin-top: -4px;
-            }
-            .audio-seek::-moz-range-thumb {
-                width: 12px;
-                height: 12px;
-            }
-            .audio-time {
-                min-width: 64px;
-                font-size: 10.5px;
-            }
-            .options-list { grid-template-columns: 1fr; gap: 10px; }
-            body.is-overview-comprehension .options-list {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            body.is-overview-comprehension .option-item {
-                min-height: 54px;
-                padding: 9px;
-            }
-            body.is-overview-comprehension .option-index {
-                width: 32px;
-                height: 32px;
-                font-size: 15px;
-            }
-            body.is-overview-comprehension .option-item.is-locked {
-                min-height: 58px;
-            }
-            body.is-overview-comprehension .option-text {
-                font-size: 12px;
-                line-height: 1.45;
-            }
-            body.is-overview-comprehension .dialogue-block {
-                padding-bottom: 12px;
-                font-size: 14px;
-            }
-            body.is-overview-comprehension .question-box {
-                padding: 30px 16px 14px;
-                font-size: 14px;
-            }
-            body.is-overview-comprehension .question-box::before {
-                top: 8px;
-                left: 12px;
-                padding: 2px 8px;
-                font-size: 11px;
-            }
-            body.is-overview-comprehension .conversation-box {
-                padding: 20px 16px 4px;
-                font-size: 14px;
-            }
-            body.is-overview-comprehension .speaker-name {
-                margin-right: 8px;
-                font-size: 12px;
-            }
-            body.is-overview-comprehension .translation {
-                font-size: 12px;
-            }
-            body.is-task-comprehension .question-title ,
-        body.is-point-comprehension .question-title {
-                font-size: 15px;
-                line-height: 1.55;
-                letter-spacing: 0.015em;
-            }
-            body.is-task-comprehension .options-list ,
-        body.is-point-comprehension .options-list {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            body.is-task-comprehension .option-item ,
-        body.is-point-comprehension .option-item {
-                min-height: 52px;
-                padding: 8px;
-                gap: 8px;
-            }
-            body.is-task-comprehension .option-index ,
-        body.is-point-comprehension .option-index {
-                width: 26px;
-                height: 26px;
-                font-size: 13px;
-            }
-            body.is-task-comprehension .option-text ,
-        body.is-point-comprehension .option-text {
-                font-size: 12px;
-                line-height: 1.45;
-            }
-            body.is-task-comprehension .dialogue-block ,
-        body.is-point-comprehension .dialogue-block {
-                padding-bottom: 12px;
-                font-size: 14px;
-            }
-            body.is-task-comprehension .question-box ,
-        body.is-point-comprehension .question-box {
-                padding: 30px 16px 14px;
-                font-size: 14px;
-            }
-            body.is-task-comprehension .question-box::before ,
-        body.is-point-comprehension .question-box::before {
-                top: 8px;
-                left: 12px;
-                padding: 2px 8px;
-                font-size: 11px;
-            }
-            body.is-task-comprehension .conversation-box ,
-        body.is-point-comprehension .conversation-box {
-                padding: 20px 16px 4px;
-                font-size: 14px;
-            }
-            body.is-task-comprehension .speaker-name ,
-        body.is-point-comprehension .speaker-name {
-                margin-right: 8px;
-                font-size: 12px;
-            }
-            body.is-task-comprehension .translation ,
-        body.is-point-comprehension .translation {
-                font-size: 12px;
-            }
-            .option-item {
-                min-height: 58px;
-                padding: 8px 10px;
-                gap: 10px;
-            }
-            .option-index {
-                width: 30px;
-                height: 30px;
-                font-size: 15px;
-            }
-            .option-placeholder {
-                font-size: 12px;
-                letter-spacing: 0.04em;
-            }
-        }
-
-        @media (max-width: 520px) {
-            h1 { font-size: 14px; }
-            main { width: calc(100% - 20px); padding-top: 16px; gap: 12px; }
-            .meta-card, .practice-card, .result-panel, .error-card { padding: 14px; }
-            .pill-row { justify-content: flex-start; }
-            body.is-task-comprehension .meta-card ,
-        body.is-point-comprehension .meta-card {
-                column-gap: 6px;
-                row-gap: 7px;
-            }
-            body.is-task-comprehension .meta-title ,
-        body.is-point-comprehension .meta-title { font-size: 17px; }
-            body.is-task-comprehension .meta-copy ,
-        body.is-point-comprehension .meta-copy {
-                font-size: 11px;
-                line-height: 1.4;
-            }
-            body.is-task-comprehension .pill-row .pill ,
-        body.is-point-comprehension .pill-row .pill {
-                min-height: 24px;
-                padding: 4px 7px;
-                font-size: 10px;
-            }
-            .question-topline {
-                display: grid;
-                grid-template-columns: 1fr auto;
-                align-items: start;
-            }
-            body.is-overview-comprehension .question-topline {
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-            }
-            body.is-overview-comprehension #questionCounter {
-                width: auto;
-                justify-self: start;
-            }
-            .question-title {
-                min-width: 0;
-                font-size: 17px;
-                line-height: 1.5;
-            }
-            .audio-box {
-                margin: 12px 0;
-                padding: 0;
-            }
-            body.is-task-comprehension .audio-box,
-            body.is-point-comprehension .audio-box {
-                margin: 10px 0 12px;
-                padding: 0;
-            }
-            audio { min-height: 0; }
-            .custom-audio-player {
-                grid-template-columns: 32px minmax(0, 1fr) max-content;
-                gap: 8px;
-                min-height: 48px;
-                padding: 8px 10px;
-            }
-            .audio-play-btn {
-                width: 32px;
-                height: 32px;
-            }
-            .audio-play-icon {
-                border-top-width: 9px;
-                border-bottom-width: 9px;
-                border-left-width: 14px;
-            }
-            .audio-play-btn.is-playing .audio-play-icon {
-                width: 14px;
-                height: 18px;
-                background:
-                    linear-gradient(currentColor, currentColor) left center / 4px 100% no-repeat,
-                    linear-gradient(currentColor, currentColor) right center / 4px 100% no-repeat;
-            }
-            .audio-seek::-webkit-slider-runnable-track {
-                height: 4px;
-            }
-            .audio-seek::-webkit-slider-thumb {
-                width: 12px;
-                height: 12px;
-                margin-top: -4px;
-            }
-            .audio-seek::-moz-range-track,
-            .audio-seek::-moz-range-progress {
-                height: 4px;
-            }
-            .audio-seek::-moz-range-thumb {
-                width: 12px;
-                height: 12px;
-            }
-            .audio-time {
-                min-width: 60px;
-                font-size: 10px;
-            }
-            .options-list { gap: 8px; }
-            body.is-overview-comprehension .options-list { gap: 8px; }
-            body.is-overview-comprehension .option-item {
-                min-height: 50px;
-                padding: 8px;
-            }
-            body.is-overview-comprehension .option-index {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            body.is-overview-comprehension .option-item.is-locked {
-                min-height: 54px;
-            }
-            body.is-overview-comprehension .option-text { font-size: 11px; }
-            body.is-task-comprehension .options-list ,
-        body.is-point-comprehension .options-list { gap: 7px; }
-            body.is-task-comprehension .option-item ,
-        body.is-point-comprehension .option-item {
-                min-height: 50px;
-                padding: 7px;
-            }
-            body.is-task-comprehension .option-index ,
-        body.is-point-comprehension .option-index {
-                width: 24px;
-                height: 24px;
-                font-size: 12px;
-            }
-            body.is-task-comprehension .option-text ,
-        body.is-point-comprehension .option-text { font-size: 11px; }
-            .option-item { min-height: 54px; }
-            .actions-row { flex-direction: column; }
-            .nav-actions, .answer-actions { width: 100%; }
-            .action-btn { flex: 1; }
-        }
-
-        @media (max-width: 390px) {
-            .question-topline { grid-template-columns: 1fr; }
-            body.is-overview-comprehension .question-topline { display: flex; }
-            #questionCounter { justify-self: start; }
-        }
-    </style>
-    <link rel="stylesheet" href="./listening-header.css">
+    <link rel="stylesheet" href="./listening-practice-redesign.css?v=20260814-derived-exact-r1">
+    <link rel="stylesheet" href="./listening-derived-practice.css?v=20260814-derived-adapter-r2">
 </head>
-<body>
+<body class="listening-practice-redesign listening-derived-page listening-category-page">
     <header>
         <a href="../immediate-response/n2/index.html?browse=category" class="back-btn" id="backBtn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            戻る
+            分類一覧へ戻る
         </a>
-        <h1 id="pageHeading">即時応答 <span id="levelBadge">N2 STAGE</span></h1>
-        <a href="../../../index.html" class="home-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            ホーム
-        </a>
+        <h1 id="pageHeading">聴解特訓 <span id="levelBadge">N2</span></h1>
+        <span aria-hidden="true"></span>
     </header>
 
-    <main>
-        <section class="meta-card" id="metaCard">
-            <div class="meta-text">
-                <h2 class="meta-title" id="categoryTitle">分類練習</h2>
-                <p class="meta-copy" id="categoryCopy">読み込み中です。</p>
+    <main class="derived-shell">
+        <section class="listening-page-intro" aria-labelledby="categoryTitle">
+            <div>
+                <p class="listening-page-eyebrow">日本語能力試験 ・ <span id="introLevel">N2</span> ・ 分類練習</p>
+                <h2 class="listening-page-title" id="categoryTitle">分類練習</h2>
             </div>
-            <div class="pill-row">
-                <span class="pill is-source" id="sourceBadge">-</span>
-                <span class="pill is-count" id="countBadge">0 题</span>
+            <div class="listening-progress" aria-label="問題の進捗">
+                <div class="listening-progress-meta"><span>問題</span><strong id="progressCurrent">1</strong><span>/</span><span id="progressTotal">1</span></div>
+                <div class="listening-progress-track"><span class="listening-progress-value" id="progressValue"></span></div>
             </div>
         </section>
 
-        <section class="practice-card" id="practiceCard">
-            <div class="question-topline">
-                <h2 class="question-title" id="questionTitle">请听音频并选择最合适的回答。</h2>
-                <span class="pill" id="questionCounter">第 1 / 0 题</span>
+        <section class="practice-container mode-practice" id="practiceCard">
+            <div class="card-header">
+                <div class="header-left"><strong class="question-select" id="questionCounter">1番</strong></div>
+                <aside class="listening-mentor-note" aria-label="一二三のアドバイス">
+                    <span class="listening-mentor-avatar"><img src="../../../assets/listening/music-duo-cover-longhair-headphones-v3.png" alt="一二三"></span>
+                    <span id="mentorText">先に音の条件を整理してみよう。</span>
+                </aside>
             </div>
-            <div class="audio-box">
-                <audio id="audioElement" preload="metadata"></audio>
-                <div class="custom-audio-player" id="customAudioPlayer" role="group" aria-label="音频播放器">
-                    <button type="button" class="audio-play-btn" id="audioPlayBtn" aria-label="播放音频">
-                        <span class="audio-play-icon" aria-hidden="true"></span>
-                    </button>
-                    <input type="range" class="audio-seek" id="audioSeek" min="0" max="100" step="0.1" value="0" aria-label="音频进度">
-                    <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+
+            <div class="content-wrapper">
+                <div class="left-panel" id="scenePanel" hidden>
+                    <div class="img-frame">
+                        <img id="sceneImage" alt="場面イラスト">
+                    </div>
                 </div>
-            </div>
-            <div class="status-box is-ready" id="statusBox" hidden>播放音频后，选择最合适的答案。</div>
-            <ol class="options-list" id="optionsList"></ol>
-            <div class="actions-row">
-                <div class="nav-actions">
-                    <button type="button" class="action-btn" id="prevBtn">上一题</button>
-                    <button type="button" class="action-btn" id="nextBtn">下一题</button>
+                <div class="right-panel">
+                    <div class="derived-question-prompt" id="questionPrompt">
+                        <h2 id="questionTitle">音声を聞いて、最も適切なものを選んでください。</h2>
+                    </div>
+                    <div class="dialogue-block" id="inlineDialogueBlock" hidden></div>
+                    <ol class="options-list" id="optionsList"></ol>
                 </div>
-                <div class="answer-actions">
-                    <button type="button" class="action-btn" id="resetBtn">重新选择</button>
-                    <button type="button" class="action-btn" id="confirmBtn" disabled>确认答案</button>
+                <div class="listening-card-footer">
+                    <div class="status-box is-ready" id="statusBox">音声を聞いてから答えを選んでください。</div>
+                    <div class="button-row">
+                        <button type="button" class="listening-skip-button" id="questionPrevBtn">前の問題</button>
+                        <button type="button" class="listening-skip-button" id="resetBtn">選び直す</button>
+                        <button type="button" class="listening-skip-button confirm-button" id="confirmBtn" disabled>答えを確認</button>
+                        <button type="button" class="listening-skip-button" id="questionNextBtn">次の問題</button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="result-panel" id="resultPanel" hidden>
-            <h2 class="result-title" id="resultTitle">解析</h2>
+            <h2 class="result-title" id="resultTitle">解答・解説</h2>
             <div class="dialogue-block" id="dialogueBlock"></div>
         </section>
 
-        <section class="error-card hidden" id="errorCard">
-            <h2 class="result-title">暂时无法开始分类练习</h2>
-            <p class="meta-copy" id="errorCopy">分类数据没有加载成功。</p>
+        <section class="error-card paper-panel hidden" id="errorCard">
+            <h2 class="error-title">分類練習を開始できません</h2>
+            <p class="error-copy" id="errorCopy">分類データを読み込めませんでした。</p>
         </section>
     </main>
 
+    <div class="audio-wrapper">
+        <div class="custom-audio-player" id="customAudioPlayer" data-derived-player role="group" aria-label="音声プレーヤー">
+            <div class="now-playing-box">
+                <div class="now-playing-content">
+                    <div class="track-header-row">
+                        <div class="track-info">
+                            <div class="track-title" id="playerTrackTitle">問題 1</div>
+                        </div>
+                        <div class="time-group">
+                            <span class="time-display" data-player-current>0:00</span>
+                            <span class="time-display time-divider">/</span>
+                            <span class="time-display" data-player-duration>0:00</span>
+                        </div>
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-container" data-player-seek tabindex="0" aria-label="再生位置">
+                            <div class="progress-bar" data-player-progress></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button type="button" class="ctrl-btn nav-btn" id="prevBtn" data-player-prev title="前へ" aria-label="前へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h2v12H3zM13 6v12L5 12zM21 6v12L13 12z"/></svg>
+                </button>
+                <button type="button" class="ctrl-btn skip-btn" id="rewindBtn" data-player-rewind title="6秒戻る" aria-label="6秒戻る"></button>
+                <button type="button" class="ctrl-btn play-btn" id="playBtn" data-player-play aria-label="再生"></button>
+                <button type="button" class="ctrl-btn skip-btn" id="forwardBtn" data-player-forward title="6秒進む" aria-label="6秒進む"></button>
+                <button type="button" class="ctrl-btn nav-btn" id="nextBtn" data-player-next title="次へ" aria-label="次へ">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6v12L11 12zM11 6v12L19 12zM19 6h2v12H19z"/></svg>
+                </button>
+                <button type="button" class="ctrl-btn loop-btn" id="loopBtn" data-player-loop title="ループ再生" aria-label="ループ再生">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+                <button type="button" class="ctrl-btn speed-btn" id="speedBtn" data-player-speed title="再生速度">1.0x</button>
+            </div>
+            <audio id="audioElement" preload="metadata"></audio>
+        </div>
+    </div>
+
     <div class="tooltip" id="keywordTooltip"></div>
 
+    <script src="./listening-derived-player.js?v=20260814-exact-player-r2"></script>
     <script src="./listening-progress.js"></script>
-    <script src="./listening-question-pools.js"></script>
+    <script src="./listening-question-pools.js?v=20260815-unified-analysis"></script>
     <script src="./listening-category-catalog.js"></script>
     <script src="./listening-category-system.js"></script>
     <script>
@@ -1357,6 +137,9 @@
         document.body.classList.toggle('is-overview-comprehension', type === 'overview_comprehension');
         document.body.classList.toggle('is-immediate-response', type === 'immediate_response');
         document.body.classList.toggle('is-level-n1', level === 'N1');
+        document.body.dataset.listeningPracticeType = type === 'immediate_response'
+            ? 'immediate'
+            : type.replace(/_/g, '-');
 
         const state = {
             category: null,
@@ -1372,20 +155,20 @@
             levelBadge: document.getElementById('levelBadge'),
             backBtn: document.getElementById('backBtn'),
             categoryTitle: document.getElementById('categoryTitle'),
-            categoryCopy: document.getElementById('categoryCopy'),
-            sourceBadge: document.getElementById('sourceBadge'),
-            countBadge: document.getElementById('countBadge'),
             questionCounter: document.getElementById('questionCounter'),
             questionTitle: document.getElementById('questionTitle'),
+            practiceCard: document.getElementById('practiceCard'),
+            questionPrompt: document.getElementById('questionPrompt'),
+            scenePanel: document.getElementById('scenePanel'),
+            sceneImage: document.getElementById('sceneImage'),
+            inlineDialogue: document.getElementById('inlineDialogueBlock'),
             audio: document.getElementById('audioElement'),
-            audioPlayer: document.getElementById('customAudioPlayer'),
-            audioPlay: document.getElementById('audioPlayBtn'),
-            audioSeek: document.getElementById('audioSeek'),
-            audioTime: document.getElementById('audioTime'),
             status: document.getElementById('statusBox'),
             options: document.getElementById('optionsList'),
-            prev: document.getElementById('prevBtn'),
-            next: document.getElementById('nextBtn'),
+            prev: document.getElementById('questionPrevBtn'),
+            next: document.getElementById('questionNextBtn'),
+            audioPrev: document.getElementById('prevBtn'),
+            audioNext: document.getElementById('nextBtn'),
             reset: document.getElementById('resetBtn'),
             confirm: document.getElementById('confirmBtn'),
             result: document.getElementById('resultPanel'),
@@ -1393,7 +176,13 @@
             dialogue: document.getElementById('dialogueBlock'),
             error: document.getElementById('errorCard'),
             errorCopy: document.getElementById('errorCopy'),
-            tooltip: document.getElementById('keywordTooltip')
+            tooltip: document.getElementById('keywordTooltip'),
+            introLevel: document.getElementById('introLevel'),
+            progressCurrent: document.getElementById('progressCurrent'),
+            progressTotal: document.getElementById('progressTotal'),
+            progressValue: document.getElementById('progressValue'),
+            playerTrackTitle: document.getElementById('playerTrackTitle'),
+            mentorText: document.getElementById('mentorText')
         };
 
         function escapeHtml(value) {
@@ -1415,6 +204,10 @@
 
         function isTaskComprehension() {
             return type === 'task_comprehension';
+        }
+
+        function isImmediateResponse() {
+            return type === 'immediate_response';
         }
 
         function isPointComprehension() {
@@ -1469,6 +262,42 @@
             }
 
             return `../task-comprehension/${level.toLowerCase()}/assets/audio/${match[1]}.${parseInt(match[2], 10)}-${question.questionId}.mp3`;
+        }
+
+        function getQuestionImageSrc(question) {
+            if (!question || !question.image) return '';
+            const imageSrc = String(question.image);
+            const decodedImageSrc = decodeURIComponent(imageSrc);
+            const listeningMarker = '/exam/listening/';
+            const markerIndex = decodedImageSrc.indexOf(listeningMarker);
+            if (markerIndex !== -1) {
+                return `..${decodedImageSrc.slice(markerIndex + '/exam/listening'.length)}`;
+            }
+            return imageSrc;
+        }
+
+        function setImmediateExplanationMode(question, visible) {
+            if (!isImmediateResponse()) return;
+
+            ui.practiceCard.classList.toggle('mode-practice', !visible);
+            ui.practiceCard.classList.toggle('mode-explanation', visible);
+            ui.questionPrompt.hidden = visible;
+            ui.inlineDialogue.hidden = !visible;
+
+            if (!visible) {
+                ui.scenePanel.hidden = true;
+                ui.sceneImage.removeAttribute('src');
+                ui.inlineDialogue.innerHTML = '';
+                return;
+            }
+
+            const imageSrc = getQuestionImageSrc(question);
+            ui.scenePanel.hidden = !imageSrc;
+            if (imageSrc) ui.sceneImage.src = imageSrc;
+            ui.inlineDialogue.innerHTML = `
+                <div class="dialogue-text">${question.dialogueHtml || '（本题暂未整理原文）'}</div>
+                ${question.translation ? `<div class="translation">${escapeHtml(question.translation)}</div>` : ''}
+            `;
         }
 
         function renderQuestionTitle(question) {
@@ -1590,38 +419,6 @@
             if (tone) ui.status.classList.add(tone);
         }
 
-        function formatAudioClock(seconds) {
-            if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
-            const total = Math.floor(seconds);
-            const minutes = Math.floor(total / 60);
-            const secs = String(total % 60).padStart(2, '0');
-            return `${minutes}:${secs}`;
-        }
-
-        function getAudioDuration() {
-            return Number.isFinite(ui.audio.duration) && ui.audio.duration > 0
-                ? ui.audio.duration
-                : 0;
-        }
-
-        function updateAudioTimeline() {
-            const duration = getAudioDuration();
-            const current = Number.isFinite(ui.audio.currentTime) ? ui.audio.currentTime : 0;
-            const progress = duration ? Math.min(100, Math.max(0, (current / duration) * 100)) : 0;
-
-            ui.audioSeek.value = String(progress);
-            ui.audioSeek.disabled = duration <= 0;
-            ui.audioSeek.style.setProperty('--audio-progress', `${progress}%`);
-            ui.audioPlayer.style.setProperty('--audio-progress', `${progress}%`);
-            ui.audioTime.textContent = `${formatAudioClock(current)} / ${formatAudioClock(duration)}`;
-        }
-
-        function updateAudioPlayState() {
-            const isPlaying = !ui.audio.paused && !ui.audio.ended;
-            ui.audioPlay.classList.toggle('is-playing', isPlaying);
-            ui.audioPlay.setAttribute('aria-label', isPlaying ? '暂停音频' : '播放音频');
-        }
-
         function setAudioSource(src) {
             ui.audio.pause();
             if (src) {
@@ -1631,55 +428,33 @@
                 ui.audio.removeAttribute('src');
             }
             ui.audio.load();
-            updateAudioPlayState();
-            updateAudioTimeline();
-        }
-
-        function toggleAudioPlayback() {
-            if (!ui.audio.currentSrc && !ui.audio.src) return;
-            if (ui.audio.paused || ui.audio.ended) {
-                if (ui.audio.ended) ui.audio.currentTime = 0;
-                ui.audio.play().catch(() => {
-                    updateAudioPlayState();
-                    updateStatus('浏览器暂时无法播放音频，请再次点击播放。', 'is-wrong');
-                });
-                return;
-            }
-            ui.audio.pause();
-        }
-
-        function seekAudioFromRange() {
-            const duration = getAudioDuration();
-            if (!duration) return;
-            ui.audio.currentTime = (Number(ui.audioSeek.value) / 100) * duration;
-            updateAudioTimeline();
         }
 
         function renderOptions(question) {
             ui.options.innerHTML = question.options.map((option, index) => {
                 const classes = ['option-item'];
-                if (state.selectedIndex === index) classes.push('is-selected');
+                if (state.selectedIndex === index) classes.push('selected');
 
                 if (state.judged) {
                     classes.push('is-locked');
-                    if (option.correct) classes.push('is-correct');
-                    if (state.selectedIndex === index && !option.correct) classes.push('is-wrong');
+                    if (option.correct) classes.push('judged-correct', 'correct-answer');
+                    if (state.selectedIndex === index && !option.correct) classes.push('judged-wrong');
                 }
 
                 const shouldShowOptionText = state.judged || isTaskComprehension() || isPointComprehension();
                 const shouldShowTranslation = state.judged && option.translation;
                 const body = shouldShowOptionText
                     ? `
-                        <div class="option-body">
+                        <div class="option-content">
                             <div class="option-text">${option.text || ''}</div>
-                            ${shouldShowTranslation ? `<div class="option-translation">${escapeHtml(option.translation)}</div>` : ''}
+                            ${shouldShowTranslation ? `<div class="translation">${escapeHtml(option.translation)}</div>` : ''}
                         </div>
                     `
                     : (isOverviewComprehension() ? '' : '<span class="option-placeholder">選択肢</span>');
 
                 return `
                     <li class="${classes.join(' ')}" data-option-index="${index}">
-                        <span class="option-index">${index + 1}</span>
+                        <span class="options-num">${index + 1}</span>
                         ${body}
                     </li>
                 `;
@@ -1697,6 +472,15 @@
         }
 
         function renderResult(question, isCorrect) {
+            if (isImmediateResponse()) {
+                ui.result.hidden = true;
+                setImmediateExplanationMode(question, true);
+                ui.mentorText.textContent = isCorrect
+                    ? 'いいね。その音の手がかり、ちゃんと拾えてるよ。'
+                    : '惜しい。原文で聞き落とした条件を一緒に確認しよう。';
+                return;
+            }
+
             ui.result.hidden = false;
             const resultCopy = isScriptListeningType() ? '来看一下完整原文' : '来看一下完整应答';
             ui.resultTitle.textContent = isCorrect ? `答对了，${resultCopy}` : `已加入错题，${resultCopy}`;
@@ -1706,6 +490,9 @@
                     <div class="dialogue-original">${question.dialogueHtml || '（本题暂未整理原文）'}</div>
                     ${question.translation ? `<div class="dialogue-translation">${escapeHtml(question.translation)}</div>` : ''}
                 `;
+            ui.mentorText.textContent = isCorrect
+                ? 'いいね。その音の手がかり、ちゃんと拾えてるよ。'
+                : '惜しい。原文で聞き落とした条件を一緒に確認しよう。';
         }
 
         function markMistake(question) {
@@ -1752,9 +539,11 @@
             state.selectedIndex = -1;
             state.judged = false;
             ui.result.hidden = true;
+            setImmediateExplanationMode(getCurrentQuestion(), false);
             ui.confirm.disabled = true;
             renderOptions(getCurrentQuestion());
             updateStatus('已重置本题，可以重新选择。', 'is-ready');
+            ui.mentorText.textContent = 'もう一度、音の流れを落ち着いて聞いてみよう。';
         }
 
         function renderQuestion() {
@@ -1765,14 +554,19 @@
             state.selectedIndex = -1;
             state.judged = false;
             ui.result.hidden = true;
+            setImmediateExplanationMode(question, false);
             ui.confirm.disabled = true;
             ui.reset.disabled = false;
             ui.prev.disabled = state.index <= 0;
             ui.next.disabled = state.index >= state.items.length - 1;
-            const counterText = `第 ${state.index + 1} / ${state.items.length} 题`;
-            ui.questionCounter.textContent = counterText;
-            ui.countBadge.textContent = isScriptListeningType() ? counterText : `${state.items.length} 题`;
-            ui.sourceBadge.textContent = item.displayLabel;
+            ui.audioPrev.disabled = state.index <= 0;
+            ui.audioNext.disabled = state.index >= state.items.length - 1;
+            ui.questionCounter.textContent = `${state.index + 1}番`;
+            ui.progressCurrent.textContent = String(state.index + 1);
+            ui.progressTotal.textContent = String(state.items.length);
+            ui.progressValue.style.width = `${((state.index + 1) / state.items.length) * 100}%`;
+            ui.playerTrackTitle.textContent = `問題 ${state.index + 1}`;
+            ui.mentorText.textContent = '先に音の条件を整理してみよう。';
             renderQuestionTitle(question);
             setAudioSource(getQuestionAudioSrc(question));
             updateStatus('播放音频后，选择最合适的答案。', 'is-ready');
@@ -1817,8 +611,9 @@
         });
 
         function init() {
-            ui.pageHeading.childNodes[0].nodeValue = `${getHeaderTitle()} `;
-            ui.levelBadge.textContent = `${level} STAGE`;
+            ui.pageHeading.childNodes[0].nodeValue = `${level} 聴解特訓 `;
+            ui.levelBadge.textContent = getHeaderTitle();
+            ui.introLevel.textContent = level;
             ui.backBtn.href = `../${getTypeFolder()}/${level.toLowerCase()}/index.html?browse=category&category=${encodeURIComponent(categoryId)}`;
 
             state.category = window.ListeningCategorySystem.getCategory(type, level, categoryId);
@@ -1837,35 +632,19 @@
             }
 
             ui.categoryTitle.textContent = state.setNumber ? `${state.category.name} · 第${state.setNumber}组` : state.category.name;
-            ui.categoryCopy.textContent = state.setNumber
-                ? state.category.description || getDefaultCategoryCopy()
-                : state.category.description || getDefaultCategoryCopy();
-            ui.countBadge.textContent = `${state.items.length} 题`;
             state.index = findInitialIndex();
             renderQuestion();
         }
 
         ui.prev.addEventListener('click', () => moveQuestion(-1));
         ui.next.addEventListener('click', () => moveQuestion(1));
+        ui.audioPrev.addEventListener('click', () => moveQuestion(-1));
+        ui.audioNext.addEventListener('click', () => moveQuestion(1));
         ui.confirm.addEventListener('click', confirmAnswer);
         ui.reset.addEventListener('click', resetAnswer);
-        ui.audioPlay.addEventListener('click', toggleAudioPlayback);
-        ui.audioSeek.addEventListener('input', seekAudioFromRange);
-        ui.audio.addEventListener('loadedmetadata', updateAudioTimeline);
-        ui.audio.addEventListener('durationchange', updateAudioTimeline);
-        ui.audio.addEventListener('timeupdate', updateAudioTimeline);
-        ui.audio.addEventListener('play', updateAudioPlayState);
-        ui.audio.addEventListener('pause', updateAudioPlayState);
-        ui.audio.addEventListener('ended', () => {
-            updateAudioPlayState();
-            updateAudioTimeline();
-        });
-        ui.audio.addEventListener('error', () => {
-            updateAudioPlayState();
-            updateAudioTimeline();
-        });
-
         window.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

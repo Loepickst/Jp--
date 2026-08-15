@@ -10,6 +10,7 @@
     let practicePetController = null;
     let listeningPetAssetsPromise = null;
     let listeningPetHooksInstalled = false;
+    let listeningLayoutInstalled = false;
 
     function installListeningHighlightAlignmentFix() {
         if (document.getElementById('listening-highlight-alignment-fix')) {
@@ -178,8 +179,10 @@
 
         wrapFunction('renderQuestion', function(original, args) {
             const result = original.apply(this, args);
-            const questionIndex = Number(window.currentQuestionIndex || 0) + 1;
             window.setTimeout(() => {
+                refreshListeningPracticeLayout();
+                setListeningGuideMessage('thinking');
+                const questionIndex = getListeningQuestionPosition().current;
                 reactListeningPet('enter', { questionIndex });
             }, 0);
             return result;
@@ -189,30 +192,25 @@
             let isCorrect = false;
             let hasSelection = false;
             try {
-                const examKey = window.currentExamKey;
-                const questionIndex = Number(window.currentQuestionIndex || 0);
-                const question = window.examData && examKey && window.examData[examKey]
-                    ? window.examData[examKey].questions[questionIndex]
-                    : null;
                 const selected = document.querySelector('#appContainer .options-list li.selected');
-                if (question && selected) {
+                if (selected) {
                     hasSelection = true;
-                    const optionIndex = Number.parseInt(selected.getAttribute('data-index') || '-1', 10);
-                    isCorrect = Boolean(question.options[optionIndex] && question.options[optionIndex].correct);
+                    isCorrect = selected.classList.contains('correct-answer');
                 }
             } catch (error) {
                 console.warn('Listening pet answer inspection failed:', error);
             }
 
             const result = original.apply(this, args);
-            const questionIndex = Number(window.currentQuestionIndex || 0) + 1;
+            const questionPosition = getListeningQuestionPosition();
+            const questionIndex = questionPosition.current;
+
+            window.setTimeout(refreshListeningPracticeLayout, 0);
 
             if (hasSelection) {
+                setListeningGuideMessage(isCorrect ? 'correct' : 'wrong');
                 reactListeningPet(isCorrect ? 'answer_correct' : 'answer_wrong', { questionIndex });
-                const examKey = window.currentExamKey;
-                const total = window.examData && examKey && window.examData[examKey]
-                    ? window.examData[examKey].questions.length
-                    : 0;
+                const total = questionPosition.total;
                 if (total > 0 && questionIndex === total) {
                     window.setTimeout(() => {
                         reactListeningPet('clear', { questionIndex });
@@ -224,6 +222,217 @@
         });
 
         listeningPetHooksInstalled = true;
+    }
+
+    function detectListeningLevel() {
+        const pathMatch = String(window.location.pathname || '').match(/\/n([123])\//i);
+        if (pathMatch) {
+            return `N${pathMatch[1]}`;
+        }
+
+        const titleMatch = String(document.title || '').match(/\bN([123])\b/i);
+        return titleMatch ? `N${titleMatch[1]}` : 'N1';
+    }
+
+    function getListeningQuestionPosition() {
+        const select = document.getElementById('questionSelect');
+        if (!select) {
+            return { current: 1, total: 1 };
+        }
+
+        const current = Math.max(1, Number(select.selectedIndex) + 1);
+        const total = Math.max(1, Number(select.options.length) || 1);
+        return { current, total };
+    }
+
+    function buildListeningIntro(labelText) {
+        const level = detectListeningLevel();
+        const queryYear = new URLSearchParams(window.location.search).get('year');
+        const queryYearMatch = String(queryYear || '').match(/^(\d{4})-(\d{1,2})$/);
+        const yearLabel = queryYearMatch
+            ? `${queryYearMatch[1]}年${Number(queryYearMatch[2])}月`
+            : '';
+        const normalizedLabel = String(labelText || '')
+            .replace(/\s*\(N[123]\)\s*/gi, '')
+            .replace(/\s*✔.*$/, '')
+            .trim();
+        const displayLabel = yearLabel || (normalizedLabel && !/理解|応答|聴解|練習/.test(normalizedLabel)
+            ? normalizedLabel
+            : '年度练习');
+
+        const intro = document.createElement('section');
+        intro.className = 'listening-page-intro';
+        intro.innerHTML = `
+            <div>
+                <p class="listening-page-eyebrow">日本語能力試験 ・ ${level} ・ 年度练习</p>
+                <h2 class="listening-page-title">[${level}] ${displayLabel}</h2>
+            </div>
+            <div class="listening-progress" aria-label="题目进度">
+                <div class="listening-progress-meta"><span>问题</span><strong>1</strong><span>/</span><span class="listening-progress-total">1</span></div>
+                <div class="listening-progress-track"><span class="listening-progress-value"></span></div>
+            </div>
+        `;
+        return intro;
+    }
+
+    function ensureListeningMentor(cardHeader) {
+        if (!cardHeader || cardHeader.querySelector('.listening-mentor-note')) {
+            return;
+        }
+
+        const note = document.createElement('div');
+        note.className = 'listening-mentor-note';
+        const avatarUrl = new URL('../../../../../assets/listening/music-duo-cover-longhair-headphones-v3.png', document.baseURI).href;
+        note.innerHTML = `
+            <span class="listening-mentor-avatar"><img src="${avatarUrl}" alt="一二三"></span>
+            <span data-listening-guide-text>先听清条件，再看图判断吧。</span>
+        `;
+        cardHeader.appendChild(note);
+    }
+
+    function ensureListeningCardFooter(container) {
+        const content = container && container.querySelector('.content-wrapper');
+        if (!content || content.querySelector('.listening-card-footer')) {
+            return;
+        }
+
+        const footer = document.createElement('div');
+        footer.className = 'listening-card-footer';
+        footer.innerHTML = `
+            <span>选择答案后进入反馈</span>
+            <button type="button" class="listening-skip-button">暂时跳过&nbsp;›</button>
+        `;
+        const skip = footer.querySelector('.listening-skip-button');
+        if (skip) {
+            skip.addEventListener('click', () => {
+                if (typeof window.nextQuestion === 'function') {
+                    window.nextQuestion();
+                }
+            });
+        }
+        content.appendChild(footer);
+    }
+
+    function setListeningGuideMessage(state) {
+        const target = document.querySelector('[data-listening-guide-text]');
+        if (!target) {
+            return;
+        }
+
+        const messages = {
+            thinking: '先听清条件，再判断彼此的关系吧。',
+            correct: '节奏抓得很准，继续保持。',
+            wrong: '差一点，再听一次关键条件吧。'
+        };
+        target.textContent = messages[state] || messages.thinking;
+    }
+
+    function refreshListeningPracticeLayout() {
+        const position = getListeningQuestionPosition();
+        const questionSelect = document.getElementById('questionSelect');
+        if (questionSelect) {
+            Array.from(questionSelect.options).forEach((option, index) => {
+                option.textContent = `${index + 1}番`;
+            });
+        }
+        const intro = document.querySelector('.listening-page-intro');
+        if (intro) {
+            const current = intro.querySelector('.listening-progress-meta strong');
+            const total = intro.querySelector('.listening-progress-total');
+            const bar = intro.querySelector('.listening-progress-value');
+            if (current) current.textContent = String(position.current);
+            if (total) total.textContent = String(position.total);
+            if (bar) bar.style.width = `${Math.min(100, (position.current / position.total) * 100)}%`;
+        }
+
+        const footerMessage = document.querySelector('.listening-card-footer > span');
+        if (footerMessage) {
+            footerMessage.textContent = document.getElementById('appContainer')?.classList.contains('mode-explanation')
+                ? '解析已展开，可继续下一题'
+                : '选择答案后进入反馈';
+        }
+
+        document.querySelectorAll('.options-list .option-text').forEach((optionText) => {
+            if (optionText.dataset.listeningNumberNormalized === 'true') {
+                return;
+            }
+
+            const walker = document.createTreeWalker(optionText, NodeFilter.SHOW_TEXT);
+            let node = walker.nextNode();
+            while (node) {
+                if (/\S/.test(node.nodeValue || '')) {
+                    node.nodeValue = String(node.nodeValue || '').replace(/^\s*\d+[.．、]\s*/, '');
+                    break;
+                }
+                node = walker.nextNode();
+            }
+            optionText.dataset.listeningNumberNormalized = 'true';
+        });
+    }
+
+    function ensureListeningPracticeLayout() {
+        const container = document.querySelector('.practice-container');
+        if (!container) {
+            return;
+        }
+
+        const subType = detectListeningPracticeSubType();
+        // 综合理解的两道子问题在正式试卷中会明确给出选项；
+        // 只有概要理解和即时应答需要在作答阶段隐藏选项正文。
+        const audioOnlyOptionTypes = new Set(['summary', 'immediate']);
+
+        document.body.classList.add('listening-practice-redesign');
+        document.body.dataset.listeningPracticeType = subType;
+        document.body.classList.toggle('listening-options-audio-only', audioOnlyOptionTypes.has(subType));
+        document.body.classList.toggle('listening-image-explanation-only', subType === 'immediate');
+        const header = document.querySelector('body > header');
+        const yearSource = header && header.querySelector('#yearLabel');
+        const titleTarget = header && (
+            header.querySelector('.kiki-unified-header-title') ||
+            header.querySelector('h1:not(#yearLabel)') ||
+            yearSource
+        );
+        const originalLabel = yearSource ? yearSource.textContent : (titleTarget ? titleTarget.textContent : document.title);
+        const level = detectListeningLevel();
+
+        if (header) {
+            const back = header.querySelector('.back-btn');
+            if (back) {
+                back.href = new URL('../index.html?browse=year', window.location.href).href;
+                back.setAttribute('aria-label', '年度一覧へ戻る');
+                back.setAttribute('title', '年度一覧へ戻る');
+                back.innerHTML = `
+                    <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+                    <span class="kiki-unified-back-label">年度一覧へ戻る</span>
+                    <span class="kiki-unified-back-label-mobile" aria-hidden="true">戻る</span>
+                `;
+            }
+            if (yearSource && yearSource !== titleTarget) {
+                yearSource.dataset.listeningSourceLabel = 'true';
+            }
+            if (titleTarget) {
+                titleTarget.classList.add('listening-header-title');
+                titleTarget.textContent = `${level} 聴解特訓`;
+            }
+        }
+
+        if (!document.querySelector('.listening-page-intro')) {
+            container.insertAdjacentElement('beforebegin', buildListeningIntro(originalLabel));
+        }
+
+        ensureListeningMentor(container.querySelector('.card-header'));
+        ensureListeningCardFooter(container);
+        if (container.dataset.listeningLayoutObserver !== 'true') {
+            const observer = new MutationObserver((mutations) => {
+                if (mutations.some((mutation) => mutation.type === 'attributes' && mutation.attributeName === 'class')) {
+                    refreshListeningPracticeLayout();
+                }
+            });
+            observer.observe(container, { attributes: true, attributeFilter: ['class'] });
+            container.dataset.listeningLayoutObserver = 'true';
+        }
+        refreshListeningPracticeLayout();
+        listeningLayoutInstalled = true;
     }
 
     const playIcon = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
@@ -546,8 +755,15 @@
     };
 
     window.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(() => {
+            ensureListeningPracticeLayout();
+            refreshListeningPracticeLayout();
+        }, 0);
         ensureListeningPetMounted().then(() => {
             installListeningPracticeHooks();
         });
+    });
+
+    window.addEventListener('pagehide', () => {
     });
 })();

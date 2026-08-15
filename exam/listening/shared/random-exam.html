@@ -3,708 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>听力随机考试</title>
+    <title>聴解ランダム練習</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="listening-header.css">
-    <style>
-
-        :root {
-            --paper: #ffffff;
-            --graphite: #333333;
-            --graphite-sub: #666666;
-            --graphite-faint: #cccccc;
-            --red-pencil: #e64a4a;
-            --marker-yellow: rgba(255, 213, 79, 0.28);
-            --marker-blue: rgba(129, 212, 250, 0.30);
-            --marker-pink: rgba(244, 143, 177, 0.24);
-            --marker-green: rgba(129, 199, 132, 0.24);
-            --marker-mint: rgba(134, 239, 172, 0.32);
-            --marker-peach: rgba(253, 186, 116, 0.32);
-            --marker-lavender: rgba(196, 181, 253, 0.32);
-            --line: var(--graphite);
-            --text: var(--graphite);
-            --sub: var(--graphite-sub);
-            --card: rgba(255, 255, 255, 0.97);
-            --chip-gold: var(--marker-yellow);
-            --chip-blue: var(--marker-blue);
-            --chip-source: rgba(255, 243, 214, 0.92);
-            --status-ready: rgba(129, 212, 250, 0.16);
-            --status-recorded: rgba(255, 213, 79, 0.18);
-            --status-danger: rgba(244, 143, 177, 0.18);
-            --primary-btn-bg: var(--marker-pink);
-            --primary-btn-text: var(--graphite);
-            --shadow-sm: 3px 3px 0 var(--graphite);
-            --shadow-md: 6px 6px 0 var(--graphite);
-            --radius-lg: 2px 24px 3px 16px / 18px 3px 24px 4px;
-            --radius-md: 2px 16px 3px 12px / 12px 3px 16px 4px;
-            --radius-sm: 2px 10px 3px 8px / 8px 3px 10px 4px;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
-            color: var(--text);
-            background-color: var(--paper);
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-        }
-
-        .container {
-            width: min(95%, 920px);
-            margin: 0 auto;
-            padding: 26px 0 72px;
-        }
-
-        .meta-card,
-        .question-card,
-        .summary-card,
-        .analysis-card,
-        .error-card {
-            background: var(--card);
-            border: 1.5px solid var(--line);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .meta-card {
-            padding: 22px 26px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .meta-card > :first-child {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100%;
-        }
-
-        .meta-title {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-        }
-
-        .meta-copy {
-            margin: 10px 0 0;
-            color: var(--sub);
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.8;
-        }
-
-        .meta-copy:empty,
-        .question-copy:empty,
-        .summary-copy:empty,
-        .analysis-copy:empty {
-            display: none;
-        }
-
-        .meta-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .meta-badge,
-        .question-chip,
-        .analysis-note {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 14px;
-            border-radius: 999px;
-            border: 1.5px solid var(--line);
-            box-shadow: var(--shadow-sm);
-            background: #fff;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .meta-badge.is-gold { background: var(--chip-gold); }
-        .meta-badge.is-blue { background: var(--chip-blue); }
-
-        .question-card,
-        .analysis-card,
-        .summary-card,
-        .error-card {
-            padding: 24px 28px 28px;
-        }
-
-        .question-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-        }
-
-        .question-chip.is-source { background: var(--chip-source); }
-        .question-chip.is-count { background: var(--chip-blue); }
-
-        .question-title {
-            margin: 0 0 8px;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-
-        .question-copy,
-        .summary-copy,
-        .analysis-copy,
-        .error-copy {
-            margin: 0 0 14px;
-            font-size: 13px;
-            line-height: 1.8;
-            color: var(--sub);
-            font-weight: 700;
-        }
-
-        .scene-image { display: none !important; }
-
-        .audio-shell {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .audio-shell audio {
-            width: 100%;
-            filter: saturate(0.92);
-        }
-
-        .status-banner {
-            padding: 11px 14px;
-            border-radius: var(--radius-md);
-            border: 1.5px solid var(--line);
-            background: var(--status-ready);
-            box-shadow: var(--shadow-sm);
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.75;
-        }
-
-        .status-banner.is-ready { background: var(--status-ready); }
-        .status-banner.is-recorded { background: var(--status-recorded); }
-        .status-banner.is-danger { background: var(--status-danger); }
-
-        .options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 12px;
-        }
-
-        .options-list.is-choice-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .option-item {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-            padding: 14px 16px;
-            border: 1.5px solid var(--line);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            background: #fff;
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-        }
-
-        .option-item:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .option-item.is-selected { background: var(--chip-blue); }
-        .option-item.is-choice-only {
-            justify-content: center;
-            align-items: center;
-            min-height: 92px;
-            padding: 10px;
-        }
-
-        .option-item.is-choice-only .option-index {
-            width: 56px;
-            height: 56px;
-            flex: 0 0 56px;
-            font-size: 20px;
-            border-radius: var(--radius-md);
-            background: rgba(255,255,255,0.94);
-        }
-
-        .option-item.is-locked { cursor: default; }
-        .option-item.is-correct { background: var(--marker-green); }
-        .option-item.is-choice-wrong { background: var(--marker-pink); }
-
-        .option-index {
-            width: 30px;
-            height: 30px;
-            flex: 0 0 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1.5px solid var(--line);
-            border-radius: var(--radius-sm);
-            background: #fff;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .option-body {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-width: 0;
-        }
-
-        .option-text {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.75;
-        }
-
-        .option-translation,
-        .analysis-translation {
-            color: var(--sub);
-            font-size: 12px;
-            line-height: 1.8;
-            font-weight: 700;
-        }
-
-        .question-actions,
-        .analysis-actions,
-        .summary-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 18px;
-        }
-
-        .action-btn {
-            appearance: none;
-            border: 1.5px solid var(--line);
-            border-radius: var(--radius-sm);
-            background: rgba(255,255,255,0.96);
-            color: var(--text);
-            box-shadow: var(--shadow-sm);
-            padding: 10px 16px;
-            font: inherit;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .action-btn.is-primary {
-            background: var(--primary-btn-bg);
-            color: var(--primary-btn-text);
-        }
-
-        .action-btn.is-blue { background: var(--chip-blue); }
-
-        .action-btn[disabled] {
-            background: #f3f4f6;
-            color: #9ca3af;
-            border-style: dashed;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
-        .summary-title,
-        .analysis-title,
-        .error-title {
-            margin: 0 0 8px;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .summary-stat,
-        .analysis-block {
-            border: 1.5px solid var(--line);
-            border-radius: var(--radius-md);
-            background: rgba(255,255,255,0.96);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .summary-stat {
-            padding: 14px 10px;
-            text-align: center;
-        }
-
-        .summary-stat-label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--sub);
-            letter-spacing: 0.05em;
-        }
-
-        .summary-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .analysis-transcript,
-        .analysis-options {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .analysis-block {
-            padding: 14px;
-        }
-
-        .analysis-block h3 {
-            margin: 0 0 8px;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .analysis-line {
-            margin-bottom: 10px;
-            line-height: 1.95;
-        }
-
-        .analysis-speaker {
-            font-weight: 700;
-            margin-right: 8px;
-        }
-
-        .analysis-note.is-correct { background: var(--marker-green); color: var(--graphite); }
-        .analysis-note.is-wrong { background: var(--marker-pink); color: var(--graphite); }
-        .analysis-note.is-empty { background: rgba(255,255,255,0.96); color: var(--sub); }
-
-        .tooltip {
-            position: absolute;
-            z-index: 40;
-            min-width: 220px;
-            max-width: min(88vw, 340px);
-            padding: 12px 14px;
-            border-radius: var(--radius-md);
-            border: 1.5px solid var(--line);
-            background: #fffef8;
-            box-shadow: var(--shadow-md);
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.7;
-            display: none;
-        }
-
-        .hidden { display: none !important; }
-        .keyword { cursor: pointer; color: #1d6fd8; font-weight: 700; }
-
-        body[data-exam-theme="ir-n1"] {
-            --chip-gold: var(--marker-yellow);
-            --chip-blue: var(--marker-blue);
-            --chip-source: rgba(255, 241, 214, 0.92);
-            --status-ready: rgba(129, 212, 250, 0.16);
-            --status-recorded: rgba(244, 143, 177, 0.16);
-            --status-danger: rgba(244, 143, 177, 0.18);
-            --primary-btn-bg: var(--marker-pink);
-        }
-
-        body[data-exam-theme="ir-n2"] {
-            --chip-gold: var(--marker-peach);
-            --chip-blue: var(--marker-lavender);
-            --chip-source: rgba(196, 181, 253, 0.18);
-            --status-ready: rgba(134, 239, 172, 0.18);
-            --status-recorded: rgba(253, 186, 116, 0.18);
-            --status-danger: rgba(196, 181, 253, 0.18);
-            --primary-btn-bg: var(--marker-lavender);
-        }
-
-        body[data-exam-theme="tc-n1"] {
-            --chip-gold: var(--marker-yellow);
-            --chip-blue: var(--marker-blue);
-            --chip-source: rgba(129, 212, 250, 0.18);
-            --status-ready: rgba(129, 212, 250, 0.16);
-            --status-recorded: rgba(255, 213, 79, 0.18);
-            --status-danger: rgba(244, 143, 177, 0.18);
-            --primary-btn-bg: var(--marker-blue);
-        }
-
-        @media (max-width: 720px) {
-            .container {
-                width: min(96%, 920px);
-                padding: 20px 0 44px;
-            }
-
-            .meta-card,
-            .question-card,
-            .summary-card,
-            .analysis-card,
-            .error-card {
-                border-width: 1.5px;
-                border-radius: var(--radius-md);
-                padding: 14px 14px 16px;
-                box-shadow: 4px 4px 0 #1c1c1c;
-            }
-
-            .meta-title { font-size: 14px; }
-            .meta-copy { margin-top: 6px; font-size: 12px; line-height: 1.6; }
-            .meta-badges { gap: 8px; justify-content: flex-start; }
-            .meta-badge, .question-chip, .analysis-note {
-                padding: 5px 10px;
-                font-size: 11px;
-                box-shadow: 2px 2px 0 #1c1c1c;
-            }
-
-            .question-top { gap: 8px; margin-bottom: 12px; }
-            .question-title { margin-bottom: 4px; font-size: 18px; }
-            .question-copy,
-            .summary-copy,
-            .analysis-copy,
-            .error-copy { margin-bottom: 10px; font-size: 12px; line-height: 1.6; }
-
-            .audio-shell { gap: 6px; margin-bottom: 12px; }
-            .status-banner {
-                padding: 8px 10px;
-                font-size: 12px;
-                line-height: 1.5;
-                box-shadow: 2px 2px 0 #1c1c1c;
-            }
-
-            .options-list { gap: 8px; }
-            .options-list.is-choice-grid { gap: 10px; }
-            .option-item {
-                gap: 8px;
-                padding: 10px 11px;
-                border-radius: var(--radius-md);
-                box-shadow: 3px 3px 0 #1c1c1c;
-            }
-            .option-item.is-choice-only { min-height: 72px; padding: 8px; }
-            .option-item.is-choice-only .option-index {
-                width: 48px;
-                height: 48px;
-                flex-basis: 48px;
-                font-size: 18px;
-            }
-            .option-index {
-                width: 26px;
-                height: 26px;
-                flex-basis: 26px;
-                font-size: 12px;
-            }
-            .option-text { font-size: 14px; line-height: 1.6; }
-            .option-translation,
-            .analysis-translation { font-size: 11px; line-height: 1.55; }
-
-            .question-actions,
-            .analysis-actions,
-            .summary-actions { gap: 8px; margin-top: 12px; }
-            .action-btn {
-                border-radius: var(--radius-sm);
-                box-shadow: 3px 3px 0 #1c1c1c;
-                padding: 9px 12px;
-                font-size: 12px;
-            }
-
-            .summary-title,
-            .analysis-title,
-            .error-title { margin-bottom: 6px; font-size: 20px; }
-            .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
-            .summary-stat { padding: 12px 8px; box-shadow: 3px 3px 0 #1c1c1c; }
-            .summary-stat-label { margin-bottom: 4px; font-size: 11px; }
-            .summary-stat-value { font-size: 21px; }
-            .analysis-transcript, .analysis-options { gap: 10px; }
-            .analysis-block { padding: 12px; box-shadow: 3px 3px 0 #1c1c1c; }
-            .analysis-block h3 { margin-bottom: 6px; font-size: 14px; }
-            .analysis-line { margin-bottom: 8px; line-height: 1.75; font-size: 13px; }
-        }
-
-        @media (max-width: 520px) {
-            .container {
-                width: min(96%, 920px);
-                padding: 16px 0 36px;
-            }
-
-            .meta-card,
-            .question-card,
-            .summary-card,
-            .analysis-card,
-            .error-card {
-                border-radius: var(--radius-md);
-                padding: 12px 12px 14px;
-                box-shadow: 3px 3px 0 #1c1c1c;
-            }
-
-            .meta-title { font-size: 13px; }
-            .meta-card > :first-child { justify-content: center; }
-            .meta-badge, .question-chip, .analysis-note { padding: 5px 8px; font-size: 10px; }
-            .question-title { font-size: 16px; }
-            .status-banner { padding: 7px 9px; font-size: 11px; }
-            .options-list { gap: 7px; }
-            .options-list.is-choice-grid { gap: 8px; }
-            .option-item {
-                padding: 9px 10px;
-                box-shadow: 2px 2px 0 #1c1c1c;
-            }
-            .option-item.is-choice-only { min-height: 62px; padding: 7px; }
-            .option-item.is-choice-only .option-index {
-                width: 42px;
-                height: 42px;
-                flex-basis: 42px;
-                font-size: 16px;
-            }
-            .option-index {
-                width: 24px;
-                height: 24px;
-                flex-basis: 24px;
-                font-size: 11px;
-            }
-            .option-text { font-size: 13px; }
-            .action-btn { padding: 8px 11px; font-size: 11px; }
-            .summary-title,
-            .analysis-title,
-            .error-title { font-size: 18px; }
-            .summary-grid { gap: 7px; }
-            .summary-stat { padding: 10px 7px; }
-            .summary-stat-label { font-size: 10px; }
-            .summary-stat-value { font-size: 18px; }
-            .analysis-block { padding: 10px; }
-            .analysis-block h3 { font-size: 13px; }
-            .analysis-line { font-size: 12px; }
-        }
-
-    </style>
+    <link rel="stylesheet" href="./listening-practice-redesign.css?v=20260814-derived-exact-r1">
+    <link rel="stylesheet" href="./listening-derived-practice.css?v=20260814-derived-adapter-r2">
 </head>
-<body>
+<body class="listening-practice-redesign listening-derived-page listening-random-page">
     <header>
-        <a class="nav-btn" id="backBtn" href="../index.html">← 返回题型页</a>
-        <h1 class="page-title">随机考试 <span id="pageTitleCount">题组</span></h1>
-        <a class="nav-btn" href="../../../index.html">主页</a>
+        <a class="back-btn" id="backBtn" href="../index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            練習メニューへ戻る
+        </a>
+        <h1 class="page-title">聴解特訓</h1>
+        <span aria-hidden="true"></span>
     </header>
 
-    <main class="container">
-        <section class="meta-card" id="metaCard">
+    <main class="derived-shell">
+        <section class="listening-page-intro" aria-labelledby="metaTitle">
             <div>
-                <h2 class="meta-title" id="metaTitle">听力随机考试</h2>
-                <p class="meta-copy" id="metaCopy">正在准备本次随机考试题组。</p>
+                <p class="listening-page-eyebrow">日本語能力試験 ・ <span id="randomLevel">N1</span> ・ ランダム練習</p>
+                <h2 class="listening-page-title" id="metaTitle">聴解ランダム練習</h2>
             </div>
-            <div class="meta-badges">
-                <span class="meta-badge is-gold" id="rangeBadge">年份范围 -</span>
-                <span class="meta-badge is-blue" id="countBadge">题数组 -</span>
-            </div>
-        </section>
-
-        <section class="question-card" id="practiceView">
-            <div class="question-top">
-                <span class="question-chip is-count" id="questionCounter">第 1 / 0 题</span>
-                <span class="question-chip is-source" id="questionSource">来源 -</span>
-            </div>
-            <h2 class="question-title" id="questionTitle">请听音频后作答</h2>
-            <p class="question-copy" id="questionCopy"></p>
-            <img class="scene-image hidden" id="sceneImage" alt="题目场景图">
-            <div class="audio-shell">
-                <audio id="audioElement" controls preload="metadata"></audio>
-                <div class="status-banner is-ready" id="statusBanner">播放音频后作答。</div>
-            </div>
-            <ol class="options-list" id="optionsList"></ol>
-            <div class="question-actions">
-                <button class="action-btn is-primary" id="confirmBtn" type="button" disabled>确认答案</button>
+            <div class="listening-progress" aria-label="問題の進捗">
+                <div class="listening-progress-meta"><span>問題</span><strong id="progressCurrent">1</strong><span>/</span><span id="progressTotal">1</span></div>
+                <div class="listening-progress-track"><span class="listening-progress-value" id="progressValue"></span></div>
             </div>
         </section>
 
-        <section class="summary-card hidden" id="summaryView">
-            <h2 class="summary-title">随机考试完成</h2>
-            <p class="summary-copy" id="summaryCopy">先查看成绩，再决定是否回看解析。</p>
+        <section class="practice-container mode-practice" id="practiceView">
+            <div class="card-header">
+                <div class="header-left"><strong class="question-select" id="questionCounter">1番</strong><span class="derived-question-source" id="questionSource">出典</span></div>
+                <aside class="listening-mentor-note" aria-label="一二三のアドバイス">
+                    <span class="listening-mentor-avatar"><img src="../../../assets/listening/music-duo-cover-longhair-headphones-v3.png" alt="一二三"></span>
+                    <span id="randomMentorText">最後まで聞いてから、いちばん自然な答えを選ぼう。</span>
+                </aside>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="right-panel">
+                    <div class="derived-question-prompt" id="questionPrompt">
+                        <h2 id="questionTitle">音声を聞いて答えてください。</h2>
+                        <p id="questionCopy"></p>
+                    </div>
+                    <img class="question-image-area scene-image hidden" id="sceneImage" alt="問題の図">
+                    <ol class="options-list" id="optionsList"></ol>
+                </div>
+                <div class="listening-card-footer">
+                    <span class="status-banner is-ready" id="statusBanner">音声を聞いてから答えてください。</span>
+                    <div class="button-row"><button class="listening-skip-button confirm-button" id="confirmBtn" type="button" disabled>答えを確認</button></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="summary-card paper-panel hidden" id="summaryView">
+            <h2 class="summary-title">今回の練習結果</h2>
+            <p class="summary-copy" id="summaryCopy">結果をまとめました。</p>
             <div class="summary-grid">
-                <div class="summary-stat">
-                    <span class="summary-stat-label">正确</span>
-                    <span class="summary-stat-value" id="summaryCorrect">0</span>
-                </div>
-                <div class="summary-stat">
-                    <span class="summary-stat-label">错误</span>
-                    <span class="summary-stat-value" id="summaryWrong">0</span>
-                </div>
-                <div class="summary-stat">
-                    <span class="summary-stat-label">未答</span>
-                    <span class="summary-stat-value" id="summaryEmpty">0</span>
-                </div>
-                <div class="summary-stat">
-                    <span class="summary-stat-label">正确率</span>
-                    <span class="summary-stat-value" id="summaryAccuracy">0%</span>
-                </div>
+                <div class="summary-stat"><span class="summary-stat-label">正解</span><span class="summary-stat-value" id="summaryCorrect">0</span></div>
+                <div class="summary-stat"><span class="summary-stat-label">不正解</span><span class="summary-stat-value" id="summaryWrong">0</span></div>
+                <div class="summary-stat"><span class="summary-stat-label">未回答</span><span class="summary-stat-value" id="summaryEmpty">0</span></div>
+                <div class="summary-stat"><span class="summary-stat-label">正答率</span><span class="summary-stat-value" id="summaryAccuracy">0%</span></div>
             </div>
             <div id="drawArea"></div>
             <div class="summary-actions">
-                <button class="action-btn" id="viewAnalysisBtn" type="button">查看解析</button>
-                <button class="action-btn is-blue" id="retryBtn" type="button">再来一轮</button>
-                <a class="action-btn" id="summaryBackBtn" href="../index.html">返回题型页</a>
+                <button class="action-btn" id="viewAnalysisBtn" type="button">解説を見る</button>
+                <button class="action-btn" id="retryBtn" type="button">もう一度</button>
+                <a class="action-btn" id="summaryBackBtn" href="../index.html">練習メニューへ戻る</a>
             </div>
         </section>
 
         <section class="analysis-card hidden" id="analysisView">
-            <div class="question-top">
-                <span class="question-chip is-count" id="analysisCounter">解析 1 / 0</span>
-                <span class="question-chip is-source" id="analysisSource">来源 -</span>
-            </div>
-            <h2 class="analysis-title" id="analysisTitle">题目解析</h2>
+            <div class="question-identity"><span id="analysisCounter">解説 1 / 1</span><strong id="analysisSource">出典</strong></div>
+            <h2 class="analysis-title" id="analysisTitle">解答・解説</h2>
             <p class="analysis-copy" id="analysisCopy"></p>
-            <div class="analysis-note" id="analysisResultNote">已记录</div>
-            <img class="scene-image hidden" id="analysisImage" alt="题目场景图">
-            <div class="audio-shell">
-                <audio id="analysisAudio" controls preload="metadata"></audio>
-            </div>
+            <div class="analysis-note" id="analysisResultNote">記録済み</div>
+            <img class="scene-image hidden" id="analysisImage" alt="問題の図">
+            <audio id="analysisAudio" controls preload="metadata"></audio>
             <div class="analysis-transcript" id="analysisTranscript"></div>
             <div class="analysis-options" id="analysisOptions"></div>
             <div class="analysis-actions">
-                <button class="action-btn" id="analysisPrevBtn" type="button">上一题</button>
-                <button class="action-btn" id="analysisNextBtn" type="button">下一题</button>
-                <button class="action-btn is-blue" id="analysisBackBtn" type="button">回到成绩页</button>
+                <button class="action-btn" id="analysisPrevBtn" type="button">前の問題</button>
+                <button class="action-btn" id="analysisNextBtn" type="button">次の問題</button>
+                <button class="action-btn" id="analysisBackBtn" type="button">結果へ戻る</button>
             </div>
         </section>
 
-        <section class="error-card hidden" id="errorView">
-            <h2 class="error-title">暂时无法开始随机考试</h2>
-            <p class="error-copy" id="errorCopy">当前条件下没有足够题量，请返回题型页重新选择年份范围。</p>
-            <div class="summary-actions">
-                <a class="action-btn is-blue" id="errorBackBtn" href="../index.html">返回题型页</a>
+        <section class="practice-container mode-explanation hidden" id="immediateAnalysisView">
+            <div class="card-header">
+                <div class="header-left">
+                    <strong class="question-select" id="immediateAnalysisCounter">1番</strong>
+                    <span class="derived-question-source" id="immediateAnalysisSource">出典</span>
+                </div>
+                <aside class="listening-mentor-note" aria-label="一二三のアドバイス">
+                    <span class="listening-mentor-avatar"><img src="../../../assets/listening/music-duo-cover-longhair-headphones-v3.png" alt="一二三"></span>
+                    <span id="immediateAnalysisMentor">原文と答えのつながりを確認しよう。</span>
+                </aside>
             </div>
+            <div class="content-wrapper">
+                <div class="left-panel" id="immediateAnalysisScene">
+                    <div class="img-frame"><img id="immediateAnalysisImage" alt="場面イラスト"></div>
+                </div>
+                <div class="right-panel">
+                    <div class="dialogue-block" id="immediateAnalysisDialogue"></div>
+                    <ol class="options-list" id="immediateAnalysisOptions"></ol>
+                </div>
+                <div class="listening-card-footer">
+                    <div class="status-box" id="immediateAnalysisStatus">解答を確認しています。</div>
+                    <div class="button-row">
+                        <button class="listening-skip-button" id="immediateAnalysisPrevBtn" type="button">前の問題</button>
+                        <button class="listening-skip-button" id="immediateAnalysisNextBtn" type="button">次の問題</button>
+                        <button class="listening-skip-button" id="immediateAnalysisBackBtn" type="button">結果へ戻る</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="error-card paper-panel hidden" id="errorView">
+            <h2 class="error-title">ランダム練習を開始できません</h2>
+            <p class="error-copy" id="errorCopy">条件に合う問題がありません。</p>
+            <div class="summary-actions"><a class="action-btn" id="errorBackBtn" href="../index.html">練習メニューへ戻る</a></div>
         </section>
     </main>
 
+    <div class="audio-wrapper" id="practiceAudioDock">
+        <div class="custom-audio-player" data-derived-player role="group" aria-label="音声プレーヤー">
+            <div class="now-playing-box">
+                <div class="now-playing-content">
+                    <div class="track-header-row">
+                        <div class="track-info"><div class="track-title" id="randomTrackTitle">問題 1</div></div>
+                        <div class="time-group">
+                            <span class="time-display" data-player-current>0:00</span>
+                            <span class="time-display time-divider">/</span>
+                            <span class="time-display" data-player-duration>0:00</span>
+                        </div>
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-container" data-player-seek tabindex="0" aria-label="再生位置">
+                            <div class="progress-bar" data-player-progress></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button type="button" class="ctrl-btn nav-btn" id="prevBtn" data-player-prev title="前へ" aria-label="前へ" disabled>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h2v12H3zM13 6v12L5 12zM21 6v12L13 12z"/></svg>
+                </button>
+                <button type="button" class="ctrl-btn skip-btn" id="rewindBtn" data-player-rewind title="6秒戻る" aria-label="6秒戻る"></button>
+                <button type="button" class="ctrl-btn play-btn" id="playBtn" data-player-play aria-label="再生"></button>
+                <button type="button" class="ctrl-btn skip-btn" id="forwardBtn" data-player-forward title="6秒進む" aria-label="6秒進む"></button>
+                <button type="button" class="ctrl-btn nav-btn" id="nextBtn" data-player-next title="次へ" aria-label="次へ" disabled>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6v12L11 12zM11 6v12L19 12zM19 6h2v12H19z"/></svg>
+                </button>
+                <button type="button" class="ctrl-btn loop-btn" id="loopBtn" data-player-loop title="ループ再生" aria-label="ループ再生">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+                <button type="button" class="ctrl-btn speed-btn" id="speedBtn" data-player-speed title="再生速度">1.0x</button>
+            </div>
+            <audio id="audioElement" preload="metadata"></audio>
+        </div>
+    </div>
+
     <div class="tooltip" id="keywordTooltip"></div>
+    <script src="./listening-derived-player.js?v=20260814-exact-player-r2"></script>
 
     <script src="../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../shared/study-quest-test-boot.js"></script>
-    <script src="./listening-question-pools.js"></script>
+    <script src="./listening-question-pools.js?v=20260815-unified-analysis"></script>
     <script>
         window.__LISTENING_RANDOM_EXAM__ = true;
 
@@ -719,7 +184,9 @@
             return 'ir-n1';
         })();
         document.body.dataset.examTheme = themeKey;
-        const pageTitleCount = document.getElementById('pageTitleCount');
+        document.body.dataset.listeningPracticeType = type === 'immediate_response'
+            ? 'immediate'
+            : type.replace(/_/g, '-');
         const randomExamDefaults = (() => {
             if (type === 'task_comprehension') {
                 return { questionCount: 6, autoAdvanceSeconds: 5 };
@@ -753,18 +220,15 @@
             practice: document.getElementById('practiceView'),
             summary: document.getElementById('summaryView'),
             analysis: document.getElementById('analysisView'),
+            immediateAnalysis: document.getElementById('immediateAnalysisView'),
             error: document.getElementById('errorView')
         };
 
         const ui = {
             backBtn: document.getElementById('backBtn'),
-            pageTitleCount,
             summaryBackBtn: document.getElementById('summaryBackBtn'),
             errorBackBtn: document.getElementById('errorBackBtn'),
             metaTitle: document.getElementById('metaTitle'),
-            metaCopy: document.getElementById('metaCopy'),
-            rangeBadge: document.getElementById('rangeBadge'),
-            countBadge: document.getElementById('countBadge'),
             counter: document.getElementById('questionCounter'),
             source: document.getElementById('questionSource'),
             title: document.getElementById('questionTitle'),
@@ -794,8 +258,26 @@
             analysisPrev: document.getElementById('analysisPrevBtn'),
             analysisNext: document.getElementById('analysisNextBtn'),
             analysisBack: document.getElementById('analysisBackBtn'),
+            immediateAnalysisCounter: document.getElementById('immediateAnalysisCounter'),
+            immediateAnalysisSource: document.getElementById('immediateAnalysisSource'),
+            immediateAnalysisMentor: document.getElementById('immediateAnalysisMentor'),
+            immediateAnalysisScene: document.getElementById('immediateAnalysisScene'),
+            immediateAnalysisImage: document.getElementById('immediateAnalysisImage'),
+            immediateAnalysisDialogue: document.getElementById('immediateAnalysisDialogue'),
+            immediateAnalysisOptions: document.getElementById('immediateAnalysisOptions'),
+            immediateAnalysisStatus: document.getElementById('immediateAnalysisStatus'),
+            immediateAnalysisPrev: document.getElementById('immediateAnalysisPrevBtn'),
+            immediateAnalysisNext: document.getElementById('immediateAnalysisNextBtn'),
+            immediateAnalysisBack: document.getElementById('immediateAnalysisBackBtn'),
             errorCopy: document.getElementById('errorCopy'),
-            tooltip: document.getElementById('keywordTooltip')
+            tooltip: document.getElementById('keywordTooltip'),
+            randomLevel: document.getElementById('randomLevel'),
+            progressCurrent: document.getElementById('progressCurrent'),
+            progressTotal: document.getElementById('progressTotal'),
+            progressValue: document.getElementById('progressValue'),
+            randomTrackTitle: document.getElementById('randomTrackTitle'),
+            mentorText: document.getElementById('randomMentorText'),
+            audioDock: document.getElementById('practiceAudioDock')
         };
 
         function htmlEscape(value) {
@@ -823,7 +305,9 @@
             setHidden(viewNodes.practice, name !== 'practice');
             setHidden(viewNodes.summary, name !== 'summary');
             setHidden(viewNodes.analysis, name !== 'analysis');
+            setHidden(viewNodes.immediateAnalysis, name !== 'immediate-analysis');
             setHidden(viewNodes.error, name !== 'error');
+            if (ui.audioDock) setHidden(ui.audioDock, name !== 'practice');
         }
 
         function stripHighlightHtml(html) {
@@ -979,25 +463,25 @@
                 const classes = ['option-item'];
                 const choiceOnly = mode === 'practice' && isImmediateResponseExam();
                 if (mode === 'practice') {
-                    if (answer.selectedIndex === index) classes.push('is-selected');
+                    if (answer.selectedIndex === index) classes.push('selected');
                     if (answer.submitted && !choiceOnly) classes.push('is-locked');
                     if (choiceOnly) classes.push('is-choice-only');
                 } else {
                     const userPicked = answer.selectedIndex === index;
-                    if (option.correct) classes.push('is-correct');
-                    if (userPicked && !option.correct) classes.push('is-choice-wrong');
+                    if (option.correct) classes.push('judged-correct', 'correct-answer');
+                    if (userPicked && !option.correct) classes.push('judged-wrong');
                 }
                 const optionBody = choiceOnly
                     ? ''
                     : `
-                        <div class="option-body">
+                        <div class="option-content">
                             <div class="option-text">${mode === 'practice' ? sanitizeExamHtml(option.text) : option.text}</div>
-                            ${mode === 'analysis' && option.translation ? `<div class="option-translation">${htmlEscape(option.translation)}</div>` : ''}
+                            ${mode === 'analysis' && option.translation ? `<div class="translation">${htmlEscape(option.translation)}</div>` : ''}
                         </div>
                     `;
                 return `
                     <li class="${classes.join(' ')}" data-option-index="${index}">
-                        <span class="option-index">${index + 1}</span>
+                        <span class="options-num">${index + 1}</span>
                         ${optionBody}
                     </li>
                 `;
@@ -1014,8 +498,9 @@
                     if (!isImmediateResponseExam()) {
                         ui.confirm.disabled = false;
                     }
-                    ui.options.querySelectorAll('.option-item').forEach((node) => node.classList.remove('is-selected'));
-                    item.classList.add('is-selected');
+                    ui.options.querySelectorAll('.option-item').forEach((node) => node.classList.remove('selected'));
+                    item.classList.add('selected');
+                    ui.mentorText.textContent = 'その答えでいいか、最後の一音まで確かめてみよう。';
                     if (isImmediateResponseExam()) {
                         updateStatus(
                             state.audioEnded ? '已选择，可在切题前重新选择。' : '已选择答案，可在音频结束前反复修改。',
@@ -1059,8 +544,13 @@
             }
 
             const prompt = getQuestionPrompt(question);
-            ui.counter.textContent = `第 ${state.index + 1} / ${state.questions.length} 题`;
+            ui.counter.textContent = `${state.index + 1}番`;
             ui.source.textContent = createSourceLabel(question);
+            ui.progressCurrent.textContent = String(state.index + 1);
+            ui.progressTotal.textContent = String(state.questions.length);
+            ui.progressValue.style.width = `${((state.index + 1) / state.questions.length) * 100}%`;
+            ui.randomTrackTitle.textContent = `問題 ${state.index + 1}`;
+            ui.mentorText.textContent = '最後まで聞いてから、いちばん自然な答えを選ぼう。';
             ui.title.innerHTML = prompt.title;
             ui.copy.textContent = prompt.copy;
             ui.audio.src = question.audio || '';
@@ -1185,6 +675,7 @@
         function showSummary() {
             clearCountdown();
             const stats = computeStats();
+            ui.audio.pause();
             showView('summary');
             ui.summaryCorrect.textContent = String(stats.correct);
             ui.summaryWrong.textContent = String(stats.wrong);
@@ -1250,10 +741,64 @@
             `;
         }
 
+        function normalizeListeningAssetSrc(value) {
+            if (!value) return '';
+            const source = String(value);
+            const decodedSource = decodeURIComponent(source);
+            const listeningMarker = '/exam/listening/';
+            const markerIndex = decodedSource.indexOf(listeningMarker);
+            if (markerIndex !== -1) {
+                return `..${decodedSource.slice(markerIndex + '/exam/listening'.length)}`;
+            }
+            return source;
+        }
+
+        function renderImmediateUnifiedAnalysis(question, answer) {
+            ui.immediateAnalysisCounter.textContent = `${state.index + 1}番`;
+            ui.immediateAnalysisSource.textContent = createSourceLabel(question);
+
+            const imageSrc = normalizeListeningAssetSrc(question.image);
+            ui.immediateAnalysisScene.hidden = !imageSrc;
+            if (imageSrc) {
+                ui.immediateAnalysisImage.src = imageSrc;
+            } else {
+                ui.immediateAnalysisImage.removeAttribute('src');
+            }
+
+            ui.immediateAnalysisDialogue.innerHTML = `
+                <div class="dialogue-text">${question.dialogueHtml || '（本题暂未整理原文）'}</div>
+                ${question.translation ? `<div class="translation">${htmlEscape(question.translation)}</div>` : ''}
+            `;
+            ui.immediateAnalysisOptions.innerHTML = renderOptions(question.options, 'analysis');
+
+            let statusText = '本题未作答，正确答案已经标出。';
+            let statusTone = 'is-ready';
+            let mentorText = '原文と答えのつながりを確認しよう。';
+            if (answer.submitted && answer.isCorrect) {
+                statusText = '回答正确。';
+                statusTone = 'is-correct';
+                mentorText = 'いいね。その音の手がかり、ちゃんと拾えてるよ。';
+            } else if (answer.submitted && !answer.unanswered) {
+                statusText = '回答不正确，正确选项已经用薄荷色标出。';
+                statusTone = 'is-wrong';
+                mentorText = '惜しい。原文で聞き落とした条件を一緒に確認しよう。';
+            }
+            ui.immediateAnalysisStatus.textContent = statusText;
+            ui.immediateAnalysisStatus.className = `status-box ${statusTone}`;
+            ui.immediateAnalysisMentor.textContent = mentorText;
+            ui.immediateAnalysisPrev.disabled = state.index === 0;
+            ui.immediateAnalysisNext.disabled = state.index >= state.questions.length - 1;
+        }
+
         function renderAnalysis() {
             const question = getCurrentQuestion();
             const answer = getAnswerRecord(state.index);
             if (!question) return;
+
+            if (isImmediateResponseExam()) {
+                renderImmediateUnifiedAnalysis(question, answer);
+                return;
+            }
 
             ui.analysisCounter.textContent = `解析 ${state.index + 1} / ${state.questions.length}`;
             ui.analysisSource.textContent = createSourceLabel(question);
@@ -1292,7 +837,7 @@
         function showAnalysis() {
             state.analysisUnlocked = true;
             state.index = 0;
-            showView('analysis');
+            showView(isImmediateResponseExam() ? 'immediate-analysis' : 'analysis');
             renderAnalysis();
         }
 
@@ -1306,13 +851,8 @@
             ui.backBtn.href = indexHref;
             ui.summaryBackBtn.href = indexHref;
             ui.errorBackBtn.href = indexHref;
-            ui.metaTitle.textContent = `${normalizeTypeLabel(type)} · ${level} 随机考试`;
-            ui.metaCopy.textContent = '';
-            ui.rangeBadge.textContent = `${fromYear} - ${toYear}`;
-            ui.countBadge.textContent = `${QUESTION_COUNT} 题挑战`;
-            if (ui.pageTitleCount) {
-                ui.pageTitleCount.textContent = `${QUESTION_COUNT}题`;
-            }
+            ui.metaTitle.textContent = `[${level}] ${normalizeTypeLabel(type)}ランダム練習`;
+            ui.randomLevel.textContent = level;
         }
 
         function initializeQuestions() {
@@ -1369,6 +909,17 @@
             renderAnalysis();
         });
         ui.analysisBack.addEventListener('click', () => showView('summary'));
+        ui.immediateAnalysisPrev.addEventListener('click', () => {
+            if (state.index <= 0) return;
+            state.index -= 1;
+            renderAnalysis();
+        });
+        ui.immediateAnalysisNext.addEventListener('click', () => {
+            if (state.index >= state.questions.length - 1) return;
+            state.index += 1;
+            renderAnalysis();
+        });
+        ui.immediateAnalysisBack.addEventListener('click', () => showView('summary'));
 
         initializeMeta();
         if (initializeQuestions()) {
@@ -1377,5 +928,7 @@
             renderPracticeQuestion();
         }
     </script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

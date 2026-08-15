@@ -1,0 +1,95 @@
+/*
+ * Shared affordance for every clickable explanation fragment in listening.
+ * Annual, category, random and full-practice pages all load this file.
+ */
+
+:where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"] {
+    cursor: help;
+}
+
+/*
+ * Vocabulary notes need to be recognisable before the learner hovers them.
+ * Keep the word itself prominent and leave a quiet, superscript hint at its
+ * upper-right corner. Sentence-level evidence keeps the hover-only treatment
+ * below so that long transcripts do not become visually noisy.
+ */
+.keyword[onclick*="showTooltip"] {
+    font-weight: 700;
+}
+
+:where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]::after {
+    content: "?";
+    width: 15px;
+    height: 15px;
+    margin-inline-start: 0.34em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #ffffff;
+    background: var(--listening-navy, #35415f);
+    border: 1px solid var(--listening-navy, #35415f);
+    border-radius: 50%;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    vertical-align: 0.12em;
+    opacity: 0;
+    transform: scale(0.78);
+    transform-origin: center;
+    transition: opacity 130ms ease, transform 130ms ease;
+    pointer-events: none;
+}
+
+.keyword[onclick*="showTooltip"]::after {
+    width: 14px;
+    height: 14px;
+    margin-inline-start: 0.2em;
+    color: var(--listening-navy-strong, #35415f);
+    background: #f1f4f9;
+    border-color: #c8d0df;
+    font-size: 9px;
+    opacity: 0.82;
+    vertical-align: super;
+    transform: translateY(-0.04em) scale(0.92);
+}
+
+:where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]:hover::after,
+:where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]:focus-visible::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.keyword[onclick*="showTooltip"]:hover::after,
+.keyword[onclick*="showTooltip"]:focus-visible::after {
+    color: #ffffff;
+    background: var(--listening-navy-strong, #35415f);
+    border-color: var(--listening-navy-strong, #35415f);
+    transform: translateY(-0.04em) scale(1);
+}
+
+/*
+ * Some answer-evidence spans contain a smaller clickable vocabulary span.
+ * While the inner phrase is hovered, show only its own question mark.
+ */
+:where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]:has(
+    :where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]:hover
+)::after {
+    opacity: 0;
+    transform: scale(0.78);
+}
+
+/* The nested vocabulary hint remains visible while its parent sentence hides. */
+:where(.explain-correct, .explain-wrong)[onclick*="showTooltip"]:has(
+    .keyword[onclick*="showTooltip"]:hover
+) .keyword[onclick*="showTooltip"]::after {
+    opacity: 1;
+    transform: translateY(-0.04em) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :where(.keyword, .explain-correct, .explain-wrong)[onclick*="showTooltip"]::after {
+        transition: none;
+    }
+}

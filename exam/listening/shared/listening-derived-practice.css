@@ -1,0 +1,236 @@
+/*
+ * Category / random listening pages use listening-practice-redesign.css as
+ * their single visual source of truth.  This file contains adapters only for
+ * controls and result views that do not exist on the annual practice page.
+ */
+
+.listening-derived-page .hidden,
+.listening-derived-page [hidden] {
+    display: none !important;
+}
+
+.listening-derived-page .derived-shell {
+    padding: 0 0 64px;
+}
+
+.listening-derived-page .listening-page-intro {
+    min-height: 51px;
+}
+
+.listening-derived-page .question-select {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--listening-font-sans);
+}
+
+/* Annual pages do not add a second source/prompt block above the choices. */
+.listening-derived-page .mode-practice .derived-question-source,
+.listening-derived-page .mode-practice .derived-question-prompt {
+    display: none;
+}
+
+.listening-derived-page .question-image-area.scene-image {
+    display: block;
+    max-height: 280px;
+    object-fit: contain;
+}
+
+.listening-derived-page .option-placeholder {
+    color: var(--listening-faint);
+    font-size: 12px;
+}
+
+.listening-derived-page .status-box,
+.listening-derived-page .status-banner {
+    color: #9aa4b4;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.listening-derived-page .status-box.is-correct,
+.listening-derived-page .status-banner.is-correct {
+    color: var(--listening-success);
+}
+
+.listening-derived-page .status-box.is-wrong,
+.listening-derived-page .status-banner.is-wrong {
+    color: var(--listening-danger);
+}
+
+.listening-derived-page .button-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.listening-derived-page .listening-skip-button:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.listening-derived-page .listening-skip-button.confirm-button:not(:disabled) {
+    color: #fff;
+    background: var(--listening-navy);
+}
+
+/* Results retain the same paper width, border and typography as the annual card. */
+.listening-derived-page .result-panel,
+.listening-derived-page .summary-card,
+.listening-derived-page .analysis-card,
+.listening-derived-page .error-card {
+    width: min(1080px, calc(100% - 52px));
+    margin: 28px auto 0;
+    padding: 30px 42px;
+    overflow: hidden;
+    color: var(--listening-ink);
+    background: var(--listening-surface);
+    border: 1px solid var(--listening-line);
+    border-radius: var(--listening-radius);
+    box-shadow: none;
+}
+
+.listening-derived-page .result-title,
+.listening-derived-page .summary-title,
+.listening-derived-page .analysis-title,
+.listening-derived-page .error-title {
+    margin: 0 0 18px;
+    color: var(--listening-ink);
+    font-family: var(--listening-font-serif);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.listening-derived-page .summary-copy,
+.listening-derived-page .error-copy,
+.listening-derived-page .analysis-copy,
+.listening-derived-page .analysis-note {
+    color: var(--listening-muted);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.listening-derived-page .summary-grid {
+    margin: 20px 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--listening-line);
+    border-bottom: 1px solid var(--listening-line);
+}
+
+.listening-derived-page .summary-stat {
+    padding: 16px;
+    text-align: center;
+}
+
+.listening-derived-page .summary-stat + .summary-stat {
+    border-left: 1px solid var(--listening-line);
+}
+
+.listening-derived-page .summary-stat-label {
+    display: block;
+    color: var(--listening-muted);
+    font-size: 10px;
+}
+
+.listening-derived-page .summary-stat-value {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--listening-font-serif);
+    font-size: 22px;
+}
+
+.listening-derived-page .summary-actions,
+.listening-derived-page .analysis-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.listening-derived-page .action-btn {
+    min-height: 40px;
+    padding: 0 12px;
+    color: var(--listening-ink-soft);
+    background: transparent;
+    border: 0;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.listening-derived-page .action-btn:hover {
+    color: var(--listening-coral);
+    background: #f7f9fc;
+}
+
+.listening-derived-page .analysis-card > .question-identity {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    color: var(--listening-muted);
+    font-size: 10px;
+}
+
+.listening-derived-page #analysisAudio {
+    width: 100%;
+    margin: 18px 0;
+}
+
+.listening-derived-page .tooltip {
+    position: absolute;
+    z-index: 3000;
+    display: none;
+    max-width: 260px;
+    padding: 9px 11px;
+    color: #fff;
+    background: var(--listening-navy);
+    border-radius: 7px;
+    font-size: 10px;
+    line-height: 1.5;
+    box-shadow: 0 8px 24px rgba(20, 40, 75, .2);
+}
+
+@media (max-width: 760px) {
+    .listening-derived-page .derived-shell {
+        padding-bottom: 44px;
+    }
+
+    .listening-derived-page .derived-question-prompt h2 {
+        font-size: 15px;
+    }
+
+    .listening-derived-page .listening-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .listening-derived-page .button-row {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .listening-derived-page .result-panel,
+    .listening-derived-page .summary-card,
+    .listening-derived-page .analysis-card,
+    .listening-derived-page .error-card {
+        width: calc(100% - 20px);
+        padding: 24px 18px;
+        border-radius: 10px;
+    }
+
+    .listening-derived-page .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .listening-derived-page .summary-stat:nth-child(3) {
+        border-left: 0;
+        border-top: 1px solid var(--listening-line);
+    }
+
+    .listening-derived-page .summary-stat:nth-child(4) {
+        border-top: 1px solid var(--listening-line);
+    }
+}

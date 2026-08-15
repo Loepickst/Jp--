@@ -64752,7 +64752,7 @@
         return {
             ...item,
             audio: normalizeAssetPath(item.audio),
-            image: ''
+            image: normalizeAssetPath(item.image)
         };
     }
 
