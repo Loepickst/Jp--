@@ -6,897 +6,153 @@
     <title>課題理解 - 聴解練習 (N1 STAGE)</title>
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
     <style>
-        :root {
-            /* 纸张与铅笔色盘 - 明亮白底版 */
-            --paper: #ffffff;          
-            --paper-light: #ffffff;    
-            
-            --graphite: #333333;       /* 深石墨灰 */
-            --graphite-sub: #666666;   
-            --graphite-faint: #cccccc; 
-            
-            --red-pencil: #e64a4a;     /* 批改用红铅笔 */
-            --red-pencil-light: rgba(230, 74, 74, 0.08); 
-
-            /* N1 专属水彩记号笔色系 (Watercolor Markers) */
-            --marker-yellow: rgba(255, 213, 79, 0.35); /* 荧光黄 - 辅助高亮/图标 */
-            --marker-blue: rgba(129, 212, 250, 0.25);  /* 水彩蓝 - 原文问题区/选中 */
-            --marker-pink: rgba(244, 143, 177, 0.25);  /* 樱花粉 - 错误解析 */
-            --marker-green: rgba(129, 199, 132, 0.25); /* 薄荷绿 - 正确解析 */
-
-            /* 铅笔排线背景 (Hatching) - 极淡 */
-            --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px);
-
-            --transition: all 0.2s ease-out;
-        }
-
-        body {
-            font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
-            background-color: var(--paper);
-            color: var(--graphite);
-            margin: 0;
+        .sentence-listen-button {
+            width: 24px;
+            height: 24px;
+            margin-left: 8px;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* 极弱的纸张噪点纹理 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* 工具类：手绘感不规则边框 */
-        .sketch-box {
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+            border: 0;
+            border-radius: 50%;
             background: transparent;
-        }
-        
-        .sketch-circle {
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-        }
-
-        /* ================= Header ================= */
-        header {
-            width: 100%;
-            padding: 16px 20px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(4px);
-            border-bottom: 2px solid var(--graphite);
-            border-bottom-left-radius: 50% 2px;
-            border-bottom-right-radius: 50% 3px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--graphite);
-            letter-spacing: 0.1em;
-            text-align: center;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .back-btn {
-            text-decoration: none;
-            color: var(--graphite);
-            font-size: 14px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            padding: 4px 12px;
-            transition: var(--transition);
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            z-index: 2;
-            border-radius: 4px;
-        }
-
-        .back-btn:hover {
-            background: var(--marker-yellow);
-        }
-
-        /* 主容器 */
-        .practice-container {
-            margin-top: 40px;
-            margin-bottom: 140px; 
-            background: transparent;
-            max-width: 840px;
-            width: 92%;
-            padding: 20px 40px;
-            position: relative;
-            flex: 1;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 16px;
-            border-bottom: 1.5px dashed var(--graphite-faint);
-            gap: 20px;
-            flex-wrap: nowrap;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 0 1 auto;
-            min-width: 0;
-        }
-
-        /* 下拉框 */
-        .question-select {
-            padding: 4px 28px 4px 4px;
-            font-size: 16px;
-            border: none;
-            border-bottom: 1.5px solid var(--graphite);
-            background-color: transparent;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 4px center;
-            appearance: none;
-            -webkit-appearance: none;
-            color: var(--graphite);
-            outline: none;
-            font-family: inherit;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            flex: 0 0 auto;
-        }
-        
-        .question-select:hover {
-            background-color: var(--marker-yellow);
-        }
-
-        /* Mark Button */
-        .mark-btn {
-            font-size: 22px;
-            width: 34px;
-            height: 34px;
-            padding: 0;
-            background: #fff;
-            border: 1.5px solid var(--graphite-faint);
-            border-radius: 10px;
-            cursor: pointer;
-            color: var(--graphite-faint);
-            transition: var(--transition);
+            color: #9aa4b2;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            flex: 0 0 auto;
-            line-height: 1;
+            vertical-align: -4px;
+            cursor: pointer;
+            transition: color 160ms ease, background-color 160ms ease;
         }
 
-        .mark-btn:hover { 
-            color: var(--graphite); 
-            border-color: var(--graphite);
-            background: var(--marker-yellow);
-        }
-        .mark-btn.active { 
-            color: var(--graphite);
-            background: var(--marker-yellow);
-            border-color: var(--graphite);
+        .sentence-listen-button svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            pointer-events: none;
         }
 
-        /* 模式切换：记号笔涂划效果 */
-        .mode-switch {
+        .sentence-listen-button:hover,
+        .sentence-listen-button:focus-visible,
+        .sentence-listen-button.is-playing {
+            color: #52617a;
+            background: #edf0f5;
+        }
+
+        .sentence-listen-button:focus-visible {
+            outline: 2px solid #aeb8c8;
+            outline-offset: 2px;
+        }
+
+        .mode-practice .sentence-listen-button {
+            display: none;
+        }
+
+        .sentence-listen-button {
+            display: none;
+        }
+
+        .mode-explanation.follow-listening-enabled .sentence-listen-button {
+            display: inline-flex;
+        }
+
+        .header-right-slot {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-left: auto;
-            flex: 0 1 auto;
+        }
+
+        .follow-listening-toggle {
+            min-height: 38px;
+            padding: 0 14px;
+            border: 1px solid #dfe4ec;
+            border-radius: 8px;
+            background: #fff;
+            color: #52617a;
+            font: 600 13px/1 "Noto Sans JP", "Noto Sans SC", sans-serif;
+            letter-spacing: 0;
+            cursor: pointer;
+            transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .follow-listening-toggle:hover,
+        .follow-listening-toggle:focus-visible {
+            border-color: #aeb8c8;
+            background: #f6f8fb;
+            color: #35435b;
+        }
+
+        .follow-listening-toggle[aria-pressed="true"] {
+            border-color: #8795ab;
+            background: #eef1f6;
+            color: #35435b;
+        }
+
+        .follow-listening-toggle[hidden] {
+            display: none !important;
+        }
+
+        .follow-listening-source {
+            position: relative;
+            display: block;
+            min-width: 0;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .follow-listening-mainline {
+            display: block;
             min-width: 0;
         }
 
-        .mode-switch button {
-            border: none;
-            background: transparent;
-            color: var(--graphite-sub);
-            padding: 4px 8px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            transition: var(--transition);
-            position: relative;
-            font-family: inherit;
-            white-space: nowrap;
-            flex: 0 0 auto;
+        .follow-listening-content {
+            min-width: 0;
+            transition: filter 180ms ease, background-color 180ms ease;
         }
 
-        .mode-switch button:hover:not(.active) {
-            color: var(--graphite);
-        }
-
-        .mode-switch button.active {
-            color: var(--graphite);
-            z-index: 1;
-        }
-        .mode-switch button.active::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--marker-yellow);
-            border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-            z-index: -1;
-            transform: rotate(-1deg);
-        }
-
-        /* 内容区布局 */
-        .content-wrapper {
-            display: block;
-        }
-
-        .right-panel { width: 100%; }
-
-        /* 练习模式状态 */
-        .mode-practice .right-panel {
-            filter: none;
-            opacity: 1;
-            pointer-events: auto;
-            user-select: auto;
-            transition: all 0.5s ease;
-        }
-
-        .mode-practice .transcript-section,
-        .mode-practice .translation { display: none !important; }
-
-        /* ================= 选项列表 (添加了手绘边框特色) ================= */
-        .options-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .options-list li {
-            padding: 14px 16px 14px 50px;
-            background: #fff;
-            /* 添加淡色铅笔线框，明确选项边界 */
-            border: 1.5px solid var(--graphite-faint);
-            border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-            transition: var(--transition);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: var(--graphite);
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .options-num {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            color: var(--graphite);
-            text-align: center;
-            line-height: 22px; 
-            font-size: 14px;
-            font-family: sans-serif;
-            font-weight: bold;
-            transition: var(--transition);
-            border: 1.5px solid var(--graphite);
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-            background: #fff;
-            z-index: 2;
-        }
-
-        .mode-practice .options-list li { cursor: pointer; }
-        
-        .mode-practice .options-list li:hover {
-            background: var(--hatching-graphite);
-            border-color: var(--marker-blue);
-        }
-        
-        .mode-practice .options-list li:hover .options-num {
-            background: var(--marker-blue);
-        }
-
-        /* 选中状态：水彩蓝涂抹 */
-        .mode-practice .options-list li.selected {
-            background: var(--marker-blue);
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-        }
-
-        .mode-practice .options-list li.selected .options-num {
-            background: var(--graphite);
-            color: var(--paper);
-        }
-
-        /* 练习模式行内提交按钮 */
-        .inline-confirm-btn {
-            margin-left: 16px;
-            padding: 6px 20px;
-            background: var(--graphite);
-            color: var(--paper);
-            border: none;
-            border-radius: 3px 8px 4px 6px / 6px 4px 8px 3px;
-            font-size: 14px;
-            font-family: inherit;
-            font-weight: 700;
-            cursor: pointer;
-            animation: fadeInBtn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            white-space: nowrap;
-            letter-spacing: 0.05em;
-            transition: transform 0.1s;
-            flex-shrink: 0;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-        }
-
-        .inline-confirm-btn:active {
-            transform: translate(1px, 1px);
-            box-shadow: none;
-        }
-
-        @keyframes fadeInBtn {
-            from { opacity: 0; transform: scale(0.9) translate(10px, 0); }
-            to { opacity: 1; transform: scale(1) translate(0, 0); }
-        }
-
-        /* 判题状态：留出右侧空间 */
-        .mode-practice .options-list li.judged-correct,
-        .mode-practice .options-list li.judged-wrong {
-            padding-right: 80px;
-        }
-
-        /* 判题状态：★ 正解 (薄荷绿底 + 边框 + 红笔大圆圈圈出) */
-        .mode-practice .options-list li.judged-correct {
-            background: var(--marker-green) !important;
-            border: 1.5px solid var(--graphite) !important;
-            transform: none !important;
-            border-radius: 4px;
-        }
-        .mode-practice .options-list li.judged-correct .options-num {
-            border-color: var(--red-pencil);
-            color: var(--red-pencil);
-            background: #fff;
-        }
-        .mode-practice .options-list li.judged-correct::before {
-            content: '';
-            position: absolute;
-            left: 2px; 
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px;
-            height: 44px;
-            border: 2px solid var(--red-pencil);
-            border-radius: 40% 60% 50% 45% / 50% 45% 60% 40%;
-            pointer-events: none;
-            opacity: 0.8;
-        }
-        .mode-practice .options-list li.judged-correct::after {
-            content: "正解";
-            color: var(--red-pencil);
-            font-weight: 900;
-            font-size: 14px;
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-family: "Noto Serif JP", serif;
-        }
-
-        /* 判题状态：× 错误 (红笔打叉) */
-        .mode-practice .options-list li.judged-wrong {
-            background: var(--red-pencil-light) !important;
-            border: 1.5px dashed var(--graphite-faint) !important;
-            opacity: 0.8;
-            border-radius: 4px;
-        }
-        .mode-practice .options-list li.judged-wrong .options-num {
-            border-color: var(--graphite-faint); 
-            color: var(--graphite-faint);
-            background: #fff;
-        }
-        .mode-practice .options-list li.judged-wrong::before {
-            content: '✕';
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--red-pencil);
-            font-size: 28px;
-            line-height: 1;
-            font-family: sans-serif;
-            pointer-events: none;
-            opacity: 0.7;
-            z-index: 1;
-        }
-
-        /* 解析模式：显示原文与翻译 */
-        .mode-explanation .right-panel {
-            filter: blur(0);
-            opacity: 1;
-            pointer-events: auto;
-            transition: all 0.5s ease;
-        }
-        
-        .mode-explanation .translation { display: block; }
-        
-        .mode-explanation .options-list li:hover {
-            border-color: var(--graphite);
-            background: var(--hatching-graphite);
-        }
-
-        .mode-explanation .correct-answer {
-            background: var(--marker-green);
-            border-color: var(--graphite);
-            border-radius: 4px;
-        }
-        .mode-explanation .correct-answer .options-num {
-            background: var(--red-pencil);
-            color: var(--paper);
-            border-color: var(--red-pencil);
-        }
-
-        .option-content { flex: 1; display: flex; flex-direction: column; min-width: 0; word-break: break-word; }
-        .option-text { font-size: 16px; font-weight: 700; color: var(--graphite); line-height: 1.6; }
-
-        /* --- 听力原文区块排版 (水彩笔记风) --- */
-        .transcript-section {
-            margin-bottom: 40px;
-            background: transparent;
-            border: 1.5px solid var(--graphite);
-            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-            padding-bottom: 20px;
-        }
-
-        .question-box {
-            background-color: var(--marker-blue); /* 水彩蓝底色强调问题 */
-            padding: 34px 22px 16px;
-            border-bottom: 1.5px dashed var(--graphite);
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--graphite);
-            position: relative;
-        }
-
-        .question-box::before {
-            content: '問題';
-            position: absolute;
-            top: 8px;
-            left: 18px;
-            background: var(--paper);
-            color: var(--graphite);
-            font-weight: 900;
-            padding: 2px 10px;
-            border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
-            border: 1.5px solid var(--graphite);
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            font-family: sans-serif;
-        }
-
-        .question-image-area {
-            display: none;
-            margin: 16px 0 18px;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1.5px dashed rgba(51, 51, 51, 0.18);
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .question-image-area img {
-            display: block;
-            width: auto;
+        .follow-listening-translation {
+            width: fit-content;
             max-width: 100%;
-            max-height: 320px;
-            margin: 0 auto;
-            object-fit: contain;
-            border-radius: 8px;
+            transition: filter 180ms ease, background-color 180ms ease;
         }
 
-        .conversation-box {
-            padding: 28px 22px 4px;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--graphite);
-            font-weight: 500;
-        }
-
-        .conversation-line {
-            margin-bottom: 18px;
-            display: flex;
-        }
-
-        /* 说话人标签：记号笔荧光黄涂抹感 */
-        .speaker-name {
-            font-weight: 900;
-            color: var(--graphite);
-            background-color: var(--marker-yellow);
-            padding: 2px 8px;
-            border-radius: 2px 6px 3px 5px / 5px 3px 6px 2px;
-            margin-right: 12px;
-            white-space: nowrap;
-            height: fit-content;
-            font-size: 13px;
-            border: 1.5px solid var(--graphite);
-        }
-        
-        .speaker-text { flex: 1; }
-
-        /* 原文高亮及选项标示 (僅在解説模式下生效) */
-        .mode-practice .highlight-correct,
-        .mode-practice .highlight-wrong {
-            background-color: transparent;
-            color: inherit;
-            padding: 0;
-            font-weight: inherit;
-            border: none;
-        }
-        
-        .mode-practice .opt-tag { display: none !important; }
-
-        .mode-explanation .highlight-correct {
-            background-color: var(--marker-green);
-            color: var(--graphite);
-            padding: 2px 6px;
-            font-weight: 700;
-            border-bottom: 2px solid var(--graphite);
-        }
-
-        .mode-explanation .highlight-wrong {
-            background-color: var(--marker-pink);
-            color: var(--graphite);
-            padding: 2px 6px;
-            font-weight: 700;
-            border-bottom: 2px dashed var(--graphite);
-        }
-
-        /* 选项序号标示样式 (手绘圆圈) */
-        .mode-explanation .opt-tag {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 900;
-            width: 18px;
-            height: 18px;
-            line-height: 16px;
-            text-align: center;
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-            margin-right: 6px;
-            vertical-align: middle;
-            border: 1.5px solid var(--graphite);
-            background: #fff;
-            color: var(--graphite);
-            font-family: sans-serif;
-        }
-        
-        .mode-explanation .tag-wrong { background-color: var(--marker-pink); }
-        .mode-explanation .tag-correct { background-color: var(--marker-green); }
-
-        /* 翻译文字统一样式 */
-        .translation {
-            color: var(--graphite-sub);
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1.5px dashed var(--graphite-faint);
-            display: none;
-        }
-
-        /* 关键词高亮：波浪/虚线底纹 */
-        .keyword {
-            color: var(--graphite);
-            background: linear-gradient(transparent 50%, rgba(255, 213, 79, 0.4) 50%);
-            border-bottom: 1.5px solid var(--graphite);
-            padding: 0 2px;
+        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) {
             cursor: pointer;
-            font-weight: 700;
-            transition: var(--transition);
-            display: inline-block;
         }
 
-        .keyword:hover {
-            background: var(--marker-yellow);
-            border-bottom-style: dashed;
-        }
-
-        /* Tooltip (便利贴风) */
-        .custom-tooltip {
-            position: absolute;
-            background-color: #fffde7; 
-            color: var(--graphite);
-            padding: 12px 16px;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.06);
-            font-size: 13px;
-            font-weight: 400;
-            font-family: 'Noto Sans SC', sans-serif;
+        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-content,
+        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-translation {
+            filter: blur(8px);
+            background: rgba(227, 232, 240, 0.94);
+            border-radius: 4px;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            user-select: none;
             pointer-events: none;
-            z-index: 1000;
-            display: none;
-            max-width: 260px;
-            line-height: 1.6;
-            --arrow-left: 50%;
-        }
-        .custom-tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%; 
-            left: var(--arrow-left);
-            margin-left: -6px;
-            border-width: 6px;
-            border-style: solid;
-            border-color: #fffde7 transparent transparent transparent;
         }
 
-        /* ================= 底部音频播放器 ================= */
-        .audio-wrapper {
-            background-color: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(4px);
-            border-top: 1.5px solid var(--graphite);
-            padding-top: 16px !important;
-            padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
-            z-index: 90 !important;
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-        }
-        
-        .custom-audio-player {
-            max-width: 800px !important;
-            margin: 0 auto !important;
-            gap: 24px !important;
-            padding: 0 24px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-
-        .now-playing-box {
-            display: flex !important;
-            align-items: center !important;
-            gap: 16px !important;
-            flex: 1 !important;
-            min-width: 0 !important;
-        }
-
-        .track-icon {
-            background: var(--marker-yellow) !important; 
-            border: 1.5px solid var(--graphite) !important;
-            border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px !important;
-            flex-shrink: 0 !important;
-            width: 44px !important;
-            height: 44px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-        .track-icon svg { fill: var(--graphite) !important; width: 22px !important; height: 22px !important;}
-        
-        .now-playing-content {
-            flex: 1 !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 8px !important;
-            min-width: 0 !important;
-        }
-
-        .track-header-row {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: flex-end !important;
-            gap: 12px !important;
-        }
-
-        .track-info { 
-            margin: 0 !important; 
-            padding: 0 !important;
-            flex: 1 !important;
-            min-width: 0 !important;
-            overflow: hidden !important;
-        }
-
-        .track-title { 
-            font-weight: 700 !important; 
-            font-size: 14px !important;
-            color: var(--graphite) !important;
-            letter-spacing: 0.1em !important;
-        }
-
-        .time-group { 
-            display: flex !important;
-            font-size: 12px !important; 
-            color: var(--graphite-sub) !important;
-            flex-shrink: 0 !important;
-            font-family: 'Courier New', Courier, monospace !important; 
-        }
-        
-        .track-subtitle { display: none !important; }
-
-        .progress-area { width: 100% !important; margin: 0 !important; }
-
-        /* 进度条：彩色水彩填充 */
-        .progress-container {
-            border: 1.5px solid var(--graphite) !important;
-            border-radius: 4px !important;
-            height: 8px !important;
+        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-content * {
+            color: transparent !important;
             background: transparent !important;
-            width: 100% !important;
-            overflow: hidden !important;
-            cursor: pointer !important;
+            border-color: transparent !important;
             box-shadow: none !important;
         }
 
-        .progress-bar {
-            background: var(--marker-blue) !important;
-            border-right: 1.5px solid var(--graphite) !important;
-            height: 100% !important;
-            border-radius: 0 !important;
+        .follow-listening-source:focus-visible {
+            outline: 2px solid #aeb8c8;
+            outline-offset: 4px;
+            border-radius: 5px;
         }
 
-        /* 播放控制按钮 */
-        .player-controls {
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-        }
-
-        .ctrl-btn {
-            border: 1.5px solid transparent !important;
-            background: transparent !important;
-            color: var(--graphite) !important;
-            width: 36px !important;
-            height: 36px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: var(--transition) !important;
-            cursor: pointer !important;
-            border-radius: 40% 60% 50% 45% / 50% 45% 60% 40% !important; 
-            box-shadow: none !important;
-        }
-        .ctrl-btn svg { width: 20px !important; height: 20px !important; }
-
-        .ctrl-btn:hover {
-            border: 1.5px solid var(--graphite) !important;
-            background: var(--marker-yellow) !important;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-        .ctrl-btn:active { transform: translate(1px, 1px) !important; }
-        
-        .play-btn { 
-            border: 1.5px solid var(--graphite) !important;
-            background: #fff !important; 
-            color: var(--graphite) !important; 
-            width: 48px !important;
-            height: 48px !important;
-            border-radius: 50% 45% 55% 40% / 45% 55% 40% 50% !important; 
-        }
-        .play-btn:hover { background: var(--marker-pink) !important; transform: none !important; }
-        .play-btn svg { fill: var(--graphite) !important; width: 24px !important; height: 24px !important;}
-        
-        .speed-btn { font-size: 13px !important; font-weight: 700 !important; width: auto !important; padding: 0 8px !important; font-family: 'Courier New', Courier, monospace !important;}
-        
-        .desktop-time { display: inline !important; }
-        .mobile-time { display: none !important; }
-
-        /* ================= 响应式深度优化 ================= */
         @media (max-width: 768px) {
-            .practice-container {
-                width: 100%;
-                margin-top: 10px;
-                padding: 16px;
-                margin-bottom: 140px; 
+            .follow-listening-toggle {
+                min-height: 34px;
+                padding: 0 10px;
+                font-size: 12px;
             }
-            .card-header { margin-bottom: 24px; padding-bottom: 12px; flex-direction: row; gap: 10px; align-items: center; }
-            .header-left { gap: 8px; }
-            .question-select { font-size: 14px; }
-            .mark-btn { width: 30px; height: 30px; font-size: 18px; }
-            .mode-switch { justify-content: flex-end; width: auto; padding: 0; gap: 6px; }
-            .mode-switch button { font-size: 12px; padding: 4px 6px; letter-spacing: 0; }
-            
-            .transcript-section { margin-bottom: 24px; }
-            .question-box { font-size: 14px; padding: 30px 16px 14px; }
-            .question-box::before { top: 8px; left: 12px; font-size: 11px; padding: 2px 8px; }
-            .question-image-area { margin: 14px 0 16px; padding: 12px; }
-            .question-image-area img { max-height: 240px; }
-            .conversation-box { font-size: 14px; padding: 20px 16px 4px; }
-            .speaker-name { font-size: 12px; }
-            .translation { font-size: 12px; }
-            
-            .options-list { gap: 12px; }
-            .options-list li { padding: 12px 14px 12px 42px; flex-direction: row; align-items: center; border-width: 1.5px;}
-            .options-num { left: 10px; width: 22px; height: 22px; line-height: 18px; font-size: 12px; }
-            .option-text { font-size: 14px; }
-            
-            .mode-practice .options-list li.judged-correct,
-            .mode-practice .options-list li.judged-wrong { padding-right: 60px; }
-            .mode-practice .options-list li.judged-correct::after,
-            .mode-practice .options-list li.judged-wrong::after { font-size: 10px; right: 8px; border-width: 1.5px; padding: 2px 6px; }
 
-            .inline-confirm-btn { margin: 0 0 0 12px !important; padding: 6px 14px; font-size: 13px; }
-
-            .custom-audio-player { padding: 0 16px !important; gap: 10px !important; flex-wrap: wrap !important; }
-            .now-playing-box { width: 100% !important; flex: none !important; }
-            .player-controls { width: 100% !important; justify-content: space-between !important; gap: 0 !important; }
-            #loopBtn { order: 1 !important; } #prevBtn { order: 2 !important; } #rewindBtn { order: 3 !important; } 
-            #playBtn { order: 4 !important; } #forwardBtn { order: 5 !important; } #nextBtn { order: 6 !important; } #speedBtn { order: 7 !important; }
-            
-            .track-icon { width: 38px !important; height: 38px !important;}
-            .track-icon svg { width: 18px !important; height: 18px !important; }
-            .track-title { font-size: 14px !important; }
-            .ctrl-btn { width: 36px !important; height: 36px !important; }
-            .play-btn { width: 44px !important; height: 44px !important; flex-shrink: 0 !important; }
-            .speed-btn { width: 40px !important; padding: 0 !important;}
         }
-    
-        @media (max-width: 520px) {
-            header { padding: 8px 10px !important; }
-            .back-btn { padding: 4px 8px !important; font-size: 12px !important; }
-            header h1, #yearLabel { font-size: 14px !important; }
-            .practice-container { padding: 12px !important; }
-
-            .card-header { gap: 8px !important; }
-            .question-select { font-size: 13px !important; padding-right: 18px !important; }
-            .mark-btn { width: 28px !important; height: 28px !important; font-size: 16px !important; }
-            .mode-switch { gap: 4px !important; }
-            .mode-switch button { font-size: 11px !important; padding: 4px 5px !important; }
-            .question-box { font-size: 13px !important; }
-            .question-image-area { margin: 12px 0 14px !important; padding: 10px !important; }
-            .question-image-area img { max-height: 190px !important; }
-            .conversation-box { font-size: 13px !important; }
-            .translation { font-size: 11px !important; }
-            
-            .options-list { gap: 10px !important; }
-            .options-list li { padding: 10px 12px 10px 38px !important; }
-            .options-num { left: 8px !important; width: 20px !important; height: 20px !important; font-size: 11px !important; line-height: 16px !important; }
-            .option-text { font-size: 13px !important; }
-            .inline-confirm-btn { padding: 4px 12px !important; font-size: 12px !important; }
-            
-            .custom-audio-player { padding: 0 10px !important; gap: 8px !important; }
-            .track-icon { width: 36px !important; height: 36px !important; }
-            .track-title { font-size: 13px !important; }
-            .ctrl-btn { width: 30px !important; height: 30px !important; }
-            .play-btn { width: 38px !important; height: 38px !important; }
-            .speed-btn { width: 36px !important; font-size: 12px !important;}
-        }
-
     </style>
-    <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-header.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-mobile.css">
 </head>
 <body>
 
@@ -906,7 +162,14 @@
             戻る
         </a>
         <h1 id="yearLabel">課題理解 (N1)</h1>
-        <div style="width: 60px;"></div>
+        <div class="header-right-slot" data-kiki-header-utility>
+            <button type="button"
+                    id="followListeningToggle"
+                    class="follow-listening-toggle"
+                    aria-pressed="false"
+                    hidden
+                    onclick="toggleFollowListening()">精听模式</button>
+        </div>
     </header>
 
         <div class="practice-container mode-practice" id="appContainer">
@@ -1002,16 +265,18 @@
             </div>
             
             <audio id="audioElement" preload="metadata"></audio>
+            <audio id="sentenceAudioElement" preload="auto" hidden></audio>
         </div>
     </div>
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -1175,6 +440,12 @@
         let currentExamKey = "N1-2020-07"; // 修复默认加载的 key
         let currentQuestionIndex = 0;
         let preferredMode = 'practice'; 
+        let activeSentenceButton = null;
+        let sentenceAudio = null;
+        let sentenceBoundaryFrame = 0;
+        let sentenceBoundaryTimer = 0;
+        let sentencePlaybackToken = 0;
+        let followListeningEnabled = false;
         const LISTENING_TYPE = 'task-comprehension';
         const LISTENING_LEVEL = 'n1';
 
@@ -1400,12 +671,258 @@
             }
         }
 
+        function normalizeSentenceSegment(segment) {
+            if (!segment) return null;
+            if (typeof segment === 'string') return { src: segment, start: 0, end: null };
+            const start = Number(segment.start);
+            const end = Number(segment.end);
+            if (!segment.src || !Number.isFinite(start)) return null;
+            return {
+                src: segment.src,
+                start: Math.max(0, start),
+                end: Number.isFinite(end) && end > start ? end : null
+            };
+        }
+
+        function sentenceListenButton(audioSegment, label) {
+            const segment = normalizeSentenceSegment(audioSegment);
+            if (!segment) return '';
+            const endAttribute = segment.end == null ? '' : `data-audio-end="${segment.end}"`;
+
+            return `
+                <button type="button"
+                        class="sentence-listen-button"
+                        data-audio-src="${segment.src}"
+                        data-audio-start="${segment.start}"
+                        ${endAttribute}
+                        aria-label="${label}"
+                        aria-pressed="false"
+                        title="この文を聞く"
+                        onclick="playSentenceClip(event, this)">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-8.7v2.06a7 7 0 0 1 0 13.28v2.06a9 9 0 0 0 0-17.4z"/>
+                    </svg>
+                </button>`;
+        }
+
+        function followListeningSource(content, translation, audioSrc, label) {
+            return `
+                <div class="follow-listening-source"
+                     tabindex="0"
+                     role="button"
+                     aria-label="点击显示原文和译文"
+                     onclick="revealFollowListeningSource(event, this)"
+                     onkeydown="handleFollowListeningKey(event, this)">
+                    <div class="follow-listening-mainline">
+                        <span class="follow-listening-content">${content}</span>${sentenceListenButton(audioSrc, label)}
+                    </div>
+                    ${translation ? `<div class="translation follow-listening-translation">${translation}</div>` : ''}
+                </div>`;
+        }
+
+        function revealFollowListeningSource(event, source) {
+            if (!followListeningEnabled || !source) return;
+            if (event && event.target && event.target.closest('.sentence-listen-button')) return;
+            source.classList.add('is-revealed');
+            source.setAttribute('aria-label', '原文已显示');
+            if (event && event.type === 'click' && event.detail > 0) source.blur();
+        }
+
+        function handleFollowListeningKey(event, source) {
+            if (!followListeningEnabled || !['Enter', ' '].includes(event.key)) return;
+            event.preventDefault();
+            revealFollowListeningSource(event, source);
+        }
+
+        function setFollowListening(enabled) {
+            followListeningEnabled = Boolean(enabled);
+            const container = document.getElementById('appContainer');
+            const toggle = document.getElementById('followListeningToggle');
+            if (container) {
+                container.classList.toggle('follow-listening-enabled', followListeningEnabled);
+                if (!followListeningEnabled) {
+                    container.querySelectorAll('.follow-listening-source.is-revealed').forEach((source) => {
+                        source.classList.remove('is-revealed');
+                        source.setAttribute('aria-label', '点击显示原文和译文');
+                    });
+                }
+            }
+            if (toggle) {
+                toggle.setAttribute('aria-pressed', String(followListeningEnabled));
+                toggle.textContent = '精听模式';
+                toggle.setAttribute('aria-label', followListeningEnabled ? '关闭精听模式' : '开启精听模式');
+                toggle.title = followListeningEnabled ? '关闭精听模式' : '开启精听模式';
+            }
+            if (!followListeningEnabled) stopSentenceClip();
+        }
+
+        function toggleFollowListening() {
+            setFollowListening(!followListeningEnabled);
+        }
+
+        function resetSentenceClipState() {
+            if (activeSentenceButton) {
+                activeSentenceButton.classList.remove('is-playing');
+                activeSentenceButton.setAttribute('aria-pressed', 'false');
+            }
+            activeSentenceButton = null;
+        }
+
+        function clearSentenceBoundaryMonitor() {
+            if (sentenceBoundaryFrame) cancelAnimationFrame(sentenceBoundaryFrame);
+            if (sentenceBoundaryTimer) clearTimeout(sentenceBoundaryTimer);
+            sentenceBoundaryFrame = 0;
+            sentenceBoundaryTimer = 0;
+        }
+
+        function getSentenceAudio() {
+            if (!sentenceAudio) {
+                sentenceAudio = document.getElementById('sentenceAudioElement');
+            }
+            return sentenceAudio;
+        }
+
+        function stopSentenceClip() {
+            sentencePlaybackToken += 1;
+            clearSentenceBoundaryMonitor();
+            const audio = getSentenceAudio();
+            if (audio) {
+                audio.pause();
+                if (Number.isFinite(audio.duration)) audio.currentTime = 0;
+            }
+            resetSentenceClipState();
+        }
+
+        function playSentenceClip(event, button) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const audioSrc = button.dataset.audioSrc;
+            const startTime = Number(button.dataset.audioStart || 0);
+            const endTime = Number(button.dataset.audioEnd);
+            if (!audioSrc) return;
+
+            const clipAudio = getSentenceAudio();
+            if (!clipAudio) return;
+
+            if (activeSentenceButton === button) {
+                stopSentenceClip();
+                return;
+            }
+
+            stopSentenceClip();
+            activeSentenceButton = button;
+            const playbackToken = sentencePlaybackToken;
+            button.classList.add('is-playing');
+            button.setAttribute('aria-pressed', 'true');
+
+            const finishPlayback = () => {
+                if (playbackToken !== sentencePlaybackToken) return;
+                clearSentenceBoundaryMonitor();
+                clipAudio.pause();
+                if (Number.isFinite(clipAudio.duration)) clipAudio.currentTime = Math.max(0, startTime);
+                resetSentenceClipState();
+            };
+
+            const monitorBoundary = () => {
+                if (playbackToken !== sentencePlaybackToken || !Number.isFinite(endTime)) return;
+                if (clipAudio.currentTime >= endTime - 0.006) {
+                    finishPlayback();
+                    return;
+                }
+                sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
+            };
+
+            const scheduleBoundaryCheck = () => {
+                if (playbackToken !== sentencePlaybackToken || !Number.isFinite(endTime)) return;
+                const remaining = endTime - clipAudio.currentTime;
+                if (remaining <= 0.006) {
+                    finishPlayback();
+                    return;
+                }
+                sentenceBoundaryTimer = window.setTimeout(
+                    scheduleBoundaryCheck,
+                    Math.max(5, Math.min(remaining * 1000 - 4, 120))
+                );
+            };
+
+            const startPlayback = () => {
+                if (playbackToken !== sentencePlaybackToken) return;
+                try { clipAudio.currentTime = Math.max(0, startTime); } catch (error) { /* metadata may still be loading */ }
+                clipAudio.muted = false;
+                clipAudio.volume = 1;
+                clipAudio.playbackRate = 1;
+                const playPromise = clipAudio.play();
+                if (playPromise && typeof playPromise.then === 'function') {
+                    playPromise.then(() => {
+                        if (playbackToken !== sentencePlaybackToken) return;
+                        sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
+                        scheduleBoundaryCheck();
+                    }).catch(finishPlayback);
+                } else {
+                    sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
+                    scheduleBoundaryCheck();
+                }
+            };
+
+            clipAudio.onended = finishPlayback;
+            clipAudio.onerror = finishPlayback;
+            clipAudio.ontimeupdate = null;
+            const resolvedSrc = new URL(audioSrc, document.baseURI).href;
+            if (clipAudio.currentSrc !== resolvedSrc && clipAudio.src !== resolvedSrc) {
+                clipAudio.src = resolvedSrc;
+                clipAudio.load();
+            }
+            if (clipAudio.readyState < 1) {
+                clipAudio.addEventListener('loadedmetadata', () => {
+                    if (playbackToken !== sentencePlaybackToken) return;
+                    try { clipAudio.currentTime = Math.max(0, startTime); } catch (error) { /* handled by playback */ }
+                }, { once: true });
+            }
+            // Keep play() inside the click activation path so browsers do not silently block it.
+            startPlayback();
+        }
+
+        function installSentenceClipPlayback() {
+            const audio = document.getElementById('audioElement');
+            if (!audio || audio.dataset.sentenceClipBound === 'true') return;
+            audio.dataset.sentenceClipBound = 'true';
+
+            audio.addEventListener('play', stopSentenceClip);
+
+            ['playBtn', 'rewindBtn', 'forwardBtn', 'prevBtn', 'nextBtn'].forEach((id) => {
+                const control = document.getElementById(id);
+                if (control) control.addEventListener('click', stopSentenceClip, true);
+            });
+
+            const progress = document.getElementById('progressContainer');
+            if (progress) progress.addEventListener('pointerdown', stopSentenceClip, true);
+        }
+
         // --- Render Content ---
+        function attachPreciseSentenceClips(question) {
+            const audioKey = String(question && question.audio || '')
+                .split('/')
+                .pop()
+                .replace(/\.mp3(?:\?.*)?$/i, '');
+            const clips = window.KijiN1TaskTimelineMap && window.KijiN1TaskTimelineMap[audioKey];
+            if (!clips || !question.script) return question;
+
+            question.script.questionClip = clips.question || question.script.questionClip;
+            (question.script.dialogue || []).forEach((line, index) => {
+                if (clips.lines && clips.lines[index]) line.clip = clips.lines[index];
+            });
+            return question;
+        }
+
         function renderQuestion() {
+            stopSentenceClip();
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = examData[currentExamKey].questions[currentQuestionIndex];
+            const data = attachPreciseSentenceClips(
+                examData[currentExamKey].questions[currentQuestionIndex]
+            );
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -1418,8 +935,13 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = data.script.question;
-            document.getElementById('questionTrans').innerHTML = data.script.questionTrans;
+            document.getElementById('questionText').innerHTML = followListeningSource(
+                data.script.question,
+                data.script.questionTrans,
+                data.script.questionClip,
+                '题干を聞く'
+            );
+            document.getElementById('questionTrans').innerHTML = '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -1437,12 +959,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        <div>${line.text}</div>
-                        <div class="translation">${line.trans}</div>
+                        ${followListeningSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
+            installSentenceClipPlayback();
 
             // Options Update
             const optionsList = document.getElementById('optionsList');
@@ -1471,9 +993,12 @@
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
 
+            if (mode === 'practice') stopSentenceClip();
+
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');
+            const followListeningToggle = document.getElementById('followListeningToggle');
             const tooltip = document.getElementById('wordTooltip');
 
             const confirmBtn = document.getElementById('inlineConfirmBtn');
@@ -1481,15 +1006,18 @@
             tooltip.style.display = 'none';
 
             if (mode === 'practice') {
+                setFollowListening(false);
                 container.classList.remove('mode-explanation');
                 container.classList.add('mode-practice');
                 btnPractice.classList.add('active');
                 btnExplanation.classList.remove('active');
+                if (followListeningToggle) followListeningToggle.hidden = true;
             } else {
                 container.classList.remove('mode-practice');
                 container.classList.add('mode-explanation');
                 btnExplanation.classList.add('active');
                 btnPractice.classList.remove('active');
+                if (followListeningToggle) followListeningToggle.hidden = false;
 
                 // 滚动至顶部以查看听力原文
                 setTimeout(() => {
@@ -1533,5 +1061,7 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src="../../../../../shared/word-bank.js"></script>
+    <script src="../../../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
