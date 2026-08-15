@@ -1,35 +1,296 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>総合理解 - 等级选择</title>
-    <style>
-        :root { --bg-color:#fdfaf5; --text-color:#2c2c2c; --accent-color:#b33e3e; --card-bg:#ffffff; --shadow:0 4px 12px rgba(0,0,0,0.05); }
-        body { font-family:"Hiragino Sans","Meiryo","Microsoft YaHei",sans-serif; background:var(--bg-color); color:var(--text-color); margin:0; min-height:100vh; }
-        header { width:100%; padding:18px 20px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; position:sticky; top:0; z-index:100; background-color:rgba(253,250,245,0.95); backdrop-filter:blur(8px); border-bottom:1px solid rgba(0,0,0,0.05); margin-bottom:34px; }
-        .back-btn { position:absolute; left:20px; text-decoration:none; color:var(--text-color); font-size:15px; font-weight:600; min-height:34px; display:inline-flex; align-items:center; opacity:0.72; }
-        .container { max-width:800px; margin:0 auto; padding:0 20px 40px; }
-        .intro { text-align:center; color:#777; font-size:13px; margin-bottom:22px; }
-        .level-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; }
-        .level-card { background:var(--card-bg); border-radius:16px; padding:28px; box-shadow:var(--shadow); border:2px solid transparent; opacity:0.65; cursor:not-allowed; text-decoration:none; color:var(--text-color); display:flex; align-items:center; justify-content:space-between; }
-        .level-info h2 { margin:0 0 6px; color:var(--accent-color); font-size:24px; }
-        .level-info p { margin:0; font-size:13px; color:#888; }
-    </style>
-    <link rel="stylesheet" href="../../../shared/site-fonts.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>総合理解 - レベル選択</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --paper: #ffffff;
+  --graphite: #333333;
+  --graphite-sub: #666666;
+  --graphite-faint: #cccccc;
+  --red-pencil: #e64a4a;
+  --marker-yellow: rgba(255, 213, 79, 0.35);
+  --marker-blue: rgba(129, 212, 250, 0.35);
+  --marker-peach: rgba(253, 186, 116, 0.35);
+  --marker-mint: rgba(134, 239, 172, 0.35);
+  --marker-pink: rgba(244, 143, 177, 0.35);
+  --marker-gray: rgba(200, 200, 200, 0.25);
+  --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px);
+  --transition: all 0.2s ease-out;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
+  background: var(--paper);
+  color: var(--graphite);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  z-index: -1;
+  pointer-events: none;
+}
+.container, .vocab-container {
+  width: 95%;
+  max-width: 860px;
+  padding: 40px 0 80px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.intro-box {
+  text-align: center;
+  margin-bottom: 36px;
+  animation: fadeIn 0.4s ease-out;
+}
+.intro-box p {
+  color: var(--graphite);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(transparent 50%, rgba(255, 213, 79, 0.4) 50%);
+  border-bottom: 1.5px dashed var(--graphite-faint);
+  display: inline-block;
+  padding: 4px 16px;
+  letter-spacing: 0.1em;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.level-grid, .year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.level-card, .year-card, .empty-card {
+  background: transparent;
+  border: 1.5px solid var(--graphite);
+  border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
+  padding: 24px;
+  color: var(--graphite);
+  text-decoration: none;
+  transition: var(--transition);
+  min-width: 0;
+}
+.level-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.level-card:hover:not(.disabled), .year-card:hover { transform: translate(-1px, -1px); background: var(--hatching-graphite); }
+.level-card:active:not(.disabled) { transform: translate(1px, 1px); }
+.level-card.disabled, .empty-card {
+  border-style: dashed;
+  border-color: var(--graphite-faint);
+  opacity: 0.82;
+}
+.level-info { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.level-info h2, .year-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--graphite);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  letter-spacing: 0.05em;
+}
+.level-info p, .category-description, .empty-card p {
+  font-family: 'Noto Sans JP', sans-serif;
+  margin: 0;
+  color: var(--graphite-sub);
+  line-height: 1.7;
+  font-size: 14px;
+  font-weight: 600;
+}
+.lesson-tag, .status-tag {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--graphite);
+  padding: 2px 8px;
+  border: 1.5px solid var(--graphite);
+  border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
+  letter-spacing: 0.08em;
+  background: var(--marker-yellow);
+}
+.level-card:nth-child(1) .lesson-tag { background: var(--marker-blue); }
+.level-card:nth-child(2) .lesson-tag { background: var(--marker-peach); }
+.level-card:nth-child(3) .lesson-tag { background: var(--marker-mint); }
+.level-card.disabled .lesson-tag { background: var(--marker-gray); border-color: var(--graphite-faint); color: var(--graphite-sub); }
+.level-icon { font-size: 42px; line-height: 1; filter: grayscale(0.1); }
+.year-card { display: flex; flex-direction: column; gap: 20px; }
+.year-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1.5px dashed var(--graphite-faint);
+  padding-bottom: 16px;
+}
+.year-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.last-practice-tag {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  background: var(--marker-yellow);
+  padding: 2px 8px;
+  border: 1.5px solid var(--graphite);
+  border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
+}
+.exam-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; }
+.exam-btn {
+  text-decoration: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 10px 16px;
+  border: 1.5px solid var(--graphite);
+  border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
+  color: var(--graphite);
+  transition: var(--transition);
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-blue { background: var(--marker-blue); }
+.btn-pink { background: var(--marker-pink); }
+.exam-btn:hover { filter: brightness(0.96); border-style: dashed; }
+.review-section {
+  background: var(--marker-yellow);
+  border: 1.5px solid var(--red-pencil);
+  border-radius: 3px 255px 5px 25px / 255px 3px 225px 5px;
+  padding: 20px;
+  margin-bottom: 32px;
+}
+.review-panel > summary { list-style: none; }
+.review-panel > summary::-webkit-details-marker { display: none; }
+.review-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+.review-panel[open] .review-summary { padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1.5px dashed var(--graphite-faint); }
+.review-summary-title { font-size: 18px; font-weight: 900; letter-spacing: 0.04em; }
+.review-summary-tags { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.review-status-pill, .review-count-pill, .review-action-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 9px;
+  border: 1.5px solid var(--graphite);
+  border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
+  background: #fff;
+  color: var(--graphite);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+.review-status-pill.has-items { background: var(--marker-yellow); color: var(--red-pencil); }
+.review-action-pill::after { content: '展开'; }
+.review-panel[open] .review-action-pill::after { content: '收起'; }
+.review-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.review-item {
+  text-decoration: none;
+  background: #fff;
+  border: 1.5px solid var(--graphite);
+  border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--graphite);
+  font-weight: 900;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.review-item:hover { border-color: var(--red-pencil); color: var(--red-pencil); }
+.review-count { color: var(--red-pencil); font-size: 12px; padding: 2px 6px; border: 1.5px solid var(--red-pencil); border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%; }
+@media (max-width: 720px) {
+  .container, .vocab-container { width: calc(100% - 32px); padding: 22px 0 44px; }
+  .intro-box { margin-bottom: 24px; }
+  .intro-box p { font-size: 13px; padding: 4px 12px; }
+  .level-grid, .year-grid { grid-template-columns: 1fr; gap: 16px; }
+  .level-card, .year-card, .empty-card { padding: 16px; }
+  .level-info h2, .year-title { font-size: 18px; gap: 8px; }
+  .level-info p, .category-description, .empty-card p { font-size: 13px; }
+  .level-icon { font-size: 32px; }
+  .exam-buttons { gap: 10px; }
+  .exam-btn { font-size: 13px; padding: 8px 12px; }
+  .review-section { padding: 16px; margin-bottom: 24px; }
+  .review-summary-title { font-size: 15px; }
+}
+@media (max-width: 520px) {
+  .container, .vocab-container { width: calc(100% - 24px); padding: 18px 0 36px; }
+  .intro-box p { font-size: 12px; }
+  .level-card, .year-card, .empty-card { padding: 14px; }
+  .exam-btn { font-size: 12px; padding: 7px 10px; }
+  .review-summary { align-items: flex-start; }
+  .review-status-pill, .review-count-pill, .review-action-pill { min-height: 24px; padding: 3px 7px; font-size: 10px; }
+}
+</style>
+  <link rel="stylesheet" href="../shared/listening-header.css">
+  <link rel="stylesheet" href="../../../shared/site-fonts.css">
 </head>
 <body>
-    <header>
-        <a href="../index.html" class="back-btn">← 戻る</a>
-        <h1>総合理解</h1>
-    </header>
-    <div class="container">
-        <p class="intro">对较长信息进行综合判断。 当前目录骨架已建立，内容仍在整理中。</p>
-        <div class="level-grid">
-            <a href="#" class="level-card" onclick="return false;"><div class="level-info"><h2>N1</h2><p>整理中</p></div><div>🗻</div></a>
-            <a href="#" class="level-card" onclick="return false;"><div class="level-info"><h2>N2</h2><p>整理中</p></div><div>⛩️</div></a>
-            <a href="#" class="level-card" onclick="return false;"><div class="level-info"><h2>N3</h2><p>整理中</p></div><div>🍱</div></a>
-        </div>
+
+<header>
+  <a href="../index.html" class="back-btn" data-back-nav>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    戻る
+  </a>
+  <h1>総合理解 <span>STAGE</span></h1>
+  <a href="../../../index.html" class="home-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    ホーム
+  </a>
+</header>
+<main class="vocab-container">
+  <div class="intro-box"><p>✎ 練習するレベルを選んでください</p></div>
+  <div class="level-grid">
+    <a href="n1/index.html" class="level-card">
+      <div class="level-info">
+        <h2>N1 <span class="lesson-tag">上級</span></h2>
+        <p>総合理解 N1 の練習入口です。現在の収録状況に合わせて年度一覧を表示します。</p>
+      </div>
+      <div class="level-icon">🗻</div>
+    </a>
+    <a href="n2/index.html" class="level-card">
+      <div class="level-info">
+        <h2>N2 <span class="lesson-tag">中上級</span></h2>
+        <p>総合理解 N2 の練習入口です。収録済みの年度から演習できます。</p>
+      </div>
+      <div class="level-icon">⛩️</div>
+    </a>
+    <div class="level-card disabled" aria-disabled="true">
+      <div class="level-info">
+        <h2>N3 <span class="lesson-tag">準備中</span></h2>
+        <p>N3 の練習素材は整理中です。</p>
+      </div>
+      <div class="level-icon">🍱</div>
     </div>
+  </div>
+</main>
+<script src="../../../shared/back-navigation.js"></script>
+<script>
+if (typeof window.bindHierarchicalBack === 'function') {
+  window.bindHierarchicalBack({ selector: '[data-back-nav]', defaultHref: '../index.html' });
+}
+</script>
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
