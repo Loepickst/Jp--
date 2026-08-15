@@ -82,7 +82,6 @@ header,
 
 h1,
 .exam-topic-title,
-.summary-title,
 .practice-picker-title {
     color: var(--text-main) !important;
 }
@@ -134,7 +133,6 @@ h1,
 
 .screen,
 .intro-card,
-.summary-card,
 .dialogue-box,
 .flashcard-main,
 .practice-picker-panel,
@@ -145,8 +143,7 @@ h1,
 .story-text,
 .typewriter-text,
 .question-main-text,
-.question-sub-text,
-.summary-msg {
+.question-sub-text {
     overflow-wrap: anywhere;
 }
 
@@ -181,8 +178,7 @@ h1,
 
 .day-card[style],
 .word-list-item[style],
-.review-summary-item[style],
-.summary-wrong-review[style] {
+.review-summary-item[style] {
     background: var(--panel-bg) !important;
     border-color: var(--panel-border) !important;
     box-shadow: var(--shadow-soft) !important;
@@ -204,8 +200,7 @@ h1,
 .intro-avatar,
 .enemy-avatar,
 .exam-topic-icon,
-.fc-action,
-.summary-word-close {
+.fc-action {
     background: var(--panel-bg-soft) !important;
     border: 1px solid var(--panel-border) !important;
     box-shadow: none !important;
@@ -218,11 +213,9 @@ h1,
 }
 
 .go-badge,
-.summary-badge,
 .last-studied-badge,
 .hud-name,
 .practice-picker-option.is-last-used::after,
-.summary-wrong-count,
 .exam-topic-tag,
 .lesson-tag {
     background: rgba(166, 78, 54, 0.08) !important;
@@ -310,7 +303,6 @@ h1,
 .story-panel,
 .question-sub-text,
 .def-ex,
-.summary-stat,
 .review-summary-line,
 .challenge-analysis-option,
 .reading-char-input,
@@ -323,14 +315,12 @@ h1,
 
 .story-panel,
 .def-ex,
-.challenge-analysis-option,
-.summary-stat {
+.challenge-analysis-option {
     border: 1px solid var(--panel-border) !important;
     border-radius: 10px !important;
 }
 
-.def-ex,
-.summary-word-card .def-ex {
+.def-ex {
     border-left: 4px solid var(--text-secondary) !important;
 }
 
@@ -338,22 +328,17 @@ h1,
 .dialogue-topline,
 .nav-controls,
 .intro-actions,
-.summary-actions,
-.summary-wrong-head,
 .exam-topic-group-head {
     border-color: var(--panel-border) !important;
 }
 
 .intro-primary-btn,
-.summary-primary-btn,
-.summary-secondary-btn,
 .reading-action-btn,
 .review-next-btn,
 .nav-btn,
 .difficulty-btn,
 .action-option,
-.practice-picker-option,
-.summary-wrong-chip {
+.practice-picker-option {
     background: var(--panel-bg-solid) !important;
     border: 1px solid var(--panel-border) !important;
     border-radius: 8px !important;
@@ -361,21 +346,45 @@ h1,
     color: var(--text-secondary) !important;
 }
 
+.action-option {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
 .intro-primary-btn:hover,
-.summary-primary-btn:hover,
-.summary-secondary-btn:hover,
 .reading-action-btn:hover:not(:disabled),
 .review-next-btn:hover,
 .nav-btn:hover:not(.disabled),
-.difficulty-btn:hover,
-.action-option:hover:not(:disabled),
-.summary-wrong-chip:hover,
-.summary-wrong-chip.is-active {
+.difficulty-btn:hover {
     transform: translateY(-1px) !important;
     background: var(--accent-hover) !important;
     border-color: var(--text-accent) !important;
     box-shadow: var(--shadow-glow) !important;
     color: var(--text-accent) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .action-option:hover:not(:disabled) {
+        transform: translateY(-1px) !important;
+        background: var(--accent-hover) !important;
+        border-color: var(--text-accent) !important;
+        box-shadow: var(--shadow-glow) !important;
+        color: var(--text-accent) !important;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .action-option:not(.correct-ans):not(.wrong-ans):hover:not(:disabled),
+    .action-option:not(.correct-ans):not(.wrong-ans):focus,
+    .action-option:not(.correct-ans):not(.wrong-ans):focus-visible,
+    .action-option:not(.correct-ans):not(.wrong-ans):active:not(:disabled) {
+        transform: none !important;
+        background: var(--panel-bg-solid) !important;
+        border-color: var(--panel-border) !important;
+        box-shadow: none !important;
+        color: var(--text-secondary) !important;
+        outline: none !important;
+    }
 }
 
 .nav-btn.primary,
@@ -401,19 +410,6 @@ h1,
     color: var(--text-main) !important;
 }
 
-.summary-stat-grid {
-    background: var(--panel-bg-solid) !important;
-    border: 1px solid var(--panel-border) !important;
-    gap: 0 !important;
-}
-
-.summary-rank {
-    color: var(--text-accent) !important;
-    text-shadow: none !important;
-    background: none !important;
-}
-
-.summary-word-overlay,
 .practice-picker-overlay {
     background: rgba(249, 246, 240, 0.86) !important;
     backdrop-filter: var(--glass-blur) !important;
@@ -433,11 +429,7 @@ h1,
     background: linear-gradient(90deg, rgba(166, 78, 54, 0.08), var(--panel-bg-solid) 72%) !important;
 }
 
-.summary-card,
 .practice-picker-panel,
-.summary-wrong-review,
-.summary-wrong-review[style],
-.summary-word-card .flashcard-main,
 .toast {
     background: var(--panel-bg-solid) !important;
     backdrop-filter: none !important;
@@ -462,18 +454,7 @@ h1,
     box-shadow: none !important;
 }
 
-.summary-word-card .flashcard-main {
-    width: 100%;
-    min-height: auto;
-    padding: 34px 40px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    position: relative;
-}
-
 .practice-picker-close:hover,
-.summary-word-close:hover,
 .mark-btn:hover,
 .mark-btn.active:hover,
 .list-arrow,
@@ -500,8 +481,7 @@ h1,
     border-radius: 0 !important;
 }
 
-.ex-jp .ex-highlight,
-.summary-word-card .ex-jp .ex-highlight {
+.ex-jp .ex-highlight {
     color: var(--text-accent) !important;
     border-bottom: 2px solid rgba(166, 78, 54, 0.45) !important;
     background: transparent !important;
@@ -534,9 +514,6 @@ h1,
 
 .practice-picker-kicker,
 .dialogue-type-label,
-.summary-overline,
-.summary-stat-value,
-.summary-wrong-title,
 .challenge-analysis-title,
 .challenge-analysis-label,
 .fc-section-title,
@@ -550,351 +527,6 @@ h1,
 
 .lesson-item.is-hidden-entry {
     display: none !important;
-}
-
-.summary-wrong-review {
-    margin-top: 28px;
-    padding: 18px;
-    text-align: left;
-}
-
-.summary-wrong-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--panel-border);
-}
-
-.summary-wrong-title {
-    color: var(--text-main);
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-}
-
-.summary-wrong-list {
-    margin-top: 14px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.summary-wrong-empty {
-    margin-top: 14px;
-    color: var(--text-secondary);
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.7;
-}
-
-.summary-word-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 86px 20px 28px;
-    overflow-y: auto;
-}
-
-.summary-word-overlay[hidden] {
-    display: none !important;
-}
-
-.summary-word-card {
-    position: relative;
-    width: min(680px, calc(100vw - 32px));
-    max-height: calc(100dvh - 114px);
-    overflow-y: auto;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-    color: var(--text-main);
-}
-
-.summary-word-card .fc-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    padding-bottom: 18px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: flex-start;
-    gap: 14px;
-}
-
-.summary-word-card .fc-word-group {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.summary-word-card .fc-title-row {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px 12px;
-    flex-wrap: wrap;
-    min-width: 0;
-}
-
-.summary-word-card .fc-meta-group {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-self: flex-end;
-    min-width: 0;
-}
-
-.summary-word-card .fc-word {
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--text-strong);
-    margin: 0;
-    line-height: 1.2;
-    font-family: var(--font-serif);
-    min-width: 0;
-}
-
-.summary-word-card .fc-word rt {
-    font-size: 0.48em;
-    color: var(--text-ruby);
-    font-family: var(--font-ui);
-    font-weight: 500;
-}
-
-.summary-word-close {
-    appearance: none;
-    flex-shrink: 0;
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50% !important;
-    font-size: 26px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.summary-word-card .fc-section-title {
-    margin: 16px 0 12px;
-    color: var(--text-secondary);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
-.summary-word-card .def-group {
-    margin-bottom: 24px;
-    padding: 0;
-}
-
-.summary-word-card .def-group + .def-group {
-    border-top: 1px dashed rgba(0, 0, 0, 0.12);
-    padding-top: 20px;
-}
-
-.summary-word-card .def-head {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: 10px;
-    align-items: flex-start;
-}
-
-.summary-word-card .def-copy {
-    min-width: 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 8px;
-    line-height: 1.6;
-}
-
-.summary-word-card .def-number {
-    flex: 0 0 auto;
-    width: 22px;
-    height: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.summary-word-card .def-meaning {
-    color: var(--text-main);
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.55;
-}
-
-.summary-word-card .def-nuance {
-    margin-left: 0;
-    color: var(--text-secondary);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.summary-word-card .def-ex {
-    margin-top: 16px;
-    padding: 18px;
-}
-
-.summary-word-card .def-example-label {
-    display: inline-flex;
-    margin-bottom: 10px;
-    padding: 0;
-    color: var(--text-accent);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.summary-word-card .ex-jp {
-    color: var(--text-main);
-    font-family: var(--font-serif);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.85;
-}
-
-.summary-word-card .ex-cn {
-    margin-top: 8px;
-    color: var(--text-secondary);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.7;
-}
-
-/* Summary review blocks: override legacy table-like inline styles in practice pages. */
-.summary-card .summary-stat-grid {
-    margin: 32px auto 0 !important;
-    width: min(100%, 760px) !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 14px !important;
-    background: transparent !important;
-    border: 0 !important;
-}
-
-.summary-card .summary-stat {
-    min-height: 118px !important;
-    padding: 22px 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF8 100%) !important;
-    border: 1px solid var(--panel-border) !important;
-    border-radius: 16px !important;
-    box-shadow: var(--shadow-soft) !important;
-}
-
-.summary-card .summary-stat + .summary-stat {
-    border-left: 1px solid var(--panel-border) !important;
-}
-
-.summary-card .summary-stat-label {
-    display: block !important;
-    color: var(--text-secondary) !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
-    line-height: 1.4 !important;
-}
-
-.summary-card .summary-stat-value {
-    display: block !important;
-    margin-top: 10px !important;
-    color: var(--text-accent) !important;
-    font-family: var(--font-ui) !important;
-    font-size: 28px !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-}
-
-.summary-card .summary-wrong-review,
-.summary-card .summary-wrong-review[style] {
-    width: min(100%, 760px) !important;
-    margin: 28px auto 0 !important;
-    padding: 22px 24px 24px !important;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF8 100%) !important;
-    border: 1px solid var(--panel-border) !important;
-    border-radius: 18px !important;
-    box-shadow: var(--shadow-soft) !important;
-    text-align: left !important;
-}
-
-.summary-card .summary-wrong-head {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 14px !important;
-    padding-bottom: 14px !important;
-    border-bottom: 1px solid rgba(213, 204, 192, 0.9) !important;
-}
-
-.summary-card .summary-wrong-title {
-    color: var(--text-main) !important;
-    font-size: 16px !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.04em !important;
-}
-
-.summary-card .summary-wrong-count {
-    flex: 0 0 auto !important;
-    padding: 4px 10px !important;
-    background: rgba(166, 78, 54, 0.08) !important;
-    border: 1px solid rgba(166, 78, 54, 0.22) !important;
-    border-radius: 999px !important;
-    color: var(--text-accent) !important;
-    font-size: 13px !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-}
-
-.summary-card .summary-wrong-list {
-    margin-top: 18px !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-}
-
-.summary-card .summary-wrong-chip {
-    padding: 7px 12px !important;
-    min-height: 34px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #FFFDF8 !important;
-    border: 1px solid var(--panel-border) !important;
-    border-radius: 999px !important;
-    color: var(--text-secondary) !important;
-    box-shadow: none !important;
-    font-size: 15px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-}
-
-.summary-card .summary-wrong-chip:hover,
-.summary-card .summary-wrong-chip.is-active {
-    transform: translateY(-1px) !important;
-    background: var(--accent-hover) !important;
-    border-color: var(--text-accent) !important;
-    box-shadow: var(--shadow-glow) !important;
-    color: var(--text-accent) !important;
-}
-
-.summary-card .summary-wrong-empty {
-    margin-top: 16px !important;
-    color: var(--text-secondary) !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    line-height: 1.7 !important;
 }
 
 @media (max-width: 768px) {
@@ -936,120 +568,11 @@ h1,
     .day-card,
     .word-list-item,
     .intro-card,
-    .summary-card,
     .dialogue-box,
     .player-hud,
     .flashcard-main,
-    .summary-word-card .flashcard-main,
     .practice-picker-panel {
         border-radius: 14px !important;
     }
 
-    .summary-card .summary-stat-grid {
-        margin-top: 24px !important;
-        gap: 10px !important;
-    }
-
-    .summary-card .summary-stat {
-        min-height: 92px !important;
-        padding: 16px 12px !important;
-        border-radius: 14px !important;
-    }
-
-    .summary-card .summary-stat-value {
-        font-size: 22px !important;
-    }
-
-    .summary-card .summary-wrong-review,
-    .summary-card .summary-wrong-review[style] {
-        margin-top: 22px !important;
-        padding: 18px 16px 20px !important;
-        border-radius: 16px !important;
-    }
-}
-
-@media (max-width: 640px) {
-    .summary-word-overlay {
-        padding: 62px 12px 18px;
-    }
-
-    .summary-word-card {
-        width: min(100%, calc(100vw - 18px));
-        max-height: calc(100dvh - 84px);
-    }
-
-    .summary-word-card .flashcard-main {
-        padding: 20px 18px !important;
-        min-height: auto !important;
-    }
-
-    .summary-word-card .fc-word {
-        font-size: 28px;
-    }
-
-    .summary-word-card .def-number {
-        width: 20px;
-        height: 20px;
-        font-size: 11px;
-    }
-
-    .summary-word-card .def-meaning {
-        font-size: 15.5px;
-    }
-
-    .summary-word-card .def-nuance {
-        font-size: 12.5px;
-    }
-
-    .summary-word-card .ex-jp {
-        font-size: 14.5px;
-    }
-
-    .summary-word-card .ex-cn {
-        font-size: 12.5px;
-    }
-
-    .summary-word-close {
-        width: 40px;
-        height: 40px;
-        font-size: 26px;
-    }
-
-    .summary-card .summary-stat-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 8px !important;
-    }
-
-    .summary-card .summary-stat {
-        min-height: 82px !important;
-        padding: 14px 8px !important;
-    }
-
-    .summary-card .summary-stat-label {
-        font-size: 11px !important;
-        letter-spacing: 0.04em !important;
-    }
-
-    .summary-card .summary-stat-value {
-        margin-top: 8px !important;
-        font-size: 20px !important;
-    }
-
-    .summary-card .summary-wrong-head {
-        align-items: flex-start !important;
-    }
-
-    .summary-card .summary-wrong-title {
-        font-size: 15px !important;
-    }
-
-    .summary-card .summary-wrong-count {
-        font-size: 12px !important;
-    }
-
-    .summary-card .summary-wrong-chip {
-        min-height: 32px !important;
-        padding: 6px 10px !important;
-        font-size: 14px !important;
-    }
 }

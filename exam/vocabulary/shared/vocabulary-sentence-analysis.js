@@ -55,6 +55,18 @@
             usage: '表示为了目标持续努力，常与学习、训练、工作等搭配。',
             collocation: { jp: '勉強に励む', cn: '努力学习' }
         },
+        'ひろう': {
+            baseForm: '拾う',
+            meaning: '捡起、拾取；偶然得到；挑选、找出；搭载、接人',
+            usage: '表示把掉落物捡起来；也可用于偶然获得机会、从大量内容中选取信息，或用车接人等场景。',
+            collocation: { jp: '落とし物を拾う', cn: '捡起失物' }
+        },
+        'ぬすむ': {
+            baseForm: '盗む',
+            meaning: '偷、盗取；偷学、窃取；偷偷进行；抽空',
+            usage: '表示未经允许取走他人物品；也用于「技を盗む」表示暗中学习技巧、「人目を盗む」表示避开他人视线、「暇を盗む」表示抽空。',
+            collocation: { jp: '人の目を盗む', cn: '避开他人的视线' }
+        },
         'にがい': {
             baseForm: '苦い',
             meaning: '苦；痛苦、难受',
@@ -496,7 +508,10 @@
 
     function getFallbackOptionDetail(optionValue) {
         const key = normalizeValue(optionValue);
-        return key ? OPTION_DETAIL_FALLBACKS[key] || null : null;
+        if (!key) return null;
+        return OPTION_DETAIL_FALLBACKS[key]
+            || (global.VocabularyOptionLexicon && global.VocabularyOptionLexicon[key])
+            || null;
     }
 
     function inferFallbackBaseForm(optionValue) {
@@ -571,9 +586,13 @@
 
     function getPrimaryMeaning(word) {
         return String(word && word.mean ? word.mean : '')
-            .split(/[；;]/)
-            .map((part) => part.trim())
-            .find(Boolean) || '';
+            .split(/[\n\r]+/)
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .join('；')
+            .replace(/[;]　?/g, '；')
+            .replace(/；{2,}/g, '；')
+            .replace(/^；+|；+$/g, '');
     }
 
     function getPrimaryUsage(word) {
@@ -582,8 +601,10 @@
         if (word && typeof word.usage === 'string' && word.usage.trim()) return word.usage.trim();
         const nuance = String(word && word.nuance ? word.nuance : '')
             .split('\n')
-            .map((line) => line.trim().replace(/^\d+\.\s*/, ''))
-            .find(Boolean);
+            .map((line) => line.trim().replace(/^[（(]?\d+[.)、）)]?\s*/, ''))
+            .filter(Boolean)
+            .map((line) => /[。！？；]$/.test(line) ? line : `${line}。`)
+            .join('');
         return nuance || getPrimaryMeaning(word);
     }
 

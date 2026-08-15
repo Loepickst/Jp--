@@ -3,336 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>単語暗記 - 能力考核心词汇</title>
+    <title>N2 語彙特訓センター</title>
+    <!-- 引入优雅的衬线与无衬线字体，契合沉浸阅读风格 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="../../../shared/legacy-directory-redirect.js?v=20260808-vocab-pos1"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500&display=swap');
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
 
         :root {
-            /* --- 统一使用阅读模版的配色 --- */
-            --bg-color: #fdfaf5;       /* 米色背景 */
-            --paper-color: #ffffff;    /* 卡片/纸张背景 */
-            --text-color: #2c2c2c;     /* 深灰文字 */
-            --accent-color: #b33e3e;   /* 茜色点缀 */
-            --sub-color: #787878;      /* 辅助文字颜色 */
-            --shadow: rgba(0,0,0,0.05); /* 柔和阴影 */
+            /* === 高对比度护眼原木色调色板 === */
+            --bg-grad-start: #F9F6F0;      /* 更柔和的纸张底色 */
+            --bg-grad-end: #EFE9E1;        /* 略深的装订色，衬托纯白卡片 */
+
+            --panel-bg: #FFFFFF;           /* 纯白卡片底色，确保文字对比度最高 */
+            --panel-border: #D5CCC0;       /* 清晰的纸质边框 */
+
+            --text-main: #2B2522;          /* 极深的墨褐，接近纯黑，极致清晰 */
+            --text-dim: #665C56;           /* 加深的次要文字，确保清晰易读 */
+            --text-accent: #A64E36;        /* 加深的赤陶橘色，提升辨识度 */
             
-            /* 词性颜色标记 */
-            --noun-color: #4fc3f7;     /* 名词 - 蓝 */
-            --verb-color: #e57373;     /* 动词 - 红 */
-            --adj-color: #fff176;      /* 形容词 - 黄 */
-            --adv-color: #81c784;      /* 副词 - 绿 */
-            --ono-color: #ba68c8;      /* 拟声拟态 - 紫 */
+            --accent-green: #3B7D50;       /* 更深的沉稳森绿 */
+            --accent-hover: #FFF9F7;       /* 悬浮时的暖白反光 */
+
+            --shadow-soft: 0 4px 16px rgba(130, 115, 100, 0.12); /* 更干净锐利的阴影 */
+            --shadow-glow: 0 0 12px rgba(166, 78, 54, 0.2);
+
+            --font-ui: "Noto Sans SC", "Noto Sans JP", -apple-system, sans-serif;
+            --font-serif: "Noto Serif SC", "Noto Serif JP", serif;
             
-            /* 级别颜色 */
-            --n1-color: #e57373;
-            --n2-color: #ff8a65;
+            --transition: 0.25s ease-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: "Hiragino Sans", "Meiryo", "Microsoft YaHei", -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            font-family: var(--font-ui);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(180deg, var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
+            background-attachment: fixed;
         }
 
-        /* 顶部导航栏 */
+        /* 隐约的网格背景，增加秩序感 */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
         header {
             width: 100%;
-            padding: 18px 20px;
-            box-sizing: border-box;
+            padding: 16px 24px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            background-color: rgba(253, 250, 245, 0.95);
-            backdrop-filter: blur(8px);
-            position: sticky; 
+            justify-content: space-between;
+            position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--panel-border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
         }
 
-        /* 返回按钮 */
-        .back-btn {
-            position: absolute;
-            left: 20px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 15px;
+        .back-btn,
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: #FFFFFF;
+            border: 1px solid var(--panel-border);
+            color: var(--text-dim);
             font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .back-btn:hover,
+        .home-btn:hover {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
-            min-height: 34px;
-            opacity: 0.72;
-            transition: opacity 0.25s, transform 0.25s;
-        }
-        .back-btn:hover {
-            opacity: 1;
-            transform: translateX(-2px);
-        }
-
-
-        h1 {
-            margin: 0;
-            font-size: 19px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
+            gap: 10px;
+            flex: 0 0 auto;
+            justify-content: flex-end;
+            margin-left: auto;
+            position: relative;
+            z-index: 2;
         }
 
-        /* 内容容器 */
-        .vocab-container {
-            width: 95%;
-            max-width: 800px;
-            padding: 30px 0;
-            display: flex;
-            flex-direction: column;
-            /* align-items: center;  Removed to allow children to stretch */
-        }
-
-        .view-section {
-            width: 100%; /* Ensure view sections take full width */
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--sub-color);
-            font-weight: normal;
-        }
-
-        /* ================= 参照单词测试页面的排版 ================= */
-        
-
-        /* [目录] 分类列表 (List) */
-        .lesson-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .hero-section {
             width: 100%;
-            /* max-width: 500px; Removed for full width */
-            margin: 0 auto;
+            max-width: 680px;
+            text-align: center;
+            margin: 50px 0 40px;
+            padding: 0 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero-kicker {
+            font-family: var(--font-serif);
+            font-size: 13px;
+            color: var(--text-accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 30px;
+            color: var(--text-main);
+            margin-bottom: 14px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 680px;
+            padding: 0 20px 60px;
+            flex: 1;
+            z-index: 1;
+            position: relative;
+        }
+
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .lesson-item {
-            background: var(--paper-color); 
-            padding: 20px; 
+            background: var(--panel-bg);
             border-radius: 12px;
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
+            border: 1px solid var(--panel-border);
+            padding: 24px;
+            display: flex;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            transition: 0.2s; 
-            border-left: 4px solid transparent;
+            justify-content: space-between;
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text-main);
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition);
         }
 
-        .lesson-item:hover { 
-            border-left-color: var(--accent-color); 
-            transform: translateX(5px); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        .lesson-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--text-accent);
+            box-shadow: 0 12px 24px rgba(166, 78, 54, 0.1);
+            background: var(--accent-hover);
         }
 
-        /* Preparation/Construction Style */
-        .lesson-item.prep {
-            background: transparent;
-            border: 1px dashed #ddd;
-            box-shadow: none;
-            cursor: default;
-            border-left: 1px dashed #ddd; /* Ensure consistent border width/style */
+        .lesson-item:active {
+            transform: translateY(0);
         }
-        .lesson-item.prep:hover {
-            transform: none;
-            box-shadow: none;
-            border-left-color: #ddd;
-        }
+
         .lesson-item.disabled {
-            opacity: 0.62;
-            cursor: not-allowed;
             pointer-events: none;
-            filter: grayscale(0.18);
-            background: rgba(255,255,255,0.7);
-            border-left-color: #ddd;
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(210, 195, 180, 0.4);
+            box-shadow: none;
         }
-        .lesson-item.disabled:hover {
-            transform: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left-color: #ddd;
-        }
-        .lesson-item.disabled .lesson-icon {
-            background: #eee !important;
-            color: #aaa !important;
-        }
-        .lesson-item.disabled .lesson-text h3,
-        .lesson-item.disabled .lesson-text p,
-        .lesson-item.disabled .lesson-tag {
-            color: #999 !important;
-        }
-        .lesson-item.prep .lesson-icon {
-            background: #eee !important;
-            color: #aaa !important;
-        }
-        .lesson-item.prep h3 { color: #999; }
-        .lesson-item.prep p { color: #aaa; }
-        
-        .construction-icon {
-            font-size: 24px;
-            opacity: 0.5;
+
+        .lesson-item.disabled .lesson-text h3 {
+            color: var(--text-dim);
         }
 
         .lesson-content {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .lesson-icon {
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            background: rgba(0,0,0,0.03);
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
+            border: 2px solid var(--panel-border);
+            background: #F9F6F0;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(130, 115, 100, 0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .lesson-item:hover .lesson-icon {
+            transform: scale(1.05) rotate(-5deg);
+            border-color: var(--text-accent);
+        }
+
+        .lesson-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lesson-icon.placeholder {
+            display: grid;
+            place-items: center;
+            color: var(--text-accent);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .lesson-icon.grayscale img {
+            filter: grayscale(100%);
+            opacity: 0.6;
         }
 
         .lesson-text {
             display: flex;
             flex-direction: column;
+            gap: 6px;
         }
 
-        .lesson-text h3 { margin: 0 0 4px; font-size: 16px; font-weight: bold; }
-        .lesson-text p { margin: 0; font-size: 12px; color: var(--sub-color); }
+        .lesson-text h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            font-family: var(--font-serif);
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+        }
+
+        .lesson-text p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            font-weight: 500;
+        }
 
         .lesson-tag {
-            background: #f5f5f5; 
-            color: #888; 
-            padding: 4px 10px; 
-            border-radius: 20px; 
-            font-size: 12px; 
-            font-weight: bold;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            letter-spacing: 0.1em;
         }
 
-        .hidden { display: none; }
-        .back-link { 
-            cursor: pointer; 
-            color: var(--text-color); 
-            margin-right: 15px; 
-            font-size: 1.2rem; 
-            text-decoration: none; 
-            display: inline-flex; 
-            vertical-align: middle;
-            
-            /* Button-like style */
-            width: 40px;
-            height: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: all 0.2s ease;
+        .tag-active {
+            background: rgba(166, 78, 54, 0.1);
+            color: var(--text-accent);
+            border: 1px solid rgba(166, 78, 54, 0.2);
         }
-        .back-link:hover { 
-            color: var(--accent-color); 
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        
-        /* 动画 */
-        .fade-in { animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .tag-prep {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--text-dim);
+            border: 1px dashed rgba(0, 0, 0, 0.2);
         }
 
         footer {
             margin-top: auto;
-            padding: 30px;
-            font-size: 12px;
-            opacity: 0.6;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-dim);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            z-index: 1;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
+            .back-btn, .home-btn { padding: 6px 12px; font-size: 12px; gap: 5px; }
+            .header-actions {
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 3;
+            }
+            .hero-section { margin: 38px 0 24px; padding: 0 16px; }
+            .hero-kicker { font-size: 12px; margin-bottom: 10px; }
+            .hero-title { font-size: 26px; margin-bottom: 12px; }
+            .hero-subtitle { font-size: 13px; line-height: 1.62; }
+            .content-wrapper { padding: 0 16px 36px; }
+            .menu-grid { gap: 14px; }
+            .lesson-item {
+                position: relative;
+                padding: 18px 82px 16px 18px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .lesson-content { width: 100%; gap: 14px; }
+            .lesson-icon { width: 48px; height: 48px; }
+            .lesson-text { gap: 4px; }
+            .lesson-text h3 { font-size: 17px; }
+            .lesson-text p { font-size: 12.5px; line-height: 1.62; }
+            .lesson-tag {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                align-self: auto;
+                margin-left: 0;
+                padding: 4px 9px;
+                font-size: 10.5px;
+            }
+            footer { padding: 20px; font-size: 11px; }
+        }
+
+        /* 移动端专属阅读优化 */
+        @media (max-width: 480px) {
+            header { padding: calc(10px + env(safe-area-inset-top)) 12px 10px; }
+            .back-btn, .home-btn { padding: 5px 10px; font-size: 11px; gap: 4px; }
+            .header-actions { right: 12px; }
+            .hero-section { margin: 28px 0 18px; padding: 0 12px; }
+            .hero-kicker { font-size: 11px; margin-bottom: 8px; }
+            .hero-title { font-size: 22px; margin-bottom: 10px; }
+            .hero-subtitle { font-size: 12px; line-height: 1.58; }
+            .content-wrapper { padding: 0 12px 24px; }
+            .menu-grid { gap: 12px; }
+
+            .lesson-item {
+                position: relative;
+                padding: 16px 72px 14px 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .lesson-content { width: 100%; gap: 12px; }
+            .lesson-icon { width: 44px; height: 44px; }
+            .lesson-text { gap: 3px; }
+            .lesson-text h3 { font-size: 16px; }
+            .lesson-text p { font-size: 12px; line-height: 1.55; }
+            .lesson-tag {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                align-self: auto;
+                margin-left: 0;
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+            footer { padding: 18px; font-size: 10px; }
         }
     </style>
-    <link rel="stylesheet" href="../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../shared/vocabulary-sketch-theme.css">
 </head>
 <body>
 
     <header>
-        <a href="../index.html" class="back-btn" data-back-nav>← 戻る</a>
-        <h1>N2 の単語</h1>
+        <a data-back-nav class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            返回
+        </a>
+        <div class="header-actions">
+            <a href="../../../index.html" class="home-btn">主页</a>
+        </div>
     </header>
 
-    <div class="vocab-container">
-        <div class="view-section fade-in">
-            <div class="section-title" style="width: 100%; margin: 0 auto 20px;">N2 の単語</div>
+    <div class="hero-section">
+        <div class="hero-kicker">VOCABULARY TRAINING</div>
+        <h1 class="hero-title">N2 語彙特訓センター</h1>
+        <p class="hero-subtitle">在这，性格迥异的导师将陪伴你攻克最难的 N2 词汇。<br>请选择你想研习的科目吧。</p>
+    </div>
 
-            <div class="lesson-list">
-                <div class="lesson-item disabled">
-                    <div class="lesson-content">
-                        <div class="lesson-icon" style="color: var(--verb-color);">🏃</div>
-                        <div class="lesson-text">
-                            <h3>動詞</h3>
-                            <p>N2 动词目录位已预留，等待词表与练习接入</p>
-                        </div>
+    <div class="content-wrapper">
+        <div class="menu-grid">
+            <a class="lesson-item" href="verbs_n2.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">
+                        <img src="../n1/icon/xuejie.png" alt="雨宫">
                     </div>
-                    <span class="lesson-tag">Soon</span>
+                    <div class="lesson-text">
+                        <h3>動詞</h3>
+                        <p>担当：雨宫<br>N2 核心动词与复合动词。</p>
+                    </div>
                 </div>
+                <span class="lesson-tag tag-active">辅导中</span>
+            </a>
 
-                <div class="lesson-item disabled">
-                    <div class="lesson-content">
-                        <div class="lesson-icon" style="color: var(--adj-color);">✨</div>
-                        <div class="lesson-text">
-                            <h3>形容詞</h3>
-                            <p>N2 形容词目录位已预留，等待词表与练习接入</p>
-                        </div>
+            <a class="lesson-item" href="adjectives_n2.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">
+                        <img src="../n1/icon/xuemei.png" alt="凛">
                     </div>
-                    <span class="lesson-tag">Soon</span>
+                    <div class="lesson-text">
+                        <h3>形容詞</h3>
+                        <p>担当：凛<br>N2 い形容词与な形容词。</p>
+                    </div>
                 </div>
+                <span class="lesson-tag tag-active">辅导中</span>
+            </a>
 
-                <div class="lesson-item disabled">
-                    <div class="lesson-content">
-                        <div class="lesson-icon">〰️</div>
-                        <div class="lesson-text">
-                            <h3>副詞</h3>
-                            <p>N2 副词目录位已预留，等待词表与练习接入</p>
-                        </div>
+            <a class="lesson-item" href="adverbs_n2.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">
+                        <img src="../n1/icon/fuci.png" alt="莉奈">
                     </div>
-                    <span class="lesson-tag">Soon</span>
+                    <div class="lesson-text">
+                        <h3>副詞</h3>
+                        <p>担当：莉奈<br>N2 副词分类与语境训练。</p>
+                    </div>
                 </div>
+                <span class="lesson-tag tag-active">辅导中</span>
+            </a>
 
-                <div class="lesson-item disabled">
-                    <div class="lesson-content">
-                        <div class="lesson-icon" style="color: var(--ono-color);">🔊</div>
-                        <div class="lesson-text">
-                            <h3>擬音・擬態語</h3>
-                            <p>N2 拟声拟态目录位已预留，等待词表与练习接入</p>
-                        </div>
-                    </div>
-                    <span class="lesson-tag">Soon</span>
-                </div>
-            </div>
         </div>
     </div>
 
-    <script src="../../../shared/back-navigation.js"></script>
+    <!-- 包含 Fallback 机制的返回逻辑 -->
+    <script src="../../../shared/back-navigation.js?v=20260808-vocab-pos1"></script>
     <script>
-        window.bindHierarchicalBack({
-            selector: "[data-back-nav]",
-            fallback: "../index.html"
-        });
+        if (typeof window.bindHierarchicalBack === 'function') {
+            window.bindHierarchicalBack({
+                selector: "[data-back-nav]",
+                fallback: "../index.html"
+            });
+        } else if (typeof window.bindStatefulBack === 'function') {
+            window.bindStatefulBack({
+                selector: "[data-back-nav]",
+                fallback: "../index.html"
+            });
+        } else {
+            document.querySelectorAll('[data-back-nav]').forEach(function(el) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = "../index.html";
+                });
+            });
+        }
     </script>
 
     <footer>
-        © kiki's Japanese Corner
+        学园词汇特训中心
     </footer>
-
+    <script src="../../../shared/word-bank.js"></script>
+    <script src="../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

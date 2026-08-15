@@ -1,0 +1,68 @@
+.vocabulary-level-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 0 0 -2px;
+}
+
+.vocabulary-level-switcher-label {
+    color: var(--vocab-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.vocabulary-level-tabs {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border: 1px solid var(--vocab-line);
+    border-radius: 9px;
+    background: var(--vocab-surface-subtle);
+}
+
+.vocabulary-level-tab {
+    min-width: 38px;
+    min-height: 28px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 7px;
+    color: var(--vocab-muted);
+    background: transparent;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: color .16s ease, background .16s ease, opacity .16s ease;
+}
+
+.vocabulary-level-tab:hover,
+.vocabulary-level-tab.is-active {
+    color: var(--vocab-accent-strong);
+    background: var(--vocab-accent-soft);
+}
+
+.vocabulary-level-tab.is-active {
+    cursor: default;
+}
+
+.vocabulary-level-tab:focus-visible {
+    outline: 2px solid var(--vocab-accent);
+    outline-offset: 2px;
+}
+
+.vocabulary-level-tab:disabled {
+    color: var(--vocab-muted);
+    background: transparent;
+    cursor: not-allowed;
+    opacity: .38;
+}
+
+@media (max-width: 760px) {
+    .vocabulary-level-switcher {
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+}
+

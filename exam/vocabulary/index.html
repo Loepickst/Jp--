@@ -6,6 +6,7 @@
     <title>JLPT 語彙特訓センター</title>
     <!-- 引入优雅的衬线与无衬线字体，契合沉浸阅读风格 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="../../shared/legacy-directory-redirect.js?v=20260808-vocab-pos1"></script>
     <style>
         html {
             -webkit-text-size-adjust: 100%;
@@ -367,42 +368,73 @@
 
     <div class="hero-section">
         <div class="hero-kicker">JLPT VOCABULARY</div>
-        <h1 class="hero-title">能力考特训中心</h1>
-        <p class="hero-subtitle">欢迎来到学园特训中心。<br>请选择你需要突破的考试级别，导师们已等候多时。</p>
+        <h1 class="hero-title">語彙特训中心</h1>
+        <p class="hero-subtitle">请选择要学习的词性。<br>进入具体内容后，可以切换 N1 / N2。</p>
     </div>
 
     <div class="content-wrapper">
         <div class="menu-grid">
             
-            <!-- N1 级别 -->
-            <a class="lesson-item" href="n1/index.html">
+            <a class="lesson-item" href="n1/verbs_n1.html">
                 <div class="lesson-content">
-                    <div class="lesson-icon">🎓</div>
+                    <div class="lesson-icon">動</div>
                     <div class="lesson-text">
-                        <h3>N1 上級特訓</h3>
-                        <p>N1核心词汇备考中心。</p>
+                        <h3>动词</h3>
+                        <p>核心动词与复合动词的分类学习。</p>
                     </div>
                 </div>
-                <span class="lesson-tag tag-active">开放中</span>
+                <span class="lesson-tag tag-active">動詞</span>
             </a>
 
-            <!-- N2 级别 -->
-            <a class="lesson-item disabled is-hidden-entry" href="#" aria-disabled="true" aria-hidden="true" tabindex="-1">
+            <a class="lesson-item" href="n1/adjectives_n1.html">
                 <div class="lesson-content">
-                    <div class="lesson-icon grayscale">📚</div>
+                    <div class="lesson-icon">形</div>
                     <div class="lesson-text">
-                        <h3>N2 中上級特訓</h3>
-                        <p>N2核心词汇入口暂时维护中。<br>整理完成后会重新开放。</p>
+                        <h3>形容词</h3>
+                        <p>い形容词与な形容词的分类学习。</p>
                     </div>
                 </div>
-                <span class="lesson-tag tag-prep">准备中</span>
+                <span class="lesson-tag tag-active">形容詞</span>
+            </a>
+
+            <a class="lesson-item" href="n1/adverbs_n1.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">副</div>
+                    <div class="lesson-text">
+                        <h3>副词</h3>
+                        <p>高频副词的功能分类与语境训练。</p>
+                    </div>
+                </div>
+                <span class="lesson-tag tag-active">副詞</span>
+            </a>
+
+            <a class="lesson-item" href="n1/mimetic_n1.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">音</div>
+                    <div class="lesson-text">
+                        <h3>拟声拟态词</h3>
+                        <p>拟声词、拟态词及其常见语境。</p>
+                    </div>
+                </div>
+                <span class="lesson-tag tag-active">擬声・擬態</span>
+            </a>
+
+            <a class="lesson-item" href="n1/loanwords_n1.html">
+                <div class="lesson-content">
+                    <div class="lesson-icon">外</div>
+                    <div class="lesson-text">
+                        <h3>外来语</h3>
+                        <p>能力考常见外来语与易混词义。</p>
+                    </div>
+                </div>
+                <span class="lesson-tag tag-active">外来語</span>
             </a>
 
         </div>
     </div>
 
     <!-- 包含 Fallback 机制的返回逻辑 -->
-    <script src="../../shared/back-navigation.js"></script>
+    <script src="../../shared/back-navigation.js?v=20260808-vocab-pos1"></script>
     <script>
         if (typeof window.bindHierarchicalBack === 'function') {
             window.bindHierarchicalBack({
@@ -427,6 +459,7 @@
     <footer>
         ✦ 学园词汇特训中心 ✦
     </footer>
-
+    <script src="../../shared/word-bank.js"></script>
+    <script src="../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

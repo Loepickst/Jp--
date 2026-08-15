@@ -1,0 +1,685 @@
+.summary-screen.vocabulary-result-active {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none !important;
+    min-height: calc(100vh - 72px);
+    margin: 0 !important;
+    padding: 32px clamp(20px, 4vw, 60px) 42px;
+    background: var(--practice-page, #f3f5f9);
+    overflow-y: auto;
+}
+
+.page-shell:has(.summary-screen.vocabulary-result-active) {
+    width: 100%;
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.summary-screen.vocabulary-result-active .vocab-result-sheet {
+    box-sizing: border-box;
+    width: min(1280px, 100%);
+    min-height: 0;
+    margin: 0 auto;
+    padding: 0;
+    color: var(--practice-ink, #1d2638);
+    background: #fff;
+    border: 1px solid var(--practice-line, #dce2ec);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(37, 48, 72, 0.05);
+    overflow: hidden;
+    text-align: left;
+}
+
+.vocab-result-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 360px);
+    gap: 28px;
+    align-items: center;
+    padding: 28px 32px 22px;
+}
+
+.vocab-result-eyebrow {
+    margin: 0 0 5px;
+    color: var(--practice-rose, #b86f6b);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+}
+
+.vocab-result-title {
+    margin: 0;
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif SC", "Songti SC", "Yu Mincho", serif;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+.vocab-result-mentor {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    min-height: 54px;
+    padding: 6px 0 6px 16px;
+    border-left: 2px solid var(--practice-rose, #b86f6b);
+}
+
+.vocab-result-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--practice-soft, #f2f4f8);
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(37, 48, 72, 0.1);
+}
+
+.vocab-result-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+}
+
+.vocab-result-mentor-name {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--practice-rose, #b86f6b);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.vocab-result-mentor-copy {
+    margin: 0;
+    color: var(--practice-muted, #677188);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.vocab-result-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 32px;
+    border-top: 1px solid var(--practice-line, #dce2ec);
+    border-bottom: 1px solid var(--practice-line, #dce2ec);
+}
+
+.vocab-result-metric {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 62px;
+    padding: 10px 20px;
+}
+
+.vocab-result-metric + .vocab-result-metric::before {
+    position: absolute;
+    inset: 10px auto 10px 0;
+    width: 1px;
+    background: var(--practice-line, #dce2ec);
+    content: "";
+}
+
+.vocab-result-metric-label {
+    display: block;
+    margin-bottom: 0;
+    color: var(--practice-muted, #737d91);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.vocab-result-metric-value {
+    display: block;
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.vocab-result-metric-value.is-accent {
+    color: var(--practice-rose, #b86f6b);
+}
+
+.vocab-result-review {
+    padding: 28px 32px 0;
+}
+
+.vocab-result-review-head {
+    display: flex;
+    gap: 24px;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding-bottom: 12px;
+}
+
+.vocab-result-review-title {
+    margin: 0;
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.vocab-result-review-note,
+.vocab-result-review-count {
+    color: var(--practice-muted, #788297);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.vocab-result-wrong-list {
+    border-top: 1px solid var(--practice-line, #dce2ec);
+}
+
+.vocab-result-word-item {
+    border-bottom: 1px solid var(--practice-line, #dce2ec);
+}
+
+.vocab-result-word-row {
+    display: grid;
+    grid-template-columns: minmax(190px, 1.05fr) minmax(220px, 1.45fr) 110px auto;
+    gap: 18px;
+    align-items: center;
+    width: 100%;
+    min-height: 72px;
+    padding: 12px 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-bottom: 0;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.vocab-result-word-row[aria-expanded="true"] {
+    color: var(--practice-accent, #35415f);
+    background: transparent;
+    box-shadow: inset 3px 0 0 var(--practice-rose, #b86f6b);
+}
+
+.vocab-result-word-row:hover,
+.vocab-result-word-row:focus-visible {
+    background: color-mix(in srgb, var(--practice-soft, #f2f4f8) 76%, white);
+    outline: none;
+}
+
+.vocab-result-word-row.is-static {
+    cursor: default;
+}
+
+.vocab-result-word-row.is-static:hover {
+    background: transparent;
+}
+
+.vocab-result-word-main {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    min-width: 0;
+    padding-left: 4px;
+}
+
+.vocab-result-word-index {
+    flex: 0 0 26px;
+    color: var(--practice-rose, #b86f6b);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+.vocab-result-word-term {
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif JP", "Yu Mincho", "Noto Serif SC", serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.vocab-result-word-reading {
+    color: var(--practice-muted, #707b91);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.vocab-result-word-meaning {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--practice-ink, #2f394d);
+    font-size: 12px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vocab-result-word-reason {
+    color: var(--practice-rose, #b86f6b);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.vocab-result-word-link {
+    color: var(--practice-accent, #35415f);
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.vocab-result-word-detail {
+    padding: 22px 30px 28px 46px;
+    background: #fff;
+    border-top: 1px solid var(--practice-line, #dce2ec);
+}
+
+.vocab-result-word-detail[hidden] {
+    display: none;
+}
+
+.vocab-result-detail-section-title {
+    margin: 0;
+    color: var(--practice-ink, #1d2638);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+}
+
+.vocab-result-question-review {
+    margin: 0;
+}
+
+.vocab-result-question-head {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.vocab-result-question-type {
+    color: var(--practice-rose, #b86f6b);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.vocab-result-question-prompt {
+    margin: 12px 0 5px;
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif JP", "Yu Mincho", "Noto Serif SC", serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.85;
+}
+
+.vocab-result-question-translation {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding-bottom: 14px;
+    color: var(--practice-muted, #707b91);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.vocab-result-question-translation p {
+    margin: 0;
+    color: var(--practice-muted, #707b91);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.vocab-result-answer-compare {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid color-mix(in srgb, var(--practice-line, #dce2ec) 76%, transparent);
+}
+
+.vocab-result-answer-item {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.vocab-result-answer-item span {
+    color: var(--practice-muted, #707b91);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.vocab-result-answer-item strong {
+    font-family: "Noto Serif JP", "Yu Mincho", "Noto Serif SC", serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.vocab-result-answer-item.is-wrong strong {
+    color: var(--practice-rose, #b86f6b);
+}
+
+.vocab-result-answer-item.is-correct strong {
+    color: var(--practice-green, #3d7c5a);
+}
+
+.vocab-result-answer-arrow {
+    color: var(--practice-muted, #9aa3b4);
+    font-size: 12px;
+}
+
+.vocab-result-option-analysis {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--practice-line, #dce2ec);
+}
+
+.vocab-result-option-analysis h5 {
+    margin: 0 0 6px;
+    color: var(--practice-ink, #1d2638);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+}
+
+.vocab-result-option-analysis ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.vocab-result-option-item {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+}
+
+.vocab-result-option-item + .vocab-result-option-item {
+    border-top: 1px solid color-mix(in srgb, var(--practice-line, #dce2ec) 72%, transparent);
+}
+
+.vocab-result-option-index {
+    padding-top: 3px;
+    color: var(--practice-muted, #707b91);
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.vocab-result-option-title {
+    display: flex;
+    gap: 9px;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.vocab-result-option-title strong {
+    color: var(--practice-ink, #1d2638);
+    font-family: "Noto Serif JP", "Yu Mincho", serif;
+    font-size: 14px;
+}
+
+.vocab-result-option-title span,
+.vocab-result-option-item p {
+    color: var(--practice-muted, #707b91);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.vocab-result-option-item p {
+    margin: 3px 0 0;
+}
+
+.vocab-result-option-item p b {
+    margin-right: 8px;
+    color: var(--practice-ink, #2f394d);
+    font-weight: 800;
+}
+
+.vocab-result-option-item em {
+    padding-top: 3px;
+    color: var(--practice-muted, #707b91);
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.vocab-result-option-item.is-correct .vocab-result-option-index,
+.vocab-result-option-item.is-correct em {
+    color: var(--practice-green, #3d7c5a);
+}
+
+.vocab-result-option-item.is-selected-wrong .vocab-result-option-index,
+.vocab-result-option-item.is-selected-wrong em {
+    color: var(--practice-rose, #b86f6b);
+}
+
+.vocab-result-empty {
+    padding: 30px 0 32px;
+    color: var(--practice-muted, #788297);
+    border-top: 1px solid var(--practice-line, #dce2ec);
+    border-bottom: 1px solid var(--practice-line, #dce2ec);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.vocab-result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 22px 32px 28px;
+}
+
+.vocab-result-action {
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.vocab-result-action:hover {
+    transform: translateY(-1px);
+}
+
+.vocab-result-action.is-secondary {
+    color: var(--practice-accent, #35415f);
+    background: #fff;
+    border: 1px solid var(--practice-line-strong, #cfd6e3);
+}
+
+.vocab-result-action.is-primary {
+    color: #fff;
+    background: var(--practice-accent, #35415f);
+    border: 1px solid var(--practice-accent, #35415f);
+}
+
+@media (max-width: 820px) {
+    .summary-screen.vocabulary-result-active {
+        padding: 18px 12px 32px;
+    }
+
+    .vocab-result-hero {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 24px 20px 20px;
+    }
+
+    .vocab-result-mentor {
+        padding-left: 16px;
+    }
+
+    .vocab-result-metrics {
+        margin: 0 20px;
+    }
+
+    .vocab-result-metric {
+        min-height: 56px;
+        padding: 10px 12px;
+    }
+
+    .vocab-result-review {
+        padding: 24px 20px 0;
+    }
+
+    .vocab-result-word-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px 16px;
+        min-height: 82px;
+    }
+
+    .vocab-result-word-detail {
+        padding: 22px 4px 26px;
+    }
+
+    .vocab-result-word-main,
+    .vocab-result-word-meaning {
+        grid-column: 1;
+    }
+
+    .vocab-result-word-reason,
+    .vocab-result-word-link {
+        grid-column: 2;
+    }
+
+    .vocab-result-word-reading {
+        display: none;
+    }
+
+    .vocab-result-actions {
+        padding: 20px 20px 24px;
+    }
+}
+
+@media (max-width: 560px) {
+    .vocab-result-title {
+        font-size: 22px;
+    }
+
+    .vocab-result-metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: 0 16px;
+    }
+
+    .vocab-result-metric + .vocab-result-metric::before {
+        inset: 10px auto 10px 0;
+        width: 1px;
+        height: auto;
+    }
+
+    .vocab-result-metric {
+        justify-content: center;
+        gap: 6px;
+        min-width: 0;
+        min-height: 48px;
+        padding: 8px 5px;
+        white-space: nowrap;
+    }
+
+    .vocab-result-metric-label {
+        font-size: 8px;
+        letter-spacing: 0;
+    }
+
+    .vocab-result-metric-value {
+        font-size: 14px;
+    }
+
+    .vocab-result-word-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        min-height: 50px;
+        padding: 10px 2px;
+    }
+
+    .vocab-result-word-main {
+        grid-column: 1;
+        gap: 0;
+        min-width: 0;
+        padding-left: 0;
+    }
+
+    .vocab-result-word-index,
+    .vocab-result-word-reading,
+    .vocab-result-word-meaning,
+    .vocab-result-word-reason {
+        display: none;
+    }
+
+    .vocab-result-word-term {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        font-size: 15px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .vocab-result-word-link {
+        grid-column: 2;
+        color: var(--practice-muted, #707b91);
+        font-size: 0;
+    }
+
+    .vocab-result-word-link::before {
+        content: "点击查看  ›";
+        font-size: 9px;
+        letter-spacing: 0.02em;
+    }
+
+    .vocab-result-word-row[aria-expanded="true"] .vocab-result-word-link::before {
+        content: "收起  ↑";
+    }
+
+    .vocab-result-word-row[aria-expanded="true"] {
+        box-shadow: inset 2px 0 0 var(--practice-rose, #b86f6b);
+    }
+
+    .vocab-result-review-head {
+        display: block;
+    }
+
+    .vocab-result-review-note {
+        display: block;
+        margin-top: 8px;
+    }
+
+    .vocab-result-answer-compare {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .vocab-result-answer-arrow {
+        display: none;
+    }
+
+    .vocab-result-option-item {
+        grid-template-columns: 22px minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .vocab-result-option-item em {
+        grid-column: 2;
+        padding-top: 0;
+    }
+
+    .vocab-result-actions {
+        flex-direction: column-reverse;
+    }
+
+    .vocab-result-action {
+        width: 100%;
+    }
+}

@@ -273,6 +273,16 @@
             return '';
         }
 
+        function hasKatakana(value) {
+            return /[\u30a1-\u30f6\u30fc]/.test(asText(value));
+        }
+
+        function getMeaningDisplayText(word, kanaText = '') {
+            const surfaceText = getWordDisplayText(word);
+            if (hasKatakana(surfaceText)) return surfaceText;
+            return asText(kanaText);
+        }
+
         function getReadingPromptForWord(word) {
             if (typeof config.getReadingPromptForWord === 'function') return config.getReadingPromptForWord(word);
             if (readingHelper && typeof readingHelper.buildPrompt === 'function') {
@@ -801,28 +811,88 @@
                 const meaning = extractPrimaryMeaning(word);
                 if (!meaning || seen.has(meaning)) return;
                 seen.add(meaning);
-                pool.push(meaning);
+                pool.push({ word, meaning });
             });
             return pool.slice(0, 3);
         }
 
         function buildMeaningQuestionSpec(word, sourcePool) {
             const kanaText = getKanaDisplayText(word && word.word_html, word && word.word);
+            const displayText = getMeaningDisplayText(word, kanaText);
             const primaryMeaning = extractPrimaryMeaning(word);
-            if (!kanaText || !primaryMeaning) return null;
+            if (!displayText || !primaryMeaning) return null;
             const distractors = buildMeaningDistractors(word, sourcePool);
             if (distractors.length < 3) return null;
             const esc = typeof config.escapeHtml === 'function' ? config.escapeHtml : defaultEscapeHtml;
+            const optionEntries = shuffleArray([
+                { word, value: primaryMeaning, isCorrect: true },
+                ...distractors.map((item) => ({ word: item.word, value: item.meaning, isCorrect: false }))
+            ]);
             return {
                 kind: 'meaning',
                 answerMode: 'choice',
                 word,
-                questionHtml: formatQuestionHtml(esc(kanaText), 'meaning'),
+                questionHtml: formatQuestionHtml(esc(displayText), 'meaning'),
                 cn: '',
                 correctAnswer: primaryMeaning,
-                options: shuffleArray([primaryMeaning, ...distractors]),
+                options: optionEntries.map((item) => item.value),
+                optionDetails: optionEntries.map((item) => ({
+                    value: item.value,
+                    wordId: getWordStorageId(item.word),
+                    wordLabel: getWordDisplayText(item.word),
+                    meaning: extractPrimaryMeaning(item.word),
+                    usage: extractPrimaryUsage(item.word),
+                    collocation: extractCommonCollocation(item.word),
+                    isResolved: Boolean(item.word),
+                    isCorrect: item.isCorrect
+                })),
                 hintText: '',
-                typingText: formatTypingText(kanaText)
+                typingText: formatTypingText(displayText)
+            };
+        }
+
+        function buildResultWrongDetail(question, submittedAnswer, isTimeout) {
+            const word = question && question.word;
+            if (!word) return null;
+            const sentenceTranslation = asText(
+                question.sentenceCn
+                || question.cn
+                || (question.reviewAnalysis && question.reviewAnalysis.sentenceTranslation)
+            );
+            const selectedAnswer = isTimeout ? '未作答（超时）' : asText(submittedAnswer || '未作答');
+            const correctAnswer = asText(question.correctAnswer);
+            const sourceOptions = asArray(question.optionDetails).length
+                ? asArray(question.optionDetails)
+                : asArray(question.reviewAnalysis && question.reviewAnalysis.options);
+            const optionDetails = asArray(question.options).map((optionValue, optionIndex) => {
+                const optionKey = normalizeLookupValue(optionValue);
+                const source = sourceOptions[optionIndex]
+                    || sourceOptions.find((item) => normalizeLookupValue(item && item.value) === optionKey)
+                    || {};
+                return {
+                    value: asText(optionValue),
+                    wordLabel: asText(source.wordLabel || source.baseForm || ''),
+                    meaning: asText(source.meaning || ''),
+                    usage: asText(source.usage || source.correctAnalysis || ''),
+                    isCorrect: optionKey === normalizeLookupValue(correctAnswer),
+                    isSelected: optionKey === normalizeLookupValue(selectedAnswer)
+                };
+            });
+            const questionType = question.kind === 'sentence'
+                ? '句子选词'
+                : question.kind === 'meaning'
+                ? '假名选义'
+                : question.kind === 'reading' || question.answerMode === 'input'
+                ? '读音填空'
+                : '错题';
+            return {
+                questionType,
+                prompt: asText(question.typingText || getWordDisplayText(word)),
+                submittedAnswer: selectedAnswer,
+                correctAnswer,
+                translation: sentenceTranslation || extractPrimaryMeaning(word),
+                translationLabel: sentenceTranslation ? '中文翻译' : '中文释义',
+                options: optionDetails
             };
         }
 
@@ -945,6 +1015,11 @@
 
         function shouldRebuildSentenceReviewQuestion(snapshot, baseWord, practiceItem) {
             if (!practiceItem) return false;
+            const optionSignature = (values) => asArray(values)
+                .map(normalizeOptionValue)
+                .filter(Boolean)
+                .sort()
+                .join('\u0001');
             const snapshotKind = asText(snapshot && snapshot.sourceKind) || 'practice';
             const snapshotIndex = Number.isFinite(parseInt(snapshot && snapshot.sourceIndex, 10))
                 ? parseInt(snapshot && snapshot.sourceIndex, 10)
@@ -952,6 +1027,12 @@
             const currentKind = asText(practiceItem && practiceItem.sourceKind) || 'practice';
             const currentIndex = Number(practiceItem && practiceItem.sourceIndex || 0);
             if (snapshotKind !== currentKind || snapshotIndex !== currentIndex) return true;
+            const snapshotAnswer = normalizeOptionValue(snapshot && (snapshot.correctAnswer || snapshot.answer));
+            const currentAnswer = normalizeOptionValue(practiceItem && practiceItem.answer);
+            if (snapshotAnswer && currentAnswer && snapshotAnswer !== currentAnswer) return true;
+            const snapshotOptions = optionSignature(snapshot && snapshot.options);
+            const currentOptions = optionSignature(practiceItem && practiceItem.options);
+            if (currentOptions && snapshotOptions !== currentOptions) return true;
             const snapshotQuestion = normalizeSentenceForMatch(
                 (snapshot && (snapshot.questionHtml || snapshot.sentence || snapshot.question || snapshot.typingText)) || ''
             );
@@ -972,9 +1053,9 @@
                     : null;
                 const sourceMeta = getSentenceSourceMeta(baseWord, practiceItem);
                 const correctAnswer = rebuiltQuestion ? rebuiltQuestion.correctAnswer : snapshot.correctAnswer;
-                const options = asArray(snapshot.options).length
-                    ? asArray(snapshot.options).slice()
-                    : (rebuiltQuestion && asArray(rebuiltQuestion.options).length ? rebuiltQuestion.options.slice() : []);
+                const options = rebuiltQuestion && asArray(rebuiltQuestion.options).length
+                    ? rebuiltQuestion.options.slice()
+                    : (asArray(snapshot.options).length ? asArray(snapshot.options).slice() : []);
                 const alignedWordIds = alignSentenceMetaToOptions(sourceMeta.options, sourceMeta.optionWordIds, options);
                 const alignedDetails = alignSentenceMetaToOptions(sourceMeta.options, sourceMeta.optionDetails, options);
                 const optionWordIds = alignedWordIds.length ? alignedWordIds : asArray(snapshot.optionWordIds);
@@ -1137,6 +1218,7 @@
             buildSentenceQuestionSpec,
             buildReadingQuestionSpec,
             buildMeaningQuestionSpec,
+            buildResultWrongDetail,
             prepareQuestionSet,
             buildReviewSummaryItems,
             buildReviewSummaryMarkup,
