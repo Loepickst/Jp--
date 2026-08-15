@@ -1,26 +1,50 @@
 (function () {
-    const topBar = document.querySelector(".top-bar");
+    const topBar = document.querySelector(".reading-editorial-header, .top-bar, body > header");
     if (!topBar) {
+        if (!window.__kikiReadingToolsWaitingForHeader) {
+            window.__kikiReadingToolsWaitingForHeader = true;
+            const currentScriptUrl = document.currentScript && document.currentScript.src;
+            document.addEventListener("kiki-unified-header:ready", () => {
+                window.__kikiReadingToolsWaitingForHeader = false;
+                if (!currentScriptUrl || document.getElementById("reading-font-size-btn") || document.getElementById("timer-panel-toggle-btn")) {
+                    return;
+                }
+                const loader = document.createElement("script");
+                loader.src = currentScriptUrl;
+                loader.dataset.readingToolsHeaderRetry = "true";
+                document.head.appendChild(loader);
+            }, { once: true });
+        }
         return;
     }
 
-    const isArticleTemplate = document.body.classList.contains("reading-article-tools-page") &&
-        !!document.querySelector(".question-card");
-    const isMediumTemplate = !isArticleTemplate && !!document.querySelector(".question-block");
-    const isShortTemplate = !isArticleTemplate && !!document.querySelector(".page-content") && !isMediumTemplate;
+    if (window.__kikiReadingToolsInitialized) return;
+    window.__kikiReadingToolsInitialized = true;
+
+    const readingPath = window.location.pathname.toLowerCase();
+    const isShortPath = /\/s\/n[123]\//.test(readingPath);
+    const isMediumPath = /\/m\/n[123]\//.test(readingPath);
+    const isArticleTemplate = !isShortPath && !isMediumPath && !!document.querySelector(".question-card, .qcard") &&
+        !!document.querySelector(".layout-container, .wrap, .article-section, .article");
+    const isShortTemplate = isShortPath;
+    const isMediumTemplate = isMediumPath || (!isArticleTemplate && !isShortTemplate && !!document.querySelector(".question-block"));
 
     if (!isShortTemplate && !isMediumTemplate && !isArticleTemplate) {
         return;
     }
 
-    const actionContainer = document.querySelector(
-        isShortTemplate ? ".top-bar-controls" : ".top-actions, .top-bar-controls"
+    let actionContainer = topBar.querySelector(".reading-editorial-actions, .top-actions, .top-bar-controls") || document.querySelector(
+        isShortTemplate ? ".top-bar .top-bar-controls" : ".top-actions, .top-bar-controls"
     );
     if (!actionContainer) {
-        return;
+        actionContainer = document.createElement("div");
+        actionContainer.className = "top-actions";
+        topBar.appendChild(actionContainer);
     }
-    const disableFuriganaTool = document.body.classList.contains("reading-tools-no-furigana") ||
-        topBar.dataset.readingToolsNoFurigana === "true";
+    /* Translation is no longer an independent reading tool. Remove every
+       legacy per-template switch so the header exposes only typography and
+       timing controls. Embedded translations remain analysis content. */
+    document.querySelectorAll(".translate-toggle-btn, .translate-btn").forEach((button) => button.remove());
 
     document.body.classList.add(
         isShortTemplate ? "jlpt-practice-short" : (isArticleTemplate ? "jlpt-practice-article" : "jlpt-practice-medium")
@@ -53,9 +77,11 @@
         timeoutSubmitted: false,
         isTimerPanelOpen: false,
         timerDisplayHidden: false,
-        timerConfigured: !isTestMode,
+        // The timer is optional in every reading mode. Entering a test page must
+        // never hide the article or block answering while waiting for a timer.
+        timerConfigured: true,
         analysisUnlocked: !canRequireResultUnlock,
-        testPhase: isTestMode ? "prestart" : "default",
+        testPhase: isTestMode ? "active" : "default",
         testSubmitted: false,
         resultSeconds: 0,
         resultTimedOut: false
@@ -77,33 +103,6 @@
             padding-bottom: 40px !important;
         }
 
-        body.reading-mode-test.reading-test-awaiting-timer .page-content.active,
-        body.reading-mode-test.reading-test-awaiting-timer .article-navigation,
-        body.reading-mode-test.reading-test-awaiting-timer .audio-wrapper,
-        body.reading-mode-test.reading-test-awaiting-timer .footer {
-            opacity: 0;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        body.reading-mode-test.reading-test-awaiting-timer.reading-article-tools-page .layout-container,
-        body.reading-mode-test.reading-test-awaiting-timer.reading-article-tools-page .quick-nav {
-            opacity: 0;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        body.reading-mode-test.reading-test-awaiting-timer .timer-panel-backdrop {
-            z-index: 1250;
-            display: block;
-            background: rgba(248, 246, 240, 0.92);
-            backdrop-filter: blur(8px);
-        }
-
-        body.reading-mode-test.reading-test-awaiting-timer .timer-panel {
-            z-index: 1260;
-        }
-
         .reading-mode-test #analysis-btn.is-disabled {
             opacity: 0.52;
             cursor: not-allowed;
@@ -112,35 +111,45 @@
     `;
     document.head.appendChild(readingModeStyle);
 
-    let furiganaBtn = null;
-    if (!disableFuriganaTool) {
-        furiganaBtn = document.createElement("button");
-        furiganaBtn.type = "button";
-        furiganaBtn.id = "furigana-toggle-btn";
-        furiganaBtn.className = "toggle-btn reading-tool-btn is-selected";
-        furiganaBtn.textContent = "注音";
-    }
+    const furiganaBtn = null;
 
     const timerBtn = document.createElement("button");
     timerBtn.type = "button";
     timerBtn.id = "timer-panel-toggle-btn";
-    timerBtn.className = "toggle-btn reading-tool-btn timer-tool-btn";
+    timerBtn.className = "reading-tool-btn timer-tool-btn";
     timerBtn.innerHTML = `
-        <span class="timer-tool-label">计时</span>
-        <span class="timer-tool-indicator" id="timer-tool-indicator" hidden>00:00</span>
+        <span class="timer-tool-label">计时功能</span>
+        <span class="timer-tool-indicator" id="timer-tool-indicator">00:00</span>
     `;
 
-    if (furiganaBtn) {
-        actionContainer.appendChild(furiganaBtn);
+    const fontChoices = [
+        { id: "small", label: "小字号", short: "小", scale: 0.9 },
+        { id: "standard", label: "标准字号", short: "标准", scale: 1 },
+        { id: "large", label: "大字号", short: "大", scale: 1.12 }
+    ];
+    const storedFontChoice = window.localStorage.getItem("reading_font_size_v2");
+    let currentFontChoice = fontChoices.some((choice) => choice.id === storedFontChoice)
+        ? storedFontChoice
+        : "standard";
+
+    const fontBtn = document.createElement("button");
+    fontBtn.type = "button";
+    fontBtn.id = "reading-font-size-btn";
+    fontBtn.className = "reading-tool-btn font-size-tool-btn";
+
+    function syncFontButton() {
+        const active = fontChoices.find((choice) => choice.id === currentFontChoice) || fontChoices[1];
+        fontBtn.innerHTML = `
+            <span class="font-size-tool-aa">Aa</span>
+            <span class="font-size-tool-label">字号大小</span>
+        `;
+        document.documentElement.dataset.readingFont = active.id;
+        document.documentElement.style.setProperty("--reading-font-scale", String(active.scale));
     }
 
-    if (isArticleTemplate) {
-        const translateBtn = document.querySelector(".article-meta .translate-toggle-btn");
-        if (translateBtn && !actionContainer.contains(translateBtn)) {
-            actionContainer.appendChild(translateBtn);
-        }
-    }
+    syncFontButton();
 
+    actionContainer.appendChild(fontBtn);
     actionContainer.appendChild(timerBtn);
 
     const timerBackdrop = document.createElement("div");
@@ -151,7 +160,7 @@
     timerPanel.id = "timer-panel";
     timerPanel.innerHTML = `
         <div class="timer-panel-header">
-            <div class="timer-panel-title">计时设定</div>
+            <div class="timer-panel-title">计时</div>
             <button type="button" class="timer-panel-close" id="timer-panel-close" aria-label="关闭">×</button>
         </div>
         <div class="timer-panel-section">
@@ -178,6 +187,31 @@
     document.body.appendChild(timerBackdrop);
     document.body.appendChild(timerPanel);
 
+    const fontBackdrop = document.createElement("div");
+    fontBackdrop.className = "reading-tool-backdrop";
+
+    const fontPanel = document.createElement("div");
+    fontPanel.className = "font-size-panel";
+    fontPanel.id = "reading-font-size-panel";
+    fontPanel.innerHTML = `
+        <div class="font-size-panel-header">
+            <div class="font-size-panel-title">文章字号</div>
+            <button type="button" class="font-size-panel-close" aria-label="关闭">×</button>
+        </div>
+        <div class="font-size-options">
+            ${fontChoices.map((choice, index) => `
+                <button type="button" class="font-size-option" data-font-choice="${choice.id}">
+                    <span class="font-size-option-sample">${index === 0 ? "A−" : (index === 1 ? "A" : "A+")}</span>
+                    <span class="font-size-option-copy"><strong>${choice.label}</strong><span>文章、题目与解析</span></span>
+                    <span class="font-size-option-check">✓</span>
+                </button>
+            `).join("")}
+        </div>
+    `;
+
+    document.body.appendChild(fontBackdrop);
+    document.body.appendChild(fontPanel);
+
     const timerDisplay = document.getElementById("reading-timer-display");
     const timerIndicator = document.getElementById("timer-tool-indicator");
     const countdownGroup = document.getElementById("timer-countdown-group");
@@ -188,7 +222,50 @@
     const closeBtn = document.getElementById("timer-panel-close");
     const statusEl = document.getElementById("timer-panel-status");
     const modeButtons = Array.from(timerPanel.querySelectorAll("[data-timer-mode]"));
-    const backToReadingIndex = document.getElementById("back-to-reading-index");
+    const fontCloseBtn = fontPanel.querySelector(".font-size-panel-close");
+    const fontOptionButtons = Array.from(fontPanel.querySelectorAll("[data-font-choice]"));
+    let isFontPanelOpen = false;
+    function syncFontOptions() {
+        fontOptionButtons.forEach((button) => {
+            button.classList.toggle("is-selected", button.dataset.fontChoice === currentFontChoice);
+        });
+    }
+
+    function positionFontPanel() {
+        if (!isFontPanelOpen) return;
+        const mobile = window.matchMedia("(max-width: 768px)").matches;
+        const topRect = topBar.getBoundingClientRect();
+        const buttonRect = fontBtn.getBoundingClientRect();
+        if (mobile) {
+            fontPanel.style.top = `${Math.round(topRect.bottom + 10)}px`;
+            fontPanel.style.left = "12px";
+            fontPanel.style.right = "12px";
+            fontPanel.style.width = "auto";
+        } else {
+            const rightSpace = Math.max(12, window.innerWidth - buttonRect.right);
+            fontPanel.style.top = `${Math.round(buttonRect.bottom + 10)}px`;
+            fontPanel.style.left = "auto";
+            fontPanel.style.right = `${rightSpace}px`;
+            fontPanel.style.width = "300px";
+        }
+    }
+
+    function openFontPanel() {
+        closeTimerPanel();
+        isFontPanelOpen = true;
+        fontBackdrop.classList.add("is-open");
+        fontPanel.classList.add("is-open");
+        fontBtn.classList.add("is-open");
+        syncFontOptions();
+        positionFontPanel();
+    }
+
+    function closeFontPanel() {
+        isFontPanelOpen = false;
+        fontBackdrop.classList.remove("is-open");
+        fontPanel.classList.remove("is-open");
+        fontBtn.classList.remove("is-open");
+    }
 
     countdownGroup.insertAdjacentHTML(
         "beforeend",
@@ -300,14 +377,12 @@
         timerPanel.classList.toggle("countdown-mode", state.timerMode === "countdown");
         modeButtons.forEach((button) => {
             button.classList.toggle("is-selected", button.dataset.timerMode === state.timerMode);
-            if (isTestMode) {
-                button.disabled = true;
-            }
+            button.disabled = state.timerStatus === "running" || state.testSubmitted;
         });
     }
 
     function syncTimerConfigControls() {
-        const settingsLocked = isTestMode && (state.timerConfigured || state.testSubmitted);
+        const settingsLocked = state.timerStatus === "running" || state.testSubmitted;
         presetButtons.forEach((button) => {
             button.disabled = settingsLocked || state.timeoutSubmitted;
         });
@@ -315,23 +390,15 @@
     }
 
     function syncActionButtons() {
-        const testLocked = isTestMode && (state.timerConfigured || state.testSubmitted);
-        startBtn.disabled = state.timeoutSubmitted || state.testSubmitted || state.timerStatus === "running" || testLocked;
-        pauseBtn.disabled = state.timeoutSubmitted || state.testSubmitted || state.timerStatus !== "running" || isTestMode;
-        resetBtn.disabled = state.timeoutSubmitted || state.testSubmitted || isTestMode;
-        if (isTestMode) {
-            startBtn.textContent = state.timerStatus === "paused" ? "继续考试" : "开始考试";
-        } else {
-            startBtn.textContent = state.timerStatus === "paused" ? "继续" : "开始";
-        }
+        startBtn.disabled = state.timeoutSubmitted || state.testSubmitted || state.timerStatus === "running";
+        pauseBtn.disabled = state.timeoutSubmitted || state.testSubmitted || state.timerStatus !== "running";
+        resetBtn.disabled = state.timeoutSubmitted || state.testSubmitted;
+        startBtn.textContent = state.timerStatus === "paused" ? "继续计时" : "开始计时";
         hideBtn.classList.toggle("is-selected", state.timerDisplayHidden);
     }
 
     function syncTimerButton() {
-        const showIndicator = !state.timerDisplayHidden &&
-            (state.timerStatus === "running" || state.timerStatus === "paused");
-
-        timerIndicator.hidden = !showIndicator;
+        timerIndicator.hidden = state.timerDisplayHidden;
         timerBtn.classList.toggle("is-selected", state.isTimerPanelOpen);
         timerBtn.classList.toggle("is-open", state.isTimerPanelOpen);
         timerBtn.classList.toggle("is-running", state.timerStatus === "running" || state.timerStatus === "paused");
@@ -368,52 +435,7 @@
         analysisBtn.textContent = locked ? "解析需结算后查看" : "解析";
     }
 
-    function syncReadingTestGate() {
-        document.body.classList.toggle("reading-test-awaiting-timer", isTestMode && !state.timerConfigured);
-    }
-
-    function shouldExitPendingTestSetup() {
-        return isTestMode && !state.timerConfigured && !state.testSubmitted;
-    }
-
-    function buildPendingTestExitHref() {
-        const rawBackHref = backToReadingIndex && backToReadingIndex.getAttribute("href");
-        if (rawBackHref) {
-            try {
-                return new URL(rawBackHref, window.location.href).href;
-            } catch (error) {
-                // Fall through to URL-based fallbacks.
-            }
-        }
-
-        try {
-            const nextUrl = new URL(window.location.href);
-            nextUrl.searchParams.delete("readingMode");
-            return nextUrl.href;
-        } catch (error) {
-            // Fall through to the shared index fallback.
-        }
-
-        const parts = window.location.pathname.split("/").filter(Boolean);
-        const parent = parts[parts.length - 2] || "";
-        const grandParent = parts[parts.length - 3] || "";
-        const isLevelPage = /^(?:n1|n2|n3)$/i.test(parent);
-        const isLongLevelPage = /^(?:n1|n2|n3)$/i.test(grandParent) && parent === "10";
-        return new URL(isLongLevelPage ? "../../../index.html" : isLevelPage ? "../../index.html" : "../index.html", window.location.href).href;
-    }
-
-    function exitPendingTestSetup() {
-        const targetHref = buildPendingTestExitHref();
-        closeTimerPanel();
-        window.location.href = targetHref;
-    }
-
     function handleTimerPanelDismissIntent() {
-        if (shouldExitPendingTestSetup()) {
-            exitPendingTestSetup();
-            return true;
-        }
-
         closeTimerPanel();
         return false;
     }
@@ -448,7 +470,7 @@
         }
 
         if (isArticleTemplate) {
-            return document.querySelector(".layout-container") || document.body;
+            return document.querySelector(".layout-container, .wrap") || document.body;
         }
 
         return document.querySelector(".question-block");
@@ -456,7 +478,7 @@
 
     function currentPageAnswered(root) {
         if (isArticleTemplate) {
-            return isAnalysisMode() || !!(root && root.querySelector(".option-input:checked"));
+            return isAnalysisMode() || !!(root && root.querySelector(".option-input:checked, .option input:checked"));
         }
         return !!(root && root.querySelector(".option-item.answered-correct, .option-item.answered-wrong"));
     }
@@ -528,14 +550,6 @@
             return;
         }
 
-        if (isTestMode) {
-            state.timerMode = "countdown";
-            syncModeUI();
-            if (state.timerConfigured) {
-                return;
-            }
-        }
-
         stopTimer();
 
         if (state.timerMode === "countup") {
@@ -559,7 +573,6 @@
         if (isTestMode) {
             state.timerConfigured = true;
             state.testPhase = "running";
-            syncReadingTestGate();
             closeTimerPanel();
             emitReadingTestEvent("studyquest:reading-test-start", {
                 seconds: state.remainingSeconds,
@@ -568,7 +581,7 @@
         }
         updateTimerDisplay();
         setStatus(
-            isTestMode ? "考试开始，时间设定已锁定。" : "倒计时开始，时间到会自动提交当前页。",
+            isTestMode ? "倒计时已开始，时间到会自动提交当前页。" : "倒计时开始，时间到会自动提交当前页。",
             "warning"
         );
         syncActionButtons();
@@ -587,7 +600,7 @@
     }
 
     function pauseTimer() {
-        if (state.timeoutSubmitted || state.testSubmitted || state.timerStatus !== "running" || isTestMode) {
+        if (state.timeoutSubmitted || state.testSubmitted || state.timerStatus !== "running") {
             return;
         }
 
@@ -599,7 +612,7 @@
     }
 
     function resetTimer() {
-        if (state.timeoutSubmitted || state.testSubmitted || isTestMode) {
+        if (state.timeoutSubmitted || state.testSubmitted) {
             return;
         }
 
@@ -617,18 +630,7 @@
         const mobile = window.matchMedia("(max-width: 768px)").matches;
         const topRect = topBar.getBoundingClientRect();
         const buttonRect = timerBtn.getBoundingClientRect();
-        const awaitingTestStart = isTestMode && !state.timerConfigured;
-
         timerPanel.style.transform = "";
-
-        if (awaitingTestStart) {
-            timerPanel.style.width = `${Math.min(320, window.innerWidth - 24)}px`;
-            timerPanel.style.top = "50%";
-            timerPanel.style.left = "50%";
-            timerPanel.style.right = "auto";
-            timerPanel.style.transform = "translate(-50%, -50%)";
-            return;
-        }
 
         if (mobile) {
             timerPanel.style.top = `${Math.round(topRect.bottom + 10)}px`;
@@ -646,20 +648,11 @@
     }
 
     function openTimerPanel() {
+        closeFontPanel();
         state.isTimerPanelOpen = true;
         timerBackdrop.classList.add("is-open");
         timerPanel.classList.add("is-open");
         positionTimerPanel();
-        if (isTestMode && !state.timerConfigured) {
-            window.setTimeout(() => {
-                try {
-                    customInput.focus({ preventScroll: true });
-                } catch (error) {
-                    customInput.focus();
-                }
-                customInput.select();
-            }, 0);
-        }
         syncTimerButton();
     }
 
@@ -758,6 +751,27 @@
         toggleTimerPanel();
     });
 
+    fontBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (isFontPanelOpen) {
+            closeFontPanel();
+        } else {
+            openFontPanel();
+        }
+    });
+
+    fontOptionButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            currentFontChoice = button.dataset.fontChoice || "standard";
+            window.localStorage.setItem("reading_font_size_v2", currentFontChoice);
+            syncFontButton();
+            syncFontOptions();
+        });
+    });
+
+    fontCloseBtn.addEventListener("click", closeFontPanel);
+    fontBackdrop.addEventListener("click", closeFontPanel);
+
     closeBtn.addEventListener("click", () => {
         handleTimerPanelDismissIntent();
     });
@@ -770,11 +784,20 @@
         if (event.key === "Escape" && state.isTimerPanelOpen) {
             event.preventDefault();
             handleTimerPanelDismissIntent();
+        } else if (event.key === "Escape" && isFontPanelOpen) {
+            event.preventDefault();
+            closeFontPanel();
         }
     });
 
-    window.addEventListener("resize", positionTimerPanel);
-    window.addEventListener("scroll", positionTimerPanel, { passive: true });
+    window.addEventListener("resize", () => {
+        positionTimerPanel();
+        positionFontPanel();
+    });
+    window.addEventListener("scroll", () => {
+        positionTimerPanel();
+        positionFontPanel();
+    }, { passive: true });
 
     document.addEventListener("click", (event) => {
         if (!state.timeoutSubmitted || isAnalysisMode()) {
@@ -843,11 +866,10 @@
         state.timerMode = "countdown";
         modeButtons.forEach((button) => {
             const isCountdown = button.dataset.timerMode === "countdown";
-            button.disabled = !isCountdown;
             button.classList.toggle("is-selected", isCountdown);
         });
-        startBtn.textContent = "开始考试";
-        setStatus("请先设定考试时长并开始，未开始前不会显示原文和题面。", "warning");
+        startBtn.textContent = "开始计时";
+        setStatus("计时为可选功能，不启动也可以直接作答。", "");
     }
 
     window.StudyQuestReadingMode = {
@@ -892,6 +914,7 @@
     };
 
     syncPresetSelection(state.selectedMinutes);
+    syncFontOptions();
     syncModeUI();
     syncFuriganaButton();
     applyFuriganaPreference();
@@ -900,11 +923,6 @@
     updateTimerDisplay();
     syncTimerButton();
     syncAnalysisLock();
-    syncReadingTestGate();
+    closeTimerPanel();
 
-    if (isTestMode) {
-        window.setTimeout(() => {
-            openTimerPanel();
-        }, 80);
-    }
 })();

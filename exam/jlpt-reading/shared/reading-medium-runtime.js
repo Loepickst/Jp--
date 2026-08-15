@@ -522,71 +522,27 @@
     }
 
     function showReadingResultOverlay() {
-        if (!isTestMode || !readingResultState.submitted) {
-            return;
-        }
-        if (document.getElementById('study-quest-test-reading-result')) {
+        if (!isTestMode || !readingResultState.submitted || document.getElementById('reading-results-panel')) {
             return;
         }
 
-        const reward = ensureReadingRewardResult();
-        const drawAffordance = buildReadingDrawMarkup(reward);
-        const timerInfo = getReadingModeController()?.getResultTimerInfo?.() || { hasResult: false, seconds: 0, timedOut: false };
-        const resultTimerText = timerInfo.hasResult === false ? '计时未开启' : formatTime(timerInfo.seconds || 0);
-        const titleText = readingResultState.accuracy === 100 ? '满分通关' : '测试完成';
-        const summaryText = readingResultState.unansweredCount > 0
-            ? `本次共完成 ${readingResultState.totalQuestions} 题，仍有 ${readingResultState.unansweredCount} 题未作答。`
-            : `本次共完成 ${readingResultState.totalQuestions} 题，已可进入解析阶段复盘整套${readingProductLabel}。`;
-
-        const overlay = document.createElement('div');
-        overlay.id = 'study-quest-test-reading-result';
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(248,244,236,0.94);backdrop-filter:blur(18px);z-index:9999;padding:24px;display:flex;align-items:center;justify-content:center;overflow-y:auto;';
-        overlay.innerHTML = `
-            <div style="max-width:660px;width:100%;box-sizing:border-box;background:#ffffff;border:1px solid #e6e4df;border-radius:18px;padding:34px 28px 28px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,0.04);">
-                <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:20px;">
-                    <h2 style="margin:0;font-size:32px;line-height:1.2;font-weight:700;color:#2c2c2a;letter-spacing:0.05em;">${titleText}</h2>
-                    ${drawAffordance}
-                </div>
-                <p style="margin:0 auto 22px;max-width:460px;font-size:14px;line-height:1.9;color:#73736e;">
-                    你已经完成了 <strong style="color:#2c2c2a;">[${ARTICLE_LEVEL}] ${formatReadingPeriodLabel()}</strong> ${readingProductLabel}阅读测试。<br>${summaryText}
-                </p>
-                <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 auto 22px;max-width:520px;">
-                    <div style="padding:18px 14px;border:1px solid #d7eadc;border-radius:12px;background:#f4fcf6;">
-                        <div style="font-size:34px;line-height:1;font-weight:700;color:#4aa55d;">${readingResultState.correctCount}</div>
-                        <div style="margin-top:8px;font-size:12px;letter-spacing:0.12em;color:#6e7d72;">正确</div>
-                    </div>
-                    <div style="padding:18px 14px;border:1px solid #f0d1cf;border-radius:12px;background:#fff7f6;">
-                        <div style="font-size:34px;line-height:1;font-weight:700;color:#d6453d;">${readingResultState.incorrectCount}</div>
-                        <div style="margin-top:8px;font-size:12px;letter-spacing:0.12em;color:#8a7777;">错误</div>
-                    </div>
-                    <div style="padding:18px 14px;border:1px solid #e7e1d7;border-radius:12px;background:#faf7f2;">
-                        <div style="font-size:34px;line-height:1;font-weight:700;color:#a07a3c;">${readingResultState.unansweredCount}</div>
-                        <div style="margin-top:8px;font-size:12px;letter-spacing:0.12em;color:#8c826f;">未答</div>
-                    </div>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 auto 28px;max-width:420px;">
-                    <div style="padding:16px 18px;border:1px solid #e6e4df;border-radius:12px;background:#fff;">
-                        <div style="font-size:12px;font-weight:700;letter-spacing:0.18em;color:#aba9a4;">正确率</div>
-                        <div style="margin-top:10px;font-size:32px;line-height:1.1;font-weight:700;color:#2c2c2a;">${readingResultState.accuracy}%</div>
-                    </div>
-                    <div style="padding:16px 18px;border:1px solid #e6e4df;border-radius:12px;background:#fff;">
-                        <div style="font-size:12px;font-weight:700;letter-spacing:0.18em;color:#aba9a4;">本次用时</div>
-                        <div style="margin-top:10px;font-size:32px;line-height:1.1;font-weight:700;color:#2c2c2a;">${resultTimerText}</div>
-                    </div>
-                </div>
-                ${timerInfo.timedOut ? '<p style="margin:0 0 20px;font-size:14px;line-height:1.7;font-weight:700;color:#b63a30;">时间结束，本轮已自动交卷。</p>' : ''}
-                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:430px;box-sizing:border-box;margin:0 auto;">
-                    <button type="button" onclick="openReadingAnalysisFromResult()" style="padding:13px 18px;border-radius:10px;border:1px solid #2c2c2a;background:#2c2c2a;color:#fff;font-size:14px;font-weight:700;letter-spacing:0.08em;">查看解析</button>
-                    <button type="button" onclick="window.location.href='${TEST_RETRY_URL}'" style="padding:13px 18px;border-radius:10px;border:1px solid #e6e4df;background:#fff;color:#2c2c2a;font-size:14px;font-weight:700;letter-spacing:0.08em;">再来一轮</button>
-                    <button type="button" onclick="window.location.href='${READING_INDEX_URL}'" style="grid-column:1 / -1;padding:13px 18px;border-radius:10px;border:1px solid #e6e4df;background:#f7f6f2;color:#73736e;font-size:14px;font-weight:700;letter-spacing:0.08em;">返回阅读</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(overlay);
+        ensureReadingRewardResult();
+        const timerInfo = getReadingModeController()?.getResultTimerInfo?.() || null;
+        window.ReadingResultPanel?.show({
+            totalQuestions: readingResultState.totalQuestions,
+            correctCount: readingResultState.correctCount,
+            accuracy: readingResultState.accuracy,
+            seconds: timerInfo && timerInfo.hasResult ? timerInfo.seconds : undefined,
+            timedOut: Boolean(timerInfo && timerInfo.timedOut),
+            meta: `练习完成 · ${formatReadingPeriodLabel()} · ${readingProductLabel}`,
+            retryUrl: TEST_RETRY_URL,
+            indexUrl: READING_INDEX_URL,
+            onAnalysis: openReadingAnalysisFromResultRuntime
+        });
     }
 
     function closeReadingResultOverlay() {
-        const overlay = document.getElementById('study-quest-test-reading-result');
+        const overlay = document.getElementById('reading-results-panel');
         if (overlay) {
             overlay.remove();
         }
@@ -626,7 +582,7 @@
             const sections = getPageQuestionSections(page);
             let pageAllCorrect = sections.length > 0;
 
-            sections.forEach((section) => {
+            sections.forEach((section, sectionIndex) => {
                 const qId = String(section.dataset.qId || '').trim();
                 const key = getQuestionKey(page, qId);
                 const correctIndex = getCorrectOptionIndex(section);
@@ -640,6 +596,9 @@
                     hasAnswer,
                     isCorrect
                 };
+                if (typeof readingSession.recordQuestionAttempt === 'function') {
+                    readingSession.recordQuestionAttempt(page, qId || sectionIndex + 1, isCorrect);
+                }
 
                 if (!hasAnswer) {
                     unansweredCount += 1;
@@ -827,7 +786,7 @@
 
         let pageCorrect = true;
 
-        sections.forEach((section) => {
+        sections.forEach((section, sectionIndex) => {
             const qId = String(section.dataset.qId || '').trim();
             const key = getQuestionKey(currentPage, qId);
             const options = getOptionItems(section);
@@ -840,6 +799,9 @@
                 correctIndex,
                 isCorrect
             };
+            if (typeof readingSession.recordQuestionAttempt === 'function') {
+                readingSession.recordQuestionAttempt(currentPage, qId || sectionIndex + 1, isCorrect);
+            }
 
             section.setAttribute('data-answered', 'true');
             options.forEach((item) => {
@@ -927,6 +889,9 @@
             correctIndex,
             isCorrect
         };
+        if (typeof readingSession.recordQuestionAttempt === 'function') {
+            readingSession.recordQuestionAttempt(currentPage, qId, isCorrect);
+        }
 
         qaSection.setAttribute('data-answered', 'true');
         element.classList.add('selected');

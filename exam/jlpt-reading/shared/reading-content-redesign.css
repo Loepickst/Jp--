@@ -1,0 +1,2623 @@
+@import url("../../../shared/unified-header.css?v=20260811-reading-single-source-1");
+
+/*
+ * JLPT reading practice — cloze mother template
+ *
+ * The old short / medium / long / integrated skins are deliberately not
+ * imported here.  Their class names remain only as data and interaction hooks;
+ * every visible surface below follows the shared cloze practice hierarchy.
+ */
+
+:root {
+    --reading-bg: #f3f5f8;
+    --reading-paper: #ffffff;
+    --reading-paper-soft: #f7f8fa;
+    --reading-ink: #1d2432;
+    --reading-ink-soft: #414b5d;
+    --reading-muted: #758093;
+    --reading-faint: #a9b1bf;
+    --reading-line: #dfe4ec;
+    --reading-line-strong: #cdd5e0;
+    --reading-accent: #596887;
+    --reading-accent-strong: #344463;
+    --reading-accent-soft: #eef1f7;
+    --reading-focus: #6d7f67;
+    --reading-focus-soft: #eef2eb;
+    --reading-translation: #315f50;
+    --reading-success: #527c70;
+    --reading-success-soft: #edf5f2;
+    --reading-danger: #b35e57;
+    --reading-danger-soft: #fbefed;
+    --reading-evidence: #ad762b;
+    --reading-evidence-line: #bd8030;
+    --reading-evidence-soft: rgba(246, 220, 151, .58);
+    --reading-evidence-strong: rgba(241, 199, 96, .72);
+    --reading-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    --reading-serif: "Noto Serif JP", "Noto Serif SC", "Yu Mincho", "Hiragino Mincho ProN", serif;
+    --reading-font-scale: 1;
+    --reading-shell: 1180px;
+
+    /* Compatibility aliases used by existing behaviour scripts. */
+    --accent-color: var(--reading-accent);
+    --text-color: var(--reading-ink);
+    --chinese-font: var(--reading-ui);
+    --font-serif: var(--reading-serif);
+    --graphite: var(--reading-ink);
+    --graphite-sub: var(--reading-muted);
+    --graphite-faint: var(--reading-faint);
+    --green: var(--reading-success);
+    --green-pencil: var(--reading-success);
+    --red: var(--reading-danger);
+    --red-pencil: var(--reading-danger);
+    --marker-blue: var(--reading-accent-soft);
+    --marker-mint: var(--reading-success-soft);
+    --marker-green: var(--reading-success-soft);
+    --marker-peach: var(--reading-danger-soft);
+    --marker-rose: var(--reading-danger-soft);
+    --marker-purple: #f1eff5;
+    --marker-yellow: #f7f1e7;
+}
+
+/* Unified reading result page. All legacy per-template result cards are
+   replaced by this single summary surface. */
+#reading-results-panel {
+    --rrp-page: #f3f6fa;
+    --rrp-paper: #ffffff;
+    --rrp-paper-soft: #f8fafc;
+    --rrp-ink: #202838;
+    --rrp-muted: #707b8e;
+    --rrp-line: #dce3ec;
+    --rrp-navy: #3d4e70;
+    --rrp-navy-soft: #edf1f7;
+    --rrp-salmon: #b86761;
+    position: fixed;
+    inset: 0;
+    z-index: 10020;
+    overflow-y: auto;
+    background: var(--rrp-page);
+    color: var(--rrp-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
+}
+
+#reading-results-panel *,
+#reading-results-panel *::before,
+#reading-results-panel *::after {
+    box-sizing: border-box;
+}
+
+#reading-results-panel button { font: inherit; }
+
+body.reading-results-open {
+    overflow: hidden !important;
+}
+
+body.reading-results-open :is(.reading-editorial-navigation,.article-navigation,.page-nav,.action-bar,.submit-area) {
+    visibility: hidden !important;
+}
+
+#reading-results-panel .rrp-page {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 38px 0 48px;
+}
+
+#reading-results-panel .rrp-sheet {
+    overflow: hidden;
+    background: var(--rrp-paper);
+    border: 1px solid var(--rrp-line);
+    border-radius: 14px;
+}
+
+#reading-results-panel .rrp-heading {
+    padding: 22px 32px 16px;
+    text-align: center;
+}
+
+#reading-results-panel .rrp-heading > span {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--rrp-navy);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .22em;
+}
+
+#reading-results-panel .rrp-heading h1 {
+    margin: 0;
+    color: var(--rrp-ink);
+    font-family: "Noto Serif SC", "Songti SC", "Hiragino Mincho ProN", serif;
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: .02em;
+}
+
+#reading-results-panel .rrp-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 32px;
+    border-top: 1px solid var(--rrp-line);
+    border-bottom: 1px solid var(--rrp-line);
+}
+
+#reading-results-panel .rrp-metrics > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 60px;
+    padding: 8px 18px;
+    border-right: 1px solid var(--rrp-line);
+}
+
+#reading-results-panel .rrp-metrics > div:last-child { border-right: 0; }
+
+#reading-results-panel .rrp-metrics dt {
+    color: var(--rrp-muted);
+    font-size: 10px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+#reading-results-panel .rrp-metrics dd {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin: 0;
+    color: var(--rrp-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+#reading-results-panel .rrp-metrics dd strong {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+#reading-results-panel .rrp-metrics dd span,
+#reading-results-panel .rrp-metrics dd small {
+    color: var(--rrp-navy);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+#reading-results-panel .rrp-answers {
+    padding: 18px 32px 0;
+}
+
+#reading-results-panel .rrp-section-head {
+    display: flex;
+    align-items: center;
+    min-height: 24px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 3px solid var(--rrp-navy);
+}
+
+#reading-results-panel .rrp-section-head h2 {
+    margin: 0;
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 16px;
+    font-weight: 750;
+}
+
+#reading-results-panel .rrp-mistake-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#reading-results-panel .rrp-mistake-columns {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 30px;
+    border-top: 1px solid var(--rrp-line);
+    color: var(--rrp-muted);
+    font-size: 9px;
+    font-weight: 750;
+}
+
+#reading-results-panel .rrp-mistake-columns span { padding: 0 16px; }
+
+#reading-results-panel .rrp-mistake-list {
+    border-bottom: 1px solid var(--rrp-line);
+}
+
+#reading-results-panel .rrp-mistake-row {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 58px;
+    border-top: 1px solid var(--rrp-line);
+}
+
+#reading-results-panel .rrp-mistake-row > * {
+    min-width: 0;
+    padding: 0 14px;
+}
+
+#reading-results-panel .rrp-mistake-row > * + * { border-left: 1px solid var(--rrp-line); }
+
+#reading-results-panel .rrp-mistake-number {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: var(--rrp-navy);
+    white-space: nowrap;
+}
+
+#reading-results-panel .rrp-mistake-number small {
+    color: var(--rrp-muted);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+#reading-results-panel .rrp-mistake-number strong {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+#reading-results-panel .rrp-mistake-type,
+#reading-results-panel .rrp-mistake-label {
+    overflow: hidden;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#reading-results-panel .rrp-mistake-type { color: #414b5d; font-weight: 750; }
+#reading-results-panel .rrp-mistake-label { color: var(--reading-danger); font-weight: 800; }
+
+#reading-results-panel .rrp-mistake-empty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    border-top: 1px solid var(--rrp-line);
+    color: var(--reading-success);
+    font-size: 11px;
+}
+
+#reading-results-panel .rrp-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 32px 22px;
+}
+
+#reading-results-panel .rrp-action {
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid var(--rrp-line);
+    border-radius: 9px;
+    background: var(--rrp-paper);
+    color: #414b5d;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+#reading-results-panel .rrp-action:hover,
+#reading-results-panel .rrp-action:focus-visible { border-color: var(--rrp-navy); }
+
+#reading-results-panel .rrp-action-primary {
+    border-color: var(--rrp-navy);
+    background: var(--rrp-navy);
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    #reading-results-panel .rrp-page { width: calc(100% - 28px); padding: 30px 0 36px; }
+    #reading-results-panel .rrp-heading { padding: 20px 18px 14px; }
+    #reading-results-panel .rrp-heading h1 { font-size: 20px; }
+    #reading-results-panel .rrp-metrics { margin: 0 18px; }
+    #reading-results-panel .rrp-metrics > div { min-height: 54px; gap: 8px; padding: 7px 8px; }
+    #reading-results-panel .rrp-metrics dd strong { font-size: 17px; }
+    #reading-results-panel .rrp-answers { padding: 16px 18px 0; }
+    #reading-results-panel .rrp-mistake-columns { display: none; }
+    #reading-results-panel .rrp-mistake-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        min-height: 82px;
+        padding: 12px 0;
+    }
+    #reading-results-panel .rrp-mistake-row > * { padding: 0; }
+    #reading-results-panel .rrp-mistake-row > * + * { border-left: 0; }
+    #reading-results-panel .rrp-mistake-number { gap: 8px; }
+    #reading-results-panel .rrp-mistake-type::before,
+    #reading-results-panel .rrp-mistake-label::before {
+        display: inline-block;
+        width: 62px;
+        color: var(--rrp-muted);
+        font-size: 8px;
+        font-weight: 700;
+    }
+    #reading-results-panel .rrp-mistake-type::before { content: "题目问点"; }
+    #reading-results-panel .rrp-mistake-label::before { content: "选项错点"; }
+    #reading-results-panel .rrp-actions { justify-content: stretch; gap: 6px; padding: 16px 18px 18px; }
+    #reading-results-panel .rrp-action { flex: 1 1 0; min-width: 0; padding: 0 7px; font-size: 9px; }
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--reading-bg);
+}
+
+* { box-sizing: border-box; }
+
+body.reading-content-page.reading-cloze-v2 {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    color: var(--reading-ink);
+    background: var(--reading-bg) !important;
+    background-image: none !important;
+    font-family: var(--reading-ui) !important;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body.reading-content-page.reading-cloze-v2::before { display: none !important; }
+
+body.reading-content-page.reading-cloze-v2 button,
+body.reading-content-page.reading-cloze-v2 input,
+body.reading-content-page.reading-cloze-v2 select,
+body.reading-content-page.reading-cloze-v2 textarea { font: inherit; }
+
+body.reading-content-page.reading-cloze-v2 :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--reading-accent) 25%, transparent);
+    outline-offset: 2px;
+}
+
+body.reading-content-page.reading-cloze-v2 ruby rt {
+    color: #606b7d;
+    font-family: var(--reading-ui);
+    font-size: .5em;
+    font-weight: 550;
+}
+
+body.reading-content-page.reading-cloze-v2.furigana-hidden rt { visibility: hidden; }
+
+/* Reading uses the same public header as its directory pages.  Content
+   pages only provide their dynamic title and practice actions. */
+body.reading-content-page.reading-cloze-v2 {
+    --kiki-header-bg: #ffffff;
+    --kiki-header-border: var(--reading-line);
+}
+
+body.reading-content-page.reading-cloze-v2 .kiki-unified-header {
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Stage and session context ----------------------------------------- */
+body.reading-content-page.reading-cloze-v2 :is(.container,.wrap,.layout-container) {
+    display: block;
+    width: min(var(--reading-shell), calc(100% - 48px)) !important;
+    max-width: var(--reading-shell) !important;
+    margin: 0 auto !important;
+    padding: 34px 0 72px !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.page-content,.page-container) { display: none; }
+body.reading-content-page.reading-cloze-v2 :is(.page-content,.page-container).active { display: block; }
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-unit {
+    width: 100%;
+    margin: 0;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-session-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+    align-items: center;
+    gap: 28px;
+    min-height: 58px;
+    margin: 0 0 18px;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-session-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: var(--reading-ink) !important;
+    font-family: var(--reading-serif) !important;
+    font-size: clamp(24px, 3vw, 32px) !important;
+    font-weight: 750 !important;
+    line-height: 1.35 !important;
+    letter-spacing: .01em !important;
+    text-align: left !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-session-title::before {
+    display: none;
+    content: none;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    align-items: center;
+    justify-self: end;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    color: var(--reading-focus);
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor__avatar {
+    position: relative;
+    display: block;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--reading-accent-soft);
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor__avatar img {
+    position: absolute;
+    top: -12px;
+    left: -40px;
+    display: block;
+    width: 145px !important;
+    max-width: none !important;
+    height: auto !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor--kaoru .reading-question-mentor__avatar img {
+    top: -28px;
+    left: -94px;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor__copy {
+    min-width: 0;
+    padding-left: 11px;
+    border-left: 2px solid color-mix(in srgb, var(--reading-focus) 62%, transparent);
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor__name {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--reading-focus);
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .05em;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-question-mentor__guide {
+    margin: 0;
+    color: var(--reading-ink-soft);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+/* Article — same white paper card as cloze -------------------------- */
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-article,.article-section,.article),
+body.reading-content-page.reading-cloze-v2 .page-content > .article-content,
+body.reading-content-page.reading-cloze-v2 .page-container > .article-content {
+    overflow: hidden;
+    width: 100% !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    border: 1px solid var(--reading-line) !important;
+    border-radius: 14px !important;
+    color: var(--reading-ink) !important;
+    background: var(--reading-paper) !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-meta,
+body.reading-content-page.reading-cloze-v2 :is(.article-meta,.meta) {
+    display: none !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 60px;
+    margin: 0 !important;
+    padding: 12px 28px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--reading-line) !important;
+    background: var(--reading-paper) !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .meta-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+body.reading-content-page.reading-cloze-v2 .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 9px;
+    border: 0;
+    border-radius: 7px;
+    color: var(--reading-focus);
+    background: var(--reading-focus-soft);
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .08em;
+}
+
+/* Exam underlines ---------------------------------------------------
+   The source files use three generations of markup: native <u>, the N1
+   .exam-underline span, and the early .underline-note span.  Keep their
+   rendering identical even when an older page stylesheet tries to remove or
+   replace the underline. */
+body.reading-content-page.reading-cloze-v2 :is(
+    .reading-editorial-unit,
+    .reading-editorial-article,
+    .reading-editorial-question,
+    .article-section,
+    .article,
+    .article-content,
+    .question-card,
+    .question-block,
+    .qcard
+) :is(u, .exam-underline, .underline-note) {
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-decoration-color: currentColor !important;
+    text-decoration-thickness: 1.25px !important;
+    text-underline-offset: .2em !important;
+    text-decoration-skip-ink: auto !important;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.article-title-info,.title-info) {
+    color: var(--reading-ink-soft);
+    font-family: var(--reading-serif);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-copy,
+body.reading-content-page.reading-cloze-v2 .article-content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 28px 34px 32px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--reading-ink) !important;
+    background: var(--reading-paper) !important;
+    box-shadow: none !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(15px * var(--reading-font-scale)) !important;
+    font-weight: 500 !important;
+    line-height: 2.15 !important;
+    letter-spacing: .025em !important;
+    text-align: left !important;
+}
+
+/* Avoid a second card when article-content itself is the legacy root. */
+body.reading-content-page.reading-cloze-v2 .page-content > .article-content,
+body.reading-content-page.reading-cloze-v2 .page-container > .article-content {
+    padding: 28px 34px 32px !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-editorial-article > .article-content,
+body.reading-content-page.reading-cloze-v2 .article-section > .article-content,
+body.reading-content-page.reading-cloze-v2 .article > .article-content {
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .article-content :is(p,.japanese) { margin: 0; }
+body.reading-content-page.reading-cloze-v2 :is(.paragraph,.paragraph-group) { margin: 0 0 1.7em; }
+
+body.reading-content-page.reading-cloze-v2 .notice-intro {
+    margin: 0 0 1.8em;
+    padding: 10px 14px;
+    border: 0;
+    border-left: 3px solid var(--reading-focus);
+    border-radius: 0 8px 8px 0;
+    color: var(--reading-muted);
+    background: var(--reading-focus-soft);
+    font-family: var(--reading-ui);
+    font-size: calc(11px * var(--reading-font-scale));
+    line-height: 1.75;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.article-part-title,.article-content h2,.article-content h3) {
+    margin: 2em 0 .8em;
+    color: var(--reading-ink);
+    font-family: var(--reading-serif);
+    font-size: calc(18px * var(--reading-font-scale));
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+body.reading-content-page.reading-cloze-v2 .article-divider {
+    width: 58px;
+    height: 1px;
+    margin: 34px auto;
+    background: var(--reading-line-strong);
+}
+
+body.reading-content-page.reading-cloze-v2 .source {
+    margin-top: 22px;
+    color: var(--reading-muted);
+    font-family: var(--reading-ui);
+    font-size: 10px;
+    line-height: 1.7;
+    text-align: right;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.article-notes,.basic-notes) {
+    margin: 24px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--reading-line);
+    color: var(--reading-muted);
+    font-family: var(--reading-ui);
+    font-size: calc(10px * var(--reading-font-scale));
+    line-height: 1.8;
+}
+
+/* Printed-exam annotations -----------------------------------------
+   Vocabulary notes are always visible beneath their article.  The source
+   term carries the same small note number used by the list, so the reader can
+   locate the explanation without opening a tooltip. */
+body.reading-content-page.reading-cloze-v2 .reading-paper-note-term {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .18em;
+    cursor: text;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-paper-note-ref {
+    display: inline;
+    margin-left: .08em;
+    color: #45484c;
+    font-family: var(--reading-serif);
+    font-size: .58em;
+    font-weight: 750;
+    line-height: 0;
+    vertical-align: super;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-paper-notes {
+    margin: 22px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid #9b9b98;
+    color: #343638;
+    background: transparent;
+    font-family: var(--reading-serif);
+    font-size: calc(10px * var(--reading-font-scale));
+    font-weight: 450;
+    line-height: 1.75;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-paper-notes ol {
+    display: grid;
+    gap: 3px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-paper-notes li {
+    margin: 0;
+    padding: 0;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-paper-note-number {
+    display: inline-block;
+    min-width: 3em;
+    margin-right: .35em;
+    font-weight: 700;
+}
+
+/* Analysis vocabulary ---------------------------------------------
+   Editor-added Chinese meanings are study aids, not annotations from the
+   printed paper.  Keep them out of the always-visible note list and reveal
+   them only with the submitted analysis. */
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary {
+    display: none;
+    margin: 26px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--reading-line);
+    color: var(--reading-ink);
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-analysis-vocabulary {
+    display: block;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary h3 {
+    margin: 0;
+    padding: 14px 0 12px;
+    border-bottom: 1px solid var(--reading-line);
+    font-family: var(--reading-ui);
+    font-size: calc(13px * var(--reading-font-scale));
+    font-weight: 750;
+    letter-spacing: .03em;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary li {
+    display: grid;
+    grid-template-columns: 30px minmax(110px, auto) minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+    min-height: 48px;
+    padding: 11px 14px 10px 0;
+    border-bottom: 1px solid var(--reading-line);
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary li:nth-child(odd) {
+    margin-right: 18px;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary__number {
+    color: var(--reading-accent);
+    font-family: var(--reading-ui);
+    font-size: calc(9px * var(--reading-font-scale));
+    font-weight: 750;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary__word {
+    font-family: var(--reading-serif);
+    font-size: calc(12px * var(--reading-font-scale));
+    font-weight: 700;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary__reading {
+    margin-left: .35em;
+    color: var(--reading-muted);
+    font-family: var(--reading-serif);
+    font-size: .78em;
+    font-weight: 500;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary__meaning {
+    color: var(--reading-translation);
+    font-family: var(--reading-ui);
+    font-size: calc(10px * var(--reading-font-scale));
+    line-height: 1.7;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-analysis-vocab-source {
+    color: inherit;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-exam-footnotes-ready :is(.vocab-tooltip,.tooltip) {
+    display: none !important;
+}
+
+@media (max-width: 760px) {
+    body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary ol {
+        grid-template-columns: 1fr;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary li,
+    body.reading-content-page.reading-cloze-v2 .reading-analysis-vocabulary li:nth-child(odd) {
+        grid-template-columns: 26px minmax(92px, auto) minmax(0, 1fr);
+        gap: 7px;
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+/* Information-search documents -------------------------------------
+   These pages contain posters, notices and comparison tables rather than
+   prose.  Keep their information hierarchy intact instead of allowing the
+   former poster skin to collapse into a loose stream of labels and values. */
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .article-section {
+    overflow: visible;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-box {
+    display: block !important;
+    width: min(100%, 920px) !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+    padding: 26px 34px 32px !important;
+    border: 1px solid #343638 !important;
+    border-radius: 0 !important;
+    color: #202224 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(13.5px * var(--reading-font-scale)) !important;
+    font-weight: 500 !important;
+    line-height: 1.78 !important;
+    letter-spacing: .01em !important;
+    overflow-wrap: anywhere;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .poster-main-title,
+    .poster-title,
+    .outline-title
+) {
+    display: block !important;
+    margin: 4px 0 24px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    color: #1f2123 !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(21px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+    letter-spacing: .035em !important;
+    text-align: center !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-title-right {
+    display: block;
+    margin-top: 5px;
+    color: var(--reading-muted);
+    font-family: var(--reading-ui);
+    font-size: calc(10px * var(--reading-font-scale));
+    font-weight: 600;
+    text-align: right;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.poster-intro,.poster-subtitle) {
+    margin: 10px 0 0 !important;
+    color: #2b2d2f !important;
+    font-size: calc(13px * var(--reading-font-scale)) !important;
+    font-weight: 500 !important;
+    line-height: 1.8 !important;
+    letter-spacing: .01em !important;
+    text-align: left !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-top-nav {
+    display: table !important;
+    margin: 0 0 16px !important;
+    padding: 0 0 4px !important;
+    border: 0 !important;
+    border-bottom: 2px solid #343638 !important;
+    color: #202224 !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    line-height: 1.5 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .poster-section-title,
+    .section-title,
+    .section-heading,
+    .subsection-title,
+    .poster-definition-title,
+    .method-title,
+    .course-header,
+    .event-title
+) {
+    position: relative !important;
+    margin: 24px 0 8px !important;
+    padding: 0 0 0 17px !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    color: #202224 !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(14px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    line-height: 1.55 !important;
+    letter-spacing: .015em !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .poster-section-title,
+    .section-title,
+    .section-heading,
+    .subsection-title,
+    .poster-definition-title,
+    .method-title,
+    .course-header,
+    .event-title
+)::before {
+    position: absolute;
+    top: .42em;
+    left: 1px;
+    color: #313335;
+    font-size: .72em;
+    line-height: 1;
+    content: "◆";
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .poster-text-block,
+    .poster-section,
+    .section-content,
+    .sub-content,
+    .poster-definition,
+    .contact-info,
+    .course-details,
+    .course-desc,
+    .event-details,
+    .indent-text,
+    .indent-list
+) {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #292b2d !important;
+    background: transparent !important;
+    line-height: 1.8 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.poster-list,.note-list) {
+    display: grid;
+    gap: 7px;
+    margin: 10px 0 20px !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.poster-list,.note-list) > li {
+    position: relative;
+    margin: 0 !important;
+    padding: 0 0 0 18px !important;
+    line-height: 1.8 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.poster-list,.note-list) > li::before {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    color: #292b2d;
+    background: transparent;
+    content: "・";
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .table-responsive {
+    overflow-x: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 12px 0 20px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    table.poster-table,
+    table.availability-table,
+    table.student-table,
+    table.job-table,
+    .poster-table > table
+) {
+    width: 100% !important;
+    min-width: 620px;
+    margin: 0 !important;
+    border: 1px solid #444648 !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    table-layout: auto !important;
+    color: #232527 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12.5px * var(--reading-font-scale)) !important;
+    line-height: 1.6 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    table.poster-table,
+    table.availability-table,
+    table.student-table,
+    table.job-table,
+    .poster-table > table
+) :is(th,td) {
+    min-width: 0 !important;
+    padding: 7px 10px !important;
+    border: 1px solid #55585a !important;
+    color: inherit !important;
+    background: #fff !important;
+    text-align: left !important;
+    vertical-align: top !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow table.poster-table tr > :first-child,
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-table > table tr > :first-child,
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .student-table tr > :first-child {
+    width: 148px !important;
+    min-width: 118px !important;
+    color: #232527 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    letter-spacing: .03em;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    table.poster-table,
+    table.availability-table,
+    table.student-table,
+    table.job-table,
+    .poster-table > table
+) thead th {
+    color: #202224 !important;
+    background: #f7f7f5 !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow table.job-table tr > :first-child {
+    width: 44px !important;
+    min-width: 44px !important;
+    color: #202224 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .availability-table :is(th,td) {
+    min-width: 76px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .availability-table thead th,
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .availability-table tbody td:first-child {
+    color: #202224 !important;
+    background: #f7f7f5 !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-grid,.info-grid) {
+    display: grid !important;
+    grid-template-columns: minmax(118px, .24fr) minmax(0, 1fr) !important;
+    gap: 0 !important;
+    width: 100% !important;
+    margin: 16px 0 24px !important;
+    border: 1px solid #4a4c4e !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    background: #fff !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-term,.info-label) {
+    margin: 0 !important;
+    padding: 11px 14px !important;
+    border: 0 !important;
+    border-right: 1px solid #55585a !important;
+    border-bottom: 1px solid #55585a !important;
+    color: #202224 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    line-height: 1.7 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-desc,.info-value) {
+    min-width: 0;
+    margin: 0 !important;
+    padding: 11px 14px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #55585a !important;
+    color: #292b2d !important;
+    background: #fff !important;
+    line-height: 1.8 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-grid,.info-grid) > :nth-last-child(-n+2) {
+    border-bottom: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .event-block,
+    .course-block,
+    .info-box,
+    .outline-box,
+    .notice-box,
+    .memo-box,
+    .doc-box,
+    .dashed-box,
+    .general-info-block,
+    .fee-section,
+    .method-section,
+    .campaign-box
+) {
+    margin: 14px 0 !important;
+    padding: 12px 14px !important;
+    border: 1px solid #55585a !important;
+    border-radius: 0 !important;
+    color: #292b2d !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .notice-title,
+    .campaign-title,
+    .general-info-block > h3,
+    .section-number-title
+) {
+    position: relative !important;
+    margin: 0 0 9px !important;
+    padding: 0 0 5px 17px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #8a8c8d !important;
+    color: #202224 !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(13px * var(--reading-font-scale)) !important;
+    font-weight: 850 !important;
+    line-height: 1.55 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .notice-title,
+    .campaign-title,
+    .general-info-block > h3,
+    .section-number-title
+)::before {
+    position: absolute;
+    top: .4em;
+    left: 1px;
+    color: #313335;
+    font-size: .7em;
+    line-height: 1;
+    content: "◆";
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .campaign-inner-box,
+    .doc-inner-list,
+    .info-sub-list
+) {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px 16px !important;
+    margin: 12px 0 !important;
+    padding: 9px 11px !important;
+    border: 1px solid #55585a !important;
+    border-radius: 0 !important;
+    color: #292b2d !important;
+    background: #fff !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+    .campaign-note,
+    .info-legend,
+    .poster-footer,
+    .note-right
+) {
+    margin: 12px 0 0 !important;
+    color: var(--reading-muted) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: calc(9px * var(--reading-font-scale)) !important;
+    font-weight: 550 !important;
+    line-height: 1.75 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .re-recruit-banner {
+    margin: 18px 0 12px !important;
+    padding: 8px 12px !important;
+    border: 0 !important;
+    border-top: 1px solid #55585a !important;
+    border-bottom: 1px solid #55585a !important;
+    border-left: 0 !important;
+    color: #202224 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(13px * var(--reading-font-scale)) !important;
+    font-weight: 850 !important;
+    line-height: 1.55 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-grid {
+    display: grid !important;
+    grid-template-columns: minmax(92px,.22fr) minmax(0,1fr) !important;
+    gap: 0 !important;
+    overflow: hidden;
+    border: 1px solid #55585a !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-grid > * {
+    min-width: 0;
+    margin: 0 !important;
+    padding: 11px 14px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #55585a !important;
+    line-height: 1.75 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-grid > :nth-last-child(-n+2) {
+    border-bottom: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-label {
+    border-right: 1px solid #55585a !important;
+    background: #fff !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .q-table-responsive {
+    overflow-x: auto !important;
+    width: 100% !important;
+    margin: 14px 0 4px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .q-table {
+    width: 100% !important;
+    min-width: 620px;
+    margin: 0 !important;
+    border: 1px solid #55585a !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    color: #292b2d !important;
+    background: #fff !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(11px * var(--reading-font-scale)) !important;
+    line-height: 1.65 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .q-table :is(th,td) {
+    padding: 7px 10px !important;
+    border: 1px solid #55585a !important;
+    color: inherit !important;
+    background: transparent !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    vertical-align: top !important;
+    white-space: normal !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .q-table th {
+    color: #202224 !important;
+    background: #f7f7f5 !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(11px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    vertical-align: middle !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .event-item {
+    display: grid !important;
+    grid-template-columns: 86px minmax(0,1fr);
+    gap: 12px;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid #8a8c8d !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .event-item:last-child { border-bottom: 0 !important; }
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.event-label,.schedule-label) {
+    color: #292b2d !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(11px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.event-value,.schedule-value) {
+    min-width: 0;
+    color: #292b2d !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .memo-grid {
+    display: grid !important;
+    grid-template-columns: minmax(90px,.28fr) minmax(0,1fr) !important;
+    gap: 6px 14px !important;
+    margin-top: 8px !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .note-text {
+    margin: 12px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+    color: #292b2d !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(12.5px * var(--reading-font-scale)) !important;
+    line-height: 1.75 !important;
+}
+
+/* Old "inline-icon" markers were layout helpers, not content. */
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .inline-icon {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .inline-icon::before,
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .inline-icon::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .source-jump-btn {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow.show-analysis .source-jump-btn,
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow.reading-paper-submitted .source-jump-btn {
+    display: inline-flex !important;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .source-jump-btn svg { width: 13px; height: 13px; }
+body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .ks-icon-text { display: inline-flex; align-items: center; gap: 5px; }
+
+body.reading-content-page.reading-cloze-v2 .reading-evidence-jump {
+    grid-column: 2;
+    display: none !important;
+    justify-self: start;
+    align-items: center;
+    gap: 5px;
+    min-height: 28px;
+    margin: 2px 0 0 !important;
+    padding: 0 9px !important;
+    border: 1px solid var(--reading-evidence-control, #c89348) !important;
+    border-radius: 6px;
+    color: var(--reading-evidence-control, #9b6125) !important;
+    background: var(--reading-evidence-control-soft, #fff8e9) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: calc(9px * var(--reading-font-scale)) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    cursor: pointer;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-evidence-jump,
+body.reading-content-page.reading-cloze-v2.reading-paper-submitted .reading-evidence-jump {
+    display: inline-flex !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-evidence-jump:hover,
+body.reading-content-page.reading-cloze-v2 .reading-evidence-jump:focus-visible {
+    color: #fff !important;
+    background: var(--reading-evidence-control, #9b6125) !important;
+    outline: 3px solid color-mix(in srgb, var(--reading-evidence-control, #9b6125) 20%, transparent);
+    outline-offset: 2px;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="1"] {
+    --reading-evidence-control: #a96a22;
+    --reading-evidence-control-soft: #fff6df;
+    --reading-evidence-fill: #fff0bd;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="2"] {
+    --reading-evidence-control: #4c7399;
+    --reading-evidence-control-soft: #eef6fc;
+    --reading-evidence-fill: #dfeffc;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="3"] {
+    --reading-evidence-control: #aa5f69;
+    --reading-evidence-control-soft: #fff1f3;
+    --reading-evidence-fill: #f9dfe4;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="4"] {
+    --reading-evidence-control: #568270;
+    --reading-evidence-control-soft: #edf7f2;
+    --reading-evidence-fill: #dcefe6;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="5"] {
+    --reading-evidence-control: #76689a;
+    --reading-evidence-control-soft: #f3f0fa;
+    --reading-evidence-fill: #e8e1f5;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="6"] {
+    --reading-evidence-control: #2f7c87;
+    --reading-evidence-control-soft: #ebf7f8;
+    --reading-evidence-fill: #d5ecef;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="7"] {
+    --reading-evidence-control: #b45d2e;
+    --reading-evidence-control-soft: #fff2e9;
+    --reading-evidence-fill: #f7dfcf;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="8"] {
+    --reading-evidence-control: #5265a7;
+    --reading-evidence-control-soft: #eef1fb;
+    --reading-evidence-fill: #dfe4f7;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="9"] {
+    --reading-evidence-control: #975c89;
+    --reading-evidence-control-soft: #faf0f7;
+    --reading-evidence-fill: #eeddea;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-evidence-jump,.reading-answer-evidence,.reading-evidence-index)[data-reading-evidence-tone="10"] {
+    --reading-evidence-control: #6f7d3f;
+    --reading-evidence-control-soft: #f4f6e9;
+    --reading-evidence-fill: #e6ebd2;
+}
+
+/* Analysis data embedded in legacy article markup stays entirely outside
+   the exercise view.  It becomes visible only in the explicit analysis state. */
+body.reading-content-page.reading-cloze-v2 :is(.translation,.article-translation,.para-translation,.reading-inline-translation,.analysis-element) {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(.translation,.article-translation,.para-translation).show,
+body.reading-content-page.reading-cloze-v2.show-analysis .translation.analysis-element,
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-inline-translation {
+    display: block !important;
+    margin: 6px 0 14px;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--reading-translation) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-family: var(--reading-ui);
+    font-size: calc(12px * var(--reading-font-scale));
+    font-weight: 400 !important;
+    line-height: 1.8;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-inline-translation .trans-title {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.sentence-badge,.inline-note-container) { display: none !important; }
+
+body.reading-content-page.reading-cloze-v2 .inline-note-title {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--reading-accent-strong);
+    font-size: 9px;
+    font-weight: 850;
+}
+
+/* Legacy documents marked explanatory sentences in advance. Those markers
+   are content metadata only and must never decide the visible evidence. */
+body.reading-content-page.reading-cloze-v2 .key-sentence:not(.reading-answer-evidence) {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: inherit !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-weight: inherit !important;
+}
+
+/* Analysis evidence -------------------------------------------------
+   Only evidence selected from the correct answer is highlighted. The legacy
+   N2 pages already reveal their answer-linked target through .revealed. */
+body.reading-content-page.reading-cloze-v2.show-analysis :is(
+    .article-content,
+    .reading-editorial-copy
+) :is(.reading-answer-evidence, .revealed) {
+    margin: 0 -.12em;
+    padding: .06em .12em .1em;
+    border-bottom: 2px solid var(--reading-evidence-control, var(--reading-evidence-line)) !important;
+    border-radius: 3px;
+    color: var(--reading-ink) !important;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 251, 240, .22) 0%,
+        var(--reading-evidence-fill, var(--reading-evidence-soft)) 30%,
+        var(--reading-evidence-fill, var(--reading-evidence-soft)) 88%,
+        rgba(255, 251, 240, .12) 100%
+    ) !important;
+    box-shadow: inset 0 -.08em 0 color-mix(in srgb, var(--reading-evidence-control, #ad762b) 24%, transparent);
+    font-weight: 650;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-evidence-index {
+    display: inline-grid;
+    place-items: center;
+    min-width: 20px;
+    height: 18px;
+    margin: 0 .45em .08em 0;
+    padding: 0 4px;
+    border-radius: 4px;
+    color: #fff !important;
+    background: var(--reading-evidence-control, #a96a22) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    line-height: 1 !important;
+    letter-spacing: .02em;
+    vertical-align: text-bottom;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(td, th) > .reading-evidence-index {
+    margin-bottom: 4px;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(
+    .article-content,
+    .reading-editorial-copy
+) :is(.reading-answer-evidence, .revealed):hover {
+    border-bottom-color: var(--reading-evidence-control, var(--reading-evidence)) !important;
+    background: var(--reading-evidence-fill, var(--reading-evidence-strong)) !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(
+    .article-content,
+    .reading-editorial-copy
+) :is(.reading-answer-evidence.reading-evidence-focus, .revealed.flash, .revealed.flash-focus) {
+    border-bottom-color: var(--reading-evidence-control, #925a1d) !important;
+    background: var(--reading-evidence-fill, var(--reading-evidence-strong)) !important;
+    box-shadow: inset 0 -.1em 0 color-mix(in srgb, var(--reading-evidence-control, #925a1d) 28%, transparent),
+        0 0 0 4px color-mix(in srgb, var(--reading-evidence-control, #925a1d) 17%, transparent);
+}
+
+/* Questions — native JLPT examination paper --------------------------- */
+body.reading-content-page.reading-cloze-v2 {
+    counter-reset: reading-exam-question;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-questions,.question-section,.questions,.qa-container) {
+    width: 100% !important;
+    margin: 14px 0 0 !important;
+    padding: 8px 28px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+}
+
+/* Data-driven middle papers keep the passage and the first question on the
+   same examination-paper baseline.  The shared question list normally adds
+   its own inset for legacy cards; inside the already padded article sheet
+   that inset was duplicated. */
+body.reading-content-page.reading-cloze-v2.reading-middle-data-page .article-content > .qa-container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question,.qa-section,.question-card,.qcard) {
+    counter-increment: reading-exam-question;
+    overflow: visible;
+    width: 100% !important;
+    margin: 0 0 16px !important;
+    padding: 20px 0 24px !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+    color: #202224 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question,.qa-section,.question-card,.qcard):last-child {
+    margin-bottom: 0 !important;
+    border-bottom: 0 !important;
+}
+
+/* Old short pages keep options as direct children. */
+body.reading-content-page.reading-cloze-v2 .qa-section {
+    display: block !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-head,.question-title,.q-header,.q-head) {
+    grid-column: 1 / -1;
+    display: grid !important;
+    grid-template-columns: 38px minmax(0,1fr);
+    align-items: start;
+    gap: 10px;
+    min-height: 0;
+    margin: 0 !important;
+    padding: 0 4px 10px !important;
+    border: 0 !important;
+    border-bottom: 0 !important;
+    background: #fff !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .question-title-main {
+    display: contents !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.q-header > div,.q-head > div) { min-width: 0; }
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-head,.question-title,.q-header,.q-head):not(:has(
+    .reading-editorial-question-number,
+    .question-num-badge,
+    .q-number,
+    .qnum
+))::before {
+    grid-column: 1;
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    height: 25px;
+    padding: 0 5px;
+    border: 1px solid #3a3c3e;
+    color: #202224;
+    background: #fff;
+    font-family: var(--reading-serif);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    content: counter(reading-exam-question, decimal-leading-zero);
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-number,.question-num-badge,.q-number,.qnum) {
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    width: auto !important;
+    height: 25px;
+    padding: 0 5px !important;
+    border: 1px solid #3a3c3e !important;
+    border-radius: 0 !important;
+    color: #202224 !important;
+    background: #fff !important;
+    font-family: var(--reading-serif);
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    line-height: 1 !important;
+    letter-spacing: .02em !important;
+    box-shadow: none !important;
+    cursor: default !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-text,.question-title-text,.q-text,.qtext) {
+    grid-column: 2;
+    color: #202224 !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(15px * var(--reading-font-scale)) !important;
+    font-weight: 600 !important;
+    line-height: 1.7 !important;
+    letter-spacing: .015em !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-translation,.q-text-trans,.qtrans) {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(.reading-editorial-question-translation,.q-text-trans,.qtrans) {
+    display: block !important;
+    margin-top: 4px;
+    color: var(--reading-translation) !important;
+    font-family: var(--reading-ui);
+    font-size: calc(10px * var(--reading-font-scale));
+    font-weight: 400 !important;
+    line-height: 1.65;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.options-group,.options) {
+    display: block !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-option,.option-item,.option-label,.option) {
+    position: relative;
+    display: grid !important;
+    grid-template-columns: 28px minmax(0,1fr);
+    align-items: start;
+    gap: 10px;
+    min-width: 0;
+    min-height: 0;
+    margin: 0 !important;
+    padding: 7px 8px !important;
+    border: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-radius: 0 !important;
+    color: #202224 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    font-weight: 400 !important;
+    transform: none !important;
+    cursor: pointer;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-option,.option-item,.option-label,.option):hover {
+    background: #f7f7f5 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.option-input,.option > input,.option-label > input) {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-option-number,.option-number,.custom-radio,.radio) {
+    grid-column: 1;
+    display: grid !important;
+    place-items: start center;
+    width: 24px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: #202224 !important;
+    background: transparent !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(14px * var(--reading-font-scale)) !important;
+    font-weight: 500 !important;
+    line-height: 1.65 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.option-content,.option-content-wrapper,.ocont) {
+    grid-column: 2;
+    min-width: 0;
+    color: inherit !important;
+    font-family: var(--reading-serif) !important;
+    font-size: calc(14px * var(--reading-font-scale)) !important;
+    font-weight: 400 !important;
+    line-height: 1.68 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .option-item > .option-content { display: contents !important; }
+body.reading-content-page.reading-cloze-v2 .option-item .option-text-group {
+    grid-column: 2;
+    min-width: 0;
+    font-weight: 400 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-option,.option-item,.option-label,.option) :is(span,p,div) {
+    font-weight: 400;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.option-translation,.option-trans,.otrans) {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(.option-translation,.option-trans,.otrans) {
+    display: block !important;
+    margin-top: 4px;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--reading-translation) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-family: var(--reading-ui);
+    font-size: calc(10px * var(--reading-font-scale));
+    font-weight: 400 !important;
+    line-height: 1.65;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis :is(
+    .reading-editorial-option,
+    .option-item,
+    .option-label,
+    .option
+) :is(.option-content,.option-content-wrapper,.ocont,.option-text-group),
+body.reading-content-page.reading-cloze-v2.show-analysis :is(
+    .reading-editorial-option,
+    .option-item,
+    .option-label,
+    .option
+) :is(.option-content,.option-content-wrapper,.ocont,.option-text-group) > :not(.option-translation,.option-trans,.otrans) {
+    font-weight: 650 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.click-hint,.hint) { display: none !important; }
+
+/* Selection is neutral until the answer has actually been submitted. */
+body.reading-content-page.reading-cloze-v2 :is(.option-item,.option-label,.option).selected,
+body.reading-content-page.reading-cloze-v2 :is(.option-label,.option):has(input:checked),
+body.reading-content-page.reading-cloze-v2:not(.show-analysis) .option-item:is(.answered-correct,.answered-wrong) {
+    color: var(--reading-accent-strong) !important;
+    background: var(--reading-accent-soft) !important;
+    box-shadow: inset 3px 0 0 var(--reading-accent) !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.option-item,.option-label,.option).selected :is(.option-number,.custom-radio,.radio),
+body.reading-content-page.reading-cloze-v2 :is(.option-label,.option):has(input:checked) :is(.custom-radio,.radio) {
+    color: #fff !important;
+    background: var(--reading-accent) !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .option-item.answered-correct,
+body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard).reviewed :is(.option-label.is-correct,.option.correct) {
+    color: var(--reading-success) !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .option-item.answered-wrong,
+body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard).reviewed :is(.option-label.is-wrong,.option.wrong) {
+    color: var(--reading-danger) !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .option-item:is(.answered-correct,.answered-wrong) :is(
+    .option-number,
+    .custom-radio,
+    .radio
+) {
+    color: var(--reading-ink-soft) !important;
+    background: transparent !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .option-item:is(.answered-correct,.answered-wrong) :is(
+    .option-content,
+    .option-content-wrapper,
+    .ocont,
+    .option-text-group
+) > :not(.option-translation,.option-trans,.otrans) {
+    font-weight: 700 !important;
+}
+
+/* Legacy analysis nodes remain in the DOM for old submit scripts, but the
+   unified option drawers are the only visible analysis surface. */
+body.reading-content-page.reading-cloze-v2 .reading-legacy-analysis-hidden,
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-legacy-analysis-hidden,
+body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard).reviewed .reading-legacy-analysis-hidden {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .option-explanation { display: none !important; }
+
+body.reading-content-page.reading-cloze-v2 :is(.option-detail-analysis,.detail) {
+    grid-column: 2;
+    display: none !important;
+    margin: 9px 0 0;
+    padding: 9px 0 0;
+    border-top: 1px solid var(--reading-line);
+    color: var(--reading-ink-soft);
+    font-family: var(--reading-ui);
+    font-size: calc(11px * var(--reading-font-scale));
+    font-weight: 520;
+    line-height: 1.75;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard).reviewed :is(.option-detail-analysis.show,.detail.show) {
+    display: block !important;
+}
+
+/* Shared answer / explanation card, matching cloze. */
+body.reading-content-page.reading-cloze-v2 :is(.reading-cloze-explanation,.explanation-box,.exp) {
+    grid-column: 1 / -1;
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-top: 1px solid var(--reading-line) !important;
+    border-radius: 0 !important;
+    color: var(--reading-ink-soft) !important;
+    background: var(--reading-paper) !important;
+    box-shadow: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-cloze-explanation,
+body.reading-content-page.reading-cloze-v2 :is(.explanation-box,.exp).show,
+body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard).reviewed :is(.explanation-box,.exp) {
+    display: block !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__heading,
+body.reading-content-page.reading-cloze-v2 :is(.explanation-title,.exp-title) {
+    margin: 0 !important;
+    padding: 15px 22px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--reading-line) !important;
+    color: var(--reading-focus) !important;
+    background: var(--reading-paper-soft) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .06em !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__heading strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__heading strong::before {
+    width: 3px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--reading-focus);
+    content: "";
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__primary {
+    padding: 22px 24px;
+    color: var(--reading-ink);
+    font-family: var(--reading-ui);
+    font-size: calc(14px * var(--reading-font-scale));
+    font-weight: 520;
+    line-height: 1.95;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__primary b {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--reading-success);
+    font-size: 12px;
+    font-weight: 850;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__primary p { margin: 0; }
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__alternatives {
+    margin: 0 24px;
+    padding: 18px 0 22px;
+    border-top: 1px solid var(--reading-line);
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__alternatives h4 {
+    margin: 0 0 11px;
+    color: var(--reading-ink-soft);
+    font-size: 12px;
+    font-weight: 850;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__alternatives p {
+    display: grid;
+    grid-template-columns: 22px minmax(0,1fr);
+    gap: 8px;
+    margin: 6px 0;
+    color: var(--reading-ink-soft);
+    font-size: calc(13px * var(--reading-font-scale));
+    font-weight: 520;
+    line-height: 1.8;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__alternatives b {
+    color: var(--reading-muted);
+    font-weight: 850;
+}
+
+/* N1 short reading: explanations live inside the original choices. */
+body.reading-content-page.reading-cloze-v2 :is(
+    .reading-option-correct-mark,
+    .reading-option-wrong-mark
+) {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option {
+    padding-right: 30px !important;
+    border-top: 1px solid var(--reading-line) !important;
+    cursor: pointer;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option:first-of-type {
+    border-top: 0 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option::after {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--reading-muted);
+    font-family: var(--reading-ui);
+    font-size: 13px;
+    line-height: 1;
+    content: "⌄";
+    transition: transform .16s ease, color .16s ease;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option.is-analysis-open::after {
+    color: var(--reading-accent-strong);
+    transform: rotate(180deg);
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option:hover {
+    background: #f8f8f6 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option :is(
+    .option-text-group,
+    .option-content-wrapper,
+    .ocont
+) {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option :is(
+    .option-text-group,
+    .option-content-wrapper,
+    .ocont
+) > :not(
+    .option-translation,
+    .option-trans,
+    .otrans,
+    .reading-option-correct-mark,
+    .reading-option-wrong-mark
+) {
+    min-width: 0;
+    color: inherit !important;
+    font-weight: 700 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option :is(
+    .option-translation,
+    .option-trans,
+    .otrans
+) {
+    display: inline !important;
+    flex: 0 1 auto;
+    margin: 0 !important;
+    color: var(--reading-translation) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: calc(10px * var(--reading-font-scale)) !important;
+    font-weight: 400 !important;
+    line-height: 1.65 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-option-correct .reading-option-correct-mark {
+    display: inline-grid !important;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff !important;
+    background: var(--reading-success);
+    font-family: var(--reading-ui) !important;
+    font-size: 11px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option:is(
+    .answered-wrong,
+    .is-wrong,
+    .wrong
+) .reading-option-wrong-mark {
+    display: inline-grid !important;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff !important;
+    background: var(--reading-danger);
+    font-family: var(--reading-ui) !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-option-analysis {
+    grid-column: 2;
+    display: none !important;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    margin: 8px 0 1px;
+    padding: 10px 0 2px;
+    border-top: 1px solid var(--reading-line);
+    color: var(--reading-ink-soft);
+    font-family: var(--reading-ui);
+}
+
+body.reading-content-page.reading-cloze-v2.show-analysis .reading-structured-option.is-analysis-open .reading-option-analysis {
+    display: grid !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-option-analysis__label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 23px;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: var(--reading-accent-strong) !important;
+    background: var(--reading-accent-soft);
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-option-analysis.is-correct .reading-option-analysis__label {
+    color: var(--reading-success) !important;
+    background: #edf5f1;
+}
+
+body.reading-content-page.reading-cloze-v2 .reading-option-analysis__reason {
+    margin: 0;
+    color: var(--reading-ink-soft) !important;
+    font-size: calc(12px * var(--reading-font-scale)) !important;
+    font-weight: 450 !important;
+    line-height: 1.8;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-cloze-explanation,.explanation-box,.exp) mark {
+    padding: .08em .22em;
+    color: var(--reading-ink);
+    background: #f5e8b9;
+    font-weight: 750;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-cloze-explanation,.explanation-box,.exp) :is(strong,b) {
+    font-weight: 850;
+}
+
+/* Short reading: desktop uses one continuous, native-test paper flow. */
+body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-session-overview {
+    margin: 0 0 18px;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-session-overview .reading-editorial-session-heading {
+    margin-bottom: 0;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-unit-heading {
+    display: block;
+    min-height: 0;
+    margin: 0 0 16px;
+}
+
+body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-unit-index {
+    color: var(--reading-ink-soft) !important;
+    font-size: 15px !important;
+    font-weight: 750 !important;
+    letter-spacing: .04em !important;
+}
+
+@media (min-width: 761px) {
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(.page-content,.page-container) {
+        display: block !important;
+        overflow: hidden;
+        margin: 0 0 18px !important;
+        padding: 28px 34px 30px !important;
+        border: 1px solid var(--reading-line) !important;
+        border-radius: 14px !important;
+        background: var(--reading-paper) !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(.page-content,.page-container) .reading-editorial-session-title {
+        margin: 0 0 18px !important;
+        font-size: 15px !important;
+        font-weight: 650 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(.page-content,.page-container) .reading-editorial-session-title::before {
+        display: none;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(
+        .page-content > .article-content,
+        .page-container > .article-content,
+        .page-container > .article-section,
+        .page-container > .article
+    ) {
+        margin: 0 !important;
+        padding: 0 0 18px !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .page-container > :is(.article-section,.article) > .article-content {
+        padding: 0 0 18px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(.page-content,.page-container) .article-content {
+        font-size: calc(15px * var(--reading-font-scale)) !important;
+        line-height: 2.25 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .page-container > :is(.question-section,.questions) {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(.qa-section,.question-card,.qcard) {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        margin: 0 !important;
+        padding: 0 0 24px !important;
+        border: 0 !important;
+        border-top: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .page-container .action-bar {
+        display: none !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .question-title {
+        padding: 12px 0 8px !important;
+        border-bottom: 0 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .question-title-text {
+        font-size: calc(15px * var(--reading-font-scale)) !important;
+        font-weight: 750 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow :is(
+        .qa-section > .option-item,
+        .question-card .options-group > .option-label,
+        .qcard .options > .option
+    ) {
+        min-height: 0;
+        padding: 7px 8px !important;
+        border-right: 0 !important;
+        border-bottom: 0 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .qa-section > .option-item:last-of-type {
+        border-bottom: 0 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-batch-navigation {
+        position: sticky;
+        z-index: 20;
+        bottom: 14px;
+        justify-content: flex-end;
+        margin-top: 20px !important;
+        padding: 12px !important;
+        border: 1px solid var(--reading-line) !important;
+        border-radius: 12px !important;
+        background: rgba(255,255,255,.96) !important;
+        box-shadow: 0 10px 28px rgba(35,45,68,.08) !important;
+        backdrop-filter: blur(10px);
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-batch-navigation:not(.is-ready) {
+        display: none !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-batch-navigation > :not(.reading-short-batch-submit) {
+        display: none !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-batch-submit[hidden] {
+        display: none !important;
+    }
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.key-sentence-box,.keybox,.explanation-content,.exp-content) {
+    margin: 0 !important;
+    padding: 20px 24px !important;
+    border: 0 !important;
+    border-top: 1px solid var(--reading-line) !important;
+    color: var(--reading-ink-soft) !important;
+    background: var(--reading-paper) !important;
+    font-family: var(--reading-ui) !important;
+    font-size: calc(13px * var(--reading-font-scale)) !important;
+    font-weight: 520 !important;
+    line-height: 1.9 !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.ks-label,.klabel) {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--reading-focus);
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .1em;
+}
+
+/* Navigation and controls ------------------------------------------- */
+body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-navigation,.article-navigation,.page-nav,.action-bar,.submit-area) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100% !important;
+    margin: 12px 0 0 !important;
+    padding: 16px 0 0 !important;
+    border: 0 !important;
+    border-top: 1px solid var(--reading-line) !important;
+    background: transparent !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.submit-btn,.nav-btn,.translate-toggle-btn,.translate-btn) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px !important;
+    border: 1px solid var(--reading-line) !important;
+    border-radius: 9px !important;
+    color: var(--reading-ink-soft) !important;
+    background: var(--reading-paper) !important;
+    box-shadow: none !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: .03em;
+    cursor: pointer;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.reading-short-batch-submit,.reading-medium-batch-submit)[hidden] {
+    display: none !important;
+}
+
+body.reading-content-page.reading-cloze-v2 .submit-btn {
+    border-color: var(--reading-accent-strong) !important;
+    color: #fff !important;
+    background: var(--reading-accent-strong) !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.nav-btn,.translate-toggle-btn,.translate-btn):hover {
+    border-color: var(--reading-accent) !important;
+    color: var(--reading-accent-strong) !important;
+    background: var(--reading-accent-soft) !important;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.nav-btn,.submit-btn):disabled,
+body.reading-content-page.reading-cloze-v2 :is(.nav-btn,.submit-btn).disabled {
+    border-color: var(--reading-line) !important;
+    color: var(--reading-faint) !important;
+    background: var(--reading-paper-soft) !important;
+    cursor: not-allowed;
+}
+
+/* Rich reading material --------------------------------------------- */
+body.reading-content-page.reading-cloze-v2 :is(img,svg) { max-width: 100%; }
+
+body.reading-content-page.reading-cloze-v2 .article-content table {
+    width: 100%;
+    margin: 24px 0;
+    border-collapse: collapse;
+    font-family: var(--reading-ui);
+    font-size: calc(11px * var(--reading-font-scale));
+    line-height: 1.7;
+}
+
+body.reading-content-page.reading-cloze-v2 .article-content :is(th,td) {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--reading-line);
+    text-align: left;
+    vertical-align: top;
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.vocab-tooltip,.tooltip) {
+    position: absolute;
+    z-index: 1200;
+    display: none;
+    max-width: 280px;
+    padding: 12px 14px;
+    border: 1px solid var(--reading-line);
+    border-radius: 8px;
+    color: var(--reading-ink-soft);
+    background: rgba(255,255,255,.98);
+    font-size: 11px;
+    line-height: 1.7;
+    box-shadow: 0 14px 36px rgba(25,31,40,.12);
+}
+
+body.reading-content-page.reading-cloze-v2 :is(.vocab-tooltip,.tooltip).show { display: block; }
+
+body.reading-content-page.reading-cloze-v2 :is(.quick-nav,.footer,.analysis-header,.old-analysis-header) {
+    display: none !important;
+}
+
+@media (max-width: 760px) {
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-session-overview {
+        margin-bottom: 14px;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-unit-heading {
+        margin-bottom: 12px;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-short-paper-flow .reading-short-unit-index {
+        font-size: 14px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 :is(.container,.wrap,.layout-container) {
+        width: calc(100% - 24px) !important;
+        padding: 20px 0 54px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-editorial-session-title {
+        font-size: 24px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-editorial-session-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-height: 0;
+        margin-bottom: 14px;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor {
+        justify-self: stretch;
+        grid-template-columns: 36px minmax(0, 1fr);
+        gap: 8px;
+        width: 100%;
+        padding-top: 10px;
+        border-top: 1px solid var(--reading-line);
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor__avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor__avatar img {
+        top: -10px;
+        left: -32px;
+        width: 116px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor--kaoru .reading-question-mentor__avatar img {
+        top: -23px;
+        left: -75px;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor__name { font-size: 8px; }
+    body.reading-content-page.reading-cloze-v2 .reading-question-mentor__guide { font-size: 10px; }
+
+    body.reading-content-page.reading-cloze-v2 .reading-editorial-meta,
+    body.reading-content-page.reading-cloze-v2 :is(.article-meta,.meta) { padding: 12px 16px !important; }
+
+    body.reading-content-page.reading-cloze-v2 .reading-editorial-copy,
+    body.reading-content-page.reading-cloze-v2 .article-content,
+    body.reading-content-page.reading-cloze-v2 .page-content > .article-content,
+    body.reading-content-page.reading-cloze-v2 .page-container > .article-content {
+        padding: 20px 16px 24px !important;
+        font-size: calc(14px * var(--reading-font-scale)) !important;
+        line-height: 2 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .qa-section,
+    body.reading-content-page.reading-cloze-v2 :is(.options-group,.options) {
+        grid-template-columns: 1fr;
+    }
+
+    body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-questions,.question-section,.questions,.qa-container) {
+        padding: 6px 12px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-option,.option-item,.option-label,.option) {
+        border-right: 0 !important;
+        min-height: 44px;
+        padding: 9px 4px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 :is(.reading-editorial-question-head,.question-title,.q-header,.q-head) {
+        padding: 12px 4px 7px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__heading,
+    body.reading-content-page.reading-cloze-v2 :is(.explanation-title,.exp-title) { padding: 14px 16px !important; }
+    body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__primary { padding: 18px 16px; font-size: 13px; }
+    body.reading-content-page.reading-cloze-v2 .reading-cloze-explanation__alternatives { margin: 0 16px; }
+    body.reading-content-page.reading-cloze-v2 .reading-option-analysis {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    body.reading-content-page.reading-cloze-v2 .reading-option-analysis__label { justify-self: start; }
+    body.reading-content-page.reading-cloze-v2 :is(.key-sentence-box,.keybox,.explanation-content,.exp-content) { padding: 18px 16px !important; }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-box {
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 18px 16px 22px !important;
+        font-size: calc(13px * var(--reading-font-scale)) !important;
+        line-height: 1.8 !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .poster-top-nav {
+        margin: 0 0 14px !important;
+        padding: 0 0 4px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+        .poster-main-title,
+        .poster-title,
+        .outline-title
+    ) {
+        font-size: calc(19px * var(--reading-font-scale)) !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-grid,.info-grid) {
+        grid-template-columns: minmax(92px,.34fr) minmax(0,1fr) !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-term,.info-label),
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(.dl-desc,.info-value) {
+        padding: 10px !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+        table.poster-table,
+        table.availability-table,
+        table.student-table,
+        table.job-table,
+        .poster-table > table,
+        .q-table
+    ) {
+        min-width: 560px;
+        font-size: calc(11px * var(--reading-font-scale)) !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .event-item {
+        grid-template-columns: 72px minmax(0,1fr);
+        gap: 9px;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .memo-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow :is(
+        .campaign-inner-box,
+        .doc-inner-list,
+        .info-sub-list
+    ) {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-grid {
+        grid-template-columns: minmax(78px,.3fr) minmax(0,1fr) !important;
+    }
+
+    body.reading-content-page.reading-cloze-v2.reading-search-paper-flow .schedule-grid > * {
+        padding: 10px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Unified option drawers are the only analysis surface after submission.  Keep
+   this final override after the legacy reviewed/show-analysis rules so older
+   page-specific panels cannot reappear through a more specific selector. */
+html body.reading-content-page.reading-cloze-v2 .reading-legacy-analysis-hidden,
+html body.reading-content-page.reading-cloze-v2.show-analysis .reading-legacy-analysis-hidden,
+html body.reading-content-page.reading-cloze-v2 :is(.question-card,.qcard,.qa-section).reviewed .reading-legacy-analysis-hidden {
+    display: none !important;
+}

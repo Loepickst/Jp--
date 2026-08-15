@@ -1,0 +1,28 @@
+{
+  "questionLabels": {
+    "viewpoint-main": "主旨观点",
+    "reason-logic": "原因理由",
+    "reference-meaning": "指代释义",
+    "method-condition": "方法条件",
+    "fact-comparison": "事实对比"
+  },
+  "errorLabels": {
+    "not-stated": "原文无依据",
+    "opposite": "原意相反",
+    "relation-error": "逻辑关系错误",
+    "object-scope-error": "对象范围错误",
+    "concept-focus-error": "概念重点错误"
+  },
+  "counts": {
+    "N1/short": 84,
+    "N1/middle": 81,
+    "N1/long": 83,
+    "N1/integrated": 34,
+    "N1/search": 42,
+    "N2/short": 105,
+    "N2/middle": 188,
+    "N2/long": 69
+  },
+  "total": 686,
+  "errors": []
+}

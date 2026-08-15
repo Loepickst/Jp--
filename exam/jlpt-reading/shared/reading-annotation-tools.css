@@ -1,0 +1,126 @@
+.reading-annotation-toolbar {
+    position: absolute;
+    z-index: 1900;
+    display: flex;
+    align-items: stretch;
+    padding: 4px;
+    border: 1px solid rgba(55, 69, 100, 0.18);
+    border-radius: 10px;
+    background: #fffefc;
+    box-shadow: 0 10px 28px rgba(32, 42, 63, 0.16);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
+    font-family: "Noto Sans SC", "Noto Sans JP", system-ui, sans-serif;
+    white-space: nowrap;
+}
+
+.reading-annotation-toolbar.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.reading-annotation-toolbar button {
+    min-width: 64px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    border: 0;
+    border-right: 1px solid rgba(55, 69, 100, 0.12);
+    border-radius: 6px;
+    background: transparent;
+    color: #39445e;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.reading-annotation-toolbar button:last-child {
+    border-right: 0;
+}
+
+.reading-annotation-toolbar button:hover,
+.reading-annotation-toolbar button:focus-visible {
+    background: #f1f4f8;
+    color: #202a40;
+    outline: none;
+}
+
+.reading-annotation-toolbar b,
+.reading-annotation-toolbar u,
+.reading-annotation-toolbar button > span[aria-hidden="true"] {
+    min-width: 14px;
+    color: #a95f57;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.reading-annotation-swatch {
+    width: 15px;
+    height: 10px;
+    min-width: 15px !important;
+    border-radius: 2px;
+    background: rgba(245, 208, 93, 0.68);
+}
+
+.reading-user-annotation--highlight {
+    padding: 0 0.06em;
+    border-radius: 0.12em;
+    background-color: rgba(245, 208, 93, 0.48);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.reading-user-annotation--bold {
+    font-weight: 800;
+}
+
+.reading-user-annotation--underline {
+    text-decoration-line: underline;
+    text-decoration-color: #b86e65;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+}
+
+.reading-annotation-practice .reading-editorial-copy::selection,
+.reading-annotation-practice .article-content::selection,
+.reading-annotation-practice .reading-editorial-copy *::selection,
+.reading-annotation-practice .article-content *::selection {
+    background: rgba(139, 160, 199, 0.28);
+}
+
+body.show-analysis .reading-annotation-toolbar,
+body.show-article-analysis .reading-annotation-toolbar,
+body.show-option-analysis .reading-annotation-toolbar,
+body.reading-paper-submitted .reading-annotation-toolbar {
+    display: none !important;
+}
+
+@media (max-width: 720px) {
+    .reading-annotation-toolbar {
+        max-width: calc(100vw - 16px);
+        overflow-x: auto;
+        border-radius: 9px;
+    }
+
+    .reading-annotation-toolbar button {
+        min-width: 58px;
+        min-height: 42px;
+        padding: 0 9px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reading-annotation-toolbar {
+        transition: none;
+    }
+}

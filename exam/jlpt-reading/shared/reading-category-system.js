@@ -102,11 +102,21 @@
         }
         const levelSegment = String(level || 'N1').trim().toLowerCase() || 'n1';
 
-        if (normalizedType === 'short') {
+        if (normalizedType === 'short' || normalizedType === 'middle') {
             if (pathContext === 'year') {
                 return fileName;
             }
-            return `s/${levelSegment}/${fileName}`;
+            const typeDirectory = normalizedType === 'short' ? 's' : 'm';
+            return `${typeDirectory}/${levelSegment}/${fileName}`;
+        }
+
+        if (normalizedType === 'long') {
+            if (pathContext === 'year') {
+                return fileName;
+            }
+            return levelSegment === 'n1'
+                ? `l/${levelSegment}/10/${fileName}`
+                : `l/${levelSegment}/${fileName}`;
         }
 
         return null;
@@ -301,6 +311,7 @@
 
         function buildCurrentPageUrl(page) {
             return buildCategoryArticleUrl({
+                level,
                 type: config.type,
                 categoryId,
                 examKey: currentExamKey,
