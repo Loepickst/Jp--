@@ -5,560 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ポイント理解 - 聴解練習 2020年12月</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #ffffff;
-      --graphite: #333333;
-      --graphite-sub: #666666;
-      --graphite-faint: #cccccc;
-      --red-pencil: #e64a4a;
-      --red-pencil-light: rgba(230, 74, 74, 0.08);
-      --marker-yellow: rgba(255, 213, 79, 0.35);
-      --marker-blue: rgba(129, 212, 250, 0.25);
-      --marker-pink: rgba(244, 143, 177, 0.25);
-      --marker-green: rgba(129, 199, 132, 0.25);
-      --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px);
-      --transition: all 0.2s ease-out;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
-      background: var(--paper);
-      color: var(--graphite);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    header {
-      width: 100%;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border-bottom: 2px solid var(--graphite);
-      border-bottom-left-radius: 50% 2px;
-      border-bottom-right-radius: 50% 3px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-    }
-
-    .back-btn {
-      text-decoration: none;
-      color: var(--graphite);
-      font-size: 14px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .back-btn:hover { background: var(--marker-yellow); }
-
-    .practice-container {
-      margin-top: 40px;
-      margin-bottom: 140px;
-      max-width: 840px;
-      width: 92%;
-      padding: 20px 40px;
-      flex: 1;
-      animation: fadeIn 0.4s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-      padding-bottom: 16px;
-      border-bottom: 1.5px dashed var(--graphite-faint);
-      gap: 20px;
-      flex-wrap: nowrap;
-    }
-
-    .header-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
-
-    .question-select {
-      padding: 4px 28px 4px 4px;
-      font-size: 16px;
-      border: none;
-      border-bottom: 1.5px solid var(--graphite);
-      background: transparent;
-      color: var(--graphite);
-      outline: none;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .mark-btn {
-      font-size: 22px;
-      width: 34px;
-      height: 34px;
-      background: #fff;
-      border: 1.5px solid var(--graphite-faint);
-      border-radius: 10px;
-      cursor: pointer;
-      color: var(--graphite-faint);
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mark-btn:hover,
-    .mark-btn.active { color: var(--graphite); border-color: var(--graphite); background: var(--marker-yellow); }
-
-    .mode-switch {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-left: auto;
-    }
-
-    .mode-switch button {
-      border: none;
-      background: transparent;
-      color: var(--graphite-sub);
-      padding: 4px 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      position: relative;
-      font-family: inherit;
-      white-space: nowrap;
-    }
-
-    .mode-switch button.active { color: var(--graphite); z-index: 1; }
-
-    .mode-switch button.active::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--marker-yellow);
-      border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-      z-index: -1;
-      transform: rotate(-1deg);
-    }
-
-    .right-panel { width: 100%; }
-
-    .mode-practice .transcript-section,
-    .mode-practice .translation { display: none !important; }
-
-    .mode-explanation .translation { display: block; }
-
-    .transcript-section {
-      margin-bottom: 40px;
-      border: 1.5px solid var(--graphite);
-      border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-      padding-bottom: 20px;
-    }
-
-    .question-box {
-      background: var(--marker-blue);
-      padding: 34px 22px 16px;
-      border-bottom: 1.5px dashed var(--graphite);
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 1.8;
-      position: relative;
-    }
-
-    .question-box::before {
-      content: '問題';
-      position: absolute;
-      top: 8px;
-      left: 18px;
-      background: var(--paper);
-      color: var(--graphite);
-      font-weight: 900;
-      padding: 2px 10px;
-      border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
-      border: 1.5px solid var(--graphite);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      font-family: sans-serif;
-    }
-
-    .question-image-area {
-      display: none;
-      margin: 16px 0 18px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1.5px dashed rgba(51, 51, 51, 0.18);
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .question-image-area img { display: block; width: auto; max-width: 100%; max-height: 320px; margin: 0 auto; object-fit: contain; border-radius: 8px; }
-
-    .conversation-box {
-      padding: 28px 22px 4px;
-      font-size: 16px;
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    .conversation-line { margin-bottom: 18px; display: flex; }
-
-    .speaker-name {
-      font-weight: 900;
-      background: var(--marker-yellow);
-      padding: 2px 8px;
-      border-radius: 2px 6px 3px 5px / 5px 3px 6px 2px;
-      margin-right: 12px;
-      white-space: nowrap;
-      height: fit-content;
-      font-size: 13px;
-      border: 1.5px solid var(--graphite);
-    }
-
-    .speaker-text { flex: 1; min-width: 0; }
-
-    .options-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .options-list li {
-      padding: 14px 16px 14px 50px;
-      background: #fff;
-      border: 1.5px solid var(--graphite-faint);
-      border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-      transition: var(--transition);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.02);
-    }
-
-    .options-num {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
-      text-align: center;
-      line-height: 22px;
-      font-size: 14px;
-      font-family: sans-serif;
-      font-weight: bold;
-      border: 1.5px solid var(--graphite);
-      border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-      background: #fff;
-      z-index: 2;
-    }
-
-    .mode-practice .options-list li { cursor: pointer; }
-    .mode-practice .options-list li:hover { background: var(--hatching-graphite); border-color: var(--marker-blue); }
-    .mode-practice .options-list li.selected { background: var(--marker-blue); border-color: var(--graphite); }
-    .mode-practice .options-list li.selected .options-num { background: var(--graphite); color: var(--paper); }
-
-    .inline-confirm-btn {
-      margin-left: 16px;
-      padding: 6px 20px;
-      background: var(--graphite);
-      color: var(--paper);
-      border: none;
-      border-radius: 3px 8px 4px 6px / 6px 4px 8px 3px;
-      font-size: 14px;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      letter-spacing: 0.05em;
-      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-    }
-
-    .mode-practice .options-list li.judged-correct,
-    .mode-practice .options-list li.judged-wrong { padding-right: 80px; }
-
-    .mode-practice .options-list li.judged-correct {
-      background: var(--marker-green) !important;
-      border-color: var(--graphite) !important;
-      border-radius: 4px;
-    }
-
-    .mode-practice .options-list li.judged-correct .options-num { border-color: var(--red-pencil); color: var(--red-pencil); background: #fff; }
-
-    .mode-practice .options-list li.judged-correct::before {
-      content: '';
-      position: absolute;
-      left: 2px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border: 2px solid var(--red-pencil);
-      border-radius: 40% 60% 50% 45% / 50% 45% 60% 40%;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-
-    .mode-practice .options-list li.judged-correct::after {
-      content: "正解";
-      color: var(--red-pencil);
-      font-weight: 900;
-      font-size: 14px;
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .mode-practice .options-list li.judged-wrong {
-      background: var(--red-pencil-light) !important;
-      border: 1.5px dashed var(--graphite-faint) !important;
-      opacity: 0.8;
-      border-radius: 4px;
-    }
-
-    .mode-practice .options-list li.judged-wrong::before {
-      content: '✕';
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--red-pencil);
-      font-size: 28px;
-      font-family: sans-serif;
-      opacity: 0.7;
-      z-index: 1;
-    }
-
-    .mode-explanation .correct-answer { background: var(--marker-green); border-color: var(--graphite); border-radius: 4px; }
-    .mode-explanation .correct-answer .options-num { background: var(--red-pencil); color: var(--paper); border-color: var(--red-pencil); }
-
-    .option-content { flex: 1; display: flex; flex-direction: column; min-width: 0; word-break: break-word; }
-    .option-text { font-size: 16px; font-weight: 700; line-height: 1.6; }
-
-    .translation {
-      color: var(--graphite-sub);
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 13px;
-      line-height: 1.6;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1.5px dashed var(--graphite-faint);
-      display: none;
-    }
-
-    .keyword {
-      color: var(--graphite);
-      background: linear-gradient(transparent 50%, rgba(255, 213, 79, 0.5) 50%);
-      border-bottom: 1.5px dashed rgba(51, 51, 51, 0.3);
-      padding: 0 2px;
-      cursor: pointer;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    .keyword:hover { background: rgba(255, 213, 79, 0.35); border-bottom-style: solid; }
-
-    .mode-practice .highlight-correct,
-    .mode-practice .highlight-wrong { background: transparent; color: inherit; padding: 0; font-weight: inherit; border: none; }
-
-    .mode-practice .opt-tag { display: none !important; }
-
-    .mode-explanation .highlight-correct,
-    .mode-explanation .highlight-wrong { background: transparent; color: var(--graphite); padding: 0 2px; font-weight: 700; }
-    .mode-explanation .explain-wrong { cursor: pointer; border-bottom: 2.5px solid rgba(244, 143, 177, 0.8); display: inline; padding-bottom: 1px; }
-    .mode-explanation .explain-correct { cursor: pointer; border-bottom: 2.5px solid rgba(129, 199, 132, 0.8); display: inline; padding-bottom: 1px; }
-    .mode-explanation .explain-wrong:hover { border-bottom-color: rgba(230, 74, 74, 0.8); background: rgba(244, 143, 177, 0.15); }
-    .mode-explanation .explain-correct:hover { border-bottom-color: rgba(76, 175, 80, 0.8); background: rgba(129, 199, 132, 0.15); }
-
-    .mode-explanation .opt-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 900;
-      width: 18px;
-      height: 18px;
-      line-height: 16px;
-      text-align: center;
-      border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-      margin-right: 6px;
-      vertical-align: middle;
-      border: 1.5px solid var(--graphite);
-      background: #fff;
-      font-family: sans-serif;
-    }
-
-    .mode-explanation .tag-wrong { background: var(--marker-pink); }
-    .mode-explanation .tag-correct { background: var(--marker-green); }
-
-    .custom-tooltip {
-      position: absolute;
-      background: #fffde7;
-      color: var(--graphite);
-      padding: 12px 16px;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.06);
-      font-size: 13px;
-      font-weight: 400;
-      font-family: 'Noto Sans SC', sans-serif;
-      pointer-events: none;
-      z-index: 1000;
-      display: none;
-      max-width: 280px;
-      line-height: 1.6;
-      --arrow-left: 50%;
-    }
-
-    .custom-tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: var(--arrow-left);
-      margin-left: -6px;
-      border-width: 6px;
-      border-style: solid;
-      border-color: #fffde7 transparent transparent transparent;
-    }
-
-    .audio-wrapper {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border-top: 1.5px solid var(--graphite);
-      padding: 16px 0 max(16px, env(safe-area-inset-bottom));
-      z-index: 90;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-    }
-
-    .custom-audio-player {
-      max-width: 800px;
-      margin: 0 auto;
-      gap: 24px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-    }
-
-    .now-playing-box { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
-
-    .track-icon {
-      background: var(--marker-yellow);
-      border: 1.5px solid var(--graphite);
-      border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .track-icon svg { fill: var(--graphite); width: 22px; height: 22px; }
-    .now-playing-content { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-    .track-header-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-    .track-title { font-weight: 700; font-size: 14px; letter-spacing: 0.1em; }
-    .time-group { display: flex; font-size: 12px; color: var(--graphite-sub); flex-shrink: 0; font-family: 'Courier New', Courier, monospace; }
-    .progress-container { border: 1.5px solid var(--graphite); border-radius: 4px; height: 8px; background: transparent; width: 100%; overflow: hidden; cursor: pointer; }
-    .progress-bar { background: var(--marker-blue); border-right: 1.5px solid var(--graphite); height: 100%; width: 0%; }
-    .player-controls { display: flex; align-items: center; gap: 8px; }
-
-    .ctrl-btn {
-      border: 1.5px solid transparent;
-      background: transparent;
-      color: var(--graphite);
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      cursor: pointer;
-      border-radius: 40% 60% 50% 45% / 50% 45% 60% 40%;
-    }
-
-    .ctrl-btn:hover { border-color: var(--graphite); background: var(--marker-yellow); }
-    .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-    .ctrl-btn svg { width: 20px; height: 20px; }
-    .play-btn { border-color: var(--graphite); background: #fff; width: 48px; height: 48px; border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%; }
-    .play-btn:hover { background: var(--marker-pink); }
-    .play-btn svg { fill: var(--graphite); width: 24px; height: 24px; }
-    .speed-btn { font-size: 13px; font-weight: 700; width: auto; padding: 0 8px; font-family: 'Courier New', Courier, monospace; }
-
-    @media (max-width: 768px) {
-      .practice-container { width: 100%; margin-top: 10px; padding: 16px; margin-bottom: 150px; }
-      .card-header { margin-bottom: 24px; padding-bottom: 12px; gap: 10px; }
-      .question-select { font-size: 14px; }
-      .mark-btn { width: 30px; height: 30px; font-size: 18px; }
-      .mode-switch { gap: 6px; }
-      .mode-switch button { font-size: 12px; padding: 4px 6px; letter-spacing: 0; }
-      .question-box { font-size: 14px; padding: 30px 16px 14px; }
-      .conversation-box { font-size: 14px; padding: 20px 16px 4px; }
-      .translation { font-size: 12px; }
-      .options-list li { padding: 12px 14px 12px 42px; }
-      .options-num { left: 10px; width: 22px; height: 22px; line-height: 18px; font-size: 12px; }
-      .option-text { font-size: 14px; }
-      .custom-audio-player { padding: 0 16px; gap: 10px; flex-wrap: wrap; }
-      .now-playing-box { width: 100%; flex: none; }
-      .player-controls { width: 100%; justify-content: space-between; gap: 0; }
-      #loopBtn { order: 1 !important; } #prevBtn { order: 2 !important; } #rewindBtn { order: 3 !important; }
-      #playBtn { order: 4 !important; } #forwardBtn { order: 5 !important; } #nextBtn { order: 6 !important; } #speedBtn { order: 7 !important; }
-    }
-
-    @media (max-width: 520px) {
-      header { padding: 8px 10px; }
-      .back-btn { padding: 4px 8px; font-size: 12px; }
-      header h1 { font-size: 14px; }
-      .practice-container { padding: 12px; }
-      .mode-switch button { font-size: 11px; padding: 4px 5px; }
-      .option-text, .conversation-box, .question-box { font-size: 13px; }
-      .custom-audio-player { padding: 0 10px; }
-      .ctrl-btn { width: 30px; height: 30px; }
-      .play-btn { width: 38px; height: 38px; }
-    }
-  </style>
+  <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
 </head>
 <body>
   <header>
@@ -629,8 +77,10 @@
   </div>
 
   <div id="wordTooltip" class="custom-tooltip"></div>
+  <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
 
   <script src="../../../shared/listening-progress.js"></script>
+  <script src="../../../shared/listening-reward-hooks.js"></script>
   <script>
     'use strict';
 
@@ -753,7 +203,7 @@
                     dialogue: [
                         { speaker: "男", text: "我が社が<span class=\"keyword\" data-tip=\"保有（ほゆう）：持有，拥有。\">保有</span>するみどり町の中古マンションですが、<span class=\"keyword\" data-tip=\"空き室（あきしつ）：空房。\">空き室</span>をなくすことは昨年度からの課題でした。これがついに今月で<span class=\"keyword\" data-tip=\"完売（かんばい）：售罄，卖光。\">完売</span>しましたので、報告します。", trans: "（关于敝公司持有的绿町二手公寓，消除空房是从上一年度开始的课题。这个月终于全部售罄了，特此报告。）" },
                         { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" data-tip=\"关于选项1，男人提到【虽然也有提议说改装一下更容易找到买家，但最终没有进行改装工程（改装したほうが買い手がつきやすいという案もありましたが、結局改装工事は行わずに）】，说明没有进行改装，排除。\">改装したほうが<span class=\"keyword\" data-tip=\"買（か）い手（て）：买主，买家。\">買い手</span>がつきやすいという案もありましたが、結局改装工事は行わずに、</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"explain-correct\" data-tip=\"男人明确表示【决定引入保洁服务（清掃サービスを取り入れることにしました）】，并且这招奏效了，成功吸引了三四十岁的夫妇，符合选项2。\">清掃サービスを取り入れることにしました。</span></span>", trans: "（虽然也有提议说改装一下更容易找到买家，但最终没有进行改装工程，而是决定引入保洁服务。）" },
-                        { speaker: "男", text: "清掃会社と<span class=\"keyword\" data-tip=\"提携（ていけい）：合作，携手。\">提携</span>して希望する入居者に定期的にトイレや台所などの<span class=\"keyword\" data-tip=\"水周（みずまわ）り：用水区域（指厨房、卫生间、浴室等）。\">水周り</span>の掃除といったサービスを提供するようにしたんですが、これが<span class=\"keyword\" data-tip=\"当（あ）たる：命中，奏效。\">当たりまして</span>、えー、育児や仕事に忙しい三、四十代の夫婦の入居者を<span class=\"keyword\" data-tip=\"呼（よ）び込（こ）む：招揽，吸引过来。\">呼び込む</span>ことができました。", trans: "（我们与保洁公司合作，为有入住意愿的住户提供定期打扫厕所、厨房等用水区域的服务，这招奏效了，成功吸引到了忙于育儿和工作的三四十岁的夫妇入住。）" },
+                        { speaker: "男", text: "清掃会社と<span class=\"keyword\" data-tip=\"提携（ていけい）：合作，携手。\">提携</span>して希望する入居者に定期的にトイレや台所などの<span class=\"keyword\" data-tip=\"水回（みずまわ）り：用水区域（指厨房、卫生间、浴室等）。\">水回り</span>の掃除といったサービスを提供するようにしたんですが、これが<span class=\"keyword\" data-tip=\"当（あ）たる：命中，奏效。\">当たりまして</span>、えー、育児や仕事に忙しい三、四十代の夫婦の入居者を<span class=\"keyword\" data-tip=\"呼（よ）び込（こ）む：招揽，吸引过来。\">呼び込む</span>ことができました。", trans: "（我们与保洁公司合作，为有入住意愿的住户提供定期打扫厕所、厨房等用水区域的服务，这招奏效了，成功吸引到了忙于育儿和工作的三四十岁的夫妇入住。）" },
                         { speaker: "男", text: "おかげで、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" data-tip=\"关于选项3，男人说【避免了销售价格的大幅降价（大幅な販売価格の値下げも回避できましたし）】，说明并没有降价，排除。\">大幅な販売価格の値下げも<span class=\"keyword\" data-tip=\"回避（かいひ）：回避，避免。\">回避</span>できましたし、</span></span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，男人说【在没有大肆打广告的情况下成功售罄了（大々的な広告を打つことなく完売に成功しました）】，排除了打广告的原因。\"><span class=\"keyword\" data-tip=\"大々的（だいだいてき）：大规模，大范围。\">大々的な</span>広告を<span class=\"keyword\" data-tip=\"打（う）つ：（这里指）打（广告），发布。\">打つ</span>ことなく完売に成功しました。</span></span>", trans: "（托这个的福，我们避免了销售价格的大幅降价，也在没有大肆打广告的情况下成功售罄了。）" }
                     ]
                 },
@@ -824,7 +274,7 @@
                 },
                 options: [
                     { text: "色のコントラストを生かす", translation: "（利用色彩的对比度）", correct: false },
-                    { text: "ふラッシュではなく自然の光を使う", translation: "（不用闪光灯而是用自然光）", correct: false },
+                    { text: "フラッシュではなく自然の光を使う", translation: "（不用闪光灯而是用自然光）", correct: false },
                     { text: "カメラの角度や対象との距離を変える", translation: "（改变相机的角度和与对象的距离）", correct: true },
                     { text: "対象全体をフレームに入れる", translation: "（把对象整体放入取景框）", correct: false }
                 ]
@@ -839,7 +289,7 @@
                         { speaker: "女", text: "皆様、このお寺は１４００年、<span class=\"keyword\" data-tip=\"円勝（えんしょう）：圆胜（人名）。\">円勝</span>という<span class=\"keyword\" data-tip=\"僧侶（そうりょ）：僧侣，和尚。\">僧侶</span>によって建てられたものです。", trans: "（各位，这座寺庙是1400年由一位名叫圆胜的僧侣建造的。）" },
                         { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" data-tip=\"关于选项1，导游提到【这边的庭院相传是圆胜设计的，是能欣赏四季花卉的优美庭院（こちらの庭は円勝の設計と伝えられており、四季の花々が楽しめる優美な庭です）】，但这只是看点之一，并没有说是“最大的”，可以排除。\">こちらの庭は円勝の設計と伝えられており、四季の花々が楽しめる<span class=\"keyword\" data-tip=\"優美（ゆうび）：优美。\">優美な</span>庭です。</span></span>", trans: "（这边的庭院相传是圆胜设计的，是一座能欣赏四季花卉的优美庭院。）" },
                         { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" data-tip=\"关于选项2，导游说【屋檐下精巧的雕刻，以及整个建筑上的工艺也很出色（軒下の精巧な彫刻を始め、建物全体に施された細工も見事なものですが）】，同样只是在介绍特色，排除。\">また<span class=\"keyword\" data-tip=\"軒下（のきした）：屋檐下。\">軒下</span>の<span class=\"keyword\" data-tip=\"精巧（せいこう）：精巧。\">精巧な</span>彫刻を始め、建物全体に<span class=\"keyword\" data-tip=\"施（ほどこ）す：施加，进行。\">施された</span><span class=\"keyword\" data-tip=\"細工（さいく）：工艺，手艺。\">細工</span>も<span class=\"keyword\" data-tip=\"見事（みごと）：出色，精彩。\">見事な</span>ものですが</span></span>、", trans: "（此外，以屋檐下精巧的雕刻为首，整个建筑物上所施加的工艺也很出色，但是）" },
-                        { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"explain-correct\" data-tip=\"导游明确强调【尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点（とりわけ円勝自らが彫った仏像は力強く、最大な見所です）】，这直接符合选项3。\"><span class=\"keyword\" data-tip=\"とりわけ：特别，尤其。\">とりわけ</span>円勝自らが彫った仏像は力強く、最大な見所です。</span></span>", trans: "（尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点。）" },
+                        { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"explain-correct\" data-tip=\"导游明确强调【尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点（とりわけ円勝自らが彫った仏像は力強く、最大の見所です）】，这直接符合选项3。\"><span class=\"keyword\" data-tip=\"とりわけ：特别，尤其。\">とりわけ</span>円勝自らが彫った仏像は力強く、最大の見所です。</span></span>", trans: "（尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点。）" },
                         { speaker: "女", text: "えー、それから、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，导游提到【圆胜晚年画的雪山屏风画也是相当不错的作品（円勝が晩年に書いた山の雪景色の屏風絵もなかなかの作品です）】，但这依然只是补充介绍，并非最大的看点，排除。\">円勝が<span class=\"keyword\" data-tip=\"晩年（ばんねん）：晚年。\">晩年</span>に書いた山の雪景色の<span class=\"keyword\" data-tip=\"屏風絵（びょうぶえ）：屏风画。\">屏風絵</span>もなかなかの作品です。</span></span>では、ごゆっくりご観覧ください。", trans: "（嗯，然后，圆胜晚年画的雪山屏风画也是相当不错的作品。那么，请各位慢慢观赏。）" }
                     ]
                 },
@@ -1129,6 +579,21 @@
     var storageKeyPrefix = 'listening-marks-';
     var LISTENING_TYPE = 'point-comprehension';
     var LISTENING_LEVEL = 'n1';
+    var listeningRewardHooks = window.StudyQuestListeningRewards && window.StudyQuestListeningRewards.create({
+      type: LISTENING_TYPE,
+      level: LISTENING_LEVEL,
+      getExamKey: function() { return currentExamKey; },
+      getCurrentQuestionIndex: function() { return currentQuestionIndex; },
+      getQuestions: function() {
+        return (examData[currentExamKey] && examData[currentExamKey].questions) || [];
+      },
+      buildIndexUrl: function() { return '../index.html'; },
+      buildRetryUrl: function(examKey) {
+        var params = new URLSearchParams();
+        if (examKey) params.set('year', examKey);
+        return params.toString() ? window.location.pathname + '?' + params.toString() : window.location.pathname;
+      }
+    });
     var audioReady = false;
 
     function byId(id) {
@@ -1616,8 +1081,9 @@
       bindEvents();
       updateQuestionSelect();
       setupAudioPlayer();
+      if (listeningRewardHooks) listeningRewardHooks.startRun();
       renderQuestion();
-      if (modeParam !== 'review') runSelfTests();
+      if (modeParam !== 'review' && modeParam !== 'challenge') runSelfTests();
     }
 
     window.changeQuestion = changeQuestion;
@@ -1630,5 +1096,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
   </script>
+    <script src="../../../../../shared/word-bank.js"></script>
+    <script src="../../../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>

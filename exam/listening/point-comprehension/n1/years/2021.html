@@ -5,560 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ポイント理解 - 聴解練習 2021年</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #ffffff;
-      --graphite: #333333;
-      --graphite-sub: #666666;
-      --graphite-faint: #cccccc;
-      --red-pencil: #e64a4a;
-      --red-pencil-light: rgba(230, 74, 74, 0.08);
-      --marker-yellow: rgba(255, 213, 79, 0.35);
-      --marker-blue: rgba(129, 212, 250, 0.25);
-      --marker-pink: rgba(244, 143, 177, 0.25);
-      --marker-green: rgba(129, 199, 132, 0.25);
-      --hatching-graphite: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(51, 51, 51, 0.04) 3px, rgba(51, 51, 51, 0.04) 4px);
-      --transition: all 0.2s ease-out;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      font-family: 'Noto Serif JP', 'Noto Sans JP', 'Noto Sans SC', serif;
-      background: var(--paper);
-      color: var(--graphite);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    header {
-      width: 100%;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border-bottom: 2px solid var(--graphite);
-      border-bottom-left-radius: 50% 2px;
-      border-bottom-right-radius: 50% 3px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-    }
-
-    .back-btn {
-      text-decoration: none;
-      color: var(--graphite);
-      font-size: 14px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .back-btn:hover { background: var(--marker-yellow); }
-
-    .practice-container {
-      margin-top: 40px;
-      margin-bottom: 140px;
-      max-width: 840px;
-      width: 92%;
-      padding: 20px 40px;
-      flex: 1;
-      animation: fadeIn 0.4s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-      padding-bottom: 16px;
-      border-bottom: 1.5px dashed var(--graphite-faint);
-      gap: 20px;
-      flex-wrap: nowrap;
-    }
-
-    .header-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
-
-    .question-select {
-      padding: 4px 28px 4px 4px;
-      font-size: 16px;
-      border: none;
-      border-bottom: 1.5px solid var(--graphite);
-      background: transparent;
-      color: var(--graphite);
-      outline: none;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .mark-btn {
-      font-size: 22px;
-      width: 34px;
-      height: 34px;
-      background: #fff;
-      border: 1.5px solid var(--graphite-faint);
-      border-radius: 10px;
-      cursor: pointer;
-      color: var(--graphite-faint);
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mark-btn:hover,
-    .mark-btn.active { color: var(--graphite); border-color: var(--graphite); background: var(--marker-yellow); }
-
-    .mode-switch {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-left: auto;
-    }
-
-    .mode-switch button {
-      border: none;
-      background: transparent;
-      color: var(--graphite-sub);
-      padding: 4px 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      position: relative;
-      font-family: inherit;
-      white-space: nowrap;
-    }
-
-    .mode-switch button.active { color: var(--graphite); z-index: 1; }
-
-    .mode-switch button.active::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--marker-yellow);
-      border-radius: 2px 8px 2px 6px / 6px 2px 8px 2px;
-      z-index: -1;
-      transform: rotate(-1deg);
-    }
-
-    .right-panel { width: 100%; }
-
-    .mode-practice .transcript-section,
-    .mode-practice .translation { display: none !important; }
-
-    .mode-explanation .translation { display: block; }
-
-    .transcript-section {
-      margin-bottom: 40px;
-      border: 1.5px solid var(--graphite);
-      border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
-      padding-bottom: 20px;
-    }
-
-    .question-box {
-      background: var(--marker-blue);
-      padding: 34px 22px 16px;
-      border-bottom: 1.5px dashed var(--graphite);
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 1.8;
-      position: relative;
-    }
-
-    .question-box::before {
-      content: '問題';
-      position: absolute;
-      top: 8px;
-      left: 18px;
-      background: var(--paper);
-      color: var(--graphite);
-      font-weight: 900;
-      padding: 2px 10px;
-      border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
-      border: 1.5px solid var(--graphite);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      font-family: sans-serif;
-    }
-
-    .question-image-area {
-      display: none;
-      margin: 16px 0 18px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1.5px dashed rgba(51, 51, 51, 0.18);
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .question-image-area img { display: block; width: auto; max-width: 100%; max-height: 320px; margin: 0 auto; object-fit: contain; border-radius: 8px; }
-
-    .conversation-box {
-      padding: 28px 22px 4px;
-      font-size: 16px;
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    .conversation-line { margin-bottom: 18px; display: flex; }
-
-    .speaker-name {
-      font-weight: 900;
-      background: var(--marker-yellow);
-      padding: 2px 8px;
-      border-radius: 2px 6px 3px 5px / 5px 3px 6px 2px;
-      margin-right: 12px;
-      white-space: nowrap;
-      height: fit-content;
-      font-size: 13px;
-      border: 1.5px solid var(--graphite);
-    }
-
-    .speaker-text { flex: 1; min-width: 0; }
-
-    .options-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .options-list li {
-      padding: 14px 16px 14px 50px;
-      background: #fff;
-      border: 1.5px solid var(--graphite-faint);
-      border-radius: 3px 255px 4px 25px / 255px 5px 225px 4px;
-      transition: var(--transition);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.02);
-    }
-
-    .options-num {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
-      text-align: center;
-      line-height: 22px;
-      font-size: 14px;
-      font-family: sans-serif;
-      font-weight: bold;
-      border: 1.5px solid var(--graphite);
-      border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-      background: #fff;
-      z-index: 2;
-    }
-
-    .mode-practice .options-list li { cursor: pointer; }
-    .mode-practice .options-list li:hover { background: var(--hatching-graphite); border-color: var(--marker-blue); }
-    .mode-practice .options-list li.selected { background: var(--marker-blue); border-color: var(--graphite); }
-    .mode-practice .options-list li.selected .options-num { background: var(--graphite); color: var(--paper); }
-
-    .inline-confirm-btn {
-      margin-left: 16px;
-      padding: 6px 20px;
-      background: var(--graphite);
-      color: var(--paper);
-      border: none;
-      border-radius: 3px 8px 4px 6px / 6px 4px 8px 3px;
-      font-size: 14px;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      letter-spacing: 0.05em;
-      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-    }
-
-    .mode-practice .options-list li.judged-correct,
-    .mode-practice .options-list li.judged-wrong { padding-right: 80px; }
-
-    .mode-practice .options-list li.judged-correct {
-      background: var(--marker-green) !important;
-      border-color: var(--graphite) !important;
-      border-radius: 4px;
-    }
-
-    .mode-practice .options-list li.judged-correct .options-num { border-color: var(--red-pencil); color: var(--red-pencil); background: #fff; }
-
-    .mode-practice .options-list li.judged-correct::before {
-      content: '';
-      position: absolute;
-      left: 2px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border: 2px solid var(--red-pencil);
-      border-radius: 40% 60% 50% 45% / 50% 45% 60% 40%;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-
-    .mode-practice .options-list li.judged-correct::after {
-      content: "正解";
-      color: var(--red-pencil);
-      font-weight: 900;
-      font-size: 14px;
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .mode-practice .options-list li.judged-wrong {
-      background: var(--red-pencil-light) !important;
-      border: 1.5px dashed var(--graphite-faint) !important;
-      opacity: 0.8;
-      border-radius: 4px;
-    }
-
-    .mode-practice .options-list li.judged-wrong::before {
-      content: '✕';
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--red-pencil);
-      font-size: 28px;
-      font-family: sans-serif;
-      opacity: 0.7;
-      z-index: 1;
-    }
-
-    .mode-explanation .correct-answer { background: var(--marker-green); border-color: var(--graphite); border-radius: 4px; }
-    .mode-explanation .correct-answer .options-num { background: var(--red-pencil); color: var(--paper); border-color: var(--red-pencil); }
-
-    .option-content { flex: 1; display: flex; flex-direction: column; min-width: 0; word-break: break-word; }
-    .option-text { font-size: 16px; font-weight: 700; line-height: 1.6; }
-
-    .translation {
-      color: var(--graphite-sub);
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 13px;
-      line-height: 1.6;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1.5px dashed var(--graphite-faint);
-      display: none;
-    }
-
-    .keyword {
-      color: var(--graphite);
-      background: linear-gradient(transparent 50%, rgba(255, 213, 79, 0.5) 50%);
-      border-bottom: 1.5px dashed rgba(51, 51, 51, 0.3);
-      padding: 0 2px;
-      cursor: pointer;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    .keyword:hover { background: rgba(255, 213, 79, 0.35); border-bottom-style: solid; }
-
-    .mode-practice .highlight-correct,
-    .mode-practice .highlight-wrong { background: transparent; color: inherit; padding: 0; font-weight: inherit; border: none; }
-
-    .mode-practice .opt-tag { display: none !important; }
-
-    .mode-explanation .highlight-correct,
-    .mode-explanation .highlight-wrong { background: transparent; color: var(--graphite); padding: 0 2px; font-weight: 700; }
-    .mode-explanation .explain-wrong { cursor: pointer; border-bottom: 2.5px solid rgba(244, 143, 177, 0.8); display: inline; padding-bottom: 1px; }
-    .mode-explanation .explain-correct { cursor: pointer; border-bottom: 2.5px solid rgba(129, 199, 132, 0.8); display: inline; padding-bottom: 1px; }
-    .mode-explanation .explain-wrong:hover { border-bottom-color: rgba(230, 74, 74, 0.8); background: rgba(244, 143, 177, 0.15); }
-    .mode-explanation .explain-correct:hover { border-bottom-color: rgba(76, 175, 80, 0.8); background: rgba(129, 199, 132, 0.15); }
-
-    .mode-explanation .opt-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 900;
-      width: 18px;
-      height: 18px;
-      line-height: 16px;
-      text-align: center;
-      border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%;
-      margin-right: 6px;
-      vertical-align: middle;
-      border: 1.5px solid var(--graphite);
-      background: #fff;
-      font-family: sans-serif;
-    }
-
-    .mode-explanation .tag-wrong { background: var(--marker-pink); }
-    .mode-explanation .tag-correct { background: var(--marker-green); }
-
-    .custom-tooltip {
-      position: absolute;
-      background: #fffde7;
-      color: var(--graphite);
-      padding: 12px 16px;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 2px 4px 10px rgba(0,0,0,0.06);
-      font-size: 13px;
-      font-weight: 400;
-      font-family: 'Noto Sans SC', sans-serif;
-      pointer-events: none;
-      z-index: 1000;
-      display: none;
-      max-width: 280px;
-      line-height: 1.6;
-      --arrow-left: 50%;
-    }
-
-    .custom-tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: var(--arrow-left);
-      margin-left: -6px;
-      border-width: 6px;
-      border-style: solid;
-      border-color: #fffde7 transparent transparent transparent;
-    }
-
-    .audio-wrapper {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border-top: 1.5px solid var(--graphite);
-      padding: 16px 0 max(16px, env(safe-area-inset-bottom));
-      z-index: 90;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-    }
-
-    .custom-audio-player {
-      max-width: 800px;
-      margin: 0 auto;
-      gap: 24px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-    }
-
-    .now-playing-box { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
-
-    .track-icon {
-      background: var(--marker-yellow);
-      border: 1.5px solid var(--graphite);
-      border-radius: 2px 8px 3px 6px / 6px 3px 8px 2px;
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .track-icon svg { fill: var(--graphite); width: 22px; height: 22px; }
-    .now-playing-content { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-    .track-header-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-    .track-title { font-weight: 700; font-size: 14px; letter-spacing: 0.1em; }
-    .time-group { display: flex; font-size: 12px; color: var(--graphite-sub); flex-shrink: 0; font-family: 'Courier New', Courier, monospace; }
-    .progress-container { border: 1.5px solid var(--graphite); border-radius: 4px; height: 8px; background: transparent; width: 100%; overflow: hidden; cursor: pointer; }
-    .progress-bar { background: var(--marker-blue); border-right: 1.5px solid var(--graphite); height: 100%; width: 0%; }
-    .player-controls { display: flex; align-items: center; gap: 8px; }
-
-    .ctrl-btn {
-      border: 1.5px solid transparent;
-      background: transparent;
-      color: var(--graphite);
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      cursor: pointer;
-      border-radius: 40% 60% 50% 45% / 50% 45% 60% 40%;
-    }
-
-    .ctrl-btn:hover { border-color: var(--graphite); background: var(--marker-yellow); }
-    .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-    .ctrl-btn svg { width: 20px; height: 20px; }
-    .play-btn { border-color: var(--graphite); background: #fff; width: 48px; height: 48px; border-radius: 50% 45% 55% 40% / 45% 55% 40% 50%; }
-    .play-btn:hover { background: var(--marker-pink); }
-    .play-btn svg { fill: var(--graphite); width: 24px; height: 24px; }
-    .speed-btn { font-size: 13px; font-weight: 700; width: auto; padding: 0 8px; font-family: 'Courier New', Courier, monospace; }
-
-    @media (max-width: 768px) {
-      .practice-container { width: 100%; margin-top: 10px; padding: 16px; margin-bottom: 150px; }
-      .card-header { margin-bottom: 24px; padding-bottom: 12px; gap: 10px; }
-      .question-select { font-size: 14px; }
-      .mark-btn { width: 30px; height: 30px; font-size: 18px; }
-      .mode-switch { gap: 6px; }
-      .mode-switch button { font-size: 12px; padding: 4px 6px; letter-spacing: 0; }
-      .question-box { font-size: 14px; padding: 30px 16px 14px; }
-      .conversation-box { font-size: 14px; padding: 20px 16px 4px; }
-      .translation { font-size: 12px; }
-      .options-list li { padding: 12px 14px 12px 42px; }
-      .options-num { left: 10px; width: 22px; height: 22px; line-height: 18px; font-size: 12px; }
-      .option-text { font-size: 14px; }
-      .custom-audio-player { padding: 0 16px; gap: 10px; flex-wrap: wrap; }
-      .now-playing-box { width: 100%; flex: none; }
-      .player-controls { width: 100%; justify-content: space-between; gap: 0; }
-      #loopBtn { order: 1 !important; } #prevBtn { order: 2 !important; } #rewindBtn { order: 3 !important; }
-      #playBtn { order: 4 !important; } #forwardBtn { order: 5 !important; } #nextBtn { order: 6 !important; } #speedBtn { order: 7 !important; }
-    }
-
-    @media (max-width: 520px) {
-      header { padding: 8px 10px; }
-      .back-btn { padding: 4px 8px; font-size: 12px; }
-      header h1 { font-size: 14px; }
-      .practice-container { padding: 12px; }
-      .mode-switch button { font-size: 11px; padding: 4px 5px; }
-      .option-text, .conversation-box, .question-box { font-size: 13px; }
-      .custom-audio-player { padding: 0 10px; }
-      .ctrl-btn { width: 30px; height: 30px; }
-      .play-btn { width: 38px; height: 38px; }
-    }
-  </style>
+  <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
 </head>
 <body>
   <header>
@@ -629,8 +77,10 @@
   </div>
 
   <div id="wordTooltip" class="custom-tooltip"></div>
+  <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
 
   <script src="../../../shared/listening-progress.js"></script>
+  <script src="../../../shared/listening-reward-hooks.js"></script>
   <script>
     'use strict';
 
@@ -931,26 +381,26 @@
                         id: 7,
                         audio: "../assets/audio/2021.7-7.mp3",
                         script: {
-                            question: "問：町の電気店を経営する父親と一緒に働いている娘が話しています。娘は店について、どのように改善したほうがいいといっていますか。",
-                            questionTrans: "（问题：和经营镇上电器店的父亲一起工作的女儿正在说话。关于店铺，女儿说怎样改善比较好？）",
+                            question: "七番：町の電気店を経営する父親と一緒に働いている娘が話しています。娘は店について、どのように改善したほうがいいといっていますか。",
+                            questionTrans: "（第七题：和经营街边电器店的父亲一起工作的女儿正在交谈。女儿说店里哪方面应该改善一下比较好？）",
                             dialogue: [
-                                { speaker: "男", text: "お帰り、商品販売の研修はどうだった？", trans: "（回来啦，商品销售的研修怎么样？）" },
-                                { speaker: "女", text: "勉強になった。うちの店でできそうなこともあったよ。商品の販売には、４つの<span class=\"keyword\" onclick=\"showTooltip(event, '要素（ようそ）：要素。')\">要素</span>があるんだって。えーと、時期、数量、価格、場所を考えて売るってこと。", trans: "（学到了很多。也有我们店感觉能做到的事情哦。据说商品销售有4个要素。嗯……就是考虑时期、数量、价格和场所来销售。）" },
-                                { speaker: "男", text: "ああ、時期っていうのは、扇風機なら夏、<span class=\"keyword\" onclick=\"showTooltip(event, '暖房器具（だんぼうきぐ）：取暖设备。')\">暖房器具</span>なら冬っていうようなことだね。", trans: "（啊，所谓时期，就是说电风扇就是夏天，取暖设备就是冬天这种事吧。）" },
-                                { speaker: "女", text: "うん。うちも季節ぐらいは意識してたけど。たとえば、引っ越しの多い時期には、洗濯機や<span class=\"keyword\" onclick=\"showTooltip(event, '炊飯器（すいはんき）：电饭煲。')\">炊飯器</span>とか。新学期には、電子辞書とか、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span><span class=\"explain-correct\" onclick=\"showTooltip(event, '女儿明确建议【我觉得更细致地配合时期来准备商品比较好（もっと細かく時期に合わせた商品を揃えたらいいと思う）】，这符合选项1。')\">もっと細かく時期に合わせた商品を<span class=\"keyword\" onclick=\"showTooltip(event, '揃（そろ）える：备齐，凑齐，准备。')\">揃えたら</span>いいと思う。</span></span>", trans: "（嗯。我们店也就是对季节有点意识而已。比如，在搬家多的时期，就卖洗衣机或者电饭煲之类的。新学期的话，就卖电子词典之类的，我觉得更细致地配合时期来准备商品比较好。）" },
-                                { speaker: "男", text: "あ、そうか。", trans: "（啊，原来如此。）" },
-                                { speaker: "女", text: "あと、数量っていうのは、売れる<span class=\"keyword\" onclick=\"showTooltip(event, '見込（みこ）み：预期，估计。')\">見込み</span>とか在庫のスペースを考えて管理できる量の商品を<span class=\"keyword\" onclick=\"showTooltip(event, '仕入（しい）れる：采购，进货。')\">仕入れる</span>ことだって。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于数量，女儿表示【我觉得这一点照以前那样就没问题（この点は、これまで通りで問題ないと思うけど）】，说明不需要改善采购数量，可以排除选项2。')\">この点は、これまで通りで問題ないと思うけど。</span></span>", trans: "（还有，所谓数量，就是要考虑卖出去的预期以及库存空间，采购能够管理得了的量的商品。我觉得这一点照以前那样就没问题。）" },
-                                { speaker: "男", text: "そうだな。で、価格だけど。うちは大型店なんかにくらべると少し高めだよね。", trans: "（也是啊。然后是价格，我们店跟大型店铺之类的一比，稍微有点贵呢。）" },
-                                { speaker: "女", text: "うん、ただ、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于价格，女儿认为【并不是单纯便宜就好……多少贵一点，附加上售后服务会更让人高兴（単に安ければいいわけじゃないって……多少高くても、アフターサービスを付けたほうが喜ばれるし）】，说明她不主张降价，排除选项3。')\">単に安ければいいわけじゃないって、うちは、<span class=\"keyword\" onclick=\"showTooltip(event, '年配（ねんぱい）：年长，上了年纪。')\">年配</span>のお客さんも多いから、多少高くても、アフターサービスを付けたほうが喜ばれるし。</span></span>これは４つ目の場所にも関連するんだけど。", trans: "（嗯，不过，并不是单纯便宜就好，我们店上了年纪的客人也多，所以就算多少贵一点，附加上售后服务会更让人高兴的。这和第四个要素“场所”也有关联。）" },
-                                { speaker: "男", text: "場所っていうのは地域性だね、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于适应地区特性的商品，父亲说【我们店本来就准备了操作简单的机型对吧（うちでは、操作がかんたんな機種をもともと揃えてるよね）】，女儿也表示赞同，说明这是已经做到的事，不是今后的改善点，排除选项4。')\">この辺は高齢者が多いから、うちでは、操作がかんたんな機種をもともと揃えてるよね。</span></span>", trans: "（场所指的就是地区特性呢，这一带老年人多，所以我们店本来就准备了操作简单的机型对吧。）" },
-                                { speaker: "女", text: "うん、そうだよね。", trans: "（嗯，是这样呢。）" }
+                                { speaker: "男", text: "お帰り、商品販売の研修はどうだった？", trans: "（回来啦，商品销售的培训怎么样？）" },
+                                { speaker: "女", text: "勉強になった。うちの店でできそうなこともあったよ。商品の販売には、４つの要素があるんだって。えーと、時期、数量、価格、場所を考えて売るってこと。", trans: "（学到了不少。也有我们店能做到的事哦。据说商品销售有四个要素。嗯……就是要考虑时间、数量、价格和地点来卖。）" },
+                                { speaker: "男", text: "ああ、時期っていうのは、扇風機なら夏、暖房器具なら冬っていうようなことだね。", trans: "（啊，时间就是指，电风扇就是夏天，取暖设备就是冬天之类的事吧。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于选项1，女儿提到【如果是根据季节，我们也有考虑到（うちも季節ぐらいは意識してだけど）】，并提议【根据时期更细致地准备商品（もっと細かく時期に合わせた商品を揃えたらいいと思う）】，这只是四要素之一的建议，并不是她最终想强调的改善点。')\">うん。うちも季節ぐらいは意識してだけど。たとえば、引っ越しの多い時期には、洗濯機や炊飯器とか。新学期には、電子辞書とか、もっと細かく時期に合わせた商品を<span class=\"keyword\" onclick=\"showTooltip(event, '揃（そろ）える：备齐。')\">揃えたら</span>いいと思う。</span></span>", trans: "（嗯。其实我们也有考虑过季节的。比如，在搬家多的时期，就备齐洗衣机、电饭煲之类的。新学期就备电子词典什么的，我觉得应该根据时期更细致地准备商品。）" },
+                                { speaker: "男", text: "あ、そうか。", trans: "（啊，这样啊。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于选项2，女儿说关于数量【我觉得这一点，像以前一样做就没问题（この点は、これまで通りで問題ないと思うけど）】，所以排除。')\">あと、数量っていうのは、売れる<span class=\"keyword\" onclick=\"showTooltip(event, '見込（みこ）み：预计。')\">見込み</span>とか在庫のスペースを考えて管理できる量の商品を<span class=\"keyword\" onclick=\"showTooltip(event, '仕入（しい）れる：采购。')\">仕入れる</span>ことだって。この点は、これまで通りで問題ないと思うけど。</span></span>", trans: "（还有，数量是指，要考虑到预计能卖出的量和库存空间，采购能够管理的商品数量。我觉得这一点，像以前一样做就没问题。）" },
+                                { speaker: "男", text: "そうだな。で、価格だけど。うちは大型店なんかにくらべると少し高めだよね。", trans: "（也是。那么，价格方面呢。我们店和大型店之类的相比，稍微偏高一点吧。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于选项3，女儿表示【也不是光便宜就行（単に安ければいいわけじゃない）】，她认为【稍微贵点，如果带售后服务客人会更开心（多少高くても、アフタサービスを付けたほうが喜ばれるし）】，所以她不建议降价，排除。')\">うん、ただ、<span class=\"keyword\" onclick=\"showTooltip(event, '単（たん）に：单纯。')\">単に</span>安ければいいわけじゃないって、うちは、年配のお客さんも多いから、多少高くても、アフタサービスを付けたほうが喜ばれるし。</span></span>これは４つ目の場所にも関連するんだけど。", trans: "（嗯，但是，也不是光便宜就行。我们这儿上了年纪的客人也多，所以就算稍微贵点，如果附带售后服务的话，客人也会更高兴的。这也和第四点‘地点’有关。）" },
+                                { speaker: "男", text: "場所っていうのは地域性だね、この辺は高齢者が多いから、うちでは、操作がかんたんな機種をもともと揃えてるよね。", trans: "（地点就是指地域性呢。这一带老年人多，所以我们店本来就备有操作简单的机型对吧。）" },
+                                { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span><span class=\"explain-correct\" onclick=\"showTooltip(event, '女儿在前文将价格和第四要素“场所（地域性）”联系起来，强调针对老年人多这一地域特点提供售后服务，父亲也认同了这一点（操作简单的机型），女儿附和【对，就是这样（そうだよ）】，这说明核心的改善方向是“在店里放适合当地情况的商品”，符合选项4。')\">うん、そうだよね。</span></span>", trans: "（嗯，对，就是这样。）" }
                             ]
                         },
                         options: [
-                            { text: "細かく時期に合わせて商品を出したほうがいい", translation: "（更细致地配合时期来推出商品比较好）", correct: true },
+                            { text: "細かく時期に合わせて商品を出したほうがいい", translation: "（根据时期更细致地推出商品比较好）", correct: false },
                             { text: "仕入れる商品の数を減らしたほうがいい", translation: "（减少采购商品的数量比较好）", correct: false },
                             { text: "商品の価格を下げたほうがいい", translation: "（降低商品价格比较好）", correct: false },
-                            { text: "地域に合った商品を店に置いたほうがいい", translation: "（在店里放置符合地区特性的商品比较好）", correct: false }
+                            { text: "地域に合った商品を店に置いたほうがいい", translation: "（在店里放适合当地情况的商品比较好）", correct: true }
                         ]
                     }
         ]
@@ -1255,6 +705,21 @@
     var storageKeyPrefix = 'listening-marks-';
     var LISTENING_TYPE = 'point-comprehension';
     var LISTENING_LEVEL = 'n1';
+    var listeningRewardHooks = window.StudyQuestListeningRewards && window.StudyQuestListeningRewards.create({
+      type: LISTENING_TYPE,
+      level: LISTENING_LEVEL,
+      getExamKey: function() { return currentExamKey; },
+      getCurrentQuestionIndex: function() { return currentQuestionIndex; },
+      getQuestions: function() {
+        return (examData[currentExamKey] && examData[currentExamKey].questions) || [];
+      },
+      buildIndexUrl: function() { return '../index.html'; },
+      buildRetryUrl: function(examKey) {
+        var params = new URLSearchParams();
+        if (examKey) params.set('year', examKey);
+        return params.toString() ? window.location.pathname + '?' + params.toString() : window.location.pathname;
+      }
+    });
     var audioReady = false;
 
     function byId(id) {
@@ -1726,8 +1191,9 @@
       bindEvents();
       updateQuestionSelect();
       setupAudioPlayer();
+      if (listeningRewardHooks) listeningRewardHooks.startRun();
       renderQuestion();
-      if (modeParam !== 'review') runSelfTests();
+      if (modeParam !== 'review' && modeParam !== 'challenge') runSelfTests();
     }
 
     window.changeQuestion = changeQuestion;
@@ -1740,5 +1206,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
   </script>
+    <script src="../../../../../shared/word-bank.js"></script>
+    <script src="../../../../../shared/unified-header.js" data-kiki-unified-header-loader></script>
 </body>
 </html>
