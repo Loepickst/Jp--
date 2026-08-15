@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <!-- 极简版侧边导航 -->
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">募集概要</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2015年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-title" style="border-bottom: none; margin-bottom: 8px;">
+                やまかわ新聞の読者モニター募集
+            </div>
+            <div class="poster-text-block" style="text-align: center; margin-bottom: 20px;">
+                紙面に掲載された記事や広告に関するアンケートにお答えください。
+            </div>
+            <div class="article-translation">
+                山川新闻的读者体验员招募<br>请回答关于报纸版面上刊登的报道及广告的问卷。
+            </div>
+
+            <!-- 第一框：募集概要 -->
+            <div class="outline-box">
+                <div class="outline-title">募集概要</div>
+                
+                <div class="dl-grid">
+                    <div class="dl-term">モニター契約期間</div>
+                    <div class="dl-desc">2016年4月から2017年3月まで</div>
+                    
+                    <div class="dl-term">応募条件</div>
+                    <div class="dl-desc">
+                        <p>1～5の条件をすべて満たしている方</p>
+                        <p>(1) <span class="ks-target target-q1 inline-icon">モニター契約期間中、以下にお住まいの方</span>関東に1都3県（東京都、神奈川県、千葉県、埼玉県）</p>
+                        <p>(2) <span class="ks-target target-q1 inline-icon">やまかわ新聞を朝、夕刊ともに自宅で<span class="vocab-word" data-reading="こうどく" data-meaning="订阅">購読</span>中の方</span></p>
+                        <p>(3) <span class="ks-target target-q1 inline-icon">2016年4月2日時点で20歳以上の方</span></p>
+                        <p>(4) <span class="ks-target target-q1 inline-icon">新聞、マスコミ、広告関係の職業に<span class="vocab-word" data-reading="じゅうじ" data-meaning="从事，就职">従事</span>されていない方</span></p>
+                        <p>(5) <span class="ks-target target-q1 inline-icon">インターネットに接続できるパソコン等をお持ちの方</span></p>
+                        <p class="indent-list" style="padding-left: 0;">＊<span class="ks-target target-q1 inline-icon">過去に「やまかわ新聞読者モニター」をされた方は、応募できません。</span></p>
+                    </div>
+
+                    <div class="dl-term">募集人数</div>
+                    <div class="dl-desc">300人</div>
+
+                    <div class="dl-term">締め切り</div>
+                    <div class="dl-desc">2016年2月1日（月）</div>
+
+                    <div class="dl-term">募集方法</div>
+                    <div class="dl-desc">はがきに「読者モニター希望」の旨と住所、氏名、年齢、性別、職業、メールアドレスをご記入の上、ご送付ください。</div>
+
+                    <div class="dl-term">結果通知</div>
+                    <div class="dl-desc">3月下旬までにメールでご連絡します。</div>
+                </div>
+            </div>
+            
+            <div class="article-translation">
+                【招募概要】<br>
+                体验员契约期间：2016年4月至2017年3月<br>
+                报名条件：满足1～5所有条件的人员<br>
+                (1) 在体验员契约期间，居住在以下地区的人员：关东1都3县（东京都、神奈川县、千叶县、埼玉县）<br>
+                (2) 在家中同时订阅了山川新闻的早报和晚报的人员<br>
+                (3) 截至2016年4月2日已满20岁的人员<br>
+                (4) 未从事新闻、传媒、广告相关职业的人员<br>
+                (5) 拥有可连接互联网的电脑等设备的人员<br>
+                ＊过去曾担任过“山川新闻读者体验员”的人员无法报名。<br>
+                招募人数：300人　　截止日期：2016年2月1日（一）<br>
+                报名方法：请在明信片上写明“希望成为读者体验员”，并填上住所、姓名、年龄、性别、职业、电子邮箱地址后寄送。<br>
+                结果通知：最晚将在3月下旬通过邮件联系。
+            </div>
+
+            <!-- 第二框：问卷内容 -->
+            <div class="outline-box">
+                <div class="outline-title">アンケート内容</div>
+                
+                <div class="dl-grid">
+                    <div class="dl-term">内容</div>
+                    <div class="dl-desc">紙面に掲載された記事や広告についての評価など</div>
+                    
+                    <div class="dl-term">実施回数</div>
+                    <div class="dl-desc">月2、3回程度</div>
+                    
+                    <div class="dl-term"><span class="vocab-word" data-reading="しゃれい" data-meaning="酬谢，谢礼">謝礼</span></div>
+                    <div class="dl-desc">回答1回につき図書カード500円分（任期終了時にまとめて発送）</div>
+                    
+                    <div class="dl-term">手順</div>
+                    <div class="dl-desc">
+                        <p>①アンケート実施1週間前にメールで「実施のお知らせ」が届きます</p>
+                        <p><span class="ks-target target-q2 inline-icon">②アンケート実施当日にウェブサイトのアンケート回答ページにアクセスして回答してください。</span></p>
+                    </div>
+
+                    <div class="dl-term">留意点</div>
+                    <div class="dl-desc">
+                        <p>＊<span class="ks-target target-q2 inline-icon">アンケート実施前一週間分の紙面を保管しておいてください。アンケートはその中から当社指定の記事や広告について答えていただきます。</span></p>
+                        <p>＊<span class="ks-target target-q2 inline-icon">回答可能時間は、アンケート実施当日の午前7時から24時間です。</span></p>
+                        <p>＊<span class="ks-target target-q2 inline-icon">回答形式には自由記述式と選択式があります。自由記述式の箇所は<span class="vocab-word" data-reading="くうらん" data-meaning="空白处">空欄</span>でもかまいませんが、選択式の箇所が未入力であった場合、回答は受付けられません。</span></p>
+                    </div>
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 16px;">
+                    〈問い合わせ先〉： やまかわ新聞読者モニター担当<br>
+                    電話： 07-1234-9876（受付時間：土日祝日を除く午前10時～午後5時）
+                </div>
+            </div>
+
+            <div class="article-translation">
+                【问卷内容】<br>
+                内容：关于版面上刊登的报道及广告的评价等<br>
+                实施次数：每月2、3次左右<br>
+                谢礼：每回答1次赠送面值500日元的图书卡（任期结束时一并发送）<br>
+                步骤：<br>
+                ① 问卷实施的1周前，将通过邮件收到“实施通知”。<br>
+                ② 请在问卷实施当天访问网站的问卷回答页面进行回答。<br>
+                注意事项：<br>
+                ＊请保管问卷实施前一周的报纸版面。问卷将要求您针对其中本公司指定的报道或广告进行回答。<br>
+                ＊可回答的时间为，问卷实施当天的上午7点起24小时内。<br>
+                ＊回答形式分为自由记述式和选择式。自由记述的部分可以留空，但如果选择式的部分未填写，回答将不予受理。<br>
+                〈咨询处〉：山川新闻读者体验员负责人<br>电话：07-1234-9876（接待时间：除周末节假日外的上午10点～下午5点）
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            次の4人は、読者モニターに応募しようと思っている。全員インターネットを使えるパソコンを持っており、過去にモニターに応募したことはない。応募条件をすべて満たしているのは誰か。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="student-table">
+                                    <tr>
+                                        <th>名前</th>
+                                        <th>職業</th>
+                                        <th>年齢<br>(2016年4月2日時点)</th>
+                                        <th>モニター契約期間中の居住地</th>
+                                        <th>購読中のやまかわ新聞</th>
+                                    </tr>
+                                    <tr>
+                                        <td>水野</td>
+                                        <td>大学生</td>
+                                        <td>22歳</td>
+                                        <td>神奈川県</td>
+                                        <td>朝刊のみ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ソウさん</td>
+                                        <td>広告代理店社員</td>
+                                        <td>24歳</td>
+                                        <td>埼玉県</td>
+                                        <td>朝刊と夕刊</td>
+                                    </tr>
+                                    <tr>
+                                        <td>チョウさん</td>
+                                        <td>旅行会社社員</td>
+                                        <td>27歳</td>
+                                        <td>東京都</td>
+                                        <td>朝刊と夕刊</td>
+                                    </tr>
+                                    <tr>
+                                        <td>山田さん</td>
+                                        <td>銀行員</td>
+                                        <td>32歳</td>
+                                        <td>千葉県 (2016年8月に愛知県へ転出予定)</td>
+                                        <td>朝刊と夕刊</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="article-translation">
+                                (下列4人想报名读者体验员。所有人都有可联网的电脑，且过去未曾报名过体验员。满足所有报名条件的是谁？)<br>
+                                (表格列：名字 / 职业 / 年龄(截至2016年4月2日) / 体验员契约期间的居住地 / 订阅中的山川新闻情况)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">水野さん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">ソウさん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">チョウさん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">山田さん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            アンケートに回答するときに、モニターがすべきことは何か。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(在回答问卷时，体验员应当做的事情是什么？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">指定時間内に所定のウェブサイトを通じて回答する。</div>
+                            <div class="option-trans">在指定时间内通过指定的网站回答。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">保管しておいたすべての新聞を読み直して回答する。</div>
+                            <div class="option-trans">将保存下来的所有报纸重新读一遍再回答。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">「実施のお知らせ」を受信してから24時間以内に回答する。</div>
+                            <div class="option-trans">在收到“实施通知”后的24小时内回答。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">回答形式を問わず、すべての質問に回答する。</div>
+                            <div class="option-trans">不论回答形式如何，所有的提问都必须要回答。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】水野同学订阅的报纸是「朝刊のみ」（仅早报），不符合招募条件（2）中「朝、夕刊ともに自宅で購読中の方」（早、晚报均在家中订阅的人）的要求。",
+                    "2": "【✖ 排除】宗同学的职业是「広告代理店社員」（广告代理店员工），不符合招募条件（4）中未在新闻、传媒、广告相关行业就职的限制。",
+                    "3": "【✔ 正解】赵同学是旅行公司员工，27岁，居住在东京都，订阅了早报和晚报。各项信息均准确对应了招募条件（1）至（5），且满足题干中“有电脑且过去未曾报名过”的补充条件。因此选项3正确。",
+                    "4": "【✖ 排除】山田同学预定在合约期内的2016年8月搬至“爱知县”，不符合招募条件（1）中合约期间内居住在关东1都3县内的要求。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】步骤②明确指示要在“实施当天访问网站的问卷回答页面进行回答（ウェブサイトの…ページにアクセスして）”，注意事项中也规定了“回答时间为实施当天的上午7点起24小时内”。该选项“在指定时间内通过指定的网站回答”准确对应了这两点要求。",
+                    "2": "【✖ 错误】注意事项中说明，只需针对“本公司指定的报道或广告（当社指定の記事や広告）”进行回答即可，并非要求重新阅读保留下来的“所有报纸（すべての新聞）”。",
+                    "3": "【✖ 错误】原文在步骤①写明“通知”会在实施的1周前发到，而注意事项指出回答时间是“实施当天的上午7点起24小时内”，并非收到通知后的24小时内。",
+                    "4": "【✖ 错误】注意事项最后一条指出“自由记述的部分可以留空（空欄でもかまいません）”，不要求回答“所有提问（すべての質問）”。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

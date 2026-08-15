@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2013年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title">
+                    緑町病院　雇用時健康診断のご案内
+                </div>
+                
+                <div class="article-translation">
+                    绿町医院 录用时健康体检指南
+                </div>
+
+                <div class="poster-section-title">【基本検査項目】</div>
+                <div class="poster-text-block">
+                    ①<span class="vocab-word" data-reading="もんしん" data-meaning="问诊">問診</span>および診察　②身体計測　③血圧測定　④尿検査　⑤視力検査　⑥聴力検査　⑦血液検査　⑧<span class="vocab-word" data-reading="きょうぶ" data-meaning="胸部">胸部</span>エックス線検査　⑨<span class="vocab-word" data-reading="しんでんず" data-meaning="心电图">心電図</span>検査<br>
+                    ※その他検査を追加でご希望の方は、ご予約時にお問い合わせください。
+                </div>
+                <div class="article-translation">
+                    【基本检查项目】<br>
+                    ①问诊及诊察 ②身体测量 ③血压测定 ④尿检 ⑤视力检查 ⑥听力检查 ⑦血液检查 ⑧胸部X光检查 ⑨心电图检查<br>
+                    ※希望追加其他检查的各位，请在预约时咨询。
+                </div>
+
+                <div class="poster-section-title">【実施日時】</div>
+                <div class="poster-text-block">
+                    月曜日～金曜日　9：30～17：00
+                </div>
+                <div class="article-translation">
+                    【实施时间】 星期一～星期五 9:30～17:00
+                </div>
+
+                <div class="poster-section-title">【予約方法】</div>
+                <ul class="poster-list">
+                    <li>・予約の申し込みは、電話もしくはＥメールにて受け付けます。<span class="ks-target target-q1 inline-icon">電話の場合は検診日の2日前まで</span>、Ｅメールの場合は4日前までにお願いします。</li>
+                    <li>・<span class="ks-target target-q1 inline-icon">上記①～⑨以外の検査をご希望の場合は、必ずお電話にてお申し込みください。</span></li>
+                </ul>
+                <div class="article-translation">
+                    【预约方法】<br>
+                    ・预约申请可通过电话或电子邮件受理。电话预约请在体检日的前2天之前，电子邮件预约请在体检日的前4天之前进行。<br>
+                    ・如果您希望进行上述①～⑨以外的检查，请务必通过电话申请。
+                </div>
+
+                <div class="poster-section-title">【費用】</div>
+                <div class="poster-text-block">
+                    （検診費用および診断書発行まですべてを含んだ金額です）<br>
+                    <div class="indent-text">
+                        電話による予約の場合　　9,450円（税込み）<br>
+                        Ｅメールによる予約の場合　8,925円（税込み）
+                    </div>
+                    ※上記①～⑨以外の検査を受ける方は、追加料金が発生します。
+                </div>
+                <div class="article-translation">
+                    【费用】<br>
+                    （包含体检费用及开具体检证明在内的全部金额）<br>
+                    通过电话预约的情况 9,450日元（含税）<br>
+                    通过电子邮件预约的情况 8,925日元（含税）<br>
+                    ※接受上述①～⑨以外检查的人员，将产生追加费用。
+                </div>
+
+                <div class="poster-section-title">【検査結果】</div>
+                <ul class="poster-list">
+                    <li>・健康診断書は、受診日の1週間後から<span class="vocab-word" data-reading="まどぐち" data-meaning="窗口">窓口</span>でのお渡しになります。郵送も可能です（送料<span class="vocab-word" data-reading="べっと" data-meaning="另外">別途</span>）。</li>
+                    <li>・<span class="ks-target target-q2 inline-icon">結果記入用の指定用紙がある場合は、受診当日、受付にご提出ください。</span></li>
+                    <li>・<span class="ks-target target-q2 inline-icon">英文による健康診断書も作成いたします（作成料別途）。ご希望の方は、ご予約時にお知らせください。</span>作成には、別途日数が約2日かかります。</li>
+                </ul>
+                <div class="article-translation">
+                    【检查结果】<br>
+                    ・健康诊断书（体检证明）将于就诊日1周后在窗口发放。也可邮寄（邮费另计）。<br>
+                    ・如有用于填写结果的指定表格，请在就诊当天提交至接待处。<br>
+                    ・我们也可以制作英文的健康诊断书（制作费另计）。希望制作英文证明的人员，请在预约时告知。制作需要另外花费约2天时间。
+                </div>
+
+                <div class="poster-section-title">【お支払い】</div>
+                <div class="poster-text-block">
+                    ・当日、窓口にてお支払いください。各種カードも取り扱っております。
+                </div>
+                <div class="article-translation">
+                    【付款】・请在当天于窗口付款。也接受各种信用卡。
+                </div>
+
+                <div class="poster-section-title">【注意事項】</div>
+                <ul class="poster-list">
+                    <li>・受診6時間前までに食事を終わらせてください。それ以降は、お水のみでお過ごしください。</li>
+                    <li>・眼鏡をお使いの方は、当日ご<span class="vocab-word" data-reading="じさん" data-meaning="自带，随身携带">持参</span>ください。コンタクトレンズをお使いの方は、ケースをご持参ください。</li>
+                </ul>
+                <div class="article-translation">
+                    【注意事项】<br>
+                    ・请在就诊前6小时结束进食。此后，请仅饮用水。<br>
+                    ・使用眼镜的人员，当天请随身携带。使用隐形眼镜的人员，请随身携带眼镜盒。
+                </div>
+
+                <div class="poster-text-block">
+                    <strong>【問い合わせ先】</strong> 緑町病院　電話：01-1234-5678　（受付時間：月曜日～金曜日の9：00～17：00）　Ｅメール：yoyaku@midori-machi.com
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            この病院で基本検査項目のほかに、追加の検査も受ける必要がある場合、予約はどのようにしなければならない決まりになっているか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(在这家医院，如果除了基本检查项目之外，还需要接受追加检查的话，规定必须如何进行预约？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">電話で、2日前までに予約する。</div>
+                            <div class="option-trans">通过电话，提前2天前预约。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">電話で、4日前までに予約する。</div>
+                            <div class="option-trans">通过电话，提前4天前预约。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">Eメールで、2日前までに予約する。</div>
+                            <div class="option-trans">通过电子邮件，提前2天前预约。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">Eメールで、4日前までに予約する。</div>
+                            <div class="option-trans">通过电子邮件，提前4天前预约。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            アンさんは健康診断書を会社指定の用紙を使って、英文で作成してもらう必要がある。作成料金を受診当日に支払うこと以外に何をすることが必要か。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(安小姐需要使用公司指定的表格，委托院方出具英文的健康体检证明。除了在体检当天支付出具费用之外，还需要做什么？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">予約時に英文の診断書の作成を<span class="vocab-word" data-reading="いらい" data-meaning="委托">依頼</span>し、受診日までに用紙を郵送する。</div>
+                            <div class="option-trans">预约时委托制作英文诊断书，并在就诊日前将表格邮寄过去。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">予約時に英文の診断書の作成を依頼し、受診当日用紙を渡す。</div>
+                            <div class="option-trans">预约时委托制作英文诊断书，并在就诊当天递交表格。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">受診当日に英文の診断書の作成を依頼し、受診後用紙を郵送する。</div>
+                            <div class="option-trans">就诊当天委托制作英文诊断书，并在就诊后邮寄表格。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">受診当日に英文の診断書の作成を依頼し、用紙を渡す。</div>
+                            <div class="option-trans">就诊当天委托制作英文诊断书，并递交表格。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】海报在【予約方法】一栏明确规定：如果需要追加检查（上記①〜⑨以外の検査），必须通过电话申请（必ずお電話にてお申し込みください）。而针对电话预约的时间限制，原文写道：电话预约最晚需在体检日前2天（電話の場合は検診日の2日前まで）。两者结合，对应选项1。题干中的「しなければならない」是动词「なる」的ない形加条件表示“必须”。",
+                    "2": "【✖ 错误】“提前4天”（4日前まで）是使用电子邮件（Eメール）预约的时间限制。",
+                    "3": "【✖ 错误】一旦涉及追加检查，根据规定必须使用电话（必ずお電話にて），不能使用电子邮件（Eメール）。",
+                    "4": "【✖ 错误】理由同上，涉及追加检查必须使用电话，排除了电子邮件选项。"
+                }
+            },
+            q2: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 错误】关于“公司指定的表格”，海报在【検査結果】一栏中明确指示要在“体检当天，提交至接待处”（受診当日、受付にご提出ください），而非在体检日前邮寄（郵送する）。",
+                    "2": "【✔ 正解】安小姐的需求包含两点：①英文诊断书，②指定表格。对应海报【検査結果】的规定：①需要英文版者请在“预约时告知”（ご予約時にお知らせください）；②持有填写结果用的指定表格，请在“体检当天提交”（受診当日、受付にご提出ください）。该选项将两点准确结合。",
+                    "3": "【✖ 错误】申请英文诊断书需要在“预约时”（ご予約時に）告知，而不是在“体检当天”（受診当日に）临时委托。表格也需要在“当天”当面提交，并非事后邮寄。",
+                    "4": "【✖ 错误】错误同样在于申请英文诊断书的时间点，规定要求在“预约时”而不是“体检当天”临时提出申请。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

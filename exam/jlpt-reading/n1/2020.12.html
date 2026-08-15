@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2020年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                
+                <div class="poster-main-title">
+                    工場見学・<span class="vocab-word" data-reading="とうげい" data-meaning="陶艺">陶芸</span>体験のご案内
+                    <div class="poster-intro">
+                        田原陶芸では、陶芸器の生地の製造から<span class="vocab-word" data-reading="えつけ" data-meaning="上色，绘画">絵付け</span>までを見学したり、カップや茶碗作りを体験したりすることができます。ご自身がお作りになったものは、後日お送りいたします。
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    工厂参观・陶艺体验指南<br>
+                    在田原陶艺，您可以参观陶器坯体的制造直到上色的过程，或者体验制作杯子和茶碗。您亲手制作的物品，将会在日后寄送给您。
+                </div>
+
+                <div class="table-responsive">
+                    <table class="poster-table">
+                        <tbody>
+                            <tr>
+                                <td>開始時間</td>
+                                <td>①9時　　②10時　　③14時</td>
+                            </tr>
+                            <tr>
+                                <td>所要時間</td>
+                                <td>
+                                    A. 工場見学と陶芸体験：約80分<br>
+                                    B. 工場見学：約30分<br>
+                                    <span class="ks-target target-q2">注意：土、日、祝日は工場の一部が見学できない場合もございます。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>予約方法</td>
+                                <td>
+                                    インターネット<br>
+                                    http://www.tahara-togei/koio-kengaku/yoyaku/<br>
+                                    電話　0731-92-3604　（8：30－16：50）
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>休業日</td>
+                                <td>年末年始、お盆</td>
+                            </tr>
+                            <tr>
+                                <td>費用</td>
+                                <td>工場見学：無料、陶芸体験：2000円（送料込み）</td>
+                            </tr>
+                            <tr>
+                                <td>所在地</td>
+                                <td>安見市西町 5982</td>
+                            </tr>
+                            <tr>
+                                <td>問い合わせ先</td>
+                                <td>
+                                    田原陶芸株式会社工場見学・陶芸体験担当<br>
+                                    電話　0731-92-3604　（8：30－16：50）
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="article-translation">
+                    【表格信息】<br>
+                    开始时间：①9时 ②10时 ③14时<br>
+                    所需时间：A.工厂参观和陶艺体验：约80分钟 / B.工厂参观：约30分钟<br>
+                    注意：周六、周日、节假日会有工厂部分区域无法参观的情况。<br>
+                    预约方法：网络(网址) / 电话(时间)<br>
+                    休息日：年末年初、盂兰盆节<br>
+                    费用：工厂参观：免费、陶艺体验：2000日元(含运费)<br>
+                    所在地及咨询处：(地址及电话等信息)
+                </div>
+
+                <div class="note-text" style="margin-top: 20px;">
+                    ＊１ インターネットでのご予約は、見学希望日の3日前まで<span class="vocab-word" data-reading="うけたまわって" data-meaning="接受，听从">承って</span>おります。<br><br>
+                    ＊２ お電話でのご予約は、見学希望日の前日まで承っております。
+                </div>
+                
+                <div class="note-text ks-target target-q1">
+                    以下のお客様に関しましては、<span class="ks-target target-q1">必ずお電話でご予約</span>ください。準備等ございますので、<span class="ks-target target-q1">見学希望日の7日前までにお申し込み</span>をお願いします。
+                </div>
+                <ul class="note-list ks-target target-q1">
+                    <li class="ks-target target-q1">10名以上の団体で利用されるお客様</li>
+                    <li class="ks-target target-q1">学校にかかわる活動で利用されるお客様</li>
+                </ul>
+
+                <div class="article-translation">
+                    *1 网络的预约，受理至希望参观日的3天前为止。<br>
+                    *2 电话的预约，受理至希望参观日的前一天为止。<br>
+                    关于以下的客人，请务必用电话进行预约。因为有各项准备工作，请在希望参观日的7天前进行报名。<br>
+                    ・作为10人以上团体来利用的客人<br>
+                    ・为了与学校相关的活动来利用的客人
+                </div>
+
+                <div class="note-text" style="margin-top: 24px; font-weight: 700;">
+                    明日（12月15日）から一週間の予約<span class="vocab-word" data-reading="じょうきょう" data-meaning="状况，情况">状況</span>　〇予約可　△残り2名以下　×不可
+                </div>
+
+                <div class="table-responsive">
+                    <table class="availability-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>15 (火)</th>
+                                <th>16 (水)</th>
+                                <th>17 (木)</th>
+                                <th>18 (金)</th>
+                                <th>19 (土)</th>
+                                <th>20 (日)</th>
+                                <th>21 (月)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>①9時</td>
+                                <td>×</td>
+                                <td>〇</td>
+                                <td>〇</td>
+                                <td>×</td>
+                                <td>△</td>
+                                <td class="ks-target target-q2">〇</td>
+                                <td>×</td>
+                            </tr>
+                            <tr>
+                                <td>②10時</td>
+                                <td>△</td>
+                                <td>×</td>
+                                <td>×</td>
+                                <td>〇</td>
+                                <td>×</td>
+                                <td>×</td>
+                                <td>×</td>
+                            </tr>
+                            <tr>
+                                <td>③14時</td>
+                                <td>△</td>
+                                <td class="ks-target target-q2">△</td>
+                                <td>〇</td>
+                                <td>〇</td>
+                                <td>×</td>
+                                <td>〇</td>
+                                <td>△</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="article-translation">
+                    从明天（12月15日）起一周的预约情况： 〇 可预约　△ 剩余2名以下　× 不可
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ソン先生は、来月以降にクラスの学生15名を連れて、「B. 工場見学」に行きたいと考えている。予約に関して、注意しなければならないことは何か。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(孙老师打算在下个月之后带着班里的15名学生去参加“B.工厂参观”。关于预约，需要注意的事情是什么？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">インターネットで行う場合は見学希望日の3日前まで、電話の場合は前日までにする</div>
+                            <div class="option-trans">用网络进行的情况下需要在希望参观日的3天前为止办理，电话的情况下需要在前一天为止办理。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">インターネットでも電話でもいいが、見学希望日の7日前までにする</div>
+                            <div class="option-trans">无论是网络还是电话都可以，但需要在希望参观日的7天前为止办理。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">電話で見学希望日の7日前までにする</div>
+                            <div class="option-trans">用电话在希望参观日的7天前为止办理。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">電話で見学希望日の前日までにする</div>
+                            <div class="option-trans">用电话在希望参观日的前一天为止办理。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            マルコさんは友達と3人で「A. 工場見学と陶芸体験」に行きたいと考えている。12月15日から21日の間の3人の空いている日時をメモにまとめたが、予約が入れられる日時はいつか。また、当日の見学についての注意事項として、あっているのはどれか。<br>
+                            <div class="memo-box">
+                                <div style="margin-bottom: 8px;">マルコさんのメモ</div>
+                                <div class="memo-grid">
+                                    <div style="font-weight: 700;">ハヌルさん</div>
+                                    <div>16午後のみ、20午前のみ</div>
+                                    <div style="font-weight: 700;">アットさん</div>
+                                    <div>16午後のみ、18、19午前のみ、20、21</div>
+                                    <div style="font-weight: 700;">マルコ</div>
+                                    <div>16、19午後のみ、20、21</div>
+                                </div>
+                            </div>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(马可打算和朋友共3人去参加“A.工厂参观和陶艺体验”。他把12月15日到21日期间3人的空闲时间整理成了笔记，那么能预约上的时间是哪一个？另外，作为当天参观的注意事项，描述正确的是哪一项？<br>马可的笔记：<br>Hanul：16日下午，20日上午<br>Atto：16日下午，18全天，19日上午，20全天，21全天<br>Marco：16全天，19日下午，20全天，21全天)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">16日の14時と20日の9時。見学は16日はすべてできるが、20日は一部できない所がある。</div>
+                            <div class="option-trans">16日的14时和20日的9时。16日可以参观全部区域，但20日有部分地方不能参观。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">16日の14時と20日の9時。見学は16日も20日も一部できない所がある。</div>
+                            <div class="option-trans">16日的14时和20日的9时。16日和20日都有部分地方不能参观。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">20日の9時。見学は一部できない所がある。</div>
+                            <div class="option-trans">20日的9时。有部分地方不能参观。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">20日の9時。見学はできない。</div>
+                            <div class="option-trans">20日的9时。不能进行参观。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】此选项列出的是普通的网络和电话预约限制，并未考虑孙老师带领15名学生这一特殊条件。",
+                    "2": "【✖ 排除】包含网络（インターネット）的选项，但对于“10人以上”或“学校活动”的客人，文中规定要求“请务必用电话预约（必ずお電話でご予約ください）”。",
+                    "3": "【✔ 正解】孙老师带领班级里的15名学生，符合海报补充说明中的条件：既是“作为10人以上团体来利用的客人（10名以上の団体）”，也是“为了与学校相关的活动来利用的客人（学校にかかわる活動）”。根据补充规定，符合这类情况的客人“请务必用电话预约（必ずお電話でご予約ください）”，并且因为准备的原因“请在希望参观日的7天前报名（7日前までにお申し込みをお願いします）”。选项的描述符合此规定。",
+                    "4": "【✖ 排除】满足特殊条件的客人需要提前7天（7日前まで）预约，选项中写的前一天（前日まで）的时间不足。"
+                }
+            },
+            q2: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】根据海报中的标识说明，“△”代表“剩余2名以下”。马可一行有3人，因此无法预约标记为“△”的16日14时（水曜14時），所以可预约时间并非16日14时和20日9时两个。",
+                    "2": "【✖ 排除】无法预约16日的14时，错误理由同上。",
+                    "3": "【✔ 正解】首先找出3人共同的空闲时间。通过对比马可的笔记可知，三人都有空的时间是16日的下午（对应14时）和20日的上午（对应9时或10时）。接着查看预约情况表：16日的14时显示为“△（剩余2名以下）”，马可一行3人超出了名额无法预约；20日的10时显示为“×（不可）”，只有20日的9时显示为“〇（可）”。所以他们唯一能预约的时间是20日的9时。此外，由于20日是星期日，根据海报「所要時間」下方的注意事项：“周六、周日、节假日会有工厂部分区域无法参观的情况（土、日、祝日は工場の一部が見学できない場合もございます）”。该选项的描述与客观条件相符。",
+                    "4": "【✖ 排除】根据注意事项，只是工厂的部分区域有无法参观的情况（一部が見学できない場合もございます），并不是说完全不能参观（見学はできない）。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

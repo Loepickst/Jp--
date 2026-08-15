@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2014年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title-right">
+                    ＣＰＪカード
+                </div>
+                <div class="poster-title" style="margin-top:0;">
+                    ＣＰＪカードのご案内
+                </div>
+                
+                <div class="article-translation">
+                    CPJ信用卡<br>CPJ信用卡指南
+                </div>
+
+                <div class="table-responsive">
+                    <table class="poster-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">カードの種類</th>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>C</th>
+                                <th>D</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th colspan="2">お申し込みの資格</th>
+                                <td>30歳以上＊1</td>
+                                <td class="ks-target target-q1">18歳以上＊1<br><hr style="border: 0; border-top: 1px solid var(--graphite-faint); margin: 4px 0;">29歳以下</td>
+                                <td>18歳以上＊1</td>
+                                <td>18歳以上</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">年会費</th>
+                                <th>ご本人</th>
+                                <td class="ks-target target-q1">10,500円</td>
+                                <td>3,150円</td>
+                                <td class="ks-target target-q1">2,625円</td>
+                                <td class="ks-target target-q1">1,050円</td>
+                            </tr>
+                            <tr>
+                                <th>ご家族</th>
+                                <td>お1人1,050円</td>
+                                <td>お1人420円</td>
+                                <td>お1人420円</td>
+                                <td>無料</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">ご利用可能枠</th>
+                                <td>最高500万円</td>
+                                <td>最高300万円</td>
+                                <td>最高300万円</td>
+                                <td>最高200万円</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">旅行保険</th>
+                                <th>国内</th>
+                                <td>最高5,000万円</td>
+                                <td>最高5,000万円</td>
+                                <td>最高3,000万円</td>
+                                <td>最高2,000万円</td>
+                            </tr>
+                            <tr>
+                                <th>海外</th>
+                                <td>最高8,000万円</td>
+                                <td>最高5,000万円</td>
+                                <td class="ks-target target-q1">最高3,000万円</td>
+                                <td class="ks-target target-q1">最高2,000万円</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="note-right">＊1 学生は除きます</div>
+                </div>
+
+                <div class="article-translation">
+                    【表格翻译供参考】<br>
+                    卡片种类：A / B / C / D<br>
+                    申请资格：30岁以上*1 / 18岁以上*1(至)29岁以下 / 18岁以上*1 / 18岁以上<br>
+                    年会费(本人)：10,500日元 / 3,150日元 / 2,625日元 / 1,050日元<br>
+                    年会费(家属)：每人1,050日元 / 每人420日元 / 每人420日元 / 免费<br>
+                    可用额度：最高500万日元 / 最高300万日元 / 最高300万日元 / 最高200万日元<br>
+                    旅行保险(国内)：最高5,000万 / 最高5,000万 / 最高3,000万 / 最高2,000万<br>
+                    旅行保险(海外)：最高8,000万 / 最高5,000万 / 最高3,000万 / 最高2,000万<br>
+                    *1 排除学生（学生不可办理）
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 24px; font-weight: bold;">
+                    お申込み方法
+                </div>
+                <ul class="poster-list numbered">
+                    <li>インターネットまたは電話で資料をご<span class="vocab-word" data-reading="せいきゅう" data-meaning="请求，索取">請求</span>ください。</li>
+                    <li>資料が到着しましたら、入会申込書にご記入のうえ、本人確認書類と一緒にご返送ください。（Dカードをお申し込みの方は、学生証のコピーも<span class="vocab-word" data-reading="どうふう" data-meaning="附入，装在一起">同封</span>してください。）</li>
+                    <li>当社に入会申込書到着後、1か月前後でカードを発行いたします。当社の判断で、ご希望に添えない場合もございます。</li>
+                </ul>
+                <div class="article-translation">
+                    申请方法：<br>
+                    1. 请通过网络或电话索取资料。<br>
+                    2. 资料寄达后，请填写申请表，并与本人身份确认材料一起寄回。（申请D卡的人，请一并附上学生证的复印件。）<br>
+                    3. 本公司收到申请表后，约在1个月左右发卡。根据本公司的判断，也有可能无法满足您的申请要求。
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 16px;">
+                    本人確認書類は、次の<span class="vocab-word" data-reading="いずれか" data-meaning="其中之一">いずれか</span>1点のコピー（お名前、生年月日、現住所の記載面）をご用意ください。
+                </div>
+                <div class="indent-text">
+                    <span class="ks-target target-q2">（１）運転免許をお持ちの方は、必ず運転免許証</span><br>
+                    （２）運転免許をお持ちでない方は、以下のいずれか1点のコピー　＊２
+                </div>
+                
+                <div class="doc-box">
+                    <div class="doc-inner-list">
+                        <span>1. パスポート</span>
+                        <span>2. 健康保険証</span>
+                        <span>3. 住民票</span>
+                        <span>4. 在留カードまたは特別永住者証明書</span>
+                    </div>
+                    <div>
+                        <span class="ks-target target-q2">＊（１）もしくは（２）に書かれた住所と入会申込書の現住所が異なる場合は、現住所が記載されている以下の書類のうち、いずれか1点のコピーを<span class="vocab-word" data-reading="あわせて" data-meaning="一并，同时">併せて</span>ご提出ください。</span><br>
+                        <span class="ks-target target-q2">a. 公共料金（電気、ガス、水道のいずれか一つ）の<span class="vocab-word" data-reading="りょうしゅうしょ" data-meaning="收据">領収書</span></span>　b. 社会保険料（健康保険、年金など）の領収書　c. 税金を納めたときの証明書
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    身份确认材料，请准备以下任意1件的复印件（印有姓名、出生年月日、现住址的一面）。<br>
+                    (1) 持有驾照的人，务必提供驾照。<br>
+                    (2) 没有驾照的人，请提供下方任意1件的复印件 *2<br>
+                    【框内文字】：<br>
+                    1.护照 2.健康保险证 3.住民票(户籍证明) 4.在留卡或特别永住者证明书<br>
+                    * 如果(1)或(2)上所写的地址与申请表上的现住址不同，请一并提交下方记载有现住址的材料中的任意1件复印件。<br>
+                    a. 公共事业费（电、煤气、水之中任意一个）的收据  b. 社会保险费（健康保险、年金等）的收据  c. 缴纳税金时的证明书
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            中西さんは35歳の会社員で、CPJカードを申し込むことにした。中西さんは年会費を5000円以内に抑えたいが、海外旅行の保険はなるべく高額なものがよい。中西さんに最も合っているカードはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(中西先生是一位35岁的公司职员，决定申请CPJ信用卡。中西先生想把年会费控制在5000日元以内，但海外旅行保险越出额越高越好。最适合中西先生的卡是哪一张？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">A</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">B</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">C</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">D</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            会社員の山本さんはCPJカードを申し込むことにした。山本さんは引っ越しをしたばかりのため、運転免許証に書かれた住所と現住所が異なっている。カードを申し込む際、入会申込書のほかに、次のどの書類を提出しなければならないか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(公司职员山本先生决定申请CPJ信用卡。因为山本先生刚搬家，所以驾照上写的地址和现在的住址不一样。申请卡片时，除了入会申请表之外，还必须提交以下哪项材料？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">運転免許証のコピーだけ</div>
+                            <div class="option-trans">仅驾照的复印件</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">運転免許証のコピーと住民票のコピー</div>
+                            <div class="option-trans">驾照复印件与住民票(户口本)复印件</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">運転免許証のコピーと先月の電話料金の領収書のコピー</div>
+                            <div class="option-trans">驾照复印件与上个月电话费收据复印件</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">運転免許証のコピーと先月の水道料金の領収書のコピー</div>
+                            <div class="option-trans">驾照复印件与上个月水费收据复印件</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】A卡的年会费为「10,500円」，超出了中西先生期望的5000日元以内（5000円以内に抑えたい）的预算条件。",
+                    "2": "【✖ 排除】B卡的报名资格一栏明确写有「18歳以上＊1（同时包含）29歳以下」。中西先生的年龄是35岁，不符合B卡的年龄限制规定。",
+                    "3": "【✔ 正解】中西先生35岁，符合C卡的年龄要求（18岁以上）；C卡年会费为「2,625円」，符合5000日元以内的要求；此时剩下的候选是C卡和D卡（D卡年会费1,050日元），对比两者的海外旅行保险，C卡最高3,000万，D卡最高2,000万。根据“保险额度尽量高”（なるべく高額なものがよい）的条件，C卡最符合要求。",
+                    "4": "【✖ 排除】虽然D卡也满足年龄和年会费条件，但其海外旅行保险（最高2,000万）低于C卡（最高3,000万），因此在“保险额度尽量高”的对比下被排除。"
+                }
+            },
+            q2: { 
+                correct: "4", 
+                optAnalysis: {
+                    "1": "【✖ 错误】由于山本先生刚搬家导致驾照地址与现址不同，根据补充规定（＊），除了驾照外，还需要“一并提交（併せてご提出ください）”能够证明现址的额外材料。仅提供驾照是不够的。",
+                    "2": "【✖ 错误】「住民票」属于（2）类没有驾照时的身份证明材料，并不在下方规定的地址补充材料（a、b、c项）之列。",
+                    "3": "【✖ 错误】补充材料的a项为「公共料金（電気、ガス、水道のいずれか一つ）の領収書」（公共事业费：电、煤气、水之中任意一个的收据）。「電話料金」（电话费）并未包含在明确的规定范围内（含まれていない）。",
+                    "4": "【✔ 正解】山本先生有驾照，根据规定（1）「必ず運転免許証」，必须提供驾照复印件。同时因为地址不符，根据补充规定（＊），需要从a、b、c三项中选一件。选项4中的「水道料金」（水费）准确对应了a项「公共料金（電気、ガス、水道のいずれか一つ）」的要求。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

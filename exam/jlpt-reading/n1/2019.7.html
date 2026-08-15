@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2019年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                
+                <div class="poster-main-title">9月の県立歴史博物館<span class="vocab-word" data-reading="もよおしもの" data-meaning="活动，集会">催し物</span>のお知らせ</div>
+                
+                <div class="article-translation">
+                    9月份县立历史博物馆活动通知
+                </div>
+
+                <!-- Event A -->
+                <div class="event-block">
+                    <div class="event-title">A 特別講座「<span class="vocab-word" data-reading="こもんじょ" data-meaning="古文书，古代文件">古文書</span>から青井市を知ろう」（全2回）</div>
+                    <div class="event-details">
+                        <div class="event-item"><div class="event-label">定員</div><div class="event-value">各回50名</div></div>
+                        <div class="event-item"><div class="event-label">会場</div><div class="event-value">2階 研修室</div></div>
+                        <div class="event-item"><div class="event-label">日時</div><div class="event-value">①9月7日(土)　②9月14日(土) 14:00~16:00</div></div>
+                        <div class="event-item"><div class="event-label">受講料</div><div class="event-value">全2回1,800円　※1回のみの受講可、1回1,000円</div></div>
+                    </div>
+                </div>
+
+                <!-- Event B -->
+                <div class="event-block">
+                    <div class="event-title">B 体験教室「武士の茶道」</div>
+                    <div class="event-details">
+                        <div class="event-item"><div class="event-label">定員</div><div class="event-value">20名</div></div>
+                        <div class="event-item"><div class="event-label">会場</div><div class="event-value">茶室</div></div>
+                        <div class="event-item"><div class="event-label">日時</div><div class="event-value">9月6日(金) 9:50~12:00</div></div>
+                        <div class="event-item"><div class="event-label">参加費</div><div class="event-value">500円</div></div>
+                    </div>
+                </div>
+
+                <!-- Event C -->
+                <div class="event-block">
+                    <div class="event-title">C 市内建築めぐり「江戸時代の建築」</div>
+                    <div class="event-details">
+                        <div class="event-item"><div class="event-label">定員</div><div class="event-value">20名</div></div>
+                        <div class="event-item"><div class="event-label">見学先</div><div class="event-value">旧杉下邸、旧前岩邸など</div></div>
+                        <div class="event-item"><div class="event-label">日時</div><div class="event-value">9月1日(日) 県立歴史博物館9:30集合。12:30頃戻り、解散。</div></div>
+                        <div class="event-item"><div class="event-label">参加費</div><div class="event-value">1,500円</div></div>
+                        <div class="event-item"><div class="event-label">その他</div><div class="event-value">14:00より、希望者を対象に、当館で開催中の特別展「江戸末期の建築」の解説を行います(約30分)。ご希望の方は当日お申し出ください。(別途、入館チケットをご購入ください。)</div></div>
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    A 特别讲座“从古文书了解青井市”（共2回）<br>
+                    ◆名额：每次50人  ◆会场：2楼 研修室<br>
+                    ◆时间：①9月7日(周六) ②9月14日(周六) 14:00~16:00<br>
+                    ◆听课费：共2回1,800日元 ※可仅听一次课，一次1,000日元<br><br>
+                    B 体验教室“武士的茶道”<br>
+                    ◆名额：20人  ◆会场：茶室<br>
+                    ◆时间：9月6日(周五) 9:50~12:00  ◆参加费：500日元<br><br>
+                    C 市内建筑巡游“江户时代的建筑”<br>
+                    ◆名额：20人  ◆参观地：旧杉下宅、旧前岩宅等<br>
+                    ◆时间：9月1日(周日) 县立历史博物馆9:30集合。12:30左右返回、解散。<br>
+                    ◆参加费：1,500日元<br>
+                    ◆其他：14:00起，针对有意愿者，将对本馆正在举办的特别展“江户末期的建筑”进行解说(约30分钟)。希望参加者请在当天提出。(请另外购买入馆门票。)
+                </div>
+
+                <div class="re-recruit-banner">7月開催の特別講座 再募集！</div>
+                
+                <!-- Event D -->
+                <div class="event-block">
+                    <div class="event-title">D 特別講座「白船山遺跡発掘の歴史」（全2回）</div>
+                    <div class="event-details">
+                        <div class="event-item"><div class="event-label">募集人数</div><div class="event-value">各回若干名</div></div>
+                        <div class="event-item"><div class="event-label">会場</div><div class="event-value">2階 研修室1</div></div>
+                        <div class="event-item"><div class="event-label">日時</div><div class="event-value">①7月20日(土)　②7月27日(土) 14:00~16:00</div></div>
+                        <div class="event-item"><div class="event-label">受講料</div><div class="event-value ks-target target-q2">全2回1,800円　<span class="ks-target target-q2">※1回のみの受講可、1回1,000円</span></div></div>
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    7月举办的特别讲座 再次招募！<br>
+                    D 特别讲座“白船山遗址发掘的历史”（共2回）<br>
+                    ◆招募人数：每次若干名  ◆会场：2楼 研修室1<br>
+                    ◆时间：①7月20日(周六) ②7月27日(周六) 14:00~16:00<br>
+                    ◆听课费：共2回1,800日元 ※可仅听一次课，一次1,000日元
+                </div>
+
+                <div class="section-heading">【申込方法】</div>
+                <div class="info-grid">
+                    <div class="info-label">A～C：</div>
+                    <div>
+                        往復はがきに住所・氏名・電話番号・希望する催し物名（複数回開催の催し物は希望回）を明記の上、下記宛先へお送りください。お申し込みが定員を超えた場合は<span class="vocab-word" data-reading="ちゅうせん" data-meaning="抽签">抽選</span>となります。<br>
+                        締切：7月19日（金）<span class="vocab-word" data-reading="ひっちゃく" data-meaning="必须寄达">必着</span>
+                    </div>
+                    <div class="info-label">D：</div>
+                    <div>
+                        電話でのみ受け付けます。ご連絡の時点で定員に達していた場合、受講をお断りすることもございます。<br>
+                        <span class="ks-target target-q2">締切：各回の3日前</span>
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    【报名方法】<br>
+                    A～C：在往返明信片上写明住址・姓名・电话号码・希望参加的活动名称(若是举办多次的活动请注明希望参加的场次)，并寄送到下方地址。报名人数超过定额时将进行抽选。<br>
+                    截止日期：7月19日(周五) 必须寄达。<br>
+                    D：仅接受电话报名。如果在您联系时已经达到定额，也有可能拒绝您的听课申请。<br>
+                    截止日期：每次的3天前。
+                </div>
+
+                <div class="section-heading">【受講料・参加費】</div>
+                <div class="info-grid" style="margin-bottom: 24px;">
+                    <div class="info-label">A、C：</div>
+                    <div class="ks-target target-q1">
+                        開催日の1週間前までにお支払いください。詳細は、お申し込みの結果をお知らせする<span class="vocab-word" data-reading="へんしんはがき" data-meaning="回信用的明信片">返信はがき</span>でご案内します。
+                    </div>
+                    <div class="info-label">B、D：</div>
+                    <div class="ks-target target-q2">
+                        当日会場にてお支払いください。
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    【听课费・参加费】<br>
+                    A、C：请在举办日的1周前进行支付。详情将会在通知报名结果的回信明信片中予以说明。<br>
+                    B、D：请在当天于会场支付。
+                </div>
+
+                <div class="contact-info">
+                    〒027-3351 青井市本町6-43 県立歴史博物館事務室企画<span class="vocab-word" data-reading="ふきゅうか" data-meaning="普及科">普及課</span><br>
+                    お問合せ・お申込先: 019-160-0224 (平日 8:30~17:00受付)
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ロンさんは、市内建築めぐり「江戸時代の建築」に参加したいと思っている。ロンさんが留意しなければならないことはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(罗恩想参加市内建筑巡游“江户时代的建筑”。罗恩需要留意的事情是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">開催日当日は、自身で直接見学先に向かわなければならない。</div>
+                            <div class="option-trans">举办日当天，必须自己直接前往参观地。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">特別展の解説も聞きたい場合、開催日の前日までに連絡する必要がある。</div>
+                            <div class="option-trans">如果也想听特别展的解说，需要在举办日的前一天之前进行联系。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">受け付けは先着順のため、できるだけ早く申し込まなければならない。</div>
+                            <div class="option-trans">因为受理是按照先到先得的顺序，所以应该尽可能早地报名。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">参加が決まったら、開催日の1週間前までに参加費を支払う必要がある。</div>
+                            <div class="option-trans">一旦决定参加，就需要在举办日的1周前支付参加费用。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            アグネスさんは7月の特別講座「白船山遺跡発掘の歴史」の再募集に申し込もうと考えている。7月27日の回を希望しているが、どのように申し込まなければならないか。また、受講できることになった場合、受講料の支払いはどうすればよいか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(阿格尼斯打算报名参加7月份特别讲座“白船山遗址发掘的历史”的再招募。她希望参加7月27日的那一场，该如何进行报名？另外，如果被录用可以听课的话，听课费的支付该怎么做？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">7月24日までに電話で申し込み、当日1,000円を会場で支払う。</div>
+                            <div class="option-trans">在7月24日之前通过电话报名，当天在会场支付1,000日元。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">7月24日までに電話で申し込み、当日1,800円を会場で支払う。</div>
+                            <div class="option-trans">在7月24日之前通过电话报名，当天在会场支付1,800日元。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">7月27日までに電話で申し込み、当日1,000円を会場で支払う。</div>
+                            <div class="option-trans">在7月27日之前通过电话报名，当天在会场支付1,000日元。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">7月27日までに電話で申し込み、当日1,800円を会場で支払う。</div>
+                            <div class="option-trans">在7月27日之前通过电话报名，当天在会场支付1,800日元。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "4", 
+                optAnalysis: {
+                    "1": "【✖ 排除】关于Event C（市内建築めぐり）的集合地点，文中记载为「県立歴史博物館9:30集合」（在县立历史博物馆集合），而非由自己直接前往参观地（自身で直接見学先に向かう）。",
+                    "2": "【✖ 排除】Event C 的补充说明提到，若想听特别展的解说，要求是「当日お申し出ください」（请在当天提出），而非需要在前一天之前联系。",
+                    "3": "【✖ 排除】关于 A～C 的报名，规则明确写有「定員を超えた場合は抽選となります」（如果超过定额则进行抽选），因此并非先到先得（先着順）。",
+                    "4": "【✔ 正解】关于 Event C 的参加费，在底部的【受講料・参加費】部分写明 A、C 是「開催日の1週間前までにお支払いください」（请在举办日的1周前进行支付）。本选项的内容符合规定条件。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】阿格尼斯希望参加7月27日的 Event D。根据【申込方法】，D 的报名截止时间为「各回の3日前」（每次的3天前），即需要在7月24日之前通过电话报名。费用方面，根据 Event D 的信息「1回のみの受講可、1回1,000円」，只报一次的话费用为1,000日元。支付方式根据【受講料・参加費】，B、D为「当日会場にてお支払いください」（当天在会场支付）。该选项描述均与原文明细一致。",
+                    "2": "【✖ 排除】此选项的金额标注为1,800日元。1,800日元是「全2回」的总费用，而阿格尼斯只希望能参加7月27日这一场，单次费用应为1,000日元。",
+                    "3": "【✖ 排除】此选项的报名截止日期标为「7月27日までに」（7月27日前）。Event D 的要求是每次的3天前（各回の3日前）也就是7月24日前报名。",
+                    "4": "【✖ 排除】此选项的报名截止日期和参加费用两项均与原文的条件不符。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

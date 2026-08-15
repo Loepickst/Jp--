@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <!-- 极简版侧边导航 -->
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">表</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：图表区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2011年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title">
+                    アルバイト情報　7月号
+                </div>
+                <div class="article-translation">
+                    打工信息 7月号
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="job-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>仕事</th>
+                                <th>内容</th>
+                                <th>時給（円）</th>
+                                <th>曜日・時間</th>
+                                <th>条件</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Q1 候选对象 1-4 -->
+                            <tr class="ks-target target-q1">
+                                <td>①</td>
+                                <td>中国料理店スタッフ</td>
+                                <td>食器洗い、材料の準備</td>
+                                <td>800</td>
+                                <td>水曜<span class="vocab-word" data-reading="ていきゅう" data-meaning="定期休息日">定休</span><br>10:00―14:00</td>
+                                <td>週3回以上<br><span class="vocab-word" data-reading="なるべく" data-meaning="尽量">なるべく</span>多く勤務できる方を望む</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>②</td>
+                                <td>日本そば屋スタッフ</td>
+                                <td>注文を取る・料理を出す等の<span class="vocab-word" data-reading="せっきゃく" data-meaning="接待顾客">接客</span>、後片付け</td>
+                                <td>900</td>
+                                <td>月曜定休<br>10:00―21:00</td>
+                                <td>週2回以上<br>時間は相談可</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>③</td>
+                                <td>居酒屋スタッフ</td>
+                                <td>注文を取る・料理を出す等の接客、後片付け</td>
+                                <td>900</td>
+                                <td>毎日<br>17:00―23:00</td>
+                                <td>週2回以上（1回は必ず23:00まで）<br>20歳以上の男女（学生可）</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>④</td>
+                                <td>コンビニ店員</td>
+                                <td>商品販売および商品管理</td>
+                                <td>(～22時) 800<br>(22時～) 950</td>
+                                <td>毎日<br>(1) 8:00―13:00<br>(2) 15:00―21:00<br>(3) 24:00―6:00</td>
+                                <td>長期できる人<br>週1、2回でもOK</td>
+                            </tr>
+                            <tr>
+                                <td>⑤</td>
+                                <td>スーパー店員</td>
+                                <td>生鮮食品・鮮魚・野菜果物・肉売り場で商品を切る。並べる、清掃</td>
+                                <td>850</td>
+                                <td>水曜定休<br>9:00―20:00</td>
+                                <td>週1日、1回4時間以上<br>（時間相談可）長期できる人</td>
+                            </tr>
+                            <tr>
+                                <td>⑥</td>
+                                <td>食品工場製造スタッフ</td>
+                                <td>主に果物の<span class="vocab-word" data-reading="かわむき" data-meaning="削皮 (动词「むく」的连用形名词化)">皮むき</span></td>
+                                <td>(～22時) 800<br>(22時～) 1000</td>
+                                <td>毎日<br>(1) 8:00―17:00<br>(2) 17:00―24:00</td>
+                                <td>毎日来られる人<br>夜間可能な人歓迎</td>
+                            </tr>
+                            <!-- Q2 短期对象候选 7-9 -->
+                            <tr class="ks-target target-q2">
+                                <td>⑦</td>
+                                <td>新製品宣伝スタッフ</td>
+                                <td>スーパーで新製品（飲み物）をお客様に紹介する</td>
+                                <td>1000</td>
+                                <td>7月の土・日曜<br>9:00―18:00のうち3時間以上</td>
+                                <td>7月中に2日以上<br>勤務できる人</td>
+                            </tr>
+                            <tr class="ks-target target-q2">
+                                <td>⑧</td>
+                                <td>引っ越しアシスタント</td>
+                                <td>荷物を造る、荷物の出し入れ</td>
+                                <td>950</td>
+                                <td>毎日原則<br>9:00―17:00<br>（<span class="vocab-word" data-reading="ざんぎょう" data-meaning="加班">残業</span>あり）</td>
+                                <td>1日だけでも可</td>
+                            </tr>
+                            <tr class="ks-target target-q2">
+                                <td>⑨</td>
+                                <td>試験監督補助</td>
+                                <td>試験監督の助手・問題配布と回収・受験生のチェック</td>
+                                <td>(<span class="vocab-word" data-reading="にっきゅう" data-meaning="日薪">日給</span>)<br>6000</td>
+                                <td>7月25日(土)<br>8:30―17:00</td>
+                                <td>大学生</td>
+                            </tr>
+                            <tr>
+                                <td>⑩</td>
+                                <td>塾講師（英語）</td>
+                                <td>中学生・高校生の英語の<span class="vocab-word" data-reading="ほしゅう" data-meaning="补习">補習</span>授業</td>
+                                <td>2000</td>
+                                <td>火・木・土曜<br>16:00―20:00</td>
+                                <td>受験指導経験者<br>長期のみ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="article-translation" style="margin-top: 16px;">
+                    【表格翻译供参考】<br>
+                    ①中国料理店：洗碗、备菜 / 时薪800 / 周三休 10-14点 / 望能每周3次以上尽量多排班<br>
+                    ②日式荞麦面店：点单上菜等接待、收拾 / 时薪900 / 周一休 10-21点 / 每周2次以上时间可商量<br>
+                    ③居酒屋：点单上菜等接待、收拾 / 时薪900 / 每天 17-23点 / 每周2次以上(必须有1次到23点)，20岁以上男女(学生可)<br>
+                    ④便利店：售货及商品管理 / 时薪800(22点前)950(22点后) / 每天 8-13点, 15-21点, 0-6点 / 能长期做，每周1~2次也可<br>
+                    ⑤超市店员：生鲜区切商品、摆放、清扫 / 时薪850 / 周三休 9-20点 / 每周1天，每次4小时以上，能长期做<br>
+                    ⑥食品工厂：主要负责削果皮 / 时薪800(22点前)1000(22点后) / 每天 8-17点, 17-24点 / 能每天来的，欢迎夜班<br>
+                    ⑦新产品宣传：在超市向客人介绍新饮料 / 时薪1000 / 7月的周六日 9-18点中至少3小时 / 7月中能工作2天以上<br>
+                    ⑧搬家助手：打包行李、搬运 / 时薪950 / 每天原则9-17点(有加班) / 仅做1天也可以<br>
+                    ⑨监考辅助：监考助手、收发试卷、检查考生 / 日薪6000 / 7月25日(周六) 8:30-17:00 / 大学生<br>
+                    ⑩补习班讲师：初高中英语补习 / 时薪2000 / 周二四六 16-20点 / 有备考指导经验，仅限长期
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            留学生のリーさんは、毎週3回ぐらい店でアルバイトをしたいと考えている。リーさんは平日の午後3時から9時までの間しか働けないが、同じ時間仕事をした場合、一番給料が多いのはどの仕事か。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(留学生小李想每周在店里打3次左右的工。小李只能在工作日的下午3点到晚上9点之间工作，如果在相同时间段工作，工资最高的是哪份工作？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">①中国料理店スタッフ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">②日本そば屋スタッフ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">③居酒屋スタッフ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">④コンビニ店員</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            大学生の山田さんは夏休みの旅行の費用が少し足りないので、7月に1日か2日だけアルバイトをしたいと考えている。山田さんが応募できる仕事はいくつあるか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(大学生山田因为暑假旅行的费用还差一点，所以想在7月里只打1天或2天的工。山田可以应聘的工作有几个？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">1つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">2つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">3つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">4つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 (全局复用) -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 排除】工作时间为「10:00-14:00」，与小李仅能在下午3点到晚上9点工作（15:00-21:00の間しか働けない，此处的「ない」是动词可能态「働ける」的否定形）的时间要求不符。",
+                    "2": "【✔ 正解】工作时间为「10:00-21:00」，包含了15:00-21:00；条件是「週2回以上」，满足小李每周打3次工的要求。其时薪为900日元，比④（800日元）更高，因此工资最多。",
+                    "3": "【✖ 排除】工作条件里明确要求「1回は必ず23:00まで」（必须有一次工作到23:00），而小李只能工作到晚上9点，时间要求不匹配。",
+                    "4": "【✖ 排除】班次(2)为「15:00-21:00」，时间上满足。但在22点前，其时薪为800日元，比②的900日元低，不符合“工资最高（一番給料が多い）”的条件。"
+                }
+            },
+            q2: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 错误】符合条件的工作不止1个，请参考选项3的详细分析。",
+                    "2": "【✖ 错误】符合条件的工作不止2个，请参考选项3的详细分析。",
+                    "3": "【✔ 正解】山田同学是“大学生”，且只想在7月里进行“1天或2天的短期打工（1日か2日だけ）”。核对表格中的「条件」一栏：\n⑦新产品宣传：「7月中に2日以上」（7月内做2天以上即可），符合。\n⑧搬家助手：「1日だけでも可」（仅1天也可以），符合。\n⑨监考辅助：「7月25日のみ」（仅7月25日一天），且条件标明「大学生」，符合。\n其他工作大部分要求「長期できる人」（能长期做）或每周固定次数，均不符合短期要求。因此共有3个工作符合。",
+                    "4": "【✖ 错误】符合条件的短期工作只有⑦、⑧、⑨这3个，没有第4个。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

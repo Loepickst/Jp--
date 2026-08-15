@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <!-- 极简版侧边导航 -->
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">募集案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2011年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-subtitle" style="margin-bottom: 12px;">
+                    生活便利化協会
+                </div>
+                <div class="poster-title" style="margin-top:0;">
+                    2012「生活を便利にする機器・道具」コンテスト<br>
+                    <span style="font-size: 15px; font-weight: normal; letter-spacing: 0;">募集案内</span>
+                </div>
+                
+                <div class="article-translation">
+                    生活便利化协会<br>2012“让生活变便利的机器・工具”大奖赛 招募通知
+                </div>
+                
+                <div class="dl-grid">
+                    <div class="dl-term" style="grid-column: 1 / -1;">1. 部門・参加資格</div>
+                    <div class="article-translation" style="grid-column: 1 / -1;">1. 部门・参加资格</div>
+
+                    <div class="dl-term">①開発部門</div>
+                    <div class="dl-desc">
+                        <p>企業、高校生以上の一般市民を対象に、生活を便利にするオリジナルな機器を募集します。</p>
+                        <div class="article-translation">① 开发部门：以企业、高中生以上的普通市民为对象，招募能让生活变便利的原创机器。</div>
+                    </div>
+                    
+                    <div class="dl-term">②アイデア部門</div>
+                    <div class="dl-desc">
+                        <p>（特定課題と自由課題）<br>
+                        <span class="ks-target target-q1">中学生以上の一般市民を対象に、便利な道具のアイデアを募集します。</span></p>
+                        <p>特定課題：<span class="ks-target target-q1">片手で簡単に操作できる道具のアイデア</span></p>
+                        <p>自由課題：「生活を便利にする道具」に関するアイデアで、特定課題に<span class="vocab-word" data-reading="がいとう" data-meaning="符合，相当">該当</span>しないものなら何でもかまいません。</p>
+                        <div class="article-translation">
+                            ② 点子部门（特定课题与自由课题）：<br>
+                            以初中生以上的普通市民为对象，招募便利工具的点子。<br>
+                            特定课题：能用单手简单操作的工具的点子。<br>
+                            自由课题：关于“让生活变便利的工具”的点子，只要不符合特定课题的，什么都可以。
+                        </div>
+                    </div>
+
+                    <div class="dl-term" style="grid-column: 1 / -1;">2. 応募</div>
+                    <div class="article-translation" style="grid-column: 1 / -1;">2. 报名</div>
+
+                    <div class="dl-term">①応募方法</div>
+                    <div class="dl-desc">
+                        <p>開発部門の応募には、<span class="ks-target target-q2">機器の<span class="vocab-word" data-reading="じつぶつ" data-meaning="实物">実物</span>の動きや使い方がわかるような動画が必要です。</span></p>
+                        <p><span class="ks-target target-q1">アイデア部門の応募には、アイデアが具体的にイメージできるようなイラストが必要です。</span>応募はすべて生活便利化協会のホームページ（http://www.benrika.corn/）からいってください。</p>
+                        <p class="indent-list">・応募フォームに必要事項を記入の上、必要なものを<span class="vocab-word" data-reading="てんぷ" data-meaning="附件，添加">添付</span>して送信してください。</p>
+                        <p class="indent-list">・応募フォームに添付できないものは郵送してください（送付先はホームページ参照）。</p>
+                        <div class="article-translation">
+                            ① 报名方法：<br>
+                            开发部门的报名，需要能看清机器实物动作和使用方法的视频。<br>
+                            点子部门的报名，需要能将点子具体形象化的插图。所有的报名请从生活便利化协会的主页进行。<br>
+                            ・在报名表中填写必要事项后，添加必要附件并发送。<br>
+                            ・无法添加到报名表中的物品请邮寄（邮寄地址请参阅主页）。
+                        </div>
+                    </div>
+
+                    <div class="dl-term">②応募期間</div>
+                    <div class="dl-desc">
+                        <p>2012年6月15日ー7月15日</p>
+                        <div class="article-translation">② 报名期间：2012年6月15日—7月15日</div>
+                    </div>
+
+                    <div class="dl-term" style="grid-column: 1 / -1;">3. 選考方法</div>
+                    <div class="dl-desc" style="grid-column: 1 / -1;">
+                        <p>開発部門は、<span class="vocab-word" data-reading="どくそうせい" data-meaning="独创性">独創性</span>のほか、実用性、有効性、コストパフォーマンスを基準に審査します。<span class="ks-target target-q2">一次審査は実物の動画を含めた書類審査、二次審査は模型および書類審査です。</span></p>
+                        <div class="article-translation">3. 选考方法：<br>开发部门，除了独创性之外，还将以实用性、有效性、性价比为基准进行审查。一次审查是包含实物视频的材料审查，二次审查是模型及材料审查。</div>
+                    </div>
+
+                    <div class="dl-term" style="grid-column: 1 / -1;">4. 発表・表彰</div>
+                    <div class="dl-desc" style="grid-column: 1 / -1;">
+                        <p>2012年8月にホームページ上で入賞作品を公表し、応募者にも結果を通知します。</p>
+                        <p>開発部門の入賞作品は、「2012生活便利化フォーラム東京」で表彰・展示され、<span class="vocab-word" data-reading="デモンストレーション" data-meaning="演示，示范">デモンストレーション</span>も行われます。アイデア部門の入賞作品は、同フォーラムで表彰され、<span class="ks-target target-q2"><span class="vocab-word" data-reading="しさくひん" data-meaning="试制品，样品">試作品</span>が作られます。</span></p>
+                        <div class="article-translation">4. 发表・表彰：<br>将于2012年8月在主页上公布入选作品，并向报名者通知结果。<br>开发部门的入选作品，将在“2012生活便利化论坛东京”上受到表彰、展示，并进行现场演示。点子部门的入选作品，将在该论坛上受到表彰，并被制作成试制品。</div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            次の4人のうち、現段階でアイデア部門の特定課題の応募条件を満たしているのはだれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="student-table">
+                                    <tr>
+                                        <th>名前</th>
+                                        <th>職業</th>
+                                        <th>応募作品</th>
+                                        <th>提出可能なもの</th>
+                                    </tr>
+                                    <tr>
+                                        <td>山田</td>
+                                        <td>小学生</td>
+                                        <td>帽子のようにかぶれる雨傘</td>
+                                        <td>試作品とイラスト</td>
+                                    </tr>
+                                    <tr>
+                                        <td>鈴木</td>
+                                        <td>高校教師</td>
+                                        <td>片手で簡単に開けられる缶切り</td>
+                                        <td>アイデアのメモ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>チェン</td>
+                                        <td>会社員</td>
+                                        <td>ふたがあけやすくこぼれにくい水筒</td>
+                                        <td>試作品</td>
+                                    </tr>
+                                    <tr>
+                                        <td>川村</td>
+                                        <td>大学生</td>
+                                        <td>片手で楽に入力できるキーボード</td>
+                                        <td>イラスト</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="article-translation">
+                                (下列4人中，现阶段满足“点子部门-特定课题”报名条件的是谁？)<br>
+                                (表格列：名字 / 职业 / 报名作品 / 能够提交的物品)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">山田さん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">鈴木さん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">チェンさん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">川村さん</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            前川さんは、小さい子どもを乗せたまま階段をスムーズに上り下りできる仕組みを持ったベビーカーを試作した。<strong>このベビーカーの実物を見て審査してもらいたいと思っている</strong>が、前川さんはどの部門に応募するのが適切か。また、応募の段階で必ず提出しなければならないものは何か。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(前川先生试制了一辆载着小孩也能顺畅上下楼梯的婴儿车。<strong>他希望能看着这辆婴儿车的实物进行审查</strong>，请问前川先生报名哪个部门比较合适？另外，在报名阶段必须要提交的东西是什么？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">アイデア部門の自由課題に応募し、作品のイラストを提出する。</div>
+                            <div class="option-trans">报名点子部门的自由课题，并提交作品的插图。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">アイデア部門の自由課題に応募し、模型とイラストを提出する。</div>
+                            <div class="option-trans">报名点子部门的自由课题，并提交模型和插图。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">開発部門に応募し、実物の動きなどがわかるような動画を提出する。</div>
+                            <div class="option-trans">报名开发部门，并提交能看清实物动作等情况的视频。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">開発部門に応募し、実物の動きなどを記録した動画と実物を提出する。</div>
+                            <div class="option-trans">报名开发部门，并提交记录实物动作等情况的视频和实物本身。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 (全局复用) -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "4", 
+                optAnalysis: {
+                    "1": "【✖ 排除】山田是“小学生”，不满足报名资格中年龄限制的条件：「中学生以上の一般市民」（初中生以上的普通市民）。",
+                    "2": "【✖ 排除】铃木的课题满足“单手操作”，但她能提交的东西是「アイデアのメモ」（点子的备忘录），不符合「アイデア部門」报名需提交「イラストが必要です」（需要插图）这一条件。",
+                    "3": "【✖ 排除】陈的课题是“好开且不易漏的水壶”，未能体现“单手操作”，不符合「特定課題：片手で…」（单手简单操作）的课题要求。且他提交的「試作品」也不符合该部门需提交插图的规定。",
+                    "4": "【✔ 正解】川村是“大学生”（满足初中以上要求）；作品是“单手轻松输入的键盘”（满足单手操作的特定课题）；能够提交“插图”（满足该部门的材料要求）。各项条件均准确对应。"
+                }
+            },
+            q2: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 错误】前川先生希望能针对实物进行审查，而「アイデア部門」在获奖后才会被制作成试制品（「試作品が作られます」，此处使用动词被动态），且只需提交插图，不符合前川的诉求。",
+                    "2": "【✖ 错误】除了选错部门之外，「アイデア部門」的报名也只需插图（イラストが必要です），并未要求提交模型。",
+                    "3": "【✔ 正解】前川希望实物被审查，应选「開発部門」，因为该部门的一次审查就是「実物の動画を含めた書類審査」（包含实物视频的材料审查）。而报名阶段所需的材料，原文也明确写道：「開発部門の応募には、機器の実物の動きや使い方がわかるような動画が必要です」（需要能看清机器实物动作的视频），准确契合选项3。",
+                    "4": "【✖ 错误】虽然选对了部门，但在报名阶段（応募の段階で），原文并未要求直接提交「実物」（实物本身），只要求提交视频。提交实物属于过度添加条件。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数 (添加/移除类以确保保持高亮并触发闪烁)
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    // 添加保持高亮的 class
+                    span.classList.add(`revealed-${qName}`);
+                    
+                    // 重新触发闪烁动画
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击跳转按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2016年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-top-nav">大森大学図書館</div>
+                
+                <div class="poster-title">他大学の図書館の資料の利用について</div>
+                
+                <div class="poster-intro">
+                    利用したい<span class="vocab-word" data-reading="しりょう" data-meaning="资料">資料</span>が本学にない場合、他大学の図書館の資料を利用できます。
+                </div>
+
+                <div class="article-translation">
+                    大森大学图书馆<br>
+                    关于利用其他大学图书馆资料的说明<br>
+                    如果想利用的资料本校没有，可以利用其他大学图书馆的资料。
+                </div>
+
+                <div class="numbered-section">
+                    <div class="section-number-title">① 他大学の図書館に行く</div>
+                    
+                    <div class="subsection-title">①－A　<span class="vocab-word" data-reading="そうごりようきょうていこう" data-meaning="相互利用协定学校">相互利用協定校</span>を利用する</div>
+                    <div class="sub-content">
+                        <span class="ks-target target-q1">相互利用協定に加盟している図書館は、学生証の<span class="vocab-word" data-reading="ていじ" data-meaning="出示">提示</span>のみで、利用することができます。</span>図書館によって、受けられるサービスが異なりますので、下記一覧を参照してください。
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="poster-table">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">協定に加盟している図書館の一覧</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th><span class="vocab-word" data-reading="えつらん" data-meaning="阅览">閲覧</span></th>
+                                    <th><span class="vocab-word" data-reading="かしだし" data-meaning="借出，出借">貸出</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>みはま大学図書館</td>
+                                    <td>可</td>
+                                    <td>可</td>
+                                </tr>
+                                <tr class="ks-target target-q1">
+                                    <td>長島大学図書館</td>
+                                    <td>可</td>
+                                    <td>可</td>
+                                </tr>
+                                <tr>
+                                    <td>あおば大学図書館</td>
+                                    <td>可</td>
+                                    <td>不可</td>
+                                </tr>
+                                <tr>
+                                    <td>中山工業大学図書館</td>
+                                    <td>可</td>
+                                    <td>不可</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="subsection-title" style="margin-top: 24px;">①－B　相互利用協定校以外を利用する</div>
+                    <div class="sub-content">
+                        本学図書館が発行する<span class="vocab-word" data-reading="しょうかいじょう" data-meaning="介绍信">紹介状</span>を<span class="vocab-word" data-reading="じさん" data-meaning="带来，自备">持参</span>すれば、相互利用協定以外の図書館にも入館できます。受けられるサービスについては、各図書館に問い合わせてください。<br>
+                        紹介状の発行は、所定の申込書に記入本学図書館受付で申し込んでください。<br>
+                        <div class="note-line">注意：利用時は、必ず学生証と紹介状を持参してください。</div>
+                        <span class="ks-target target-q1">紹介状の発行は無料ですが、発行まで約５日かかります</span>
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    ① 前往其他大学图书馆<br>
+                    ①-A 利用相互利用协定学校<br>
+                    加盟相互利用协定的图书馆，仅凭出示学生证即可利用。因图书馆而异，可享受的服务不同，请参照下方一览表。<br>
+                    【协定加盟图书馆一览】(阅览 / 借出)<br>
+                    ・Mihama大学：可 / 可<br>
+                    ・长岛大学：可 / 可<br>
+                    ・青叶大学：可 / 不可<br>
+                    ・中山工业大学：可 / 不可<br><br>
+                    ①-B 利用相互利用协定校以外的学校<br>
+                    只要自带本校图书馆发行的介绍信，也可以进入相互利用协定外的图书馆。关于可享受的服务，请向各图书馆咨询。<br>
+                    介绍信的发行，请填写规定的申请书在本校图书馆前台申请。<br>
+                    注意：利用时，请务必随身携带学生证和介绍信。<br>
+                    介绍信的发行是免费的，但发行大约需要5天时间。
+                </div>
+
+                <div class="numbered-section">
+                    <div class="section-number-title" style="margin-top: 24px;">② 他大学の図書館に<span class="vocab-word" data-reading="ふくしゃ" data-meaning="复制，复印">複写</span>を依頼し、<span class="vocab-word" data-reading="とりよせる" data-meaning="索取，寄来">取り寄せる</span></div>
+                    <div class="section-content">
+                        本学図書館が他大学の図書館に複写を依頼し、取り寄せることができます。<br>
+                        <span class="ks-target target-q2">申し込みは、本学図書館受付、または本学図書館ホームページ上で行ってください。</span><br>
+                        <div class="note-line">注意：資料の複写料金、送料などは全額利用者<span class="vocab-word" data-reading="ふたん" data-meaning="负担">負担</span>となります。</div>
+                        <span class="ks-target target-q2">一度に依頼できる件数は５件までです。</span>
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    ② 委托其他大学图书馆复印，并将其寄来<br>
+                    本校图书馆可以向其他大学的图书馆委托复印，并索取寄来。<br>
+                    申请请在本校图书馆前台，或本校图书馆主页上进行。<br>
+                    注意：资料的复印费、邮费等全部由利用者负担。<br>
+                    一次可申请的数量上限为5件。
+                </div>
+
+                <div class="numbered-section">
+                    <div class="section-number-title" style="margin-top: 24px;">③ 他大学の図書館から<span class="vocab-word" data-reading="しゃくよう" data-meaning="借用">借用</span>した資料を見る</div>
+                    <div class="section-content">
+                        本学図書館が他大学の図書館から資料を一定の期間借用し、その資料を本学図書館内にて閲覧することができます。<br>
+                        申し込みは、本学図書館受付で行って下さい。<br>
+                        <div class="note-line ks-target target-q2">注意：資料の往復送料などは全額利用者負担となります。</div>
+                        <div class="note-line ks-target target-q2">本学図書館内での閲覧に限ります。貸出はできません。</div>
+                        借用可能な資料は、一人一点限りとなります。
+                    </div>
+                </div>
+                
+                <div class="article-translation">
+                    ③ 阅览从其他大学图书馆借用的资料<br>
+                    本校图书馆可以从其他大学图书馆借用资料一定期间，并在本校图书馆内阅览该资料。<br>
+                    申请请在本校图书馆前台进行。<br>
+                    注意：资料的往返邮费等全部由利用者负担。<br>
+                    仅限于在本校图书馆内阅览。无法外借。<br>
+                    可借用的资料，每人限1件。
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            大森大学の学生のリンさんは、明日中に借りたい本がある。明日行ける図書館の中では、以下の４館が所蔵していることがわかったので、メモをした。リンさんが本を借りられるのは、次の方法のうちどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(大森大学的学生林同学，有想在明天之内借的书。在明天能去的图书馆中，了解到以下4个馆有收藏，所以做了笔记。林同学能借到书的是以下哪种方法？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">学生証を持参して、長島大学図書館に行く。</div>
+                            <div class="option-trans">带上学生证，去长岛大学图书馆。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">今から紹介状を申請し、それを持参して、あおば大学図書館に行く。</div>
+                            <div class="option-trans">现在开始申请介绍信，然后带上它，去青叶大学图书馆。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">学生証を持参して、中山工業大学図書館に行く。</div>
+                            <div class="option-trans">带上学生证，去中山工业大学图书馆。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">今から紹介状を申請し、それを持参して、さくら大学図書館に行く。</div>
+                            <div class="option-trans">现在开始申请介绍信，然后带上它，去樱花大学图书馆。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            大森大学の学生のロイさんは利用したい資料があるが、大森大学にはなかった。他大学に行く時間がないため、複写依頼か資料借用のサービスを利用しようと考えている。ロイさんが注意しなければならないこととして合っているのは、次のどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(大森大学的学生罗伊有想用的资料，但是大森大学没有。因为没有时间去其他大学，所以打算使用复印委托或资料借用的服务。作为罗伊必须要注意的事项，合适的是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">複写依頼は、資料を所蔵する大学のホームページから行わなければならない。</div>
+                            <div class="option-trans">复印委托，要在收藏该资料的大学的主页上进行。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">複写依頼は、一度に２件以上まとめて申し込むことはできない。</div>
+                            <div class="option-trans">复印委托，不能一次合并申请2件以上。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">資料の借用に必要な送料は、半額を自身が負担しなければならない。</div>
+                            <div class="option-trans">资料借用所需的邮费，自己要负担一半。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">借用した資料は、大森大学図書館内で閲覧しなければならない。</div>
+                            <div class="option-trans">借用的资料，要在大森大学图书馆内阅览。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】林同学想“明天之内借书”。长岛大学属于“协定学校”，根据表格，阅览和借出均为“可”。且前往协定学校只需“出示学生证（学生証の提示のみ）”，所以明天直接带学生证去即可借到书。",
+                    "2": "【✖ 排除】青叶大学（あおば）虽然是协定学校，但表格中显示其借出（貸出）为“不可”，因此无法借书。",
+                    "3": "【✖ 排除】中山工业大学是协定学校，但表格中显示其借出（貸出）为“不可”，因此无法借书。",
+                    "4": "【✖ 排除】樱花大学（さくら）不在协定学校列表中，属于“协定校以外”。前往非协定校需要申请介绍信，而介绍信发行需要约5天时间（発行まで約５日かかります），赶不上“明天之内”的要求。"
+                }
+            },
+            q2: { 
+                correct: "4", 
+                optAnalysis: {
+                    "1": "【✖ 排除】关于复印申请（複写依頼），②中提到申请途径是“本校图书馆前台，或本校图书馆主页（本学図書館受付、または本学図書館ホームページ上）”，而非资料所在大学的主页。",
+                    "2": "【✖ 排除】②中说明“一次可申请的数量上限为5件（一度に依頼できる件数は５件まで）”，并非不能一次申请2件以上。",
+                    "3": "【✖ 排除】③中说明，关于借用资料的往返邮费等，是“全额由使用者负担（全額利用者負担）”，并非负担半额。",
+                    "4": "【✔ 正解】③中明确规定，借用的资料“仅限于在本校图书馆内阅览（本学図書館内での閲覧に限ります）”，该选项内容相符。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <!-- 极简版侧边导航 -->
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2014年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title">
+                    就職支援行事(9月-12月)のスケジュール
+                </div>
+                
+                <div class="article-translation">
+                    就职支援活动(9月-12月)日程表
+                </div>
+                
+                <div class="poster-text-block">
+                    就職活動を行う学生のために、各種行事を実施しています。<br>
+                    全行事、申し込みは不要です。当日、学生証を<span class="vocab-word" data-reading="じさん" data-meaning="自带，自己带去">持参</span>うえ、会場へお越し下さい。
+                </div>
+                <div class="article-translation">
+                    为了进行求职活动的学生，实施了各种活动。<br>
+                    所有活动均无需报名。当天请带上学生证来会场。
+                </div>
+
+                <div class="table-responsive">
+                    <table class="poster-table event-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th style="width: 100px;">日</th>
+                                <th style="width: 40px;">時間</th>
+                                <th style="width: 140px;">行事名</th>
+                                <th>内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>①</td>
+                                <td>9月19日(金)</td>
+                                <td>イ</td>
+                                <td>就職<span class="vocab-word" data-reading="がいだんす" data-meaning="指导，说明会 (guidance)">ガイダンス</span></td>
+                                <td>[就職活動全般の基本的な情報]就職活動の方法やスケジュールなど</td>
+                            </tr>
+                            <tr>
+                                <td>②</td>
+                                <td>9月24日(水)</td>
+                                <td>ア</td>
+                                <td>留学生ガイダンス</td>
+                                <td>留学生向けの在留資格や留学生の就職状況などの説明</td>
+                            </tr>
+                            <tr class="ks-target target-q2">
+                                <td>③</td>
+                                <td>10月3日(金)</td>
+                                <td>イ</td>
+                                <td>就職活動体験談(1)</td>
+                                <td>広告、<span class="vocab-word" data-reading="ますこみ" data-meaning="大众传媒 (mass communication)">マスコミ</span>業界に就職した卒業生による就職活動の体験談</td>
+                            </tr>
+                            <tr>
+                                <td>④</td>
+                                <td>10月16日(水)</td>
+                                <td>ア</td>
+                                <td>就職ガイダンス</td>
+                                <td>[就職活動全般の基本的な情報]内容は9月19日と同じです</td>
+                            </tr>
+                            <tr>
+                                <td>⑤</td>
+                                <td>10月23日(木)</td>
+                                <td>ア</td>
+                                <td>留学生ガイダンス</td>
+                                <td>内容は9月24日と同じです</td>
+                            </tr>
+                            <tr>
+                                <td>⑥</td>
+                                <td>11月7日(金)</td>
+                                <td>イ</td>
+                                <td>留学生マナー講座</td>
+                                <td>留学生が日本で就職活動を行うにあたっての基本的なマナー講座</td>
+                            </tr>
+                            <tr>
+                                <td>⑦</td>
+                                <td>11月20日(木)</td>
+                                <td>イ</td>
+                                <td>就職活動体験談(2)</td>
+                                <td>金融、<span class="vocab-word" data-reading="しょうけん" data-meaning="证券">証券</span>業界に就職した卒業生による就職活動の体験談</td>
+                            </tr>
+                            <tr>
+                                <td>⑧</td>
+                                <td>12月1日(月)</td>
+                                <td>＊</td>
+                                <td><span class="vocab-word" data-reading="ごうどう" data-meaning="联合，共同">合同</span>企業説明会</td>
+                                <td>詳細は下記参照</td>
+                            </tr>
+                            <tr>
+                                <td>⑨</td>
+                                <td>12月12日(金)</td>
+                                <td>イ</td>
+                                <td>就職活動体験談(3)</td>
+                                <td>貿易・流通業界に就職した卒業生による就職活動の体験談</td>
+                            </tr>
+                            <tr>
+                                <td>⑩</td>
+                                <td>12月17日(水)</td>
+                                <td>＊</td>
+                                <td>合同企業説明会</td>
+                                <td>詳細は下記参照</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="article-translation">
+                    【主表格翻译】<br>
+                    ① 9/19(五) | イ | 就职指导 | [求职总体基本信息]求职方法与日程等<br>
+                    ② 9/24(三) | ア | 留学生指导 | 面向留学生的在留资格及求职状况说明<br>
+                    ③ 10/3(五) | イ | 求职体验谈(1) | 进入广告、传媒行业的毕业生分享求职经验<br>
+                    ④ 10/16(三)| ア | 就职指导 | [求职总体基本信息]内容同9月19日<br>
+                    ⑤ 10/23(木)| ア | 留学生指导 | 内容同9月24日<br>
+                    ⑥ 11/7(五) | イ | 留学生礼仪讲座 | 留学生在日本求职的基本礼仪讲座<br>
+                    ⑦ 11/20(木)| イ | 求职体验谈(2) | 进入金融、证券行业的毕业生分享求职经验<br>
+                    ⑧ 12/1(一) | ＊ | 联合企业说明会 | 详情见下文<br>
+                    ⑨ 12/12(五)| イ | 求职体验谈(3) | 进入贸易、流通行业的毕业生分享求职经验<br>
+                    ⑩ 12/17(三)| ＊ | 联合企业说明会 | 详情见下文
+                </div>
+
+                <div class="info-legend">
+                    開催時間：ア…14:50-16:20　　<span class="ks-target target-q2">イ…18:30-20:00</span>　　＊合同企業説明会は下記参照<br>
+                    開催場所：⑥以外…緑山ホール　　⑥…101教室
+                </div>
+                <div class="article-translation">
+                    举办时间：ア…14:50-16:20　イ…18:30-20:00　＊联合企业说明会见下文<br>
+                    举办地点：⑥以外…绿山大厅　⑥…101教室
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">注意事項</div>
+                    <ul style="margin:0; padding-left: 20px;">
+                        <li><span class="ks-target target-q1">・就職希望者（留学生含む）は、[就職ガイダンス]のどちらかに必ず出席してください。</span></li>
+                        <li>・[留学生ガイダンス]は希望者のみ出席してください。</li>
+                    </ul>
+                </div>
+                <div class="article-translation">
+                    【注意事项】<br>
+                    ・求职者（含留学生），必须出席[就职指导]中的任意一场。<br>
+                    ・[留学生指导]仅限有意愿者出席。
+                </div>
+
+                <div class="notice-box" style="padding:0; border: none;">
+                    <div class="poster-table" style="margin-top:0;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="font-weight: 700;">合同企業説明会について</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" style="text-align: left;">合同企業説明会は業種別に、以下の日時に開催されます。各回、約50社が参加予定です。（途中入退場自由）</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>12月1日</th>
+                                    <th>12月17日</th>
+                                </tr>
+                                <tr>
+                                    <td>16:00 - 17:00</td>
+                                    <td>金融・証券</td>
+                                    <td class="ks-target target-q2">広告・マスコミ</td>
+                                </tr>
+                                <tr>
+                                    <td>17:15 - 18:15</td>
+                                    <td class="ks-target target-q2">広告・マスコミ</td>
+                                    <td>メーカー・IT</td>
+                                </tr>
+                                <tr>
+                                    <td>18:30 - 19:30</td>
+                                    <td>貿易・流通</td>
+                                    <td>教育・福祉</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="article-translation">
+                    关于联合企业说明会：按行业在以下时间举办。每场约有50家企业预定参加。（中途可自由进出）<br>
+                    16:00-17:00 | (12/1)金融・证券 | (12/17)广告・传媒<br>
+                    17:15-18:15 | (12/1)广告・传媒 | (12/17)制造・IT<br>
+                    18:30-19:30 | (12/1)贸易・流通 | (12/17)教育・福利
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            留学生のマイクさんは日本で就職したいと思っている。マイクさんが必ず出席しなければいけない行事はいくつあるか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(留学生迈克想在日本就职。迈克必须出席的活动有几个？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">一つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">二つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">三つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">四つ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            林さんはマスコミ関連の企業に就職したいので、関連企業に就職した先輩の話や、関連企業の仕事内容について聞きたいと思っている。林さんは授業のため１７時以降しか出席できない。林さんに合う行事はどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(林同学想在传媒相关的企业就职，所以想听听已经入职相关企业的前辈的经验，也想听听相关企业的工作内容介绍。因为有课，林同学只能在17点以后出席。适合林同学的活动是哪个？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">③と⑧のみ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">③と⑧と⑩</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">⑧のみ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">⑧と⑩のみ</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】关于必须要出席的活动，主表下方的「注意事項」第一条明确写有：「就職希望者（留学生含む）は、[就職ガイダンス]のどちらかに必ず出席してください」（求职者含留学生，必须出席[就职指导]中的任意一场）。注意这里的「どちらか」意为二者择一，因此只需参加一场即可。其他活动中，比如留学生指导明确标明「希望者のみ」（仅限有意愿者），并非必须。",
+                    "2": "【✖ 错误】不需要两场。根据规定只需在两场就职指导中任选一场（どちらか）出席。",
+                    "3": "【✖ 错误】除了任意一场就职指导外，其他的体验谈、说明会都没有强制出席的要求。",
+                    "4": "【✖ 错误】理由同上，强制参加的活动数量只有一个。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】林同学的需求是：传媒行业（マスコミ）、前辈分享（体験談）、工作内容（説明会），且只能在17:00以后出席。我们逐一核对：\n・关于前辈分享：第③项活动是传媒行业的体验谈，时间标注为「イ」，查阅说明可知「イ」是18:30-20:00，满足17点以后，因此可选③。\n・关于工作内容：查看下方的说明会明细表，传媒行业（広告・マスコミ）有两场。12月1日那场的时间是 17:15-18:15，满足17点以后，因此可选⑧。而12月17日那场的时间是 16:00-17:00，与上课时间冲突，排除⑩。综上，只有③和⑧符合条件。",
+                    "2": "【✖ 排除】包含了第⑩项活动。查阅下方的说明会明细表可知，12月17日（⑩）的传媒行业说明会时间是 16:00-17:00，而林同学只能在17点以后出席，时间冲突。",
+                    "3": "【✖ 排除】漏掉了第③项活动。第③项是传媒行业前辈的经验分享，且时间是 18:30-20:00，符合林同学的需求。",
+                    "4": "【✖ 排除】漏掉了符合条件的第③项，却包含了与上课时间冲突的第⑩项（16:00-17:00）。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

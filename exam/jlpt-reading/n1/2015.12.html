@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2015年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title-right">
+                    東あさひ市立博物館
+                </div>
+                <div class="poster-title">
+                    東あさひ市立博物館 “友の会” 入会案内
+                </div>
+                
+                <div class="article-translation">
+                    东朝日市立博物馆<br>东朝日市立博物馆 “友之会” 入会指南
+                </div>
+
+                <div class="poster-subtitle">
+                    “友の会” 会員になると
+                </div>
+                <ul class="poster-list">
+                    <li>東あさひ市立博物館の<span class="vocab-word" data-reading="じょうせつてん" data-meaning="常设展览">常設展</span>や、附属の東あさひ市立植物園に何度でも無料で入場（園）できます。</li>
+                    <li class="ks-target target-q1">東あさひ市立博物館では、特別展を年数回開催します。会員の方は、各特別展につき１回、無料で入場できます。また、同一の特別展を２回以上ご覧になる際は、２回目以降は<span class="vocab-word" data-reading="わりびき" data-meaning="折扣">割引</span>料金で入場できます。</li>
+                    <li>館内レストランでご飲食の際に５％の割引が受けられます。</li>
+                    <li>館内のショップで１０％の割引が受けられます。ただし、<span class="vocab-word" data-reading="しょせき" data-meaning="书籍">書籍</span>は除きます。</li>
+                    <li>東あさひ市立博物館が年６回、毎<span class="vocab-word" data-reading="ぐうすう" data-meaning="偶数">偶数</span>月に発行する情報誌を無料でお届けします。</li>
+                </ul>
+
+                <div class="article-translation">
+                    成为“友之会”会员后<br>
+                    ・可以无限次免费参观东朝日市立博物馆的常设展，以及附属的东朝日市立植物园。<br>
+                    ・东朝日市立博物馆每年会举办几次特别展。会员对于每个特别展可免费入场1次。另外，如果观看同一个特别展2次以上，从第2次起可以以折扣价入场。<br>
+                    ・在馆内餐厅用餐时可享受5%的折扣。<br>
+                    ・在馆内商店购物可享受10%的折扣。但是，书籍除外。<br>
+                    ・免费派送东朝日市立博物馆每年发行6次（逢偶数月）的资讯杂志。
+                </div>
+
+                <div class="poster-subtitle" style="margin-top: 24px; border-bottom: 1px solid var(--graphite); padding-bottom: 4px;">
+                    入会方法
+                </div>
+                
+                <div class="poster-definition">
+                    <span class="poster-definition-title">新規入会：</span>初めて入会する場合（以前入会したことがある方も、会員証の有効期間が終了した場合は、再度、新規入会手続きを行ってください。）
+                </div>
+                <div class="poster-definition">
+                    <span class="poster-definition-title">継続入会：</span><span class="ks-target target-q2">会員証の有効期間内に手続きをする</span>場合
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 12px; margin-bottom: 16px;">
+                    新規入会、<span class="vocab-word" data-reading="けいぞく" data-meaning="继续，延续">継続</span>入会ともに、下記のいずれかの方法でお申し込みください。
+                </div>
+
+                <div class="method-section">
+                    <div class="method-title">＜窓口＞</div>
+                    <div class="method-desc">窓口<span class="vocab-word" data-reading="そなえつけ" data-meaning="配备，放置">備え付け</span>の入会申込書にご記入いただき、年会費お支払い後、<span class="ks-target target-q2">その場で会員証を発行</span>いたします。</div>
+                </div>
+
+                <div class="method-section">
+                    <div class="method-title">＜郵送＞</div>
+                    <div class="method-desc">
+                        新規入会申込書、または継続入会申込書を本ホームページからダウンロードし、必要事項をご記入の上、下記住所にご郵送ください。<br>
+                        年会費は、郵便局で「払込取扱票」の必要箇所にご記入の上、下記の<span class="vocab-word" data-reading="こうざ" data-meaning="账户">口座</span>、加入者宛にご送金ください。<br>
+                        お申込書内容とご入金が確認でき次第、会員証を発行し、送付いたします。会員証の到着までには、<span class="ks-target target-q2">ご入金後２週間程度</span>かかります。
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    入会方法<br>
+                    新入会：首次入会的情况（即使以前曾入会，如果会员证有效期已结束，也请再次办理新入会手续。）<br>
+                    继续入会：在会员证有效期内办理手续的情况<br>
+                    <br>
+                    新入会和继续入会，请通过以下任意一种方法申请。<br>
+                    ＜窗口＞ 在窗口放置的入会申请表上填写，支付年会费后，当场发行会员证。<br>
+                    ＜邮寄＞ 从本主页下载新入会申请表或继续入会申请表，填写必要事项后，邮寄到以下地址。<br>
+                    年会费请在邮局的“汇款处理票”的必要位置填写后，汇款到以下账户及收款人。<br>
+                    确认了申请表内容和汇款后，将发行并发送会员证。会员证送达大约需要汇款后2周左右的时间。
+                </div>
+
+                <div class="fee-section">
+                    <div style="font-weight: 900;">年会費（１年間有効）</div>
+                    <div>新規入会：<span class="ks-target target-q2">10,000円</span></div>
+                    <div>継続入会：<span class="ks-target target-q2">8,500円</span></div>
+                </div>
+                
+                <div class="article-translation">
+                    年会费（有效期1年）　新入会：10,000日元　　继续入会：8,500日元
+                </div>
+
+                <div class="contact-info">
+                    お問い合わせ先：電話 091-568-1153　　　　Eメール：hakubutsukan@higashi-asahi.jp<br>
+                    郵送先：〒009-0364　　東あさひ市中川5-6-1東あさひ市立博物館友の会担当<br>
+                    振込先：口座番号0501-111111　　　　加入者名：東あさひ市立博物館友の会
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            東あさひ市立博物館 “友の会” の会員になると受けることのできるサービスはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(成为东朝日市立博物馆“友之会”的会员后，可以享受的服务是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">常設展をいつでも割引料金で見学できる。</div>
+                            <div class="option-trans">可以随时以折扣价参观常设展。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">開催されるすべての特別展にそれぞれ一度だけ無料で入れる。</div>
+                            <div class="option-trans">举办的所有特别展都能分别免费进入一次。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">ショップで売られている本や雑誌を１０％安く買える。</div>
+                            <div class="option-trans">在商店售卖的书和杂志可以便宜10%购买。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">半年間、毎月無料で博物館発行の情報誌を送ってもらえる。</div>
+                            <div class="option-trans">半年内，每月都能免费获赠博物馆发行的资讯杂志。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ノンさんは、家の近所にある東あさひ市立博物館の “友の会” 会員である。明後日２１日に始まる特別展を見に行く予定だが、明日２０日で会員期間が終了することに気がついた。２１日に会員サービスが利用でき、年会費がより安く済む方法はどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(Non女士是家附近东朝日市立博物馆“友之会”的会员。计划去看后天21号开始的特别展，但发现明天20号会员期就结束了。要想在21号能使用会员服务，并且年会费更便宜的方法是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">２０日までに窓口に行って、継続入会の申し込みをする。</div>
+                            <div class="option-trans">20号之前去窗口办理继续入会的申请。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">２０日までに郵送で、継続入会の申し込みをする。</div>
+                            <div class="option-trans">20号之前通过邮寄办理继续入会的申请。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">２１日に窓口に行って、継続入会の申し込みをする。</div>
+                            <div class="option-trans">21号去窗口办理继续入会的申请。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">２１日に窓口に行って、新規入会の申し込みをする。</div>
+                            <div class="option-trans">21号去窗口办理新入会的申请。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 排除】原文写的是常设展“何度でも無料で入場”，意思是无限次免费，而不是打折（割引料金）。",
+                    "2": "【✔ 正解】原文提到“特別展を年数回開催します。会員の方は、各特別展につき１回、無料で入場できます”，即每一个特别展都可以免费入场1次。该选项说法相符。",
+                    "3": "【✖ 排除】原文提到商店享受10%折扣时特别注明了“ただし、書籍は除きます”（但是，书籍除外），所以书和杂志不能便宜10%。",
+                    "4": "【✖ 排除】原文写的是“年６回、毎偶数月に発行”（每年6次，逢偶数月发行），而不是连续“半年間、毎月”（半年内每月）派送。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】要在21号当天看展并马上享受服务，因为邮寄需要2周左右时间，所以应当去窗口办理，可以“当场发行”（その場で会員証を発行）。另外，题干要求“费用更便宜”（より安く），继续入会（8500日元）比新入会（10000日元）便宜。而办理继续入会需要在“有效期内”（会員証の有効期間内に手続きをする場合），即20日及以前。因此，20日之前去窗口办理继续入会符合了所有条件。",
+                    "2": "【✖ 排除】邮寄方式确认汇款后到会员证寄达“大约需要两周时间”（２週間程度かかります），无法保证在21日马上使用会员服务。",
+                    "3": "【✖ 排除】继续入会要求在“有效期内”办理。如果21日去，此时有效期（到20日止）已经结束，将无法再办理继续入会。",
+                    "4": "【✖ 排除】如果拖到21日再去窗口，因为过期只能办理新入会，费用为10000日元，比继续入会（8500日元）贵，不符合题干中“更便宜”（より安く）的要求。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

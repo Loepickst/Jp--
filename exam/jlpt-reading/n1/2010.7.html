@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <!-- 使用书面/印刷感字体组合 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <!-- 精简版侧边导航 -->
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">ポスター</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問 1</a>
+        <a href="#q2-card" class="nav-link">問 2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2010年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title">
+                    清森市 秋の美術コンクール<br>
+                    作品募集
+                </div>
+                
+                <div class="article-translation">
+                    清森市 秋季美术大奖赛<br>作品募集
+                </div>
+                
+                <div class="dl-grid">
+                    <div class="dl-term">部門</div>
+                    <div class="dl-desc">
+                        <p>絵画部門、写真部門</p>
+                        <div class="article-translation">类别：绘画部门、摄影部门</div>
+                    </div>
+                    
+                    <div class="dl-term">募集期間</div>
+                    <div class="dl-desc">
+                        <p>2010年11月1日～11月30日</p>
+                        <div class="article-translation">募集期间：2010年11月1日～11月30日</div>
+                    </div>
+                    
+                    <div class="dl-term">審査員</div>
+                    <div class="dl-desc">
+                        <p>山田太郎（日本アート協会会長）、山本花子（画家）、川上次郎（写真家）</p>
+                        <div class="article-translation">评委：山田太郎（日本艺术协会会长）、山本花子（画家）、川上次郎（摄影家）</div>
+                    </div>
+                    
+                    <div class="dl-term">応募規定</div>
+                    <div class="dl-desc">
+                        <p>１ <span class="ks-target target-q1">清森市内の秋を<span class="vocab-word" data-reading="だいざい" data-meaning="题材">題材</span>にしたもの。</span></p>
+                        <p>２ <span class="ks-target target-q1">絵画部門に出品する作品は、イラスト、水彩画、油絵、どれでも可。</span><br>
+                           写真部門に出品する写真は、フィルム写真、デジタル写真、どちらも可。</p>
+                        <p class="indent-list">※<span class="ks-target target-q1">応募作品は各部門1人1点に限ります。</span></p>
+                        <p class="indent-list">※<span class="ks-target target-q1">作品の制作年は<span class="vocab-word" data-reading="とわない" data-meaning="不问，不管 (动词「問う」的ない形)">問わない</span>が、<span class="vocab-word" data-reading="みはっぴょう" data-meaning="未发表">未発表</span>のものに限ります。<br>
+                           （他のコンクールに入賞していたり、出版物や展示会などで公表されたりしていないものであること。）</span></p>
+                        
+                        <div class="article-translation">
+                            参赛规定：<br>
+                            1. 以清森市内的秋天为题材的作品。<br>
+                            2. 绘画部门提交的作品，插画、水彩画、油画皆可。摄影部门提交的照片，胶片照片、数码照片皆可。<br>
+                            ※ 参赛作品每人每个部门仅限1件。<br>
+                            ※ 作品的制作年份不限，但仅限于未发表的作品。（必须是没有在其他比赛中获过奖，也没有在出版物或展览会上等公开发表过的作品。）
+                        </div>
+                    </div>
+                    
+                    <div class="dl-term">応募方法</div>
+                    <div class="dl-desc">
+                        <p>郵送、または<span class="vocab-word" data-reading="じさん" data-meaning="带来，自己带去">持参</span>。ただし、郵送中の事故について、市は責任を負いません。<br>
+                        指定の応募用紙を作品裏側に<span class="vocab-word" data-reading="てんぷ" data-meaning="贴上，附加">添付</span>のこと。応募用紙は市役所の窓口で、または市のホームページ（http://www.kiyomori-shi.jp）から入手可能。</p>
+                        <div class="article-translation">参赛方法：邮寄，或亲自送达。但是，对于邮寄过程中的事故，市政府不承担责任。请将指定的报名表贴在作品背面。报名表可以在市政府窗口获取，也可以从市政府主页下载。</div>
+                    </div>
+                    
+                    <div class="dl-term">応募先</div>
+                    <div class="dl-desc">
+                        <p>清森市商業観光課観光係<br>
+                        （〒951－0022清森市清森2－8、TEL084－874－8524）</p>
+                        <div class="article-translation">邮寄地址：清森市商业观光课观光组（邮编...）</div>
+                    </div>
+                    
+                    <div class="dl-term">賞</div>
+                    <div class="dl-desc">
+                        <div class="table-responsive">
+                            <table class="poster-table">
+                                <tr>
+                                    <th>最優秀賞</th>
+                                    <td>各部門1点</td>
+                                    <td>賞状と<span class="vocab-word" data-reading="ふくしょう" data-meaning="附加奖品">副賞</span>（デジタル一眼レフカメラ）</td>
+                                </tr>
+                                <tr>
+                                    <th>優秀賞</th>
+                                    <td>各部門2点</td>
+                                    <td>賞状と副賞（清森ホテルのペア宿泊券）</td>
+                                </tr>
+                                <tr>
+                                    <th>清森賞</th>
+                                    <td>各部門20点以内</td>
+                                    <td>賞状と副賞（図書カード5千円分）</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="article-translation">奖项：(表格中分别为最优秀奖、优秀奖、清森奖的获奖名额和奖状及附加奖品内容)</div>
+                    </div>
+                    
+                    <div class="dl-term">審査結果</div>
+                    <div class="dl-desc">
+                        <p><span class="ks-target target-q2">清森市のホームページ上に1月15日に発表します。入賞者には1月中に結果を郵送します。電話および窓口での問い合わせには応じられません。</span></p>
+                        <div class="article-translation">审查结果：将于1月15日在清森市主页上公布。入围者将在1月中旬通过邮寄收到结果。不接受电话或窗口的咨询。</div>
+                    </div>
+                    
+                    <div class="dl-term">表彰式</div>
+                    <div class="dl-desc">
+                        <p><span class="ks-target target-q2">2011年2月下旬（予定）最優秀賞と優秀賞の方には、表彰式で賞状および副賞をお渡しします。</span></p>
+                        <div class="article-translation">表彰仪式：2011年2月下旬（预定），最优秀奖和优秀奖的获得者，将在表彰仪式上颁发奖状及附加奖品。</div>
+                    </div>
+                    
+                    <div class="dl-term">注意事項</div>
+                    <div class="dl-desc">
+                        <p>※入賞作品は、1年を限度に主催者がお預かりして<span class="vocab-word" data-reading="こうほう" data-meaning="宣传，公关">広報</span>活動などに使用し、1年後にお返しします。<br>
+                        ※上記の応募規定を守っていなかった場合には入賞が取り消されることがあります。</p>
+                        <div class="article-translation">注意事项：<br>※ 入围作品将由主办方保管最多1年，用于宣传活动等，1年后归还。<br>※ 如果没有遵守上述的参赛规定，可能会被取消获奖资格。</div>
+                    </div>
+                </div>
+                
+                <div class="poster-footer">
+                    <div>〈主催〉 清森市</div>
+                    <div>〈協賛〉 昭和デザイン株式会社、山手百貨店、新東京鉄道、清森ホテル</div>
+                </div>
+                <div class="article-translation">〈主办〉清森市  〈协办〉昭和设计股份公司，山手百货店，新东京铁路，清森酒店</div>
+            </div>
+            
+        </main>
+
+        <aside class="question-section" id="quizForm">
+            
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            高木さんが制作した以下の作品のうち、応募できるものはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(高木制作的以下作品中，能够参赛的是哪一个？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">清森高校に通っていたとき入賞した秋の風景画</div>
+                            <div class="option-trans">在清森高中上学时曾获奖的秋季风景画</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">清森市にある清森温泉の紅葉の油絵とイラスト</div>
+                            <div class="option-trans">清森市内清森温泉的红叶油画和插画</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">清森市にある清森公園で撮った春の木々の写真</div>
+                            <div class="option-trans">在清森市内清森公园拍摄的春季树木照片</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">去年清森市で行われた秋祭りの写真と水彩画</div>
+                            <div class="option-trans">去年在清森市举行的秋季祭典的照片和水彩画</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            入賞したかどうかを知るには、高木さんはどうしたらよいか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(为了知道自己是否入围（获奖），高木应该怎么做才好？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">1月中旬に清森市のホームページを見る。</div>
+                            <div class="option-trans">1月中旬查看清森市的官方主页。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">1月中旬に直接、観光係に電話して聞く。</div>
+                            <div class="option-trans">1月中旬直接打电话给观光组询问。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">2月下旬に市役所の窓口に問い合わせる。</div>
+                            <div class="option-trans">2月下旬前往市政府窗口咨询。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">2月下旬に届く予定の通知を待つ。</div>
+                            <div class="option-trans">等待预定于2月下旬寄到的通知。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "4", 
+                optAnalysis: {
+                    "1": "【✖ 错误】「入賞した」（曾获奖）违反了「未発表のものに限ります」（仅限未发表）以及不得在其他比赛获奖的规定。",
+                    "2": "【✖ 错误】两者同属「絵画部門」，违反了「各部門1人1点に限ります」（各部门每人限1件）的规定。",
+                    "3": "【✖ 错误】「春の木々」（春季树木）违反了「秋を題材にしたもの」（以秋天为题材）的规定。",
+                    "4": "【✔ 正解】满足「秋を題材」（秋天题材）；因为规定写明「制作年は問わない」（使用动词「問う」的ない形表示年份不限），所以去年的也没问题；且分属摄影和绘画两部门，满足「各部門1人1点」的要求。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】原文写明「ホームページ上に1月15日に発表します」（1月15日在主页公布），15日即属于「1月中旬」。",
+                    "2": "【✖ 错误】原文明确规定，使用了被动态的否定形式：「電話および窓口での問い合わせには応じられません」（不接受电话及窗口咨询）。",
+                    "3": "【✖ 错误】理由同上，不接受窗口（窓口）的咨询。",
+                    "4": "【✖ 错误】邮寄通知的时间是「1月中」（1月内），选项中的「2月下旬」其实是「表彰式」（表彰仪式）的时间。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                });
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <!-- 使用书面/印刷感字体组合 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2013年12月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title" style="margin-top:0;">
+                    原口市市民農園　利用者募集案内
+                </div>
+                
+                <div class="article-translation">
+                    原口市市民农园 使用者招募通知
+                </div>
+                
+                <div class="poster-text-block">
+                    市民農園は、小面積の土地を利用して野菜や花作りを楽しむための貸し農園です。野菜や花作りに興味はあるけれど育てる場所がないといった方々は、市民農園を利用してみませんか。
+                </div>
+                <div class="article-translation">
+                    市民农园是为了利用小面积土地享受种植蔬菜和花卉乐趣的出租农园。对种菜或种花感兴趣却没有种植场所的各位，要不要来试试市民农园呢？
+                </div>
+
+                <div class="dl-grid">
+                    <div class="dl-term">【対象者】</div>
+                    <div class="dl-desc">
+                        <span class="ks-target target-q2">原口市内にお住まいの人または市内にお<span class="vocab-word" data-reading="つとめ" data-meaning="工作，就职">勤め</span>の人</span>
+                        <div class="article-translation">【对象】居住在原口市内的人，或者在市内工作的人</div>
+                    </div>
+                    
+                    <div class="dl-term">【利用期間】</div>
+                    <div class="dl-desc">
+                        2014年4月ー2015年3月（<span class="ks-target target-q2">最長3年間の<span class="vocab-word" data-reading="けいぞく" data-meaning="继续，持续">継続</span>利用が可能</span>）
+                        <div class="article-translation">【使用期间】2014年4月—2015年3月（最长可支持3年的持续使用）</div>
+                    </div>
+
+                    <div class="dl-term" style="grid-column: 1 / -1;">【農園の場所・特徴・料金】</div>
+                    <div class="dl-desc" style="grid-column: 1 / -1;">
+                        今回募集する農園は以下の4か所です
+                        <div class="article-translation">【农园的地点・特征・费用】本次招募的农园为以下4处</div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="poster-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"></th>
+                                <th style="width: 120px;">場所</th>
+                                <th>特徴</th>
+                                <th style="width: 80px;">料金/年</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">①</td>
+                                <td>原口市東山</td>
+                                <td>指導を受けながら、共同で楽しく野菜や花の栽培ができます(<span class="ks-target target-q1 inline-icon">栽培する野菜や花は、農園によって決められています</span>)。</td>
+                                <td>8000円</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">②</td>
+                                <td>原口市西山</td>
+                                <td>10m²を個人で借りて、<span class="ks-target target-q1 inline-icon">自由に野菜や花の栽培が楽しめます。</span>（必要な種、苗、農具などは準備してあります。）<span class="ks-target target-q1 inline-icon">必要に応じて栽培指導を受けられます。</span>種、苗などは各自で準備してください。農具は<span class="vocab-word" data-reading="かしだし" data-meaning="借出，出租">貸し出し</span>ます。</td>
+                                <td>5000円</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">③</td>
+                                <td>原口市三田</td>
+                                <td>10m²を個人で借りて、自由に野菜や花の栽培が楽しめます。種、苗、<span class="ks-target target-q2 inline-icon">必要な農具は、各自で準備してください。</span></td>
+                                <td>3000円</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">④</td>
+                                <td>原口市池沢</td>
+                                <td>50m²を個人で借りて、じっくり野菜や花の栽培が楽しめます。必要に応じて栽培指導を受けられます。種、苗、<span class="ks-target target-q2 inline-icon">必要な農具は、各自で準備してください。</span>農業用大型機械の貸し出しを行っています。</td>
+                                <td>5000円</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="article-translation">
+                    【表格翻译供参考】<br>
+                    ①原口市东山 | 可边接受指导边共同享受栽培乐趣(栽培的蔬菜花卉由农园决定)。 | 8000日元<br>
+                    ②原口市西山 | 个人租借10m²，可自由享受栽培。可根据需要接受栽培指导。种子、菜苗等请各自准备。农具可借用。 | 5000日元<br>
+                    ③原口市三田 | 个人租借10m²，可自由享受栽培。种子、菜苗、必需的农具请各自准备。 | 3000日元<br>
+                    ④原口市池泽 | 个人租借50m²，可慢慢享受栽培。可根据需要接受栽培指导。种子、菜苗、必需的农具请各自准备。提供农业用大型机械出租。 | 5000日元
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 16px;">
+                    ①②③は市街地に近く、比較的利用しやすい場所にあります。④は豊かな自然に囲まれた<span class="vocab-word" data-reading="こうがい" data-meaning="郊外">郊外</span>にあります。③④では栽培指導は行っていません。
+                </div>
+                <div class="article-translation">①②③靠近市区，位于相对容易利用的地点。④位于被丰富自然包围的郊外。③④不提供栽培指导。</div>
+
+                <div class="dl-grid" style="margin-top: 16px;">
+                    <div class="dl-term" style="width: 140px;">【応募方法】</div>
+                    <div class="dl-desc">
+                        往復はがきに、(1)利用を希望する農園の場所、(2)利用者の名前・住所・電話番号を記入し、市役所市民課市民農園係宛に送ってください。<span class="ks-target target-q2">希望者が多い場合は<span class="vocab-word" data-reading="ちゅうせん" data-meaning="抽签">抽選</span>になります。</span>
+                        <div class="article-translation">【报名方法】请在往返明信片上填写 (1)希望使用的农园地点、(2)使用者的姓名・住所・电话号码，并寄至市役所市民课市民农园系收。报名者多时将进行抽签。</div>
+                    </div>
+                    
+                    <div class="dl-term" style="width: 140px;">【応募締め切り】</div>
+                    <div class="dl-desc">
+                        2014年3月2日当日<span class="vocab-word" data-reading="けしいん" data-meaning="邮戳">消印</span>有効
+                        <div class="article-translation">【报名截止】2014年3月2日当天邮戳有效</div>
+                    </div>
+
+                    <div class="dl-term" style="width: 140px;">【問い合わせ先】</div>
+                    <div class="dl-desc">
+                        原口市役所市民課市民農園係　電話:031 (389) 6930
+                        <div class="article-translation">【咨询处】原口市役所市民课市民农园系 电话...</div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ムディさんは、市民農園を借りたいと考えている。作る野菜は自分で決めたいが、農作業の経験がないので作り方を教えてほしいと思っている。ムディさんはどの農園を借りたらよいか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(穆迪女士想租借市民农园。她想自己决定种什么蔬菜，但因为没有农活经验，希望有人教她怎么种。穆迪女士应该租借哪个农园比较好？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">①</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">②</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">③</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">④</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            原口市の市民農園を借りる際に、留意しなければならないことはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(在租借原口市的市民农园时，必须留意的事情是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">原口市に住んでいる人しか借りることができない。</div>
+                            <div class="option-trans">只有居住在原口市的人才能租借。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">同じ農園を３年以上連続して借りなければならない。</div>
+                            <div class="option-trans">必须连续租借同一个农园3年以上。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">自分で農具を準備しなければならない農園がある。</div>
+                            <div class="option-trans">有的农园必须自己准备农具。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">早く応募しないと希望の農園が借りられないことがある。</div>
+                            <div class="option-trans">如果不早点报名，有时会租不到希望的农园。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 排除】①号农园在特征栏中标明「栽培する野菜や花は、農園によって決められています」（栽培的蔬菜由农园决定，使用被动态），这与穆迪想自己决定种什么的要求不符。",
+                    "2": "【✔ 正解】穆迪有两个要求：1.“想自己决定种什么”，2.“希望有人教怎么种”。核对表格，②号农园既能「自由に野菜や花の栽培が楽しめます」（自由享受栽培），又能「必要に応じて栽培指導を受けられます」（根据需要接受栽培指导），准确对应了这两个要求。",
+                    "3": "【✖ 排除】③号农园和④号农园在表格下方的补充说明中被明确指出：「③④では栽培指導は行っていません」（不进行栽培指导），这无法满足穆迪需要人教的条件。",
+                    "4": "【✖ 排除】理由同上，④号农园也不提供栽培指导。"
+                }
+            },
+            q2: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 错误】海报在【対象者】（对象）一栏写明是「市内にお住まいの人または市内にお勤めの人」（居住在市内或在市内工作的人），因此并非“只有”住在市内的人才能租借，排除了表示限定的选项1。",
+                    "2": "【✖ 错误】海报在【利用期間】一栏写明「最長3年間の継続利用が可能」（最长可使用3年，使用了名词「可能」），说明是“可以”续借，而不是“必须连续租借3年以上”，选项逻辑错误。",
+                    "3": "【✔ 正解】核对表格内容，③号和④号农园的特征栏中都明确标有「必要な農具は、各自で準備してください」（必需的农具请各自准备），这准确对应了选项所述的“有的农园必须自己准备农具”。",
+                    "4": "【✖ 错误】海报在【応募方法】一栏写明「希望者が多い場合は抽選になります」（如果报名者多则进行抽签），说明名额分配靠抽签，而不是靠先到先得的拼手速（早く応募しないと…）。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

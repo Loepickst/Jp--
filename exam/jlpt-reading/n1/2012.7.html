@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2012年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                <div class="poster-title">
+                    東京都カルチャー会館　4月<span class="vocab-word" data-reading="かいこう" data-meaning="开讲，开课">開講</span>の講座
+                </div>
+                
+                <div class="article-translation">
+                    东京都文化会馆 4月开课的讲座
+                </div>
+                
+                <!-- 课程 ① -->
+                <div class="course-block">
+                    <div class="course-header">
+                        <span>①やさしい英語</span>
+                        <span class="course-date">4月8日開講</span>
+                    </div>
+                    <div class="course-desc">
+                        簡単な単語で伝えられるようになるための「聞く・話す」を中心とした講座。中学校レベルの英語で充分。講師はボランティアの日本人通訳者。事前に見学をすることができます。
+                    </div>
+                    <div class="course-details">
+                        <div>・毎週火曜　18：30～20：00　　12回　16,000円（教材費別）</div>
+                        <div>・講師　　青木一郎（東京友だちつくろう会代表）</div>
+                    </div>
+                    <div class="article-translation">
+                        ① 简易英语（4月8日开课）：以“听・说”为中心，旨在能用简单单词进行传达的讲座。初中水平英语足矣。讲师是志愿的日语翻译。可事前参观。<br>
+                        ・每周二 18:30~20:00，共12次，16,000日元（教材费另算）<br>
+                        ・讲师 青木一郎（东京交友会代表）
+                    </div>
+                </div>
+
+                <!-- 课程 ② -->
+                <div class="course-block">
+                    <div class="course-header">
+                        <span>②外国人としっかり学ぶ英語</span>
+                        <span class="course-date">4月10日開講</span>
+                    </div>
+                    <div class="course-desc">
+                        日本人講師では<span class="vocab-word" data-reading="ものたりない" data-meaning="感觉不够，不过瘾">物足りない</span>。でも、いきなり英語だけの会話についていく自信はない。そんな人にぴったりの日本語が話せる外国人講師によるコース。<span class="ks-target target-q1">毎回講師と新聞記事を読みながら英語力を<span class="vocab-word" data-reading="みにつける" data-meaning="掌握">身につける</span>。</span>事前に見学をすることができます。
+                    </div>
+                    <div class="course-details">
+                        <div>・<span class="ks-target target-q1">毎週木曜</span>　18：30～20：00　　15回　18,000円（教材費別）</div>
+                        <div>・講師　　フレンド外国語学校講師</div>
+                    </div>
+                    <div class="article-translation">
+                        ② 与外国人踏实学英语（4月10日开课）：觉得日本讲师不够过瘾，但又没自信一开始就跟上全英语对话。这是由会说日语的外国讲师为这样的人量身打造的课程。每次与讲师一起边读报纸文章边掌握英语能力。可事前参观。<br>
+                        ・每周四 18:30~20:00，共15次，18,000日元（教材费另算）<br>
+                        ・讲师 Friend外语学校讲师
+                    </div>
+                </div>
+
+                <!-- 课程 ③ -->
+                <div class="course-block">
+                    <div class="course-header">
+                        <span>③初めての英語</span>
+                        <span class="course-date">4月12日開講</span>
+                    </div>
+                    <div class="course-desc">
+                        <span class="vocab-word" data-reading="きまりもんく" data-meaning="客套话，套话">決まり文句</span>をまず<span class="vocab-word" data-reading="れくちゃー" data-meaning="讲授，讲课 (lecture)">レクチャー</span>。あいさつや買い物などでよく使う表現を紹介。聞くことから入り、日常会話を勉強しながらやさしい文法も学ぶので身につきやすい。英語での<span class="vocab-word" data-reading="じつむけいけん" data-meaning="实际工作经验">実務経験</span>の長い日本人講師が丁寧に教える。事前に見学をすることができます。
+                    </div>
+                    <div class="course-details">
+                        <div>・毎週土曜　12：00～13：30　　10回　14,000円（教材費別）</div>
+                        <div>・講師　　石川健二</div>
+                    </div>
+                    <div class="article-translation">
+                        ③ 英语入门（4月12日开课）：首先讲授常用套话。介绍打招呼、购物等常用表达。从听力入手，一边学习日常对话一边学习简单语法，容易掌握。由有着丰富英语实务经验的日本讲师仔细教导。可事前参观。<br>
+                        ・每周六 12:00~13:30，共10次，14,000日元（教材费另算）<br>
+                        ・讲师 石川健二
+                    </div>
+                </div>
+
+                <!-- 课程 ④ -->
+                <div class="course-block">
+                    <div class="course-header">
+                        <span>④ステップアップの英語</span>
+                        <span class="course-date">4月13日開講</span>
+                    </div>
+                    <div class="course-desc">
+                        相手に細かな<span class="vocab-word" data-reading="にゅあんす" data-meaning="微妙的差异，语感 (nuance)">ニュアンス</span>まで伝えられる英語力を身につけたいと思っている方におすすめ。中級以上の文法を習得した方対象。イギリス人講師とさらに複雑なテーマで会話をします。<span class="ks-target target-q1">雑誌や新聞などの読解もあり。</span><span class="ks-target target-q2">必ず事前に見学をして、ご自分のレベルに合っているかどうかを確認してからお申し込みください。</span>
+                    </div>
+                    <div class="course-details">
+                        <div>・<span class="ks-target target-q1">毎週日曜</span>　10：00～12：00　　12回　20,000円（教材費別）</div>
+                        <div>・講師　　キャサリン・スミス</div>
+                    </div>
+                    <div class="article-translation">
+                        ④ 英语进阶（4月13日开课）：推荐给想要掌握能向对方传达细微语感之英语能力的人。以掌握中级以上语法的人为对象。与英国讲师就更复杂的主题进行对话。也有杂志、报纸等的阅读理解。请务必事前参观，确认是否符合自己的水平后再报名。<br>
+                        ・每周日 10:00~12:00，共12次，20,000日元（教材费另算）<br>
+                        ・讲师 凯瑟琳·史密斯
+                    </div>
+                </div>
+
+                <div class="general-info-block">
+                    <h3>◎受講の申し込み</h3>
+                    <p><span class="ks-target target-q2">受講の予約、申し込みはお電話で。</span>お電話での申し込み後、受講される講座の案内と振り込み用紙をお送りします。<span class="vocab-word" data-reading="しょてい" data-meaning="规定，指定">所定</span>日まてにお近くの銀行から受講料を<span class="vocab-word" data-reading="ふりこんで" data-meaning="转账，汇入">振り込んで</span>ください。<span class="ks-target target-q2">会館の窓口では、申し込みおよび現金の取り扱いはいたしません。</span></p>
+                    <p>館内には4月からの講座の総合パンフレットを用意しています。気軽にお立ち寄りください。</p>
+                    <p>申し込み／問い合わせ先：03-444-7890（平日9：00～17：00）</p>
+                    <div class="article-translation">
+                        ◎听课报名<br>
+                        听课预约、报名请通过电话进行。电话报名后，我们将寄送所报讲座的指南和汇款单。请在规定日期前从附近的银行汇入听课费。会馆窗口不办理报名及现金业务。<br>
+                        馆内备有4月起讲座的综合宣传册。欢迎随时顺道来取。<br>
+                        报名/咨询处：03-444-7890（工作日 9:00～17:00）
+                    </div>
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            会社員の山田さんは英語で書かれた新聞を読めるようになりたいと思っている。週末は出張が多いので平日しか通えない。山田さんに合う講座はどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(公司职员山田想学会读英文报纸。因为周末出差多，只能工作日去上课。适合山田的讲座是哪一个？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">①</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">②</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">③</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">④</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ④の講座を受講するためにはどのような手続きが必要か。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(为了报名上④号讲座，需要怎样的手续？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">見学をしてレベルを確認してから、電話で受講を申し込む。</div>
+                            <div class="option-trans">参观并确认水平后，通过电话报名听课。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">会館に行って総合パンフレットをもらい、窓口で申し込む。</div>
+                            <div class="option-trans">去会馆拿综合宣传册，在窗口报名。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">電話で受講申込書を送ってもらい、会館に行って申し込む。</div>
+                            <div class="option-trans">通过电话让人把报名表寄过来，然后去会馆报名。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">事前見学の予約をし、見学後、郵便局で受講料を振り込む。</div>
+                            <div class="option-trans">预约事前参观，参观后在邮局汇入听课费。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 排除】①号课程主要针对基础的听和说（「聞く・話す」を中心とした），无法满足“想读英文报纸”的需求。",
+                    "2": "【✔ 正解】山田的需求是“读报纸”以及“平日（工作日）上课”（原句使用「しか～ない」表限定）。②号课程包含“边读报纸文章边学习”（新聞記事を読みながら），且时间是“每周四”（毎週木曜），完美符合这两项要求。",
+                    "3": "【✖ 排除】③号课程是入门级别的听力和日常会话，没有关于阅读报纸的内容，且时间是“每周六”（周末），与只能工作日上课的要求不符。",
+                    "4": "【✖ 排除】④号课程虽然包含了“杂志和报纸等的阅读”（雑誌や新聞などの読解もあり），但上课时间是“每周日”（毎週日曜），违反了只能在工作日（平日）上课的限制条件。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】关于④号讲座，其介绍中明确要求“务必事前参观确认水平后再报名”（必ず事前に見学をして…確認してからお申し込みください）。而底部的通用报名规定则写明“报名通过电话进行”（申し込みはお電話で）。将这两者结合，即为选项1所述内容。",
+                    "2": "【✖ 错误】底部的通用报名规定中明确指出“窗口不办理报名”（窓口では、申し込み…はいたしません），因此去窗口报名是错误的。",
+                    "3": "【✖ 错误】同样地，规定中指明必须通过“电话”报名，而不是亲自去会馆报名（会館に行って申し込む）。",
+                    "4": "【✖ 错误】汇款需通过“银行”（銀行から受講料を振り込んで），而不是邮局（郵便局）。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

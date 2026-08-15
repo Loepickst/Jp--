@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">案内</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2017年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                
+                <div class="poster-title">ご入会案内</div>
+                
+                <div class="poster-intro">
+                    広々としたトレーニングジムとプールで、楽しく汗を流しませんか。
+                </div>
+
+                <div class="poster-section-title">営業時間</div>
+                <div class="poster-text-block">
+                    月～金　8：00～23：00　　　土　8：00～21：00　　　日　9：00～20：00<br>
+                    祝日の場合は20：00で営業終了します。
+                </div>
+
+                <div class="article-translation">
+                    入会指南<br>
+                    在宽敞的训练健身房和游泳池里，愉快地流汗吧。<br>
+                    营业时间<br>
+                    周一至周五 8:00~23:00　　周六 8:00~21:00　　周日 9:00~20:00<br>
+                    遇节假日则在20:00结束营业。
+                </div>
+
+                <div class="poster-section-title" style="margin-top: 12px; border:none;">料金表 曜日や時間など、ご自身に合ったプランをお選びください！</div>
+                
+                <div class="table-responsive">
+                    <table class="poster-table">
+                        <thead>
+                            <tr>
+                                <th>プラン</th>
+                                <th>月会費</th>
+                                <th>ご利用時間</th>
+                                <th>ご入会条件</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>フルタイム</td>
+                                <td>10,000</td>
+                                <td>全営業時間内</td>
+                                <td rowspan="4">
+                                    <span class="ks-target target-q1">16歳以上の方</span>
+                                </td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>平日 A</td>
+                                <td>9,000</td>
+                                <td>月～金の営業時間内</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>平日 B</td>
+                                <td>8,000</td>
+                                <td>月～金の17：00まで</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td>平日 C</td>
+                                <td>8,000</td>
+                                <td>月～金の18：00以降</td>
+                            </tr>
+                            <tr>
+                                <td>シニア</td>
+                                <td>7,800</td>
+                                <td>月～日の20：00まで</td>
+                                <td>
+                                    <span class="ks-target target-q1">60歳以上の方</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="poster-text-block" style="margin-bottom: 24px;">
+                    すべてのプランで、トレーニングジムとプールがご利用いただけます。
+                </div>
+
+                <div class="article-translation">
+                    费用表 请根据星期和时间等，选择适合您自身的套餐！<br>
+                    套餐 / 月会费 / 使用时间 / 入会条件<br>
+                    全时段 / 10,000 / 全营业时间内 / 16岁以上的人士<br>
+                    平日A / 9,000 / 周一至周五的营业时间内 / (同上)<br>
+                    平日B / 8,000 / 周一至周五的17:00为止 / (同上)<br>
+                    平日C / 8,000 / 周一至周五的18:00以后 / (同上)<br>
+                    老年套餐 / 7,800 / 周一至周日的20:00为止 / 60岁以上的人士<br>
+                    所有套餐皆可使用训练健身房和游泳池。
+                </div>
+
+                <div class="poster-section-title">入会手続き</div>
+                <div class="poster-text-block">
+                    ①～③をお持ちの上、受付にお越しください。
+                    <ul class="poster-list">
+                        <li>①本人確認書類（免許証、保険証などの公的身分証明書）</li>
+                        <li>②金融機関の通帳とお届け印、またはキャッシュカード</li>
+                        <li class="ks-target target-q2">③<span class="vocab-word" data-reading="にゅうかいきん" data-meaning="入会费">入会金</span>（5,000円）および2か月分（1か月目、2か月目）の月会費</li>
+                    </ul>
+                    ＊各種キャンペーン<span class="vocab-word" data-reading="てきよう" data-meaning="适用">適用</span>により、入会金、月会費が<span class="vocab-word" data-reading="わりびき" data-meaning="折扣，减价">割引</span>になる場合があります。
+                </div>
+
+                <div class="contact-info" style="margin-bottom: 24px; text-align: right;">
+                    りんどうスポーツジム　電話 058-556-7788　http://rindou-s.com
+                </div>
+
+                <div class="article-translation">
+                    入会手续<br>
+                    请携带①～③，前往前台。<br>
+                    ①本人身份确认材料（驾照、保险证等官方身份证明）<br>
+                    ②金融机构的存折和登记印章，或者银行卡<br>
+                    ③入会费（5,000日元）以及2个月份（第1个月、第2个月）的月会费<br>
+                    *由于适用各种活动，入会费、月会费可能会有折扣。<br>
+                    Rindou体育健身房 电话 058-556-7788 http://rindou-s.com
+                </div>
+
+                <div class="campaign-box">
+                    <div class="campaign-title">夏のご入会キャンペーン</div>
+                    <div class="poster-text-block" style="margin-bottom: 0;">
+                        7月31日までにご入会の方限定の3つの<span class="vocab-word" data-reading="とくてん" data-meaning="特权，优惠">特典</span>！この機会をお見逃しなく！
+                    </div>
+                    
+                    <div class="campaign-inner-box">
+                        <ul class="poster-list" style="margin-bottom: 0;">
+                            <li><span class="ks-target target-q2">特典①　入会金が無料！</span></li>
+                            <li><span class="ks-target target-q2">特典②　月会費が1か月分無料！（3か月目の月会費を<span class="vocab-word" data-reading="めんじょ" data-meaning="免除">免除</span>）</span></li>
+                            <li>特典③　タオルレンタルが2か月間無料！</li>
+                        </ul>
+                    </div>
+
+                    <div class="campaign-note">
+                        ＊入会手続き等、詳細については「ご入会案内」のポスターをご参照の上、ご不明な点はスタッフまでお気軽にお問い合わせください。
+                    </div>
+                    
+                    <div class="contact-info">
+                        りんどうスポーツジム　電話 058-556-7788　http://rindou-s.com
+                    </div>
+                </div>
+
+                <div class="article-translation">
+                    夏季入会活动<br>
+                    7月31日前入会者限定的3项特权！不要错过这个机会！<br>
+                    特权① 入会费免费！<br>
+                    特权② 月会费1个月免费！（免除第3个月的月会费）<br>
+                    特权③ 毛巾租赁2个月免费！<br>
+                    *关于入会手续等详情，请参考“入会指南”的海报，如有不明白之处请随时向工作人员咨询。
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ウーさんは５５歳で、このスポーツジムに入会してトレーニングジムとプールを使いたいと考えている。火曜の１０時から１２時までと、水曜の１７時から１９時までが両方利用できるもので、できるだけ安いプランがいい。ウーさんの希望に合うプランはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックして表内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(吴女士55岁，想加入这家健身房使用训练房和游泳池。她希望找一个既能涵盖周二10点到12点，又能涵盖周三17点到19点的时段，并且尽可能便宜的套餐。符合吴女士要求的套餐是哪一个？)</div>
+                    </div>
+                </div>
+                <div class="options-group horizontal">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">フルタイム</div>
+                            <div class="option-trans">全时段</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">平日 A</div>
+                            <div class="option-trans">平日 A</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">平日 B</div>
+                            <div class="option-trans">平日 B</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">平日 C</div>
+                            <div class="option-trans">平日 C</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            アンガスさんは、このスポーツジムの「夏のご入会キャンペーン」の期間内に入会手続きに行くつもりだ。アンガスさんが入会手続き時に支払わなければならない料金はどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(安格斯先生打算在这家健身房的“夏季入会活动”期间去办理入会手续。安格斯先生在办理入会手续时需要支付的费用是哪项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">入会金と２か月分の月会費</div>
+                            <div class="option-trans">入会费和2个月份的月会费</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">入会金と１か月分の月会費</div>
+                            <div class="option-trans">入会费和1个月份的月会费</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">２か月分の月会費</div>
+                            <div class="option-trans">2个月份的月会费</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">１か月分の月会費</div>
+                            <div class="option-trans">1个月份的月会费</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "2", 
+                optAnalysis: {
+                    "1": "【✖ 排除】全时段套餐满足时间要求，但月会费为10,000日元，比平日A套餐贵。吴女士希望“尽可能便宜（できるだけ安い）”，此项并非最优选择。",
+                    "2": "【✔ 正解】吴女士55岁，不符合老年套餐（60岁以上）的要求。她希望在使用时间上涵盖周二的10:00-12:00和周三的17:00-19:00。平日A（9,000日元）涵盖周一至周五的全部营业时间，既满足时段要求，价格也比全时段套餐（10,000日元）更便宜，符合条件。",
+                    "3": "【✖ 排除】平日B套餐的使用时间是“至17:00（17:00まで）”，无法涵盖吴女士希望的周三17:00至19:00的时段。",
+                    "4": "【✖ 排除】平日C套餐的使用时间是“18:00之后（18:00以降）”，无法涵盖吴女士希望的周二10:00至12:00的时段，也无法涵盖周三的17:00至18:00。"
+                }
+            },
+            q2: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】夏季活动明确指出“特权① 入会费免费（入会金が無料）”，所以办理时不需要再支付入会费。",
+                    "2": "【✖ 排除】既不需要支付入会费，且所需支付的月会费不仅是1个月份。",
+                    "3": "【✔ 正解】根据正常的“入会手续”条款，办理时需缴纳“③入会费及2个月份（第1个月、第2个月）的月会费”。由于适用“夏季入会活动”，特权①免除了入会费；而特权②说明“月会费1个月免费”，括号内明确标注为“免除第3个月的月会费（3か月目の月会費を免除）”。因此，办理入会手续时，第1个月和第2个月的月会费并未减免，仍需支付2个月份的月会费。",
+                    "4": "【✖ 排除】夏季活动中免除的是“第3个月的月会费”，办理手续时所要求的“第1个月、第2个月”会费并未享受免费，依然应当支付2个月份的月会费。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>

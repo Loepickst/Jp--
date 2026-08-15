@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情報検索 - 练习与解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../shared/reading-content-redesign.css?v=20260811-n2-short-footnotes-3">
+    <link rel="stylesheet" href="../../shared/reading-tools.css?v=20260809-14">
+</head>
+<body id="top" class="reading-article-tools-page reading-tools-no-furigana reading-content-page reading-cloze-v2">
+
+    <header class="kiki-unified-header kiki-unified-header--practice" data-kiki-unified-header="practice" data-kiki-unified-header-host="reading-practice">
+    <div class="kiki-unified-header-left">
+        <a class="kiki-unified-brand" href="/index.html" aria-label="返回 kiji 首页"><img src="/assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline" alt="kiji"></a>
+        <span class="kiki-unified-divider" aria-hidden="true"></span>
+        <a id="back-to-reading-index" class="kiki-unified-back" href="../../index.html?level=N1&type=search&browse=year" aria-label="返回上一页" data-kiki-dynamic-back>
+            <svg class="kiki-unified-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+            <span class="kiki-unified-back-label">返回上一页</span>
+            <span class="kiki-unified-back-label-mobile" aria-hidden="true">返回</span>
+        </a>
+    </div>
+    <h1 class="kiki-unified-header-title">N1 · 情報検索</h1>
+    <div class="kiki-unified-header-right"><div class="top-actions top-bar-controls reading-editorial-actions"></div></div>
+</header>
+
+    <nav class="quick-nav sketch-box">
+        <a href="#top" class="nav-link">Top</a>
+        <div class="nav-divider"></div>
+        <a href="#poster-content" class="nav-link">募集</a>
+        <div class="nav-divider"></div>
+        <a href="#q1-card" class="nav-link">問1</a>
+        <a href="#q2-card" class="nav-link">問2</a>
+    </nav>
+
+    <div class="layout-container">
+        
+        <!-- 上部：海报区域 -->
+        <main class="article-section sketch-box" id="mainArticleContent">
+            <div class="article-meta">
+                <div class="meta-left">
+                    <span class="tag">N1 読解</span>
+                    <span class="article-title-info">2018年7月 · 情報検索</span>
+                </div>
+                <button class="translate-toggle-btn" onclick="toggleTranslation(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    参考訳
+                </button>
+            </div>
+            
+            <div class="poster-box" id="poster-content">
+                
+                <div class="poster-title">ふかみ農業公園の2019年度ボランティア<span class="vocab-word" data-reading="ぼしゅう" data-meaning="招募">募集</span></div>
+                
+                <div class="poster-intro" style="margin-left: 0; text-align: justify;">
+                    ふかみ農業公園では、野菜や花を育てたり、季節に<span class="vocab-word" data-reading="おうじた" data-meaning="根据，适应">応じた</span>イベントを手伝ったりしてくださるボランティアを募集しています。
+                </div>
+
+                <div class="article-translation">
+                    深见农业公园2019年度志愿者招募<br>
+                    深见农业公园正在招募能帮忙种植蔬菜和花卉、协助各项季节性活动的志愿者。
+                </div>
+
+                <div class="table-responsive">
+                    <table class="poster-table">
+                        <tbody>
+                            <tr>
+                                <td>ボランティア①</td>
+                                <td>畑に野菜の<span class="vocab-word" data-reading="たねをまいたり" data-meaning="播种">種をまいたり</span>、<span class="vocab-word" data-reading="くさとり" data-meaning="拔草，除草">草取り</span>などの農作業をしたりして、<span class="vocab-word" data-reading="しゅうかく" data-meaning="收获">収穫</span>までの作業を行います。</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background: transparent; font-weight: normal;">活動時間●日時：2019年4月～翌3月●毎週金曜10時～12時</td>
+                            </tr>
+                            <tr class="ks-target target-q1">
+                                <td class="ks-target target-q1">ボランティア②</td>
+                                <td class="ks-target target-q1">花を植えたり、草取りなどの<span class="vocab-word" data-reading="かだん" data-meaning="花坛">花壇</span>の<span class="vocab-word" data-reading="せいび" data-meaning="整理，配备">整備</span>をしたりします。</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background: transparent; font-weight: normal;">活動時間●日時：2019年4月～翌3月●毎週木曜10時～12時</td>
+                            </tr>
+                            <tr>
+                                <td>ボランティア③</td>
+                                <td>年3回のイベント（桜祭り、夏祭り、収穫祭）時に、公園内で収穫した野菜を売ったり、花を売ったりします。一つのイベントのみの参加も可能です。</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="background: transparent; font-weight: normal;">活動日時：4月6日桜祭り、8月10日夏祭り、11月9日収穫祭）各イベント当日開始から<span class="vocab-word" data-reading="かたづけ" data-meaning="收拾，整理">片付け</span>まで<span class="ks-target target-q2">（開始2時間前に集合）</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="article-translation">
+                    志愿者①：进行在田里播种蔬菜、拔草等农活，直到收获为止的作业。<br>
+                    活动时间●日期：2019年4月～次年3月●每周五10点～12点<br>
+                    志愿者②：进行种花、拔草等花坛的整理工作。<br>
+                    活动时间●日期：2019年4月～次年3月●每周四10点～12点<br>
+                    志愿者③：在每年3次的活动（樱花祭、夏日祭、收获祭）时，售卖在公园内收获的蔬菜或鲜花。可以仅参加其中一项活动。<br>
+                    活动日期：4月6日樱花祭、8月10日夏日祭、11月9日收获祭。各项活动当天从开始到收拾完毕为止（开始前2小时集合）。
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 16px; font-weight: 700;">
+                    登録説明会（場所：ふかみ農業公園事務所2階会議室）
+                </div>
+                <ul class="poster-list indent">
+                    <li>ボランティア①：2019年3月8日（金）、9日（土）※1　10時～11時</li>
+                    <li class="ks-target target-q1">ボランティア②：2019年3月15日（金）、16日（土）※1　10時～11時</li>
+                    <li style="list-style: none;" class="ks-target target-q1">※1 <span style="font-weight: 700;">必ずいずれかの日にご参加ください。</span></li>
+                    <li>ボランティア③：なし</li>
+                </ul>
+
+                <div class="article-translation">
+                    注册说明会（地点：深见农业公园事务所2楼会议室）<br>
+                    志愿者①：2019年3月8日（周五）、9日（周六）※1　10点～11点<br>
+                    志愿者②：2019年3月15日（周五）、16日（周六）※1　10点～11点<br>
+                    ※1 请务必参加其中的一天。<br>
+                    志愿者③：无
+                </div>
+
+                <div class="section-title">申し込み方法</div>
+                <div class="poster-text-block">
+                    以下を<span class="vocab-word" data-reading="めいき" data-meaning="明确记载">明記</span>の上、はがき、Eメール、FAXのいずれかでお申し込みください。
+                </div>
+                <ul class="poster-list indent">
+                    <li>ボランティア①、②：住所、氏名、年齢、電話番号、参加を希望するボランティア番号、登録説明会の参加希望日</li>
+                    <li>ボランティア③　　：住所、氏名、年齢、電話番号、イベント名</li>
+                </ul>
+                <div class="poster-text-block ks-target target-q1" style="margin-left: 1.5em; font-weight: 700;">
+                    <span class="vocab-word" data-reading="しめきり" data-meaning="截止日期">締切</span>①、②登録説明会開催日1日目の1週間前、③各イベント実施日の1週間前<span class="vocab-word" data-reading="ひっちゃく" data-meaning="必须寄达">必着</span>
+                </div>
+
+                <div class="article-translation">
+                    报名方法<br>
+                    明确填写以下内容后，请通过明信片、电子邮件、传真中的任意一种方式进行报名。<br>
+                    志愿者①、②：地址、姓名、年龄、电话号码、希望参加的志愿者编号、注册说明会的希望参加日<br>
+                    志愿者③：地址、姓名、年龄、电话号码、活动名称<br>
+                    截止日期：①、②注册说明会举办首日的1周前，③各项活动实施日的1周前必须寄达。
+                </div>
+
+                <div class="poster-text-block" style="margin-top: 20px;">
+                    <span style="font-weight: 700;">登録費用（保険料）</span>ボランティア①、②300円　③50円［各イベントにつき］※2<br>
+                    ①、②にご参加の方は、活動初日にお支払いください。③にご参加の方は、イベント当日の集合時にお支払いください。
+                </div>
+                <div class="poster-text-block ks-target target-q2">
+                    ※2 ①または②にご参加の方が③にも参加された場合、③の登録費用は必要ありません。
+                </div>
+
+                <div class="article-translation">
+                    注册费用（保险费）：志愿者①、② 300日元　③ 50日元 [按各项活动计算] ※2<br>
+                    参加①、②的人，请在活动首日支付。参加③的人，请在活动当天的集合时支付。<br>
+                    ※2 参加了①或②的人如果也参加了③，不需要缴纳③的注册费用。
+                </div>
+
+                <div class="contact-info">
+                    ふかみ農業公園 〒009-1527 山川市ふかみ 1569<br>
+                    電話／FAX：031-849-1111 Eメール：bosyu@fukami-nogyo-koen.com
+                </div>
+
+            </div>
+            
+        </main>
+
+        <!-- 下部：题目区域 -->
+        <aside class="question-section" id="quizForm">
+            
+            <!-- 问题 1 -->
+            <div class="question-card sketch-box" data-question="q1" id="q1-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-blue);">1</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            ナイニさんは1年を通じて花の世話をするボランティアに参加したいと考えている。参加するためには、どうしなければならないか。<br>
+                            <div class="source-jump-btn ks-theme-q1" onclick="jumpToTarget('q1')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(奈妮想要参加全年照顾花卉的志愿者活动。为了能够参加，她必须怎么做？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q1" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">3月8日の1週間前までに申し込み、3月8日か9日の説明会に参加する。</div>
+                            <div class="option-trans">在3月8日的1周前报名，并参加3月8日或9日的说明会。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q1" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">3月8日の1週間前までに申し込み、3月15日と16日の説明会に参加する。</div>
+                            <div class="option-trans">在3月8日的1周前报名，并参加3月15日和16日的说明会。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q1" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">3月15日の1週間前までに申し込み、3月15日か16日の説明会に参加する。</div>
+                            <div class="option-trans">在3月15日的1周前报名，并参加3月15日或16日的说明会。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q1" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">3月15日の1週間前までに申し込み、3月15日と16日の説明会に参加する。</div>
+                            <div class="option-trans">在3月15日的1周前报名，并参加3月15日和16日的说明会。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 问题 2 -->
+            <div class="question-card sketch-box" data-question="q2" id="q2-card">
+                <div class="q-header">
+                    <div class="q-number" style="background: var(--marker-peach);">2</div>
+                    <div class="q-text-wrapper">
+                        <div class="q-text">
+                            フリオさんはボランティア①に参加し、さらに、ボランティア③の夏祭りのボランティアとしても参加するつもりだ。その場合、夏祭り当日にしなければならないこととして合っているのはどれか。<br>
+                            <div class="source-jump-btn ks-theme-q2" onclick="jumpToTarget('q2')">
+                                <div class="ks-icon-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    <span>クリックしてポスター内の出処へ移動</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="q-text-trans">(胡里奥打算参加志愿者①，并且还准备作为志愿者③参加夏日祭。在此情况下，关于他在夏日祭当天应当做的事情，符合说明的是哪一项？)</div>
+                    </div>
+                </div>
+                <div class="options-group">
+                    <label class="option-label" data-opt="1">
+                        <input type="radio" name="q2" value="1" class="option-input">
+                        <div class="custom-radio">1</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">イベント開始2時間前に公園に行く。</div>
+                            <div class="option-trans">在活动开始的2小时前前往公园。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="2">
+                        <input type="radio" name="q2" value="2" class="option-input">
+                        <div class="custom-radio">2</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">イベント開始2時間前に公園に行き、ボランティア登録費用50円を支払う。</div>
+                            <div class="option-trans">在活动开始的2小时前前往公园，并支付50日元的志愿者注册费。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="3">
+                        <input type="radio" name="q2" value="3" class="option-input">
+                        <div class="custom-radio">3</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">イベント開始時間に公園に行く。</div>
+                            <div class="option-trans">在活动开始的时间前往公园。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                    <label class="option-label" data-opt="4">
+                        <input type="radio" name="q2" value="4" class="option-input">
+                        <div class="custom-radio">4</div>
+                        <div class="option-content-wrapper">
+                            <div class="option-content">イベント開始時間に公園に行き、ボランティア登録費用50円を支払う。</div>
+                            <div class="option-trans">在活动开始的时间前往公园，并支付50日元的志愿者注册费。</div>
+                        </div>
+                        <span class="click-hint">詳細解説</span>
+                        <div class="option-detail-analysis"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="action-bar">
+                <button type="button" class="submit-btn" id="submitBtn" onclick="submitAnswers()">答え合わせ</button>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- 词汇解释气泡 -->
+    <div id="vocabTooltip" class="vocab-tooltip"></div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        function toggleTranslation(btn) {
+            if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) {
+                alert("请先完成所有题目（点击「答え合わせ」提交），然后再查看译文哦！");
+                return;
+            }
+            
+            btn.classList.toggle('active');
+            const translations = document.querySelectorAll('.article-translation');
+            translations.forEach(el => {
+                el.classList.toggle('show');
+            });
+        }
+
+        const answerData = {
+            q1: { 
+                correct: "3", 
+                optAnalysis: {
+                    "1": "【✖ 排除】3月8日是志愿者①的说明会日期。奈妮想要“照顾花卉”（花の世話），这属于志愿者②（花を植えたり…），对应的说明会并非3月8日或9日。",
+                    "2": "【✖ 排除】报名截止日期和参加日期均与文中要求不符。另外，说明会只需参加一天即可，不需要15日“和”16日都参加。",
+                    "3": "【✔ 正解】奈妮想要全年照顾花卉，对应的是“志愿者②”。关于志愿者②，报名截止日期是“说明会举办首日的1周前”（登録説明会開催日1日目の1週間前），即3月15日的1周前；并且要求在3月15日或16日中参加其中一天的说明会（必ずいずれかの日にご参加ください）。该选项的描述完全相符。",
+                    "4": "【✖ 排除】文中的要求是“参加其中一天的说明会（いずれかの日にご参加）”，选项描述为“参加15日和（と）16日的说明会”，要求其参加两天，与文中规定不符。"
+                }
+            },
+            q2: { 
+                correct: "1", 
+                optAnalysis: {
+                    "1": "【✔ 正解】胡里奥既参加志愿者①又参加志愿者③。关于志愿者③当天的集合时间，活动列表中明确记载“开始的2小时前集合”（開始2時間前に集合）。关于费用，底部的补充说明提到“参加了①或②的人如果也参加了③，不需要缴纳③的注册费用（③の登録費用は必要ありません）”。因此，当天他只需提前2小时去公园，无需支付费用。本选项符合。",
+                    "2": "【✖ 排除】虽然提早2小时的时间是对的，但根据规定，由于他已经参加了志愿者①，因此不需要再缴纳志愿者③的50日元注册费。",
+                    "3": "【✖ 排除】活动要求在“开始的2小时前集合”，而不是在开始时间才去公园。",
+                    "4": "【✖ 排除】集合时间不符合（应当是提前2小时），并且也不需要支付50日元的注册费。"
+                }
+            }
+        };
+
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', function() {
+                if (document.getElementById('submitBtn').disabled) return;
+
+                const name = this.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.closest('.option-label').classList.remove('selected');
+                });
+                
+                if(this.checked) {
+                    this.closest('.option-label').classList.add('selected');
+                }
+            });
+        });
+
+        // 选项点击展示独立解析的逻辑
+        document.querySelectorAll('.option-label').forEach(label => {
+            label.addEventListener('click', function(e) {
+                const group = this.closest('.options-group');
+                if(group.classList.contains('reviewed')) {
+                    const detailBox = this.querySelector('.option-detail-analysis');
+                    if(detailBox.classList.contains('show')) {
+                        detailBox.classList.remove('show');
+                    } else {
+                        group.querySelectorAll('.option-detail-analysis').forEach(box => box.classList.remove('show'));
+                        detailBox.classList.add('show');
+                    }
+                }
+            });
+        });
+
+        const vocabTooltip = document.getElementById('vocabTooltip');
+        document.querySelectorAll('.vocab-word').forEach(word => {
+            word.addEventListener('click', function(e) {
+                if (!document.getElementById('mainArticleContent').classList.contains('reviewed')) return;
+                
+                e.stopPropagation();
+                const reading = this.getAttribute('data-reading');
+                const meaning = this.getAttribute('data-meaning');
+                
+                vocabTooltip.innerHTML = `<span class="reading">${reading}</span><span class="meaning">${meaning}</span>`;
+                
+                const rect = this.getBoundingClientRect();
+                const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                vocabTooltip.style.left = `${rect.left + scrollX - 10}px`;
+                vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                
+                vocabTooltip.classList.add('show');
+                setTimeout(() => {
+                    vocabTooltip.style.top = `${rect.top + scrollY - vocabTooltip.offsetHeight - 10}px`;
+                }, 10);
+            });
+        });
+
+        document.addEventListener('click', function() {
+            vocabTooltip.classList.remove('show');
+        });
+        
+        // 跳转逻辑函数
+        window.jumpToTarget = function(qName) {
+            const targetArticleSpans = document.querySelectorAll(`.target-${qName}`);
+            if (targetArticleSpans.length > 0) {
+                targetArticleSpans[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                targetArticleSpans.forEach(span => {
+                    span.classList.add(`revealed-${qName}`);
+                    span.classList.remove('flash-focus');
+                    void span.offsetWidth; 
+                    span.classList.add('flash-focus');
+                });
+            }
+        };
+
+        function submitAnswers() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("すべての問いに答えてください。（请回答所有問題）");
+                return;
+            }
+
+            const userAnswers = { q1: q1.value, q2: q2.value };
+            let score = 0;
+
+            document.querySelectorAll('.option-input').forEach(input => {
+                input.disabled = true;
+                input.closest('.option-label').classList.add('disabled'); 
+            });
+            
+            document.querySelectorAll('.options-group').forEach(group => {
+                group.classList.add('reviewed');
+            });
+
+            document.getElementById('mainArticleContent').classList.add('reviewed');
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
+            Object.keys(answerData).forEach(qName => {
+                const qCard = document.querySelector(`.question-card[data-question="${qName}"]`);
+                qCard.classList.add('reviewed');
+
+                const data = answerData[qName];
+                const correctVal = data.correct;
+                const userVal = userAnswers[qName];
+
+                qCard.querySelectorAll('.option-label').forEach(label => {
+                    const input = label.querySelector('.option-input');
+                    const optVal = input.value;
+                    
+                    if (optVal === correctVal) {
+                        label.classList.add('is-correct');
+                        label.querySelector('.custom-radio').innerHTML = '✔';
+                    }
+                    if (optVal === userVal && userVal !== correctVal) {
+                        label.classList.add('is-wrong');
+                        label.querySelector('.custom-radio').innerHTML = '✖';
+                    }
+                    
+                    const detailBox = label.querySelector('.option-detail-analysis');
+                    if (detailBox) {
+                        detailBox.innerText = data.optAnalysis[optVal];
+                    }
+                });
+
+                if (userVal === correctVal) {
+                    score++;
+                }
+
+                // 答题后不再直接高亮，由用户点击按钮触发
+            });
+
+            if (score === 2) {
+                btn.innerText = "全問正解！素晴らしい！";
+                btn.style.background = "var(--marker-mint)";
+                btn.style.color = "var(--green-pencil)";
+            } else {
+                btn.innerText = `完了 (${score}/2 正解)`;
+                btn.style.background = "var(--marker-peach)";
+                btn.style.color = "var(--red-pencil)";
+            }
+        }
+    </script>
+
+    <script src="../../../../shared/study-quest-test-runtime.js"></script>
+    <script src="../../../../shared/study-quest-test-boot.js"></script>
+    <script src="../../shared/reading-year-system.js?v=20260809-reading-mistakes"></script>
+    
+
+<script src="../../shared/reading-analysis-n1-search.js?v=20260811-unified-analysis-1"></script>
+<script src="../../shared/reading-practice-redesign.js?v=20260811-n2-short-footnotes-3"></script>
+<script src="../../shared/reading-tools.js?v=20260811-reading-single-source-1"></script>
+<script src="../../shared/reading-dt-year-session.js?v=20260809-reading-mistakes"></script>
+    <script src="../../../../shared/word-bank.js?v=20260808-reading-tools"></script>
+</body>
+</html>
