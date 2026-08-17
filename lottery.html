@@ -161,6 +161,10 @@
             box-shadow: var(--shadow-glow);
         }
 
+        .collection-btn-mobile {
+            display: none;
+        }
+
         h1 {
             margin: 0;
             font-size: clamp(16px, 2vw, 20px);
@@ -2396,7 +2400,16 @@
             }
 
             .collection-btn::after {
-                content: "图鉴";
+                content: none;
+                display: none;
+            }
+
+            .collection-btn-desktop {
+                display: none;
+            }
+
+            .collection-btn-mobile {
+                display: inline;
                 font-size: 12px;
                 font-weight: 500;
                 letter-spacing: 0.04em;
@@ -2949,7 +2962,7 @@
     <header>
         <a href="index.html" class="back-btn">主页</a>
         <h1>今日はどんな幸運が待っているかな？</h1>
-        <button class="collection-btn" id="openCollectionBtn">奖品一览</button>
+        <button class="collection-btn" id="openCollectionBtn" data-mobile-label="图鉴"><span class="collection-btn-desktop">奖品一览</span><span class="collection-btn-mobile">图鉴</span></button>
     </header>
 
     <main class="lottery-stage">
@@ -2966,7 +2979,7 @@
                 </div>
             </div>
             <picture class="omikuji-picture">
-                <source media="(max-width: 720px)" srcset="assets/lottery-mobile-shrine.webp">
+                <source id="omikujiMobileSource" media="(max-width: 720px)" type="image/webp" srcset="assets/lottery-mobile-autumn-fishing-idle-v1.webp?v=20260817">
                 <img
                     src="assets/lottery-autumn-fishing-idle.webp"
                     alt="柴犬在秋日湖畔悠然垂钓"
@@ -3154,6 +3167,7 @@
 
         const omikujiContainer = document.getElementById('omikujiContainer');
         const omikujiImg = document.getElementById('omikujiImg');
+        const omikujiMobileSource = document.getElementById('omikujiMobileSource');
         const resultCard = document.getElementById('resultCard');
         const resultTitle = document.getElementById('resultTitle');
         const resultIcon = document.getElementById('resultIcon');
@@ -3169,12 +3183,14 @@
         const desktopFishingMedia = window.matchMedia('(min-width: 721px)');
         const DESKTOP_FISHING_IDLE_IMAGE = 'assets/lottery-autumn-fishing-idle.webp';
         const DESKTOP_FISHING_HOOKED_IMAGE = 'assets/lottery-autumn-fishing-hooked.webp';
+        const MOBILE_FISHING_IDLE_IMAGE = 'assets/lottery-mobile-autumn-fishing-idle-v1.webp?v=20260817';
+        const MOBILE_FISHING_HOOKED_IMAGE = 'assets/lottery-mobile-autumn-fishing-hooked-v1.webp?v=20260817';
 
-        if (desktopFishingMedia.matches) {
-            const hookedFramePreload = new Image();
-            hookedFramePreload.decoding = 'async';
-            hookedFramePreload.src = DESKTOP_FISHING_HOOKED_IMAGE;
-        }
+        const hookedFramePreload = new Image();
+        hookedFramePreload.decoding = 'async';
+        hookedFramePreload.src = desktopFishingMedia.matches
+            ? DESKTOP_FISHING_HOOKED_IMAGE
+            : MOBILE_FISHING_HOOKED_IMAGE;
 
         const collectionModal = document.getElementById('collectionModal');
         const collectionModalContent = collectionModal.querySelector('.modal-content');
@@ -4744,11 +4760,16 @@
             }
         }
 
-        function resetDesktopFishingCover() {
-            if (!desktopFishingMedia.matches) {
-                return;
+        function setFishingCoverState(state = 'idle') {
+            const isHooked = state === 'hooked';
+            omikujiImg.src = isHooked ? DESKTOP_FISHING_HOOKED_IMAGE : DESKTOP_FISHING_IDLE_IMAGE;
+            if (omikujiMobileSource) {
+                omikujiMobileSource.srcset = isHooked ? MOBILE_FISHING_HOOKED_IMAGE : MOBILE_FISHING_IDLE_IMAGE;
             }
-            omikujiImg.src = DESKTOP_FISHING_IDLE_IMAGE;
+        }
+
+        function resetFishingCover() {
+            setFishingCoverState('idle');
             omikujiContainer.classList.remove('fishing', 'hooked');
         }
 
@@ -4769,7 +4790,7 @@
             newBadge.classList.remove('is-foil-badge');
             newBadge.textContent = 'NEW!';
             newBadge.style.display = 'none';
-            resetDesktopFishingCover();
+            resetFishingCover();
         }
 
         function refreshLotteryUIAfterImport() {
@@ -5586,21 +5607,20 @@
 
                 if (usesDesktopFishingAnimation) {
                     omikujiContainer.classList.remove('fishing');
-                    omikujiImg.src = DESKTOP_FISHING_HOOKED_IMAGE;
+                    setFishingCoverState('hooked');
                     omikujiContainer.classList.add('hooked');
                     setActionButtonLabel('收竿中...', '抽签');
                 } else {
                     omikujiContainer.classList.remove('shaking');
-                    omikujiContainer.classList.add('drawing');
+                    setFishingCoverState('hooked');
+                    omikujiContainer.classList.add('hooked');
                     setActionButtonLabel('神签显现...');
                 }
 
                 window.setTimeout(() => {
                     omikujiContainer.classList.remove('drawing', 'hooked', 'fishing', 'shaking');
                     omikujiContainer.style.display = 'none';
-                    if (usesDesktopFishingAnimation) {
-                        omikujiImg.src = DESKTOP_FISHING_IDLE_IMAGE;
-                    }
+                    setFishingCoverState('idle');
 
                     const collectionMetaBeforeDraw = getCollectionMeta();
                     const foilResult = resolveFoilDraw(
