@@ -95,6 +95,14 @@
         monthProgressBar: root.querySelector('[data-month-progress-bar]'),
         examCountdown: root.querySelector('[data-exam-countdown]'),
         studyStreak: root.querySelector('[data-study-streak]'),
+        mobileProgressRing: root.querySelector('[data-mobile-plan-progress-ring]'),
+        mobileProgressCount: root.querySelector('[data-mobile-plan-progress-count]'),
+        mobilePlanTitle: root.querySelector('[data-mobile-plan-title]'),
+        mobileRemaining: root.querySelector('[data-mobile-plan-remaining]'),
+        mobileStudyStreak: root.querySelector('[data-mobile-study-streak]'),
+        mobileWeekTitle: root.querySelector('[data-mobile-plan-week-title]'),
+        mobileWeekStrip: root.querySelector('[data-mobile-plan-week-strip]'),
+        calendarToggleButtons: Array.from(root.querySelectorAll('[data-plan-calendar-toggle]')),
         characterLevel: root.querySelector('[data-character-level]'),
         characterXp: root.querySelector('[data-character-xp]'),
         characterNextXp: root.querySelector('[data-character-next-xp]'),
@@ -289,6 +297,7 @@
     let selectedDateKey = toDateKey(today);
     let viewedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     let activeTaskType = 'reading';
+    let isMobileCalendarOpen = false;
 
     function getTasksForDate(dateKey) {
         return state.tasks
@@ -304,6 +313,99 @@
     function formatSelectedDate(date) {
         const weekday = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][date.getDay()];
         return `${date.getMonth() + 1}月${date.getDate()}日 · ${weekday}`;
+    }
+
+    function renderMobileWeek() {
+        if (!elements.mobileWeekStrip || !elements.mobileWeekTitle) return;
+        const selectedDate = parseDateKey(selectedDateKey) || today;
+        const weekStart = new Date(selectedDate);
+        weekStart.setDate(selectedDate.getDate() - ((selectedDate.getDay() + 6) % 7));
+        const todayKey = toDateKey(today);
+        const weekdayLabels = ['一', '二', '三', '四', '五', '六', '日'];
+
+        elements.mobileWeekTitle.textContent = `${selectedDate.getMonth() + 1}月${selectedDate.getDate()}日 · 本周`;
+        elements.mobileWeekStrip.textContent = '';
+
+        for (let index = 0; index < 7; index += 1) {
+            const date = new Date(weekStart);
+            date.setDate(weekStart.getDate() + index);
+            const dateKey = toDateKey(date);
+            const tasks = getTasksForDate(dateKey);
+            const isSelected = dateKey === selectedDateKey;
+            const isToday = dateKey === todayKey;
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'mobile-plan-week-day';
+            if (isSelected) button.classList.add('is-selected');
+            if (isToday) button.classList.add('is-today');
+            button.setAttribute('aria-pressed', String(isSelected));
+            button.setAttribute('aria-label', `${date.getMonth() + 1}月${date.getDate()}日，${tasks.length}项任务`);
+
+            const label = document.createElement('small');
+            label.textContent = isToday ? '今日' : weekdayLabels[index];
+            const number = document.createElement('strong');
+            number.textContent = String(date.getDate());
+            button.append(label, number);
+
+            if (tasks.length) {
+                const dot = document.createElement('i');
+                dot.setAttribute('aria-hidden', 'true');
+                button.appendChild(dot);
+            }
+
+            button.addEventListener('click', () => {
+                selectDate(dateKey, date.getMonth() !== viewedMonth.getMonth());
+            });
+            elements.mobileWeekStrip.appendChild(button);
+        }
+    }
+
+    function renderMobileOverview() {
+        const date = parseDateKey(selectedDateKey) || today;
+        const tasks = getTasksForDate(selectedDateKey);
+        const completed = tasks.filter((task) => task.completed).length;
+        const remainingMinutes = tasks
+            .filter((task) => !task.completed)
+            .reduce((total, task) => total + task.minutes, 0);
+        const percentage = tasks.length ? (completed / tasks.length) * 100 : 0;
+
+        if (elements.mobileProgressRing) {
+            elements.mobileProgressRing.style.setProperty('--mobile-plan-progress', `${Math.min(100, percentage)}%`);
+        }
+        if (elements.mobileProgressCount) {
+            elements.mobileProgressCount.textContent = `${completed}/${tasks.length}`;
+        }
+        if (elements.mobilePlanTitle) {
+            elements.mobilePlanTitle.textContent = selectedDateKey === toDateKey(today)
+                ? '今日的学习'
+                : `${date.getMonth() + 1}月${date.getDate()}日的学习`;
+        }
+        if (elements.mobileRemaining) {
+            if (!tasks.length) {
+                elements.mobileRemaining.textContent = '还没有安排任务';
+            } else if (!remainingMinutes) {
+                elements.mobileRemaining.textContent = '今天的任务已经完成';
+            } else {
+                elements.mobileRemaining.textContent = '';
+                elements.mobileRemaining.append('还有 ');
+                const minutes = document.createElement('strong');
+                minutes.textContent = `${remainingMinutes} 分钟`;
+                elements.mobileRemaining.append(minutes, '完成计划');
+            }
+        }
+        if (elements.mobileStudyStreak) {
+            elements.mobileStudyStreak.textContent = String(calculateStudyStreak());
+        }
+        renderMobileWeek();
+    }
+
+    function syncMobileCalendarState() {
+        root.classList.toggle('is-calendar-open', isMobileCalendarOpen);
+        elements.calendarToggleButtons.forEach((button) => {
+            button.setAttribute('aria-expanded', String(isMobileCalendarOpen));
+            button.setAttribute('aria-label', isMobileCalendarOpen ? '返回今日任务' : '打开月历');
+            button.textContent = isMobileCalendarOpen ? '返回任务' : '查看月历 ›';
+        });
     }
 
     function renderCalendar() {
@@ -460,6 +562,11 @@
         }
         renderCalendar();
         renderSelectedDay();
+        renderMobileOverview();
+        if (window.innerWidth <= 767 && isMobileCalendarOpen) {
+            isMobileCalendarOpen = false;
+            syncMobileCalendarState();
+        }
         if (window.innerWidth <= 800 && elements.dayPanel) {
             elements.dayPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -512,6 +619,21 @@
             openLink.textContent = '进入内容 ↗';
             topActions.appendChild(openLink);
 
+            const mobileDeleteButton = document.createElement('button');
+            mobileDeleteButton.type = 'button';
+            mobileDeleteButton.className = 'mobile-task-delete';
+            mobileDeleteButton.textContent = '···';
+            mobileDeleteButton.setAttribute('aria-label', `删除${content.title}`);
+            mobileDeleteButton.addEventListener('click', () => deleteTask(task.id));
+            topActions.appendChild(mobileDeleteButton);
+
+            const mobileCompleteButton = document.createElement('button');
+            mobileCompleteButton.type = 'button';
+            mobileCompleteButton.className = 'mobile-task-check';
+            mobileCompleteButton.textContent = task.completed ? '✓' : '';
+            mobileCompleteButton.setAttribute('aria-label', task.completed ? '取消完成' : '标记完成');
+            mobileCompleteButton.addEventListener('click', () => toggleTask(task.id));
+
             const footer = document.createElement('div');
             footer.className = 'day-task-footer';
             const completeButton = document.createElement('button');
@@ -526,7 +648,7 @@
             deleteButton.addEventListener('click', () => deleteTask(task.id));
             footer.append(completeButton, deleteButton);
 
-            card.append(copy, topActions, footer);
+            card.append(mobileCompleteButton, copy, topActions, footer);
             elements.taskList.appendChild(card);
         });
     }
@@ -680,6 +802,7 @@
         renderSelectedDay();
         renderGrowth();
         renderHeaderMetrics();
+        renderMobileOverview();
     }
 
     elements.prevButton.addEventListener('click', () => {
@@ -695,7 +818,16 @@
     elements.todayButton.addEventListener('click', () => {
         selectedDateKey = toDateKey(today);
         viewedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        isMobileCalendarOpen = false;
+        syncMobileCalendarState();
         renderAll();
+    });
+
+    elements.calendarToggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            isMobileCalendarOpen = !isMobileCalendarOpen;
+            syncMobileCalendarState();
+        });
     });
 
     elements.taskForm.addEventListener('submit', addTask);
@@ -707,6 +839,7 @@
 
     renderTaskTypeOptions();
     renderContentOptions();
+    syncMobileCalendarState();
     saveState();
     renderAll();
 })();

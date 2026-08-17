@@ -26,6 +26,14 @@
     font-family: var(--font-ui, "Noto Sans SC", sans-serif);
 }
 
+.study-plan-embedded .mobile-plan-summary,
+.study-plan-embedded .mobile-plan-week,
+.study-plan-embedded .mobile-task-check,
+.study-plan-embedded .mobile-task-delete,
+.study-plan-embedded .mobile-calendar-close {
+    display: none;
+}
+
 .study-plan-embedded button,
 .study-plan-embedded select {
     color: inherit;
@@ -1162,6 +1170,506 @@
 
     .study-plan-embedded .task-form-actions {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    body.home-dashboard-redesign .feature-panel[data-section="study-plan"].is-active {
+        padding-bottom: 0;
+    }
+
+    .study-plan-embedded {
+        width: 100%;
+        padding: 0 16px 84px;
+        background: #f7f2ee;
+    }
+
+    .study-plan-embedded .plan-embedded-header {
+        display: none;
+    }
+
+    .study-plan-embedded .mobile-plan-summary {
+        position: relative;
+        display: grid;
+        grid-template-columns: 68px minmax(0, 1fr) 52px;
+        align-items: center;
+        gap: 11px;
+        min-height: 102px;
+        margin-bottom: 15px;
+        padding: 13px 12px 13px 10px;
+        overflow: hidden;
+        border: 1px solid var(--plan-line);
+        border-radius: 19px;
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(66, 45, 38, 0.075);
+    }
+
+    .study-plan-embedded .mobile-plan-summary::after {
+        position: absolute;
+        right: 90px;
+        bottom: -23px;
+        color: rgba(182, 52, 58, 0.035);
+        content: "枫";
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 76px;
+        transform: rotate(-13deg);
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring {
+        --mobile-plan-progress: 0%;
+        position: relative;
+        display: grid;
+        width: 64px;
+        height: 64px;
+        place-items: center;
+        border-radius: 50%;
+        background: conic-gradient(var(--plan-maple) 0 var(--mobile-plan-progress), #eee7e3 var(--mobile-plan-progress) 100%);
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring::before {
+        position: absolute;
+        inset: 7px;
+        border-radius: 50%;
+        background: #fff;
+        content: "";
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring strong,
+    .study-plan-embedded .mobile-plan-progress-ring small {
+        position: relative;
+        z-index: 1;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring strong {
+        align-self: end;
+        margin-bottom: 2px;
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 17px;
+        line-height: 1;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring small {
+        align-self: start;
+        margin-top: 1px;
+        color: var(--plan-muted);
+        font-size: 7px;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy {
+        position: relative;
+        z-index: 1;
+        min-width: 0;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy > small {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--plan-maple-dark);
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy h2 {
+        margin: 0 0 5px;
+        overflow: hidden;
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 19px;
+        line-height: 1.18;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy p {
+        margin: 0;
+        overflow: hidden;
+        color: var(--plan-muted);
+        font-size: 9px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy p strong {
+        color: #3f736d;
+    }
+
+    .study-plan-embedded .mobile-plan-streak {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        min-width: 50px;
+        place-items: center;
+        padding-left: 9px;
+        border-left: 1px solid var(--plan-line);
+    }
+
+    .study-plan-embedded .mobile-plan-streak strong {
+        color: var(--plan-maple-dark);
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 19px;
+    }
+
+    .study-plan-embedded .mobile-plan-streak small {
+        color: var(--plan-muted);
+        font-size: 7px;
+        white-space: nowrap;
+    }
+
+    .study-plan-embedded .mobile-plan-week {
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .study-plan-embedded .mobile-plan-week > header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 30px;
+        margin: 0 2px 8px;
+    }
+
+    .study-plan-embedded .mobile-plan-week > header strong {
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 15px;
+    }
+
+    .study-plan-embedded .mobile-plan-week > header button {
+        min-height: 28px;
+        padding: 0 8px;
+        border: 0;
+        border-radius: 8px;
+        background: #f8e7e9;
+        color: var(--plan-maple-dark);
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+    .study-plan-embedded .mobile-plan-week-strip {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 4px;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day {
+        position: relative;
+        display: grid;
+        min-width: 0;
+        min-height: 65px;
+        place-items: center;
+        align-content: center;
+        gap: 5px;
+        padding: 0;
+        border: 1px solid transparent;
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.65);
+        color: var(--plan-ink);
+    }
+
+    .study-plan-embedded .mobile-plan-week-day small {
+        color: var(--plan-muted);
+        font-size: 8px;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day strong {
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 14px;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day i {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #4f7d7b;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day.is-selected {
+        border-color: rgba(182, 52, 58, 0.32);
+        background: var(--plan-maple);
+        color: #fff;
+        box-shadow: 0 7px 16px rgba(143, 36, 43, 0.18);
+    }
+
+    .study-plan-embedded .mobile-plan-week-day.is-selected small,
+    .study-plan-embedded .mobile-plan-week-day.is-selected strong {
+        color: #fff;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day.is-selected i {
+        background: #fff;
+    }
+
+    .study-plan-embedded .plan-embedded-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 0;
+    }
+
+    .study-plan-embedded .day-panel {
+        position: static;
+        order: 1;
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .study-plan-embedded .day-panel-header,
+    .study-plan-embedded .growth-card {
+        display: none;
+    }
+
+    .study-plan-embedded .day-tasks {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .study-plan-embedded .day-tasks > header {
+        min-height: 30px;
+        margin: 0 2px 8px;
+    }
+
+    .study-plan-embedded .day-tasks h4 {
+        font-size: 14px;
+    }
+
+    .study-plan-embedded .day-tasks > header span {
+        color: var(--plan-maple-dark);
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+    .study-plan-embedded .day-task-list {
+        gap: 8px;
+    }
+
+    .study-plan-embedded .day-task-empty {
+        min-height: 90px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.58);
+        font-size: 10px;
+    }
+
+    .study-plan-embedded .day-task-card {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 9px;
+        min-height: 64px;
+        padding: 9px 9px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 4px 13px rgba(54, 39, 33, 0.035);
+    }
+
+    .study-plan-embedded .day-task-card::before {
+        content: none;
+    }
+
+    .study-plan-embedded .mobile-task-check {
+        display: grid;
+        grid-column: 1;
+        grid-row: 1;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        padding: 0;
+        border: 1.5px solid var(--plan-line-strong);
+        border-radius: 9px;
+        background: #fff;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    .study-plan-embedded .day-task-card.is-completed .mobile-task-check {
+        border-color: #4f7d7b;
+        background: #4f7d7b;
+    }
+
+    .study-plan-embedded .day-task-copy {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+
+    .study-plan-embedded .day-task-type {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--plan-maple-dark);
+        font-size: 8px;
+    }
+
+    .study-plan-embedded .day-task-copy h4 {
+        margin: 4px 0 0;
+        overflow: hidden;
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 13px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .study-plan-embedded .day-task-copy small {
+        display: inline-flex;
+        margin-top: 5px;
+        padding: 2px 6px;
+        border-radius: 7px;
+        background: #f2eeeb;
+        font-size: 7.5px;
+    }
+
+    .study-plan-embedded .day-task-actions {
+        display: flex;
+        grid-column: 3;
+        grid-row: 1;
+        align-items: center;
+        gap: 1px;
+    }
+
+    .study-plan-embedded .day-task-actions a {
+        width: 24px;
+        min-width: 24px;
+        height: 30px;
+        min-height: 30px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--plan-maple-dark);
+        font-size: 0;
+    }
+
+    .study-plan-embedded .day-task-actions a::after {
+        content: "›";
+        font-size: 16px;
+    }
+
+    .study-plan-embedded .mobile-task-delete {
+        display: grid;
+        width: 24px;
+        min-width: 24px;
+        height: 30px;
+        min-height: 30px;
+        place-items: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--plan-muted);
+        font-size: 13px;
+    }
+
+    .study-plan-embedded .day-task-footer {
+        display: none;
+    }
+
+    .study-plan-embedded .task-form-panel {
+        margin-top: 10px;
+        border: 1px dashed rgba(182, 52, 58, 0.42);
+        border-radius: 14px;
+        background: rgba(248, 223, 217, 0.42);
+    }
+
+    .study-plan-embedded .task-form-panel summary {
+        justify-content: center;
+        min-height: 47px;
+        color: var(--plan-maple-dark);
+        font-size: 10px;
+    }
+
+    .study-plan-embedded .task-form-panel summary::after {
+        display: none;
+    }
+
+    .study-plan-embedded .task-form {
+        background: #fff;
+    }
+
+    .study-plan-embedded .calendar-card {
+        display: none;
+        order: 2;
+        padding: 11px 9px 9px;
+        border-radius: 15px;
+    }
+
+    .study-plan-embedded .calendar-controls .mobile-calendar-close {
+        display: inline-flex;
+        min-width: 70px;
+        align-items: center;
+        justify-content: center;
+        color: var(--plan-maple-dark);
+        font-size: 8px;
+        font-weight: 700;
+    }
+
+    .study-plan-embedded.is-calendar-open .mobile-plan-summary,
+    .study-plan-embedded.is-calendar-open .mobile-plan-week,
+    .study-plan-embedded.is-calendar-open .day-panel {
+        display: none;
+    }
+
+    .study-plan-embedded.is-calendar-open .calendar-card {
+        display: block;
+    }
+
+    .study-plan-embedded .calendar-scroll {
+        overflow: visible;
+    }
+
+    .study-plan-embedded .calendar-weekdays,
+    .study-plan-embedded .calendar-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 3px;
+        min-width: 0;
+    }
+
+    .study-plan-embedded .calendar-grid {
+        grid-auto-rows: 50px;
+    }
+
+    .study-plan-embedded .calendar-day {
+        min-height: 50px;
+        border-radius: 8px;
+    }
+
+    .study-plan-embedded .calendar-day-button {
+        padding: 5px 3px;
+    }
+
+    .study-plan-embedded .calendar-weekdays span {
+        font-size: 7px;
+    }
+
+    .study-plan-embedded .calendar-day-number {
+        font-size: 10px;
+    }
+
+    .study-plan-embedded .calendar-holiday-name,
+    .study-plan-embedded .calendar-exam-name,
+    .study-plan-embedded .calendar-task-more {
+        display: none;
+    }
+
+    .study-plan-embedded .calendar-task-chips {
+        flex-direction: row;
+        gap: 2px;
+    }
+
+    .study-plan-embedded .calendar-task-chip {
+        width: 5px;
+        height: 5px;
+        flex: 0 0 5px;
+        border-radius: 50%;
+    }
+
+    .study-plan-embedded .calendar-legend {
+        flex-wrap: wrap;
+        gap: 7px 10px;
     }
 }
 
