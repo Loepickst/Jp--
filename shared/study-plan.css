@@ -28,6 +28,9 @@
 
 .study-plan-embedded .mobile-plan-summary,
 .study-plan-embedded .mobile-plan-week,
+.study-plan-embedded .mobile-plan-appbar,
+.study-plan-embedded .mobile-plan-target-line,
+.study-plan-embedded .mobile-plan-stats,
 .study-plan-embedded .mobile-task-check,
 .study-plan-embedded .mobile-task-delete,
 .study-plan-embedded .mobile-calendar-close {
@@ -110,6 +113,26 @@
     height: 7px;
     border-radius: 50%;
     background: var(--plan-maple);
+}
+
+.study-plan-embedded .plan-level-control select,
+.study-plan-embedded .mobile-plan-level-control select {
+    min-height: 22px;
+    margin: 0;
+    padding: 1px 5px;
+    border: 1px solid rgba(182, 52, 58, 0.2);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.72);
+    color: inherit;
+    font-size: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.study-plan-embedded .mobile-plan-level-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .study-plan-embedded .plan-tag--stage {
@@ -1530,38 +1553,40 @@
         grid-column: 3;
         grid-row: 1;
         align-items: center;
-        gap: 1px;
+        gap: 10px;
     }
 
     .study-plan-embedded .day-task-actions a {
-        width: 24px;
-        min-width: 24px;
-        height: 30px;
-        min-height: 30px;
+        width: auto;
+        min-width: 34px;
+        height: 32px;
+        min-height: 32px;
         padding: 0;
         border: 0;
         background: transparent;
         color: var(--plan-maple-dark);
-        font-size: 0;
+        font-size: 10px;
+        font-weight: 700;
     }
 
     .study-plan-embedded .day-task-actions a::after {
-        content: "›";
-        font-size: 16px;
+        content: none;
     }
 
-    .study-plan-embedded .mobile-task-delete {
+    .study-plan-embedded .day-task-actions .mobile-task-delete {
         display: grid;
-        width: 24px;
-        min-width: 24px;
-        height: 30px;
-        min-height: 30px;
+        width: auto;
+        min-width: 34px;
+        height: 32px;
+        min-height: 32px;
         place-items: center;
         padding: 0;
         border: 0;
         background: transparent;
         color: var(--plan-muted);
-        font-size: 13px;
+        font-size: 10px;
+        font-weight: 700;
+        box-shadow: none;
     }
 
     .study-plan-embedded .day-task-footer {
@@ -1670,6 +1695,303 @@
     .study-plan-embedded .calendar-legend {
         flex-wrap: wrap;
         gap: 7px 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .study-plan-embedded {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 16px 84px;
+        background: #f7f2ee;
+    }
+
+    .study-plan-embedded .mobile-plan-appbar {
+        display: flex;
+        order: 0;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 52px;
+        padding: 3px 0 7px;
+        border-bottom: 1px solid var(--plan-line);
+    }
+
+    .study-plan-embedded .mobile-plan-appbar h2 {
+        margin: 0;
+        font-family: var(--font-display, "Noto Serif SC", serif);
+        font-size: 22px;
+        line-height: 1.15;
+    }
+
+    .study-plan-embedded .mobile-plan-appbar p {
+        margin: 3px 0 0;
+        color: var(--plan-muted);
+        font-size: 9px;
+    }
+
+    .study-plan-embedded .mobile-plan-appbar button {
+        display: inline-flex;
+        min-height: 36px;
+        align-items: center;
+        gap: 6px;
+        padding: 0 10px;
+        border: 1px solid var(--plan-line-strong);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--plan-maple-dark);
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .study-plan-embedded .mobile-plan-appbar .icon-slot,
+    .study-plan-embedded .mobile-plan-appbar .icon-slot svg {
+        display: block;
+        width: 16px;
+        height: 16px;
+    }
+
+    .study-plan-embedded .mobile-plan-target-line {
+        display: flex;
+        order: 1;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 39px;
+        color: var(--plan-muted);
+        font-size: 9px;
+    }
+
+    .study-plan-embedded .mobile-plan-target-line strong {
+        color: var(--plan-ink);
+        font-size: 10px;
+    }
+
+    .study-plan-embedded .mobile-plan-level-control select {
+        min-height: 25px;
+        padding: 1px 6px;
+        border-color: var(--plan-line-strong);
+        background: #fff;
+        color: var(--plan-ink);
+        font-size: 10px;
+    }
+
+    .study-plan-embedded .mobile-plan-week {
+        order: 2;
+        margin: 0 0 12px;
+    }
+
+    .study-plan-embedded .mobile-plan-week > header {
+        display: none;
+    }
+
+    .study-plan-embedded .mobile-plan-week-strip {
+        gap: 3px;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day {
+        min-height: 54px;
+        gap: 3px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.72);
+    }
+
+    .study-plan-embedded .mobile-plan-week-day small {
+        font-size: 8px;
+    }
+
+    .study-plan-embedded .mobile-plan-week-day strong {
+        font-size: 13px;
+    }
+
+    .study-plan-embedded .mobile-plan-summary {
+        --mobile-plan-progress: 0%;
+        display: grid;
+        order: 3;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 10px;
+        min-height: 74px;
+        margin: 0 0 15px;
+        padding: 13px 14px 25px;
+        border-radius: 16px;
+        box-shadow: 0 5px 15px rgba(66, 45, 38, 0.045);
+    }
+
+    .study-plan-embedded .mobile-plan-summary::after {
+        right: 14px;
+        bottom: 11px;
+        left: 14px;
+        width: auto;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(
+            90deg,
+            var(--plan-maple) 0 var(--mobile-plan-progress),
+            #eee7e3 var(--mobile-plan-progress) 100%
+        );
+        color: transparent;
+        content: "";
+        transform: none;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring {
+        display: flex;
+        width: auto;
+        height: auto;
+        align-items: baseline;
+        gap: 5px;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring::before {
+        content: none;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring strong {
+        align-self: auto;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .study-plan-embedded .mobile-plan-progress-ring small {
+        align-self: auto;
+        margin: 0;
+        color: var(--plan-muted);
+        font-size: 9px;
+        white-space: nowrap;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy {
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy > small,
+    .study-plan-embedded .mobile-plan-summary-copy h2,
+    .study-plan-embedded .mobile-plan-streak {
+        display: none;
+    }
+
+    .study-plan-embedded .mobile-plan-summary-copy p {
+        align-self: baseline;
+        font-size: 9px;
+    }
+
+    .study-plan-embedded .plan-embedded-layout {
+        order: 4;
+    }
+
+    .study-plan-embedded .day-panel {
+        position: relative;
+    }
+
+    .study-plan-embedded .day-tasks > header {
+        min-height: 36px;
+        margin: 0;
+        padding-right: 82px;
+        border-bottom: 1px solid var(--plan-line);
+    }
+
+    .study-plan-embedded .day-tasks h4 {
+        font-size: 16px;
+    }
+
+    .study-plan-embedded .day-task-list {
+        gap: 0;
+    }
+
+    .study-plan-embedded .day-task-card {
+        min-height: 70px;
+        padding: 11px 0;
+        border: 0;
+        border-bottom: 1px solid var(--plan-line);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .study-plan-embedded .day-task-copy h4 {
+        margin-top: 3px;
+        font-size: 13px;
+    }
+
+    .study-plan-embedded .day-task-copy small {
+        margin-top: 4px;
+        padding: 0;
+        background: transparent;
+        color: var(--plan-muted);
+        font-size: 8px;
+    }
+
+    .study-plan-embedded .day-task-type {
+        font-size: 8px;
+        font-weight: 800;
+    }
+
+    .study-plan-embedded .day-task-empty {
+        min-height: 76px;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .study-plan-embedded .task-form-panel {
+        position: static;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .study-plan-embedded .task-form-panel summary {
+        position: absolute;
+        top: 1px;
+        right: 0;
+        z-index: 2;
+        min-height: 30px;
+        padding: 0 9px;
+        border: 1px solid rgba(182, 52, 58, 0.24);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.64);
+        font-size: 9px;
+    }
+
+    .study-plan-embedded .task-form-panel[open] {
+        padding-top: 10px;
+    }
+
+    .study-plan-embedded .task-form {
+        border: 1px solid var(--plan-line);
+        border-radius: 14px;
+    }
+
+    .study-plan-embedded .mobile-plan-stats {
+        display: grid;
+        order: 5;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 14px;
+        padding: 12px 0 2px;
+        border-top: 1px solid var(--plan-line);
+        color: var(--plan-muted);
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .study-plan-embedded .mobile-plan-stats span + span {
+        border-left: 1px solid var(--plan-line);
+    }
+
+    .study-plan-embedded .mobile-plan-stats strong {
+        color: var(--plan-ink);
+        font-size: 10px;
+    }
+
+    .study-plan-embedded.is-calendar-open .mobile-plan-target-line,
+    .study-plan-embedded.is-calendar-open .mobile-plan-stats {
+        display: none;
+    }
+
+    .study-plan-embedded.is-calendar-open .mobile-plan-appbar {
+        margin-bottom: 10px;
     }
 }
 

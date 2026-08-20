@@ -4,8 +4,71 @@
     const STORAGE_KEY = 'kikiStudyPlan_v1';
     const STATE_VERSION = 1;
     const LEVEL_XP = 120;
+    const TARGET_LEVELS = Object.freeze(['N1', 'N2']);
     const ADDABLE_TYPES = ['vocabulary', 'grammar', 'reading', 'listening'];
     const root = document.querySelector('[data-study-plan-root]');
+
+    const TRY_N1_TASK_CONTENTS = Object.freeze([
+        'オクトーバーフェスト',
+        '産業医を増やそう',
+        '飯食わぬ女房',
+        '上司との付き合い方',
+        '転職',
+        '研修を終えて',
+        'さすが本田君',
+        '楽園の萌花',
+        'トリアージ',
+        '前衛書道'
+    ].map((title, index) => Object.freeze({
+        id: `try-n1-lesson-${String(index + 1).padStart(2, '0')}`,
+        title: `TRY！N1 第${index + 1}课 · ${title}`,
+        chip: `语法 · TRY N1-${index + 1}`,
+        url: `daily/try-n1/lesson-content-redesign.html?lesson=${index + 1}`
+    })));
+
+    const TRY_N2_TASK_CONTENTS = Object.freeze([
+        'スタッフ募集のお知らせ',
+        '転任のあいさつ',
+        'ホテルの仕事',
+        '台風情報',
+        '就職活動',
+        '苦労した5年間',
+        'オオカミと生態系',
+        '取引先で',
+        '食べ放題',
+        '満員電車',
+        'ラーメンの紹介',
+        'ウォーキングシューズの開発',
+        '人生の転機',
+        'オリンピックの開催について'
+    ].map((title, index) => Object.freeze({
+        id: `try-n2-lesson-${String(index + 1).padStart(2, '0')}`,
+        title: `TRY！N2 第${index + 1}课 · ${title}`,
+        chip: `语法 · TRY N2-${index + 1}`,
+        url: `daily/try-n2/lesson-content-redesign.html?lesson=${index + 1}`
+    })));
+
+    const DAILY_GRAMMAR_TASK_CONTENTS = Object.freeze([
+        { id: 'grammar-learning-word-classes', title: '语法学习 · 词汇分类', chip: '语法 · 分类', url: 'daily/grammar/foundation/word-classes.html' },
+        { id: 'grammar-learning-verb-change', title: '语法学习 · 动词的活用', chip: '语法 · 活用', url: 'daily/grammar/foundation/change.html' },
+        { id: 'grammar-learning-sentence-structure', title: '语法学习 · 语句构造', chip: '语法 · 构造', url: 'daily/grammar/expressions/sentence-structure.html' },
+        { id: 'grammar-learning-particle-concept', title: '语法学习 · 助词概念', chip: '语法 · 概念', url: 'daily/grammar/particles/particle-concept.html' },
+        { id: 'grammar-learning-case-particle', title: '语法学习 · 格助詞理解', chip: '语法 · 格助词', url: 'daily/grammar/particles/kakujyo.html' },
+        { id: 'grammar-learning-adverbial-particle', title: '语法学习 · 副助詞理解', chip: '语法 · 副助词', url: 'daily/grammar/particles/fukujoshi.html' },
+        { id: 'grammar-learning-parallel-particle', title: '语法学习 · 並列助詞理解', chip: '语法 · 并列', url: 'daily/grammar/particles/heiretsujoshi.html' },
+        { id: 'grammar-learning-focus-particle', title: '语法学习 · 提示助詞理解', chip: '语法 · 提示', url: 'daily/grammar/particles/teijijyoshi.html' },
+        { id: 'grammar-learning-connection-particle', title: '语法学习 · 接続助詞理解', chip: '语法 · 接续助词', url: 'daily/grammar/particles/setsuzokujoshi.html' },
+        { id: 'grammar-learning-final-particle', title: '语法学习 · 終助詞理解', chip: '语法 · 终助词', url: 'daily/grammar/particles/shujoshi.html' },
+        { id: 'grammar-learning-conjunction', title: '语法学习 · 接续词使用', chip: '语法 · 接续词', url: 'daily/grammar/expressions/conjunction.html' },
+        { id: 'grammar-learning-compound-particle', title: '语法学习 · 复合格助词', chip: '语法 · 复合助词', url: 'daily/grammar/expressions/复合格助词.html' },
+        { id: 'grammar-learning-keigo', title: '语法学习 · 敬語学習', chip: '语法 · 敬语', url: 'daily/grammar/expressions/敬语.html' },
+        { id: 'grammar-learning-conditional', title: '语法学习 · 假定表达', chip: '语法 · 条件', url: 'daily/grammar/expressions/conditional-comparison.html' },
+        { id: 'grammar-learning-formal-nouns', title: '语法学习 · 形式名词', chip: '语法 · 形式名词', url: 'daily/grammar/expressions/formal-nouns.html' },
+        { id: 'grammar-learning-te-auxiliary', title: '语法学习 · 补助动词', chip: '语法 · 补助动词', url: 'daily/grammar/foundation/te-auxiliary.html' },
+        { id: 'grammar-learning-appearance', title: '语法学习 · 样态表达', chip: '语法 · 样态', url: 'daily/grammar/expressions/appearance-expressions.html' },
+        { id: 'grammar-learning-demonstratives', title: '语法学习 · 指示词', chip: '语法 · 指示词', url: 'daily/grammar/foundation/demonstratives.html' },
+        { id: 'grammar-learning-affixes', title: '语法学习 · 接头接尾词', chip: '语法 · 接辞', url: 'daily/grammar/foundation/affixes.html' }
+    ].map((content) => Object.freeze(content)));
 
     if (!root) {
         return;
@@ -32,6 +95,9 @@
             shortLabel: '语法',
             color: '#b68a4a',
             contents: Object.freeze([
+                ...TRY_N1_TASK_CONTENTS,
+                ...TRY_N2_TASK_CONTENTS,
+                ...DAILY_GRAMMAR_TASK_CONTENTS,
                 { id: 'grammar-overview', title: 'JLPT 语法专项总览', chip: '语法 · 专项', url: 'exam/grammar/index.html' },
                 { id: 'grammar-form-n2', title: 'N2 文法形式判断', chip: '语法 · 形式', url: 'exam/grammar/grammar/n2/index.html' },
                 { id: 'grammar-sort', title: 'JLPT 文法排序练习', chip: '语法 · 排序', url: 'exam/grammar/sort/index.html' },
@@ -59,6 +125,11 @@
             color: '#587a98',
             contents: Object.freeze([
                 { id: 'listening-overview', title: 'JLPT 听力专项总览', chip: '听力 · 总览', url: 'exam/listening/index.html' },
+                { id: 'listening-immediate-n1', title: 'N1 即时应答', chip: '听力 · N1应答', url: 'exam/listening/immediate-response/n1/index.html' },
+                { id: 'listening-task-n1', title: 'N1 课题理解', chip: '听力 · N1课题', url: 'exam/listening/task-comprehension/n1/index.html' },
+                { id: 'listening-point-n1', title: 'N1 要点理解', chip: '听力 · N1要点', url: 'exam/listening/point-comprehension/n1/index.html' },
+                { id: 'listening-summary-n1', title: 'N1 概要理解', chip: '听力 · N1概要', url: 'exam/listening/summary-comprehension/n1/index.html' },
+                { id: 'listening-integrated-n1', title: 'N1 综合理解', chip: '听力 · N1综合', url: 'exam/listening/integrated-comprehension/n1/index.html' },
                 { id: 'listening-immediate-n2', title: 'N2 即时应答', chip: '听力 · 应答', url: 'exam/listening/immediate-response/n2/index.html' },
                 { id: 'listening-task-n2', title: 'N2 课题理解', chip: '听力 · 课题', url: 'exam/listening/task-comprehension/n2/index.html' },
                 { id: 'listening-point-n2', title: 'N2 要点理解', chip: '听力 · 要点', url: 'exam/listening/point-comprehension/n2/index.html' },
@@ -95,6 +166,12 @@
         monthProgressBar: root.querySelector('[data-month-progress-bar]'),
         examCountdown: root.querySelector('[data-exam-countdown]'),
         studyStreak: root.querySelector('[data-study-streak]'),
+        mobileSummary: root.querySelector('.mobile-plan-summary'),
+        mobilePlanDate: root.querySelector('[data-mobile-plan-date]'),
+        mobileExamCountdown: root.querySelector('[data-mobile-exam-countdown]'),
+        mobileMonthProgressCount: root.querySelector('[data-mobile-month-progress-count]'),
+        mobileCharacterLevel: root.querySelector('[data-mobile-character-level]'),
+        mobileStudyStreakSecondary: root.querySelector('[data-mobile-study-streak-secondary]'),
         mobileProgressRing: root.querySelector('[data-mobile-plan-progress-ring]'),
         mobileProgressCount: root.querySelector('[data-mobile-plan-progress-count]'),
         mobilePlanTitle: root.querySelector('[data-mobile-plan-title]'),
@@ -102,6 +179,9 @@
         mobileStudyStreak: root.querySelector('[data-mobile-study-streak]'),
         mobileWeekTitle: root.querySelector('[data-mobile-plan-week-title]'),
         mobileWeekStrip: root.querySelector('[data-mobile-plan-week-strip]'),
+        levelSelects: Array.from(root.querySelectorAll('[data-plan-level]')),
+        targetLevelLabels: Array.from(root.querySelectorAll('[data-plan-target-label]')),
+        dayTasksTitle: root.querySelector('[data-day-tasks-title]'),
         calendarToggleButtons: Array.from(root.querySelectorAll('[data-plan-calendar-toggle]')),
         characterLevel: root.querySelector('[data-character-level]'),
         characterXp: root.querySelector('[data-character-xp]'),
@@ -128,6 +208,18 @@
         if (!match) return null;
         const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
         return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function normalizeTargetLevel(value) {
+        const normalized = String(value || '').toUpperCase();
+        return TARGET_LEVELS.includes(normalized) ? normalized : 'N2';
+    }
+
+    function getContentTargetLevel(content) {
+        if (!content) return null;
+        const haystack = `${content.id || ''} ${content.title || ''} ${content.url || ''}`;
+        const match = haystack.match(/(?:^|[^A-Z0-9])(N[12])(?:[^A-Z0-9]|$)/i);
+        return match ? match[1].toUpperCase() : null;
     }
 
     function createChinaHolidaySchedule2026() {
@@ -266,7 +358,8 @@
             version: STATE_VERSION,
             plan: {
                 ...defaults.plan,
-                ...(parsed.plan && typeof parsed.plan === 'object' ? parsed.plan : {})
+                ...(parsed.plan && typeof parsed.plan === 'object' ? parsed.plan : {}),
+                targetLevel: normalizeTargetLevel(parsed.plan && parsed.plan.targetLevel)
             },
             tasks: Array.isArray(parsed.tasks) ? parsed.tasks.map(normalizeTask).filter(Boolean) : defaults.tasks,
             updatedAt: Number.isFinite(Number(parsed.updatedAt)) ? Number(parsed.updatedAt) : Date.now()
@@ -308,6 +401,16 @@
     function getTasksForMonth(date) {
         const prefix = `${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-`;
         return state.tasks.filter((task) => task.date.startsWith(prefix));
+    }
+
+    function getContentsForTargetLevel(type) {
+        const definition = TYPE_DEFINITIONS[type];
+        if (!definition) return [];
+        const targetLevel = normalizeTargetLevel(state.plan.targetLevel);
+        return definition.contents.filter((content) => {
+            const contentLevel = getContentTargetLevel(content);
+            return !contentLevel || contentLevel === targetLevel;
+        });
     }
 
     function formatSelectedDate(date) {
@@ -369,8 +472,14 @@
             .reduce((total, task) => total + task.minutes, 0);
         const percentage = tasks.length ? (completed / tasks.length) * 100 : 0;
 
+        if (elements.mobileSummary) {
+            elements.mobileSummary.style.setProperty('--mobile-plan-progress', `${Math.min(100, percentage)}%`);
+        }
         if (elements.mobileProgressRing) {
             elements.mobileProgressRing.style.setProperty('--mobile-plan-progress', `${Math.min(100, percentage)}%`);
+        }
+        if (elements.mobilePlanDate) {
+            elements.mobilePlanDate.textContent = formatSelectedDate(date);
         }
         if (elements.mobileProgressCount) {
             elements.mobileProgressCount.textContent = `${completed}/${tasks.length}`;
@@ -396,6 +505,9 @@
         if (elements.mobileStudyStreak) {
             elements.mobileStudyStreak.textContent = String(calculateStudyStreak());
         }
+        if (elements.mobileStudyStreakSecondary) {
+            elements.mobileStudyStreakSecondary.textContent = String(calculateStudyStreak());
+        }
         renderMobileWeek();
     }
 
@@ -404,7 +516,12 @@
         elements.calendarToggleButtons.forEach((button) => {
             button.setAttribute('aria-expanded', String(isMobileCalendarOpen));
             button.setAttribute('aria-label', isMobileCalendarOpen ? '返回今日任务' : '打开月历');
-            button.textContent = isMobileCalendarOpen ? '返回任务' : '查看月历 ›';
+            const label = button.querySelector('[data-plan-calendar-label]');
+            if (label) {
+                label.textContent = isMobileCalendarOpen ? '返回任务' : '月历';
+            } else {
+                button.textContent = isMobileCalendarOpen ? '返回任务' : '查看月历 ›';
+            }
         });
     }
 
@@ -447,7 +564,7 @@
             button.className = 'calendar-day-button';
             button.setAttribute(
                 'aria-label',
-                `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日，${tasks.length}项任务${holiday ? `，${holiday.name}，${holiday.badge}` : ''}${isExamDay ? '，JLPT N2考试日' : ''}`
+                `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日，${tasks.length}项任务${holiday ? `，${holiday.name}，${holiday.badge}` : ''}${isExamDay ? `，JLPT ${state.plan.targetLevel}考试日` : ''}`
             );
             button.dataset.date = dateKey;
 
@@ -465,7 +582,7 @@
                 const examSeal = document.createElement('span');
                 examSeal.className = 'calendar-exam-seal';
                 examSeal.textContent = '試験';
-                examSeal.title = 'JLPT N2 試験日';
+                examSeal.title = `JLPT ${state.plan.targetLevel} 試験日`;
                 flags.appendChild(examSeal);
             }
 
@@ -506,7 +623,7 @@
             if (isExamDay) {
                 const examName = document.createElement('span');
                 examName.className = 'calendar-exam-name';
-                examName.textContent = 'JLPT N2 試験日';
+                examName.textContent = `JLPT ${state.plan.targetLevel} 試験日`;
                 button.appendChild(examName);
             }
 
@@ -577,6 +694,11 @@
         const tasks = getTasksForDate(selectedDateKey);
         const totalMinutes = tasks.reduce((total, task) => total + task.minutes, 0);
         elements.selectedDate.textContent = formatSelectedDate(date);
+        if (elements.dayTasksTitle) {
+            elements.dayTasksTitle.textContent = selectedDateKey === toDateKey(today)
+                ? '今日的学习'
+                : `${date.getMonth() + 1}月${date.getDate()}日的学习`;
+        }
         elements.taskSummary.textContent = tasks.length
             ? `${tasks.length} 项 · 预计 ${totalMinutes} 分钟`
             : '0 项';
@@ -616,13 +738,13 @@
             topActions.className = 'day-task-actions';
             const openLink = document.createElement('a');
             openLink.href = content.url;
-            openLink.textContent = '进入内容 ↗';
+            openLink.textContent = '进入';
             topActions.appendChild(openLink);
 
             const mobileDeleteButton = document.createElement('button');
             mobileDeleteButton.type = 'button';
             mobileDeleteButton.className = 'mobile-task-delete';
-            mobileDeleteButton.textContent = '···';
+            mobileDeleteButton.textContent = '删除';
             mobileDeleteButton.setAttribute('aria-label', `删除${content.title}`);
             mobileDeleteButton.addEventListener('click', () => deleteTask(task.id));
             topActions.appendChild(mobileDeleteButton);
@@ -675,13 +797,18 @@
     }
 
     function renderContentOptions() {
+        const previousValue = elements.taskContent.value;
         elements.taskContent.textContent = '';
-        TYPE_DEFINITIONS[activeTaskType].contents.forEach((content) => {
+        const contents = getContentsForTargetLevel(activeTaskType);
+        contents.forEach((content) => {
             const option = document.createElement('option');
             option.value = content.id;
             option.textContent = content.title;
             elements.taskContent.appendChild(option);
         });
+        if (contents.some((content) => content.id === previousValue)) {
+            elements.taskContent.value = previousValue;
+        }
     }
 
     function addTask(event) {
@@ -744,6 +871,9 @@
         const percentage = tasks.length ? (completed / tasks.length) * 100 : 0;
         elements.monthProgressCount.textContent = `${completed} / ${tasks.length}`;
         elements.monthProgressBar.style.width = `${Math.min(100, percentage)}%`;
+        if (elements.mobileMonthProgressCount) {
+            elements.mobileMonthProgressCount.textContent = `${completed} / ${tasks.length}`;
+        }
     }
 
     function calculateStudyStreak() {
@@ -769,6 +899,9 @@
         const level = Math.floor(totalXp / LEVEL_XP) + 1;
         const levelXp = totalXp % LEVEL_XP;
         elements.characterLevel.textContent = String(level);
+        if (elements.mobileCharacterLevel) {
+            elements.mobileCharacterLevel.textContent = String(level);
+        }
         elements.characterXp.textContent = String(levelXp);
         elements.characterNextXp.textContent = String(LEVEL_XP);
         elements.characterXpBar.style.width = `${(levelXp / LEVEL_XP) * 100}%`;
@@ -793,11 +926,26 @@
             const millisecondsPerDay = 24 * 60 * 60 * 1000;
             const days = Math.max(0, Math.ceil((examDate.getTime() - today.getTime()) / millisecondsPerDay));
             elements.examCountdown.textContent = String(days);
+            if (elements.mobileExamCountdown) {
+                elements.mobileExamCountdown.textContent = String(days);
+            }
         }
         elements.studyStreak.textContent = String(calculateStudyStreak());
     }
 
+    function renderPlanTarget() {
+        const targetLevel = normalizeTargetLevel(state.plan.targetLevel);
+        state.plan.targetLevel = targetLevel;
+        elements.levelSelects.forEach((select) => {
+            select.value = targetLevel;
+        });
+        elements.targetLevelLabels.forEach((label) => {
+            label.textContent = `JLPT ${targetLevel}`;
+        });
+    }
+
     function renderAll() {
+        renderPlanTarget();
         renderCalendar();
         renderSelectedDay();
         renderGrowth();
@@ -831,6 +979,20 @@
     });
 
     elements.taskForm.addEventListener('submit', addTask);
+    elements.levelSelects.forEach((select) => {
+        select.addEventListener('change', () => {
+            const nextLevel = normalizeTargetLevel(select.value);
+            if (nextLevel === state.plan.targetLevel) {
+                renderPlanTarget();
+                return;
+            }
+            state.plan.targetLevel = nextLevel;
+            saveState();
+            renderContentOptions();
+            renderAll();
+            showToast(`备考级别已切换为 JLPT ${nextLevel}。`);
+        });
+    });
     window.addEventListener('storage', (event) => {
         if (event.key !== STORAGE_KEY) return;
         state = loadState();

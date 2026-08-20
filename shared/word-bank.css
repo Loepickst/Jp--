@@ -3332,6 +3332,11 @@
 }
 
 @media (max-width: 760px) {
+    .word-bank-board {
+        box-sizing: border-box;
+        padding-top: 14px;
+    }
+
     .word-bank-board .word-bank-toolbar {
         padding: 8px;
     }
@@ -3395,14 +3400,50 @@
         background: #fff;
     }
 
+    .word-bank-board .word-bank-entry-row {
+        grid-template-columns: minmax(0, 1fr) 31px;
+    }
+
+    .word-bank-board .word-bank-entry-main {
+        min-height: 68px;
+        gap: 3px 8px;
+        padding: 8px 7px 8px 10px;
+    }
+
+    .word-bank-board .word-bank-entry-word {
+        gap: 6px;
+    }
+
+    .word-bank-board .word-bank-entry-word strong {
+        font-size: 15px;
+        line-height: 1.3;
+    }
+
+    .word-bank-board .word-bank-entry-word small {
+        font-size: 8.5px;
+        line-height: 1.3;
+    }
+
+    .word-bank-board .word-bank-entry-meaning {
+        font-size: 10.5px;
+        line-height: 1.45;
+    }
+
     .word-bank-board .word-bank-entry-row::before {
-        top: 11px;
-        bottom: 11px;
+        top: 9px;
+        bottom: 9px;
         width: 2px;
     }
 
     .word-bank-board .word-bank-entry-source {
-        padding: 4px 7px;
+        padding: 3px 6px;
         background: var(--wb-source-soft);
+        font-size: 7.5px;
+        line-height: 1.2;
+    }
+
+    .word-bank-board .word-bank-entry-menu > summary {
+        width: 28px;
+        height: 28px;
     }
 }

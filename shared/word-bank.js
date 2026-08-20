@@ -5,9 +5,9 @@
         return;
     }
 
-    const VERSION = "1.13.2";
+    const VERSION = "1.13.4";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
-    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV16";
+    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV18";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
     const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV2";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
@@ -49,7 +49,7 @@
         ? new URL("./", currentScript.src)
         : new URL("./shared/", window.location.href);
     const siteRoot = new URL("../", sharedBase);
-    const cssHref = new URL("word-bank.css?v=20260815-novel-anaba1", sharedBase).href;
+    const cssHref = new URL("word-bank.css?v=20260820-novel-muttsuri1", sharedBase).href;
 
     let activeSelection = null;
     let selectionTimer = 0;
