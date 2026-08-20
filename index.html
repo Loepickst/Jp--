@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
     <link rel="stylesheet" href="shared/study-directory.css?v=20260810b">
-    <link rel="stylesheet" href="shared/study-plan.css?v=20260817a">
+    <link rel="stylesheet" href="shared/study-plan.css?v=20260820b">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -5693,7 +5693,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260815-novel-baka3">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260820-mobile-compact1">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -12422,7 +12422,7 @@
                 --legacy-accent-soft: var(--autumn-maple-soft);
                 --legacy-border: var(--autumn-line-soft);
                 --legacy-border-strong: var(--autumn-line);
-                padding: 0 16px 82px;
+                padding: 24px 16px 82px;
                 letter-spacing: 0;
             }
 
@@ -12754,6 +12754,548 @@
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 2;
             }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] {
+                position: relative;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-center-action {
+                position: static;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                z-index: auto;
+                width: 100%;
+                min-height: 34px;
+                margin: 0 0 2px;
+                justify-content: flex-end;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-center-favorite-entry {
+                min-width: 94px;
+                min-height: 34px;
+                padding: 0 9px;
+                gap: 5px;
+                border-color: rgba(182, 52, 58, 0.2);
+                border-radius: 11px;
+                background: rgba(255, 255, 255, 0.7);
+                color: var(--autumn-maple-dark);
+                font-size: 9px;
+                letter-spacing: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-center-favorite-entry-icon {
+                font-size: 12px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-center-favorite-entry-count {
+                min-width: 16px;
+                height: 16px;
+                font-size: 8px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-hero {
+                align-items: center;
+                padding: 4px 0 11px;
+                text-align: center;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-title-lockup {
+                width: auto;
+                min-height: 50px;
+                margin: 0 auto 3px;
+                padding-right: 0;
+                gap: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-title {
+                width: auto;
+                max-width: none;
+                font-size: clamp(21px, 5.7vw, 24px);
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-title-shiba {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: calc(100% + 5px);
+                width: 50px;
+                height: 50px;
+                margin-left: 0;
+                opacity: 0.72;
+                transform: translateY(-48%) rotate(-1.5deg);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-subtitle {
+                padding-right: 0;
+                font-size: 10px;
+                text-align: center;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-mobile-search-icon {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-search-container {
+                margin-top: 15px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-search-input {
+                min-height: 52px;
+                padding-left: 14px;
+                border-radius: 13px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-filter-bar {
+                min-height: 36px;
+                margin-top: 10px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-filter-control {
+                height: 34px;
+                border-color: var(--autumn-line-soft);
+                background: rgba(255, 255, 255, 0.68);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-grid {
+                gap: 0;
+                margin-top: 12px;
+                border-top: 1px solid var(--autumn-line-soft);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card {
+                min-height: 86px;
+                padding: 13px 38px 12px 2px;
+                border: 0;
+                border-bottom: 1px solid var(--autumn-line-soft);
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card:first-child {
+                border-left: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card:hover {
+                background: rgba(255, 255, 255, 0.3);
+                box-shadow: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card::after {
+                top: 50%;
+                right: 3px;
+                bottom: auto;
+                transform: translateY(-50%);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-star {
+                top: 9px;
+                right: 0;
+                width: 26px;
+                height: 26px;
+                border-radius: 0;
+                background: transparent;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card-header {
+                gap: 5px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card-title {
+                font-size: 14px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="search"] .grammar-legacy-card-meaning {
+                margin-top: 5px;
+                -webkit-line-clamp: 1;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-center-action {
+                min-height: 32px;
+                margin: 0 0 8px;
+                justify-content: flex-start;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-center-favorite-entry {
+                min-width: 0;
+                min-height: 32px;
+                padding: 0 3px;
+                gap: 5px;
+                border: 0;
+                background: transparent;
+                color: var(--autumn-maple-dark);
+                font-size: 10px;
+                box-shadow: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-center-favorite-entry:hover {
+                transform: none;
+                background: transparent;
+                color: var(--autumn-maple);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-shell {
+                margin-bottom: 20px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library {
+                border: 0;
+                background: transparent;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-head {
+                min-height: 0;
+                padding: 0 0 10px;
+                gap: 9px;
+                border-bottom-color: var(--autumn-line-soft);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-title h2 {
+                font-size: 18px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-title span {
+                font-size: 9px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-search {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-tools {
+                display: flex;
+                grid-template-columns: none;
+                align-items: center;
+                gap: 6px;
+                overflow-x: auto;
+                padding: 1px 0 2px;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-tools::-webkit-scrollbar {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-tools select {
+                flex: 0 0 auto;
+                width: auto;
+                max-width: 112px;
+                min-height: 31px;
+                padding: 0 24px 0 9px;
+                border-color: var(--autumn-line-soft);
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.64);
+                font-size: 9px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-tools select:focus,
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-library-tools select:focus-visible {
+                outline: none;
+                border-color: var(--autumn-line);
+                box-shadow: 0 0 0 2px rgba(101, 77, 70, 0.06);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorites-review-button {
+                grid-column: auto;
+                flex: 0 0 auto;
+                width: auto;
+                min-width: 82px;
+                min-height: 31px;
+                padding: 0 9px;
+                border-radius: 10px;
+                font-size: 9px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card > .grammar-legacy-star {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 6px;
+                min-height: 76px;
+                padding: 12px 14px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-name,
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-meaning {
+                grid-column: 1;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-name {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto auto;
+                align-items: center;
+                gap: 5px;
+                padding-left: 11px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card h3 {
+                grid-column: 1;
+                grid-row: 1;
+                order: 0;
+                margin: 0;
+                overflow: hidden;
+                font-size: 14px;
+                line-height: 1.35;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card .grammar-legacy-badge-group {
+                grid-column: 2;
+                grid-row: 1;
+                order: 0;
+                flex-wrap: nowrap;
+                justify-content: flex-end;
+                gap: 4px;
+                max-width: none;
+                overflow: hidden;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card .grammar-legacy-badge {
+                flex: 0 0 auto;
+                min-height: 18px;
+                max-width: 94px;
+                padding: 2px 5px;
+                overflow: hidden;
+                font-size: 8px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card .grammar-legacy-badge:nth-child(n + 2) {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-connection {
+                display: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-sources {
+                display: flex;
+                grid-column: 3;
+                grid-row: 1;
+                order: 0;
+                flex-wrap: nowrap;
+                gap: 4px;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-sources button {
+                min-height: 18px;
+                max-width: 76px;
+                padding: 2px 5px;
+                overflow: hidden;
+                border-radius: 6px;
+                font-size: 8px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-search[data-grammar-center-active="favorites"] .grammar-favorite-card-meaning {
+                margin-left: 14px;
+                overflow: hidden;
+                font-size: 10.5px;
+                font-weight: 550;
+                line-height: 1.45;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal {
+                display: block;
+                padding: 0;
+                overflow: hidden;
+                background: #ffffff;
+                animation: none;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-content {
+                width: 100%;
+                max-width: none;
+                height: 100%;
+                max-height: none;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                background: #ffffff;
+                box-shadow: none;
+                animation: none;
+                overscroll-behavior: contain;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-close {
+                top: max(11px, env(safe-area-inset-top));
+                right: auto;
+                left: 12px;
+                display: inline-flex;
+                width: auto;
+                min-width: 58px;
+                height: 34px;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 0 7px;
+                border: 0;
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+                color: var(--grammar-modal-red-dark);
+                font-size: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-close::before {
+                content: "← 返回";
+                font-family: var(--font-ui);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.02em;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-close:hover {
+                transform: none;
+                border-color: transparent;
+                background: transparent;
+                color: var(--grammar-modal-red-dark);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-header {
+                min-height: 0;
+                align-items: flex-start;
+                gap: 12px;
+                padding: calc(max(11px, env(safe-area-inset-top)) + 42px) 16px 16px;
+                border-top: 0;
+                border-bottom-color: var(--autumn-line-soft);
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-header > div {
+                min-width: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-title {
+                font-size: clamp(18px, 5.1vw, 21px);
+                line-height: 1.42;
+                letter-spacing: 0.025em;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-badges {
+                gap: 5px;
+                margin-top: 8px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-badge {
+                min-height: 18px;
+                padding: 2px 6px;
+                font-size: 8px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-fav {
+                position: fixed;
+                top: max(11px, env(safe-area-inset-top));
+                right: 12px;
+                z-index: 5002;
+                display: grid;
+                width: 34px;
+                height: 34px;
+                min-width: 34px;
+                min-height: 34px;
+                place-items: center;
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+                font-size: 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-fav::before {
+                content: "🐶";
+                font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+                font-size: 18px;
+                line-height: 1;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-fav.is-fav {
+                border-color: transparent;
+                background: transparent;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-modal-body {
+                padding: 18px 16px calc(34px + env(safe-area-inset-bottom));
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-detail-item {
+                margin-bottom: 21px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-label {
+                margin-bottom: 7px;
+                font-size: 10px;
+                letter-spacing: 0.08em;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-label::before {
+                height: 11px;
+                margin-right: 6px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-highlight {
+                display: block;
+                padding: 0 0 3px;
+                font-size: 15px;
+                line-height: 1.55;
+                letter-spacing: 0.02em;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-code {
+                display: block;
+                padding: 10px 11px;
+                font-size: 12px;
+                line-height: 1.55;
+                white-space: normal;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-desc {
+                font-size: 13px;
+                line-height: 1.72;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-example-card {
+                margin-bottom: 9px;
+                padding: 11px 12px;
+                border-left-width: 3px;
+                border-radius: 0 5px 5px 0;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-example-jp {
+                margin-bottom: 4px;
+                font-size: 13px;
+                line-height: 1.62;
+                letter-spacing: 0.01em;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-example-cn {
+                font-size: 11.5px;
+                line-height: 1.55;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-more-examples {
+                min-height: 32px;
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-related-tag {
+                margin-right: 6px;
+                margin-bottom: 7px;
+                padding: 5px 9px;
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -12845,15 +13387,15 @@
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
                                                 <img src="assets/home-redesign/hero-mobile-autumn-camp-shiba-cat-quote-v1.webp?v=20260817b" alt="红枫林露营地里，柴犬和猫一起烧烤，题字为“人事を尽くして天命を待つ”">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.15.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.20.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-horror.webp?v=20260717a" alt="夏夜无灯的和室里，柴犬与小动物们围坐着讲怪谈的铅笔手绘插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b" alt="日光照进厨房，一位日漫风格的女生在木砧板上切胡萝卜丝，旁边放着茶与洋葱的铅笔水彩插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>三つの怖い話</h2>
-                                                    <p>医疗AI、异常好运与扭曲的家庭之爱。三则在最后一刻翻转含义的恐怖悬疑故事。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>怪谈</span><time datetime="2026-08-15">08.15</time></span>
+                                                    <h2>感覚の領域</h2>
+                                                    <p>当视线暂时失去焦点，泡茶和切菜的双手依然知道如何行动，也让人重新发现五感彼此交叠的方式。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-08-20">08.20</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -13093,6 +13635,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/8.20.html" aria-label="阅读：感覚の領域">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b" alt="">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">感覚の領域</strong>
+                                    <span class="daily-reading-item-subtitle">感官的领域</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">随笔</span>
+                                    </span>
+                                    <time datetime="2026-08-20">2026.08.20</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/8.15.html" aria-label="阅读：三つの怖い話">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-horror.webp?v=20260717a" alt="">
@@ -13104,19 +13659,6 @@
                                         <span class="daily-reading-item-tag">怪谈</span>
                                     </span>
                                     <time datetime="2026-08-15">2026.08.15</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/8.11.html" aria-label="阅读：去りゆく夏">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-11.webp?v=20260811a" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">去りゆく夏</strong>
-                                    <span class="daily-reading-item-subtitle">渐行渐远的夏日</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">随笔</span>
-                                    </span>
-                                    <time datetime="2026-08-11">2026.08.11</time>
                                 </span>
                             </a>
                         </div>
@@ -13269,8 +13811,8 @@
     <script src="shared/grammar-learning-sources.js?v=20260804c"></script>
     <script src="shared/grammar-db-repo.js?v=20260809-no-compare"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260815-novel-baka3"></script>
-    <script src="shared/word-bank.js?v=20260815-novel-baka3"></script>
+    <script src="shared/word-bank-presets.js?v=20260820-novel-muttsuri1"></script>
+    <script src="shared/word-bank.js?v=20260820-novel-muttsuri1"></script>
     <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
@@ -13287,6 +13829,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-essay-8-20", file: "8.20.html", publishedAt: "2026.08.20", titleJa: "感覚の領域", titleZh: "感官的领域", summary: "散瞳検査で焦点が合わなくなった体験から、料理では視覚以外の感覚も重なり合って働いていることに気づく随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b", coverAlt: "日光照进厨房，一位日漫风格的女生在木砧板上切胡萝卜丝，旁边放着茶与洋葱的铅笔水彩插画" },
             { id: "daily-horror-8-15", file: "8.15.html", publishedAt: "2026.08.15", titleJa: "三つの怖い話", titleZh: "三则恐怖悬疑故事", summary: "嘘をつけない医療AI、他人へ不運を押し付ける先輩、歪んだ家族愛。最後の一文で意味が反転する三つの恐怖短編。", category: "horror", series: "怪谈" },
             { id: "daily-essay-8-11", file: "8.11.html", publishedAt: "2026.08.11", titleJa: "去りゆく夏", titleZh: "渐行渐远的夏日", summary: "早く去った夏とびわ湖の花火大会を振り返り、目の前の美しさを無心に楽しめる若さと、もう戻らない季節への心細さを描く随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-11.webp?v=20260811a", coverAlt: "琵琶湖畔，一位女性目送远去的人群与消散中的最后一朵烟花的铅笔水彩插画" },
             { id: "daily-essay-8-4", file: "8.4.html", publishedAt: "2026.08.04", titleJa: "外からの声", titleZh: "来自外面的声音", summary: "深夜に聞こえた歓声を妖怪の声と思った体験から、人が手持ちの知識や物差しで世界を理解していることを考える日常随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-04.webp?v=20260804a", coverAlt: "白昼的窗边，一位女生趴在窗台上侧耳倾听窗外声音的日漫水彩素描插画" },
@@ -16231,13 +16774,13 @@
                     <div class="grammar-legacy-title-lockup">
                         <h2 class="grammar-legacy-title">
                             <span class="grammar-desktop-title">日本語文法検索</span>
-                            <span class="grammar-mobile-title">今日は、何を調べる？</span>
+                            <span class="grammar-mobile-title">日本語文法検索</span>
                         </h2>
                         <img class="grammar-legacy-title-shiba" src="assets/grammar/shiba-crossed-paws-pencil-avatar-v1.webp" alt="" aria-hidden="true" decoding="async">
                     </div>
                     <p class="grammar-legacy-subtitle">
                         <span class="grammar-desktop-title">快速查找语法、接续与例句</span>
-                        <span class="grammar-mobile-title">输入日语、假名或中文含义</span>
+                        <span class="grammar-mobile-title">快速查找语法、接续与例句</span>
                     </p>
                     <div class="grammar-legacy-search-container">
                         <span class="grammar-mobile-search-icon" aria-hidden="true">
@@ -17944,7 +18487,15 @@
                             <h2>学习计划</h2>
                         </div>
                         <div class="plan-summary-tags" aria-label="备考目标">
-                            <span class="plan-tag plan-tag--target"><i aria-hidden="true"></i>JLPT N2 · 2026年12月6日</span>
+                            <label class="plan-tag plan-tag--target plan-level-control">
+                                <i aria-hidden="true"></i>
+                                <span>JLPT</span>
+                                <select data-plan-level aria-label="选择备考级别">
+                                    <option value="N1">N1</option>
+                                    <option value="N2" selected>N2</option>
+                                </select>
+                                <span>· 2026年12月6日</span>
+                            </label>
                             <span class="plan-tag plan-tag--stage">阶段 2 · 强化期</span>
                         </div>
                         <section class="plan-summary-progress" aria-label="本月计划完成进度">
@@ -17964,13 +18515,36 @@
                         </dl>
                     </header>
 
+                    <header class="mobile-plan-appbar">
+                        <div>
+                            <h2>学习计划</h2>
+                            <p data-mobile-plan-date>今天</p>
+                        </div>
+                        <button type="button" data-plan-calendar-toggle aria-expanded="false">
+                            <span class="icon-slot" aria-hidden="true">${getIconMarkup("plan")}</span>
+                            <span data-plan-calendar-label>月历</span>
+                        </button>
+                    </header>
+
+                    <div class="mobile-plan-target-line">
+                        <label class="mobile-plan-level-control">
+                            <span>JLPT</span>
+                            <select data-plan-level aria-label="选择备考级别">
+                                <option value="N1">N1</option>
+                                <option value="N2" selected>N2</option>
+                            </select>
+                            <span>· 强化期</span>
+                        </label>
+                        <span>距离考试 <strong data-mobile-exam-countdown>--</strong> 天</span>
+                    </div>
+
                     <section class="mobile-plan-summary" aria-label="当天学习进度">
                         <div class="mobile-plan-progress-ring" data-mobile-plan-progress-ring>
                             <strong data-mobile-plan-progress-count>0/0</strong>
-                            <small>今日</small>
+                            <small>今日已完成</small>
                         </div>
                         <div class="mobile-plan-summary-copy">
-                            <small>JLPT N2 · 强化期</small>
+                            <small><span data-plan-target-label>JLPT N2</span> · 强化期</small>
                             <h2 data-mobile-plan-title>今日的学习</h2>
                             <p data-mobile-plan-remaining>还没有安排任务</p>
                         </div>
@@ -18036,7 +18610,7 @@
 
                             <section class="day-tasks" aria-labelledby="day-tasks-title">
                                 <header>
-                                    <h4 id="day-tasks-title">今天的任务</h4>
+                                    <h4 id="day-tasks-title" data-day-tasks-title>今日的学习</h4>
                                     <span data-day-task-summary>0 项</span>
                                 </header>
                                 <div class="day-task-list" data-day-task-list></div>
@@ -18070,6 +18644,12 @@
                                 </form>
                             </details>
                         </aside>
+                    </div>
+
+                    <div class="mobile-plan-stats" aria-label="学习统计">
+                        <span>连续 <strong data-mobile-study-streak-secondary>0</strong> 天</span>
+                        <span>本月 <strong data-mobile-month-progress-count>0 / 0</strong></span>
+                        <span>Lv. <strong data-mobile-character-level>1</strong></span>
                     </div>
 
                     <div class="plan-toast" role="status" aria-live="polite" data-plan-toast></div>
@@ -20193,7 +20773,7 @@
             syncMobileNavigation();
         })();
     </script>
-    <script src="shared/study-plan.js?v=20260817a"></script>
+    <script src="shared/study-plan.js?v=20260820b"></script>
     <script>
         (() => {
             const carousel = document.querySelector("[data-mobile-feature-carousel]");
