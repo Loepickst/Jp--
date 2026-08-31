@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>日语相关考试有哪些？｜日本の伝統 - KIKI</title>
+  <meta name="description" content="从综合日语能力、赴日升学、商务沟通、实用日语和翻译职业资格等用途出发，详细介绍 JLPT、EJU、BJT、J.TEST、CATTI 等日语相关考试。">
+  <style>
+    :root {
+      --paper: #f3f3ef;
+      --paper-light: #fbfaf6;
+      --paper-blue: #e8eef0;
+      --ink: #182126;
+      --text: #505a5d;
+      --muted: #7a8283;
+      --line: #cfd4d2;
+      --navy: #233746;
+      --navy-deep: #172731;
+      --red: #af4e44;
+      --yellow: #d9c45e;
+      --mint: #8ea99c;
+      --max: 1180px;
+      --reading: 850px;
+      --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans JP", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--paper); }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(35, 55, 70, .032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 55, 70, .032) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      font-family: var(--sans);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    img { display: block; width: 100%; }
+
+    :focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 4px;
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 100;
+      width: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .site-head {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 58px;
+      padding: 0 max(24px, calc((100vw - var(--max)) / 2));
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(23, 39, 49, .96);
+      backdrop-filter: blur(10px);
+    }
+
+    .site-head a {
+      width: max-content;
+      color: rgba(255, 255, 255, .75);
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .site-head strong {
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    .site-head span {
+      justify-self: end;
+      color: rgba(255, 255, 255, .5);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+    }
+
+    .hero {
+      position: relative;
+      min-height: min(720px, calc(100vh - 58px));
+      overflow: hidden;
+      background: #e7e7e1;
+    }
+
+    .hero > img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, rgba(248, 248, 243, .98) 0%, rgba(248, 248, 243, .96) 31%, rgba(248, 248, 243, .58) 49%, rgba(248, 248, 243, .03) 72%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: min(calc(100% - 56px), var(--max));
+      min-height: min(720px, calc(100vh - 58px));
+      margin: 0 auto;
+      padding: 78px 0 70px;
+    }
+
+    .eyebrow,
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      width: max-content;
+      margin: 0;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .kicker::after {
+      width: 34px;
+      height: 2px;
+      content: "";
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 670px;
+      margin: 22px 0 0;
+      font-size: clamp(49px, 6.2vw, 84px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -.06em;
+      text-wrap: balance;
+    }
+
+    .hero-lead {
+      max-width: 540px;
+      margin: 28px 0 0;
+      color: #465155;
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 550;
+      line-height: 1.9;
+    }
+
+    .hero-lead strong { color: var(--ink); font-weight: 850; }
+
+    .hero-link,
+    .official-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: max-content;
+      text-decoration: none;
+    }
+
+    .hero-link {
+      margin-top: 32px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid var(--ink);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .intro {
+      width: min(calc(100% - 48px), var(--reading));
+      margin: 0 auto;
+      padding: 100px 0 92px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(17px, 1.65vw, 21px);
+      font-weight: 500;
+      line-height: 2.05;
+    }
+
+    .intro p + p { margin-top: 24px; }
+    .intro strong { color: var(--ink); font-weight: 850; }
+
+    .choose {
+      color: #f5f5ef;
+      background: var(--navy);
+    }
+
+    .choose-inner {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 76px 0 80px;
+    }
+
+    .choose .kicker { color: #e0bd68; }
+
+    .choose h2,
+    .section-head h2,
+    .article-section h2,
+    .ending h2 {
+      margin: 17px 0 0;
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -.04em;
+    }
+
+    .choose > .choose-inner > p {
+      max-width: 710px;
+      margin: 18px 0 0;
+      color: rgba(245, 245, 239, .7);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .choice-list {
+      margin: 44px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    .choice-list a {
+      display: grid;
+      grid-template-columns: 58px minmax(180px, .9fr) minmax(260px, 1.45fr) auto;
+      gap: 22px;
+      align-items: center;
+      min-height: 92px;
+      padding: 19px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .2);
+      text-decoration: none;
+    }
+
+    .choice-number {
+      color: #e0bd68;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .13em;
+    }
+
+    .choice-list strong {
+      font-size: 19px;
+      font-weight: 850;
+    }
+
+    .choice-list p {
+      margin: 0;
+      color: rgba(255, 255, 255, .62);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .choice-list b {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+
+    .section-head {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 96px 0 46px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head p {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .article-section {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 78px 0 82px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 76px;
+    }
+
+    .article-section:last-of-type { border-bottom: 0; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .14em;
+    }
+
+    .section-label::after {
+      width: 46px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    .article-section h2 span {
+      display: block;
+      margin-top: 8px;
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    .section-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+      gap: clamp(46px, 7vw, 92px);
+      align-items: start;
+      margin-top: 34px;
+    }
+
+    .section-copy p {
+      margin: 0;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.98;
+    }
+
+    .section-copy p + p { margin-top: 17px; }
+    .section-copy strong { color: var(--ink); font-weight: 850; }
+
+    .copy-label {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    .section-copy p + .copy-label { margin-top: 27px; }
+
+    .official-link {
+      margin-top: 26px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid currentColor;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .level-panel,
+    .score-panel,
+    .eju-panel,
+    .jtest-panel,
+    .catti-panel {
+      padding: 28px;
+      color: #f7f7f2;
+      background: var(--navy);
+    }
+
+    .panel-title {
+      margin: 0 0 22px;
+      color: rgba(255, 255, 255, .56);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .15em;
+    }
+
+    .jlpt-levels {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid rgba(255, 255, 255, .2);
+      border-bottom: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    .jlpt-levels div {
+      padding: 20px 8px 18px;
+      border-right: 1px solid rgba(255, 255, 255, .18);
+      text-align: center;
+    }
+
+    .jlpt-levels div:last-child { border-right: 0; }
+
+    .jlpt-levels strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .jlpt-levels small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, .48);
+      font-size: 9px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    .level-arrow {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      color: rgba(255, 255, 255, .5);
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .fact-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 31px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact-row div { min-width: 0; padding: 15px 16px 16px 0; }
+
+    .fact-row div + div {
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+
+    .fact-row dt {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .12em;
+    }
+
+    .fact-row dd {
+      margin: 6px 0 0;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.6;
+    }
+
+    .eju-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .eju-grid div {
+      min-height: 116px;
+      padding: 18px;
+      background: var(--navy);
+    }
+
+    .eju-grid strong {
+      display: block;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .eju-grid small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, .52);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .score-line {
+      position: relative;
+      height: 10px;
+      margin: 14px 0 13px;
+      background: linear-gradient(90deg, #78928a 0 38%, #d2b861 66%, #b65c50 100%);
+    }
+
+    .score-scale {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, .62);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .score-levels {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, .18);
+      border-bottom: 1px solid rgba(255, 255, 255, .18);
+    }
+
+    .score-levels span {
+      padding: 15px 3px;
+      border-right: 1px solid rgba(255, 255, 255, .14);
+      font-size: 11px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .score-levels span:last-child { border-right: 0; }
+
+    .jtest-bands,
+    .catti-grid {
+      display: grid;
+      gap: 1px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .jtest-bands { grid-template-columns: 1fr; }
+    .catti-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .jtest-bands div,
+    .catti-grid div {
+      padding: 18px;
+      background: var(--navy);
+    }
+
+    .jtest-bands div {
+      display: grid;
+      grid-template-columns: 86px 90px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .jtest-bands strong,
+    .catti-grid strong {
+      display: block;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .jtest-bands b {
+      color: #e0bd68;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .jtest-bands small,
+    .catti-grid small {
+      display: block;
+      color: rgba(255, 255, 255, .54);
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.65;
+    }
+
+    .catti-grid div { min-height: 150px; }
+    .catti-grid small { margin-top: 9px; }
+
+    .panel-note {
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, .56);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .other-tests {
+      color: #f5f5ef;
+      background: var(--navy-deep);
+    }
+
+    .other-inner {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 92px 0 96px;
+    }
+
+    .other-tests .kicker { color: #e0bd68; }
+
+    .other-tests h2 {
+      margin: 17px 0 0;
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -.04em;
+    }
+
+    .other-intro {
+      max-width: 730px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, .66);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .test-list { margin-top: 45px; border-top: 1px solid rgba(255, 255, 255, .2); }
+
+    .test-item {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) 130px;
+      gap: 36px;
+      align-items: start;
+      padding: 31px 0 33px;
+      border-bottom: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    .test-item h3 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .test-item h3 span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255, 255, 255, .45);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+    }
+
+    .test-item p {
+      margin: 0;
+      color: rgba(255, 255, 255, .68);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .test-item p strong { color: #fff; font-weight: 850; }
+
+    .test-item a {
+      justify-self: end;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, .5);
+      color: rgba(255, 255, 255, .78);
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .decision {
+      width: min(calc(100% - 48px), 940px);
+      margin: 0 auto;
+      padding: 100px 0 104px;
+    }
+
+    .decision .kicker { color: var(--red); }
+
+    .decision h2 {
+      margin: 17px 0 0;
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -.04em;
+    }
+
+    .decision-steps { margin: 42px 0 0; border-top: 1px solid var(--line); }
+
+    .decision-step {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 24px;
+      padding: 27px 0 29px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .decision-step b {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+
+    .decision-step h3 {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .decision-step p {
+      margin: 9px 0 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .note {
+      margin-top: 40px;
+      padding: 25px 27px 26px;
+      border-left: 4px solid var(--red);
+      background: var(--paper-blue);
+    }
+
+    .note strong {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .note p {
+      margin: 10px 0 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .ending { color: #f5f5ef; background: var(--navy); }
+
+    .ending-inner {
+      width: min(calc(100% - 48px), 900px);
+      margin: 0 auto;
+      padding: 88px 0 94px;
+    }
+
+    .ending .kicker { color: #e0bd68; }
+
+    .ending p {
+      margin: 24px 0 0;
+      color: rgba(255, 255, 255, .7);
+      font-size: 17px;
+      line-height: 2;
+    }
+
+    .ending strong { color: #fff; font-weight: 850; }
+
+    footer {
+      padding: 24px;
+      color: rgba(255, 255, 255, .46);
+      background: #101c23;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .choice-list a { grid-template-columns: 48px 180px minmax(0, 1fr) auto; gap: 15px; }
+      .section-layout { grid-template-columns: 1fr; gap: 36px; }
+      .level-panel, .score-panel, .eju-panel, .jtest-panel, .catti-panel { max-width: 620px; }
+      .test-item { grid-template-columns: 150px minmax(0, 1fr) 100px; gap: 24px; }
+    }
+
+    @media (max-width: 640px) {
+      .site-head { grid-template-columns: 1fr auto; min-height: 54px; padding: 0 18px; }
+      .site-head strong { justify-self: end; font-size: 13px; }
+      .site-head span { display: none; }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+        background: var(--paper-light);
+      }
+
+      .hero > img {
+        position: relative;
+        order: 1;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-position: 69% center;
+      }
+
+      .hero::after { display: none; }
+
+      .hero-inner {
+        order: 2;
+        width: 100%;
+        min-height: 0;
+        padding: 35px 22px 46px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow { font-size: 10px; }
+      h1 { margin-top: 15px; font-size: 42px; line-height: 1.13; }
+      .hero-lead { margin-top: 20px; font-size: 15px; line-height: 1.85; }
+      .hero-link { margin-top: 25px; }
+
+      .intro { width: calc(100% - 40px); padding: 64px 0 61px; }
+      .intro p { font-size: 15px; line-height: 1.95; }
+
+      .choose-inner,
+      .section-head,
+      .article-section,
+      .other-inner,
+      .decision,
+      .ending-inner { width: calc(100% - 40px); }
+
+      .choose-inner { padding: 58px 0 62px; }
+      .choose h2, .section-head h2, .article-section h2, .ending h2 { font-size: 31px; }
+      .choose > .choose-inner > p, .section-head p, .other-intro { font-size: 14px; }
+
+      .choice-list { margin-top: 34px; }
+
+      .choice-list a {
+        grid-template-columns: 38px minmax(0, 1fr) auto;
+        gap: 12px;
+        min-height: 0;
+        padding: 20px 0;
+      }
+
+      .choice-list p { display: none; }
+      .choice-list strong { font-size: 16px; }
+      .choice-list b { font-size: 12px; }
+
+      .section-head { padding: 64px 0 38px; }
+      .article-section { padding: 52px 0 57px; }
+      .section-layout { margin-top: 27px; }
+      .section-copy p { font-size: 14px; line-height: 1.95; }
+
+      .fact-row { grid-template-columns: 1fr; margin-top: 24px; }
+
+      .fact-row div,
+      .fact-row div + div {
+        display: grid;
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 10px;
+        padding: 12px 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .fact-row div:first-child { border-top: 0; }
+      .fact-row dd { margin: 0; }
+
+      .level-panel, .score-panel, .eju-panel, .jtest-panel, .catti-panel { padding: 22px 17px; }
+      .jlpt-levels strong { font-size: 19px; }
+      .jlpt-levels small { font-size: 8px; }
+      .eju-grid div { min-height: 104px; padding: 15px; }
+      .eju-grid strong { font-size: 15px; }
+      .eju-grid small { font-size: 10px; }
+      .score-levels span { font-size: 9px; }
+      .jtest-bands div { grid-template-columns: 70px 72px minmax(0, 1fr); gap: 9px; padding: 14px 10px; }
+      .jtest-bands strong { font-size: 14px; }
+      .jtest-bands b { font-size: 10px; }
+      .jtest-bands small { font-size: 9px; }
+      .catti-grid { grid-template-columns: 1fr; }
+      .catti-grid div { min-height: 0; padding: 15px; }
+
+      .other-inner { padding: 66px 0 70px; }
+      .other-tests h2, .decision h2 { font-size: 31px; }
+      .test-list { margin-top: 34px; }
+
+      .test-item {
+        grid-template-columns: 1fr auto;
+        gap: 11px 18px;
+        padding: 26px 0 28px;
+      }
+
+      .test-item h3 { font-size: 21px; }
+      .test-item p { grid-column: 1 / -1; font-size: 13px; }
+      .test-item a { grid-column: 2; grid-row: 1; }
+
+      .decision { padding: 68px 0 72px; }
+      .decision-steps { margin-top: 32px; }
+      .decision-step { grid-template-columns: 38px minmax(0, 1fr); gap: 12px; }
+      .decision-step h3 { font-size: 18px; }
+      .note { padding: 21px 19px 22px; }
+
+      .ending-inner { padding: 66px 0 72px; }
+      .ending p { font-size: 15px; line-height: 1.95; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-head">
+    <a href="../../../index.html#daily/daily-culture/culture-japanese-tradition">← 返回日本の伝統</a>
+    <strong>日本の伝統</strong>
+    <span>002 / 日本語試験</span>
+  </header>
+
+  <section class="hero">
+    <img src="assets/japanese-exams/hero-japanese-exams.webp" alt="一名日语学习者在书桌前比较不同的考试资料">
+    <div class="hero-inner">
+      <p class="eyebrow">日本語試験ガイド</p>
+      <h1>日语相关考试有哪些？</h1>
+      <p class="hero-lead">日语相关考试分别用于<strong>语言能力证明、赴日升学、商务沟通、阶段检测和翻译职业资格评价</strong>。了解每项考试的用途和内容，才能判断哪一项与自己的目标相符。</p>
+      <a class="hero-link" href="#choose">按考试用途查看 ↓</a>
+    </div>
+  </section>
+
+  <main>
+    <section class="intro">
+      <p>“日语考试”并不是单一的考试体系。JLPT 主要评价语言知识、阅读和听力；EJU 的日语科目用于日本大学等高等教育机构的入学选拔；BJT 评价商务场景中的理解和判断能力；J.TEST 以分数和等级持续测量实用日语能力。</p>
+      <p>中国的 CATTI 日语考试又属于另一类：它不是面向普通学习者的综合日语等级考试，而是评价<strong>中日双向笔译或口译能力的国家级职业资格考试</strong>。因此，选择考试前应先确定成绩的使用对象，再比较考试内容、成绩形式和报考条件。</p>
+    </section>
+
+    <section class="choose" id="choose">
+      <div class="choose-inner">
+        <span class="kicker">START WITH YOUR GOAL</span>
+        <h2>先按使用目的选择考试</h2>
+        <p>同一项考试并不能覆盖所有需求。以下分类用于说明各考试最常见的用途，实际报考时仍应确认学校、企业、考试机构或职业资格管理部门的具体要求。</p>
+        <nav class="choice-list" aria-label="按考试目的选择">
+          <a href="#jlpt"><span class="choice-number">01</span><strong>证明综合日语能力</strong><p>希望获得通用度较高的等级证明，用于学校、求职或长期学习目标。</p><b>JLPT →</b></a>
+          <a href="#eju"><span class="choice-number">02</span><strong>申请日本大学</strong><p>需要证明自己能听懂课程、阅读学术材料，并完成日语写作。</p><b>EJU →</b></a>
+          <a href="#bjt"><span class="choice-number">03</span><strong>进入日企或商务环境</strong><p>想知道自己能否在邮件、会议与职场交流中正确理解和判断。</p><b>BJT →</b></a>
+          <a href="#jtest"><span class="choice-number">04</span><strong>检测实用日语水平</strong><p>希望通过分数和等级观察学习进展，并接触听力比重较高的实用题型。</p><b>J.TEST →</b></a>
+          <a href="#catti"><span class="choice-number">05</span><strong>取得翻译职业资格</strong><p>计划在中国从事中日笔译或口译，需要评价双语转换与专业翻译能力。</p><b>CATTI →</b></a>
+          <a href="#other"><span class="choice-number">06</span><strong>增加阶段检测机会</strong><p>希望在 JLPT 之外增加考试机会，或体验不同的等级和实用日语题型。</p><b>其他考试 →</b></a>
+        </nav>
+      </div>
+    </section>
+
+    <header class="section-head">
+      <span class="kicker">FIVE EXAMS EXPLAINED</span>
+      <h2>需要重点了解的五项考试</h2>
+      <p>下面依次说明 JLPT、EJU、BJT、J.TEST 和 CATTI 日语考试的用途、内容、成绩形式与适合人群。它们之间不能只按难度排列，因为评价对象并不相同。</p>
+    </header>
+
+    <section class="article-section" id="jlpt">
+      <span class="section-label">01 · 综合能力证明</span>
+      <h2>日本语能力测试<span>日本語能力試験 / JLPT</span></h2>
+      <div class="section-layout">
+        <div class="section-copy">
+          <h3 class="copy-label">这项考试用于什么</h3>
+          <p>JLPT 是面向母语非日语者的综合日语能力考试，常被学校、企业和各类申请材料用作日语水平参考。考试从 N5 到 N1 分为五个等级，<strong>N5 最基础，N1 最高</strong>。考生在报名时需要直接选择一个等级参加考试。</p>
+          <h3 class="copy-label">考试内容与成绩形式</h3>
+          <p>考试围绕文字、词汇、语法、阅读和听力展开。N1、N2、N3 的成绩分为“语言知识”“阅读”“听力”三个得分区间；N4、N5 则把语言知识和阅读合并为一个区间，再加上听力。各级总分均为 180 分。</p>
+          <p>JLPT 的合格判定不仅要求总分达到标准，还要求各得分区间达到最低分。也就是说，即使总分较高，只要某一部分低于该等级规定的基准，仍不能合格。</p>
+          <h3 class="copy-label">报考前需要了解</h3>
+          <p><strong>JLPT 不直接测试口语和写作</strong>。它可以说明考生在阅读、听力和语言知识方面达到某一等级，但不能单独证明实际会话、写作或翻译能力。如果学校或职位写明需要 N2、N1，还应继续确认是否要求具体分数、成绩单原件或其他语言证明。</p>
+          <a class="official-link" href="https://www.jlpt.jp/" target="_blank" rel="noreferrer">查看 JLPT 官方说明 ↗</a>
+          <dl class="fact-row">
+            <div><dt>适合</dt><dd>需要通用等级证明的人</dd></div>
+            <div><dt>方式</dt><dd>按 N5—N1 选择等级</dd></div>
+            <div><dt>主要内容</dt><dd>语言知识、阅读、听力</dd></div>
+            <div><dt>结果</dt><dd>180 分制，判定合格与否</dd></div>
+          </dl>
+        </div>
+        <aside class="level-panel" aria-label="JLPT等级示意">
+          <p class="panel-title">JLPT LEVELS</p>
+          <div class="jlpt-levels">
+            <div><strong>N5</strong><small>基础日语</small></div>
+            <div><strong>N4</strong><small>基本理解</small></div>
+            <div><strong>N3</strong><small>衔接等级</small></div>
+            <div><strong>N2</strong><small>广泛场景</small></div>
+            <div><strong>N1</strong><small>最高等级</small></div>
+          </div>
+          <div class="level-arrow"><span>基础</span><span>难度逐步提高 →</span><span>高级</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="article-section" id="eju">
+      <span class="section-label">02 · 赴日大学升学</span>
+      <h2>日本留学考试<span>日本留学試験 / EJU</span></h2>
+      <div class="section-layout">
+        <div class="section-copy">
+          <h3 class="copy-label">这项考试用于什么</h3>
+          <p>EJU 用于评价外国留学生是否具备进入日本大学等高等教育机构学习所需要的能力。日语科目测试的是能够应对课程、资料阅读、说明和讨论的<strong>学术日语</strong>，它与单纯证明日语等级的 JLPT 用途不同。</p>
+          <h3 class="copy-label">日语科目怎样进行</h3>
+          <p>日语科目共 125 分钟，依次进行记述、阅读、听读解和听解。记述约 30 分钟，要求根据题目提出观点并组织文章；阅读约 40 分钟；听读解与听解合计约 55 分钟，其中听读解要求考生同时处理音频和图表、文字等视觉信息。</p>
+          <p>阅读为 0—200 分，听解与听读解合计为 0—200 分，两者合计 0—400 分；记述另以 0—50 分表示。EJU 不设置面向所有考生的统一“合格线”，<strong>录取所需科目和分数由各大学、学部及入学方式决定</strong>。</p>
+          <h3 class="copy-label">报考前需要了解</h3>
+          <p>大学可能只要求日语，也可能同时指定数学、综合科目或理科。理科与综合科目不能同时选择，数学还分为不同课程。准备报考前，应先阅读目标学校当年度的募集要项，再决定科目组合和目标分数。</p>
+          <a class="official-link" href="https://www.jasso.go.jp/ryugaku/eju/" target="_blank" rel="noreferrer">查看 EJU 官方说明 ↗</a>
+          <dl class="fact-row">
+            <div><dt>适合</dt><dd>准备申请日本大学的人</dd></div>
+            <div><dt>方式</dt><dd>按学校要求选择科目</dd></div>
+            <div><dt>主要内容</dt><dd>学术阅读、听力与写作</dd></div>
+            <div><dt>结果</dt><dd>日语最高 450 分，无统一合格线</dd></div>
+          </dl>
+        </div>
+        <aside class="eju-panel" aria-label="EJU日语科目构成">
+          <p class="panel-title">EJU JAPANESE</p>
+          <div class="eju-grid">
+            <div><strong>记述</strong><small>根据题目提出观点，并用理由和例子组织文章。</small></div>
+            <div><strong>阅读</strong><small>处理说明、论述与大学生活中可能出现的实用文章。</small></div>
+            <div><strong>听读解</strong><small>同时阅读图表或文字信息，并理解相关音频。</small></div>
+            <div><strong>听解</strong><small>理解课程、发表、讨论与咨询等场景中的语音信息。</small></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="article-section" id="bjt">
+      <span class="section-label">03 · 商务与求职</span>
+      <h2>商务日语能力测试<span>BJT ビジネス日本語能力テスト</span></h2>
+      <div class="section-layout">
+        <div class="section-copy">
+          <h3 class="copy-label">这项考试用于什么</h3>
+          <p>BJT 评价考生能否在日语商务环境中理解信息，并根据人物关系、场合和工作目的作出合适判断。题目会使用会议、商谈、电话、邮件、公司资料和图表等场景，因此适合准备进入日企、已经在日语工作环境中任职，或需要证明商务日语理解能力的人。</p>
+          <h3 class="copy-label">考试内容与成绩形式</h3>
+          <p>考试采用电脑考试形式，内容分为听解、听读解和阅读三个部分。听读解会同时提供语音与文字、图表等材料，要求考生综合判断信息；阅读部分还包括词汇、语法、表达和商务文章理解。</p>
+          <p>BJT 不设置合格或不合格，而是给出 <strong>0—800 分</strong>的成绩，并对应 J5、J4、J3、J2、J1、J1+ 六个等级。考生不需要先选择等级，一次考试即可获得当前分数和等级评价。</p>
+          <h3 class="copy-label">报考前需要了解</h3>
+          <p>BJT 不是面对面的口语考试，也不要求现场书写商务邮件。它主要通过选择题评价考生对商务语言、场景和日本商务习惯的理解。考试一般可按考点空位预约，但两次考试之间需要间隔三个月。</p>
+          <a class="official-link" href="https://www.kanken.or.jp/bjt/" target="_blank" rel="noreferrer">查看 BJT 官方说明 ↗</a>
+          <dl class="fact-row">
+            <div><dt>适合</dt><dd>日企求职与商务场景</dd></div>
+            <div><dt>方式</dt><dd>电脑考试，统一评分</dd></div>
+            <div><dt>主要内容</dt><dd>听解、听读解、阅读</dd></div>
+            <div><dt>结果</dt><dd>0—800 分与六个等级</dd></div>
+          </dl>
+        </div>
+        <aside class="score-panel" aria-label="BJT分数与等级示意">
+          <p class="panel-title">BJT SCORE SCALE</p>
+          <div class="score-scale"><span>0</span><span>800</span></div>
+          <div class="score-line"></div>
+          <div class="score-levels"><span>J5</span><span>J4</span><span>J3</span><span>J2</span><span>J1</span><span>J1+</span></div>
+          <div class="level-arrow"><span>基础</span><span>以分数显示当前位置</span><span>高级</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="article-section" id="jtest">
+      <span class="section-label">04 · 实用日语与阶段检测</span>
+      <h2>J.TEST 实用日本语检定<span>J.TEST 実用日本語検定</span></h2>
+      <div class="section-layout">
+        <div class="section-copy">
+          <h3 class="copy-label">这项考试用于什么</h3>
+          <p>J.TEST 面向母语非日语的学习者，通过分数和等级评价实际使用日语的能力。考试从 1991 年开始实施，题目强调生活、学习和工作中会接触到的表达。与只在报名时选择单一等级的考试不同，J.TEST 在所报考的考试区间内，按照最终分数判定具体等级。</p>
+          <h3 class="copy-label">三个考试区间怎样选择</h3>
+          <p>A—C 级考试面向中高级至高级学习者，满分 1000 分；D—E 级面向初级至中级学习者，满分 700 分；F—G 级面向入门学习者，满分 350 分。官方提供的对照只用于理解大致范围：D 级约相当于 JLPT N3，E 级约相当于 N4，F 级约相当于 N5，<strong>两种考试的等级并不能直接互换</strong>。</p>
+          <h3 class="copy-label">考试内容与成绩形式</h3>
+          <p>各区间的读解与听解得分各占 50%。题型包括文法词汇、阅读、汉字、照片理解、听读解、应答和会话说明等。A—C、D—E 还包含记述式问题，例如填写汉字读音或完成短文；F—G 全部采用选择题。</p>
+          <p>所有考生都会收到成绩表，达到规定分数并满足各分野不得为零分等条件时，才会获得相应等级的认定证书。日本国内的 A—C、D—E 公开考试通常一年六次，F—G 的国内公开考试次数较少，海外安排可能不同。</p>
+          <a class="official-link" href="https://j-test.jp/newjtest" target="_blank" rel="noreferrer">查看 J.TEST 官方说明 ↗</a>
+          <dl class="fact-row">
+            <div><dt>适合</dt><dd>希望持续观察学习进展的人</dd></div>
+            <div><dt>方式</dt><dd>先选择 A—C、D—E 或 F—G</dd></div>
+            <div><dt>主要内容</dt><dd>读解 50%＋听解 50%</dd></div>
+            <div><dt>结果</dt><dd>分数、等级与认定证书</dd></div>
+          </dl>
+        </div>
+        <aside class="jtest-panel" aria-label="J.TEST考试区间示意">
+          <p class="panel-title">J.TEST LEVEL GROUPS</p>
+          <div class="jtest-bands">
+            <div><strong>A—C</strong><b>1000 分</b><small>中高级至高级；包含商务题型和记述式问题。</small></div>
+            <div><strong>D—E</strong><b>700 分</b><small>初级至中级；包含生活、职场题型和记述式问题。</small></div>
+            <div><strong>F—G</strong><b>350 分</b><small>入门阶段；全部为选择题。</small></div>
+          </div>
+          <p class="panel-note">不同区间使用不同满分与认定标准，报名时应先根据当前水平选择考试区间。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="article-section" id="catti">
+      <span class="section-label">05 · 中国翻译职业资格</span>
+      <h2>CATTI 日语考试<span>全国翻译专业资格（水平）考试</span></h2>
+      <div class="section-layout">
+        <div class="section-copy">
+          <h3 class="copy-label">这项考试用于什么</h3>
+          <p>CATTI 是中国的全国翻译专业资格（水平）考试，日语是开考语种之一。它评价的是<strong>中文与日文之间的笔译或口译能力</strong>，属于翻译职业资格评价，不是以词汇、语法、阅读和听力为主体的普通日语等级考试。</p>
+          <h3 class="copy-label">级别与类别怎样区分</h3>
+          <p>日语考试分为一级、二级、三级，每个级别分别设置笔译和口译。三级适合开始系统检验翻译基本能力的人；二级要求考生能够处理难度和专业性更高的翻译任务；一级面向已经取得相应二级证书或具备规定翻译专业职务的人员，报考条件与二、三级不同。</p>
+          <h3 class="copy-label">考试内容与作答方式</h3>
+          <p>二、三级笔译通常包括《笔译综合能力》和《笔译实务》，综合能力考查语言基础与理解，实务要求完成中日双向翻译；二、三级口译包括《口译综合能力》和《口译实务》。一级只参加相应类别的实务科目。日语二级口译目前开考交替传译，不开设日语同声传译类别。</p>
+          <p>考试采用电子化方式。笔译通过键盘输入译文，参加笔译实务时可按当年考务规定携带纸质中外、外中综合性语文词典；口译实务采用听取材料、现场口译并录音的方式。</p>
+          <h3 class="copy-label">成绩怎样判定</h3>
+          <p>各科目合格标准原则上为试卷满分的 60%。成绩实行非滚动管理，考生需要在当次考试中通过所报语种、级别和类别的全部科目，才能取得相应资格证书。具体开考时间、报考资格、免试政策和考试工具要求，应以中国人事考试网及报考地区当年度通知为准。</p>
+          <a class="official-link" href="https://www.cpta.com.cn/" target="_blank" rel="noreferrer">查看中国人事考试网 ↗</a>
+          <dl class="fact-row">
+            <div><dt>适合</dt><dd>准备从事中日笔译或口译的人</dd></div>
+            <div><dt>级别</dt><dd>一级、二级、三级</dd></div>
+            <div><dt>类别</dt><dd>笔译与口译分别报考</dd></div>
+            <div><dt>结果</dt><dd>通过全部科目后取得资格证书</dd></div>
+          </dl>
+        </div>
+        <aside class="catti-panel" aria-label="CATTI日语级别示意">
+          <p class="panel-title">CATTI JAPANESE</p>
+          <div class="catti-grid">
+            <div><strong>三级</strong><small>检验基本翻译能力，常作为初次接触职业翻译考试的起点。</small></div>
+            <div><strong>二级</strong><small>要求处理更复杂、专业性更高的翻译任务。</small></div>
+            <div><strong>一级</strong><small>报考有资格条件，考试以相应类别的实务科目为主。</small></div>
+          </div>
+          <p class="panel-note">每个级别均区分笔译与口译；取得某一级笔译资格，并不等于同时取得该级口译资格。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="other-tests" id="other">
+      <div class="other-inner">
+        <span class="kicker">OTHER OPTIONS</span>
+        <h2>其他可用于阶段检测的考试</h2>
+        <p class="other-intro">NAT-TEST 和 TOPJ 也可以用来检查日语学习进度。它们的成绩用途与 JLPT、EJU、BJT、J.TEST 或 CATTI 不同，在用于留学、签证、求职或职业资格证明前，应先确认接收方是否认可。</p>
+        <div class="test-list">
+          <article class="test-item">
+            <h3>NAT-TEST<span>日本語 NAT-TEST</span></h3>
+            <p>分为五个级别，5 级最基础，1 级最高，难度设计与 JLPT 的 N5—N1 路线大致对应。考试围绕语言知识、阅读和听力展开，适合把它作为阶段检测，或在 JLPT 之外增加一次接近目标等级的考试经验。</p>
+            <a href="https://nat-test.jp/" target="_blank" rel="noreferrer">官网 ↗</a>
+          </article>
+          <article class="test-item">
+            <h3>TOPJ<span>実用日本語運用能力試験</span></h3>
+            <p>分为初级、中级和高级，除了词汇、语法、阅读和听力，也重视生活场景、日本社会与文化背景下的语言运用。适合希望检查实际表达判断能力，并增加考试机会的学习者。</p>
+            <a href="https://topj-test.org/" target="_blank" rel="noreferrer">官网 ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="decision">
+      <span class="kicker">BEFORE YOU APPLY</span>
+      <h2>报名之前，先确认五件事</h2>
+      <div class="decision-steps">
+        <div class="decision-step"><b>01</b><div><h3>成绩要交给谁？</h3><p>学校、企业、签证或个人学习的要求不同。先查看接收方明确列出的考试名称与分数条件。</p></div></div>
+        <div class="decision-step"><b>02</b><div><h3>需要的是等级、分数，还是职业资格？</h3><p>JLPT 以等级合格为核心；EJU、BJT、J.TEST 会提供分数；CATTI 则是在通过规定科目后取得相应翻译资格证书。</p></div></div>
+        <div class="decision-step"><b>03</b><div><h3>要评价日语理解，还是双语翻译？</h3><p>能够理解日文不等于能够完成准确的中日互译。以翻译职业为目标时，应单独准备 CATTI 的笔译或口译实务。</p></div></div>
+        <div class="decision-step"><b>04</b><div><h3>是否需要写作或学术日语？</h3><p>准备大学升学时，仅有综合能力等级可能不够。EJU 的记述、听读解和学术场景需要单独训练。</p></div></div>
+        <div class="decision-step"><b>05</b><div><h3>什么时候必须拿到成绩？</h3><p>不同考试的报名频率、考试日期和成绩公布时间并不相同。应倒推学校申请、求职或资格使用的截止日期，再选择考试场次。</p></div></div>
+      </div>
+      <aside class="note">
+        <strong>考试成绩不能代替全部语言能力</strong>
+        <p>JLPT、EJU、BJT、J.TEST 和 CATTI 的评价目标不同，成绩不能直接互换。即使考试包含写作、商务判断或翻译实务，也不等于覆盖了所有真实交流场景。报考时应以成绩的实际用途为判断依据。</p>
+      </aside>
+    </section>
+
+    <section class="ending">
+      <div class="ending-inner">
+        <span class="kicker">THE RIGHT TEST</span>
+        <h2>根据使用目的确定报考顺序</h2>
+        <p>需要综合日语等级证明时，优先确认 JLPT；申请日本大学时，按照目标学校要求准备 EJU；需要评价商务场景中的理解能力时，可了解 BJT；希望用分数和等级持续检查实用日语时，可选择 J.TEST；计划在中国取得中日翻译职业资格时，则应区分 CATTI 日语笔译与口译。<strong>确定成绩的使用对象，是选择考试的第一步。</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>KIKI · 日本の伝統 002 · 日本語試験</footer>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+    };
+    addEventListener('scroll', updateProgress, { passive: true });
+    addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>
