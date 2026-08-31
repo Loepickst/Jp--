@@ -4104,6 +4104,110 @@
             line-height: 1.8;
         }
 
+        .grammar-legacy-usage-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .grammar-legacy-usage-card {
+            --grammar-usage-accent: #9b3026;
+            --grammar-usage-accent-dark: #7f271f;
+            --grammar-usage-soft: rgba(155, 48, 38, 0.07);
+            padding: 20px;
+            border: 1px solid var(--grammar-modal-line);
+            border-top: 3px solid var(--grammar-usage-accent);
+            border-radius: 6px;
+            background: linear-gradient(180deg, var(--grammar-usage-soft) 0, #fff 92px);
+        }
+
+        .grammar-legacy-usage-card--1 {
+            --grammar-usage-accent: #9b3026;
+            --grammar-usage-accent-dark: #7f271f;
+            --grammar-usage-soft: rgba(155, 48, 38, 0.07);
+        }
+
+        .grammar-legacy-usage-card--2 {
+            --grammar-usage-accent: #a16b18;
+            --grammar-usage-accent-dark: #81540f;
+            --grammar-usage-soft: rgba(161, 107, 24, 0.08);
+        }
+
+        .grammar-legacy-usage-card--3 {
+            --grammar-usage-accent: #496f82;
+            --grammar-usage-accent-dark: #36596a;
+            --grammar-usage-soft: rgba(73, 111, 130, 0.08);
+        }
+
+        .grammar-legacy-usage-header {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .grammar-legacy-usage-number {
+            display: inline-flex;
+            min-width: 54px;
+            min-height: 28px;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 8px;
+            border: 1px solid var(--grammar-usage-accent);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--grammar-usage-accent-dark);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .grammar-legacy-usage-title {
+            margin: 0;
+            color: var(--grammar-modal-black);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+
+        .grammar-legacy-usage-meaning {
+            margin: 4px 0 0;
+            color: var(--grammar-usage-accent-dark);
+            font-size: 0.9rem;
+            font-weight: 650;
+            line-height: 1.5;
+        }
+
+        .grammar-legacy-usage-field + .grammar-legacy-usage-field {
+            margin-top: 15px;
+        }
+
+        .grammar-legacy-usage-field-label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--grammar-modal-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .grammar-legacy-usage-card .grammar-legacy-code {
+            display: block;
+            width: fit-content;
+        }
+
+        .grammar-legacy-usage-card .grammar-legacy-desc {
+            font-size: 0.94rem;
+        }
+
+        .grammar-legacy-usage-card .grammar-legacy-example-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .grammar-legacy-usage-card .grammar-legacy-example-card {
+            border-left-color: var(--grammar-usage-accent);
+        }
+
         .grammar-legacy-example-card {
             margin-bottom: 12px;
             padding: 14px 18px;
@@ -11976,24 +12080,30 @@
                 min-width: 0;
                 min-height: 46px;
                 padding: 1px 10px 1px 6px;
-                border: 1px solid rgba(179, 13, 45, 0.16);
+                border: 1px solid rgba(179, 13, 45, 0.24);
                 border-radius: 10px;
-                background-color: rgba(255, 255, 255, 0.3);
+                background-color: #ffffff;
                 background-image: none;
                 color: var(--autumn-maple-dark);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+                box-shadow:
+                    4px 4px 0 rgba(179, 13, 45, 0.065),
+                    0 8px 16px rgba(75, 49, 43, 0.13),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.96);
             }
 
             body.home-dashboard-redesign .tool-button--support {
                 min-width: 0;
                 min-height: 46px;
                 padding: 1px 10px 1px 6px;
-                border: 1px solid rgba(43, 106, 102, 0.16);
+                border: 1px solid rgba(43, 106, 102, 0.24);
                 border-radius: 10px;
-                background-color: rgba(255, 255, 255, 0.3);
+                background-color: #ffffff;
                 background-image: none;
                 color: var(--autumn-pine-dark);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+                box-shadow:
+                    4px 4px 0 rgba(43, 106, 102, 0.065),
+                    0 8px 16px rgba(75, 49, 43, 0.13),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.96);
             }
 
             body.home-dashboard-redesign .tool-link--fortune,
@@ -12004,7 +12114,11 @@
                 font-weight: 800;
                 letter-spacing: 0.12em;
                 text-shadow: 0 1px 0 rgba(255, 255, 255, 0.68);
-                transition: transform 180ms ease, color 180ms ease, filter 180ms ease;
+                transition:
+                    transform 180ms ease,
+                    color 180ms ease,
+                    border-color 180ms ease,
+                    box-shadow 180ms ease;
             }
 
             body.home-dashboard-redesign .tool-link--fortune .tool-icon,
@@ -12042,21 +12156,27 @@
             }
 
             body.home-dashboard-redesign .tool-link--fortune:hover {
-                border-color: rgba(179, 13, 45, 0.26);
-                background-color: rgba(255, 255, 255, 0.5);
+                border-color: rgba(179, 13, 45, 0.34);
+                background-color: #ffffff;
                 background-image: none;
                 color: var(--autumn-maple);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
-                filter: drop-shadow(0 4px 5px rgba(127, 24, 41, 0.12));
+                box-shadow:
+                    5px 5px 0 rgba(179, 13, 45, 0.08),
+                    0 10px 20px rgba(75, 49, 43, 0.16),
+                    inset 0 1px 0 #ffffff;
+                filter: none;
             }
 
             body.home-dashboard-redesign .tool-button--support:hover {
-                border-color: rgba(43, 106, 102, 0.26);
-                background-color: rgba(255, 255, 255, 0.5);
+                border-color: rgba(43, 106, 102, 0.34);
+                background-color: #ffffff;
                 background-image: none;
                 color: var(--autumn-pine);
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
-                filter: drop-shadow(0 4px 5px rgba(30, 81, 79, 0.12));
+                box-shadow:
+                    5px 5px 0 rgba(43, 106, 102, 0.08),
+                    0 10px 20px rgba(75, 49, 43, 0.16),
+                    inset 0 1px 0 #ffffff;
+                filter: none;
             }
 
             body.home-dashboard-redesign .tool-link--fortune:focus-visible,
@@ -13461,6 +13581,38 @@
                 line-height: 1.72;
             }
 
+            body.home-dashboard-redesign .grammar-legacy-usage-list {
+                gap: 13px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-card {
+                padding: 14px 12px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-header {
+                gap: 9px;
+                margin-bottom: 13px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-number {
+                min-width: 48px;
+                min-height: 24px;
+                padding: 2px 6px;
+                font-size: 9px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-title {
+                font-size: 14px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-meaning {
+                font-size: 12px;
+            }
+
+            body.home-dashboard-redesign .grammar-legacy-usage-card .grammar-legacy-desc {
+                font-size: 12.5px;
+            }
+
             body.home-dashboard-redesign .grammar-legacy-example-card {
                 margin-bottom: 9px;
                 padding: 11px 12px;
@@ -13585,15 +13737,15 @@
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
                                                 <img src="assets/home-redesign/hero-mobile-autumn-camp-shiba-cat-quote-v1.webp?v=20260817b" alt="红枫林露营地里，柴犬和猫一起烧烤，题字为“人事を尽くして天命を待つ”">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.24.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.31.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-24.webp?v=20260824a" alt="日光窗边，一位日漫风格的女生把裁好的小号绿色便利贴贴到书页上方留白处的铅笔水彩插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a" alt="高层观众席里，一位女生安静聆听远处重金属乐队演出的日漫铅笔水彩插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>信じろいつか終わる</h2>
-                                                    <p>把便利贴裁到1.2厘米，靠的是反复告诉自己：相信自己，继续动手，总会做完。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-08-24">08.24</time></span>
+                                                    <h2>誰かの配剤</h2>
+                                                    <p>几乎第一次走进演唱会，却意外遇见一场恰到好处的“地狱安排”。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-08-31">08.31</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -13737,9 +13889,9 @@
                                                 <span aria-hidden="true">›</span>
                                             </button>
                                             <!-- 最新日本文化：与桌面端右侧轮播入口同步更新。 -->
-                                            <a class="mobile-discovery-item" href="daily/culture/anime/hatsune-miku.html" aria-label="阅读二次元文化文章《世界で一番おひめさま》">
-                                                <img src="daily/culture/anime/hatsune-miku-assets/hatsune-miku-hero.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-                                                <span class="mobile-discovery-item-copy"><strong>世界で一番おひめさま</strong><small>初音未来带来的日本音乐热潮</small></span>
+                                            <a class="mobile-discovery-item" href="daily/culture/tradition/japanese-language-exams.html" aria-label="阅读日本文化文章《日语相关考试有哪些？》">
+                                                <img src="daily/culture/tradition/assets/japanese-exams/hero-japanese-exams.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                                                <span class="mobile-discovery-item-copy"><strong>日语相关考试有哪些？</strong><small>从 JLPT 到 CATTI，了解不同考试的用途</small></span>
                                                 <span aria-hidden="true">›</span>
                                             </a>
                                         </div>
@@ -13760,15 +13912,15 @@
                             <div class="home-rail-carousel-track" data-home-rail-carousel-track>
                                 <div class="home-rail-carousel-slide" data-home-rail-carousel-slide aria-hidden="false">
                                     <!-- 最新日本文化：与手机端“发现”入口同步更新。 -->
-                                    <a class="latest-culture-quick-link" href="daily/culture/anime/hatsune-miku.html" aria-label="阅读二次元文化文章《世界で一番おひめさま》">
+                                    <a class="latest-culture-quick-link" href="daily/culture/tradition/japanese-language-exams.html" aria-label="阅读日本文化文章《日语相关考试有哪些？》">
                                         <span class="latest-culture-quick-media" aria-hidden="true">
-                                            <img src="daily/culture/anime/hatsune-miku-assets/hatsune-miku-hero.webp" alt="" loading="lazy" decoding="async">
+                                            <img src="daily/culture/tradition/assets/japanese-exams/hero-japanese-exams.webp" alt="" loading="lazy" decoding="async">
                                             <span class="latest-culture-quick-kicker">日本文化 · 最新</span>
                                         </span>
                                         <span class="latest-culture-quick-copy">
                                             <span>
-                                                <strong>世界で一番おひめさま</strong>
-                                                <small>初音未来带来的日本音乐热潮</small>
+                                                <strong>日语相关考试有哪些？</strong>
+                                                <small>从 JLPT 到 CATTI，了解不同考试的用途</small>
                                             </span>
                                             <span class="latest-culture-quick-arrow" aria-hidden="true">→</span>
                                         </span>
@@ -13833,6 +13985,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/8.31.html" aria-label="阅读：誰かの配剤">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a" alt="">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">誰かの配剤</strong>
+                                    <span class="daily-reading-item-subtitle">某人的安排</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">随笔</span>
+                                    </span>
+                                    <time datetime="2026-08-31">2026.08.31</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/8.24.html" aria-label="阅读：信じろいつか終わる">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-08-24.webp?v=20260824a" alt="">
@@ -13844,19 +14009,6 @@
                                         <span class="daily-reading-item-tag">随笔</span>
                                     </span>
                                     <time datetime="2026-08-24">2026.08.24</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/8.20.html" aria-label="阅读：感覚の領域">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">感覚の領域</strong>
-                                    <span class="daily-reading-item-subtitle">感官的领域</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">随笔</span>
-                                    </span>
-                                    <time datetime="2026-08-20">2026.08.20</time>
                                 </span>
                             </a>
                         </div>
@@ -14003,14 +14155,14 @@
 
     <script src="shared/omikuji-catalog.js?v=20260811-qiuji1"></script>
     <script src="shared/home-pet.js?v=20260717-ronin-unlock1"></script>
-    <script src="shared/grammar-db-core.js?v=20260807b"></script>
-    <script src="shared/grammar-db-tags.js?v=20260804c"></script>
+    <script src="shared/grammar-db-core.js?v=20260831-mainichi-n1-027"></script>
+    <script src="shared/grammar-db-tags.js?v=20260831-mainichi-n1-027"></script>
     <script src="shared/grammar-db-resources.js?v=20260808-example-batch5"></script>
     <script src="shared/grammar-learning-sources.js?v=20260804c"></script>
-    <script src="shared/grammar-db-repo.js?v=20260809-no-compare"></script>
+    <script src="shared/grammar-db-repo.js?v=20260825-gaii-textbook2"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260820-novel-muttsuri1"></script>
-    <script src="shared/word-bank.js?v=20260820-novel-muttsuri1"></script>
+    <script src="shared/word-bank-presets.js?v=20260829-drama-hirakinaoru1"></script>
+    <script src="shared/word-bank.js?v=20260829-drama-hirakinaoru1"></script>
     <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
@@ -14027,6 +14179,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-essay-8-31", file: "8.31.html", publishedAt: "2026.08.31", titleJa: "誰かの配剤", titleZh: "某人的安排", summary: "ほぼ初めて参加した聖飢魔Ⅱのライブで、音楽の圧倒的な力と、初心者にちょうどよく巡ってきた「地獄の配剤」を味わう随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a", coverAlt: "高层观众席里，一位女生安静聆听远处重金属乐队演出的日漫铅笔水彩插画" },
             { id: "daily-essay-8-24", file: "8.24.html", publishedAt: "2026.08.24", titleJa: "信じろいつか終わる", titleZh: "相信自己，总会做完的", summary: "読書仕事に使う小さな付箋を自作し、終わりの見えない細かな作業で自分を信じて手を動かすことを考える随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-24.webp?v=20260824a", coverAlt: "日光窗边，一位日漫风格的女生把裁好的小号绿色便利贴贴到书页上方留白处的铅笔水彩插画" },
             { id: "daily-essay-8-20", file: "8.20.html", publishedAt: "2026.08.20", titleJa: "感覚の領域", titleZh: "感官的领域", summary: "散瞳検査で焦点が合わなくなった体験から、料理では視覚以外の感覚も重なり合って働いていることに気づく随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b", coverAlt: "日光照进厨房，一位日漫风格的女生在木砧板上切胡萝卜丝，旁边放着茶与洋葱的铅笔水彩插画" },
             { id: "daily-horror-8-15", file: "8.15.html", publishedAt: "2026.08.15", titleJa: "三つの怖い話", titleZh: "三则恐怖悬疑故事", summary: "嘘をつけない医療AI、他人へ不運を押し付ける先輩、歪んだ家族愛。最後の一文で意味が反転する三つの恐怖短編。", category: "horror", series: "怪谈" },
@@ -14266,6 +14419,18 @@
                                         tag: "花火",
                                         tone: "mist",
                                         fileNumber: "001",
+                                        state: "published"
+                                    },
+                                    {
+                                        id: "culture-tradition-japanese-exams",
+                                        title: "日语相关考试有哪些？",
+                                        desc: "从综合日语、赴日升学、商务能力到翻译职业资格，了解 JLPT、EJU、BJT、J.TEST 与 CATTI 的区别。",
+                                        href: "daily/culture/tradition/japanese-language-exams.html",
+                                        cover: "daily/culture/tradition/assets/japanese-exams/hero-japanese-exams.webp",
+                                        icon: "light-read",
+                                        tag: "日本語試験",
+                                        tone: "mist",
+                                        fileNumber: "002",
                                         state: "published"
                                     }
                                 ]
@@ -16872,6 +17037,45 @@
             `;
         }
 
+        function getGrammarUsageSectionMarkup(section, index, allExamples) {
+            const indexes = Array.isArray(section && section.exampleIndexes)
+                ? section.exampleIndexes.map(Number).filter(Number.isInteger)
+                : [];
+            const examples = indexes
+                .map((exampleIndex) => allExamples[exampleIndex])
+                .filter(Boolean);
+
+            return `
+                <section class="grammar-legacy-usage-card grammar-legacy-usage-card--${index + 1}" aria-labelledby="grammar-usage-${index + 1}">
+                    <div class="grammar-legacy-usage-header">
+                        <span class="grammar-legacy-usage-number">用法 ${index + 1}</span>
+                        <div>
+                            <h3 class="grammar-legacy-usage-title" id="grammar-usage-${index + 1}">${escapeHtml(section.title || `用法 ${index + 1}`)}</h3>
+                            ${section.meaning ? `<p class="grammar-legacy-usage-meaning">${escapeHtml(section.meaning)}</p>` : ""}
+                        </div>
+                    </div>
+                    ${section.connection ? `
+                        <div class="grammar-legacy-usage-field">
+                            <span class="grammar-legacy-usage-field-label">接续</span>
+                            <div class="grammar-legacy-code">${escapeHtml(section.connection)}</div>
+                        </div>
+                    ` : ""}
+                    ${section.desc ? `
+                        <div class="grammar-legacy-usage-field">
+                            <span class="grammar-legacy-usage-field-label">解説</span>
+                            <div class="grammar-legacy-desc">${section.desc}</div>
+                        </div>
+                    ` : ""}
+                    ${examples.length ? `
+                        <div class="grammar-legacy-usage-field">
+                            <span class="grammar-legacy-usage-field-label">例文</span>
+                            ${examples.map(getGrammarExampleMarkup).join("")}
+                        </div>
+                    ` : ""}
+                </section>
+            `;
+        }
+
         function getGrammarRelatedItems(item) {
             const ids = Array.isArray(item.related) ? item.related : [];
             const seen = new Set();
@@ -16897,6 +17101,9 @@
             const examples = Array.isArray(item.examples) ? item.examples : [];
             const extraExamples = getGrammarExtraExamples(item.id);
             const allExamples = [...examples, ...extraExamples];
+            const usageSections = Array.isArray(item.usageSections)
+                ? item.usageSections.filter((section) => section && typeof section === "object")
+                : [];
             const isExamplesExpanded = Number(grammarExpandedExamplesId) === Number(item.id);
             const visibleExamples = isExamplesExpanded ? allExamples : allExamples.slice(0, 3);
             const relatedItems = getGrammarRelatedItems(item);
@@ -16927,23 +17134,32 @@
                                 <span class="grammar-legacy-label">意味</span><br>
                                 <div class="grammar-legacy-highlight">${escapeHtml(item.meaning || "")}</div>
                             </div>
-                            <div class="grammar-legacy-detail-item">
-                                <span class="grammar-legacy-label">接续</span><br>
-                                <div class="grammar-legacy-code">${escapeHtml(item.connection || "")}</div>
-                            </div>
-                            <div class="grammar-legacy-detail-item">
-                                <span class="grammar-legacy-label">解説</span>
-                                <div class="grammar-legacy-desc">${item.desc || ""}</div>
-                            </div>
-                            <div class="grammar-legacy-detail-item">
-                                <span class="grammar-legacy-label">例文</span>
-                                ${visibleExamples.map(getGrammarExampleMarkup).join("")}
-                                ${allExamples.length > 3 ? `
-                                    <button type="button" class="grammar-legacy-more-examples" data-grammar-more-examples="${escapeHtml(item.id)}">
-                                        ${isExamplesExpanded ? "收起例句" : "查看更多例句"} <span>${isExamplesExpanded ? "↑" : "➜"}</span>
-                                    </button>
-                                ` : ""}
-                            </div>
+                            ${usageSections.length ? `
+                                <div class="grammar-legacy-detail-item">
+                                    <span class="grammar-legacy-label">用法</span>
+                                    <div class="grammar-legacy-usage-list">
+                                        ${usageSections.map((section, index) => getGrammarUsageSectionMarkup(section, index, allExamples)).join("")}
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="grammar-legacy-detail-item">
+                                    <span class="grammar-legacy-label">接续</span><br>
+                                    <div class="grammar-legacy-code">${escapeHtml(item.connection || "")}</div>
+                                </div>
+                                <div class="grammar-legacy-detail-item">
+                                    <span class="grammar-legacy-label">解説</span>
+                                    <div class="grammar-legacy-desc">${item.desc || ""}</div>
+                                </div>
+                                <div class="grammar-legacy-detail-item">
+                                    <span class="grammar-legacy-label">例文</span>
+                                    ${visibleExamples.map(getGrammarExampleMarkup).join("")}
+                                    ${allExamples.length > 3 ? `
+                                        <button type="button" class="grammar-legacy-more-examples" data-grammar-more-examples="${escapeHtml(item.id)}">
+                                            ${isExamplesExpanded ? "收起例句" : "查看更多例句"} <span>${isExamplesExpanded ? "↑" : "➜"}</span>
+                                        </button>
+                                    ` : ""}
+                                </div>
+                            `}
                             ${relatedItems.length ? `
                                 <div class="grammar-legacy-detail-item">
                                     <span class="grammar-legacy-label">关联语法</span><br>
@@ -18211,7 +18427,8 @@
 
         function renderCultureTraditionDirectory(panel, view) {
             const categoryDefinitions = [
-                { id: "festival", label: "祭典与节庆", labelJa: "祭り" }
+                { id: "festival", label: "祭典与节庆", labelJa: "祭り" },
+                { id: "language", label: "语言与学习", labelJa: "日本語" }
             ];
             const items = view.items
                 .filter((item) => !item.disabled)
@@ -18221,7 +18438,7 @@
                     titleZh: "",
                     summary: item.desc || "",
                     series: item.tag || "日本の伝統",
-                    category: "festival",
+                    category: item.id === "culture-tradition-japanese-exams" ? "language" : "festival",
                     directoryLabel: item.fileNumber || ""
                 }))
                 .sort((a, b) => String(b.fileNumber || "").localeCompare(String(a.fileNumber || "")));
