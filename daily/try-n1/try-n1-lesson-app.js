@@ -280,6 +280,7 @@
   let audioPartIndex = 0;
   let audioRateIndex = 1;
   let audioScrubPointerId = null;
+  let lessonAudioSentenceIndex = -1;
   let mobileCatalogMenuOpen = false;
   let activeGrammarDetailKey = null;
   let expandedGrammarExampleKey = null;
@@ -354,6 +355,22 @@
     template.innerHTML = String(markup || "").replace(/<br\s*\/?>/gi, "\n");
     template.content.querySelectorAll("rt").forEach((reading) => reading.remove());
     return String(template.content.textContent || "").replace(/\s+/g, " ").trim().slice(0, limit);
+  }
+
+  function htmlToFuriganaAnnotation(markup, limit = 1200) {
+    const template = document.createElement("template");
+    template.innerHTML = String(markup || "");
+    Array.from(template.content.querySelectorAll("ruby")).forEach((ruby) => {
+      const reading = Array.from(ruby.querySelectorAll("rt"))
+        .map((node) => node.textContent || "")
+        .join("");
+      const base = ruby.cloneNode(true);
+      base.querySelectorAll("rt, rp").forEach((node) => node.remove());
+      const text = String(base.textContent || "").trim();
+      ruby.replaceWith(document.createTextNode(reading && text ? `${text}[${reading}]` : text));
+    });
+    template.content.querySelectorAll("rt, rp").forEach((node) => node.remove());
+    return normalizeText(template.content.textContent, limit);
   }
 
   function rubyMarkupToReading(markup, limit = 120) {
@@ -455,6 +472,7 @@
     clearShadowingAudioSegment();
     dom.audio.currentTime = Math.max(0, Math.min(dom.audio.duration, dom.audio.currentTime + seconds));
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
   }
 
   function seekAudioFromClientX(clientX) {
@@ -465,6 +483,7 @@
     const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     dom.audio.currentTime = ratio * dom.audio.duration;
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
     return true;
   }
 
@@ -472,6 +491,7 @@
     if (!dom.audio || !audioSources.length) return;
     audioPartIndex = Math.max(0, Math.min(audioSources.length - 1, Number(index) || 0));
     dom.audio.pause();
+    clearLessonAudioSentenceHighlight();
     dom.audioPlay.disabled = false;
     dom.audio.src = new URL(audioSources[audioPartIndex], window.location.href).href;
     dom.audio.playbackRate = audioRates[audioRateIndex];
@@ -485,6 +505,7 @@
   function configureLessonAudio(item) {
     if (!dom.audio) return;
     dom.audio.pause();
+    clearLessonAudioSentenceHighlight();
     dom.audio.removeAttribute("src");
     dom.audio.load();
     audioSources = (Array.isArray(item?.audioSrc) ? item.audioSrc : item?.audioSrc ? [item.audioSrc] : [])
@@ -628,6 +649,53 @@
 
   function getShadowingSentences() {
     return Array.from(dom.textPanel?.querySelectorAll("[data-shadowing-sentence]") || []);
+  }
+
+  function clearLessonAudioSentenceHighlight() {
+    getShadowingSentences().forEach((sentence) => sentence.classList.remove("is-audio-current"));
+    lessonAudioSentenceIndex = -1;
+  }
+
+  function getLessonAudioSentenceIndex() {
+    if (!dom.audio || activeSection !== "text") return -1;
+    const timeline = getShadowingTimeline();
+    const current = Number(dom.audio.currentTime);
+    if (!timeline.length || !Number.isFinite(current)) return -1;
+    const partSegments = timeline
+      .map((segment, index) => ({ segment, index }))
+      .filter(({ segment }) => Number(segment.part || 0) === audioPartIndex);
+    if (!partSegments.length || current < Number(partSegments[0].segment.start)) return -1;
+    for (let index = partSegments.length - 1; index >= 0; index -= 1) {
+      const item = partSegments[index];
+      const start = Number(item.segment.start);
+      const nextStart = Number(partSegments[index + 1]?.segment.start);
+      const end = Number.isFinite(nextStart) ? nextStart : Number(item.segment.end) + 0.25;
+      if (current >= start && current < end) return item.index;
+    }
+    return -1;
+  }
+
+  function scrollAudioSentenceIntoView(sentence) {
+    if (!sentence || document.hidden) return;
+    sentence.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  }
+
+  function syncLessonAudioSentenceHighlight({ scroll = false, forceScroll = false } = {}) {
+    const sentences = getShadowingSentences();
+    const timeline = getShadowingTimeline();
+    if (!sentences.length || sentences.length !== timeline.length) {
+      clearLessonAudioSentenceHighlight();
+      return;
+    }
+    const nextIndex = getLessonAudioSentenceIndex();
+    const sentenceChanged = nextIndex !== lessonAudioSentenceIndex;
+    if (sentenceChanged) {
+      sentences.forEach((sentence, index) => sentence.classList.toggle("is-audio-current", index === nextIndex));
+      lessonAudioSentenceIndex = nextIndex;
+    }
+    if (scroll && nextIndex >= 0 && (sentenceChanged || forceScroll)) {
+      scrollAudioSentenceIntoView(sentences[nextIndex]);
+    }
   }
 
   function setShadowingStatus(message) {
@@ -1232,25 +1300,79 @@
 
   function makeVocabBankEntry(entry) {
     const item = getInsightItem(entry.key);
+    const vocabMeta = vocabMetaMap[entry.key] || Object.create(null);
+    const exampleMarkup = vocabExampleRubyMap[entry.key] || item.exampleJa;
+    const meaningZh = stripDuplicateVocabPos(item.meaningZh) || "解释整理中";
+    const contextZh = normalizeText(item.contextZh, 600);
+    const meaning = contextZh && !meaningZh.includes(contextZh)
+      ? `${meaningZh}${/[。！？!?；;]$/.test(meaningZh) ? "" : "。"}${contextZh}`
+      : meaningZh;
+    const example = htmlWithoutRubyReadings(exampleMarkup || item.exampleJa, 520);
+    const exampleRuby = htmlToFuriganaAnnotation(exampleMarkup, 1200);
+    const exampleZh = normalizeText(item.exampleZh, 520).replace(/^[（(]\s*/, "").replace(/\s*[）)]$/, "");
     const now = new Date().toISOString();
     return {
       id: getVocabBankId(entry.key),
       word: entry.titleHtml
         ? htmlWithoutRubyReadings(entry.titleHtml, 90)
         : htmlToText(item.title || entry.key, 90),
-      reading: item.reading,
-      meaningZh: item.meaningZh || "解释整理中",
-      meaningJa: item.contextZh || "",
-      example: item.exampleJa,
+      reading: resolveVocabSpeechText(entry),
+      partOfSpeech: entry.pos || vocabMeta.pos || "",
+      accent: entry.pitch || vocabMeta.pitch || "",
+      jlptLevel: "N1",
+      meaning,
+      meaningZh: "",
+      meaningJa: "",
+      nuance: "",
+      usage: "",
+      collocations: [],
+      example,
+      exampleRuby,
+      exampleZh,
+      relatedWords: [],
       note: "",
       tags: ["教材"],
       sourceTitle: `Try! N1 第${activeLesson}課 ${activeBundle.title}`,
       sourceUrl: `daily/try-n1/lesson-content-redesign.html?lesson=${activeLesson}`,
-      sourceText: [item.exampleJa, item.exampleZh, item.meaningZh].filter(Boolean).join(" "),
+      sourceCategory: "textbook",
+      sourceText: [meaning, example, exampleZh].filter(Boolean).join(" "),
       createdAt: now,
       updatedAt: now,
       origin: "textbook",
     };
+  }
+
+  function syncLegacyVocabFavorites() {
+    const entries = getWordBankEntries();
+    let changed = false;
+    (activeBundle?.vocab || []).forEach((entry) => {
+      const index = entries.findIndex((item) => item && item.id === getVocabBankId(entry.key));
+      if (index < 0) return;
+      const previous = entries[index];
+      const isLegacy = !previous.meaning
+        || !("partOfSpeech" in previous)
+        || !("accent" in previous)
+        || !("exampleZh" in previous);
+      if (!isLegacy) return;
+      const updated = makeVocabBankEntry(entry);
+      entries[index] = {
+        ...previous,
+        ...updated,
+        collocations: Array.isArray(previous.collocations) && previous.collocations.length
+          ? previous.collocations
+          : updated.collocations,
+        relatedWords: Array.isArray(previous.relatedWords) && previous.relatedWords.length
+          ? previous.relatedWords
+          : updated.relatedWords,
+        note: previous.note || updated.note,
+        tags: Array.isArray(previous.tags) && previous.tags.length ? previous.tags : updated.tags,
+        createdAt: previous.createdAt || updated.createdAt,
+      };
+      changed = true;
+    });
+    if (changed) {
+      saveWordBankEntries(entries, { action: "migrate", source: `try-n1-l${activeLesson}` });
+    }
   }
 
   function toggleVocabFavorite(key) {
@@ -1315,6 +1437,7 @@
 
   function buildVocabList() {
     if (!activeBundle || !dom.vocabList) return;
+    syncLegacyVocabFavorites();
     if (dom.vocabList.dataset.lesson === String(activeLesson) && dom.vocabList.childElementCount) {
       dom.vocabList.classList.toggle("is-self-check", isVocabSelfCheck);
       return;
@@ -2360,8 +2483,12 @@
 
   dom.audio?.addEventListener("loadedmetadata", syncAudioUi);
   dom.audio?.addEventListener("durationchange", syncAudioUi);
+  dom.audio?.addEventListener("seeking", () => {
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
+  });
   dom.audio?.addEventListener("timeupdate", () => {
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
     if (shadowingSegmentEnd !== null && dom.audio.currentTime >= shadowingSegmentEnd) {
       const end = shadowingSegmentEnd;
       shadowingSegmentEnd = null;
@@ -2372,7 +2499,10 @@
       setShadowingStatus("原音播放完成。现在可以开始录音。");
     }
   });
-  dom.audio?.addEventListener("play", () => setAudioPlaying(true));
+  dom.audio?.addEventListener("play", () => {
+    setAudioPlaying(true);
+    syncLessonAudioSentenceHighlight({ scroll: true, forceScroll: true });
+  });
   dom.audio?.addEventListener("pause", () => setAudioPlaying(false));
   dom.audio?.addEventListener("ended", () => {
     shadowingSegmentEnd = null;
@@ -2380,11 +2510,13 @@
       loadAudioPart(audioPartIndex + 1, { autoplay: true });
       return;
     }
+    clearLessonAudioSentenceHighlight();
     setAudioPlaying(false);
   });
   dom.audio?.addEventListener("error", () => {
     if (dom.audioLabel) dom.audioLabel.textContent = "课文音频加载失败";
     if (dom.audioPlay) dom.audioPlay.disabled = true;
+    clearLessonAudioSentenceHighlight();
     setAudioPlaying(false);
   });
 
