@@ -7,7 +7,10 @@
     let playbackToken = 0;
     let boundaryFrame = 0;
     let boundaryTimer = 0;
+    let pendingSeekCancel = null;
     const FALLBACK_END_GUARD_SECONDS = 0.06;
+    const SEEK_TOLERANCE_SECONDS = 0.08;
+    const SEEK_TIMEOUT_MS = 800;
 
     function getAudioKey(audioSrc) {
         if (!audioSrc) return '';
@@ -122,14 +125,106 @@
         boundaryTimer = 0;
     }
 
+    function clearPendingSeek() {
+        if (typeof pendingSeekCancel === 'function') pendingSeekCancel();
+        pendingSeekCancel = null;
+    }
+
+    function seekBeforePlayback(audio, targetTime, token, onReady, onFailure) {
+        clearPendingSeek();
+        const target = Math.max(0, targetTime);
+        let cancelled = false;
+        let metadataHandler = null;
+        let seekHandler = null;
+        let timeoutId = 0;
+        let attempts = 0;
+
+        const cleanup = () => {
+            if (metadataHandler) audio.removeEventListener('loadedmetadata', metadataHandler);
+            if (seekHandler) audio.removeEventListener('seeked', seekHandler);
+            if (timeoutId) window.clearTimeout(timeoutId);
+            metadataHandler = null;
+            seekHandler = null;
+            timeoutId = 0;
+        };
+        const cancel = () => {
+            cancelled = true;
+            cleanup();
+            if (pendingSeekCancel === cancel) pendingSeekCancel = null;
+        };
+        const fail = () => {
+            cancel();
+            if (token === playbackToken && typeof onFailure === 'function') onFailure();
+        };
+        const confirmPosition = () => {
+            if (cancelled || token !== playbackToken) {
+                cancel();
+                return;
+            }
+            const current = Number(audio.currentTime);
+            if (Number.isFinite(current) && Math.abs(current - target) <= SEEK_TOLERANCE_SECONDS) {
+                cancel();
+                onReady();
+                return;
+            }
+            if (attempts >= 2) {
+                fail();
+                return;
+            }
+            requestSeek();
+        };
+        const armTimeout = (delay) => {
+            if (timeoutId) window.clearTimeout(timeoutId);
+            timeoutId = window.setTimeout(confirmPosition, delay);
+        };
+        const requestSeek = () => {
+            if (cancelled || token !== playbackToken) {
+                cancel();
+                return;
+            }
+            if (audio.readyState < 1) {
+                if (!metadataHandler) {
+                    metadataHandler = () => {
+                        metadataHandler = null;
+                        requestSeek();
+                    };
+                    audio.addEventListener('loadedmetadata', metadataHandler, { once: true });
+                }
+                armTimeout(SEEK_TIMEOUT_MS * 2);
+                return;
+            }
+            const current = Number(audio.currentTime);
+            if (Number.isFinite(current) && Math.abs(current - target) <= 0.015) {
+                cancel();
+                onReady();
+                return;
+            }
+            attempts += 1;
+            if (seekHandler) audio.removeEventListener('seeked', seekHandler);
+            seekHandler = () => {
+                seekHandler = null;
+                confirmPosition();
+            };
+            audio.addEventListener('seeked', seekHandler, { once: true });
+            try {
+                audio.currentTime = target;
+            } catch (error) {
+                fail();
+                return;
+            }
+            armTimeout(SEEK_TIMEOUT_MS);
+        };
+
+        pendingSeekCancel = cancel;
+        requestSeek();
+    }
+
     function stop() {
         playbackToken += 1;
         clearBoundaryMonitor();
+        clearPendingSeek();
         const audio = getAudio();
-        if (audio) {
-            audio.pause();
-            if (Number.isFinite(audio.duration)) audio.currentTime = 0;
-        }
+        if (audio) audio.pause();
         resetButton();
     }
 
@@ -151,6 +246,13 @@
         activeButton = button;
         const token = playbackToken;
         let boundaryEndTime = endTime;
+        if (Number.isFinite(endTime)) {
+            const requestedEndGuard = Number.isFinite(configuredEndGuard)
+                ? Math.max(0, configuredEndGuard)
+                : FALLBACK_END_GUARD_SECONDS;
+            const endGuard = Math.max(FALLBACK_END_GUARD_SECONDS, requestedEndGuard);
+            boundaryEndTime = Math.max(startTime + 0.03, endTime - endGuard);
+        }
         button.classList.add('is-playing');
         button.setAttribute('aria-pressed', 'true');
 
@@ -183,21 +285,9 @@
         };
         const start = () => {
             if (token !== playbackToken) return;
-            try {
-                audio.currentTime = Math.max(0, startTime);
-            } catch (error) {
-                // With readyState=HAVE_NOTHING the browser stores this as the
-                // default playback position and seeks as soon as metadata lands.
-            }
             audio.playbackRate = 1;
             audio.muted = false;
             audio.volume = 1;
-            if (Number.isFinite(endTime)) {
-                const endGuard = Number.isFinite(configuredEndGuard)
-                    ? Math.max(0, configuredEndGuard)
-                    : FALLBACK_END_GUARD_SECONDS;
-                boundaryEndTime = Math.max(startTime + 0.03, endTime - endGuard);
-            }
             const promise = audio.play();
             if (promise && typeof promise.then === 'function') {
                 promise.then(() => {
@@ -219,17 +309,7 @@
             audio.src = resolvedSrc;
             audio.load();
         }
-        if (audio.readyState < 1) {
-            audio.addEventListener('loadedmetadata', () => {
-                if (token !== playbackToken) return;
-                try { audio.currentTime = Math.max(0, startTime); } catch (error) { /* handled by play */ }
-            }, { once: true });
-        }
-        // The native media element is deliberately started inside the click
-        // handler. This shares the same user-activation path as the main
-        // player and avoids a silent, suspended AudioContext after async MP3
-        // decoding.
-        start();
+        seekBeforePlayback(audio, startTime, token, start, finish);
     }
 
     function setEnabled(next) {
