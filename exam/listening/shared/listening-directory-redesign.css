@@ -30,6 +30,33 @@
     align-items: center;
 }
 
+.listening-directory-app .grammar-year-session-copy small {
+    display: block;
+    margin-top: 4px;
+    color: var(--grammar-muted);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .02em;
+}
+
+.listening-directory-app .grammar-year-session.is-locked,
+.listening-directory-app .grammar-year-session.is-locked:hover {
+    cursor: not-allowed;
+    color: var(--grammar-muted);
+    background: var(--grammar-surface-subtle);
+    border-color: var(--grammar-line);
+    box-shadow: none;
+    opacity: 1;
+    transform: none;
+}
+
+.listening-directory-app .grammar-year-session.is-locked .grammar-year-session-state {
+    color: #9b675f;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: .04em;
+}
+
 .listening-directory-app .listening-training-mode-modal .training-mode-header img {
     object-position: center 20%;
 }

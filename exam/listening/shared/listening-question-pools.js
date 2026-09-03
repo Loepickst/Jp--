@@ -40829,8 +40829,33 @@
           "dialogue": [
             {
               "speaker": "係長",
-              "text": "皆さん、先月の会議でオフィス環境の<span class=\"keyword\" onclick=\"showTooltip(event, '改善（かいぜん）：改善。')\">改善</span>についてお話ししましたが、取り組んでくれていますか。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '个人信息不放在桌上这点已经执行得很彻底，不是新任务。')\">机の上に個人情報を出したままにしないというのは徹底してくれている</span></span>ようですね。以前は<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '电脑上贴很多便签的情况最近已经没有了，不是接下来要新做。')\">メモがたくさん張ってあるパソコンをよく見ましたが、最近はなくなりました</span></span>。えー、今は使わない昔の書類ですが、ダンボール箱に入ったままになっていますね。<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>年度ごとに<span class=\"keyword\" onclick=\"showTooltip(event, 'ファイル：文件夹、档案夹。')\">ファイル</span>にまとめるなどしておいてください</span>。あっ、ファイルといえば、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '柜子里的文件已经贴标签整理好了，不是新任务。')\">棚の中のものは、<span class=\"keyword\" onclick=\"showTooltip(event, 'ラベル：标签。')\">ラベル</span>が付いて整理され、見違えるようになりました</span></span>ね。",
-              "trans": "（各位，上个月会议上谈到改善办公室环境，大家有在推进吗？桌上不放着个人信息这一点似乎执行得很彻底。以前我常看到电脑上贴着很多便条，最近没有了。嗯，现在不用的旧文件还一直放在纸箱里，请按年度整理进文件夹。啊，说到文件夹，架子里的东西已经贴好标签整理起来，变得焕然一新了。）"
+              "text": "皆さん、先月の会議でオフィス環境の<span class=\"keyword\" onclick=\"showTooltip(event, '改善（かいぜん）：改善。')\">改善</span>についてお話ししましたが、取り組んでくれていますか。",
+              "trans": "（各位，上个月开会时提到了要改善咱们办公室的环境，大家都有在好好落实吗？）"
+            },
+            {
+              "speaker": "係長",
+              "text": "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '个人信息不放在桌上这点已经执行得很彻底，不是新任务。')\">机の上に個人情報を出したままにしないというのは徹底してくれている</span></span>ようですね。",
+              "trans": "（下班时桌上不留任何个人信息这一点，大家似乎执行得很到位。）"
+            },
+            {
+              "speaker": "係長",
+              "text": "以前は<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '电脑上贴很多便签的情况最近已经没有了，不是接下来要新做。')\">メモがたくさん張ってあるパソコンをよく見ましたが、最近はなくなりました</span></span>。",
+              "trans": "（以前还经常能看到电脑上贴满便签的情况，最近已经没有了。）"
+            },
+            {
+              "speaker": "係長",
+              "text": "えー、今は使わない昔の書類ですが、ダンボール箱に入ったままになっていますね。",
+              "trans": "（不过，那些现在已经不用的旧文件，还一直放在纸箱里呢。）"
+            },
+            {
+              "speaker": "係長",
+              "text": "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>年度ごとに<span class=\"keyword\" onclick=\"showTooltip(event, 'ファイル：文件夹、档案夹。')\">ファイル</span>にまとめるなどしておいてください</span>。",
+              "trans": "（请大家把这些文件按年度整理到文件夹中。）"
+            },
+            {
+              "speaker": "係長",
+              "text": "あっ、ファイルといえば、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '柜子里的文件已经贴标签整理好了，不是新任务。')\">棚の中のものは、<span class=\"keyword\" onclick=\"showTooltip(event, 'ラベル：标签。')\">ラベル</span>が付いて整理され、見違えるようになりました</span></span>ね。",
+              "trans": "（啊，说到文件夹，架子里的东西已经贴好标签并整理妥当，简直焕然一新了。）"
             }
           ]
         },

@@ -9,7 +9,13 @@
             categoryType: 'task_comprehension',
             years: {
                 N1: standardSessions(2010, 2020, (year) => `years/n1_${year}.html`, { noJuly: [2020] }),
-                N2: standardSessions(2010, 2020, (year) => `years/${year}.html`, { noJuly: [2020] }),
+                N2: standardSessions(2010, 2020, (year) => `years/${year}.html`, { noJuly: [2020] })
+                    .concat(
+                        session('2021-07', 'years/2021.html'),
+                        session('2021-12', 'years/2021.html'),
+                        session('2022-07', 'years/2022.html'),
+                        session('2022-12', 'years/2022.html')
+                    ),
                 N3: []
             }
         },
@@ -63,13 +69,16 @@
         return String(value).padStart(2, '0');
     }
 
-    function session(key, href) {
+    function session(key, href, options = {}) {
         const match = String(key).match(/^(\d{4})-(\d{2})$/);
         return {
             key,
             year: match ? Number(match[1]) : 0,
             month: match ? Number(match[2]) : 0,
-            href: `${href}${href.includes('?') ? '&' : '?'}year=${key}`
+            href: `${href}${href.includes('?') ? '&' : '?'}year=${key}`,
+            locked: options.locked === true,
+            statusLabel: options.statusLabel || '',
+            statusDetail: options.statusDetail || ''
         };
     }
 
@@ -371,7 +380,10 @@
                 <header class="grammar-year-stage-header"><span class="grammar-year-stage-title"><strong>${year} 年</strong></span></header>
                 <div class="grammar-year-sessions">
                     ${entries.map((entry) => {
-                        const current = entry.key === lastPractice;
+                        const current = !entry.locked && entry.key === lastPractice;
+                        if (entry.locked) {
+                            return `<button type="button" class="exam-year-item grammar-year-session is-locked" disabled aria-disabled="true"><span class="grammar-year-session-copy"><strong>${entry.month} 月</strong>${entry.statusDetail ? `<small>${escapeHtml(entry.statusDetail)}</small>` : ''}</span><span class="grammar-year-session-state">${escapeHtml(entry.statusLabel || '准备中')}</span></button>`;
+                        }
                         return `<button type="button" data-year-session-key="${escapeHtml(entry.key)}" class="exam-year-item grammar-year-session ${current ? 'is-current' : ''}"><span class="grammar-year-session-copy"><strong>${entry.month} 月</strong></span><span class="grammar-year-session-state">${current ? '继续 ›' : '进入 ›'}</span></button>`;
                     }).join('')}
                 </div>
@@ -400,7 +412,7 @@
     }
 
     function renderMistakes() {
-        const rows = getSessions().map((entry) => ({ entry, ids: getMistakeIds(entry.key) })).filter((item) => item.ids.length);
+        const rows = getSessions().filter((entry) => !entry.locked).map((entry) => ({ entry, ids: getMistakeIds(entry.key) })).filter((item) => item.ids.length);
         const total = rows.reduce((sum, item) => sum + item.ids.length, 0);
         document.getElementById('listening-mistake-count').textContent = String(total);
         document.getElementById('listening-mistake-total').textContent = `${total} 题`;
@@ -420,7 +432,7 @@
         const button = document.getElementById('listening-resume-button');
         const copy = document.getElementById('listening-resume-copy');
         const last = getLastPractice();
-        const target = getSessions().find((entry) => entry.key === last);
+        const target = getSessions().find((entry) => entry.key === last && !entry.locked);
         button.hidden = !target;
         if (!target) return;
         copy.textContent = `${target.year}年${target.month}月 · ${config.ja}`;
@@ -440,7 +452,7 @@
     }
 
     function openTrainingMode(entry) {
-        if (!entry) return;
+        if (!entry || entry.locked) return;
         pendingYearEntry = entry;
         syncTrainingModeModal();
         document.getElementById('listening-training-mode-overlay').hidden = false;

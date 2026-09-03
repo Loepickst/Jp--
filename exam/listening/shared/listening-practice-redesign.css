@@ -19,6 +19,8 @@
     --listening-success-bg: #edf4f1;
     --listening-danger: #a85252;
     --listening-danger-bg: #fbefef;
+    --listening-highlight-correct-line: #5f9875;
+    --listening-highlight-wrong-line: #c86f80;
     --listening-radius: 14px;
     --listening-font-ui: "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --listening-font-serif: "Noto Serif SC", "Noto Serif JP", "Songti SC", serif;
@@ -660,19 +662,29 @@ body.listening-image-explanation-only .mode-practice .question-image-area {
 
 .mode-explanation .highlight-correct,
 .mode-explanation .highlight-wrong {
-    padding: 0 0.12em;
-    border-radius: 2px;
+    padding: 0;
+    border-radius: 0;
     font-weight: 700;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 2px;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
 }
 
 .mode-explanation .highlight-correct {
-    background: linear-gradient(transparent 55%, rgba(94, 166, 135, 0.32) 55%);
+    background-image: linear-gradient(
+        var(--listening-highlight-correct-line),
+        var(--listening-highlight-correct-line)
+    );
 }
 
 .mode-explanation .highlight-wrong {
-    background: linear-gradient(transparent 55%, rgba(209, 103, 107, 0.28) 55%);
+    background-image: linear-gradient(
+        var(--listening-highlight-wrong-line),
+        var(--listening-highlight-wrong-line)
+    );
 }
 
 .opt-tag {
@@ -683,6 +695,7 @@ body.listening-image-explanation-only .mode-practice .question-image-area {
     height: 1.35em;
     margin: 0 0.22em;
     padding: 0 0.18em;
+    border: 1px solid currentColor;
     border-radius: 50%;
     font-size: 0.72em;
     font-weight: 900;
@@ -690,13 +703,13 @@ body.listening-image-explanation-only .mode-practice .question-image-area {
 }
 
 .tag-correct {
-    color: #fff;
-    background: var(--listening-success);
+    color: #416f5b;
+    background: #edf5f0;
 }
 
 .tag-wrong {
-    color: #fff;
-    background: var(--listening-danger);
+    color: #914c59;
+    background: #f9eaed;
 }
 
 .custom-tooltip {
@@ -1062,13 +1075,6 @@ body[data-listening-practice-type="immediate"] .mode-explanation .options-list l
     font-size: 19px;
     font-weight: 800;
     line-height: 1;
-}
-
-body[data-listening-practice-type="immediate"] .mode-explanation .highlight-correct,
-body[data-listening-practice-type="immediate"] .mode-explanation .highlight-wrong {
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
 }
 
 body[data-listening-practice-type="immediate"] .mode-explanation .listening-card-footer {
