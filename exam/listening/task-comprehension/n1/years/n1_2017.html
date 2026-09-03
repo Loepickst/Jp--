@@ -7,8 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <link rel="stylesheet" href="../shared/follow-listening.css?v=20260811-all-years">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+<link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -127,13 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
-<script src="../shared/follow-listening.js?v=20260813-native-audio-recovery-v1"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260901-2017-recalibrated"></script>
+<script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -153,7 +153,7 @@
                                 { speaker: "女", text: "それで、これが研究計画書ですね。今これで何字ぐらいですか。", trans: "（然后，这是研究计划书吧。现在这大概有多少字？）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于研究计划书，女职员表示【1200字以内，这样已经足够了】，不需要再多写，排除。')\">えっと、千百字ちょっとです。もう少し書き足したほうがいいですか。</span></span>", trans: "（呃，一千一百字出头。是不是再多写一点比较好？）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>ううん、千二百字以内となっているので、それぐらいで十分ですよ。</span>あっ、あと、<span class=\"keyword\" onclick=\"showTooltip(event, '推薦書（すいせんしょ）：推荐信。')\">推薦書</span>と成績証明書がありませんよ。", trans: "（不用，要求是1200字以内，所以这样就足够了。啊，还有，没有推荐信和成绩证明哦。）" },
-                                { speaker: "男", text: "はい、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于推荐信，男学生表示【已经拜托老师了】，是已经做完的事，排除。')\">推薦書は先生にお願いして来週の提出期限までにいただけるようになっています。</span></span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于成绩证明，男学生表示【现在也正在申请中】，不需要接下来去申请，排除。')\">成績証明書も今申請中です。</span></span>", trans: "（是的，推荐信我已经拜托老师了，老师说会在下周提交期限之前给我。成绩证明现在也正在申请中。）" },
+                                { speaker: "男", text: "はい、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于推荐信，男学生表示【已经拜托老师了】，是已经做完的事，排除。')\">推薦書は先生にお願いして来週の提出期限までにいただけることになっています。</span></span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于成绩证明，男学生表示【现在也正在申请中】，不需要接下来去申请，排除。')\">成績証明書も今申請中です。</span></span>", trans: "（是的，推荐信我已经拜托老师了，老师说会在下周提交期限之前给我。成绩证明现在也正在申请中。）" },
                                 { speaker: "女", text: "そうですか。来週の水曜日までですからね。", trans: "（这样啊。截止日期是下周三哦。）" },
                                 { speaker: "男", text: "はい。ありがとうございました。", trans: "（好的。谢谢您。）" }
                             ]
@@ -302,10 +302,10 @@
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span>うん、それについてはほかのメンバーがもう動いてくれてるんだ。</span>でも、それだけじゃ足りないから、新しい方法での<span class=\"keyword\" onclick=\"showTooltip(event, '資金調達（しきんちょうたつ）：筹集资金，融资。')\">資金調達</span>も考えないといけないんだけど、今やろうと思ってるのは、これまで無料だった入場券を有料にすることと、大学校内で<span class=\"keyword\" onclick=\"showTooltip(event, '寄付（きふ）：捐款，捐赠。')\">寄付</span>を<span class=\"keyword\" onclick=\"showTooltip(event, '募る（つのる）：招募，募集。')\">募る</span>こと。", trans: "（嗯，关于那件事已经有其他成员在跑了。但光靠那个还不够，还得考虑用新方法筹集资金。目前打算做的是，把以前免费的入场券改成收费的，同时在大学校园内募集捐款。）" },
                                 { speaker: "女", text: "はい。", trans: "（知道。）" },
                                 { speaker: "男", text: "あと、ウェブで一般の人から寄付を集められる資金調達サイトっていうのがあるんだけど、それを利用しようと思ってるんだ。", trans: "（另外，网上还有那种可以向普通大众募集捐款的众筹网站，我打算利用那个。）" },
-                                { speaker: "女", text: "へへえ。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于在大学内募捐，两人决定【在下一次的会议上再讨论（次ぎのミーティングで話し合おう）】，所以这不是当下立刻要做的，排除。')\">大学での寄付は、何かキャンペーンをして集めるのがよさそうですね。</span></span>", trans: "（哦~。在大学里募捐的话，感觉搞个宣传活动来收集会比较好呢。）" },
-                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span>そうだね。どんなキャンペーンをするかは次ぎのミーティングで話し合おう。</span>問題は入場券だね。今までは無料だったからなあ。", trans: "（是啊。至于具体搞什么样的活动，在下一次的会议上再讨论吧。现在的问题是入场券。毕竟以前都是免费的……）" },
+                                { speaker: "女", text: "へえ。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于在大学内募捐，两人决定【在下一次的会议上再讨论（次のミーティングで話し合おう）】，所以这不是当下立刻要做的，排除。')\">大学での寄付は、何かキャンペーンをして集めるのがよさそうですね。</span></span>", trans: "（哦~。在大学里募捐的话，感觉搞个宣传活动来收集会比较好呢。）" },
+                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span>そうだね。どんなキャンペーンをするかは次のミーティングで話し合おう。</span>問題は入場券だね。今までは無料だったからなあ。", trans: "（是啊。至于具体搞什么样的活动，在下一次的会议上再讨论吧。现在的问题是入场券。毕竟以前都是免费的……）" },
                                 { speaker: "女", text: "はい。", trans: "（是啊。）" },
-                                { speaker: "男", text: "悪いんだけど、ほかの大学のイベントの例とか参考にして、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>これぐらいがいいんじゃないかっていう額を次ぎのミーティングで出してもらえるかな、みんなで検討できるように。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于寻找和调查众筹网站，男部长表示【由我来详细调查（詳しく調べておくよ）】，不需要女学生做，排除。')\">資金調達サイトは利用方法を詳しく調べておくよ。</span></span>", trans: "（不好意思，能不能麻烦你参考一下其他大学活动的例子，想一个觉得比较合适的票价，在下一次会议上提出来，好让大家一起讨论？至于众筹网站的使用方法，就由我来详细调查吧。）" },
+                                { speaker: "男", text: "悪いんだけど、ほかの大学のイベントの例とか参考にして、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>これぐらいがいいんじゃないかっていう額を次のミーティングで出してもらえるかな、みんなで検討できるように。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于寻找和调查众筹网站，男部长表示【由我来详细调查（詳しく調べておくよ）】，不需要女学生做，排除。')\">資金調達サイトは利用方法を詳しく調べておくよ。</span></span>", trans: "（不好意思，能不能麻烦你参考一下其他大学活动的例子，想一个觉得比较合适的票价，在下一次会议上提出来，好让大家一起讨论？至于众筹网站的使用方法，就由我来详细调查吧。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>わかりました。</span>", trans: "（好的，我知道了。）" }
                             ]
                         },
@@ -331,7 +331,7 @@
                                 { speaker: "女", text: "いいえ、持ってません。", trans: "（没带。）" },
                                 { speaker: "男", text: "でしたら、発行手数料はかかりますが、<span class=\"keyword\" onclick=\"showTooltip(event, '住民票の写し（じゅうみんひょうのうつし）：居民票复印件（相当于户口本复印件）。')\">住民票の写し</span>でも証明できます。こちらで発行できますよ。", trans: "（那样的话，可以用住民票的复印件来证明，但需要支付一定的手续费。我们这里是可以开具办理的。）" },
                                 { speaker: "女", text: "じゃあ、お願いします。", trans: "（那麻烦帮我开一份吧。）" },
-                                { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>では、ご用意ができましたら、番号でお呼びしますので、隣の<span class=\"keyword\" onclick=\"showTooltip(event, '交付窓口（こうふまどぐち）：发放窗口。')\">交付窓口</span>にお越しください。ただ、今二三十分はかかるかと。その間に、保険課で健康保険のお手続きをどうぞ、十分もかからないと思いますから。</span>", trans: "（好的，材料准备好后，我们会用叫号的方式通知您，您可以到旁边的领取窗口（イ）领取。不过，现在可能需要等20到30分钟。在这期间，您可以先到保险科（ア）办理健康保险的手续，那边大概10分钟之内就能办好。）" },
+                                { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>では、ご用意ができましたら、番号でお呼びしますので、隣の<span class=\"keyword\" onclick=\"showTooltip(event, '交付窓口（こうふまどぐち）：发放窗口。')\">交付窓口</span>にお越しください。お客様の番号は22番です。ただ、今二、三十分はかかるかと。その間に、保険課で健康保険のお手続きをどうぞ、十分もかからないと思いますから。</span>", trans: "（好的，材料准备好后，我们会用叫号的方式通知您，您可以到旁边的领取窗口（イ）领取。您的号码是22号。不过，现在可能需要等20到30分钟。在这期间，您可以先到保险科（ア）办理健康保险的手续，那边大概10分钟之内就能办好。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>わかりました。そうします。</span>", trans: "（明白了，那我就先去保险科处理一下。谢谢！）" }
                             ]
                         },
@@ -369,14 +369,14 @@
                             question: "四番：洋服店で、男の店員と店長が話しています。男の店員は、この後、まず何をしますか。",
                             questionTrans: "（第四题：在服装店里，男店员和店长正在交谈。男店员接下来首先要做什么？）",
                             dialogue: [
-                                { speaker: "男", text: "店長、さっき店開けたばかりなのに、そとの<span class=\"keyword\" onclick=\"showTooltip(event, '行列（ぎょうれつ）：排队（的队伍）。')\">行列</span>、どんどん長くなってますよ。新人アイドルの夢野光がデザインしたTシャツ、この勢いじゃすぐ売切れてしまいます。一人一枚ってことにはなってますが。", trans: "（店长，刚开门，外面的排队队伍已经越来越长了。新人偶像梦野光设计的那款T恤，这样下去很快就会卖完了。规定上是一人只能限购一件的，但……）" },
+                                { speaker: "男", text: "店長、さっき店開けたばかりなのに、外の<span class=\"keyword\" onclick=\"showTooltip(event, '行列（ぎょうれつ）：排队（的队伍）。')\">行列</span>、どんどん長くなってますよ。新人アイドルの夢野光がデザインしたTシャツ、この勢いじゃすぐ売切れてしまいます。一人一枚ってことにはなってますが。", trans: "（店长，刚开门，外面的排队队伍已经越来越长了。新人偶像梦野光设计的那款T恤，这样下去很快就会卖完了。规定上是一人只能限购一件的，但……）" },
                                 { speaker: "女", text: "そう、予想以上ね。じゃ、県内のほかの店舗に連絡して、<span class=\"keyword\" onclick=\"showTooltip(event, '在庫（ざいこ）：库存。')\">在庫</span>に<span class=\"keyword\" onclick=\"showTooltip(event, '余裕（よゆう）：充裕，余地。')\">余裕</span>があるところ探してみてくれる？うちのほかにも３店舗あるでしょう。", trans: "（是啊，超出预期了。那你联系一下县内其他的门店，看看有没有库存比较充足的？我们这边除了本店还有三家分店吧。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于联系其他门店，男店员表示【刚才已经问过了（さっき問い合わせてみた）】，是已经完成的事，排除。')\">そう思ってさっき問い合わせてみたんですが、どこも同じ状況だそうです。</span></span>", trans: "（我刚才也这么想，所以已经问过了，但据说每家店的情况都一样。）" },
                                 { speaker: "女", text: "へえ、夢野光、恐るべし。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>とりあえず近隣から<span class=\"keyword\" onclick=\"showTooltip(event, '苦情（くじょう）：苦情，投诉，抱怨。')\">苦情</span>が出るといけないから、大谷君は道路に出て、お客様の列の整理に当たって。通行の邪魔にならないようにね。</span>", trans: "（诶，梦野光的影响力真是惊人啊。总之，你先去外面帮忙引导一下排队的人群，免得住在附近的人来投诉我们。注意不要妨碍到交通哦。）" },
                                 { speaker: "男", text: "はい。", trans: "（好的。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>あっ、外に出る前に、他のスタッフ、誰でもいいから在庫の数を確認するよう頼んでくれる？</span>確認でき次第すぐわたしに報告するよう伝えて。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '店长确实让男店员去【整理外面的队伍】，但紧接着补充说在出去之前，要先【拜托其他店员去确认库存】。因此整理队伍是下一步，目前首先要立刻做的是确认库存。')\">在庫数がわかったら、大谷君にも携帯で知らせるから、列の先頭からお客様の数を数えて。</span></span>商品が<span class=\"keyword\" onclick=\"showTooltip(event, '行（ゆ）き届（ど）く：周到，无微不至，（这里指）商品分发到位。')\">行き届か</span>ないかもしれない方には、その旨伝えてくれるかな。こういうのは出来るだけ早く伝えておいたほうがいいから。", trans: "（啊，对了，出去之前，先找个其他的员工，谁都可以，让他去确认一下我们的库存数量？并且让他确认完后立刻向我汇报一下情况。等库存数确认完后，我会通过手机通知你，你再从队伍前面开始数一下顾客的数量。如果发现商品可能不够分了，就尽早告知后面的顾客。这种事情越早通知越好。）" },
                                 { speaker: "男", text: "はい。", trans: "（明白了。）" },
-                                { speaker: "女", text: "あ、そうだ。今日お渡しできないお客様には、次ぎの<span class=\"keyword\" onclick=\"showTooltip(event, '入荷（にゅうか）：进货，到货。')\">入荷</span>予定日を知らせておいたほうがいいね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于向总部询问下次到货时间，女店长说【我会联系总部问清楚（本社に問い合わせて...聞いておくわ）】，不需要男店员去做，排除。')\">本社に問い合わせて、入荷までに何日かかるか聞いておくわ。</span></span>あとで在庫数の連絡するとき、一緒に言うから、今日渡せない方に伝えてね。", trans: "（对了，对于那些没办法在今天拿到货的顾客，最好告诉他们一下下一次的到货时间。我会联系总部问清楚补货所需的时间。到时候和库存信息一起告诉你，你再把补货时间转告给那些今天拿不到货的顾客。）" },
+                                { speaker: "女", text: "あ、そうだ。今日お渡しできないお客様には、次の<span class=\"keyword\" onclick=\"showTooltip(event, '入荷（にゅうか）：进货，到货。')\">入荷</span>予定日を知らせておいたほうがいいね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于向总部询问下次到货时间，女店长说【我会联系总部问清楚（本社に問い合わせて...聞いておくわ）】，不需要男店员去做，排除。')\">本社に問い合わせて、入荷までに何日かかるか聞いておくわ。</span></span>あとで在庫数の連絡するとき、一緒に言うから、今日渡せない方に伝えてね。", trans: "（对了，对于那些没办法在今天拿到货的顾客，最好告诉他们一下下一次的到货时间。我会联系总部问清楚补货所需的时间。到时候和库存信息一起告诉你，你再把补货时间转告给那些今天拿不到货的顾客。）" },
                                 { speaker: "男", text: "わかりました。", trans: "（了解了。）" },
                                 { speaker: "女", text: "とにかく、近所から苦情が出ないよう、整理のほうをしっかりお願い。", trans: "（总之，请一定要做好排队人群的整理工作，尽量避免被附近的人投诉。麻烦你了！）" }
                             ]
@@ -426,8 +426,8 @@
                                 { speaker: "女", text: "はい、部長。", trans: "（嗯，部长，有什么事吗？）" },
                                 { speaker: "男", text: "うちが販売している冷凍食品のことなんだけど、ここ数年、売り上げが<span class=\"keyword\" onclick=\"showTooltip(event, '芳（かんば）しくない：不佳，不理想，不芳香。')\">芳しくない</span>ことは知ってるよね。", trans: "（是关于我们销售的冷冻食品的事。这几年销量一直不太理想，你应该清楚吧？）" },
                                 { speaker: "女", text: "はい。", trans: "（啊这我知道。）" },
-                                { speaker: "男", text: "それで今、新商品を作って<span class=\"keyword\" onclick=\"showTooltip(event, '梃入（てこい）れ：介入支撑，鼎力扶持，这里指提振。')\">梃入れ</span>を図ろうとしてるんだけど、先日の役員会議で<span class=\"keyword\" onclick=\"showTooltip(event, '専務（せんむ）：专务董事。')\">専務</span>から、今後は今までの<span class=\"keyword\" onclick=\"showTooltip(event, '路線（ろせん）：路线，方针。')\">路線</span>を変えて、<span class=\"keyword\" onclick=\"showTooltip(event, '高級志向（こうきゅうしこう）：追求高档/高端。')\">高級志向</span>の消費者をターゲットに冷凍食品を開発するのはどうかて意見が出てね。", trans: "（所以现在我们正打算开发新产品来提振销售。在前几天的董事会议上，专务提了个建议，说以后要改变以往的路线，针对高端消费群体开发冷冻食品，你怎么看？）" },
-                                { speaker: "女", text: "ああ、最近よく聴きますね。お菓子とか<span class=\"keyword\" onclick=\"showTooltip(event, 'レトルト（retort）食品：速食品，蒸煮袋食品。')\">レトルト食品</span>とか。以前に比べていい素材をつかった高級品の<span class=\"keyword\" onclick=\"showTooltip(event, '売れ行き（うれゆき）：销路，销售情况。')\">売れ行き</span>が伸びてるって。", trans: "（啊，这个最近确实很常听到。比如一些用了更好的原料的高端零食，速食产品卖得挺不错的，销量在增加。）" },
+                                { speaker: "男", text: "それで今、新商品を作って<span class=\"keyword\" onclick=\"showTooltip(event, '梃入（てこい）れ：介入支撑，鼎力扶持，这里指提振。')\">梃入れ</span>を図ろうとしてるんだけど、先日の役員会議で<span class=\"keyword\" onclick=\"showTooltip(event, '専務（せんむ）：专务董事。')\">専務</span>から、今後は今までの<span class=\"keyword\" onclick=\"showTooltip(event, '路線（ろせん）：路线，方针。')\">路線</span>を変えて、<span class=\"keyword\" onclick=\"showTooltip(event, '高級志向（こうきゅうしこう）：追求高档/高端。')\">高級志向</span>の消費者をターゲットに冷凍食品を開発するのはどうかって意見が出てね。", trans: "（所以现在我们正打算开发新产品来提振销售。在前几天的董事会议上，专务提了个建议，说以后要改变以往的路线，针对高端消费群体开发冷冻食品，你怎么看？）" },
+                                { speaker: "女", text: "ああ、最近よく聞きますね。お菓子とか<span class=\"keyword\" onclick=\"showTooltip(event, 'レトルト（retort）食品：速食品，蒸煮袋食品。')\">レトルト食品</span>とか。以前に比べていい素材をつかった高級品の<span class=\"keyword\" onclick=\"showTooltip(event, '売れ行き（うれゆき）：销路，销售情况。')\">売れ行き</span>が伸びてるって。", trans: "（啊，这个最近确实很常听到。比如一些用了更好的原料的高端零食，速食产品卖得挺不错的，销量在增加。）" },
                                 { speaker: "男", text: "うん、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于高端食品的销售额，男部长明确说【从之前的调查结果来看一目了然】，说明已经调查过了，不需要女方再去做，排除。')\">高級食品の売上額が上昇しているのはこれまでの調査結果を見れば<span class=\"keyword\" onclick=\"showTooltip(event, '一目瞭然（いちもくりょうぜん）：一目了然。')\">一目瞭然</span>だから</span></span>、わたしも路線としてはいいと思うんだ。でも、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>具体的に何が消費者の高級食品に対する購買意欲を刺激しているのかについては、ほとんどリサーチされてなくて、会議でその点について独自に調べてみようという話になってね。それで、それを吉田さんにお願いしたいと思ってるんだ。</span>", trans: "（是的，从之前的调查结果来看，高端食品的销售额确实在增长，一目了然。这个方向我觉得不错。不过，具体是什么刺激了消费者对高端食品的购买意愿，对于这方面的调查还很少。所以在会议上我们决定做一次独立调查，这件事我想交给你负责。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>あっ、はい。</span>", trans: "（啊，好的。）" },
                                 { speaker: "男", text: "あとでもう少し詳しく説明するよ。もちろん僕もいつでも相談に乗るし、必要なら、ほかにもメンバーをつけるから。", trans: "（稍后我会再跟你详细说明。当然，你随时可以来找我商量，如果需要的话，我也会安排其他成员协助你。）" },
@@ -678,7 +678,7 @@
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = KijiListeningFollow.applyClips(examData[currentExamKey].questions[currentQuestionIndex]);
+const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -691,13 +691,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = KijiListeningFollow.renderSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -715,13 +710,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${KijiListeningFollow.renderSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            KijiListeningFollow.bindPlayer();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -748,8 +742,6 @@
         // --- Mode Switching ---
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
-            KijiListeningFollow.syncMode(mode);
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');

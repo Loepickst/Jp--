@@ -7,8 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <link rel="stylesheet" href="../shared/follow-listening.css?v=20260811-all-years">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+<link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -127,13 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
-<script src="../shared/follow-listening.js?v=20260813-native-audio-recovery-v1"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260901-2013-recalibrated"></script>
+<script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -149,11 +149,11 @@
                             dialogue: [
                                 { speaker: "女", text: "来月の新製品発表会だけど、会長の<span class=\"keyword\" onclick=\"showTooltip(event, '挨拶（あいさつ）：致辞，寒暄，问候。这里指发布会上的致辞。')\">挨拶</span>、どうなっている？", trans: "（关于下个月的新产品发布会，会长的致辞安排得怎么样了？）" },
                                 { speaker: "男", text: "はい。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方回答已经得到了会长的同意（了解いただいております），说明已经委托过了，因此排除。')\">了解いただいております。</span></span>", trans: "（是的。已经得到会长的同意了。）" },
-                                { speaker: "女", text: "会場は？もう<span class=\"keyword\" onclick=\"showTooltip(event, '押さえる（おさえる）：确保，预定（会场、日程等）。')\">押さえて</span>てある？", trans: "（会场呢？已经预定好了吗？）" },
+                                { speaker: "女", text: "会場は？もう<span class=\"keyword\" onclick=\"showTooltip(event, '押さえる（おさえる）：确保，预定（会场、日程等）。')\">押さえて</span>ある？", trans: "（会场呢？已经预定好了吗？）" },
                                 { speaker: "男", text: "それはあのう、出席者数によって大きさが変わるかと思いまして、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方表示已经预定了大小两个会场（予約してあります），所以预定会场的事已经做完了，排除。')\">今は大小二つの会場を予約してあります。</span></span>", trans: "（这个嘛，我想着规模可能会根据出席人数而变化，所以目前先预定了大小两个会场。）" },
                                 { speaker: "女", text: "なるほど。じゃ、とりあえず、<span class=\"keyword\" onclick=\"showTooltip(event, '保留（ほりゅう）：保留，暂时搁置。')\">保留</span>っていうことで、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '准备邀请函需要等【出席人员和会场确定之后】才进行，并不是马上要做的，排除。')\">出席者と会場が決まり<span class=\"keyword\" onclick=\"showTooltip(event, '〜次第（しだい）：一……就……。接动词连用形（ます形）后。')\">次第</span>、招待状の準備に<span class=\"keyword\" onclick=\"showTooltip(event, '取り掛かる（とりかかる）：着手，开始做。')\">取りかかって</span>くれる？</span></span>", trans: "（原来如此。那先暂时保留着，等出席人员和会场一确定，你能着手准备邀请函吗？）" },
                                 { speaker: "男", text: "はい。", trans: "（好的。）" },
-                                { speaker: "女", text: "ああ、それから<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>当日の会場の<span class=\"keyword\" onclick=\"showTooltip(event, '送り迎え（おくりむかえ）：接送。')\">送り迎え</span>の車、頼んどいてくれると助かるんだけど。</span>", trans: "（啊，还有，当天的会场接送车辆，能麻烦你预定一下吗？）" },
+                                { speaker: "女", text: "ああ、それから<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>当日の会長の<span class=\"keyword\" onclick=\"showTooltip(event, '送り迎え（おくりむかえ）：接送。')\">送り迎え</span>の車、頼んどいてくれると助かるんだけど。</span>", trans: "（啊，还有，当天接送会长的车辆，能麻烦你预定一下吗？）" },
                                 { speaker: "男", text: "承知しました。", trans: "（明白了。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>できることからやっといて。よろしくね。</span>", trans: "（先把能做的做了。拜托了。）" },
                                 { speaker: "男", text: "はい。", trans: "（好的。）" }
@@ -259,7 +259,7 @@
                                 { speaker: "女", text: "うーん、ほかのメンバーからは授業の<span class=\"keyword\" onclick=\"showTooltip(event, '空き時間（あきじかん）：空闲时间，课余時間。')\">空き時間</span>にゴミ拾いの活動をしたらどうか案が出てたけど。", trans: "（嗯……虽然其他成员也有提议说，要不要利用课余时间搞个捡垃圾的活动。）" },
                                 { speaker: "男", text: "そうですか。やってみますか。", trans: "（是吗。那要试试吗？）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于捡垃圾，女生反驳说光靠社团成员做没用，必须提高全校学生的意识，以此否决了捡垃圾的方案，排除。')\">でも、メンバーだけでやってもね。大学全体の意識を高めないとだめだよね。</span></span>", trans: "（不过，光靠我们成员来捡也没多大用啊。必须得提高全校学生的意识才行。）" },
-                                { speaker: "男", text: "確かに。あいつら、偉いなあなんて人事って感じで見られてても困りますよね。", trans: "（确实。要是被别人当成事不关己，光在旁边看着感叹“那帮人真伟大啊”，那也没意义。）" },
+                                { speaker: "男", text: "確かに。あいつら、偉いなあなんて<span class=\"keyword\" onclick=\"showTooltip(event, '他人事（ひとごと）：与自己无关的事，别人的事。')\">他人事</span>って感じで見られてても困りますよね。", trans: "（确实。要是被别人当成事不关己，光在旁边看着感叹“那帮人真伟大啊”，那也没意义。）" },
                                 { speaker: "女", text: "ゴミを拾うんじゃなくて、拾うゴミがない状態を目指すべきじゃない？", trans: "（我们不应该只想着捡垃圾，而应该以“没有垃圾可捡”的状态为目标吧？）" },
                                 { speaker: "男", text: "それで、ポスターを作ったんですもんね。", trans: "（所以当初才做了海报嘛。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>じゃ、さあ、やっぱりマイクじゃない？</span>", trans: "（那，我看果然还是得靠麦克风喊话吧？）" },
@@ -683,7 +683,7 @@
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = KijiListeningFollow.applyClips(examData[currentExamKey].questions[currentQuestionIndex]);
+const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -696,13 +696,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = KijiListeningFollow.renderSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -720,13 +715,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${KijiListeningFollow.renderSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            KijiListeningFollow.bindPlayer();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -753,8 +747,6 @@
         // --- Mode Switching ---
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
-            KijiListeningFollow.syncMode(mode);
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');

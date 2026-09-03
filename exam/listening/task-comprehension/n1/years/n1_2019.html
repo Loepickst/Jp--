@@ -7,8 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <link rel="stylesheet" href="../shared/follow-listening.css?v=20260811-all-years">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+<link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -127,13 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260812-manual-onset-2019-07-1-v2"></script>
-<script src="../shared/follow-listening.js?v=20260813-native-audio-recovery-v1"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260902-2019-recalibrated"></script>
+<script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -149,8 +149,8 @@
                             dialogue: [
                                 { speaker: "女", text: "あのう、すみません。この赤い花をつけてる植物、先日こちらで同じのを購入したんですけど、花がつかなくなってしまって。", trans: "（那个，不好意思。这种开红花的植物，我之前在这边买了一盆，可是现在不开花了。）" },
                                 { speaker: "店員", text: "そうですか。これは夏まではずっと花を楽しめるんですけどね。", trans: "（是这样吗？这种植物通常在夏天之前都会一直开花的。）" },
-                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于换大花盆，女人表示【已经试着换到大一圈的花盆里了（植え替えてみたんですけど）】，这是已经做过的事情，排除。')\">一回り大きいはちに<span class=\"keyword\" onclick=\"showTooltip(event, '植（う）え替（か）える：移栽，换盆。')\">植え替えて</span>みたんですけど。</span></span>", trans: "（我试着换到了一个稍大一点的花盆里，但……）" },
-                                { speaker: "店員", text: "植え替えはおすすめしてるんですが、花を咲かせるのには、<span class=\"keyword\" onclick=\"showTooltip(event, 'ひりょう（肥料）：肥料。')\">ひりょう</span>もたっぷり与えないといけないんです。", trans: "（这种情况换一个花盆是可以的，但如果想让它开花，还需要给它施足肥料。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于换大花盆，女人表示【已经试着换到大一圈的花盆里了（植え替えてみたんですけど）】，这是已经做过的事情，排除。')\">一回り大きい鉢に<span class=\"keyword\" onclick=\"showTooltip(event, '植（う）え替（か）える：移栽，换盆。')\">植え替えて</span>みたんですけど。</span></span>", trans: "（我试着换到了一个稍大一点的花盆里，但……）" },
+                                { speaker: "店員", text: "植え替えはおすすめしてるんですが、花を咲かせるのには、<span class=\"keyword\" onclick=\"showTooltip(event, '肥料（ひりょう）：肥料。')\">肥料</span>もたっぷり与えないといけないんです。", trans: "（这种情况换一个花盆是可以的，但如果想让它开花，还需要给它施足肥料。）" },
                                 { speaker: "女", text: "ああ、買ってからまだ一度もやってないです。どんなのがいいかわからなくて。", trans: "（啊，我买回来之后还一次都没施过肥。因为不知道该用什么样的肥料。）" },
                                 { speaker: "店員", text: "花にもよりますが、液体タイプは水やりで流れてしまって、<span class=\"keyword\" onclick=\"showTooltip(event, '効（き）き目（め）：效力，效果。')\">効き目</span>が長続きしない場合もありますよ。<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"keyword\" onclick=\"showTooltip(event, '粒状（つぶじょう）：颗粒状。')\">粒状</span>のもののほうが、少しずつ溶けだして、ゆっくり効くので、おすすめです。試してみてください。</span>", trans: "（这要看花的种类，但一般来说液体类的肥料有时会随着浇水而流失，效果不持久。我推荐使用颗粒状的肥料，它会慢慢溶解，持续发挥作用。您可以试试看。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>はい。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span>水はたっぷりやったほうがいいんですか。</span>", trans: "（好的。那浇水要浇得很足吗？）" },
@@ -161,8 +161,8 @@
                             ]
                         },
                         options: [
-                            { text: "植物を大きいはちに植え替える", translation: "（把植物移栽到大花盆里）", correct: false },
-                            { text: "植物にひりょうを与える", translation: "（给植物施肥）", correct: true },
+                            { text: "植物を大きい鉢に植え替える", translation: "（把植物移栽到大花盆里）", correct: false },
+                            { text: "植物に肥料を与える", translation: "（给植物施肥）", correct: true },
                             { text: "植物に水をたっぷり与える", translation: "（给植物浇充足的水）", correct: false },
                             { text: "植物を置く場所を変える", translation: "（改变植物放置的位置）", correct: false }
                         ]
@@ -305,7 +305,7 @@
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">① ②</span>それが何度も探したんですが、どうしても見つからなくて。</span>", trans: "（我找了很多次了，但怎么都找不到。）" },
                                 { speaker: "女", text: "では<span class=\"keyword\" onclick=\"showTooltip(event, '弁償（べんしょう）：赔偿。')\">弁償</span>していただくことになります。", trans: "（那样的话，可能就需要您进行赔偿了。）" },
                                 { speaker: "男", text: "えっ？弁償ですか。", trans: "（诶？要赔吗？）" },
-                                { speaker: "女", text: "はい。盗難等に遭われた場合は警察に<span class=\"keyword\" onclick=\"showTooltip(event, '盗難届（とうなんとどけ）：失窃证明，被盗申报。')\">盗難届</span>を提出していただければ、弁償は免除になるんですが、紛失や破損の場合は<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>同じものを商店などで入手の上、お持ちいただくことになります。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女职员明确表示【本馆不接受现金赔偿（現金での弁償はお受けしておりませんので）】，排除。')\">現金での弁償はお受けしておりませんので。</span></span>", trans: "（是的。如果是遭遇盗窃等情况，您提交警方的盗窃证明后可以免除赔偿，但对于丢失或损坏的情况，您需要在商店购买同样的书并带来归还。本馆是不接受现金赔偿的。）" },
+                                { speaker: "女", text: "はい。盗難等に遭われた場合は警察に<span class=\"keyword\" onclick=\"showTooltip(event, '盗難届（とうなんとどけ）：失窃证明，被盗申报。')\">盗難届</span>を提出していただければ、弁償は免除になるんですが、紛失や破損の場合は<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>同じものを書店などで入手の上、お持ちいただくことになります。</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女职员明确表示【本馆不接受现金赔偿（現金での弁償はお受けしておりませんので）】，排除。')\">現金での弁償はお受けしておりませんので。</span></span>", trans: "（是的。如果是遭遇盗窃等情况，您提交警方的盗窃证明后可以免除赔偿，但对于丢失或损坏的情况，您需要在书店购买同样的书并带来归还。本馆是不接受现金赔偿的。）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>そうですか、わかりました。</span>", trans: "（是这样啊，我明白了。）" }
                             ]
                         },
@@ -330,7 +330,7 @@
                                 { speaker: "女", text: "いつもの<span class=\"keyword\" onclick=\"showTooltip(event, '業者（ぎょうしゃ）：承包商，供应商。')\">業者</span>に頼んだんですが、あれだと、<span class=\"keyword\" onclick=\"showTooltip(event, '納期（のうき）：交货期。')\">納期</span>に間に合わないと言われまして。", trans: "（我委托了平时的供应商，但他们说那样的设计赶不上交货日期。）" },
                                 { speaker: "男", text: "それはまずいね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span>別のとこに<span class=\"keyword\" onclick=\"showTooltip(event, 'あたる：碰，找（人）试探/询问。')\">あたる</span>ことはできない？</span>", trans: "（那就麻烦了。能不能找别家试试？）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女职员表示这家供应商在预算上给了很大优惠，找别家有困难，排除了换供应商的方案。')\">それも考えたんですが、あの業者には予算面でもかなり無理を聞いてもらってますし。</span></span>", trans: "（我也考虑过，但这家供应商在预算上已经给了我们很大的优惠，不太好……）" },
-                                { speaker: "男", text: "そうだね。じゃあ、見た目に<span class=\"keyword\" onclick=\"showTooltip(event, '拘（こだわ）る：拘泥，讲究。')\">拘りたい</span>のは<span class=\"keyword\" onclick=\"showTooltip(event, 'やまやま：很想（做某事），极其渴望。')\">やまやま</span>だけど、時間のことあるし、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>業者と相談して納期に<span class=\"keyword\" onclick=\"showTooltip(event, '納（おさ）まる：缴纳，容纳，（这里指）按期交货。')\">納まる</span>程度のものにしてくれる？</span>", trans: "（也是。那虽然很想在外观上追求精致，但考虑到时间问题，你还是跟供应商商量一下，把设计调整到能按时交货的程度吧？）" },
+                                { speaker: "男", text: "そうだね。じゃあ、見た目に<span class=\"keyword\" onclick=\"showTooltip(event, '拘（こだわ）る：拘泥，讲究。')\">拘りたい</span>のは<span class=\"keyword\" onclick=\"showTooltip(event, 'やまやま：很想（做某事），极其渴望。')\">やまやま</span>だけど、時間のことあるし、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>業者と相談して納期に<span class=\"keyword\" onclick=\"showTooltip(event, '収（おさ）まる：容纳、控制在范围内；这里指能在交货期内完成。')\">収まる</span>程度のものにしてくれる？</span>", trans: "（也是。那虽然很想在外观上追求精致，但考虑到时间问题，你还是跟供应商商量一下，把设计调整到能按时交货的程度吧？）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>はい、承知しました。</span>", trans: "（好的，我明白了。）" }
                             ]
                         },
@@ -375,7 +375,7 @@
                                 { speaker: "男", text: "うちのパン屋、お客さんが<span class=\"keyword\" onclick=\"showTooltip(event, '軒先（のきさき）：屋檐下，门前。')\">のきさき</span>に自転車を止めることがあるんですけど。どうしても歩道に<span class=\"keyword\" onclick=\"showTooltip(event, 'はみ出（だ）す：挤出，超出，突出。')\">はみ出して</span>しまうので、近所から苦情が来てるんですよ。佐藤さんが経営なさってる喫茶店もうちと環境似てますけど、どうされてますか。", trans: "（我们面包店门口经常会有客人停自行车，占到人行道，有住在附近的人来投诉抱怨了。佐藤小姐您经营的咖啡店和我们面包店的环境差不多吧，您是怎么解决的？）" },
                                 { speaker: "女", text: "私のところでも以前同じような問題がありましたよ。ただ、たまたますぐ隣に市の駐輪場ができて。無料のね。今はそこを使ってもらっています。", trans: "（我们之前也有过同样的问题。不过，刚好我们店旁边建了一个市政府的自行车停车场，是免费的。现在客人都会去那里停车。）" },
                                 { speaker: "男", text: "無料で使える市の駐輪場、ないことはないんですが。店からちょっと離れてるんですよね。って言っても、徒歩五分くらいだから、ぜひそこを使ってほしいんですが。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男店主表示已经在入口处贴了去停车场的地图，但效果不好，所以这是已经做过的事，排除。')\">駐輪場までの地図を入口に表示してるんですけど、なかなか...</span></span>", trans: "（免费的市政府停车场我们这里也有，但离店稍微有点远。虽说步行只要五分钟，很希望客人可以多利用那个停车场。虽然我在入口贴了去停车场的地图，但效果不太好……）" },
-                                { speaker: "女", text: "うん。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女店主表示除非能弄到店旁边的土地，否则很难建自己的停车场，这显然不切实际，排除。')\"><span class=\"keyword\" onclick=\"showTooltip(event, '自前（じまえ）：自己掏腰包，自己的。')\">自前</span>の駐輪場が持ってたら一番いいんでしょうけど、店の隣の土地が手に入れない限りはね。</span></span>もう自転車を物理的に置けなくするしかないと思いますよ。", trans: "（嗯，如果能有自己的停车场当然是最好的，但除非能买下店旁边的地，否则没办法。现在唯一的办法就是让自行车在物理上没法停在那里了。）" },
+                                { speaker: "女", text: "うん。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女店主表示除非能弄到店旁边的土地，否则很难建自己的停车场，这显然不切实际，排除。')\"><span class=\"keyword\" onclick=\"showTooltip(event, '自前（じまえ）：自己掏腰包，自己的。')\">自前</span>の駐輪場が持てたら一番いいんでしょうけど、店の隣の土地が手に入らない限りはね。</span></span>もう自転車を物理的に置けなくするしかないと思いますよ。", trans: "（嗯，如果能有自己的停车场当然是最好的，但除非能买下店旁边的地，否则没办法。现在唯一的办法就是让自行车在物理上没法停在那里了。）" },
                                 { speaker: "男", text: "つまり、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男店主问是不是要竖个大牌子写禁止停车，女店主说那样会破坏店铺的氛围，于是推荐了放花盆，排除。')\">自転車を置いてほしくない場所に駐輪禁止と書いた大きな看板を設置するとかですか。</span></span>", trans: "（也就是说，在不希望停自行车的地方竖个大牌子写“禁止停车”之类的吗？）" },
                                 { speaker: "女", text: "ええ、まあ。ただ、そうすると、お店の雰囲気が悪くなっちゃうでしょ。だから、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>花や緑の<span class=\"keyword\" onclick=\"showTooltip(event, '植木鉢（うえきばち）：花盆。')\">植木鉢</span>でのきさきのスペースを埋めちゃうんです。</span>うちも隣に駐輪場ができるまではそうやってて、効果ありましたよ。", trans: "（嗯，也行。但那样会破坏店铺的整体氛围吧。所以，我的办法是用花草和绿色植物的花盆把门前的空间填满。我们也是在旁边建停车场之前用的这个办法，很有效哦。）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>なるほど、早速やってみます。</span>", trans: "（原来如此，那我马上试试看。）" }
@@ -668,7 +668,7 @@
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = KijiListeningFollow.applyClips(examData[currentExamKey].questions[currentQuestionIndex]);
+const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -681,13 +681,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = KijiListeningFollow.renderSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -705,13 +700,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${KijiListeningFollow.renderSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            KijiListeningFollow.bindPlayer();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -738,8 +732,6 @@
         // --- Mode Switching ---
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
-            KijiListeningFollow.syncMode(mode);
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');

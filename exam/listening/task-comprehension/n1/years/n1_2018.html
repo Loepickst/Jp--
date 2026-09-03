@@ -7,8 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <link rel="stylesheet" href="../shared/follow-listening.css?v=20260811-all-years">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+<link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -127,13 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
-<script src="../shared/follow-listening.js?v=20260813-native-audio-recovery-v1"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260901-2018-recalibrated"></script>
+<script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -173,7 +173,7 @@
                             dialogue: [
                                 { speaker: "女", text: "佐藤君、今年も10月の市民マラソン大会に出るんでしょう。", trans: "（佐藤君，你今年也会参加10月份的市民马拉松大会，是吗？）" },
                                 { speaker: "男", text: "うん。", trans: "（是啊。）" },
-                                { speaker: "女", text: "私も、申し込んだんだ。<span class=\"keyword\" onclick=\"showTooltip(event, 'フルマラソン（full marathon）：全程马拉松。')\">フルマラソン</span>は初めてだから、練習方法とかアドバイスもらえる？後半半年で何ができるか。私、どうしても最後まで走りきりたいんだ。", trans: "（我也报了名。这是我第一次跑全程马拉松，能不能请你给我一点训练方法上的建议呀？还有半年时间，这半年内我能做些什么呢？我真的很想跑完全程。）" },
+                                { speaker: "女", text: "私も、申し込んだんだ。<span class=\"keyword\" onclick=\"showTooltip(event, 'フルマラソン（full marathon）：全程马拉松。')\">フルマラソン</span>は初めてだから、練習方法とかアドバイスもらえる？あと半年で何ができるか。私、どうしても最後まで走りきりたいんだ。", trans: "（我也报了名。这是我第一次跑全程马拉松，能不能请你给我一点训练方法上的建议呀？还有半年时间，这半年内我能做些什么呢？我真的很想跑完全程。）" },
                                 { speaker: "男", text: "そうだなあ。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方说她【动作挺标准的（フォームきれいだよ）】，不需要改，排除。')\">まずは腕の振り方とか姿勢とか<span class=\"keyword\" onclick=\"showTooltip(event, 'フォーム（form）：姿势，体态，（这里指）动作规范。')\">フォーム</span>が大事かな。でも、この前一緒に走ったときに思ったけど、フォームきれいだよね。</span></span>", trans: "（让我想想，首先是摆臂方式、跑步姿势等这些动作上的规范。不过，上次和你一起跑步的时候，我觉得你的动作挺标准的。）" },
                                 { speaker: "女", text: "本当？よかった。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方建议【按目前的频率跑就好了（それぐらいがいいよ）】，盲目增加次数会伤脚，排除。')\">今は週三日のペースで走ってるんだけど、もう少し増やしたほうがいいかな。</span></span>授業で忙しいし、なかなか増やせないんだけど。", trans: "（真的吗？那太好了！我现在每周跑三次，是不是再多加一点好一些？不过因为上课很忙，要加的话时间上可能很难。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span>休養日も必要だから、それぐらいがいいよ。</span><span class=\"keyword\" onclick=\"showTooltip(event, '無闇（むやみ）に：盲目地，胡乱地，随便地。')\">無闇に</span>走る回数増やすと、足を痛めちゃったりするし。それより、とにかく筋肉を鍛えること。", trans: "（休息也是很重要的，按目前的频率跑就好了。如果盲目地增加跑步次数，可能会伤到脚的。与其增加次数，还是重点加强肌肉训练。）" },
@@ -231,8 +231,8 @@
                                 { speaker: "男", text: "そうだね。薬品使うからね。ええと、子供たちと一緒にする作業っていうと、子供たちにはごみを拾うグループと落ち葉を集めるグループに分かれて作業をしてもらう予定なんだ。落ち葉拾いは今まではやったことないんだけど、公園の管理事務所に<span class=\"keyword\" onclick=\"showTooltip(event, '依頼（いらい）：委托，请求。')\">依頼</span>されてね。", trans: "（对啊，因为要用到化学药品。嗯……要说能跟孩子们一起做的工作，这次是打算让他们分成两个小组，分别处理“捡垃圾”和“清理落叶”的工作。以前是没做过清理落叶的，这次是公园管理处提出的需求。）" },
                                 { speaker: "女", text: "そうですか。", trans: "（这样啊。）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>今回初めてだから、島田さんがいてくれたら安心だな。お願いできる？</span>", trans: "（因为是第一次做落叶清理，岛田你在的话我也比较放心一点，可以拜托你和孩子们一起吗？）" },
-                                { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>はい！</span>かだんの雑草を抜くのは今回やらなくていいんですか。", trans: "（好的！那花坛里的杂草清理，这次不用做吗？）" },
-                                { speaker: "男", text: "やるんだけど、かだんは道路沿いで危ないから。子供にはさせられないからね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于花坛除草，男方表示因为在路边太危险不能让孩子做，而且【那边的人手也差不多集齐了（人手は確保できそう）】，所以不需要女方去做，排除。')\">一応そっちは人手は<span class=\"keyword\" onclick=\"showTooltip(event, '確保（かくほ）：确保，（这里指）集齐人员。')\">確保</span>できそうだし。</span></span>", trans: "（要做的，只是花坛在马路边上，太危险了，没法让孩子们去做这个事。而且那边的人手也差不多集齐了。）" },
+                                { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>はい！</span>花壇の雑草を抜くのは今回やらなくていいんですか。", trans: "（好的！那花坛里的杂草清理，这次不用做吗？）" },
+                                { speaker: "男", text: "やるんだけど、花壇は道路沿いで危ないから。子供にはさせられないからね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于花坛除草，男方表示因为在路边太危险不能让孩子做，而且【那边的人手也差不多集齐了（人手は確保できそう）】，所以不需要女方去做，排除。')\">一応そっちは人手は<span class=\"keyword\" onclick=\"showTooltip(event, '確保（かくほ）：确保，（这里指）集齐人员。')\">確保</span>できそうだし。</span></span>", trans: "（要做的，只是花坛在马路边上，太危险了，没法让孩子们去做这个事。而且那边的人手也差不多集齐了。）" },
                                 { speaker: "女", text: "分かりました。", trans: "（我知道了。）" }
                             ]
                         },
@@ -240,7 +240,7 @@
                             { text: "落書きを消す", translation: "（擦除涂鸦）", correct: false },
                             { text: "ごみを拾う", translation: "（捡垃圾）", correct: false },
                             { text: "落ち葉を集める", translation: "（收集落叶）", correct: true },
-                            { text: "かだんの草を抜く", translation: "（拔除花坛的草）", correct: false }
+                            { text: "花壇の草を抜く", translation: "（拔除花坛的草）", correct: false }
                         ]
                     },
                     {
@@ -272,12 +272,12 @@
                         id: 6,
                         audio: "../assets/audio/2018.7-6.mp3",
                         script: {
-                            question: "六番：本屋の店長がミーティングで店員に話しています。店員は特殊コーナーに置く本として、どんな作品を選びますか。",
+                            question: "六番：本屋の店長がミーティングで店員に話しています。店員は特集コーナーに置く本として、どんな作品を選びますか。",
                             questionTrans: "（第六题：书店的店长在会议上对店员讲话。店员将选择什么样的作品放在特殊区域？）",
                             dialogue: [
                                 { speaker: "男", text: "おはようございます。ええ、駅前の緑書店が最近売り上げを伸ばしているという話を聞いていませんか。", trans: "（早上好各位。你们有没有听说，最近车站前面的书店“绿”生意挺不错的。）" },
-                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '把销量不佳的作品放在显眼处是【绿书店】成功的策略，店长只是作为引子提到，并非本店要采取的做法，排除。')\">関係者に聞いたところ、売り場の客の目に触れやすい特殊コーナーに<span class=\"keyword\" onclick=\"showTooltip(event, '売れ行きが芳（かんば）しくない：销量不佳，卖得不好。')\">売れ行きが芳しくない</span>作品を並べる戦略が当たったらしいんです。</span></span>", trans: "（据相关人士透露，他们好像是采用了一种新的销售策略，就是在一个显眼的地方设置一个特殊区域，把那些销量不佳的作品都放置在这，结果挺有效的。）" },
-                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '特殊区域摆放热门（人气）作品，店长说这是【业界的惯例（業界の常識）】，并不是本店这次的创新，排除。')\">特殊コーナーには<span class=\"keyword\" onclick=\"showTooltip(event, '話題（わだい）になっている：引起話題的，热门的。')\">話題になっている</span>作品、というのが業界の<span class=\"keyword\" onclick=\"showTooltip(event, '常識（じょうしき）：常识，惯例。')\">常識</span>だったんですがね。</span></span>それで、うちでも何かできないか考えてみました。", trans: "（一般来说，特殊区域是用来摆放热门作品的，这是业界的惯例。所以，我在想我们能不能也做点什么。）" },
+                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '把销量不佳的作品放在显眼处是【绿书店】成功的策略，店长只是作为引子提到，并非本店要采取的做法，排除。')\">関係者に聞いたところ、売り場の客の目に触れやすい特集コーナーに<span class=\"keyword\" onclick=\"showTooltip(event, '売れ行きが芳（かんば）しくない：销量不佳，卖得不好。')\">売れ行きが芳しくない</span>作品を並べる戦略が当たったらしいんです。</span></span>", trans: "（据相关人士透露，他们好像是采用了一种新的销售策略，就是在一个显眼的地方设置一个特殊区域，把那些销量不佳的作品都放置在这，结果挺有效的。）" },
+                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '特殊区域摆放热门（人气）作品，店长说这是【业界的惯例（業界の常識）】，并不是本店这次的创新，排除。')\">特集コーナーには<span class=\"keyword\" onclick=\"showTooltip(event, '話題（わだい）になっている：引起話題的，热门的。')\">話題になっている</span>作品、というのが業界の<span class=\"keyword\" onclick=\"showTooltip(event, '常識（じょうしき）：常识，惯例。')\">常識</span>だったんですがね。</span></span>それで、うちでも何かできないか考えてみました。", trans: "（一般来说，特殊区域是用来摆放热门作品的，这是业界的惯例。所以，我在想我们能不能也做点什么。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '摆放与当季有关的作品，是本店【迄今为止（これまで）】的做法，这次要改变，排除。')\">これまでは、季節に<span class=\"keyword\" onclick=\"showTooltip(event, 'ちなむ：与……相关，因缘于。')\">ちなんだ</span>作品、え、今なら冬の作品を集めていますが、</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span><span class=\"keyword\" onclick=\"showTooltip(event, '敢（あ）えて：特意，硬要，敢于。')\">敢えて</span>冬以外の季節をテーマにした作品を並べてみようと思うんです。</span>", trans: "（目前，我们是按照当前的季节作为主题来陈列书籍，比如现在集中展示的是冬季主题的作品。但这次我想特意尝试陈列以其他季节为主题的书籍。）" },
                                 { speaker: "男", text: "意外性からお客様の関心を<span class=\"keyword\" onclick=\"showTooltip(event, '掘（ほ）り起（お）こす：挖掘出，唤起。')\">掘り起こせたら</span>と思います。今週ゆっくり時間をかけて各自候補を選んでみてください。", trans: "（希望能够以这种意外的方式，吸引到顾客的兴趣。这周请大家花点时间，各自挑选一些候选作品吧。）" }
                             ]
@@ -303,7 +303,7 @@
                             questionTrans: "（第一题：在咖啡店里，店长和兼职的女生正在交谈。兼职的女生下个月哪几天工作？）",
                             dialogue: [
                                 { speaker: "男", text: "小田さん、来月六月のアルバイトのシフト、もう少し勤務日増やせないかな。バイトの中山君が5月いっぱいでやめることになってね。", trans: "（小田，关于下个月6月份的排班，能不能请你再多加几天？因为中山君他做到5月底就辞职了。）" },
-                                { speaker: "女", text: "えっ？そんなんですか。", trans: "（啊，是这样吗？）" },
+                                { speaker: "女", text: "えっ？そうなんですか。", trans: "（啊，是这样吗？）" },
                                 { speaker: "男", text: "うん、で、中山君週３日、月水日の勤務だけど、その穴を埋めなきゃなんないんだよ。えっと、小田さんは今、シフト入っているの、火曜と金曜だよね。", trans: "（嗯。中山君的排班是周一、周三和周日这三天。得有人补上他的班次才行。嗯，小田你现在是周二和周五排班，是吧？）" },
                                 { speaker: "女", text: "はい。", trans: "（是的。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">① ②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '周一和周三的班次店长说【能自己想办法解决（どうにかなりそう）】，不需要女生补，排除选项1和2（因为图1和图2都圈了周一和周三）。')\">月曜、水曜はどうにかなりそうなんだけど。</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span><span class=\"keyword\" onclick=\"showTooltip(event, '隔週（かくしゅう）：隔周。')\">隔週</span>で日曜も入ってもらえないかな。<span class=\"keyword\" onclick=\"showTooltip(event, '第一と第三：第一周和第三周。')\">第一と第三</span>。</span>", trans: "（周一和周三的班次暂时可以解决，能不能请你补两个隔周的周日班次？就是第一周和第三周的周日。）" },
@@ -326,8 +326,8 @@
                             question: "二番：男の人がボランティアの参加者に話しています。ボランティアの参加者は今日何をしますか。",
                             questionTrans: "（第二题：男人正在对志愿者参与者讲话。志愿者参与者今天要做什么？）",
                             dialogue: [
-                                { speaker: "男", text: "え、緑山の環境保護活動に参加いただき、ありがとうございます。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '原本计划是除草，但因为大雨导致步道被泥沙覆盖，所以临时【变更（変更になりました）】了任务，今天不除草，排除。')\">本日は<span class=\"keyword\" onclick=\"showTooltip(event, '雑草（ざっそう）を刈（か）る：割杂草，除草。')\">林の雑草を刈る</span>予定でしたが</span></span>、先月の大雨で<span class=\"keyword\" onclick=\"showTooltip(event, '遊歩道（ゆうほどう）：游步道，散步小道。')\">遊歩道</span>が<span class=\"keyword\" onclick=\"showTooltip(event, '土砂（どしゃ）：泥沙，泥土。')\">土砂</span>に汚れてしまったため、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"keyword\" onclick=\"showTooltip(event, '急遽（きゅうきょ）：匆忙，临时，突然。')\">急遽</span>歩道からこれを<span class=\"keyword\" onclick=\"showTooltip(event, '除去（じょきょ）：去除，清除。')\">除去</span>する作業に変更になりました。</span>", trans: "（呃，感谢大家来参加绿山的环境保护活动。今天原本的计划是清除林中的杂草，但由于上个月的大雨，使得步道被泥沙覆盖，所以临时改为了清理步道上泥沙的作业。）" },
-                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '清理出的泥沙将会在【日后（後日）】用于加固池塘围栏，所以今天不负责加固，排除。')\"><span class=\"keyword\" onclick=\"showTooltip(event, '撤去（てっきょ）：撤除，清除。')\">撤去</span>した土砂は<span class=\"keyword\" onclick=\"showTooltip(event, '後日（ごじつ）：日后，改天。')\">後日</span>池のさくの<span class=\"keyword\" onclick=\"showTooltip(event, '補強（ほきょう）：加固，补强。')\">補強</span>に使いますので</span></span>、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>遊歩道脇に置いてある袋につめてってください。</span>", trans: "（清理出来的泥沙将会在日后用于加固池塘的围栏，所以请大家将泥沙装入放置在步道旁的袋子里。）" },
+                                { speaker: "男", text: "え、緑山の環境保護活動に参加いただき、ありがとうございます。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '原本计划是除草，但因为大雨导致步道被泥沙覆盖，所以临时【变更（変更になりました）】了任务，今天不除草，排除。')\">本日は<span class=\"keyword\" onclick=\"showTooltip(event, '雑草（ざっそう）を刈（か）る：割杂草，除草。')\">林の雑草を刈る</span>予定でしたが</span></span>、先月の大雨で<span class=\"keyword\" onclick=\"showTooltip(event, '遊歩道（ゆうほどう）：游步道，散步小道。')\">遊歩道</span>が<span class=\"keyword\" onclick=\"showTooltip(event, '土砂（どしゃ）：泥沙，泥土。')\">土砂</span>に埋もれてしまったため、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"keyword\" onclick=\"showTooltip(event, '急遽（きゅうきょ）：匆忙，临时，突然。')\">急遽</span>歩道からこれを<span class=\"keyword\" onclick=\"showTooltip(event, '除去（じょきょ）：去除，清除。')\">除去</span>する作業に変更になりました。</span>", trans: "（呃，感谢大家来参加绿山的环境保护活动。今天原本的计划是清除林中的杂草，但由于上个月的大雨，使得步道被泥沙覆盖，所以临时改为了清理步道上泥沙的作业。）" },
+                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '清理出的泥沙将会在【日后（後日）】用于加固池塘围栏，所以今天不负责加固，排除。')\"><span class=\"keyword\" onclick=\"showTooltip(event, '撤去（てっきょ）：撤除，清除。')\">撤去</span>した土砂は<span class=\"keyword\" onclick=\"showTooltip(event, '後日（ごじつ）：日后，改天。')\">後日</span>池のさくの<span class=\"keyword\" onclick=\"showTooltip(event, '補強（ほきょう）：加固，补强。')\">補強</span>に使いますので</span></span>、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span>遊歩道脇に置いてある袋に詰めていってください。</span>", trans: "（清理出来的泥沙将会在日后用于加固池塘的围栏，所以请大家将泥沙装入放置在步道旁的袋子里。）" },
                                 { speaker: "男", text: "え、展望台へ行く石段は、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '前往观景台的石阶有坍塌，男人要求大家【请不要靠近那里（立ち入らないように）】，所以今天不是去修石阶，排除。')\">一部くずれている<span class=\"keyword\" onclick=\"showTooltip(event, '箇所（かしょ）：地方，部分。')\">箇所</span>がありますので、そちらには<span class=\"keyword\" onclick=\"showTooltip(event, '立（た）ち入（い）る：进入，涉足。')\">立ち入らない</span>ようにしてください。</span></span>", trans: "（另外，通往观景台的石阶已经出现了部分坍塌的情况，请大家不要靠近那里。）" }
                             ]
                         },
@@ -372,7 +372,7 @@
                                 { speaker: "男", text: "先輩、食事と睡眠に関する研究プロジェクトの実験を受けてくれる調査協力者、今日までに２０名ほど<span class=\"keyword\" onclick=\"showTooltip(event, '応募（おうぼ）：报名，应募。')\">応募</span>がありました。", trans: "（学姐，关于饮食和睡眠关系的研究项目实验，目前已经有20名左右的志愿者报名参与了。）" },
                                 { speaker: "女", text: "３０名は集めたいから、後１０名だけど、この分なら集まりそうだね。自宅で記録をつけてもらう作業が中心だけど、何度か研究室に<span class=\"keyword\" onclick=\"showTooltip(event, '面談（めんだん）：面谈，当面交谈。')\">面談</span>に来てもらうってことも、募集の際にちゃんと伝えてるよね。", trans: "（目标是招募30人，还差10人，照这个进度来看应该能凑齐。虽然主要是请他们在家做记录，但有几次需要来研究室面谈，这件事在招募时都已经说清楚了吧？）" },
                                 { speaker: "男", text: "はい。", trans: "（是的，已经说明了。）" },
-                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">① ②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于把报名者叫来和调整面谈日期，学姐表示【等招募到更多人之后再调整（もう少し人数が集まったら調整するとして）】，不是现在要做的，排除选项1和2。')\">面談の日時は、もう少し人数が集まったら調整するとして、</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>調査協力へのサインもらう<span class=\"keyword\" onclick=\"showTooltip(event, '同意書（どういしょ）：同意书。')\">同意書</span>を郵送しないとね。目標人数に達するのを待たずに、その二十名には発送しちゃおう。</span>", trans: "（面谈的时间等招募到更多人之后再调整吧。另外，需要寄给他们一份参与调查的同意书，就不等招齐30人了，先把那20个人的寄过去吧。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">① ②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于把报名者叫来和调整面谈日期，学姐表示【等招募到更多人之后再调整（もう少し人数が集まったら調整するとして）】，不是现在要做的，排除选项1和2。')\">面談の日時は、もう少し人数が集まったら調整するとして、</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>調査協力へのサインをもらう<span class=\"keyword\" onclick=\"showTooltip(event, '同意書（どういしょ）：同意书。')\">同意書</span>を郵送しないとね。目標人数に達するのを待たずに、その二十名には発送しちゃおう。</span>", trans: "（面谈的时间等招募到更多人之后再调整吧。另外，需要寄给他们一份参与调查的同意书，就不等招齐30人了，先把那20个人的寄过去吧。）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>そうですね。</span>", trans: "（嗯，好的。）" },
                                 { speaker: "女", text: "それと、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于整理报名资料，男方回答【那个我已经处理完了（それはもう済んでます）】，是已经提前完成的事，排除。')\">提出してもらった応募書類の<span class=\"keyword\" onclick=\"showTooltip(event, '取（と）りまとめ：汇总，收集整理。')\">取りまとめ</span>、すぐにとりかかってくれる。</span></span>どんな人が応募してくれたか見たいから。", trans: "（还有，已经提交上来的报名表格，能尽快汇总整理一下吗？我想看看都有哪些人报名了。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span>あっ、はい、それはもう<span class=\"keyword\" onclick=\"showTooltip(event, '済（す）む：完成，结束，解决。')\">済んでます</span>。</span>", trans: "（啊，好的，那个我已经处理完了。）" }
@@ -669,7 +669,7 @@
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = KijiListeningFollow.applyClips(examData[currentExamKey].questions[currentQuestionIndex]);
+const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -682,13 +682,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = KijiListeningFollow.renderSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -706,13 +701,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${KijiListeningFollow.renderSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            KijiListeningFollow.bindPlayer();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -739,8 +733,6 @@
         // --- Mode Switching ---
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
-            KijiListeningFollow.syncMode(mode);
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');

@@ -7,152 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <style>
-        .sentence-listen-button {
-            width: 24px;
-            height: 24px;
-            margin-left: 8px;
-            padding: 0;
-            border: 0;
-            border-radius: 50%;
-            background: transparent;
-            color: #9aa4b2;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            vertical-align: -4px;
-            cursor: pointer;
-            transition: color 160ms ease, background-color 160ms ease;
-        }
-
-        .sentence-listen-button svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-            pointer-events: none;
-        }
-
-        .sentence-listen-button:hover,
-        .sentence-listen-button:focus-visible,
-        .sentence-listen-button.is-playing {
-            color: #52617a;
-            background: #edf0f5;
-        }
-
-        .sentence-listen-button:focus-visible {
-            outline: 2px solid #aeb8c8;
-            outline-offset: 2px;
-        }
-
-        .mode-practice .sentence-listen-button {
-            display: none;
-        }
-
-        .sentence-listen-button {
-            display: none;
-        }
-
-        .mode-explanation.follow-listening-enabled .sentence-listen-button {
-            display: inline-flex;
-        }
-
-        .header-right-slot {
-            display: flex;
-            align-items: center;
-        }
-
-        .follow-listening-toggle {
-            min-height: 38px;
-            padding: 0 14px;
-            border: 1px solid #dfe4ec;
-            border-radius: 8px;
-            background: #fff;
-            color: #52617a;
-            font: 600 13px/1 "Noto Sans JP", "Noto Sans SC", sans-serif;
-            letter-spacing: 0;
-            cursor: pointer;
-            transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
-        }
-
-        .follow-listening-toggle:hover,
-        .follow-listening-toggle:focus-visible {
-            border-color: #aeb8c8;
-            background: #f6f8fb;
-            color: #35435b;
-        }
-
-        .follow-listening-toggle[aria-pressed="true"] {
-            border-color: #8795ab;
-            background: #eef1f6;
-            color: #35435b;
-        }
-
-        .follow-listening-toggle[hidden] {
-            display: none !important;
-        }
-
-        .follow-listening-source {
-            position: relative;
-            display: block;
-            min-width: 0;
-            width: fit-content;
-            max-width: 100%;
-        }
-
-        .follow-listening-mainline {
-            display: block;
-            min-width: 0;
-        }
-
-        .follow-listening-content {
-            min-width: 0;
-            transition: filter 180ms ease, background-color 180ms ease;
-        }
-
-        .follow-listening-translation {
-            width: fit-content;
-            max-width: 100%;
-            transition: filter 180ms ease, background-color 180ms ease;
-        }
-
-        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) {
-            cursor: pointer;
-        }
-
-        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-content,
-        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-translation {
-            filter: blur(8px);
-            background: rgba(227, 232, 240, 0.94);
-            border-radius: 4px;
-            -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .mode-explanation.follow-listening-enabled .follow-listening-source:not(.is-revealed) .follow-listening-content * {
-            color: transparent !important;
-            background: transparent !important;
-            border-color: transparent !important;
-            box-shadow: none !important;
-        }
-
-        .follow-listening-source:focus-visible {
-            outline: 2px solid #aeb8c8;
-            outline-offset: 4px;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 768px) {
-            .follow-listening-toggle {
-                min-height: 34px;
-                padding: 0 10px;
-                font-size: 12px;
-            }
-
-        }
-    </style>
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+    <link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -168,7 +24,7 @@
                     class="follow-listening-toggle"
                     aria-pressed="false"
                     hidden
-                    onclick="toggleFollowListening()">精听模式</button>
+onclick="KijiListeningFollow.toggle()">精听模式</button>
         </div>
     </header>
 
@@ -271,12 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260902-2020-q1-browser-waveform-rebuild-r5"></script>
+    <script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -351,7 +208,7 @@
                                 { speaker: "男", text: "ああ、知り合う<span class=\"keyword\" onclick=\"showTooltip(event, 'きっかけ：契机，机会。')\">きっかけ</span>作りになるような．．．", trans: "（啊，像一些可以让大家互相认识的契机……）" },
                                 { speaker: "女", text: "うん、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于想自我介绍的游戏，学姐说【我会在下周的会议前考虑一下（ちょっと考えてみるよ）】，这是学姐要做的事，不需要男生做，排除。')\">来週のミーティングまでに、ちょっと考えてみるよ。</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>グループ分けも来週したいから、それまでにリスト、お願いしてもいい？</span>", trans: "（是啊。我会在下周的会议前考虑一下。分组的事也希望能在下周完成，名单能拜托你整理好吗？）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>あ、はい、分かりました。</span>", trans: "（啊，好的，我明白了。）" },
-                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于制作日程表，学姐明确说【我会先做一个初稿出来（私が叩き台を作ってくるから）】，所以这也是学姐的任务，排除。')\">当日のスケジュール表は私が<span class=\"keyword\" onclick=\"showTooltip(event, '叩（たた）き台（だい）：草案，初稿。')\">叩き台</span>を作ってくるから</span></span>、ミーティングで確認しよう。", trans: "（当天的时间安排表，我会先做一个初稿出来，到时候在会议上一起确认吧。）" }
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于制作日程表，学姐明确说【我会先做一个初稿出来（私が叩き台を作っていくから）】，所以这也是学姐的任务，排除。')\">当日のスケジュール表は私が<span class=\"keyword\" onclick=\"showTooltip(event, '叩（たた）き台（だい）：草案，初稿。')\">叩き台</span>を作っていくから</span></span>、ミーティングで確認しよう。", trans: "（当天的时间安排表，我会先做一个初稿出来，到时候在会议上一起确认吧。）" }
                             ]
                         },
                         options: [
@@ -440,12 +297,6 @@
         let currentExamKey = "N1-2020-07"; // 修复默认加载的 key
         let currentQuestionIndex = 0;
         let preferredMode = 'practice'; 
-        let activeSentenceButton = null;
-        let sentenceAudio = null;
-        let sentenceBoundaryFrame = 0;
-        let sentenceBoundaryTimer = 0;
-        let sentencePlaybackToken = 0;
-        let followListeningEnabled = false;
         const LISTENING_TYPE = 'task-comprehension';
         const LISTENING_LEVEL = 'n1';
 
@@ -671,258 +522,12 @@
             }
         }
 
-        function normalizeSentenceSegment(segment) {
-            if (!segment) return null;
-            if (typeof segment === 'string') return { src: segment, start: 0, end: null };
-            const start = Number(segment.start);
-            const end = Number(segment.end);
-            if (!segment.src || !Number.isFinite(start)) return null;
-            return {
-                src: segment.src,
-                start: Math.max(0, start),
-                end: Number.isFinite(end) && end > start ? end : null
-            };
-        }
-
-        function sentenceListenButton(audioSegment, label) {
-            const segment = normalizeSentenceSegment(audioSegment);
-            if (!segment) return '';
-            const endAttribute = segment.end == null ? '' : `data-audio-end="${segment.end}"`;
-
-            return `
-                <button type="button"
-                        class="sentence-listen-button"
-                        data-audio-src="${segment.src}"
-                        data-audio-start="${segment.start}"
-                        ${endAttribute}
-                        aria-label="${label}"
-                        aria-pressed="false"
-                        title="この文を聞く"
-                        onclick="playSentenceClip(event, this)">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-8.7v2.06a7 7 0 0 1 0 13.28v2.06a9 9 0 0 0 0-17.4z"/>
-                    </svg>
-                </button>`;
-        }
-
-        function followListeningSource(content, translation, audioSrc, label) {
-            return `
-                <div class="follow-listening-source"
-                     tabindex="0"
-                     role="button"
-                     aria-label="点击显示原文和译文"
-                     onclick="revealFollowListeningSource(event, this)"
-                     onkeydown="handleFollowListeningKey(event, this)">
-                    <div class="follow-listening-mainline">
-                        <span class="follow-listening-content">${content}</span>${sentenceListenButton(audioSrc, label)}
-                    </div>
-                    ${translation ? `<div class="translation follow-listening-translation">${translation}</div>` : ''}
-                </div>`;
-        }
-
-        function revealFollowListeningSource(event, source) {
-            if (!followListeningEnabled || !source) return;
-            if (event && event.target && event.target.closest('.sentence-listen-button')) return;
-            source.classList.add('is-revealed');
-            source.setAttribute('aria-label', '原文已显示');
-            if (event && event.type === 'click' && event.detail > 0) source.blur();
-        }
-
-        function handleFollowListeningKey(event, source) {
-            if (!followListeningEnabled || !['Enter', ' '].includes(event.key)) return;
-            event.preventDefault();
-            revealFollowListeningSource(event, source);
-        }
-
-        function setFollowListening(enabled) {
-            followListeningEnabled = Boolean(enabled);
-            const container = document.getElementById('appContainer');
-            const toggle = document.getElementById('followListeningToggle');
-            if (container) {
-                container.classList.toggle('follow-listening-enabled', followListeningEnabled);
-                if (!followListeningEnabled) {
-                    container.querySelectorAll('.follow-listening-source.is-revealed').forEach((source) => {
-                        source.classList.remove('is-revealed');
-                        source.setAttribute('aria-label', '点击显示原文和译文');
-                    });
-                }
-            }
-            if (toggle) {
-                toggle.setAttribute('aria-pressed', String(followListeningEnabled));
-                toggle.textContent = '精听模式';
-                toggle.setAttribute('aria-label', followListeningEnabled ? '关闭精听模式' : '开启精听模式');
-                toggle.title = followListeningEnabled ? '关闭精听模式' : '开启精听模式';
-            }
-            if (!followListeningEnabled) stopSentenceClip();
-        }
-
-        function toggleFollowListening() {
-            setFollowListening(!followListeningEnabled);
-        }
-
-        function resetSentenceClipState() {
-            if (activeSentenceButton) {
-                activeSentenceButton.classList.remove('is-playing');
-                activeSentenceButton.setAttribute('aria-pressed', 'false');
-            }
-            activeSentenceButton = null;
-        }
-
-        function clearSentenceBoundaryMonitor() {
-            if (sentenceBoundaryFrame) cancelAnimationFrame(sentenceBoundaryFrame);
-            if (sentenceBoundaryTimer) clearTimeout(sentenceBoundaryTimer);
-            sentenceBoundaryFrame = 0;
-            sentenceBoundaryTimer = 0;
-        }
-
-        function getSentenceAudio() {
-            if (!sentenceAudio) {
-                sentenceAudio = document.getElementById('sentenceAudioElement');
-            }
-            return sentenceAudio;
-        }
-
-        function stopSentenceClip() {
-            sentencePlaybackToken += 1;
-            clearSentenceBoundaryMonitor();
-            const audio = getSentenceAudio();
-            if (audio) {
-                audio.pause();
-                if (Number.isFinite(audio.duration)) audio.currentTime = 0;
-            }
-            resetSentenceClipState();
-        }
-
-        function playSentenceClip(event, button) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            const audioSrc = button.dataset.audioSrc;
-            const startTime = Number(button.dataset.audioStart || 0);
-            const endTime = Number(button.dataset.audioEnd);
-            if (!audioSrc) return;
-
-            const clipAudio = getSentenceAudio();
-            if (!clipAudio) return;
-
-            if (activeSentenceButton === button) {
-                stopSentenceClip();
-                return;
-            }
-
-            stopSentenceClip();
-            activeSentenceButton = button;
-            const playbackToken = sentencePlaybackToken;
-            button.classList.add('is-playing');
-            button.setAttribute('aria-pressed', 'true');
-
-            const finishPlayback = () => {
-                if (playbackToken !== sentencePlaybackToken) return;
-                clearSentenceBoundaryMonitor();
-                clipAudio.pause();
-                if (Number.isFinite(clipAudio.duration)) clipAudio.currentTime = Math.max(0, startTime);
-                resetSentenceClipState();
-            };
-
-            const monitorBoundary = () => {
-                if (playbackToken !== sentencePlaybackToken || !Number.isFinite(endTime)) return;
-                if (clipAudio.currentTime >= endTime - 0.006) {
-                    finishPlayback();
-                    return;
-                }
-                sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
-            };
-
-            const scheduleBoundaryCheck = () => {
-                if (playbackToken !== sentencePlaybackToken || !Number.isFinite(endTime)) return;
-                const remaining = endTime - clipAudio.currentTime;
-                if (remaining <= 0.006) {
-                    finishPlayback();
-                    return;
-                }
-                sentenceBoundaryTimer = window.setTimeout(
-                    scheduleBoundaryCheck,
-                    Math.max(5, Math.min(remaining * 1000 - 4, 120))
-                );
-            };
-
-            const startPlayback = () => {
-                if (playbackToken !== sentencePlaybackToken) return;
-                try { clipAudio.currentTime = Math.max(0, startTime); } catch (error) { /* metadata may still be loading */ }
-                clipAudio.muted = false;
-                clipAudio.volume = 1;
-                clipAudio.playbackRate = 1;
-                const playPromise = clipAudio.play();
-                if (playPromise && typeof playPromise.then === 'function') {
-                    playPromise.then(() => {
-                        if (playbackToken !== sentencePlaybackToken) return;
-                        sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
-                        scheduleBoundaryCheck();
-                    }).catch(finishPlayback);
-                } else {
-                    sentenceBoundaryFrame = requestAnimationFrame(monitorBoundary);
-                    scheduleBoundaryCheck();
-                }
-            };
-
-            clipAudio.onended = finishPlayback;
-            clipAudio.onerror = finishPlayback;
-            clipAudio.ontimeupdate = null;
-            const resolvedSrc = new URL(audioSrc, document.baseURI).href;
-            if (clipAudio.currentSrc !== resolvedSrc && clipAudio.src !== resolvedSrc) {
-                clipAudio.src = resolvedSrc;
-                clipAudio.load();
-            }
-            if (clipAudio.readyState < 1) {
-                clipAudio.addEventListener('loadedmetadata', () => {
-                    if (playbackToken !== sentencePlaybackToken) return;
-                    try { clipAudio.currentTime = Math.max(0, startTime); } catch (error) { /* handled by playback */ }
-                }, { once: true });
-            }
-            // Keep play() inside the click activation path so browsers do not silently block it.
-            startPlayback();
-        }
-
-        function installSentenceClipPlayback() {
-            const audio = document.getElementById('audioElement');
-            if (!audio || audio.dataset.sentenceClipBound === 'true') return;
-            audio.dataset.sentenceClipBound = 'true';
-
-            audio.addEventListener('play', stopSentenceClip);
-
-            ['playBtn', 'rewindBtn', 'forwardBtn', 'prevBtn', 'nextBtn'].forEach((id) => {
-                const control = document.getElementById(id);
-                if (control) control.addEventListener('click', stopSentenceClip, true);
-            });
-
-            const progress = document.getElementById('progressContainer');
-            if (progress) progress.addEventListener('pointerdown', stopSentenceClip, true);
-        }
-
         // --- Render Content ---
-        function attachPreciseSentenceClips(question) {
-            const audioKey = String(question && question.audio || '')
-                .split('/')
-                .pop()
-                .replace(/\.mp3(?:\?.*)?$/i, '');
-            const clips = window.KijiN1TaskTimelineMap && window.KijiN1TaskTimelineMap[audioKey];
-            if (!clips || !question.script) return question;
-
-            question.script.questionClip = clips.question || question.script.questionClip;
-            (question.script.dialogue || []).forEach((line, index) => {
-                if (clips.lines && clips.lines[index]) line.clip = clips.lines[index];
-            });
-            return question;
-        }
-
         function renderQuestion() {
-            stopSentenceClip();
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = attachPreciseSentenceClips(
-                examData[currentExamKey].questions[currentQuestionIndex]
-            );
+            const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -935,13 +540,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = followListeningSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -959,13 +559,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${followListeningSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            installSentenceClipPlayback();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -993,8 +592,6 @@
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
 
-            if (mode === 'practice') stopSentenceClip();
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');
@@ -1006,7 +603,6 @@
             tooltip.style.display = 'none';
 
             if (mode === 'practice') {
-                setFollowListening(false);
                 container.classList.remove('mode-explanation');
                 container.classList.add('mode-practice');
                 btnPractice.classList.add('active');

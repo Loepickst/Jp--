@@ -7,8 +7,8 @@
     <!-- 使用与练习页一致的书面/印刷感字体组合 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
-    <link rel="stylesheet" href="../shared/follow-listening.css?v=20260811-all-years">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+<link rel="stylesheet" href="../../n2/shared/follow-listening.css?v=20260901-sentence-console-r3">
 </head>
 <body>
 
@@ -127,13 +127,13 @@
 
     <div id="wordTooltip" class="custom-tooltip"></div>
 
-    <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+    <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
     <script src="../../../shared/listening-progress.js"></script>
     <script src="../../../../shared/study-quest-test-runtime.js"></script>
     <script src="../../../../shared/study-quest-test-boot.js"></script>
     <script src="../../../shared/listening-reward-hooks.js"></script>
-    <script src="../shared/follow-listening-timelines.js?v=20260811-timeline"></script>
-<script src="../shared/follow-listening.js?v=20260813-native-audio-recovery-v1"></script>
+    <script src="../shared/follow-listening-timelines.js?v=20260901-2014-recalibrated"></script>
+<script src="../../n2/shared/follow-listening.js?v=20260901-sentence-console-r3"></script>
     <script>
         // --- Data Structure (针对课题理解的数据结构) ---
         const examData = {
@@ -177,7 +177,7 @@
                                 { speaker: "男", text: "あ、これ、無料のサイトからダウンロードしたんですけど、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方表示自己已经“稍微修了一下图（手を加えてみました）”，所以这是【已经做过】的事，排除。')\">それにちょっと<span class=\"keyword\" onclick=\"showTooltip(event, '手を加える（てをくわえる）：稍加修改，润色，修补。')\">手を加えて</span>みました。</span></span>", trans: "（啊，这是从免费素材网下载的，不过我稍微修了一下图。）" },
                                 { speaker: "女", text: "ああ、そういうサイト私も使ったことあるけど、無料って言っても、使うにはいろいろ条件があってね。<span class=\"keyword\" onclick=\"showTooltip(event, '勝手に（かってに）：擅自，随便。')\">勝手に</span><span class=\"keyword\" onclick=\"showTooltip(event, '加工（かこう）する：加工，处理（这里指修图）。')\">加工</span>しちゃだめなこともあるのよ。", trans: "（啊，那种网站我也用过。虽说是免费的，但使用时也是有各种条件的。有的规定不能擅自修改图片哦。）" },
                                 { speaker: "男", text: "えっ、そうなんですか。知りませんでした。じゃ、この写真は削除します。", trans: "（诶？是这样吗？我不知道。那我把这张照片删掉。）" },
-                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方提议删掉照片，但女方以“因为附近有公园是卖点，想保留照片（写真は残しておきたいな）”为由拒绝了，排除。')\">うーん、近くに公園があることはこのマンションの<span class=\"keyword\" onclick=\"showTooltip(event, 'セールスポイント（sales point）：卖点，推销重点。')\">セールスポイント</span>だから、写真は残しておきたいな。</span></span>きれいに撮っているし。<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>加工して使ってもいいか、撮影者に連絡とってみてくれる？</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女方指示“如果这次不能用（もし今回使えなかったら），到时候你再去拍”，说明自己拍照是如果交涉失败后的【备用方案】，不是首先要做的，排除。')\">もし今回使えなかったら、そのときは山田さんが同じような写真、撮ってきてよ。</span></span>", trans: "（嗯……毕竟“附近有公园”是这栋公寓的一大卖点，照片我还是想留着。而且这张拍得也挺好看的。你去联系一下摄影师，问问能不能加工使用？如果这次不能用，到时候就得麻烦山田你去拍张差不多的回来。）" },
+                                { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '男方提议删掉照片，但女方以“因为附近有公园是卖点，想保留照片（写真は残しておきたいな）”为由拒绝了，排除。')\">うーん、近くに公園があることはこのマンションの<span class=\"keyword\" onclick=\"showTooltip(event, 'セールスポイント（sales point）：卖点，推销重点。')\">セールスポイント</span>だから、写真は残しておきたいな。</span></span>きれいに撮れてるし。<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">④</span>加工して使ってもいいか、撮影者に連絡とってみてくれる？</span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女方指示“如果这次不能用（もし今回使えなかったら），到时候你再去拍”，说明自己拍照是如果交涉失败后的【备用方案】，不是首先要做的，排除。')\">もし今回使えなかったら、そのときは山田さんが同じような写真、撮ってきてよ。</span></span>", trans: "（嗯……毕竟“附近有公园”是这栋公寓的一大卖点，照片我还是想留着。而且这张拍得也挺好看的。你去联系一下摄影师，问问能不能加工使用？如果这次不能用，到时候就得麻烦山田你去拍张差不多的回来。）" },
                                 { speaker: "男", text: "はい。", trans: "（好的。）" },
                                 { speaker: "女", text: "これから、無料サイトの写真を使うときは、利用条件をちゃんと確認するようにね。", trans: "（以后使用免费素材网的照片时，一定要仔细确认使用条款。）" },
                                 { speaker: "男", text: "はい、わかりました。", trans: "（好的，我知道了。）" }
@@ -274,7 +274,7 @@
                             question: "六番：ギター教室で男の人と受付の人が話しています。男の人はこの後すぐ何をしますか。",
                             questionTrans: "（第六题：在吉他教室，一个男人和前台接待人员正在交谈。男人接下来马上要做什么？）",
                             dialogue: [
-                                { speaker: "男", text: "すみません。来月からしばらく休みたいんですけど、休んでいる間で<span class=\"keyword\" onclick=\"showTooltip(event, '月謝（げっしゃ）：每月的学费，月费。')\">月謝</span>を納めなくていいんですよね。", trans: "（不好意思。下个月开始我想休息一段时间，休息期间不用交月费吧？）" },
+                                { speaker: "男", text: "すみません。来月からしばらく休みたいんですけど、休んでいる間って<span class=\"keyword\" onclick=\"showTooltip(event, '月謝（げっしゃ）：每月的学费，月费。')\">月謝</span>を納めなくていいんですよね。", trans: "（不好意思。下个月开始我想休息一段时间，休息期间不用交月费吧？）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '关于休会，前台表示除非住院等特殊情况，否则不能办休会手续，必须退会，因此排除选项1。')\"><span class=\"keyword\" onclick=\"showTooltip(event, '休会（きゅうかい）：暂停会员资格，休会。')\">休会</span>でございますか。失礼ですが、どのような理由でしょうか。</span></span>", trans: "（您是指暂停会员资格吗？冒昧问一下，是因为什么原因呢？）" },
                                 { speaker: "男", text: "仕事が忙しくなっちゃって、しばらくこられそうにないので。", trans: "（工作变得很忙，估计有一阵子来不了了。）" },
                                 { speaker: "女", text: "申し訳ございません。入院など<span class=\"keyword\" onclick=\"showTooltip(event, 'やむを得ない（やむをえない）：不得已的，无可奈何的。')\">やむを得ない</span>場合を除き、１ヶ月以上お休みになる場合は一度<span class=\"keyword\" onclick=\"showTooltip(event, '退会（たいかい）：退会。')\">退会</span>していただいています。", trans: "（非常抱歉。除非是住院等不可抗力的情况，否则如果缺席一个月以上，需要先办理退会手续。）" },
@@ -335,7 +335,7 @@
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span>結果は来週の月曜日に学生課の掲示板に<span class=\"keyword\" onclick=\"showTooltip(event, '張り出す（はりだす）：张贴，公布。')\">張り出し</span>ます。</span>", trans: "（结果将于下周一在学生处的布告栏张贴公布。）" },
                                 { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '职员明确说明负责的工作人员【无法逐一回应】关于个人结果的咨询，所以不能向职员确认，排除。')\">担当の職員は個別の結果については対応でき<span class=\"keyword\" onclick=\"showTooltip(event, '〜かねる：难以……，不能……（接在动词ます形后，表示婉拒）。対応できかねます：无法处理/无法应对。')\">かねます</span></span></span>ので、各自で確認してください。", trans: "（负责的工作人员无法逐一回应关于个人结果的咨询，所以请大家各自前往查看。）" },
                                 { speaker: "男", text: "申し込みはウェブ上で行ってもらいましたが、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '虽然报名是在网上进行的，但结果【不会在网上发布】，排除。')\">結果はウェブ上には<span class=\"keyword\" onclick=\"showTooltip(event, '掲載（けいさい）：刊登，登载，发布。')\">掲載</span>しません。</span></span>", trans: "（虽然报名是在网上进行的，但结果不会在网上发布。）" },
-                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '职员也明确说【直接去问老师也是不会得到回复的】，所以不能向老师确认，排除。')\">直接先生からも答えいただけません</span></span>ので、気をつけてください。", trans: "（直接去问老师也是不会得到回复的，请大家注意这一点。）" }
+                                { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '职员也明确说【直接去问老师也是不会得到回复的】，所以不能向老师确认，排除。')\">直接先生からもお答えいただけません</span></span>ので、気をつけてください。", trans: "（直接去问老师也是不会得到回复的，请大家注意这一点。）" }
                             ]
                         },
                         options: [
@@ -384,7 +384,7 @@
                                 { speaker: "女", text: "そうなんですけど、もうこんな時間ですし。。", trans: "（说是这么说，可已经这个点了……）" },
                                 { speaker: "男", text: "あ、そうだね。しかも、今日は金曜日だったね。週末<span class=\"keyword\" onclick=\"showTooltip(event, '放っておく（ほっておく）：放置不管，置之不理。')\">ほっておく</span>のが心配だな。", trans: "（啊，也是啊。而且今天还是周五。周末放着不管还真让人担心。）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女助手提议去买杀虫剂，但男老师觉得太危险否决了（自分たちでやるのが危ないから），所以不需要去买，排除。')\">ええ、とりあえず<span class=\"keyword\" onclick=\"showTooltip(event, '殺虫剤（さっちゅうざい）：杀虫剂。')\">殺虫剤</span>を買ってきましょうか。</span></span>", trans: "（是啊，要不我先去买点杀虫剂回来？）" },
-                                { speaker: "男", text: "自分たちでやるのが危ないから、やっぱり専門な人に駆除頼まなきゃね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '联系办公室请人来清除是【周一早上一上班（月曜日の朝一番）】才做的事，并非“接下来首先”要做的，排除。')\">悪いけど、月曜日の<span class=\"keyword\" onclick=\"showTooltip(event, '朝一番（あさいちばん）：大清早，头一件事，一上班。')\">朝一番</span>に事務室に連絡してくれる？</span></span>", trans: "（我们自己弄太危险了，还是得请专业人士来处理。不好意思，能不能麻烦你周一早上一上班就联系办公室？）" },
+                                { speaker: "男", text: "自分たちでやるのが危ないから、やっぱり専門の人に駆除頼まなきゃね。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '联系办公室请人来清除是【周一早上一上班（月曜日の朝一番）】才做的事，并非“接下来首先”要做的，排除。')\">悪いけど、月曜日の<span class=\"keyword\" onclick=\"showTooltip(event, '朝一番（あさいちばん）：大清早，头一件事，一上班。')\">朝一番</span>に事務室に連絡してくれる？</span></span>", trans: "（我们自己弄太危险了，还是得请专业人士来处理。不好意思，能不能麻烦你周一早上一上班就联系办公室？）" },
                                 { speaker: "女", text: "はい。", trans: "（好的。）" },
                                 { speaker: "男", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>それから裏口を使わないように、裏口のドアに張り紙をしといてくれるかな。</span>土日に裏口使って<span class=\"keyword\" onclick=\"showTooltip(event, '刺される（さされる）：被刺，被蛰。')\">刺される</span>と大変だから。", trans: "（还有，你去后门贴张纸条，提醒大家别走那里。要是周末有人走后门被蛰了就麻烦了。）" },
                                 { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span>分かりました。</span>", trans: "（明白了。）" },
@@ -437,11 +437,11 @@
                             questionTrans: "（第六题：在公司里女人和社长在交谈。女人接下来首先要做什么？）",
                             dialogue: [
                                 { speaker: "女", text: "社長、田中電気に持っていく<span class=\"keyword\" onclick=\"showTooltip(event, '見積書（みつもりしょ）：报价单。')\">見積書</span>作ったんですが、見ていただけますか。", trans: "（社长，给田中电机的报价单我做好了，您能过目一下吗？）" },
-                                { speaker: "男", text: "うん、新しいねじのだよな。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '社长问能不能再便宜点，女人回答已经是底线了，社长表示接受，所以不需要讨论降价，排除。')\">うんん、もうちょっと<span class=\"keyword\" onclick=\"showTooltip(event, '値引き（ねびき）：降价，打折。')\">値引き</span>できないかな。</span></span>ほかのところもこのタイプの部品は作っているから、このままだと、<span class=\"keyword\" onclick=\"showTooltip(event, '新規（しんき）：新的，新增的。')\">新規</span>の注文をいただくのは難しくなるぞ。", trans: "（嗯，是新螺丝的那份吧。嗯……能不能再便宜点？别的地方也在做这种零件，照这个价格，想拿到新订单恐怕很难啊。）" },
+                                { speaker: "男", text: "うん、新しいねじのだよな。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '社长问能不能再便宜点，女人回答已经是底线了，社长表示接受，所以不需要讨论降价，排除。')\">うーん、もうちょっと<span class=\"keyword\" onclick=\"showTooltip(event, '値引き（ねびき）：降价，打折。')\">値引き</span>できないかな。</span></span>ほかのところもこのタイプの部品は作っているから、このままだと、<span class=\"keyword\" onclick=\"showTooltip(event, '新規（しんき）：新的，新增的。')\">新規</span>の注文をいただくのは難しくなるぞ。", trans: "（嗯，是新螺丝的那份吧。嗯……能不能再便宜点？别的地方也在做这种零件，照这个价格，想拿到新订单恐怕很难啊。）" },
                                 { speaker: "女", text: "検討はしてみたんですが、これ以上はなかなか。。", trans: "（我也核算过了，但想再降价恐怕有点……）" },
                                 { speaker: "男", text: "そうだよね。これが最低ラインなんだよな。", trans: "（也是啊。这就是底线了吧。）" },
                                 { speaker: "女", text: "そうですね。", trans: "（是的。）" },
-                                { speaker: "男", text: "先方にとってはやすいほうがいいだろうけど、うちにはそんなにゆるくないしな。じゃあ、見積金額はこのへんで<span class=\"keyword\" onclick=\"showTooltip(event, '勘弁（かんべん）してもらう：这里指请对方包涵、接受（这个价格）。')\">勘弁してもらう</span>として、<span class=\"keyword\" onclick=\"showTooltip(event, '納期（のうき）：交货期。')\">納期</span>の希望は確認してあるんだろうな。", trans: "（虽然对客户来说肯定是越便宜越好，但咱们也没那么多让利空间啊。那就这样，价格这块就让他们接受这个数，交货期方面确认过他们的要求了吧？）" },
+                                { speaker: "男", text: "先方にとっては安いほうがいいだろうけど、うちにはそんな余力ないしな。じゃあ、見積金額はこのへんで<span class=\"keyword\" onclick=\"showTooltip(event, '勘弁（かんべん）してもらう：这里指请对方包涵、接受（这个价格）。')\">勘弁してもらう</span>として、<span class=\"keyword\" onclick=\"showTooltip(event, '納期（のうき）：交货期。')\">納期</span>の希望は確認してあるんだろうな。", trans: "（虽然对客户来说肯定是越便宜越好，但咱们也没那么多让利空间啊。那就这样，价格这块就让他们接受这个数，交货期方面确认过他们的要求了吧？）" },
                                 { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" onclick=\"showTooltip(event, '女人表示已经听取了客户希望提前交货的要求，这是【已经进行】的事，排除。')\">ええ、実はもうすこし早められないかと言われているんです。</span></span>", trans: "（嗯，其实他们问能不能再稍微提前一点。）" },
                                 { speaker: "男", text: "ほかに工場のほうは急ぎの注文入ってない時期だろう。これを優先させればできるんじゃないか。", trans: "（工厂那边这段时间应该没有加急订单吧。如果优先做这个，应该能行吧？）" },
                                 { speaker: "女", text: "そうですね、できますね。", trans: "（是啊，应该没问题。）" },
@@ -693,7 +693,7 @@
             const container = document.getElementById('appContainer');
             if (container) container.classList.remove('judged');
 
-            const data = KijiListeningFollow.applyClips(examData[currentExamKey].questions[currentQuestionIndex]);
+const data = examData[currentExamKey].questions[currentQuestionIndex];
             const total = examData[currentExamKey].questions.length;
 
             updateMarkUI();
@@ -706,13 +706,8 @@
             });
 
             // Transcript Update (分割问题与对话内容)
-            document.getElementById('questionText').innerHTML = KijiListeningFollow.renderSource(
-                data.script.question,
-                data.script.questionTrans,
-                data.script.questionClip,
-                '题干を聞く'
-            );
-            document.getElementById('questionTrans').innerHTML = '';
+document.getElementById('questionText').innerHTML = data.script.question || '';
+            document.getElementById('questionTrans').innerHTML = data.script.questionTrans || '';
             const questionImageArea = document.getElementById('questionImageArea');
             const questionImage = document.getElementById('questionImage');
             if (questionImageArea && questionImage) {
@@ -730,13 +725,12 @@
                 <div class="conversation-line">
                     <span class="speaker-name">${line.speaker}</span>
                     <div class="speaker-text">
-                        ${KijiListeningFollow.renderSource(line.text, line.trans, line.clip, `${line.speaker}の文を聞く`)}
+<div>${line.text || ''}</div>
+                        ${line.trans ? `<div class="translation">${line.trans}</div>` : ''}
                     </div>
                 </div>
             `).join('');
             document.getElementById('conversationText').innerHTML = conversationHtml;
-            KijiListeningFollow.bindPlayer();
-
             // Options Update
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -763,8 +757,6 @@
         // --- Mode Switching ---
         function setMode(mode, updatePreference = true) {
             if (updatePreference) preferredMode = mode;
-            KijiListeningFollow.syncMode(mode);
-
             const container = document.getElementById('appContainer');
             const btnPractice = document.getElementById('btnPractice');
             const btnExplanation = document.getElementById('btnExplanation');
