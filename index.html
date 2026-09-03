@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
     <link rel="stylesheet" href="shared/study-directory.css?v=20260810b">
-    <link rel="stylesheet" href="shared/study-plan.css?v=20260824a">
+    <link rel="stylesheet" href="shared/study-plan.css?v=20260902c">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -5797,7 +5797,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260820-mobile-compact1">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260831-two-examples1">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -9402,7 +9402,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="shared/main-directory.css?v=20260716">
+    <link rel="stylesheet" href="shared/main-directory.css?v=20260902-games">
     <link rel="stylesheet" href="shared/culture-music-directory.css?v=20260714a">
     <style id="mobile-home-view-20260713">
         .mobile-home-header,
@@ -11141,6 +11141,46 @@
                 font-weight: 500;
                 text-decoration: none;
                 cursor: pointer;
+            }
+
+            body.home-dashboard-redesign .mobile-section-head-actions {
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 9px;
+                flex: 0 0 auto;
+            }
+
+            body.home-dashboard-redesign .mobile-section-head .mobile-mini-game-entry {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                min-height: 28px;
+                padding: 0 9px;
+                border: 1px solid rgba(163, 67, 54, 0.24);
+                border-radius: 999px;
+                background: rgba(255, 253, 248, 0.94);
+                color: #8f3e34;
+                box-shadow: 0 5px 13px rgba(82, 58, 45, 0.06);
+                font-size: 10px;
+                font-weight: 650;
+                line-height: 1;
+                white-space: nowrap;
+            }
+
+            body.home-dashboard-redesign .mobile-mini-game-mark {
+                display: grid;
+                width: 18px;
+                height: 18px;
+                place-items: center;
+                border: 1px solid rgba(163, 67, 54, 0.24);
+                border-radius: 50%;
+                background: #fff7f3;
+                font-family: "Noto Serif JP", "Yu Mincho", serif;
+                font-size: 8px;
+                font-weight: 700;
+                line-height: 1;
             }
 
             body.home-dashboard-redesign .mobile-entry-grid {
@@ -13817,7 +13857,10 @@
                                     <section class="mobile-learning-section" aria-labelledby="mobile-daily-learning-title">
                                         <div class="mobile-section-head">
                                             <h2 id="mobile-daily-learning-title">日常学习</h2>
-                                            <button type="button" data-home-section-link="daily">全部 ›</button>
+                                            <div class="mobile-section-head-actions">
+                                                <a class="mobile-mini-game-entry" href="日语学习游戏合集.html" aria-label="进入日语小游戏"><span class="mobile-mini-game-mark" aria-hidden="true">遊</span><span>日语小游戏</span></a>
+                                                <button type="button" data-home-section-link="daily">全部 ›</button>
+                                            </div>
                                         </div>
                                         <nav class="mobile-entry-grid" aria-label="日常学习入口">
                                             <button type="button" class="mobile-entry-card" data-home-section-link="daily" data-home-section-path="daily-grammar">
@@ -14155,14 +14198,14 @@
 
     <script src="shared/omikuji-catalog.js?v=20260811-qiuji1"></script>
     <script src="shared/home-pet.js?v=20260717-ronin-unlock1"></script>
-    <script src="shared/grammar-db-core.js?v=20260831-mainichi-n1-027"></script>
-    <script src="shared/grammar-db-tags.js?v=20260831-mainichi-n1-027"></script>
+    <script src="shared/grammar-db-core.js?v=20260831-mainichi-n1-048"></script>
+    <script src="shared/grammar-db-tags.js?v=20260831-mainichi-n1-048"></script>
     <script src="shared/grammar-db-resources.js?v=20260808-example-batch5"></script>
     <script src="shared/grammar-learning-sources.js?v=20260804c"></script>
     <script src="shared/grammar-db-repo.js?v=20260825-gaii-textbook2"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260829-drama-hirakinaoru1"></script>
-    <script src="shared/word-bank.js?v=20260829-drama-hirakinaoru1"></script>
+    <script src="shared/word-bank-presets.js?v=20260831-two-examples1"></script>
+    <script src="shared/word-bank.js?v=20260831-two-examples1"></script>
     <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
@@ -18021,12 +18064,15 @@
             const backButton = view.isNested
                 ? `<button type="button" class="section-view-back" data-section-back="${escapeHtml(sectionKey)}" data-section-back-path="${escapeHtml((view.parentPath || []).join("/"))}">${getArrowSvg("left")} 返回上一层</button>`
                 : "";
-            const actionsMarkup = backButton
-                ? `<div class="section-view-actions">${backButton}</div>`
+            const miniGameEntry = isMainDirectory && sectionKey === "daily"
+                ? `<a class="section-view-open section-view-mini-game" href="日语学习游戏合集.html" aria-label="进入日语小游戏"><span class="section-view-mini-game-mark" aria-hidden="true">遊</span><span>日语小游戏</span>${getArrowSvg("right")}</a>`
+                : "";
+            const actionsMarkup = backButton || miniGameEntry
+                ? `<div class="section-view-actions">${backButton}${miniGameEntry}</div>`
                 : "";
 
             return `
-                <div class="section-view-head${isMainDirectory ? " section-view-head--main-directory" : ""}">
+                <div class="section-view-head${isMainDirectory ? " section-view-head--main-directory" : ""}${miniGameEntry ? " section-view-head--with-mini-game" : ""}">
                     <div class="section-view-meta">
                         ${isMainDirectory ? `<span class="section-view-eyebrow">${mainDirectoryEyebrow}</span>` : ""}
                         <h2 class="section-view-title">${safeTitle}</h2>
@@ -18965,16 +19011,32 @@
                         <span>距离考试 <strong data-mobile-exam-countdown>--</strong> 天</span>
                     </div>
 
-                    <nav class="plan-view-tabs" aria-label="学习计划视图">
-                        <button type="button" data-plan-view-tab="calendar" aria-selected="true">
-                            <span aria-hidden="true">日</span>
-                            学習カレンダー
+                    <div class="plan-view-toolbar">
+                        <button class="plan-import-open" type="button" data-plan-import-open>
+                            <span aria-hidden="true">予</span>
+                            计划导入
                         </button>
-                        <button type="button" data-plan-view-tab="insights" aria-selected="false">
-                            <span aria-hidden="true">診</span>
-                            弱点復習
-                        </button>
-                    </nav>
+                        <nav class="plan-view-tabs" aria-label="学习计划视图">
+                            <button type="button" data-plan-view-tab="calendar" aria-selected="true">
+                                <span aria-hidden="true">日</span>
+                                学習カレンダー
+                            </button>
+                            <button type="button" data-plan-view-tab="insights" aria-selected="false">
+                                <span aria-hidden="true">診</span>
+                                弱点復習
+                            </button>
+                        </nav>
+                    </div>
+
+                    <section class="plan-preset-status" data-plan-preset-status hidden aria-label="已导入的预设计划">
+                        <span class="plan-preset-status-mark" aria-hidden="true">予</span>
+                        <div>
+                            <small data-plan-preset-status-label>導入済み</small>
+                            <strong data-plan-preset-status-title>TRY！N2 课程计划</strong>
+                        </div>
+                        <span data-plan-preset-status-progress>14 / 14课</span>
+                        <button type="button" data-plan-preset-jump>查看课程</button>
+                    </section>
 
                     <section class="plan-insights-view" data-plan-insights-view hidden aria-labelledby="plan-insights-title">
                         <header class="plan-insights-intro">
@@ -19066,11 +19128,16 @@
                             </header>
 
                             <section class="growth-card" aria-labelledby="character-name">
-                                <div class="preset-character" aria-hidden="true">
-                                    <img src="exam/vocabulary/n1/icon/kiki.png?v=20260515" alt="">
+                                <div class="preset-character">
+                                    <button class="character-avatar-button" type="button" data-character-avatar-change aria-label="更换 kiki 的头像">
+                                        <img src="exam/vocabulary/n1/icon/kiki.png?v=20260515" data-character-avatar data-default-src="exam/vocabulary/n1/icon/kiki.png?v=20260515" alt="kiki 当前头像">
+                                        <span aria-hidden="true">更换</span>
+                                    </button>
+                                    <button class="character-avatar-reset" type="button" data-character-avatar-reset aria-label="恢复 kiki 的默认头像" title="恢复默认头像" hidden>↺</button>
+                                    <input type="file" accept="image/png,image/jpeg,image/webp" data-character-avatar-input hidden>
                                 </div>
                                 <div class="growth-profile">
-                                    <h4 id="character-name">kiki</h4>
+                                    <h4 id="character-name" data-character-name>kiki</h4>
                                     <span>Lv. <b data-character-level>1</b></span>
                                     <div class="growth-xp-track" aria-label="等级经验"><span data-character-xp-bar></span></div>
                                     <small><span data-character-xp>0</span> / <span data-character-next-xp>120</span> EXP</small>
@@ -19127,6 +19194,24 @@
                         <span>本月 <strong data-mobile-month-progress-count>0 / 0</strong></span>
                         <span>Lv. <strong data-mobile-character-level>1</strong></span>
                     </div>
+
+                    <dialog class="plan-import-dialog" data-plan-import-dialog aria-labelledby="plan-import-title">
+                        <div class="plan-import-dialog-shell">
+                            <header class="plan-import-dialog-header">
+                                <div>
+                                    <span>PRESET PLAN</span>
+                                    <h3 id="plan-import-title">导入学习计划</h3>
+                                    <p>确认课程日期后，将整套课程加入当前日历。</p>
+                                </div>
+                                <button type="button" data-plan-import-close aria-label="关闭导入窗口">×</button>
+                            </header>
+                            <section class="plan-import-preview" data-plan-import-preview></section>
+                            <footer class="plan-import-dialog-footer">
+                                <p data-plan-import-footnote>已有任务会保留；相同日期与课程不会重复添加。</p>
+                                <button type="button" class="plan-import-confirm" data-plan-import-confirm>导入课程</button>
+                            </footer>
+                        </div>
+                    </dialog>
 
                     <div class="plan-toast" role="status" aria-live="polite" data-plan-toast></div>
                 </div>
@@ -21250,7 +21335,8 @@
         })();
     </script>
     <script src="shared/study-plan-insights.js?v=20260824a"></script>
-    <script src="shared/study-plan.js?v=20260824a"></script>
+    <script src="shared/study-plan-presets.js?v=20260902a"></script>
+    <script src="shared/study-plan.js?v=20260902c"></script>
     <script>
         (() => {
             const carousel = document.querySelector("[data-mobile-feature-carousel]");
