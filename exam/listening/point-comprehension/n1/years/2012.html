@@ -6,7 +6,8 @@
   <title>ポイント理解 - 聴解練習 2020年12月</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../../../shared/site-fonts.css">
-    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260811-tooltip-all">
+    <link rel="stylesheet" href="../../../shared/listening-practice-redesign.css?v=20260829-underline-highlights">
+    <link rel="stylesheet" href="../../../task-comprehension/n2/shared/follow-listening.css?v=20260830-sentence-console-r2">
 </head>
 <body>
   <header>
@@ -77,10 +78,12 @@
   </div>
 
   <div id="wordTooltip" class="custom-tooltip"></div>
-  <script src="../../../shared/audio-player-theme.js?v=20260811-integrated-options"></script>
+  <script src="../../../shared/audio-player-theme.js?v=20260829-highlight-cleanup"></script>
 
   <script src="../../../shared/listening-progress.js"></script>
   <script src="../../../shared/listening-reward-hooks.js"></script>
+  <script src="../shared/follow-listening-timelines.js?v=20260828-n1-point-2012-december-manual-r1"></script>
+  <script src="../../../task-comprehension/n2/shared/follow-listening.js?v=20260830-sentence-console-r2"></script>
   <script>
     'use strict';
 
@@ -201,7 +204,8 @@
                     question: "三番：会議で男の人が話しています。男の人はどうしてマンションの部屋が全部売れたと言っていますか。",
                     questionTrans: "（第三题：在会议上男人正在讲话。男人说为什么公寓的房间全部卖出去了？）",
                     dialogue: [
-                        { speaker: "男", text: "我が社が<span class=\"keyword\" data-tip=\"保有（ほゆう）：持有，拥有。\">保有</span>するみどり町の中古マンションですが、<span class=\"keyword\" data-tip=\"空き室（あきしつ）：空房。\">空き室</span>をなくすことは昨年度からの課題でした。これがついに今月で<span class=\"keyword\" data-tip=\"完売（かんばい）：售罄，卖光。\">完売</span>しましたので、報告します。", trans: "（关于敝公司持有的绿町二手公寓，消除空房是从上一年度开始的课题。这个月终于全部售罄了，特此报告。）" },
+                        { speaker: "男", text: "我が社が<span class=\"keyword\" data-tip=\"保有（ほゆう）：持有，拥有。\">保有</span>するみどり町の中古マンションですが、<span class=\"keyword\" data-tip=\"空き室（あきしつ）：空房。\">空き室</span>をなくすことは昨年度からの課題でした。", trans: "（关于敝公司持有的绿町二手公寓，消除空房是从上一年度开始的课题。）" },
+                        { speaker: "男", text: "これがついに今月で<span class=\"keyword\" data-tip=\"完売（かんばい）：售罄，卖光。\">完売</span>しましたので、報告します。", trans: "（这个月终于全部售罄了，特此报告。）" },
                         { speaker: "男", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" data-tip=\"关于选项1，男人提到【虽然也有提议说改装一下更容易找到买家，但最终没有进行改装工程（改装したほうが買い手がつきやすいという案もありましたが、結局改装工事は行わずに）】，说明没有进行改装，排除。\">改装したほうが<span class=\"keyword\" data-tip=\"買（か）い手（て）：买主，买家。\">買い手</span>がつきやすいという案もありましたが、結局改装工事は行わずに、</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">②</span><span class=\"explain-correct\" data-tip=\"男人明确表示【决定引入保洁服务（清掃サービスを取り入れることにしました）】，并且这招奏效了，成功吸引了三四十岁的夫妇，符合选项2。\">清掃サービスを取り入れることにしました。</span></span>", trans: "（虽然也有提议说改装一下更容易找到买家，但最终没有进行改装工程，而是决定引入保洁服务。）" },
                         { speaker: "男", text: "清掃会社と<span class=\"keyword\" data-tip=\"提携（ていけい）：合作，携手。\">提携</span>して希望する入居者に定期的にトイレや台所などの<span class=\"keyword\" data-tip=\"水回（みずまわ）り：用水区域（指厨房、卫生间、浴室等）。\">水回り</span>の掃除といったサービスを提供するようにしたんですが、これが<span class=\"keyword\" data-tip=\"当（あ）たる：命中，奏效。\">当たりまして</span>、えー、育児や仕事に忙しい三、四十代の夫婦の入居者を<span class=\"keyword\" data-tip=\"呼（よ）び込（こ）む：招揽，吸引过来。\">呼び込む</span>ことができました。", trans: "（我们与保洁公司合作，为有入住意愿的住户提供定期打扫厕所、厨房等用水区域的服务，这招奏效了，成功吸引到了忙于育儿和工作的三四十岁的夫妇入住。）" },
                         { speaker: "男", text: "おかげで、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" data-tip=\"关于选项3，男人说【避免了销售价格的大幅降价（大幅な販売価格の値下げも回避できましたし）】，说明并没有降价，排除。\">大幅な販売価格の値下げも<span class=\"keyword\" data-tip=\"回避（かいひ）：回避，避免。\">回避</span>できましたし、</span></span><span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，男人说【在没有大肆打广告的情况下成功售罄了（大々的な広告を打つことなく完売に成功しました）】，排除了打广告的原因。\"><span class=\"keyword\" data-tip=\"大々的（だいだいてき）：大规模，大范围。\">大々的な</span>広告を<span class=\"keyword\" data-tip=\"打（う）つ：（这里指）打（广告），发布。\">打つ</span>ことなく完売に成功しました。</span></span>", trans: "（托这个的福，我们避免了销售价格的大幅降价，也在没有大肆打广告的情况下成功售罄了。）" }
@@ -225,8 +229,8 @@
                         { speaker: "男", text: "そう？僕はあまり好きじゃないな。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" data-tip=\"关于选项1，男人觉得【把商品名重复好几遍挺烦人的（商品名を何度も繰り返しているのがうっとうしくて）】，这是男人讨厌的理由，不是女人觉得好的理由，排除。\">商品名を何度も繰り返しているのが<span class=\"keyword\" data-tip=\"うっとうしい：烦人，讨厌。\">うっとうしくて</span>。</span></span>", trans: "（是吗？我倒是不太喜欢。把商品名重复好几遍挺烦人的。）" },
                         { speaker: "女", text: "でも、そこがこのコマーシャルの良さでしょう。<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" data-tip=\"关于选项2，女人提到【虽然起用知名艺人的广告很多（有名な芸能人を起用するだけのコマーシャルが多いのに）】，但她接下来赞赏的并不是这个，排除。\">有名な芸能人を<span class=\"keyword\" data-tip=\"起用（きよう）：起用，任用。\">起用</span>するだけのコマーシャルが多いのに</span></span>、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">③</span><span class=\"explain-wrong\" data-tip=\"女人明确表示【不花钱靠创意决胜负这点很好啊（お金をかけずにアイディア勝負ってところがいいな）】，“不花钱”和选项3的“花钱制作”意思相反，这里女人的意思是低成本高创意，虽然选项3是“お金をかけて”，但这实际上是错误的描述。注意：题目问的是女人为什么说这个广告好。女人的原话是“お金をかけずに”（不花钱），而选项3是“お金をかけてつくっているから”（因为花钱制作了）。所以选项3是错的。真正的理由在后面。\">お金をかけずにアイディア勝負ってところがいいな。</span></span>", trans: "（不过，那正是这个广告的优点吧。明明光是起用知名艺人的广告有很多，但不花钱靠创意决胜负这点很好啊。）" },
                         { speaker: "男", text: "まあ、それはそうだけど。でも、今一面白みに<span class=\"keyword\" data-tip=\"欠（か）ける：缺乏，缺少。\">欠ける</span>んだよな。", trans: "（嘛，话是这么说没错。但是，还是感觉差了点趣味性啊。）" },
-                        { speaker: "女", text: "そう？でも、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，女人认为【就算内容有趣，意外地关键的商品名却留不在记忆里的情况也很多吧（内容がおもしろくても、意外と肝心の商品名が記憶に残らないことも多いんじゃない？）】，说明她不认为“内容有趣”是这个广告好的理由，排除。\">内容がおもしろくても、意外と<span class=\"keyword\" data-tip=\"肝心（かんじん）：关键，重要。\">肝心</span>の商品名が記憶に残らないことも多いんじゃない？</span></span>その点、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span><span class=\"explain-correct\" data-tip=\"女人认为虽然内容有趣可能记不住商品名，但【在那一点上，这个就……（その点、これはね…）】，也就是赞同了男人前面说的“多次重复商品名”，这让她觉得能记住商品名，所以她觉得这个广告好。符合选项1。\">その点、これはね...</span></span>", trans: "（是吗？可是，就算内容有趣，意外地关键的商品名却留不在记忆里的情况也很多吧？在那一点上，这个就……）" },
-                        { speaker: "男", text: "うん。確かに嫌いだけど、僕も覚えてるな。", trans: "（嗯。确实虽然讨厌，我也记住了呢。）" }
+                        { speaker: "女", text: "そう？でも、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，女人认为【就算内容有趣，意外地关键的商品名却留不在记忆里的情况也很多吧（内容がおもしろくても、意外と肝心の商品名が記憶に残らないことも多いんじゃない？）】，说明她不认为“内容有趣”是这个广告好的理由，排除。\">内容がおもしろくても、意外と<span class=\"keyword\" data-tip=\"肝心（かんじん）：关键，重要。\">肝心</span>の商品名が記憶に残らないことも多いんじゃない？</span></span><span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">①</span><span class=\"explain-correct\" data-tip=\"女人认为虽然内容有趣可能记不住商品名，但【在那一点上，这个就……（その点、これはね…）】，也就是赞同了男人前面说的“多次重复商品名”，这让她觉得能记住商品名，所以她觉得这个广告好。符合选项1。\">その点、これはね...</span></span>", trans: "（是吗？可是，就算内容有趣，意外地关键的商品名却留不在记忆里的情况也很多吧？在那一点上，这个就……）" },
+                        { speaker: "男", text: "うーん。確かに嫌いだけど、僕も覚えてるな。", trans: "（嗯。确实虽然讨厌，我也记住了呢。）" }
                     ]
                 },
                 options: [
@@ -288,9 +292,9 @@
                     dialogue: [
                         { speaker: "女", text: "皆様、このお寺は１４００年、<span class=\"keyword\" data-tip=\"円勝（えんしょう）：圆胜（人名）。\">円勝</span>という<span class=\"keyword\" data-tip=\"僧侶（そうりょ）：僧侣，和尚。\">僧侶</span>によって建てられたものです。", trans: "（各位，这座寺庙是1400年由一位名叫圆胜的僧侣建造的。）" },
                         { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">①</span><span class=\"explain-wrong\" data-tip=\"关于选项1，导游提到【这边的庭院相传是圆胜设计的，是能欣赏四季花卉的优美庭院（こちらの庭は円勝の設計と伝えられており、四季の花々が楽しめる優美な庭です）】，但这只是看点之一，并没有说是“最大的”，可以排除。\">こちらの庭は円勝の設計と伝えられており、四季の花々が楽しめる<span class=\"keyword\" data-tip=\"優美（ゆうび）：优美。\">優美な</span>庭です。</span></span>", trans: "（这边的庭院相传是圆胜设计的，是一座能欣赏四季花卉的优美庭院。）" },
-                        { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" data-tip=\"关于选项2，导游说【屋檐下精巧的雕刻，以及整个建筑上的工艺也很出色（軒下の精巧な彫刻を始め、建物全体に施された細工も見事なものですが）】，同样只是在介绍特色，排除。\">また<span class=\"keyword\" data-tip=\"軒下（のきした）：屋檐下。\">軒下</span>の<span class=\"keyword\" data-tip=\"精巧（せいこう）：精巧。\">精巧な</span>彫刻を始め、建物全体に<span class=\"keyword\" data-tip=\"施（ほどこ）す：施加，进行。\">施された</span><span class=\"keyword\" data-tip=\"細工（さいく）：工艺，手艺。\">細工</span>も<span class=\"keyword\" data-tip=\"見事（みごと）：出色，精彩。\">見事な</span>ものですが</span></span>、", trans: "（此外，以屋檐下精巧的雕刻为首，整个建筑物上所施加的工艺也很出色，但是）" },
-                        { speaker: "女", text: "<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"explain-correct\" data-tip=\"导游明确强调【尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点（とりわけ円勝自らが彫った仏像は力強く、最大の見所です）】，这直接符合选项3。\"><span class=\"keyword\" data-tip=\"とりわけ：特别，尤其。\">とりわけ</span>円勝自らが彫った仏像は力強く、最大の見所です。</span></span>", trans: "（尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点。）" },
-                        { speaker: "女", text: "えー、それから、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，导游提到【圆胜晚年画的雪山屏风画也是相当不错的作品（円勝が晩年に書いた山の雪景色の屏風絵もなかなかの作品です）】，但这依然只是补充介绍，并非最大的看点，排除。\">円勝が<span class=\"keyword\" data-tip=\"晩年（ばんねん）：晚年。\">晩年</span>に書いた山の雪景色の<span class=\"keyword\" data-tip=\"屏風絵（びょうぶえ）：屏风画。\">屏風絵</span>もなかなかの作品です。</span></span>では、ごゆっくりご観覧ください。", trans: "（嗯，然后，圆胜晚年画的雪山屏风画也是相当不错的作品。那么，请各位慢慢观赏。）" }
+                        { speaker: "女", text: "<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">②</span><span class=\"explain-wrong\" data-tip=\"关于选项2，导游说【屋檐下精巧的雕刻，以及整个建筑上的工艺也很出色（軒下の精巧な彫刻を始め、建物全体に施された細工も見事なものですが）】，同样只是在介绍特色，排除。\">また<span class=\"keyword\" data-tip=\"軒下（のきした）：屋檐下。\">軒下</span>の<span class=\"keyword\" data-tip=\"精巧（せいこう）：精巧。\">精巧な</span>彫刻を始め、建物全体に<span class=\"keyword\" data-tip=\"施（ほどこ）す：施加，进行。\">施された</span><span class=\"keyword\" data-tip=\"細工（さいく）：工艺，手艺。\">細工</span>も<span class=\"keyword\" data-tip=\"見事（みごと）：出色，精彩。\">見事な</span>ものですが</span></span>、<span class=\"highlight-correct\"><span class=\"opt-tag tag-correct\">③</span><span class=\"explain-correct\" data-tip=\"导游明确强调【尤其是圆胜亲自雕刻的佛像强健有力，是最大的看点（とりわけ円勝自らが彫った仏像は力強く、最大の見所です）】，这直接符合选项3。\"><span class=\"keyword\" data-tip=\"とりわけ：特别，尤其。\">とりわけ</span>円勝自らが彫った仏像は力強く、最大の見所です。</span></span>", trans: "（此外，以屋檐下精巧的雕刻为首，整个建筑物上的工艺也十分出色，但其中圆胜亲手雕刻的佛像尤其强健有力，是最大的看点。）" },
+                        { speaker: "女", text: "えー、それから、<span class=\"highlight-wrong\"><span class=\"opt-tag tag-wrong\">④</span><span class=\"explain-wrong\" data-tip=\"关于选项4，导游提到【圆胜晚年画的雪山屏风画也是相当不错的作品（円勝が晩年に書いた山の雪景色の屏風絵もなかなかの作品です）】，但这依然只是补充介绍，并非最大的看点，排除。\">円勝が<span class=\"keyword\" data-tip=\"晩年（ばんねん）：晚年。\">晩年</span>に書いた山の雪景色の<span class=\"keyword\" data-tip=\"屏風絵（びょうぶえ）：屏风画。\">屏風絵</span>もなかなかの作品です。</span></span>", trans: "（嗯，然后，圆胜晚年画的雪山屏风画也是相当不错的作品。）" },
+                        { speaker: "女", text: "では、ごゆっくりご観覧ください。", trans: "（那么，请各位慢慢观赏。）" }
                     ]
                 },
                 options: [
@@ -351,19 +355,33 @@
               questionTrans: "（第2题：在温泉地，播音员正在介绍。她说这个温泉地受欢迎的理由是什么？）",
               dialogue: [
                 line("女", [
-                  textSegment("皆さん、こんにちは。私は今、紅葉谷温泉に来ています。"),
+                  textSegment("皆さん、こんにちは。")
+                ], "（大家好。）"),
+                line("女", [
+                  textSegment("私は今、紅葉谷温泉に来ています。")
+                ], "（我现在来到了红叶谷温泉。）"),
+                line("女", [
                   keywordSegment("ひっそりとした", "ひっそりとした：安静的、寂静的、不显眼的。常用于地方、街道、环境等。"),
                   textSegment("山奥にあるこの温泉、お湯の"),
-                  highlightSegment(false, 1, [textSegment("特別な効能を謳っているわけではありません。")], "关于选项1，播音员说这个温泉并不是以特殊功效为卖点，所以不是因为有特别功效而受欢迎，排除。"),
-                  textSegment("古く歴史あるこの情調溢れる町並みが、"),
-                  highlightSegment(true, 2, [textSegment("心を癒してくれるともっぱらの評判なんです。")], "播音员明确说，这里古老而有历史感、充满风情的街景能治愈人心，这正是受欢迎的原因，对应选项2。"),
-                  highlightSegment(false, 3, [textSegment("こちらまで電車はご利用になれませんが、車なら都心から日帰りで往復できない距離ではありません。")], "关于选项3，播音员说不能坐电车到这里，只是开车从市中心当天往返也不是不可能。并不是交通特别方便，排除。"),
+                  highlightSegment(false, 1, [textSegment("特別な効能を謳っているわけではありません。")], "关于选项1，播音员说这个温泉并不是以特殊功效为卖点，所以不是因为有特别功效而受欢迎，排除。")
+                ], "（这座温泉位于安静的深山里，并不是主打什么特别的泉水功效。）"),
+                line("女", [
+                  textSegment("古く歴史あるこの情緒溢れる町並みが、"),
+                  highlightSegment(true, 2, [textSegment("心を癒してくれるともっぱらの評判なんです。")], "播音员明确说，这里古老而有历史感、充满风情的街景能治愈人心，这正是受欢迎的原因，对应选项2。")
+                ], "（真正有口皆碑的是，这里古老而有历史感、充满风情的街景能让人放松身心。）"),
+                line("女", [
+                  highlightSegment(false, 3, [textSegment("こちらまで電車はご利用になれませんが、車なら都心から日帰りで往復できない距離ではありません。")], "关于选项3，播音员说不能坐电车到这里，只是开车从市中心当天往返也不是不可能。并不是交通特别方便，排除。")
+                ], "（虽然不能坐电车直接到这里，但如果开车，从市中心当天往返也不是不可能。）"),
+                line("女", [
                   textSegment("皆さんもぜひ一度"),
                   keywordSegment("訪れて", "訪れる（おとずれる）：访问、拜访、到访。比「行く」更书面，常用于旅游地、施設、機会等。"),
-                  textSegment("みてください。季節折々の自然の美しさも"),
+                  textSegment("みてください。")
+                ], "（也请大家有机会一定来看看。）"),
+                line("女", [
+                  textSegment("季節折々の自然の美しさも"),
                   keywordSegment("味わえる", "味わう：品味、体验、感受。可用于食物味道，也可用于景色、雰囲気、経験等。"),
                   textSegment("ことでしょう。")
-                ], "（大家好。我现在来到了红叶谷温泉。这座温泉位于安静的深山里，并不是主打什么特别的泉水功效。真正有口皆碑的是，这里古老而有历史感、充满风情的街景能让人放松身心。虽然不能坐电车直接到这里，但如果开车，从市中心当天往返也不是不可能。也请大家有机会一定来看看，相信也能感受到四季不同的自然之美。）")
+                ], "（相信也能感受到四季不同的自然之美。）")
               ]
             },
             options: [
@@ -382,13 +400,19 @@
               dialogue: [
                 line("アナウンス", [
                   textSegment("本日午後一時より、日本書店協会文学賞を"),
-                  highlightSegment(false, 1, [textSegment("受賞されたベストセラー作家、松田ハナ先生のサイン会を開催いたします。")], "关于选项1，作家获得文学奖只是对作家的介绍，不是现在发放纪念品的理由，排除。"),
+                  highlightSegment(false, 1, [textSegment("受賞されたベストセラー作家、松田ハナ先生のサイン会を開催いたします。")], "关于选项1，作家获得文学奖只是对作家的介绍，不是现在发放纪念品的理由，排除。")
+                ], "（今天下午1点起，将举办获得日本书店协会文学奖的畅销作家松田花老师的签售会。）"),
+                line("アナウンス", [
                   textSegment("松田先生の最新作である小説「真実」は、この秋出版されたばかりですが、"),
-                  highlightSegment(false, 3, [textSegment("すでに映画化も決定しております。")], "关于选项3，作品已经确定电影化只是补充信息，不是发放纪念品的理由，排除。"),
+                  highlightSegment(false, 3, [textSegment("すでに映画化も決定しております。")], "关于选项3，作品已经确定电影化只是补充信息，不是发放纪念品的理由，排除。")
+                ], "（松田老师的最新小说《真实》是今年秋天刚出版的作品，而且已经确定将改编成电影。）"),
+                line("アナウンス", [
                   textSegment("本日は「真実」の"),
-                  highlightSegment(true, 4, [textSegment("販売５０万部突破記念といたしまして、二階サイン会会場にて、記念品をお渡ししております。")], "广播明确说，今天是为了纪念《真実》销量突破50万册，所以在二楼签售会会场发放纪念品。对应选项4。"),
+                  highlightSegment(true, 4, [textSegment("販売５０万部突破記念といたしまして、二階サイン会会場にて、記念品をお渡ししております。")], "广播明确说，今天是为了纪念《真実》销量突破50万册，所以在二楼签售会会场发放纪念品。对应选项4。")
+                ], "（今天为了纪念《真实》销量突破50万册，我们将在二楼签售会会场发放纪念品。）"),
+                line("アナウンス", [
                   textSegment("数に限りがございますので、どうぞお早めにお越しくださいませ。")
-                ], "（今天下午1点起，将举办获得日本书店协会文学奖的畅销作家松田花老师的签售会。松田老师的最新小说《真实》是今年秋天刚出版的作品，而且已经确定将改编成电影。今天为了纪念《真实》销量突破50万册，我们将在二楼签售会会场发放纪念品。数量有限，请大家尽早前来。）")
+                ], "（数量有限，请大家尽早前来。）")
               ]
             },
             options: [
@@ -420,18 +444,18 @@
                   highlightSegment(false, 4, [textSegment("え？もう一人で十分読めるだろう。")], "关于选项4，父亲一开始认为孩子可以自己读，但后面母亲反对，并最终决定由父母挑文章一起读，所以不是最终决定，排除。")
                 ], "（诶？他一个人应该已经能读了吧。）"),
                 line("女", [
-                  textSegment("でも、太郎に一人で読ませると、スポーツやゲームばかりに"),
+                  textSegment("でも、太郎に一人で読ませると、スポーツや芸能ばかりに"),
                   keywordSegment("偏りそう", "偏る（かたよる）：偏向、偏于一方。常用于内容、营养、意见、选择等不均衡。"),
                   textSegment("だから、"),
                   highlightSegment(true, 1, [textSegment("私たちがバランスよく記事を選んで、一緒に読んであげたほうがいいんじゃない？")], "母亲提出的具体做法是：由父母均衡地选择文章，然后和孩子一起读。这里对应选项1中的“親が選んだ記事をいっしょに読む”。")
-                ], "（可是如果让太郎一个人读，他可能只会偏向体育和游戏类的内容。所以是不是我们来均衡地挑选文章，然后和他一起读比较好？）"),
+                ], "（可是如果让太郎一个人读，他可能只会偏向体育和娱乐类的内容。所以是不是我们来均衡地挑选文章，然后和他一起读比较好？）"),
                 line("男", [
                   highlightSegment(false, 2, [textSegment("うーん、まあ、記事は僕たちが選ぶとしても、一人で読ませればいいんじゃないかな。")], "关于选项2，父亲提出过由父母选文章后让孩子自己读，但母亲后面认为还是需要父母解说，所以这不是最终决定，排除。")
                 ], "（嗯，文章可以由我们来选，不过让他自己读不就好了？）"),
                 line("女", [
                   textSegment("あの年齢だと、まだ"),
                   highlightSegment(true, 1, [textSegment("解説してやったほうが、楽しさを感じさせられるんじゃない？")], "母亲进一步补充，孩子这个年龄还需要父母解说，这对应选项1中的“親が解説して”。"),
-                  textSegment("そうすれば、今まで無関心だった記事にも目が行くようになって、そのうち、一人で読むようになると思うけど。それが適当に親子のコミュニケーションにもなるし。")
+                  textSegment("そうすれば、今まで無関心だった記事にも目が行くようになって、そのうち、一人で読むようになると思うけど。それが適度に親子のコミュニケーションにもなるし。")
                 ], "（他这个年纪，还是先由我们解释给他听，更能让他感受到读报纸的乐趣吧。这样一来，他也会开始注意以前不关心的文章，之后慢慢就会自己读了。而且这也正好能成为亲子交流。）"),
                 line("男", [
                   highlightSegment(true, 1, [textSegment("わかったよ。じゃあ、明日からやってみるか。")], "父亲最后接受了母亲的提议。前面已经说明具体做法：父母选择文章，并一边解释一边和孩子一起读。")
@@ -453,16 +477,24 @@
               questionTrans: "（第5题：广播里，评论家正在讲话。评论家说，消费者总是买便宜的东西，最大的问题是什么？）",
               dialogue: [
                 line("評論家", [
-                  textSegment("「安物買いの銭失い」ということわざがあります。これは、安いものは品質が悪いことが多く、何度も買い換えることになり、"),
+                  textSegment("「安物買いの銭失い」ということわざがあります。")
+                ], "（有句俗语叫“贪便宜反而吃大亏”。）"),
+                line("評論家", [
+                  textSegment("これは、安いものは品質が悪いことが多く、何度も買い換えることになり、"),
                   highlightSegment(false, 2, [textSegment("結局は高くつくという意味ですが、")], "关于选项2，评论家先解释谚语含义：便宜货可能反而更花钱。但后面说“私は経済的な損失よりも”，说明他认为最大的问题不是经济损失，排除。"),
                   textSegment("私は経済的な損失よりも、えー、"),
                   highlightSegment(true, 3, [textSegment("安いからという理由だけで商品を購入すると、物を粗末に扱う気持ちを引き起こしがちであるということのほうを、より深刻に受け止める必要があると考えます。")], "评论家明确说，比起经济损失，更应该严肃看待的是：只因为便宜就买东西，会容易引发粗略对待物品的心态。对应选项3。"),
-                  textSegment("安いものは、無くしてしまったり、壊してしまったりすることが多いというのが、そのいい例です。高価なブランド品を買う必要はありませんが、質のよいものを長く大事に使うほうが、資源の浪費を"),
+                ], "（这句话的意思是，便宜的东西往往质量不好，结果需要反复更换，最后反而花得更贵。不过我认为，比起经济损失，更需要认真看待的是：如果只是因为便宜就购买商品，人就容易产生不珍惜、粗略对待物品的心态。）"),
+                line("評論家", [
+                  textSegment("安いものは、無くしてしまったり、壊してしまったりすることが多いというのが、そのいい例です。")
+                ], "（便宜的东西经常被弄丢、弄坏，就是一个很好的例子。）"),
+                line("評論家", [
+                  textSegment("高価なブランド品を買う必要はありませんが、質のよいものを長く大事に使うほうが、資源の浪費を"),
                   keywordSegment("抑える", "抑える（おさえる）：控制、抑制、压低。常用于费用、增长、浪费、感情等。"),
                   textSegment("ことにも"),
                   keywordSegment("繋がる", "繋がる（つながる）：连接、相关、导致。常见搭配：結果につながる、節約につながる。"),
                   textSegment("のではないでしょうか。")
-                ], "（有句俗语叫“贪便宜反而吃大亏”。意思是便宜的东西质量往往不好，结果要反复更换，最后反而花得更贵。不过我认为，比起经济上的损失，更需要认真看待的是：如果只是因为便宜就买东西，人就容易产生不珍惜物品、随便对待物品的心态。便宜的东西经常被弄丢、弄坏，就是一个很好的例子。并不是说一定要买昂贵的名牌，而是选择质量好的东西，并长期珍惜使用，这样也有助于减少资源浪费，不是吗？）")
+                ], "（并不是说一定要买昂贵的名牌，而是选择质量好的东西，并长期珍惜使用，这样也有助于减少资源浪费，不是吗？）")
               ]
             },
             options: [
@@ -480,18 +512,26 @@
               questionTrans: "（第6题：在公司里，运动服装厂商的工作人员正在讲话。这个新产品最大的特点是什么？）",
               dialogue: [
                 line("男", [
-                  textSegment("ええ、わが社のスポーツウェアは従来から水分吸収力、吸収した水分をすばやく乾かす速乾性、肌触りのよさ、体の動きを妨げない伸縮性の高さで市場のシェアを広げてきました。このシェアをさらに拡大すべく、このたび、特殊なマイクロファイバーを使い、"),
+                  textSegment("ええ、わが社のスポーツウェアは従来から水分吸収力、吸収した水分をすばやく乾かす速乾性、肌触りのよさ、体の動きを妨げない伸縮性の高さで市場のシェアを広げてきました。")
+                ], "（我们公司的运动服一直以来凭借吸水性、把吸收的水分快速弄干的快干性、良好的肌肤触感，以及不妨碍身体活动的高伸缩性，扩大了市场份额。）"),
+                line("男", [
+                  textSegment("このシェアをさらに拡大すべく、このたび、特殊なマイクロファイバーを使い、"),
                   highlightSegment(true, 2, [
                     textSegment("汗を"),
                     keywordSegment("そくざに", "即座（そくざ）に：立刻、马上。比「すぐに」更书面，常用于说明反应、处理、变化很快。"),
                     textSegment("蒸発させる新しいテニスウェアの開発に成功いたしました。")
-                  ], "新产品的核心特点是使用特殊微纤维，让汗水立刻蒸发。也就是即使出汗、衣料沾湿，也能迅速变干，对应选项2。"),
-                  textSegment("１０月上旬に発売を予定しております。ええ、生地の肌触りどうにつきましては、"),
+                  ], "新产品的核心特点是使用特殊微纤维，让汗水立刻蒸发。也就是即使出汗、衣料沾湿，也能迅速变干，对应选项2。")
+                ], "（为了进一步扩大这一份额，这次我们使用特殊微纤维，成功开发出了能让汗水迅速蒸发的新款网球服。）"),
+                line("男", [
+                  textSegment("１０月上旬に発売を予定しております。")
+                ], "（计划在10月上旬发售。）"),
+                line("男", [
+                  textSegment("ええ、生地の肌触り等につきましては、"),
                   highlightSegment(false, 3, [
                     keywordSegment("さらなる", "さらなる：进一步的、更加的。后接名词，常见搭配：さらなる発展、さらなる向上、さらなる努力。"),
                     textSegment("品質の向上を目指して引き続き研究開発を行ってまいります。")
                   ], "关于选项3，肌触りについては今后继续研究开发，说明这不是此次新产品已经实现的最大特点，排除。")
-                ], "（我们公司的运动服一直以来凭借吸水性、把吸收的水分快速弄干的快干性、良好的肌肤触感，以及不妨碍身体活动的高伸缩性，扩大了市场份额。为了进一步扩大这一份额，这次我们使用特殊微纤维，成功开发出了能让汗水迅速蒸发的新款网球服。计划在10月上旬发售。另外，关于面料的肌肤触感，我们会继续以进一步提升品质为目标进行研发。）")
+                ], "（另外，关于面料的肌肤触感，我们会继续以进一步提升品质为目标进行研发。）")
               ]
             },
             options: [
