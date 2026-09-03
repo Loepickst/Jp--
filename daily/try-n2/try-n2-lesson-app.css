@@ -400,6 +400,56 @@
   border-bottom-color: rgba(138, 47, 43, 0.58);
 }
 
+.lesson-fragment .shadowing-sentence {
+  border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.lesson-fragment .shadowing-sentence.is-audio-current {
+  background-color: rgba(58, 122, 108, 0.13);
+  box-shadow: 0 0 0 2px rgba(58, 122, 108, 0.035);
+}
+
+.lesson-fragment span.shadowing-sentence.is-audio-current {
+  padding: 0.42em 0.16em 0.14em;
+  margin-inline: -0.16em;
+}
+
+.lesson-fragment div.shadowing-sentence,
+.lesson-fragment .salary-row.shadowing-sentence {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.lesson-fragment div.shadowing-sentence.is-audio-current,
+.lesson-fragment .salary-row.shadowing-sentence.is-audio-current {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.lesson-fragment div.shadowing-sentence.is-audio-current::before,
+.lesson-fragment .salary-row.shadowing-sentence.is-audio-current::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -0.5em -0.22em -0.14em -0.42em;
+  border-radius: 4px;
+  background-color: rgba(58, 122, 108, 0.13);
+  box-shadow:
+    inset 3px 0 0 rgba(38, 100, 88, 0.46),
+    0 0 0 2px rgba(58, 122, 108, 0.035);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-fragment .shadowing-sentence {
+    transition: none;
+  }
+}
+
 .audio-part-button {
   min-width: 54px;
 }
@@ -885,20 +935,25 @@
 }
 
 .practice-explanation li.practice-other-option {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 7px;
-  align-items: baseline;
+  display: block;
 }
 
-.practice-explanation li.practice-other-option > strong:first-child,
-.practice-explanation li.practice-other-option > div {
+.practice-explanation li.practice-other-option > .practice-other-option-line {
+  display: block;
   margin: 0;
+  min-width: 0;
 }
 
-.practice-explanation li.practice-other-option > div {
-  display: inline;
-  min-width: 0;
+.practice-other-option-number {
+  display: inline-block;
+  min-width: 1.35em;
+  margin-right: 3px;
+  color: #000;
+  font-weight: 500;
+}
+
+.practice-explanation .practice-other-option-line > strong {
+  font-weight: 700;
 }
 
 .grammar-modal {

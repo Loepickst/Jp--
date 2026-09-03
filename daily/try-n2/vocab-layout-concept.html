@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Try! N2 新单词排版设计稿</title>
+  <style>
+    :root {
+      --canvas: #e9ecea;
+      --paper: #fbfaf7;
+      --card: #ffffff;
+      --ink: #202321;
+      --muted: #737974;
+      --navy: #253d72;
+      --teal: #007d76;
+      --red: #8b2d29;
+      --line: #dedfdc;
+      --line-soft: #ecece8;
+      --sidebar: #292d35;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button { font: inherit; }
+
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 372px;
+      gap: 24px;
+      width: min(1580px, calc(100vw - 36px));
+      margin: 18px auto;
+      align-items: start;
+    }
+
+    .artboard {
+      overflow: hidden;
+      border: 1px solid #d5d8d5;
+      border-radius: 6px;
+      background: var(--paper);
+      box-shadow: 0 12px 34px rgba(37, 45, 42, 0.11);
+    }
+
+    .desktop-board { height: 900px; }
+    .mobile-board { height: 900px; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      padding: 0 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fdfcf9;
+    }
+
+    .topbar-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #252a2f;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid #d6d8d4;
+      border-radius: 6px;
+      background: #fff;
+      color: #53605a;
+    }
+
+    .icon-button svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-button.is-active {
+      border-color: rgba(0, 125, 118, 0.38);
+      background: rgba(0, 125, 118, 0.08);
+      color: var(--teal);
+    }
+
+    .desktop-shell {
+      display: grid;
+      grid-template-columns: 204px minmax(0, 1fr);
+      height: calc(100% - 58px);
+    }
+
+    .sidebar {
+      padding: 28px 14px;
+      background: var(--sidebar);
+      color: #e8e9e9;
+    }
+
+    .brand {
+      margin: 0 10px 30px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .lesson-name {
+      padding: 13px 12px;
+      border-left: 3px solid #d7c3a8;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 2px;
+      margin-top: 8px;
+    }
+
+    .side-item {
+      padding: 10px 14px 10px 24px;
+      color: #bfc3c7;
+      font-size: 12px;
+    }
+
+    .side-item.active {
+      border-left: 2px solid #dbc7a9;
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .desktop-content {
+      padding: 28px 32px 34px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #cfd1cd;
+    }
+
+    .section-title {
+      margin: 0 0 13px;
+      color: var(--navy);
+      font-family: "Songti SC", "Yu Mincho", serif;
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .vocab-card {
+      min-width: 0;
+      min-height: 210px;
+      padding: 17px 19px 15px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--card);
+      box-shadow: 0 2px 6px rgba(35, 43, 39, 0.035);
+    }
+
+    .vocab-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .word-block {
+      display: flex;
+      align-items: baseline;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .word {
+      margin: 0;
+      color: #1f2522;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    ruby { ruby-position: over; }
+
+    rt {
+      color: #747b75;
+      font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+      font-size: 0.48em;
+      font-weight: 550;
+    }
+
+    .word-meta {
+      flex: 0 0 auto;
+      color: #7d827e;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .card-actions {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 6px;
+    }
+
+    .card-actions .icon-button {
+      width: 31px;
+      height: 31px;
+    }
+
+    .meaning-scene {
+      margin: 13px 0 0;
+      padding: 9px 11px;
+      border-left: 3px solid #b53c38;
+      border-radius: 4px;
+      background: #fff4f3;
+      color: #3b3533;
+      font-size: 12.5px;
+      font-weight: 560;
+      line-height: 1.6;
+    }
+
+    .example {
+      margin-top: 12px;
+      padding-left: 11px;
+      border-left: 2px solid #d9dcd8;
+    }
+
+    .example-ja {
+      margin: 0;
+      color: #252825;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.65;
+    }
+
+    .example-zh {
+      display: inline-block;
+      max-width: 100%;
+      margin: 5px 0 0;
+      padding: 3px 7px;
+      border-radius: 3px;
+      background: #edf7f2;
+      color: #49796d;
+      font-size: 10.5px;
+      line-height: 1.5;
+    }
+
+    .mobile-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 54px;
+      padding: 0 12px;
+      border-bottom: 1px solid var(--line);
+      background: #fdfcf9;
+    }
+
+    .mobile-tabs {
+      display: flex;
+      gap: 8px;
+      overflow: hidden;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .lesson-tab {
+      height: 34px;
+      padding: 0 14px;
+      border: 1px solid #dcddd9;
+      border-radius: 999px;
+      background: #fff;
+      color: #676c68;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .lesson-tab.active {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .mobile-content {
+      padding: 18px 12px 28px;
+    }
+
+    .mobile-content .section-head {
+      min-height: 44px;
+      margin-bottom: 12px;
+    }
+
+    .mobile-content .section-title {
+      margin-bottom: 11px;
+      font-size: 23px;
+    }
+
+    .mobile-cards {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mobile-cards .vocab-card {
+      min-height: 0;
+      padding: 15px 15px 13px;
+    }
+
+    .mobile-cards .word-block { gap: 7px; }
+    .mobile-cards .word { font-size: 22px; }
+    .mobile-cards .word-meta { font-size: 10px; }
+    .mobile-cards .meaning-scene { margin-top: 11px; padding: 8px 9px; font-size: 11.5px; }
+    .mobile-cards .example { margin-top: 9px; padding-left: 9px; }
+    .mobile-cards .example-ja { font-size: 13.5px; }
+    .mobile-cards .example-zh { font-size: 10px; }
+
+    @media (max-width: 1040px) {
+      .stage { grid-template-columns: 1fr; }
+      .mobile-board { width: 372px; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5M6.5 9.5V20h11V9.5M9.5 20v-6h5v6"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5 9.5 17 19 7.5"/></symbol>
+  </svg>
+
+  <main class="stage">
+    <section class="artboard desktop-board" aria-label="桌面端新单词设计稿">
+      <header class="topbar">
+        <div class="topbar-title">Try! N2</div>
+        <button class="icon-button" aria-label="返回首页"><svg><use href="#i-home"/></svg></button>
+      </header>
+      <div class="desktop-shell">
+        <aside class="sidebar">
+          <div class="brand">Try! N2</div>
+          <div class="lesson-name">第一课：スタッフ募集のお知らせ</div>
+          <nav class="side-list">
+            <div class="side-item">课文</div>
+            <div class="side-item active">新单词</div>
+            <div class="side-item">文型</div>
+            <div class="side-item">课后练习</div>
+          </nav>
+        </aside>
+        <section class="desktop-content">
+          <header class="section-head">
+            <h1 class="section-title">新单词</h1>
+            <button class="icon-button" aria-label="进入自检"><svg><use href="#i-check"/></svg></button>
+          </header>
+          <div class="cards-grid">
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word">やる気</h2><div class="word-meta">名词 · ⓪型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">干劲；积极性。用于描述对工作、学习等表现出的主动意愿。</p>
+              <div class="example"><p class="example-ja">やる気のある<ruby>人<rt>ひと</rt></ruby>を<ruby>募集<rt>ぼしゅう</rt></ruby>する。</p><p class="example-zh">招募有干劲的人。</p></div>
+            </article>
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word"><ruby>案内<rt>あんない</rt></ruby></h2><div class="word-meta">名・他动词 · ③型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button is-active"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">引导；介绍；通知。常用于接待、产品说明或书面通知。</p>
+              <div class="example"><p class="example-ja">お<ruby>客様<rt>きゃくさま</rt></ruby>を<ruby>席<rt>せき</rt></ruby>へ<ruby>案内<rt>あんない</rt></ruby>する。</p><p class="example-zh">引导客人入座。</p></div>
+            </article>
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word"><ruby>可<rt>か</rt></ruby></h2><div class="word-meta">名・构词 · ①型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">可以；允许。多用于规则、招聘条件等正式书面表达。</p>
+              <div class="example"><p class="example-ja"><ruby>未経験者<rt>みけいけんしゃ</rt></ruby>も<ruby>応募可<rt>おうぼか</rt></ruby>。</p><p class="example-zh">无经验者也可应聘。</p></div>
+            </article>
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word"><ruby>給与<rt>きゅうよ</rt></ruby></h2><div class="word-meta">名词 · ①型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">薪资；工资。常用于招聘广告、合同等正式场景。</p>
+              <div class="example"><p class="example-ja"><ruby>給与<rt>きゅうよ</rt></ruby>は<ruby>経験<rt>けいけん</rt></ruby>を<ruby>考慮<rt>こうりょ</rt></ruby>して<ruby>決<rt>き</rt></ruby>める。</p><p class="example-zh">薪资根据经验决定。</p></div>
+            </article>
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word"><ruby>考慮<rt>こうりょ</rt></ruby></h2><div class="word-meta">名・他动词 · ①型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">考虑；顾及。表示做决定时把相关情况纳入判断。</p>
+              <div class="example"><p class="example-ja"><ruby>事情<rt>じじょう</rt></ruby>を<ruby>考慮<rt>こうりょ</rt></ruby>する。</p><p class="example-zh">酌情考虑。</p></div>
+            </article>
+            <article class="vocab-card">
+              <header class="vocab-card-head">
+                <div class="word-block"><h2 class="word"><ruby>往復<rt>おうふく</rt></ruby></h2><div class="word-meta">名・自动词 · ⓪型</div></div>
+                <div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div>
+              </header>
+              <p class="meaning-scene">往返；来回。常用于说明交通费、路程或所需时间。</p>
+              <div class="example"><p class="example-ja"><ruby>会社<rt>かいしゃ</rt></ruby>まで<ruby>往復<rt>おうふく</rt></ruby>2<ruby>時間<rt>じかん</rt></ruby>かかる。</p><p class="example-zh">往返公司需要两小时。</p></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="artboard mobile-board" aria-label="手机端新单词设计稿">
+      <header class="mobile-topbar"><button class="icon-button"><svg><use href="#i-menu"/></svg></button><button class="icon-button"><svg><use href="#i-home"/></svg></button></header>
+      <div class="mobile-tabs"><button class="lesson-tab active">第一课：スタッフ募集のお知らせ</button><button class="lesson-tab">第二课：転任のあいさつ</button></div>
+      <section class="mobile-content">
+        <header class="section-head"><h1 class="section-title">新单词</h1><button class="icon-button"><svg><use href="#i-check"/></svg></button></header>
+        <div class="mobile-cards">
+          <article class="vocab-card">
+            <header class="vocab-card-head"><div class="word-block"><h2 class="word">やる気</h2><div class="word-meta">名词 · ⓪型</div></div><div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div></header>
+            <p class="meaning-scene">干劲；积极性。用于描述对工作、学习等表现出的主动意愿。</p>
+            <div class="example"><p class="example-ja">やる気のある<ruby>人<rt>ひと</rt></ruby>を<ruby>募集<rt>ぼしゅう</rt></ruby>する。</p><p class="example-zh">招募有干劲的人。</p></div>
+          </article>
+          <article class="vocab-card">
+            <header class="vocab-card-head"><div class="word-block"><h2 class="word"><ruby>案内<rt>あんない</rt></ruby></h2><div class="word-meta">名・他动词 · ③型</div></div><div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button is-active"><svg><use href="#i-star"/></svg></button></div></header>
+            <p class="meaning-scene">引导；介绍；通知。常用于接待、产品说明或书面通知。</p>
+            <div class="example"><p class="example-ja">お<ruby>客様<rt>きゃくさま</rt></ruby>を<ruby>席<rt>せき</rt></ruby>へ<ruby>案内<rt>あんない</rt></ruby>する。</p><p class="example-zh">引导客人入座。</p></div>
+          </article>
+          <article class="vocab-card">
+            <header class="vocab-card-head"><div class="word-block"><h2 class="word"><ruby>可<rt>か</rt></ruby></h2><div class="word-meta">名・构词 · ①型</div></div><div class="card-actions"><button class="icon-button"><svg><use href="#i-volume"/></svg></button><button class="icon-button"><svg><use href="#i-star"/></svg></button></div></header>
+            <p class="meaning-scene">可以；允许。多用于规则、招聘条件等正式书面表达。</p>
+            <div class="example"><p class="example-ja"><ruby>未経験者<rt>みけいけんしゃ</rt></ruby>も<ruby>応募可<rt>おうぼか</rt></ruby>。</p><p class="example-zh">无经验者也可应聘。</p></div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

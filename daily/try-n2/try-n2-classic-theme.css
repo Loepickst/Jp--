@@ -1744,6 +1744,16 @@ body {
   place-items: center;
 }
 
+.grammar-study-card.is-supplement .grammar-study-head {
+  grid-template-columns: 78px minmax(0, 1fr) auto;
+}
+
+.grammar-study-code.is-supplement {
+  width: 78px;
+  padding-inline: 7px;
+  white-space: nowrap;
+}
+
 .grammar-study-title-block,
 .grammar-study-title-line {
   min-width: 0;
@@ -1938,6 +1948,16 @@ body {
     height: 26px;
     padding: 0 4px;
     font-size: 9.5px;
+  }
+
+  .grammar-study-card.is-supplement .grammar-study-head {
+    grid-template-columns: 60px minmax(0, 1fr) auto;
+  }
+
+  .grammar-study-code.is-supplement {
+    width: 60px;
+    padding-inline: 3px;
+    font-size: 8.5px;
   }
 
   .grammar-study-title-line {

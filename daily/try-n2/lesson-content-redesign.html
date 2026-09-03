@@ -541,6 +541,70 @@
       line-height: 1.2;
     }
 
+    .vocab-heading-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vocab-sort-control {
+      position: relative;
+      display: inline-flex;
+      width: 128px;
+      height: 34px;
+      color: var(--sage-dark);
+    }
+
+    .vocab-sort-control .icon {
+      position: absolute;
+      z-index: 1;
+      left: 11px;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      transform: translateY(-50%);
+      stroke-width: 1.9;
+      pointer-events: none;
+    }
+
+    .vocab-sort-control::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .vocab-sort-select {
+      width: 100%;
+      height: 100%;
+      padding: 0 28px 0 32px;
+      border: 1px solid rgba(138, 74, 64, 0.26);
+      border-radius: 999px;
+      appearance: none;
+      background: #fff;
+      color: var(--sage-dark);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .vocab-sort-control:hover .vocab-sort-select,
+    .vocab-sort-control:focus-within .vocab-sort-select {
+      border-color: rgba(138, 74, 64, 0.48);
+      background: var(--sage-soft);
+      outline: none;
+      box-shadow: 0 4px 12px rgba(138, 74, 64, 0.08);
+    }
+
     .vocab-self-check-toggle {
       min-width: 76px;
       height: 34px;
@@ -612,9 +676,35 @@
       gap: 14px;
     }
 
+    .vocab-pos-group-heading {
+      display: flex;
+      grid-column: 1 / -1;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+      color: var(--sage-dark);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .vocab-pos-group-heading:first-child {
+      margin-top: 0;
+    }
+
+    .vocab-pos-group-heading::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
     .lesson-vocab-bank .word-bank-entry-card {
       width: 100%;
+      height: auto;
       min-height: 0;
+      align-self: start;
       gap: 12px;
       padding: 18px 20px 20px;
       border-radius: 8px;
@@ -623,6 +713,18 @@
       text-align: left;
       cursor: default;
       transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .lesson-vocab-bank .word-bank-entry-head {
+      display: flex;
+    }
+
+    .lesson-vocab-bank .word-bank-entry-word {
+      grid-column: auto;
+    }
+
+    .lesson-vocab-bank .word-bank-entry-actions {
+      grid-column: auto;
     }
 
     .lesson-vocab-bank .word-bank-entry-card::before {
@@ -704,12 +806,20 @@
       line-height: 1.55;
     }
 
+    .lesson-vocab-bank .word-bank-entry-line {
+      align-items: start;
+    }
+
     .lesson-vocab-bank .word-bank-entry-line strong,
     .lesson-pattern-bank .word-bank-entry-line strong {
       color: var(--sage-dark);
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.04em;
+    }
+
+    .lesson-vocab-bank .word-bank-entry-line:has(.vocab-example-original) > strong {
+      padding-top: 0.72em;
     }
 
     .lesson-vocab-bank .word-bank-entry-line span,
@@ -735,8 +845,26 @@
       user-select: none;
     }
 
-    .lesson-vocab-bank .vocab-example-translation {
-      margin-left: 4px;
+    .lesson-vocab-bank .word-bank-entry-line .vocab-example-translation {
+      display: block;
+      margin-top: 5px;
+      color: #0b7f75;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .lesson-vocab-bank .vocab-example-original {
+      display: block;
+      line-height: 1.9;
+    }
+
+    .lesson-vocab-bank .vocab-example-original strong {
+      color: #8b302a;
+      font-weight: 750;
+      text-decoration: underline;
+      text-decoration-color: #8b302a;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 4px;
     }
 
     .lesson-vocab-bank .word-bank-entry-line ruby {
@@ -1348,7 +1476,7 @@
 
     .textbook-example-translation {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 10px;
       padding: 0;
       font-family: var(--sans);
       border: 0;
@@ -1360,30 +1488,23 @@
 
     .textbook-example-cn {
       display: inline-block;
-      padding: 3px 5px;
-      border-radius: 5px;
-      color: #000;
+      padding: 0;
+      color: #007f78;
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 400;
-      line-height: 1.65;
-      transition: filter 160ms ease, opacity 160ms ease, background 160ms ease;
+      line-height: 1.7;
+      transition: filter 160ms ease, opacity 160ms ease;
     }
 
     .textbook-example-translation.is-hidden .textbook-example-cn {
-      background: rgba(255, 255, 255, 0.68);
       filter: blur(5px);
-      opacity: 0.45;
+      opacity: 0.22;
       user-select: none;
     }
 
-    .textbook-example-translation:hover .textbook-example-cn,
-    .textbook-example-translation:focus-visible .textbook-example-cn {
-      background: var(--sage-soft);
-    }
-
     .textbook-example-translation:focus-visible {
-      outline: 2px solid rgba(138, 74, 64, 0.32);
+      outline: 2px solid rgba(0, 127, 120, 0.26);
       outline-offset: 3px;
     }
 
@@ -1392,11 +1513,173 @@
     }
 
     .grammar-modal.textbook-example-mode .grammar-example-jp rt {
+      position: relative;
+      top: -2px;
       color: #6f7569;
       font-family: var(--sans);
       font-size: 0.58em;
       font-weight: 560;
       letter-spacing: 0;
+    }
+
+    .grammar-modal.textbook-example-mode .grammar-example-jp strong,
+    .grammar-modal.textbook-example-mode .grammar-example-jp > span {
+      padding: 0 2px;
+      border-radius: 3px;
+      background: rgba(139, 45, 41, 0.08);
+      color: #8b2d29;
+      font-weight: 800;
+      text-decoration-line: underline;
+      text-decoration-color: #8b2d29;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+      text-decoration-skip-ink: auto;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .grammar-example-jp-line {
+      display: block;
+    }
+
+    .textbook-review-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 126px;
+      padding: 25px 36px 22px 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .textbook-review-heading {
+      min-width: 0;
+    }
+
+    .textbook-review-title {
+      margin: 0;
+      color: #172d59;
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .textbook-review-subtitle {
+      margin: 9px 0 0;
+      color: #656a65;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .textbook-review-title:focus {
+      outline: none;
+    }
+
+    .textbook-review-tools {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .textbook-review-tool {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 42px;
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid #d8dad6;
+      border-radius: 6px;
+      background: #fff;
+      color: #272a27;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
+      cursor: pointer;
+    }
+
+    .textbook-review-tool .icon {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .textbook-review-tool:hover {
+      border-color: #aeb7ad;
+      background: #f7f9f7;
+    }
+
+    .textbook-review-tool:focus-visible {
+      outline: 2px solid rgba(42, 64, 115, 0.28);
+      outline-offset: 3px;
+    }
+
+    .textbook-review-tool.is-active {
+      border-color: rgba(0, 127, 120, 0.34);
+      background: rgba(0, 127, 120, 0.07);
+      color: #006f69;
+    }
+
+    .textbook-review-speed {
+      width: 44px;
+      padding-right: 8px;
+      padding-left: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .textbook-example-audio {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-left: 9px;
+      padding: 0;
+      vertical-align: middle;
+      border: 1px solid rgba(42, 64, 115, 0.24);
+      border-radius: 50%;
+      background: #fff;
+      color: #2a4073;
+      cursor: pointer;
+      transform: translateY(-1px);
+      transition: color 150ms ease, background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .textbook-example-audio .icon {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .textbook-example-audio:hover {
+      border-color: rgba(42, 64, 115, 0.48);
+      background: #f5f7fb;
+    }
+
+    .textbook-example-audio:focus-visible {
+      outline: 2px solid rgba(42, 64, 115, 0.3);
+      outline-offset: 3px;
+    }
+
+    .textbook-example-audio.is-playing {
+      border-color: #2a4073;
+      background: #2a4073;
+      color: #fff;
     }
 
     .grammar-modal {
@@ -1439,22 +1722,45 @@
       display: none;
     }
 
+    .grammar-modal.textbook-example-mode .grammar-modal-panel {
+      width: min(920px, 100%);
+    }
+
     .grammar-modal-standalone-close {
       display: none;
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 14px;
+      right: 22px;
       z-index: 2;
       place-items: center;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: #60645c;
-      font-size: 21px;
-      line-height: 1;
-      box-shadow: 0 4px 14px rgba(41, 42, 34, 0.08);
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: #555a57;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .grammar-modal-standalone-close .icon {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+    }
+
+    .grammar-modal-standalone-close:hover {
+      background: #f4f5f3;
+      color: #232623;
+    }
+
+    .grammar-modal-standalone-close:focus-visible {
+      outline: 2px solid rgba(42, 64, 115, 0.28);
+      outline-offset: 3px;
     }
 
     .grammar-modal.textbook-example-mode .grammar-modal-standalone-close {
@@ -1462,7 +1768,8 @@
     }
 
     .grammar-modal.textbook-example-mode .grammar-modal-body {
-      padding-top: 62px;
+      display: block;
+      padding: 0;
     }
 
     .grammar-modal-title {
@@ -1548,25 +1855,57 @@
       background: #fff;
     }
 
-    .grammar-example-list {
+    .grammar-modal.textbook-example-mode .grammar-example-list {
+      display: block;
+    }
+
+    .grammar-modal.textbook-example-mode .grammar-example-card {
+      position: relative;
       display: grid;
-      gap: 10px;
-    }
-
-    .grammar-example-card {
-      padding: 13px 15px;
-      border: 1px solid var(--line);
-      border-left: 3px solid var(--sage);
-      border-radius: 6px;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 16px;
+      min-height: 120px;
+      padding: 22px 38px 20px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
       background: #fff;
+      transition: background 180ms ease, box-shadow 180ms ease;
     }
 
-    .grammar-example-jp {
+    .grammar-modal.textbook-example-mode .grammar-example-card:last-child {
+      border-bottom: 0;
+    }
+
+    .grammar-modal.textbook-example-mode .grammar-example-card.is-audio-active {
+      background: #f5f8fb;
+      box-shadow: inset 4px 0 0 #2a4073;
+    }
+
+    .textbook-example-index {
+      padding-top: 7px;
+      color: #7a7e79;
+      font-family: var(--sans);
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .grammar-example-card.is-audio-active .textbook-example-index {
+      color: #2a4073;
+    }
+
+    .textbook-example-content {
+      min-width: 0;
+    }
+
+    .grammar-modal.textbook-example-mode .grammar-example-jp {
       color: var(--ink);
       font-family: var(--serif);
-      font-size: 14px;
+      font-size: 20px;
       font-weight: 700;
-      line-height: 1.72;
+      line-height: 1.75;
     }
 
     .grammar-example-cn {
@@ -2820,6 +3159,33 @@
         width: 100%;
       }
 
+      .resource-heading--with-actions {
+        gap: 10px;
+      }
+
+      .vocab-heading-actions {
+        gap: 6px;
+      }
+
+      .vocab-sort-control {
+        width: 118px;
+        height: 40px;
+      }
+
+      .vocab-sort-select {
+        padding-right: 26px;
+        padding-left: 30px;
+        font-size: 12px;
+      }
+
+      .vocab-sort-control .icon {
+        left: 10px;
+      }
+
+      .vocab-sort-control::after {
+        right: 10px;
+      }
+
       .lesson-vocab-bank.word-bank-list,
       .lesson-pattern-bank.word-bank-list {
         grid-template-columns: 1fr;
@@ -2990,7 +3356,9 @@
 
       .grammar-modal-standalone-close {
         top: 12px;
-        right: 12px;
+        right: 15px;
+        width: 26px;
+        height: 26px;
       }
 
       .grammar-modal {
@@ -3015,22 +3383,129 @@
       }
 
       .grammar-modal.textbook-example-mode .grammar-modal-body {
-        padding-top: 58px;
+        padding: 0;
+      }
+
+      .textbook-example-audio {
+        width: 28px;
+        height: 28px;
+        margin-left: 5px;
+      }
+
+      .grammar-modal.textbook-example-mode {
+        padding: 0;
+      }
+
+      .grammar-modal.textbook-example-mode .grammar-modal-panel {
+        width: 100%;
+        max-height: calc(100vh - var(--site-header-height, 0px));
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+      }
+
+      .textbook-review-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
+        column-gap: 12px;
+        row-gap: 8px;
+        align-items: center;
+        min-height: 0;
+        padding: 16px 16px 14px 18px;
+      }
+
+      .textbook-review-heading {
+        display: contents;
+      }
+
+      .textbook-review-title {
+        grid-row: 1;
+        grid-column: 1 / -1;
+        padding-right: 34px;
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .textbook-review-subtitle {
+        grid-row: 2;
+        grid-column: 1;
+        margin: 0;
+        font-size: 11px;
+      }
+
+      .textbook-review-tools {
+        grid-row: 2;
+        grid-column: 2;
+        width: auto;
+        justify-content: flex-end;
+        margin: 0;
+        gap: 5px;
+      }
+
+      .textbook-review-tool {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        padding: 0;
+        font-size: 11px;
+      }
+
+      .textbook-review-tool span {
+        display: none;
+      }
+
+      .textbook-review-tool .icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      .textbook-review-speed {
+        width: 34px;
+        min-width: 34px;
+      }
+
+      .grammar-modal.textbook-example-mode .grammar-example-card {
+        grid-template-columns: 26px minmax(0, 1fr);
+        gap: 7px;
+        min-height: 0;
+        padding: 19px 14px 17px;
+      }
+
+      .textbook-example-index {
+        padding-top: 6px;
+        font-size: 13px;
+      }
+
+      .grammar-modal.textbook-example-mode .grammar-example-jp {
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .grammar-modal.textbook-example-mode .grammar-example-jp rt {
+        top: -1px;
+      }
+
+      .textbook-example-cn {
+        font-size: 12px;
       }
     }
   </style>
-  <link rel="stylesheet" href="try-n2-lesson-app.css?v=20260727-1">
-  <link rel="stylesheet" href="try-n2-classic-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="try-n2-lesson-app.css?v=20260830-audio-sentence1">
+  <link rel="stylesheet" href="try-n2-classic-theme.css?v=20260829-nikagiri-supplement1">
 </head>
 <body>
   <svg class="icon-sprite" width="0" height="0" aria-hidden="true" focusable="false">
     <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></symbol>
     <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5h3v14H8z"/><path d="M13 5h3v14h-3z"/></symbol>
     <symbol id="icon-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M19 12a7 7 0 0 0-12.2-4.7L4 10"/><path d="M5 12a7 7 0 0 0 12.2 4.7L20 14"/></symbol>
     <symbol id="icon-skip-back" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
     <symbol id="icon-skip-forward" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol>
     <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+    <symbol id="icon-list-filter" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></symbol>
     <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9 21v-7h6v7"/></symbol>
     <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
     <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
@@ -3082,10 +3557,19 @@
         <section class="reader-body" id="article-start">
           <article class="lesson-paper lesson-section-panel" data-section-panel="text" aria-label="课文正文"></article>
 
-          <section class="resource-panel lesson-section-panel" data-section-panel="vocab" hidden aria-label="新单词">
+          <section class="resource-panel lesson-section-panel" data-section-panel="vocab" hidden aria-label="語彙">
             <div class="resource-heading resource-heading--with-actions">
-              <h2>新单词</h2>
-              <button class="vocab-self-check-toggle" type="button" data-action="toggle-vocab-self-check" aria-pressed="false">自检</button>
+              <h2>語彙</h2>
+              <div class="vocab-heading-actions">
+                <label class="vocab-sort-control" for="vocab-sort">
+                  <svg class="icon" aria-hidden="true"><use href="#icon-list-filter"></use></svg>
+                  <select class="vocab-sort-select" id="vocab-sort" aria-label="词汇排序方式">
+                    <option value="lesson">课文顺序</option>
+                    <option value="pos">按词性分类</option>
+                  </select>
+                </label>
+                <button class="vocab-self-check-toggle" type="button" data-action="toggle-vocab-self-check" aria-pressed="false">自检</button>
+              </div>
             </div>
             <div class="resource-list word-bank-list lesson-vocab-bank" id="vocab-list"></div>
           </section>
@@ -3099,9 +3583,9 @@
             <div class="pattern-practice-shell" id="pattern-practice-shell" hidden></div>
           </section>
 
-          <section class="resource-panel lesson-section-panel" data-section-panel="practice" hidden aria-label="课后练习">
+          <section class="resource-panel lesson-section-panel" data-section-panel="practice" hidden aria-label="練習問題">
             <div class="resource-heading resource-heading--with-actions practice-heading">
-              <h2>课后练习</h2>
+              <h2>練習問題</h2>
               <button class="practice-mobile-reset" type="button" data-practice-reset>重新练习</button>
             </div>
             <div id="practice-content"></div>
@@ -3190,7 +3674,7 @@
           </div>
           <button class="grammar-modal-close" type="button" data-action="close-grammar-detail" aria-label="关闭文型详情">&times;</button>
         </div>
-        <button class="grammar-modal-standalone-close" type="button" data-action="close-grammar-detail" aria-label="关闭课文例句">&times;</button>
+        <button class="grammar-modal-standalone-close" type="button" data-action="close-grammar-detail" aria-label="关闭课文例句"><svg class="icon" aria-hidden="true"><use href="#icon-x"></use></svg></button>
         <div class="grammar-modal-body" id="grammar-modal-body"></div>
       </div>
     </div>
@@ -3201,11 +3685,13 @@
   <script src="../../shared/grammar-db-resources.js"></script>
   <script src="../../shared/grammar-db-repo.js"></script>
   <script src="../../shared/grammar-favorites.js?v=20260731-1"></script>
-  <script src="data/try-n2-dict-data.js?v=20260805"></script>
+  <script src="data/try-n2-dict-data.js?v=20260829-vocab-reset1"></script>
+    <script src="data/try-n2-vocab-data.js?v=20260831-lesson3-new-vocab2"></script>
   <script src="data/lesson-catalog.js?v=20260714-5"></script>
   <script src="data/try-n2-shadowing-timelines.js?v=20260802-1"></script>
-  <script src="data/try-n2-vocab-example-ruby.js?v=20260802-1"></script>
-  <script src="try-n2-lesson-app.js?v=20260806-1"></script>
+  <script src="data/try-n2-vocab-example-ruby.js?v=20260829-vocab-reset1"></script>
+  <script src="data/try-n2-textbook-example-audio.js?v=20260831-audio-sprites2"></script>
+  <script src="try-n2-lesson-app.js?v=20260831-audio-sprites2"></script>
   <script src="../../shared/grammar-learning-favorites.js?v=20260731-1"></script>
 </body>
 </html>

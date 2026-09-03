@@ -3,6 +3,7 @@
 
   const catalog = Array.isArray(window.tryN2LessonCatalog) ? window.tryN2LessonCatalog : [];
   const dictData = window.tryN2DictData || {};
+  const vocabData = window.tryN2VocabData || Object.create(null);
   const vocabExampleRubyMap = window.tryN2VocabExampleRubyMap || Object.create(null);
   const bundles = window.tryN2LessonBundles = window.tryN2LessonBundles || {};
   const practiceBundles = window.tryN2PracticeBundles = window.tryN2PracticeBundles || {};
@@ -29,15 +30,34 @@
   const mobileQuery = window.matchMedia("(max-width: 980px)");
   const lessonSections = [
     ["text", "课文"],
-    ["vocab", "新单词"],
+    ["vocab", "語彙"],
     ["patterns", "文型"],
-    ["practice", "课后练习"],
+    ["practice", "練習問題"],
   ];
+  const VOCAB_POS_GROUPS = Object.freeze([
+    ["noun", "名词"],
+    ["noun-verb", "名词・サ变"],
+    ["verb", "动词"],
+    ["i-adjective", "い形容词"],
+    ["na-adjective", "な形容词"],
+    ["adverb", "副词"],
+    ["adnominal", "连体词"],
+    ["pronoun", "代词"],
+    ["word-forming", "构词成分"],
+    ["expression", "惯用表达"],
+    ["unclassified", "待分类"],
+  ]);
+  const VOCAB_POS_LABELS = Object.freeze(Object.fromEntries(VOCAB_POS_GROUPS));
+  const VOCAB_POS_ORDER = Object.freeze(Object.fromEntries(VOCAB_POS_GROUPS.map(([key], index) => [key, index])));
   const WORD_BANK_STORAGE_KEY = "kikiWordBankEntriesV1";
   const WORD_BANK_MAX_ENTRIES = 600;
   const PATTERN_MISTAKE_STORAGE_KEY = "tryN2PatternPracticeMistakesV1";
+  const PRACTICE_SUBMISSION_STORAGE_KEY = "tryN2PracticeSubmissionsV1";
   const LEGACY_PATTERN_MISTAKE_STORAGE_KEYS = ["n2_mistakes"];
-  const CONTENT_VERSION = "20260727-1";
+  const CONTENT_VERSION = "20260831-example-audio-sprites2";
+  const TEXTBOOK_EXAMPLE_AUDIO_SOURCES = window.tryN2TextbookExampleAudioSources || Object.freeze({});
+  const TEXTBOOK_EXAMPLE_AUDIO_RATES = Object.freeze([0.8, 1]);
+  const TEXTBOOK_EXAMPLE_CONTINUOUS_GAP_MS = 550;
   const GRAMMAR_SEQUENCE_SYMBOLS = [
     "❶", "❷", "❸", "❹", "❺", "❻", "❼", "❽", "❾", "❿",
     "⓫", "⓬", "⓭", "⓮", "⓯", "⓰", "⓱", "⓲", "⓳", "⓴",
@@ -109,6 +129,7 @@
     textPanel: document.querySelector('[data-section-panel="text"]'),
     vocabPanel: document.querySelector('[data-section-panel="vocab"]'),
     vocabList: document.getElementById("vocab-list"),
+    vocabSort: document.getElementById("vocab-sort"),
     vocabSelfCheck: document.querySelector('[data-action="toggle-vocab-self-check"]'),
     patternPanel: document.querySelector('[data-section-panel="patterns"]'),
     patternList: document.getElementById("pattern-list"),
@@ -153,12 +174,23 @@
   let activeBundle = null;
   let activeDetailAnchor = null;
   let lastGrammarTrigger = null;
+  let textbookExampleAudio = null;
+  let activeTextbookExampleAudioButton = null;
+  let activeTextbookExampleAudioStart = 0;
+  let activeTextbookExampleAudioEnd = 0;
+  let textbookExampleAudioFrame = 0;
+  let textbookExamplePlaybackRateIndex = 1;
+  let textbookExampleContinuous = false;
+  let textbookExampleTranslationsVisible = false;
+  let textbookExampleContinuousTimer = 0;
   let isVocabSelfCheck = false;
+  let vocabSortMode = "lesson";
   let lessonLoadToken = 0;
   let audioSources = [];
   let audioPartIndex = 0;
   let audioRateIndex = 1;
   let audioScrubPointerId = null;
+  let lessonAudioSentenceIndex = -1;
   let mobileCatalogMenuOpen = false;
   let patternAlignmentFrame = 0;
   let shadowingActive = false;
@@ -238,6 +270,22 @@
     return String(template.content.textContent || "").replace(/\s+/g, " ").trim().slice(0, limit);
   }
 
+  function htmlToFuriganaAnnotation(markup, limit = 1200) {
+    const template = document.createElement("template");
+    template.innerHTML = String(markup || "");
+    Array.from(template.content.querySelectorAll("ruby")).forEach((ruby) => {
+      const reading = Array.from(ruby.querySelectorAll("rt"))
+        .map((node) => node.textContent || "")
+        .join("");
+      const base = ruby.cloneNode(true);
+      base.querySelectorAll("rt, rp").forEach((node) => node.remove());
+      const text = String(base.textContent || "").trim();
+      ruby.replaceWith(document.createTextNode(reading && text ? `${text}[${reading}]` : text));
+    });
+    template.content.querySelectorAll("rt, rp").forEach((node) => node.remove());
+    return normalizeText(template.content.textContent, limit);
+  }
+
   function formatAudioTime(value) {
     const seconds = Number.isFinite(Number(value)) ? Math.max(0, Math.floor(Number(value))) : 0;
     return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
@@ -297,6 +345,7 @@
     clearShadowingAudioSegment();
     dom.audio.currentTime = Math.max(0, Math.min(dom.audio.duration, dom.audio.currentTime + seconds));
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
   }
 
   function seekAudioFromClientX(clientX) {
@@ -307,6 +356,7 @@
     const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     dom.audio.currentTime = ratio * dom.audio.duration;
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
     return true;
   }
 
@@ -315,6 +365,7 @@
     audioPartIndex = Math.max(0, Math.min(audioSources.length - 1, Number(index) || 0));
     dom.audio.pause();
     shadowingSegmentEnd = null;
+    clearLessonAudioSentenceHighlight();
     dom.audioPlay.disabled = false;
     dom.audio.src = new URL(audioSources[audioPartIndex], window.location.href).href;
     dom.audio.playbackRate = audioRates[audioRateIndex];
@@ -328,6 +379,7 @@
   function configureLessonAudio(item) {
     if (!dom.audio) return;
     dom.audio.pause();
+    clearLessonAudioSentenceHighlight();
     dom.audio.removeAttribute("src");
     dom.audio.load();
     audioSources = (Array.isArray(item?.audioSrc) ? item.audioSrc : item?.audioSrc ? [item.audioSrc] : [])
@@ -373,7 +425,10 @@
     let textNode = walker.nextNode();
     while (textNode) {
       if (textNode.parentElement?.tagName !== "RT") {
-        textNode.nodeValue = textNode.nodeValue.replace(/([/／])(\s*)(?![～〜~])/g, "$1$2～");
+        textNode.nodeValue = textNode.nodeValue.replace(
+          /([/／])(\s*)[～〜~]?/g,
+          (_, slash, spacing) => `${slash}${spacing}～`,
+        );
       }
       textNode = walker.nextNode();
     }
@@ -508,6 +563,53 @@
 
   function getShadowingSentences() {
     return Array.from(dom.textPanel?.querySelectorAll("[data-shadowing-sentence]") || []);
+  }
+
+  function clearLessonAudioSentenceHighlight() {
+    getShadowingSentences().forEach((sentence) => sentence.classList.remove("is-audio-current"));
+    lessonAudioSentenceIndex = -1;
+  }
+
+  function getLessonAudioSentenceIndex() {
+    if (!dom.audio || activeSection !== "text") return -1;
+    const timeline = getShadowingTimeline();
+    const current = Number(dom.audio.currentTime);
+    if (!timeline.length || !Number.isFinite(current)) return -1;
+    const partSegments = timeline
+      .map((segment, index) => ({ segment, index }))
+      .filter(({ segment }) => Number(segment.part || 0) === audioPartIndex);
+    if (!partSegments.length || current < Number(partSegments[0].segment.start)) return -1;
+    for (let index = partSegments.length - 1; index >= 0; index -= 1) {
+      const item = partSegments[index];
+      const start = Number(item.segment.start);
+      const nextStart = Number(partSegments[index + 1]?.segment.start);
+      const end = Number.isFinite(nextStart) ? nextStart : Number(item.segment.end) + 0.25;
+      if (current >= start && current < end) return item.index;
+    }
+    return -1;
+  }
+
+  function scrollAudioSentenceIntoView(sentence) {
+    if (!sentence || document.hidden) return;
+    sentence.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  }
+
+  function syncLessonAudioSentenceHighlight({ scroll = false, forceScroll = false } = {}) {
+    const sentences = getShadowingSentences();
+    const timeline = getShadowingTimeline();
+    if (!sentences.length || sentences.length !== timeline.length) {
+      clearLessonAudioSentenceHighlight();
+      return;
+    }
+    const nextIndex = getLessonAudioSentenceIndex();
+    const sentenceChanged = nextIndex !== lessonAudioSentenceIndex;
+    if (sentenceChanged) {
+      sentences.forEach((sentence, index) => sentence.classList.toggle("is-audio-current", index === nextIndex));
+      lessonAudioSentenceIndex = nextIndex;
+    }
+    if (scroll && nextIndex >= 0 && (sentenceChanged || forceScroll)) {
+      scrollAudioSentenceIntoView(sentences[nextIndex]);
+    }
   }
 
   function setShadowingStatus(message) {
@@ -846,9 +948,11 @@
       dom.vocabSelfCheck.textContent = "自检";
       dom.vocabSelfCheck.setAttribute("aria-pressed", "false");
     }
+    if (dom.vocabSort) dom.vocabSort.value = vocabSortMode;
     if (dom.vocabList) {
       dom.vocabList.innerHTML = "";
       delete dom.vocabList.dataset.lesson;
+      delete dom.vocabList.dataset.sort;
     }
     if (dom.patternList) {
       dom.patternList.innerHTML = "";
@@ -917,6 +1021,17 @@
     if (dom.workspace) dom.workspace.classList.toggle("is-text-section", section === "text");
   }
 
+  function scrollWorkspaceIntoMobileView() {
+    if (!dom.workspace) return;
+    const headerHeight = document.querySelector(".classic-page-header")?.getBoundingClientRect().height || 0;
+    const catalogHeight = document.querySelector(".left-nav:not(.mobile-collapsed)")?.getBoundingClientRect().height || 0;
+    const workspaceTop = window.scrollY + dom.workspace.getBoundingClientRect().top;
+    window.scrollTo({
+      top: Math.max(0, workspaceTop - headerHeight - catalogHeight),
+      behavior: "smooth",
+    });
+  }
+
   function showSection(section, focusContent = true) {
     activeSection = section;
     if (!activeBundle) {
@@ -938,7 +1053,7 @@
       dom.reader.focus({ preventScroll: true });
     }
     if (focusContent && mobileQuery.matches && dom.workspace) {
-      dom.workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollWorkspaceIntoMobileView();
     }
   }
 
@@ -971,13 +1086,120 @@
   });
 
   function getDictItem(key) {
-    return localDictData[key] || dictData[key] || null;
+    return localDictData[key] || vocabData[key] || dictData[key] || null;
+  }
+
+  function getVocabLessons(item) {
+    if (Array.isArray(item?.lessons) && item.lessons.length) return item.lessons;
+    return Number.isFinite(Number(item?.lesson)) ? [Number(item.lesson)] : [];
+  }
+
+  function getVocabLessonOrder(item) {
+    const lessonOrder = item?.lessonOrders?.[String(activeLesson)];
+    return Number.isFinite(Number(lessonOrder)) ? Number(lessonOrder) : Number(item?.order || 0);
+  }
+
+  function getActiveVocabEntries() {
+    if (!activeBundle) return [];
+    const bundled = activeBundle.vocab || [];
+    const seen = new Set(bundled.map((entry) => entry.key));
+    const supplemental = Object.values(vocabData)
+      .filter((item) => item?.type === "vocab"
+        && getVocabLessons(item).includes(activeLesson)
+        && !seen.has(item.key))
+      .sort((left, right) => getVocabLessonOrder(left) - getVocabLessonOrder(right))
+      .map((item) => ({ key: item.key, data: item }));
+    const baseEntries = bundled.map((entry) => ({ ...entry, data: getDictItem(entry.key) || {} }))
+      .concat(supplemental)
+      .map((entry) => {
+        const data = entry.data || {};
+        const word = String(data.word || entry.title || data.title || entry.key || "");
+        const reading = String(data.reading || entry.speakText || "");
+        return {
+          ...entry,
+          title: word,
+          titleHtml: data.titleHtml || entry.titleHtml || (reading
+            ? `<ruby>${escapeHtml(word)}<rt>${escapeHtml(reading)}</rt></ruby>`
+            : escapeHtml(word)),
+          speakText: reading || word,
+          pos: data.partOfSpeech || entry.pos || "",
+          pitch: data.pitch || entry.pitch || "",
+          data,
+        };
+      });
+    return baseEntries.flatMap((entry) => {
+      const parts = Array.isArray(entry.data?.focusParts) ? entry.data.focusParts : [];
+      const focusEntries = parts.map((part, index) => {
+        const word = String(part.word || "");
+        const reading = String(part.reading || "");
+        return {
+          key: `${entry.key}--focus-${index + 1}`,
+          title: word,
+          titleHtml: part.titleHtml || (reading
+            ? `<ruby>${escapeHtml(word)}<rt>${escapeHtml(reading)}</rt></ruby>`
+            : escapeHtml(word)),
+          speakText: reading || word,
+          pos: part.partOfSpeech || "",
+          pitch: part.pitch || "",
+          data: part,
+          isFocusPart: true,
+          parentWord: entry.title,
+        };
+      });
+      return [entry, ...focusEntries];
+    });
   }
 
   function findBundleEntry(key) {
     if (!activeBundle) return null;
-    return [...(activeBundle.vocab || []), ...(activeBundle.patterns || [])]
+    return [...getActiveVocabEntries(), ...getActivePatternEntries()]
       .find((entry) => entry.key === key) || null;
+  }
+
+  function getActivePatternEntries() {
+    const entries = Array.isArray(activeBundle?.patterns) ? activeBundle.patterns : [];
+    return entries.flatMap((entry, index) => {
+      const grammarCode = `${String(activeLesson).padStart(2, "0")}-${index + 1}`;
+      const isLessonOneNikagiri = activeLesson === 1 && entry.key === "nikagiri";
+      const examples = Array.isArray(entry.examples) ? entry.examples : [];
+      const primaryEntry = {
+        ...entry,
+        grammarCode,
+        grammarSequence: index + 1,
+        examples: isLessonOneNikagiri ? examples.slice(0, 5) : examples,
+      };
+      if (!isLessonOneNikagiri) return [primaryEntry];
+      return [
+        primaryEntry,
+        {
+          key: "nikagitte_nai",
+          title: "〜に限って〜ない",
+          titleHtml: "〜に限って〜ない",
+          grammarCode: `${grammarCode} 补充`,
+          grammarSequence: index + 1,
+          grammarFavoriteId: "n2-217",
+          libraryId: "n2-217",
+          libraryUsageKey: "trusted-exception",
+          meaning: "唯独……绝不会……",
+          connection: "表示受到信任的人或组织的名词（短语）＋に限って＋否定表达",
+          descHtml: "表示说话人非常信任前项所指的人或组织，坚信<b>唯独该对象不会做出后项所说的负面行为</b>。后项通常使用否定形式。",
+          examples: examples.slice(5),
+          cardExamples: [
+            {
+              ja: "<ruby>責<rt>せき</rt></ruby><ruby>任<rt>にん</rt></ruby><ruby>感<rt>かん</rt></ruby>の<ruby>強<rt>つよ</rt></ruby>い<ruby>田<rt>た</rt></ruby><ruby>中<rt>なか</rt></ruby>さん<strong>に<ruby>限<rt>かぎ</rt></ruby>って</strong>、<ruby>連<rt>れん</rt></ruby><ruby>絡<rt>らく</rt></ruby>もせずに<ruby>休<rt>やす</rt></ruby>むはずがない。",
+              zh: "像田中这样责任心强的人，绝不会不联系就请假。",
+            },
+            {
+              ja: "<ruby>長<rt>なが</rt></ruby><ruby>年<rt>ねん</rt></ruby><ruby>取<rt>と</rt></ruby>り<ruby>引<rt>ひ</rt></ruby>きしているあの<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby><strong>に<ruby>限<rt>かぎ</rt></ruby>って</strong>、<ruby>約<rt>やく</rt></ruby><ruby>束<rt>そく</rt></ruby>を<ruby>破<rt>やぶ</rt></ruby>るはずがない。",
+              zh: "唯独那家合作多年的公司，绝不会违背约定。",
+            },
+          ],
+          preferEntryExamples: true,
+          isSupplement: true,
+          supplementalOf: entry.key,
+        },
+      ];
+    });
   }
 
   function getDescRows(markup) {
@@ -1002,6 +1224,40 @@
     return index >= 0
       ? { original: text.slice(0, index).trim(), translation: text.slice(index).trim() }
       : { original: text.trim(), translation: "" };
+  }
+
+  function getVocabContent(data, key) {
+    const source = data || {};
+    const rows = getDescRows(source.desc);
+    const legacyExample = splitExample(source.ex);
+    const structuredExample = Array.isArray(source.examples) && source.examples[0]
+      ? source.examples[0]
+      : {};
+    const jaHtml = String(
+      structuredExample.jaHtml
+      || vocabExampleRubyMap[key]
+      || legacyExample.original
+      || "",
+    ).trim();
+    const ja = normalizeText(
+      structuredExample.ja || htmlWithoutRubyReadings(jaHtml, 520),
+      520,
+    );
+    const zh = normalizeText(
+      structuredExample.zh || htmlToText(legacyExample.translation, 520),
+      520,
+    ).replace(/^[（(]\s*/, "").replace(/\s*[）)]$/, "");
+    return {
+      meaning: normalizeText(
+        source.meaning || rows["含义"] || rows["中文"] || htmlToText(source.desc, 800),
+        800,
+      ),
+      usage: normalizeText(
+        source.usage || source.context || rows["场景"] || rows["用法"] || rows["补充"] || rows["搭配"] || rows["注意"],
+        800,
+      ),
+      example: { ja, jaHtml, zh },
+    };
   }
 
   function rowMarkup(label, value, valueClass = "", htmlValue = false) {
@@ -1035,29 +1291,87 @@
   }
 
   function makeVocabBankEntry(entry) {
-    const data = getDictItem(entry.key) || {};
-    const rows = getDescRows(data.desc);
+    const data = entry.data || getDictItem(entry.key) || {};
+    const content = getVocabContent(data, entry.key);
+    const meaningZh = content.meaning || "解释整理中";
+    const contextZh = content.usage;
+    const meaning = contextZh && !meaningZh.includes(contextZh)
+      ? `${meaningZh}${/[。！？!?；;]$/.test(meaningZh) ? "" : "。"}${contextZh}`
+      : meaningZh;
+    const exampleMarkup = content.example.jaHtml || escapeHtml(content.example.ja);
+    const example = content.example.ja;
+    const exampleRuby = htmlToFuriganaAnnotation(exampleMarkup, 1200);
+    const exampleZh = content.example.zh;
     const now = new Date().toISOString();
     return {
       id: getVocabBankId(entry.key),
-      word: htmlToText(entry.titleHtml || data.title || entry.key, 90),
+      word: htmlWithoutRubyReadings(entry.titleHtml || data.title || entry.key, 90),
       reading: entry.speakText || "",
-      meaningZh: rows["含义"] || htmlToText(data.desc, 420),
-      meaningJa: rows["场景"] || "",
-      example: htmlToText(data.ex, 520),
-      note: "",
+      partOfSpeech: entry.pos || "",
+      accent: entry.pitch || "",
+      jlptLevel: "N2",
+      meaning,
+      meaningZh: "",
+      meaningJa: "",
+      nuance: "",
+      usage: "",
+      collocations: [],
+      example,
+      exampleRuby,
+      exampleZh,
+      relatedWords: [],
+      note: entry.parentWord ? `词内拆解自：${entry.parentWord}` : "",
       tags: ["教材"],
       sourceTitle: `Try! N2 第${activeLesson}課 ${activeBundle.title}`,
       sourceUrl: `daily/try-n2/lesson-content-redesign.html?lesson=${activeLesson}`,
-      sourceText: htmlToText(data.ex || data.desc, 700),
+      sourceCategory: "textbook",
+      sourceText: [meaning, example, exampleZh].filter(Boolean).join(" "),
       createdAt: now,
       updatedAt: now,
       origin: "textbook",
     };
   }
 
+  function syncLegacyVocabFavorites() {
+    const entries = getWordBankEntries();
+    let changed = false;
+    getActiveVocabEntries().forEach((entry) => {
+      const index = entries.findIndex((item) => item && item.id === getVocabBankId(entry.key));
+      if (index < 0) return;
+      const previous = entries[index];
+      const updated = makeVocabBankEntry(entry);
+      const isLegacy = !previous.meaning
+        || !("partOfSpeech" in previous)
+        || !("accent" in previous)
+        || !("exampleZh" in previous)
+        || previous.partOfSpeech !== updated.partOfSpeech
+        || previous.accent !== updated.accent
+        || (updated.meaning !== "解释整理中" && previous.meaning === "解释整理中")
+        || (updated.example && !previous.example)
+        || (updated.exampleZh && !previous.exampleZh);
+      if (!isLegacy) return;
+      entries[index] = {
+        ...previous,
+        ...updated,
+        collocations: Array.isArray(previous.collocations) && previous.collocations.length
+          ? previous.collocations
+          : updated.collocations,
+        relatedWords: Array.isArray(previous.relatedWords) && previous.relatedWords.length
+          ? previous.relatedWords
+          : updated.relatedWords,
+        note: previous.note || updated.note,
+        tags: Array.isArray(previous.tags) && previous.tags.length ? previous.tags : updated.tags,
+        createdAt: previous.createdAt || updated.createdAt,
+      };
+      changed = true;
+    });
+    if (changed) {
+      saveWordBankEntries(entries, { action: "migrate", source: `try-n2-l${activeLesson}` });
+    }
+  }
+
   function toggleVocabFavorite(key) {
-    const entry = (activeBundle.vocab || []).find((item) => item.key === key);
+    const entry = getActiveVocabEntries().find((item) => item.key === key);
     if (!entry) return;
     const wordBankEntry = makeVocabBankEntry(entry);
     const entries = getWordBankEntries();
@@ -1090,7 +1404,7 @@
   }
 
   function speakVocab(key, button) {
-    const entry = (activeBundle.vocab || []).find((item) => item.key === key);
+    const entry = getActiveVocabEntries().find((item) => item.key === key);
     if (!entry || !("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       showToast("当前浏览器不支持发音。");
       return;
@@ -1106,26 +1420,49 @@
     window.speechSynthesis.speak(utterance);
   }
 
+  function getVocabPosGroup(data) {
+    const group = String(data?.partOfSpeechGroup || "unclassified");
+    return Object.prototype.hasOwnProperty.call(VOCAB_POS_LABELS, group) ? group : "unclassified";
+  }
+
   function buildVocabList() {
     if (!activeBundle || !dom.vocabList) return;
-    if (dom.vocabList.dataset.lesson === String(activeLesson) && dom.vocabList.childElementCount) {
+    syncLegacyVocabFavorites();
+    if (dom.vocabList.dataset.lesson === String(activeLesson)
+      && dom.vocabList.dataset.sort === vocabSortMode
+      && dom.vocabList.childElementCount) {
       dom.vocabList.classList.toggle("is-self-check", isVocabSelfCheck);
       return;
     }
     dom.vocabList.dataset.lesson = String(activeLesson);
+    dom.vocabList.dataset.sort = vocabSortMode;
     dom.vocabList.className = "resource-list word-bank-list lesson-vocab-bank";
     dom.vocabList.classList.toggle("is-self-check", isVocabSelfCheck);
-    dom.vocabList.innerHTML = (activeBundle.vocab || []).map((entry) => {
-      const data = getDictItem(entry.key) || {};
-      const rows = getDescRows(data.desc);
-      const example = splitExample(data.ex);
-      const exampleOriginal = vocabExampleRubyMap[entry.key] || example.original;
+    dom.vocabList.classList.toggle("is-pos-sorted", vocabSortMode === "pos");
+    const records = getActiveVocabEntries().map((entry, lessonIndex) => {
+      const data = entry.data || getDictItem(entry.key) || {};
+      return { entry, data, lessonIndex, posGroup: getVocabPosGroup(data) };
+    });
+    if (vocabSortMode === "pos") {
+      records.sort((left, right) => {
+        const groupDifference = VOCAB_POS_ORDER[left.posGroup] - VOCAB_POS_ORDER[right.posGroup];
+        return groupDifference || left.lessonIndex - right.lessonIndex;
+      });
+    }
+    let previousGroup = "";
+    dom.vocabList.innerHTML = records.map(({ entry, data, posGroup }) => {
+      const content = getVocabContent(data, entry.key);
+      const exampleOriginal = content.example.jaHtml || (content.example.ja ? escapeHtml(content.example.ja) : "");
       const saved = isVocabSaved(entry.key);
       const meta = [entry.pos, entry.pitch].filter(Boolean).join("・");
-      const meaning = rows["含义"] || rows["中文"] || htmlToText(data.desc);
-      const context = rows["场景"] || rows["用法"] || rows["补充"] || rows["搭配"] || rows["注意"] || "";
-      return `
-        <article class="word-bank-entry-card vocab-bank-card${saved ? " is-saved" : ""}">
+      const meaning = content.meaning;
+      const context = content.usage;
+      const groupHeading = vocabSortMode === "pos" && previousGroup !== posGroup
+        ? `<div class="vocab-pos-group-heading" role="heading" aria-level="3"><span>${escapeHtml(VOCAB_POS_LABELS[posGroup])}</span></div>`
+        : "";
+      previousGroup = posGroup;
+      return `${groupHeading}
+        <article class="word-bank-entry-card vocab-bank-card${entry.isFocusPart ? " is-focus-entry" : ""}${saved ? " is-saved" : ""}">
           <div class="word-bank-entry-head">
             <div class="word-bank-entry-word">
               <span class="vocab-word-title">${entry.titleHtml || escapeHtml(data.title || entry.key)}</span>
@@ -1139,9 +1476,9 @@
             </div>
           </div>
           <div class="word-bank-entry-body">
-            ${rowMarkup("中文", meaning, "vocab-answer-content")}
+            ${rowMarkup("说明", meaning, "vocab-answer-content")}
             ${rowMarkup("场景", context, "vocab-answer-content")}
-            ${rowMarkup("例", `<span class="vocab-example-original">${exampleOriginal}</span>${example.translation ? `<span class="vocab-example-translation vocab-answer-content">${example.translation}</span>` : ""}`, "", true)}
+            ${exampleOriginal ? rowMarkup("例句", `<span class="vocab-example-original">${exampleOriginal}</span>${content.example.zh ? `<span class="vocab-example-translation vocab-answer-content">${escapeHtml(content.example.zh)}</span>` : ""}`, "", true) : ""}
           </div>
         </article>`;
     }).join("");
@@ -1156,6 +1493,11 @@
   }
 
   function findGrammarSearchItem(entry) {
+    const repo = window.GrammarDB && window.GrammarDB.repo;
+    if (entry.libraryId && repo && typeof repo.getGrammarById === "function") {
+      const libraryItem = repo.getGrammarById(entry.libraryId);
+      if (libraryItem) return libraryItem;
+    }
     const alias = GRAMMAR_LIBRARY_TITLE_ALIASES[entry.key];
     if (alias) {
       const normalizedAlias = normalizeGrammarTitle(alias);
@@ -1189,6 +1531,9 @@
     const data = getDictItem(entry.key) || {};
     const rows = getDescRows(data.desc);
     const library = findGrammarSearchItem(entry);
+    const usageSection = entry.libraryUsageKey && Array.isArray(library?.usageSections)
+      ? library.usageSections.find((section) => section.key === entry.libraryUsageKey) || null
+      : null;
     const libraryExamples = library && Array.isArray(library.examples)
       ? library.examples.map((example) => ({ ja: example.jp || "", zh: example.cn || "" })).filter((example) => example.ja)
       : [];
@@ -1196,14 +1541,16 @@
       ? entry.examples.map((example) => ({ ja: example.ja || "", zh: example.zh || "" })).filter((example) => example.ja)
       : [];
     const legacyExample = splitExample(data.ex);
-    const examples = libraryExamples.length
-      ? libraryExamples
-      : entryExamples.length
+    const examples = entry.preferEntryExamples && entryExamples.length
+      ? entryExamples
+      : libraryExamples.length
+        ? libraryExamples
+        : entryExamples.length
         ? entryExamples
         : legacyExample.original
           ? [{ ja: legacyExample.original, zh: htmlToText(legacyExample.translation) }]
           : [];
-    return { data, rows, library, examples };
+    return { data, rows, library, usageSection, examples };
   }
 
   function clearPatternCardAlignment() {
@@ -1256,8 +1603,8 @@
     }
     dom.patternList.dataset.lesson = String(activeLesson);
     dom.patternList.className = "resource-list word-bank-list lesson-pattern-bank";
-    dom.patternList.innerHTML = (activeBundle.patterns || []).map((entry, index) => {
-      const { data, rows, library, examples } = resolveGrammarDetailData(entry);
+    dom.patternList.innerHTML = getActivePatternEntries().map((entry, index) => {
+      const { data, rows, library, usageSection, examples } = resolveGrammarDetailData(entry);
       const rawTitleMarkup = entry.titleHtml || escapeHtml(library?.title || data.title || entry.key);
       const patternTitleMarkup = formatPatternTitleHtml(rawTitleMarkup);
       const patternTitle = htmlWithoutRubyReadings(patternTitleMarkup);
@@ -1265,33 +1612,37 @@
       const patternTitleSizeClass = patternTitleLength >= 18 ? " is-compact" : patternTitleLength >= 14 ? " is-long" : "";
       const cardExamples = [];
       const seenExamples = new Set();
-      [
-        ...(library?.examples || []),
-        ...getGrammarExtraExamples(library),
-        ...examples,
-      ].forEach((example) => {
+      const exampleSources = Array.isArray(entry.cardExamples)
+        ? entry.cardExamples
+        : entry.preferEntryExamples
+          ? examples
+          : [...(library?.examples || []), ...getGrammarExtraExamples(library), ...examples];
+      exampleSources.forEach((example) => {
         const normalized = normalizeGrammarExample(example);
         const exampleKey = normalized ? htmlToText(normalized.ja) : "";
         if (!normalized || !exampleKey || seenExamples.has(exampleKey) || cardExamples.length >= 2) return;
         seenExamples.add(exampleKey);
         cardExamples.push(normalized);
       });
-      const grammarCode = `${String(activeLesson).padStart(2, "0")}-${index + 1}`;
+      const grammarCode = entry.grammarCode || `${String(activeLesson).padStart(2, "0")}-${index + 1}`;
       const grammarFavoriteId = String(
-        {
+        entry.grammarFavoriteId || {
           lesson7_kara_iuto: "supp-try-n2-kara-iuto",
           omieninarimashita: "supp-try-n2-special-keigo",
         }[entry.key] || library?.canonicalId || library?.id || "",
       ).trim();
-      const usageMarkup = library?.desc || escapeHtml(rows["语境"] || "");
+      const meaning = entry.meaning || usageSection?.meaning || library?.meaning || rows["含义"] || "";
+      const connection = entry.connection || usageSection?.connection || library?.connection || rows["接续"] || "";
+      const usageMarkup = entry.descHtml || usageSection?.desc || library?.desc || escapeHtml(rows["语境"] || "");
+      const cardClass = entry.isSupplement ? " is-supplement" : "";
       return `
-        <article class="word-bank-entry-card pattern-bank-card grammar-study-card">
+        <article class="word-bank-entry-card pattern-bank-card grammar-study-card${cardClass}">
           <header class="grammar-study-head">
-            <span class="grammar-study-code" aria-label="第${activeLesson}课第${index + 1}条">${grammarCode}</span>
+            <span class="grammar-study-code${cardClass}" aria-label="${escapeHtml(grammarCode)}">${escapeHtml(grammarCode)}</span>
             <div class="grammar-study-title-block">
               <div class="grammar-study-title-line">
                 <h3 class="pattern-word-title${patternTitleSizeClass}" lang="ja">${patternTitleMarkup}</h3>
-                <span class="grammar-study-meaning">${escapeHtml(library?.meaning || rows["含义"] || "")}</span>
+                <span class="grammar-study-meaning">${escapeHtml(meaning)}</span>
               </div>
             </div>
             <div class="grammar-study-actions grammar-learning-favorite-slot">
@@ -1312,7 +1663,7 @@
           <div class="grammar-study-body">
             <section class="grammar-study-section grammar-study-connection">
               <h4>接续</h4>
-              <p>${escapeHtml(library?.connection || rows["接续"] || "")}</p>
+              <p>${escapeHtml(connection)}</p>
             </section>
             <section class="grammar-study-section grammar-study-explanation">
               <h4>用法说明</h4>
@@ -1342,14 +1693,206 @@
     document.body.classList.add("modal-open");
     requestAnimationFrame(() => {
       const selector = dom.grammarModal.classList.contains("textbook-example-mode")
-        ? ".grammar-modal-standalone-close"
+        ? ".textbook-review-title"
         : ".grammar-modal-close";
       dom.grammarModal.querySelector(selector)?.focus({ preventScroll: true });
     });
   }
 
+  function setTextbookExampleAudioButtonState(button, playing) {
+    if (!button) return;
+    button.classList.toggle("is-playing", playing);
+    button.closest(".grammar-example-card")?.classList.toggle("is-audio-active", playing);
+    button.setAttribute("aria-pressed", String(playing));
+    button.setAttribute("aria-label", playing ? "暂停本句音频" : "播放本句音频");
+    button.title = playing ? "暂停" : "播放本句";
+    button.querySelector("use")?.setAttribute("href", playing ? "#icon-pause" : "#icon-sound");
+  }
+
+  function updateTextbookExampleControls() {
+    const speedButton = dom.grammarModalBody?.querySelector("[data-textbook-example-speed]");
+    if (speedButton) {
+      const rate = TEXTBOOK_EXAMPLE_AUDIO_RATES[textbookExamplePlaybackRateIndex];
+      speedButton.textContent = `${rate}×`;
+      speedButton.setAttribute("aria-label", `播放速度 ${rate} 倍，点击切换`);
+    }
+    const continuousButton = dom.grammarModalBody?.querySelector("[data-textbook-example-continuous]");
+    if (continuousButton) {
+      continuousButton.classList.toggle("is-active", textbookExampleContinuous);
+      continuousButton.setAttribute("aria-pressed", String(textbookExampleContinuous));
+      continuousButton.setAttribute("aria-label", textbookExampleContinuous ? "停止连续播放" : "连续播放全部例句");
+      continuousButton.querySelector("use")?.setAttribute("href", textbookExampleContinuous ? "#icon-pause" : "#icon-play");
+    }
+    const translationButton = dom.grammarModalBody?.querySelector("[data-textbook-example-translations]");
+    if (translationButton) {
+      translationButton.classList.toggle("is-active", textbookExampleTranslationsVisible);
+      translationButton.setAttribute("aria-pressed", String(textbookExampleTranslationsVisible));
+      translationButton.setAttribute("aria-label", textbookExampleTranslationsVisible ? "隐藏全部译文" : "显示全部译文");
+    }
+  }
+
+  function setTextbookExampleContinuous(active) {
+    textbookExampleContinuous = Boolean(active);
+    updateTextbookExampleControls();
+  }
+
+  function setTextbookExampleTranslationsVisible(visible) {
+    textbookExampleTranslationsVisible = Boolean(visible);
+    dom.grammarModalBody?.querySelectorAll("[data-textbook-translation-toggle]").forEach((translation) => {
+      translation.classList.toggle("is-hidden", !textbookExampleTranslationsVisible);
+      translation.setAttribute("aria-pressed", String(textbookExampleTranslationsVisible));
+    });
+    updateTextbookExampleControls();
+  }
+
+  function stopTextbookExampleAudio({ reset = true, stopContinuous = true } = {}) {
+    clearTimeout(textbookExampleContinuousTimer);
+    textbookExampleContinuousTimer = 0;
+    cancelAnimationFrame(textbookExampleAudioFrame);
+    textbookExampleAudioFrame = 0;
+    if (textbookExampleAudio) {
+      textbookExampleAudio.pause();
+      if (reset) textbookExampleAudio.currentTime = activeTextbookExampleAudioStart;
+    }
+    setTextbookExampleAudioButtonState(activeTextbookExampleAudioButton, false);
+    activeTextbookExampleAudioButton = null;
+    activeTextbookExampleAudioStart = 0;
+    activeTextbookExampleAudioEnd = 0;
+    if (stopContinuous) setTextbookExampleContinuous(false);
+  }
+
+  function getTextbookExampleAudioSegment(button) {
+    const source = button?.dataset.textbookExampleAudio;
+    const start = Number(button?.dataset.textbookExampleAudioStart);
+    const end = Number(button?.dataset.textbookExampleAudioEnd);
+    if (!source || !Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+    return { source, start, end };
+  }
+
+  function finishTextbookExampleAudioSegment() {
+    const finishedButton = activeTextbookExampleAudioButton;
+    if (!finishedButton) return;
+    cancelAnimationFrame(textbookExampleAudioFrame);
+    textbookExampleAudioFrame = 0;
+    textbookExampleAudio?.pause();
+    const buttons = [...(dom.grammarModalBody?.querySelectorAll("[data-textbook-example-audio]") || [])];
+    const nextButton = textbookExampleContinuous
+      ? buttons[buttons.indexOf(finishedButton) + 1]
+      : null;
+    setTextbookExampleAudioButtonState(finishedButton, false);
+    activeTextbookExampleAudioButton = null;
+    if (nextButton) {
+      textbookExampleContinuousTimer = window.setTimeout(() => {
+        textbookExampleContinuousTimer = 0;
+        if (textbookExampleContinuous) playTextbookExampleAudio(nextButton, { locate: true });
+      }, TEXTBOOK_EXAMPLE_CONTINUOUS_GAP_MS);
+      return;
+    }
+    if (textbookExampleAudio) textbookExampleAudio.currentTime = activeTextbookExampleAudioStart;
+    activeTextbookExampleAudioStart = 0;
+    activeTextbookExampleAudioEnd = 0;
+    setTextbookExampleContinuous(false);
+  }
+
+  function monitorTextbookExampleAudioSegment() {
+    cancelAnimationFrame(textbookExampleAudioFrame);
+    textbookExampleAudioFrame = 0;
+    if (!textbookExampleAudio || !activeTextbookExampleAudioButton || textbookExampleAudio.paused) return;
+    if (textbookExampleAudio.currentTime >= activeTextbookExampleAudioEnd - 0.025) {
+      textbookExampleAudio.currentTime = activeTextbookExampleAudioEnd;
+      finishTextbookExampleAudioSegment();
+      return;
+    }
+    textbookExampleAudioFrame = requestAnimationFrame(monitorTextbookExampleAudioSegment);
+  }
+
+  function getTextbookExampleAudio() {
+    if (textbookExampleAudio) return textbookExampleAudio;
+    textbookExampleAudio = new Audio();
+    textbookExampleAudio.preload = "metadata";
+    textbookExampleAudio.addEventListener("ended", finishTextbookExampleAudioSegment);
+    textbookExampleAudio.addEventListener("error", () => {
+      stopTextbookExampleAudio();
+      showToast("本句音频播放失败。");
+    });
+    return textbookExampleAudio;
+  }
+
+  function playTextbookExampleAudio(button, { locate = false } = {}) {
+    const segment = getTextbookExampleAudioSegment(button);
+    if (!segment) return;
+    const audio = getTextbookExampleAudio();
+    const resolvedSource = new URL(segment.source, window.location.href).href;
+    const buttonChanged = activeTextbookExampleAudioButton !== button;
+    const sourceChanged = audio.src !== resolvedSource;
+    if (buttonChanged) {
+      setTextbookExampleAudioButtonState(activeTextbookExampleAudioButton, false);
+      audio.pause();
+      activeTextbookExampleAudioButton = button;
+    }
+    activeTextbookExampleAudioStart = segment.start;
+    activeTextbookExampleAudioEnd = segment.end;
+    if (sourceChanged) {
+      audio.src = resolvedSource;
+      audio.load();
+    }
+    dom.audio?.pause();
+    dom.shadowingRecording?.pause();
+    window.speechSynthesis?.cancel();
+    const startPlayback = () => {
+      if (activeTextbookExampleAudioButton !== button) return;
+      const outsideSegment = audio.currentTime < segment.start || audio.currentTime >= segment.end - 0.05;
+      if (buttonChanged || sourceChanged || outsideSegment) audio.currentTime = segment.start;
+      audio.playbackRate = TEXTBOOK_EXAMPLE_AUDIO_RATES[textbookExamplePlaybackRateIndex];
+      setTextbookExampleAudioButtonState(button, true);
+      if (locate) button.closest(".grammar-example-card")?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      audio.play().then(monitorTextbookExampleAudioSegment).catch(() => {
+        stopTextbookExampleAudio();
+        showToast("本句音频播放失败。");
+      });
+    };
+    if (audio.readyState >= HTMLMediaElement.HAVE_METADATA) startPlayback();
+    else audio.addEventListener("loadedmetadata", startPlayback, { once: true });
+  }
+
+  function toggleTextbookExampleAudio(button) {
+    const audio = getTextbookExampleAudio();
+    const segment = getTextbookExampleAudioSegment(button);
+    if (!segment) return;
+    const isCurrent = activeTextbookExampleAudioButton === button
+      && audio.src === new URL(segment.source, window.location.href).href;
+    setTextbookExampleContinuous(false);
+    if (isCurrent && !audio.paused) {
+      audio.pause();
+      cancelAnimationFrame(textbookExampleAudioFrame);
+      textbookExampleAudioFrame = 0;
+      setTextbookExampleAudioButtonState(button, false);
+      return;
+    }
+    playTextbookExampleAudio(button);
+  }
+
+  function toggleTextbookExampleContinuous() {
+    if (textbookExampleContinuous) {
+      stopTextbookExampleAudio();
+      return;
+    }
+    const firstButton = dom.grammarModalBody?.querySelector("[data-textbook-example-audio]");
+    if (!firstButton) return;
+    stopTextbookExampleAudio({ stopContinuous: false });
+    setTextbookExampleContinuous(true);
+    playTextbookExampleAudio(firstButton, { locate: true });
+  }
+
+  function cycleTextbookExampleSpeed() {
+    textbookExamplePlaybackRateIndex = (textbookExamplePlaybackRateIndex + 1) % TEXTBOOK_EXAMPLE_AUDIO_RATES.length;
+    if (textbookExampleAudio) textbookExampleAudio.playbackRate = TEXTBOOK_EXAMPLE_AUDIO_RATES[textbookExamplePlaybackRateIndex];
+    updateTextbookExampleControls();
+  }
+
   function closeGrammarModal(restoreFocus = true) {
     if (!dom.grammarModal) return;
+    stopTextbookExampleAudio();
     dom.grammarModal.hidden = true;
     dom.grammarModal.classList.remove("textbook-example-mode");
     document.body.classList.remove("modal-open");
@@ -1365,19 +1908,64 @@
     return Array.isArray(items) ? items.map((example) => ({ ja: example.jp || "", zh: example.cn || "" })) : [];
   }
 
+  function renderTextbookExampleAudioButton(audioSegment) {
+    if (!audioSegment?.src) return "";
+    const start = Number(audioSegment.start);
+    const end = Number(audioSegment.end);
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return "";
+    return `<button class="textbook-example-audio" type="button"
+      data-textbook-example-audio="${escapeHtml(audioSegment.src)}"
+      data-textbook-example-audio-start="${start}"
+      data-textbook-example-audio-end="${end}"
+      aria-label="播放本句音频" aria-pressed="false" title="播放本句">
+      <svg class="icon" aria-hidden="true"><use href="#icon-sound"></use></svg>
+    </button>`;
+  }
+
   function renderTextbookExamples(key) {
-    const entry = (activeBundle.patterns || []).find((item) => item.key === key);
+    const entry = getActivePatternEntries().find((item) => item.key === key);
     if (!entry) return;
+    stopTextbookExampleAudio();
+    const exampleAudioSources = TEXTBOOK_EXAMPLE_AUDIO_SOURCES[key] || [];
+    const examples = Array.isArray(entry.examples) ? entry.examples : [];
+    const hasTranslations = examples.some((example) => example.zh);
+    const hasAudio = examples.some((example, index) => Boolean(exampleAudioSources[index]));
+    const titleMarkup = entry.titleHtml || escapeHtml(entry.title || key);
+    textbookExampleTranslationsVisible = false;
     dom.grammarModal.classList.add("textbook-example-mode");
     dom.grammarModalTitle.textContent = "";
     dom.grammarModalBadges.innerHTML = "";
-    dom.grammarModalBody.innerHTML = entry.examples && entry.examples.length
-      ? `<div class="grammar-example-list">${entry.examples.map((example) => `
-          <div class="grammar-example-card">
-            <div class="grammar-example-jp">${example.ja}</div>
-            ${example.zh ? `<button class="textbook-example-translation is-hidden" type="button" data-textbook-translation-toggle aria-pressed="false"><span class="textbook-example-cn">${escapeHtml(example.zh)}</span></button>` : ""}
-          </div>`).join("")}</div>`
+    dom.grammarModalBody.innerHTML = examples.length
+      ? `<section class="textbook-review" aria-label="${escapeHtml(entry.title || key)}课文例句">
+          <header class="textbook-review-header">
+            <div class="textbook-review-heading">
+              <h2 class="textbook-review-title" lang="ja" tabindex="-1">${titleMarkup}</h2>
+              <p class="textbook-review-subtitle">课文例句 · ${examples.length}句</p>
+            </div>
+            <div class="textbook-review-tools" aria-label="例句复习工具">
+              ${hasTranslations ? `<button class="textbook-review-tool" type="button" data-textbook-example-translations aria-pressed="false">
+                <svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg><span>译文</span>
+              </button>` : ""}
+              ${hasAudio ? `<button class="textbook-review-tool textbook-review-speed" type="button" data-textbook-example-speed>1×</button>
+              <button class="textbook-review-tool" type="button" data-textbook-example-continuous aria-pressed="false">
+                <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg><span>连续播放</span>
+              </button>` : ""}
+            </div>
+          </header>
+          <div class="grammar-example-list">${examples.map((example, index) => `
+            <article class="grammar-example-card" data-textbook-example-index="${index}">
+              <span class="textbook-example-index" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
+              <div class="textbook-example-content">
+                <div class="grammar-example-jp-line">
+                  <span class="grammar-example-jp" lang="ja">${example.ja}</span>
+                  ${renderTextbookExampleAudioButton(exampleAudioSources[index])}
+                </div>
+                ${example.zh ? `<button class="textbook-example-translation is-hidden" type="button" data-textbook-translation-toggle aria-label="显示或隐藏第${index + 1}条译文" aria-pressed="false"><span class="textbook-example-cn">${escapeHtml(example.zh)}</span></button>` : ""}
+              </div>
+            </article>`).join("")}</div>
+        </section>`
       : '<div class="textbook-example-empty">这里还没有添加课文例句。</div>';
+    setTextbookExampleTranslationsVisible(false);
     openGrammarModal();
   }
 
@@ -1540,20 +2128,21 @@
     const entry = findBundleEntry(key);
     const data = getDictItem(key) || {};
     const rows = getDescRows(data.desc);
+    const content = getVocabContent(data, key);
     const isGrammar = data.type === "grammar"
       || Boolean((activeBundle?.patterns || []).some((item) => item.key === key))
       || Boolean(anchor?.classList?.contains("grammar-point"));
-    const title = htmlToText(data.title || entry?.titleHtml || entry?.title || key, 80);
+    const title = htmlToText(data.title || data.word || entry?.titleHtml || entry?.title || key, 80);
     return {
       key,
       type: isGrammar ? "grammar" : "vocab",
       title,
       titleHtml: entry?.titleHtml || escapeHtml(title),
       reading: isGrammar ? "" : entry?.speakText || "",
-      pos: isGrammar ? "" : entry?.pos || "",
-      meaningZh: rows["含义"] || rows["中文"] || "",
-      contextZh: rows["语境"] || rows["场景"] || rows["用法"] || "",
-      usageZh: rows["语境"] || rows["用法"] || rows["场景"] || "",
+      pos: isGrammar ? "" : entry?.pos || data.partOfSpeech || "",
+      meaningZh: isGrammar ? rows["含义"] || rows["中文"] || "" : content.meaning,
+      contextZh: isGrammar ? rows["语境"] || rows["场景"] || rows["用法"] || "" : content.usage,
+      usageZh: isGrammar ? rows["语境"] || rows["用法"] || rows["场景"] || "" : content.usage,
     };
   }
 
@@ -1843,9 +2432,73 @@
     renderPatternPractice();
   }
 
+  function readPracticeSubmissionStore() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(PRACTICE_SUBMISSION_STORAGE_KEY) || "{}");
+      return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+    } catch (_error) {
+      return {};
+    }
+  }
+
+  function normalizePracticeSelection(selected) {
+    if (!selected || typeof selected !== "object" || Array.isArray(selected)) return {};
+    return Object.fromEntries(Object.entries(selected)
+      .filter(([questionId, choice]) => questionId && Number.isInteger(Number(choice)) && Number(choice) >= 0)
+      .map(([questionId, choice]) => [questionId, Number(choice)]));
+  }
+
+  function loadPracticeSubmission(lesson) {
+    const record = readPracticeSubmissionStore()[String(lesson)];
+    if (!record || record.submitted !== true) return null;
+    return { selected: normalizePracticeSelection(record.selected), submitted: true };
+  }
+
+  function savePracticeSubmission() {
+    const state = getPracticeState();
+    if (!state.submitted) return;
+    try {
+      const store = readPracticeSubmissionStore();
+      store[String(activeLesson)] = {
+        submitted: true,
+        selected: normalizePracticeSelection(state.selected),
+        submittedAt: Date.now(),
+      };
+      localStorage.setItem(PRACTICE_SUBMISSION_STORAGE_KEY, JSON.stringify(store));
+    } catch (_error) {
+      // The submitted result remains available for the current session if storage is unavailable.
+    }
+  }
+
+  function clearPracticeSubmission() {
+    try {
+      const store = readPracticeSubmissionStore();
+      delete store[String(activeLesson)];
+      if (Object.keys(store).length) localStorage.setItem(PRACTICE_SUBMISSION_STORAGE_KEY, JSON.stringify(store));
+      else localStorage.removeItem(PRACTICE_SUBMISSION_STORAGE_KEY);
+    } catch (_error) {
+      // Resetting the in-memory state still lets the learner start again.
+    }
+  }
+
   function getPracticeState() {
-    if (!practiceStates.has(activeLesson)) practiceStates.set(activeLesson, { selected: {}, submitted: false, loading: false, error: "" });
+    if (!practiceStates.has(activeLesson)) {
+      const saved = loadPracticeSubmission(activeLesson);
+      practiceStates.set(activeLesson, {
+        selected: saved?.selected || {},
+        submitted: Boolean(saved?.submitted),
+        loading: false,
+        error: "",
+      });
+    }
     return practiceStates.get(activeLesson);
+  }
+
+  function submitPractice() {
+    const state = getPracticeState();
+    state.submitted = true;
+    savePracticeSubmission();
+    renderPractice();
   }
 
   function removeFirstPracticeLabel(markup, pattern) {
@@ -1926,9 +2579,16 @@
     });
 
     template.content.querySelectorAll("li").forEach((item) => {
-      if (item.querySelector(":scope > strong:first-child") && item.querySelector(":scope > div")) {
-        item.classList.add("practice-other-option");
-      }
+      const number = item.querySelector(":scope > strong:first-child, :scope > span:first-child");
+      const explanation = item.querySelector(":scope > div");
+      if (!number || !explanation) return;
+      const inlineNumber = document.createElement("span");
+      inlineNumber.className = "practice-other-option-number";
+      inlineNumber.textContent = normalizeText(number.textContent, 8);
+      explanation.classList.add("practice-other-option-line");
+      explanation.prepend(inlineNumber, document.createTextNode(" "));
+      item.replaceChildren(explanation);
+      item.classList.add("practice-other-option");
     });
 
     return template.innerHTML;
@@ -2029,6 +2689,7 @@
     const state = getPracticeState();
     state.selected = {};
     state.submitted = false;
+    clearPracticeSubmission();
     renderPractice();
   }
 
@@ -2118,10 +2779,36 @@
       return;
     }
 
+    const textbookExampleAudioButton = event.target.closest("[data-textbook-example-audio]");
+    if (textbookExampleAudioButton) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleTextbookExampleAudio(textbookExampleAudioButton);
+      return;
+    }
+
+    if (event.target.closest("[data-textbook-example-continuous]")) {
+      toggleTextbookExampleContinuous();
+      return;
+    }
+
+    if (event.target.closest("[data-textbook-example-speed]")) {
+      cycleTextbookExampleSpeed();
+      return;
+    }
+
+    if (event.target.closest("[data-textbook-example-translations]")) {
+      setTextbookExampleTranslationsVisible(!textbookExampleTranslationsVisible);
+      return;
+    }
+
     const translation = event.target.closest("[data-textbook-translation-toggle]");
     if (translation) {
       const hidden = translation.classList.toggle("is-hidden");
       translation.setAttribute("aria-pressed", String(!hidden));
+      textbookExampleTranslationsVisible = [...dom.grammarModalBody.querySelectorAll("[data-textbook-translation-toggle]")]
+        .every((item) => !item.classList.contains("is-hidden"));
+      updateTextbookExampleControls();
       return;
     }
 
@@ -2146,14 +2833,12 @@
     }
 
     if (event.target.closest("[data-practice-submit-confirm-action]")) {
-      getPracticeState().submitted = true;
-      renderPractice();
+      submitPractice();
       return;
     }
 
     if (event.target.closest("[data-practice-submit]")) {
-      getPracticeState().submitted = true;
-      renderPractice();
+      submitPractice();
       return;
     }
 
@@ -2219,6 +2904,10 @@
   });
 
   dom.patternPracticeToggle?.addEventListener("click", openPatternPractice);
+  dom.vocabSort?.addEventListener("change", () => {
+    vocabSortMode = dom.vocabSort.value === "pos" ? "pos" : "lesson";
+    buildVocabList();
+  });
 
   dom.audioPlay?.addEventListener("click", () => {
     if (!dom.audio || !audioSources.length) return;
@@ -2299,8 +2988,12 @@
 
   dom.audio?.addEventListener("loadedmetadata", syncAudioUi);
   dom.audio?.addEventListener("durationchange", syncAudioUi);
+  dom.audio?.addEventListener("seeking", () => {
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
+  });
   dom.audio?.addEventListener("timeupdate", () => {
     syncAudioUi();
+    syncLessonAudioSentenceHighlight({ scroll: !dom.audio.paused });
     if (shadowingSegmentEnd !== null && dom.audio.currentTime >= shadowingSegmentEnd) {
       const end = shadowingSegmentEnd;
       shadowingSegmentEnd = null;
@@ -2311,7 +3004,10 @@
       setShadowingStatus("原音播放完成。现在可以开始录音。");
     }
   });
-  dom.audio?.addEventListener("play", () => setAudioPlaying(true));
+  dom.audio?.addEventListener("play", () => {
+    setAudioPlaying(true);
+    syncLessonAudioSentenceHighlight({ scroll: true, forceScroll: true });
+  });
   dom.audio?.addEventListener("pause", () => setAudioPlaying(false));
   dom.audio?.addEventListener("ended", () => {
     shadowingSegmentEnd = null;
@@ -2319,11 +3015,13 @@
       loadAudioPart(audioPartIndex + 1, { autoplay: true });
       return;
     }
+    clearLessonAudioSentenceHighlight();
     setAudioPlaying(false);
   });
   dom.audio?.addEventListener("error", () => {
     if (dom.audioLabel) dom.audioLabel.textContent = "课文音频加载失败";
     if (dom.audioPlay) dom.audioPlay.disabled = true;
+    clearLessonAudioSentenceHighlight();
     setAudioPlaying(false);
   });
 
