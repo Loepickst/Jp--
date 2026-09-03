@@ -59,8 +59,9 @@
       return repo.resolveCanonicalIdFromSearchId(numeric) || null;
     }
 
-    if (typeof repo.getGrammarById === "function" && repo.getGrammarById(direct)) {
-      return direct;
+    if (typeof repo.getGrammarById === "function") {
+      const grammar = repo.getGrammarById(direct);
+      if (grammar) return String(grammar.id || direct);
     }
 
     return null;

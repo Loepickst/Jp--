@@ -2,10 +2,22 @@
     'use strict';
 
     const STORAGE_KEY = 'kikiStudyPlan_v1';
+    const AVATAR_STORAGE_KEY = 'kikiStudyPlanAvatar_v1';
+    const USER_PROFILE_CHANGED_EVENT = 'kiki-user-profile:changed';
     const STATE_VERSION = 1;
     const LEVEL_XP = 120;
+    const DEFAULT_CHARACTER_NAME = 'kiki';
+    const AVATAR_MAX_FILE_SIZE = 12 * 1024 * 1024;
+    const AVATAR_OUTPUT_SIZE = 512;
     const TARGET_LEVELS = Object.freeze(['N1', 'N2']);
     const ADDABLE_TYPES = ['vocabulary', 'grammar', 'reading', 'listening'];
+    const INSIGHT_TYPES = Object.freeze(['vocabulary', 'grammar', 'reading', 'listening']);
+    const INSIGHT_COLORS = Object.freeze({
+        vocabulary: Object.freeze({ color: '#b65355', soft: '#f8e8e7' }),
+        grammar: Object.freeze({ color: '#b68a4a', soft: '#f4ebdc' }),
+        reading: Object.freeze({ color: '#4f7d7b', soft: '#e5eeed' }),
+        listening: Object.freeze({ color: '#587a98', soft: '#e8edf4' })
+    });
     const root = document.querySelector('[data-study-plan-root]');
 
     const TRY_N1_TASK_CONTENTS = Object.freeze([
@@ -187,7 +199,33 @@
         characterXp: root.querySelector('[data-character-xp]'),
         characterNextXp: root.querySelector('[data-character-next-xp]'),
         characterXpBar: root.querySelector('[data-character-xp-bar]'),
+        characterName: root.querySelector('[data-character-name]'),
+        characterAvatar: root.querySelector('[data-character-avatar]'),
+        characterAvatarChange: root.querySelector('[data-character-avatar-change]'),
+        characterAvatarInput: root.querySelector('[data-character-avatar-input]'),
+        characterAvatarReset: root.querySelector('[data-character-avatar-reset]'),
         dayPanel: root.querySelector('.day-panel'),
+        planViewTabs: Array.from(root.querySelectorAll('[data-plan-view-tab]')),
+        importOpen: root.querySelector('[data-plan-import-open]'),
+        importDialog: root.querySelector('[data-plan-import-dialog]'),
+        importClose: root.querySelector('[data-plan-import-close]'),
+        importPreview: root.querySelector('[data-plan-import-preview]'),
+        importConfirm: root.querySelector('[data-plan-import-confirm]'),
+        importFootnote: root.querySelector('[data-plan-import-footnote]'),
+        presetStatus: root.querySelector('[data-plan-preset-status]'),
+        presetStatusLabel: root.querySelector('[data-plan-preset-status-label]'),
+        presetStatusTitle: root.querySelector('[data-plan-preset-status-title]'),
+        presetStatusProgress: root.querySelector('[data-plan-preset-status-progress]'),
+        presetJump: root.querySelector('[data-plan-preset-jump]'),
+        insightsView: root.querySelector('[data-plan-insights-view]'),
+        insightCategories: root.querySelector('[data-plan-insight-categories]'),
+        insightDetail: root.querySelector('[data-plan-insight-detail]'),
+        insightDot: root.querySelector('[data-plan-insight-dot]'),
+        insightTitle: root.querySelector('[data-plan-insight-title]'),
+        insightTopicCount: root.querySelector('[data-plan-insight-topic-count]'),
+        insightTopicList: root.querySelector('[data-plan-insight-topic-list]'),
+        insightRecentList: root.querySelector('[data-plan-insight-recent-list]'),
+        insightOverviewLink: root.querySelector('[data-plan-insight-overview-link]'),
         toast: root.querySelector('[data-plan-toast]')
     };
 
@@ -263,6 +301,23 @@
         return definition.contents.find((entry) => entry.id === contentId) || null;
     }
 
+    function normalizeCustomContent(value, type) {
+        if (!value || typeof value !== 'object') return null;
+        const title = String(value.title || '').trim();
+        const url = String(value.url || '').trim();
+        if (!title || !url || !ADDABLE_TYPES.includes(type)) return null;
+        return {
+            title,
+            chip: String(value.chip || `${TYPE_DEFINITIONS[type].label} · 复习`).trim(),
+            url
+        };
+    }
+
+    function getTaskContent(task) {
+        if (!task || typeof task !== 'object') return null;
+        return normalizeCustomContent(task.content, task.type) || getContent(task.type, task.contentId);
+    }
+
     function createDefaultTasks(referenceDate) {
         const year = referenceDate.getFullYear();
         const month = referenceDate.getMonth();
@@ -329,7 +384,8 @@
         const date = parseDateKey(task.date);
         const type = String(task.type || '');
         const contentId = String(task.contentId || '');
-        if (!date || !getContent(type, contentId)) return null;
+        const customContent = normalizeCustomContent(task.content, type);
+        if (!date || (!getContent(type, contentId) && !customContent)) return null;
         return {
             id: String(task.id || `task-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
             date: toDateKey(date),
@@ -337,7 +393,10 @@
             contentId,
             minutes: Math.max(5, Math.min(240, Number.parseInt(task.minutes, 10) || 30)),
             completed: Boolean(task.completed),
-            createdAt: Number.isFinite(Number(task.createdAt)) ? Number(task.createdAt) : Date.now()
+            createdAt: Number.isFinite(Number(task.createdAt)) ? Number(task.createdAt) : Date.now(),
+            ...(customContent ? { content: customContent } : {}),
+            ...(String(task.presetId || '').trim() ? { presetId: String(task.presetId).trim() } : {}),
+            ...(String(task.presetItemId || '').trim() ? { presetItemId: String(task.presetItemId).trim() } : {})
         };
     }
 
@@ -375,6 +434,129 @@
         }
     }
 
+    function loadCustomAvatarUrl() {
+        try {
+            const value = localStorage.getItem(AVATAR_STORAGE_KEY) || '';
+            return /^data:image\/(?:png|jpeg|webp);base64,/i.test(value) ? value : '';
+        } catch (error) {
+            return '';
+        }
+    }
+
+    function getPetUserName() {
+        const petSystem = window.HomePetSystem;
+        if (!petSystem || typeof petSystem.getUserName !== 'function') return DEFAULT_CHARACTER_NAME;
+        const userName = String(petSystem.getUserName() || '').trim();
+        return userName || DEFAULT_CHARACTER_NAME;
+    }
+
+    function renderCharacterName() {
+        const characterName = getPetUserName();
+        if (elements.characterName) elements.characterName.textContent = characterName;
+        if (elements.characterAvatarChange) {
+            elements.characterAvatarChange.setAttribute('aria-label', `更换 ${characterName} 的头像`);
+        }
+        if (elements.characterAvatar) {
+            elements.characterAvatar.alt = `${characterName} 当前头像`;
+        }
+        if (elements.characterAvatarReset) {
+            elements.characterAvatarReset.setAttribute('aria-label', `恢复 ${characterName} 的默认头像`);
+        }
+        return characterName;
+    }
+
+    function renderCharacterAvatar() {
+        if (!elements.characterAvatar) return;
+        const defaultSrc = elements.characterAvatar.dataset.defaultSrc || elements.characterAvatar.getAttribute('src') || '';
+        elements.characterAvatar.src = customAvatarUrl || defaultSrc;
+        if (elements.characterAvatarReset) {
+            elements.characterAvatarReset.hidden = !customAvatarUrl;
+        }
+    }
+
+    function createAvatarDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const objectUrl = URL.createObjectURL(file);
+            const image = new Image();
+
+            image.onload = () => {
+                URL.revokeObjectURL(objectUrl);
+                const sourceSize = Math.min(image.naturalWidth, image.naturalHeight);
+                if (!sourceSize) {
+                    reject(new Error('invalid-image'));
+                    return;
+                }
+
+                const outputSize = Math.min(AVATAR_OUTPUT_SIZE, sourceSize);
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                if (!context) {
+                    reject(new Error('canvas-unavailable'));
+                    return;
+                }
+
+                canvas.width = outputSize;
+                canvas.height = outputSize;
+                context.imageSmoothingEnabled = true;
+                context.imageSmoothingQuality = 'high';
+                context.drawImage(
+                    image,
+                    (image.naturalWidth - sourceSize) / 2,
+                    (image.naturalHeight - sourceSize) / 2,
+                    sourceSize,
+                    sourceSize,
+                    0,
+                    0,
+                    outputSize,
+                    outputSize
+                );
+                resolve(canvas.toDataURL('image/webp', 0.88));
+            };
+
+            image.onerror = () => {
+                URL.revokeObjectURL(objectUrl);
+                reject(new Error('invalid-image'));
+            };
+            image.src = objectUrl;
+        });
+    }
+
+    async function replaceCharacterAvatar(file) {
+        if (!file) return;
+        if (!/^image\/(?:png|jpeg|webp)$/i.test(file.type)) {
+            showToast('请选择 PNG、JPG 或 WebP 图片。');
+            return;
+        }
+        if (file.size > AVATAR_MAX_FILE_SIZE) {
+            showToast('图片不能超过 12 MB。');
+            return;
+        }
+
+        if (elements.characterAvatarChange) elements.characterAvatarChange.disabled = true;
+        try {
+            const nextAvatarUrl = await createAvatarDataUrl(file);
+            localStorage.setItem(AVATAR_STORAGE_KEY, nextAvatarUrl);
+            customAvatarUrl = nextAvatarUrl;
+            renderCharacterAvatar();
+            showToast(`${getPetUserName()} 的头像已更换。`);
+        } catch (error) {
+            showToast('图片处理或保存失败，请换一张图片重试。');
+        } finally {
+            if (elements.characterAvatarChange) elements.characterAvatarChange.disabled = false;
+        }
+    }
+
+    function resetCharacterAvatar() {
+        try {
+            localStorage.removeItem(AVATAR_STORAGE_KEY);
+            customAvatarUrl = '';
+            renderCharacterAvatar();
+            showToast(`已恢复 ${getPetUserName()} 的默认头像。`);
+        } catch (error) {
+            showToast('暂时无法恢复默认头像，请稍后重试。');
+        }
+    }
+
     function showToast(message) {
         if (!elements.toast) return;
         elements.toast.textContent = message;
@@ -386,11 +568,231 @@
     }
 
     let state = loadState();
+    let customAvatarUrl = loadCustomAvatarUrl();
     const today = getToday();
     let selectedDateKey = toDateKey(today);
     let viewedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     let activeTaskType = 'reading';
     let isMobileCalendarOpen = false;
+    let activePlanView = 'calendar';
+    let activeInsightType = 'grammar';
+    let insightSnapshot = null;
+
+    function getPresetCatalog() {
+        const catalog = window.StudyPlanPresets;
+        return catalog && Array.isArray(catalog.presets) ? catalog.presets : [];
+    }
+
+    function getPrimaryPreset() {
+        return getPresetCatalog()[0] || null;
+    }
+
+    function formatPresetDate(dateKey) {
+        const date = parseDateKey(dateKey);
+        return date ? `${date.getMonth() + 1}.${date.getDate()}` : String(dateKey || '');
+    }
+
+    function taskMatchesPresetItem(task, preset, item) {
+        if (!task || !preset || !item) return false;
+        const matchesSource = task.presetId === preset.id && task.presetItemId === item.id;
+        const matchesSchedule = task.date === item.date
+            && task.type === item.type
+            && task.contentId === item.contentId;
+        return matchesSource || matchesSchedule;
+    }
+
+    function getPresetCoverage(preset) {
+        const items = preset && Array.isArray(preset.items) ? preset.items : [];
+        const matched = items.filter((item) => state.tasks.some((task) => (
+            taskMatchesPresetItem(task, preset, item)
+        ))).length;
+        return { matched, total: items.length };
+    }
+
+    function renderPresetImportPreview() {
+        if (!elements.importPreview || !elements.importConfirm) return;
+        const preset = getPrimaryPreset();
+        elements.importPreview.textContent = '';
+
+        if (!preset) {
+            const empty = document.createElement('p');
+            empty.className = 'plan-import-empty';
+            empty.textContent = '暂时没有可导入的课程计划。';
+            elements.importPreview.appendChild(empty);
+            elements.importConfirm.disabled = true;
+            elements.importConfirm.textContent = '暂无课程';
+            return;
+        }
+
+        const coverage = getPresetCoverage(preset);
+        const card = document.createElement('article');
+        card.className = 'plan-import-preset-card';
+
+        const header = document.createElement('header');
+        const headingCopy = document.createElement('div');
+        const eyebrow = document.createElement('span');
+        eyebrow.textContent = 'TRY! N2 · 14 LESSONS';
+        const title = document.createElement('h4');
+        title.textContent = preset.title;
+        const subtitle = document.createElement('p');
+        subtitle.textContent = preset.subtitle;
+        headingCopy.append(eyebrow, title, subtitle);
+        const stateBadge = document.createElement('strong');
+        stateBadge.textContent = coverage.matched === coverage.total ? '導入済み' : '導入可能';
+        header.append(headingCopy, stateBadge);
+
+        const description = document.createElement('p');
+        description.className = 'plan-import-description';
+        description.textContent = preset.description;
+
+        const facts = document.createElement('dl');
+        facts.className = 'plan-import-facts';
+        [
+            ['期間', `${formatPresetDate(preset.startDate)} - ${formatPresetDate(preset.endDate)}`],
+            ['课程数', `${coverage.total}节`],
+            ['予定時間', `每课 ${preset.defaultMinutes || 30}分钟`]
+        ].forEach(([label, value]) => {
+            const item = document.createElement('div');
+            const term = document.createElement('dt');
+            term.textContent = label;
+            const detail = document.createElement('dd');
+            detail.textContent = value;
+            item.append(term, detail);
+            facts.appendChild(item);
+        });
+
+        const schedule = document.createElement('p');
+        schedule.className = 'plan-import-schedule';
+        schedule.textContent = preset.scheduleLabel;
+
+        const lessonList = document.createElement('div');
+        lessonList.className = 'plan-import-lesson-list';
+        preset.items.forEach((item) => {
+            const row = document.createElement('div');
+            row.className = 'plan-import-lesson';
+            if (state.tasks.some((task) => taskMatchesPresetItem(task, preset, item))) {
+                row.classList.add('is-imported');
+            }
+            const date = document.createElement('time');
+            date.dateTime = item.date;
+            date.textContent = formatPresetDate(item.date);
+            const copy = document.createElement('span');
+            const lessonTitle = document.createElement('strong');
+            lessonTitle.textContent = item.label;
+            const note = document.createElement('small');
+            note.textContent = item.note || '常规课';
+            copy.append(lessonTitle, note);
+            const status = document.createElement('i');
+            status.textContent = row.classList.contains('is-imported') ? '追加済み' : '追加';
+            row.append(date, copy, status);
+            lessonList.appendChild(row);
+        });
+
+        card.append(header, description, facts, schedule, lessonList);
+        elements.importPreview.appendChild(card);
+
+        const remaining = Math.max(0, coverage.total - coverage.matched);
+        elements.importConfirm.disabled = remaining === 0;
+        elements.importConfirm.textContent = remaining === 0 ? '14节课程已导入' : `导入 ${remaining} 节课程`;
+        if (elements.importFootnote) {
+            elements.importFootnote.textContent = coverage.matched
+                ? `检测到 ${coverage.matched} 节课程已存在；本次只会补齐缺少的课程。`
+                : '已有任务会保留；相同日期与课程不会重复添加。';
+        }
+    }
+
+    function renderPresetStatus() {
+        if (!elements.presetStatus) return;
+        const preset = getPrimaryPreset();
+        if (!preset) {
+            elements.presetStatus.hidden = true;
+            return;
+        }
+        const coverage = getPresetCoverage(preset);
+        elements.presetStatus.hidden = coverage.matched === 0;
+        if (coverage.matched === 0) return;
+        if (elements.presetStatusLabel) {
+            elements.presetStatusLabel.textContent = coverage.matched === coverage.total ? '導入済み' : '一部導入済み';
+        }
+        if (elements.presetStatusTitle) elements.presetStatusTitle.textContent = preset.title;
+        if (elements.presetStatusProgress) {
+            elements.presetStatusProgress.textContent = `${coverage.matched} / ${coverage.total}课`;
+        }
+    }
+
+    function openPresetImportDialog() {
+        if (!elements.importDialog) return;
+        renderPresetImportPreview();
+        if (typeof elements.importDialog.showModal === 'function') {
+            elements.importDialog.showModal();
+        } else {
+            elements.importDialog.setAttribute('open', '');
+        }
+    }
+
+    function closePresetImportDialog() {
+        if (!elements.importDialog) return;
+        if (typeof elements.importDialog.close === 'function') {
+            elements.importDialog.close();
+        } else {
+            elements.importDialog.removeAttribute('open');
+        }
+    }
+
+    function importPrimaryPreset() {
+        const preset = getPrimaryPreset();
+        if (!preset) {
+            showToast('暂时没有可导入的课程计划。');
+            return;
+        }
+
+        const additions = preset.items.filter((item) => (
+            getContent(item.type, item.contentId)
+            && !state.tasks.some((task) => taskMatchesPresetItem(task, preset, item))
+        ));
+
+        additions.forEach((item, index) => {
+            state.tasks.push({
+                id: `preset-${preset.id}-${item.id}`,
+                date: item.date,
+                type: item.type,
+                contentId: item.contentId,
+                minutes: item.minutes || preset.defaultMinutes || 30,
+                completed: false,
+                createdAt: Date.now() + index,
+                presetId: preset.id,
+                presetItemId: item.id
+            });
+        });
+
+        if (additions.length) {
+            state.plan.targetLevel = normalizeTargetLevel(preset.targetLevel);
+            selectedDateKey = preset.startDate;
+            const startDate = parseDateKey(preset.startDate);
+            if (startDate) viewedMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+            activePlanView = 'calendar';
+            isMobileCalendarOpen = window.innerWidth <= 767;
+            saveState();
+            renderContentOptions();
+            setPlanView('calendar');
+            renderAll();
+            syncMobileCalendarState();
+        }
+
+        closePresetImportDialog();
+        showToast(additions.length ? `已导入 ${additions.length} 节 TRY！N2 课程。` : '14节 TRY！N2 课程已经全部导入。');
+    }
+
+    function jumpToPrimaryPreset() {
+        const preset = getPrimaryPreset();
+        if (!preset) return;
+        setPlanView('calendar');
+        selectDate(preset.startDate, true);
+        if (window.innerWidth <= 767) {
+            isMobileCalendarOpen = true;
+            syncMobileCalendarState();
+        }
+    }
 
     function getTasksForDate(dateKey) {
         return state.tasks
@@ -631,7 +1033,7 @@
                 const chipList = document.createElement('span');
                 chipList.className = 'calendar-task-chips';
                 tasks.slice(0, 2).forEach((task) => {
-                    const content = getContent(task.type, task.contentId);
+                    const content = getTaskContent(task);
                     const chip = document.createElement('span');
                     chip.className = `calendar-task-chip type-soft-${task.type}`;
                     if (task.completed) chip.classList.add('is-completed');
@@ -714,7 +1116,7 @@
         }
 
         tasks.forEach((task) => {
-            const content = getContent(task.type, task.contentId);
+            const content = getTaskContent(task);
             const typeDefinition = TYPE_DEFINITIONS[task.type];
             if (!content || !typeDefinition) return;
 
@@ -728,11 +1130,16 @@
             const type = document.createElement('span');
             type.className = `day-task-type type-soft-${task.type}`;
             type.textContent = typeDefinition.label;
+            const presetSource = document.createElement('span');
+            presetSource.className = 'day-task-preset-source';
+            presetSource.textContent = '预设课程';
             const title = document.createElement('h4');
             title.textContent = content.title;
             const meta = document.createElement('small');
             meta.textContent = `${task.minutes} 分钟`;
-            copy.append(type, title, meta);
+            copy.append(type);
+            if (task.presetId) copy.append(presetSource);
+            copy.append(title, meta);
 
             const topActions = document.createElement('div');
             topActions.className = 'day-task-actions';
@@ -856,7 +1263,7 @@
     function deleteTask(taskId) {
         const task = state.tasks.find((entry) => entry.id === taskId);
         if (!task) return;
-        const content = getContent(task.type, task.contentId);
+        const content = getTaskContent(task);
         const confirmed = window.confirm(`确定删除“${content ? content.title : '这项任务'}”吗？`);
         if (!confirmed) return;
         state.tasks = state.tasks.filter((entry) => entry.id !== taskId);
@@ -944,13 +1351,260 @@
         });
     }
 
+    function setInsightTheme(element, type) {
+        if (!element) return;
+        const palette = INSIGHT_COLORS[type] || INSIGHT_COLORS.grammar;
+        element.style.setProperty('--insight-color', palette.color);
+        element.style.setProperty('--insight-soft', palette.soft);
+    }
+
+    function formatInsightDate(timestamp) {
+        const date = new Date(Number(timestamp) || 0);
+        if (!timestamp || Number.isNaN(date.getTime())) return '最近';
+        return `${date.getMonth() + 1}/${date.getDate()}`;
+    }
+
+    function createInsightEmpty(title, description) {
+        const empty = document.createElement('div');
+        empty.className = 'plan-insight-empty';
+        const copy = document.createElement('div');
+        const heading = document.createElement('strong');
+        heading.textContent = title;
+        const detail = document.createElement('small');
+        detail.textContent = description;
+        copy.append(heading, detail);
+        empty.appendChild(copy);
+        return empty;
+    }
+
+    function getInsightTaskId(type, topic) {
+        return `insight-${type}-${String(topic && topic.id || 'review')}`;
+    }
+
+    function isInsightTaskAdded(type, topic) {
+        const taskId = getInsightTaskId(type, topic);
+        const todayKey = toDateKey(today);
+        return state.tasks.some((task) => (
+            task.date === todayKey
+            && task.type === type
+            && task.contentId === taskId
+        ));
+    }
+
+    function addInsightTask(section, topic) {
+        if (!section || !topic || !ADDABLE_TYPES.includes(section.type)) return;
+        if (isInsightTaskAdded(section.type, topic)) {
+            showToast('这项复习已经加入今天的计划。');
+            return;
+        }
+        const taskId = getInsightTaskId(section.type, topic);
+        state.tasks.push({
+            id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            date: toDateKey(today),
+            type: section.type,
+            contentId: taskId,
+            content: {
+                title: `${TYPE_DEFINITIONS[section.type].label}复习 · ${topic.title}`,
+                chip: topic.chip || `${section.name} · 弱点`,
+                url: topic.url || section.overviewUrl
+            },
+            minutes: Math.max(10, Math.min(90, Number(topic.minutes) || 25)),
+            completed: false,
+            createdAt: Date.now()
+        });
+        saveState();
+        renderAll();
+        showToast('已加入今天的学习计划。');
+    }
+
+    function renderInsightCategories(sections) {
+        if (!elements.insightCategories) return;
+        elements.insightCategories.textContent = '';
+        INSIGHT_TYPES.forEach((type) => {
+            const section = sections[type];
+            if (!section) return;
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'plan-insight-category';
+            button.dataset.insightType = type;
+            button.setAttribute('aria-pressed', String(type === activeInsightType));
+            setInsightTheme(button, type);
+
+            const head = document.createElement('span');
+            head.className = 'plan-insight-category-head';
+            const name = document.createElement('span');
+            name.className = 'plan-insight-category-name';
+            const mark = document.createElement('span');
+            mark.className = 'plan-insight-category-mark';
+            mark.textContent = section.mark;
+            name.append(mark, section.name);
+            const stateBadge = document.createElement('span');
+            stateBadge.className = 'plan-insight-state';
+            stateBadge.textContent = section.state;
+            head.append(name, stateBadge);
+
+            const metric = document.createElement('span');
+            metric.className = 'plan-insight-category-metric';
+            const primary = document.createElement('strong');
+            const primaryLabel = document.createElement('small');
+            if (section.accuracy !== null) {
+                primary.append(`${section.accuracy}%`);
+                primaryLabel.textContent = '正答率';
+            } else if (section.pending > 0) {
+                primary.append(String(section.pending));
+                primaryLabel.textContent = '要復習';
+            } else {
+                primary.append('—');
+                primaryLabel.textContent = '記録なし';
+            }
+            primary.appendChild(primaryLabel);
+            const pending = document.createElement('span');
+            pending.textContent = `${section.pending}問 要復習`;
+            metric.append(primary, pending);
+
+            button.append(head, metric);
+            button.addEventListener('click', () => {
+                activeInsightType = type;
+                renderInsights();
+            });
+            elements.insightCategories.appendChild(button);
+        });
+    }
+
+    function renderInsightTopics(section) {
+        if (!elements.insightTopicList || !elements.insightTopicCount) return;
+        elements.insightTopicList.textContent = '';
+        elements.insightTopicCount.textContent = `${section.topics.length}項目`;
+        const topics = section.topics.slice(0, 3);
+        if (!topics.length) {
+            const hasHistory = section.attempts > 0 || section.recent.length > 0;
+            elements.insightTopicList.appendChild(createInsightEmpty(
+                hasHistory ? '現在、復習待ちの問題はありません' : 'まだ練習記録がありません',
+                hasHistory
+                    ? '新しい誤答が記録されると、ここに知識点別で表示されます。'
+                    : '試験対策エリアで練習すると、錯題と弱点が自動で反映されます。'
+            ));
+            return;
+        }
+
+        topics.forEach((topic, index) => {
+            const item = document.createElement('article');
+            item.className = 'plan-insight-topic';
+            setInsightTheme(item, section.type);
+
+            const rank = document.createElement('span');
+            rank.className = 'plan-insight-topic-rank';
+            rank.textContent = String(index + 1).padStart(2, '0');
+
+            const copy = document.createElement('div');
+            copy.className = 'plan-insight-topic-copy';
+            const title = document.createElement('strong');
+            title.textContent = topic.title;
+            const note = document.createElement('small');
+            note.textContent = topic.accuracy === null
+                ? topic.note
+                : `${topic.note} · 正答率 ${topic.accuracy}%`;
+            copy.append(title, note);
+
+            const actions = document.createElement('div');
+            actions.className = 'plan-insight-topic-actions';
+            const count = document.createElement('span');
+            count.textContent = `${Math.max(topic.pendingCount, topic.wrongCount)}回ミス`;
+            const openLink = document.createElement('a');
+            openLink.className = 'plan-insight-open-link';
+            openLink.href = topic.url || section.overviewUrl;
+            openLink.textContent = '原題';
+            const addButton = document.createElement('button');
+            addButton.type = 'button';
+            addButton.className = 'plan-insight-add-button';
+            const added = isInsightTaskAdded(section.type, topic);
+            addButton.classList.toggle('is-added', added);
+            addButton.textContent = added ? '追加済み' : '今日に追加';
+            addButton.addEventListener('click', () => addInsightTask(section, topic));
+            actions.append(count, openLink, addButton);
+
+            item.append(rank, copy, actions);
+            elements.insightTopicList.appendChild(item);
+        });
+    }
+
+    function renderInsightRecent(section) {
+        if (!elements.insightRecentList) return;
+        elements.insightRecentList.textContent = '';
+        if (!section.recent.length) {
+            elements.insightRecentList.appendChild(createInsightEmpty(
+                '最近の練習はありません',
+                'この項目の練習を始めると、直近の結果がここに表示されます。'
+            ));
+            return;
+        }
+
+        section.recent.forEach((record) => {
+            const item = document.createElement('a');
+            item.className = 'plan-insight-recent-item';
+            item.href = record.url || section.overviewUrl;
+            const date = document.createElement('span');
+            date.className = 'plan-insight-recent-date';
+            date.textContent = formatInsightDate(record.timestamp);
+            const copy = document.createElement('span');
+            copy.className = 'plan-insight-recent-copy';
+            const title = document.createElement('strong');
+            title.textContent = record.title;
+            const source = document.createElement('small');
+            source.textContent = record.source;
+            copy.append(title, source);
+            const result = document.createElement('span');
+            result.className = 'plan-insight-recent-result';
+            if (record.isLow) result.classList.add('is-low');
+            result.textContent = record.result;
+            item.append(date, copy, result);
+            elements.insightRecentList.appendChild(item);
+        });
+    }
+
+    function renderInsights() {
+        if (!elements.insightsView || !globalThis.StudyPlanInsights) return;
+        insightSnapshot = globalThis.StudyPlanInsights.collect(state.plan.targetLevel);
+        const sections = insightSnapshot.sections || {};
+        const section = sections[activeInsightType] || sections.grammar;
+        if (!section) return;
+        renderInsightCategories(sections);
+        setInsightTheme(elements.insightDetail, section.type);
+        if (elements.insightDot) setInsightTheme(elements.insightDot, section.type);
+        if (elements.insightTitle) elements.insightTitle.textContent = `${section.name}の弱点`;
+        if (elements.insightOverviewLink) elements.insightOverviewLink.href = section.overviewUrl;
+        renderInsightTopics(section);
+        renderInsightRecent(section);
+    }
+
+    function setPlanView(view) {
+        activePlanView = view === 'insights' ? 'insights' : 'calendar';
+        const insightsActive = activePlanView === 'insights';
+        root.classList.toggle('is-insights-view', insightsActive);
+        elements.planViewTabs.forEach((button) => {
+            button.setAttribute('aria-selected', String(button.dataset.planViewTab === activePlanView));
+        });
+        if (elements.insightsView) {
+            elements.insightsView.hidden = !insightsActive;
+        }
+        if (insightsActive) {
+            isMobileCalendarOpen = false;
+            syncMobileCalendarState();
+            renderInsights();
+        }
+    }
+
     function renderAll() {
+        renderCharacterName();
         renderPlanTarget();
         renderCalendar();
         renderSelectedDay();
         renderGrowth();
         renderHeaderMetrics();
         renderMobileOverview();
+        renderCharacterAvatar();
+        renderPresetStatus();
+        if (activePlanView === 'insights') renderInsights();
     }
 
     elements.prevButton.addEventListener('click', () => {
@@ -978,6 +1632,41 @@
         });
     });
 
+    elements.planViewTabs.forEach((button) => {
+        button.addEventListener('click', () => {
+            setPlanView(button.dataset.planViewTab);
+        });
+    });
+
+    if (elements.importOpen) {
+        elements.importOpen.addEventListener('click', openPresetImportDialog);
+    }
+    if (elements.importClose) {
+        elements.importClose.addEventListener('click', closePresetImportDialog);
+    }
+    if (elements.importConfirm) {
+        elements.importConfirm.addEventListener('click', importPrimaryPreset);
+    }
+    if (elements.presetJump) {
+        elements.presetJump.addEventListener('click', jumpToPrimaryPreset);
+    }
+    if (elements.characterAvatarChange && elements.characterAvatarInput) {
+        elements.characterAvatarChange.addEventListener('click', () => elements.characterAvatarInput.click());
+        elements.characterAvatarInput.addEventListener('change', async () => {
+            const [file] = elements.characterAvatarInput.files || [];
+            elements.characterAvatarInput.value = '';
+            await replaceCharacterAvatar(file);
+        });
+    }
+    if (elements.characterAvatarReset) {
+        elements.characterAvatarReset.addEventListener('click', resetCharacterAvatar);
+    }
+    if (elements.importDialog) {
+        elements.importDialog.addEventListener('click', (event) => {
+            if (event.target === elements.importDialog) closePresetImportDialog();
+        });
+    }
+
     elements.taskForm.addEventListener('submit', addTask);
     elements.levelSelects.forEach((select) => {
         select.addEventListener('change', () => {
@@ -994,14 +1683,28 @@
         });
     });
     window.addEventListener('storage', (event) => {
-        if (event.key !== STORAGE_KEY) return;
-        state = loadState();
-        renderAll();
+        renderCharacterName();
+        if (event.key === AVATAR_STORAGE_KEY) {
+            customAvatarUrl = loadCustomAvatarUrl();
+            renderCharacterAvatar();
+            return;
+        }
+        if (event.key === STORAGE_KEY) {
+            state = loadState();
+            renderAll();
+            return;
+        }
+        if (activePlanView === 'insights') renderInsights();
+    });
+    window.addEventListener(USER_PROFILE_CHANGED_EVENT, renderCharacterName);
+    window.addEventListener('pageshow', () => {
+        if (activePlanView === 'insights') renderInsights();
     });
 
     renderTaskTypeOptions();
     renderContentOptions();
     syncMobileCalendarState();
+    setPlanView('calendar');
     saveState();
     renderAll();
 })();

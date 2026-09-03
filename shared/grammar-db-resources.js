@@ -2024,6 +2024,22 @@
       {
         "jp": "<ruby>失<rt>しっ</rt></ruby><ruby>敗<rt>ぱい</rt></ruby>を<ruby>恐<rt>おそ</rt></ruby>れていては<ruby>何<rt>なに</rt></ruby>も<ruby>始<rt>はじ</rt></ruby>まらない、ただ<ruby>前<rt>まえ</rt></ruby>へ<ruby>進<rt>すす</rt></ruby>む<span style='color:#d64045'>のみ</span>である。",
         "cn": "害怕失败的话就什么也干不成，唯有不断向前。"
+      },
+      {
+        "jp": "<ruby>当<rt>とう</rt></ruby><ruby>店<rt>てん</rt></ruby>のお<ruby>支<rt>し</rt></ruby><ruby>払<rt>はら</rt></ruby>いは、<ruby>現<rt>げん</rt></ruby><ruby>金<rt>きん</rt></ruby><span style='color:#d64045'>のみ</span>となっております。",
+        "cn": "本店结账仅支持现金支付。"
+      },
+      {
+        "jp": "<ruby>優<rt>ゆう</rt></ruby><ruby>勝<rt>しょう</rt></ruby>できたのは、ただ<ruby>運<rt>うん</rt></ruby>が<ruby>良<rt>よ</rt></ruby>かった<span style='color:#d64045'>のみ</span>です。",
+        "cn": "能够拿到冠军，只不过是运气好罢了。"
+      },
+      {
+        "jp": "<ruby>与<rt>あた</rt></ruby>えられた<ruby>仕<rt>し</rt></ruby><ruby>事<rt>ごと</rt></ruby>を、ただ<ruby>黙<rt>だま</rt></ruby>ってこなす<span style='color:#d64045'>のみ</span>だ。",
+        "cn": "我能做的，就是默默把交代下来的工作干完。"
+      },
+      {
+        "jp": "<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みはオンライン<span style='color:#d64045'>のみ</span>で<ruby>受<rt>う</rt></ruby>け<ruby>付<rt>つ</rt></ruby>けております。",
+        "cn": "报名方式仅限线上办理。"
       }
     ],
     "114": [
@@ -3384,24 +3400,6 @@
         "cn": "为了不辜负父母的期望，他拼了命地在学习。"
       }
     ],
-    "189": [
-      {
-        "jp": "<ruby>当<rt>とう</rt></ruby><ruby>店<rt>てん</rt></ruby>のお<ruby>支<rt>し</rt></ruby><ruby>払<rt>はら</rt></ruby>いは、<ruby>現<rt>げん</rt></ruby><ruby>金<rt>きん</rt></ruby><span style='color:#d64045'>のみ</span>となっております。",
-        "cn": "本店结账仅支持现金支付。"
-      },
-      {
-        "jp": "<ruby>優<rt>ゆう</rt></ruby><ruby>勝<rt>しょう</rt></ruby>できたのは、ただ<ruby>運<rt>うん</rt></ruby>が<ruby>良<rt>よ</rt></ruby>かった<span style='color:#d64045'>のみ</span>です。",
-        "cn": "能够拿到冠军，只不过是运气好罢了。"
-      },
-      {
-        "jp": "<ruby>与<rt>あた</rt></ruby>えられた<ruby>仕<rt>し</rt></ruby><ruby>事<rt>ごと</rt></ruby>を、ただ<ruby>黙<rt>だま</rt></ruby>ってこなす<span style='color:#d64045'>のみ</span>だ。",
-        "cn": "我能做的，就是默默把交代下来的工作干完。"
-      },
-      {
-        "jp": "<ruby>申<rt>もう</rt></ruby>し<ruby>込<rt>こ</rt></ruby>みはオンライン<span style='color:#d64045'>のみ</span>で<ruby>受<rt>う</rt></ruby>け<ruby>付<rt>つ</rt></ruby>けております。",
-        "cn": "报名方式仅限线上办理。"
-      }
-    ],
     "190": [
       {
         "jp": "<ruby>若<rt>わか</rt></ruby>い<span style='color:#d64045'>つもりで</span><ruby>無<rt>む</rt></ruby><ruby>理<rt>り</rt></ruby>をしたら、すぐに<ruby>腰<rt>こし</rt></ruby>を<ruby>痛<rt>いた</rt></ruby>めてしまった。",
@@ -4289,6 +4287,768 @@
         "jp": "<ruby>手<rt>て</rt></ruby><ruby>首<rt>くび</rt></ruby><ruby>内<rt>うち</rt></ruby><ruby>側<rt>がわ</rt></ruby>にパッドが<ruby>当<rt>あ</rt></ruby>たるよう<ruby>手<rt>て</rt></ruby><ruby>首<rt>くび</rt></ruby>に<ruby>巻<rt>ま</rt></ruby>くとともに、<ruby>革<rt>かわ</rt></ruby>ひもでキャッチャーミットに<ruby>固<rt>こ</rt></ruby><ruby>定<rt>てい</rt></ruby>することで、<span style='color:#d64045'><ruby>捕<rt>ほ</rt></ruby><ruby>球<rt>きゅう</rt></ruby>し<ruby>損<rt>そこ</rt></ruby>ねた</span>ボールが<ruby>手<rt>て</rt></ruby><ruby>首<rt>くび</rt></ruby>に<ruby>当<rt>あ</rt></ruby>たった<ruby>際<rt>さい</rt></ruby>の<ruby>衝<rt>しょう</rt></ruby><ruby>撃<rt>げき</rt></ruby>を<ruby>和<rt>やわ</rt></ruby>らげ、<ruby>手<rt>て</rt></ruby><ruby>首<rt>くび</rt></ruby>を<ruby>怪<rt>け</rt></ruby><ruby>我<rt>が</rt></ruby>から<ruby>守<rt>まも</rt></ruby>る。",
         "cn": "将护垫朝向手腕内侧缠好，并用皮绳固定在捕手手套上，可缓和漏接的球击中手腕时的冲击，保护手腕免受伤害。",
         "source": { "original": "手首内側にパッドが当たるよう手首に巻くとともに、革ひもでキャッチャーミットに固定することで、捕球し損ねたボールが手首に当たった際の衝撃を和らげ、手首を怪我から守る。", "name": "税関「野球用リストガード（固定用革ひも付き）」", "url": "https://www.customs.go.jp/tetsuzuki_search/bunrui/J3/23/J32300537.htm", "type": "政府", "accessedAt": "2026-08-08" }
+      }
+    ],
+    "232": [
+      {
+        "jp": "なお、INAILによると、<ruby>今<rt>いま</rt></ruby>のところ、3000あまりの<ruby>手<rt>て</rt></ruby><ruby>当<rt>あて</rt></ruby><ruby>支<rt>し</rt></ruby><ruby>給<rt>きゅう</rt></ruby><ruby>請<rt>せい</rt></ruby><ruby>求<rt>きゅう</rt></ruby>のうち、<ruby>支<rt>し</rt></ruby><ruby>給<rt>きゅう</rt></ruby>が<ruby>認<rt>みと</rt></ruby>められたのは<span style='color:#d64045'>107にすぎない</span>ということである。",
+        "cn": "据INAIL称，目前三千多件补贴申请中，仅有107件获准发放。",
+        "source": { "original": "なお、INAILによると、今のところ、3000あまりの手当支給請求のうち、支給が認められたのは107にすぎないということである。", "name": "労働政策研究・研修機構「労災保険未加入の主婦・主夫に対し罰則」", "url": "https://www.jil.go.jp/foreign/jihou/2005_3/italy_02.html", "type": "政府系研究机构", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>批<rt>ひ</rt></ruby><ruby>判<rt>はん</rt></ruby><ruby>者<rt>しゃ</rt></ruby>に「おまえにそんなことを<ruby>言<rt>い</rt></ruby>う<ruby>権<rt>けん</rt></ruby><ruby>利<rt>り</rt></ruby>はあるのか」と<ruby>切<rt>き</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>すのは、<ruby>論<rt>ろん</rt></ruby><ruby>点<rt>てん</rt></ruby>のすりかえ<span style='color:#d64045'>にすぎない</span>。",
+        "cn": "反问批评者“你有权说这种话吗”，不过是在偷换论点。",
+        "source": { "original": "批判者に「おまえにそんなことを言う権利はあるのか」と切り返すのは、論点のすりかえにすぎない。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "233": [
+      {
+        "jp": "これは、<ruby>全<rt>ぜん</rt></ruby><ruby>米<rt>べい</rt></ruby>でベストセラーになった<span style='color:#d64045'><ruby>上<rt>うえ</rt></ruby>に</span>、<ruby>世<rt>せ</rt></ruby><ruby>界<rt>かい</rt></ruby><ruby>各<rt>かっ</rt></ruby><ruby>国<rt>こく</rt></ruby>で<ruby>次<rt>つぎ</rt></ruby><ruby>々<rt>つぎ</rt></ruby>と<ruby>翻<rt>ほん</rt></ruby><ruby>訳<rt>やく</rt></ruby>された<ruby>環<rt>かん</rt></ruby><ruby>境<rt>きょう</rt></ruby><ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>の<ruby>本<rt>ほん</rt></ruby>である。",
+        "cn": "这是一本不仅在全美成为畅销书，还陆续被世界各国翻译出版的环保书籍。",
+        "source": { "original": "これは、全米でベストセラーになった上に、世界各国で次々と翻訳された環境問題の本である。", "name": "国際交流基金 みんなの教材サイト「ごみの減量化」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/DCH00004/07honbun.pdf", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>調<rt>ちょう</rt></ruby><ruby>査<rt>さ</rt></ruby>の<ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby>、<ruby>症<rt>しょう</rt></ruby><ruby>状<rt>じょう</rt></ruby>がある<span style='color:#d64045'><ruby>上<rt>うえ</rt></ruby>に</span>、<ruby>医<rt>い</rt></ruby><ruby>療<rt>りょう</rt></ruby><ruby>機<rt>き</rt></ruby><ruby>関<rt>かん</rt></ruby>や<ruby>周<rt>しゅう</rt></ruby><ruby>囲<rt>い</rt></ruby>の<ruby>無<rt>む</rt></ruby><ruby>理<rt>り</rt></ruby><ruby>解<rt>かい</rt></ruby>から<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>の<ruby>暴<rt>ぼう</rt></ruby><ruby>力<rt>りょく</rt></ruby>を<ruby>受<rt>う</rt></ruby>け（ドクターハラスメント・セクシャルハラスメント）、<ruby>七<rt>なな</rt></ruby><ruby>〇<rt>じゅう</rt></ruby>％が<ruby>一<rt>いち</rt></ruby><ruby>度<rt>ど</rt></ruby>は<ruby>自<rt>じ</rt></ruby><ruby>殺<rt>さつ</rt></ruby>を<ruby>考<rt>かんが</rt></ruby>えていることが<ruby>分<rt>わ</rt></ruby>かった。",
+        "cn": "调查发现，患者不仅承受症状，还因医疗机构及周围人的不理解而遭受言语伤害，其中七成曾想过自杀。",
+        "source": { "original": "調査の結果、症状がある上に、医療機関や周囲の無理解から言葉の暴力を受け（ドクターハラスメント・セクシャルハラスメント）、七〇％が一度は自殺を考えていることが分かった。", "name": "参議院「脳脊髄液減少症に関する請願」", "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/seigan/174/yousi/yo1740840.htm", "type": "政府议会资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "234": [
+      {
+        "jp": "<ruby>鳥<rt>とり</rt></ruby>の<ruby>中<rt>なか</rt></ruby>には<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>の<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>を<ruby>話<rt>はな</rt></ruby>すものがいる。<ruby>話<rt>はな</rt></ruby>す<span style='color:#d64045'>といっても</span><ruby>音<rt>おと</rt></ruby>をまねしているだけなので、<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>と<ruby>会<rt>かい</rt></ruby><ruby>話<rt>わ</rt></ruby>ができるわけではない。",
+        "cn": "有些鸟会说人类的语言。不过虽说会说，也只是在模仿声音，并不能和人类交谈。",
+        "source": { "original": "鳥の中には人間の言葉を話すものがいる。話すといっても音をまねしているだけなので、人間と会話ができるわけではない。", "name": "国際交流基金 みんなの教材サイト「といっても」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00020/ja/render.do", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>飛<rt>ひ</rt></ruby><ruby>行<rt>こう</rt></ruby><ruby>場<rt>じょう</rt></ruby><span style='color:#d64045'>といっても</span><ruby>小<rt>ちい</rt></ruby>さな<ruby>滑<rt>かっ</rt></ruby><ruby>走<rt>そう</rt></ruby><ruby>路<rt>ろ</rt></ruby>が１<ruby>本<rt>ぽん</rt></ruby>あるだけです。",
+        "cn": "虽说是机场，也不过只有一条小跑道。",
+        "source": { "original": "飛行場といっても小さな滑走路が１本あるだけです。", "name": "国立科学博物館「キリバス共和国クリスマス島」", "url": "https://www.kahaku.go.jp/research/db/zoology/uodas/field/kirbati/06.html", "type": "国立博物馆", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "235": [
+      {
+        "jp": "<ruby>新<rt>しん</rt></ruby><ruby>鮮<rt>せん</rt></ruby>な<ruby>魚<rt>さかな</rt></ruby>は、やっぱり<ruby>生<rt>なま</rt></ruby>で<ruby>食<rt>た</rt></ruby>べる<span style='color:#d64045'>に<ruby>限<rt>かぎ</rt></ruby>る</span>ね。",
+        "cn": "新鲜的鱼，果然还是生吃最好。",
+        "source": { "original": "新鮮な魚は、やっぱり生で食べるに限るね。", "name": "Hedgehog Japanese「～に限る」", "url": "https://hedgehog-japanese.com/grammar/jlpt-n2/nikagiru/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "こんな<ruby>天<rt>てん</rt></ruby><ruby>気<rt>き</rt></ruby>がいい<ruby>日<rt>ひ</rt></ruby>は、<ruby>庭<rt>にわ</rt></ruby>で<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>む<span style='color:#d64045'>に<ruby>限<rt>かぎ</rt></ruby>る</span>。",
+        "cn": "天气这么好的日子，最适合在院子里读书。",
+        "source": { "original": "こんな天気がいい日は、庭で本を読むに限る。", "name": "日本語の例文「〜に限る」", "url": "https://j-nihongo.com/nikagiru/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "236": [
+      {
+        "jp": "<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>で<ruby>作<rt>つく</rt></ruby>ったへちま<ruby>水<rt>すい</rt></ruby>で<ruby>磨<rt>みが</rt></ruby>いている<span style='color:#d64045'>だけあって</span>、<ruby>叔<rt>お</rt></ruby><ruby>母<rt>ば</rt></ruby>はわりあい<ruby>色<rt>いろ</rt></ruby><ruby>白<rt>じろ</rt></ruby>で<ruby>皺<rt>しわ</rt></ruby>も<ruby>少<rt>すく</rt></ruby>ない。",
+        "cn": "不愧是一直用自制丝瓜水保养，姨妈的肤色比较白，皱纹也少。",
+        "source": { "original": "自分で作ったへちま水で磨いているだけあって、叔母はわりあい色白で皺も少ない。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>田<rt>た</rt></ruby><ruby>中<rt>なか</rt></ruby>さんは30<ruby>年<rt>ねん</rt></ruby>タクシーの<ruby>運<rt>うん</rt></ruby><ruby>転<rt>てん</rt></ruby><ruby>手<rt>しゅ</rt></ruby>をしていた<span style='color:#d64045'>だけあって</span>、<ruby>道<rt>みち</rt></ruby>に<ruby>詳<rt>くわ</rt></ruby>しい。",
+        "cn": "田中先生做过30年出租车司机，难怪对道路很熟悉。",
+        "source": { "original": "田中さんは30年タクシーの運転手をしていただけあって、道に詳しい。", "name": "日本語教師たのすけ「～だけあって」", "url": "https://tanosuke.com/dakenokotohaaru/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "237": [
+      {
+        "jp": "<ruby>科<rt>か</rt></ruby><ruby>学<rt>がく</rt></ruby><ruby>技<rt>ぎ</rt></ruby><ruby>術<rt>じゅつ</rt></ruby><span style='color:#d64045'>にしろ</span><ruby>創<rt>そう</rt></ruby><ruby>造<rt>ぞう</rt></ruby><ruby>技<rt>ぎ</rt></ruby><ruby>術<rt>じゅつ</rt></ruby><span style='color:#d64045'>にしろ</span>，アイデアが<ruby>浮<rt>う</rt></ruby>かんだとしても，それを<ruby>実<rt>じつ</rt></ruby><ruby>現<rt>げん</rt></ruby>するためには，<ruby>様<rt>さま</rt></ruby><ruby>々<rt>ざま</rt></ruby>な<ruby>工<rt>く</rt></ruby><ruby>夫<rt>ふう</rt></ruby>が<ruby>必<rt>ひつ</rt></ruby><ruby>要<rt>よう</rt></ruby>です。",
+        "cn": "无论是科学技术还是创造技术，即使有了想法，要将其实现也需要下各种功夫。",
+        "source": { "original": "科学技術にしろ創造技術にしろ，アイデアが浮かんだとしても，それを実現するためには，様々な工夫が必要です。", "name": "職業能力開発総合大学校 基盤整備センター「技能と技術」", "url": "https://www.tetras.uitec.jeed.go.jp/files/data/199602/19960205/19960205_main0.html", "type": "公共职业教育机构", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "サラリーマン<span style='color:#d64045'>にせよ</span>、<ruby>役<rt>やく</rt></ruby><ruby>人<rt>にん</rt></ruby><span style='color:#d64045'>にせよ</span>、<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>が<ruby>帰<rt>き</rt></ruby><ruby>属<rt>ぞく</rt></ruby>する<ruby>集<rt>しゅう</rt></ruby><ruby>団<rt>だん</rt></ruby>には<ruby>忠<rt>ちゅう</rt></ruby><ruby>誠<rt>せい</rt></ruby>を<ruby>誓<rt>ちか</rt></ruby>うけれど、「そと」の<ruby>人<rt>ひと</rt></ruby><ruby>々<rt>びと</rt></ruby>へのやさしさや<ruby>思<rt>おも</rt></ruby>いやりが<ruby>乏<rt>とぼ</rt></ruby>しい。",
+        "cn": "无论是公司职员还是公务员，都会忠于自己所属的群体，却缺少对群体外之人的体贴与关怀。",
+        "source": { "original": "サラリーマンにせよ、役人にせよ、自分が帰属する集団には忠誠を誓うけれど、「そと」の人々へのやさしさや思いやりが乏しい。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "238": [
+      {
+        "jp": "さきほど<ruby>佐<rt>さ</rt></ruby><ruby>藤<rt>とう</rt></ruby>さん<span style='color:#d64045'>とかいう</span><ruby>人<rt>ひと</rt></ruby>から<ruby>電<rt>でん</rt></ruby><ruby>話<rt>わ</rt></ruby>がかかってきましたよ。",
+        "cn": "刚才有个叫佐藤什么的人打电话来了。",
+        "source": { "original": "さきほど佐藤さんとかいう人から電話がかかってきましたよ。", "name": "相愛大学研究論集「会話における『とか』の用法」", "url": "https://soai.repo.nii.ac.jp/record/1294/files/AA12311615_20110300_1048.pdf", "type": "大学研究论文", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "239": [
+      {
+        "jp": "<ruby>我<rt>われ</rt></ruby><ruby>々<rt>われ</rt></ruby>はコンクリートのパイプの<ruby>中<rt>なか</rt></ruby>を<ruby>水<rt>みず</rt></ruby>の<ruby>流<rt>なが</rt></ruby>れ<span style='color:#d64045'>に<ruby>沿<rt>そ</rt></ruby>って</span><ruby>進<rt>すす</rt></ruby>んだ。",
+        "cn": "我们顺着水流在混凝土管道中前进。",
+        "source": { "original": "我々はコンクリートのパイプの中を水の流れに沿って進んだ。", "name": "東京外国語大学博士論文「経路を表す日本語の移動動詞」", "url": "https://tufs.repo.nii.ac.jp/record/919/files/dt-ko-0107005.pdf", "type": "大学学位论文", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "240": [
+      {
+        "jp": "<ruby>鈴<rt>すず</rt></ruby><ruby>木<rt>き</rt></ruby>さんって<ruby>勉<rt>べん</rt></ruby><ruby>強<rt>きょう</rt></ruby>は<ruby>全<rt>ぜん</rt></ruby><ruby>然<rt>ぜん</rt></ruby>できないけど、<ruby>絵<rt>え</rt></ruby>を<ruby>書<rt>か</rt></ruby>くこと<span style='color:#d64045'>にかけては</span><ruby>本<rt>ほん</rt></ruby><ruby>当<rt>とう</rt></ruby>にすごいよね。",
+        "cn": "铃木虽然完全不擅长学习，但说到画画是真的很厉害。",
+        "source": { "original": "鈴木さんって勉強は全然できないけど、絵を書くことにかけては本当にすごいよね。", "name": "日本語NET「〜にかけては」", "url": "https://nihongokyoshi-net.com/2019/02/13/jlptn3-grammar-nikaketewa/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>漢<rt>かん</rt></ruby><ruby>字<rt>じ</rt></ruby>の<ruby>知<rt>ち</rt></ruby><ruby>識<rt>しき</rt></ruby><span style='color:#d64045'>にかけては</span><ruby>誰<rt>だれ</rt></ruby>にも<ruby>負<rt>ま</rt></ruby>けない<ruby>自<rt>じ</rt></ruby><ruby>信<rt>しん</rt></ruby>がある。",
+        "cn": "论汉字知识，我有信心不输给任何人。",
+        "source": { "original": "漢字の知識にかけては誰にも負けない自信がある。", "name": "JSMORI「〜にかけては」", "url": "https://www.jsmori.com/grammar-n3-86/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "241": [
+      {
+        "jp": "<ruby>図<rt>と</rt></ruby><ruby>書<rt>しょ</rt></ruby>カードが<span style='color:#d64045'>ないことには</span>、<ruby>本<rt>ほん</rt></ruby>をお<ruby>貸<rt>か</rt></ruby>しすることはできません。",
+        "cn": "没有借书卡，就不能把书借给您。",
+        "source": { "original": "図書カードがないことには、本をお貸しすることはできません。", "name": "日本の言葉と文化「〜ないことには〜ない」", "url": "https://nihon5-bunka.net/japanese-grammar-intermediate-naikotoniwa/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>彼<rt>かれ</rt></ruby>が<ruby>来<rt>こ</rt></ruby><span style='color:#d64045'>ないことには</span>、<ruby>会<rt>かい</rt></ruby><ruby>議<rt>ぎ</rt></ruby>を<ruby>始<rt>はじ</rt></ruby>めることができない。",
+        "cn": "他不来，会议就无法开始。",
+        "source": { "original": "彼が来ないことには、会議を始めることができない。", "name": "日本語NET「〜ないことには〜ない」", "url": "https://nihongokyoshi-net.com/2019/01/23/jlptn2-grammar-naikotowa-nai/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "242": [
+      {
+        "jp": "お<ruby>年<rt>とし</rt></ruby><ruby>寄<rt>よ</rt></ruby>りは<ruby>冬<rt>ふゆ</rt></ruby>になると<ruby>風<rt>か</rt></ruby><ruby>邪<rt>ぜ</rt></ruby>をひき<span style='color:#d64045'>がち</span>なので、<ruby>健<rt>けん</rt></ruby><ruby>康<rt>こう</rt></ruby>には<ruby>十<rt>じゅう</rt></ruby><ruby>分<rt>ぶん</rt></ruby><ruby>注<rt>ちゅう</rt></ruby><ruby>意<rt>い</rt></ruby>してください。",
+        "cn": "老年人到了冬天容易感冒，请充分注意身体健康。",
+        "source": { "original": "お年寄りは冬になると風邪をひきがちなので、健康には十分注意してください。", "name": "国際交流基金 みんなの教材サイト「がちだ／がちの」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00068/ja/render.do", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>雪<rt>ゆき</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>は、どうしても<ruby>電<rt>でん</rt></ruby><ruby>車<rt>しゃ</rt></ruby>が<ruby>遅<rt>おく</rt></ruby>れ<span style='color:#d64045'>がち</span>になるから、<ruby>早<rt>はや</rt></ruby>く<ruby>出<rt>しゅっ</rt></ruby><ruby>発<rt>ぱつ</rt></ruby>したほうがいいよ。",
+        "cn": "下雪天电车总容易晚点，最好早点出发。",
+        "source": { "original": "雪の日は、どうしても電車が遅れがちになるから、早く出発したほうがいいよ。", "name": "国際交流基金 みんなの教材サイト「がちだ／がちの」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00068/ja/render.do", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "243": [
+      {
+        "jp": "<ruby>今<rt>こん</rt></ruby><ruby>度<rt>ど</rt></ruby><ruby>登<rt>のぼ</rt></ruby>る<span style='color:#d64045'>としたら</span><ruby>白<rt>はく</rt></ruby><ruby>馬<rt>ば</rt></ruby>だな。",
+        "cn": "下次如果要爬山的话，就去白马岳吧。",
+        "source": { "original": "今度登るとしたら白馬だな。", "name": "国立国語研究所『日本語教育指導参考書15 談話の研究と教育Ⅱ』", "url": "https://repository.ninjal.ac.jp/record/1855/files/kk_nkss_015.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>平<rt>へい</rt></ruby><ruby>均<rt>きん</rt></ruby><ruby>世<rt>せ</rt></ruby><ruby>帯<rt>たい</rt></ruby><ruby>所<rt>しょ</rt></ruby><ruby>得<rt>とく</rt></ruby>が<ruby>実<rt>じっ</rt></ruby><ruby>質<rt>しつ</rt></ruby><ruby>的<rt>てき</rt></ruby>に<ruby>増<rt>ぞう</rt></ruby><ruby>加<rt>か</rt></ruby>していない<span style='color:#d64045'>としたら</span>、それは<ruby>彼<rt>かれ</rt></ruby>らの<ruby>生<rt>せい</rt></ruby><ruby>活<rt>かつ</rt></ruby><ruby>水<rt>すい</rt></ruby><ruby>準<rt>じゅん</rt></ruby>が<ruby>大<rt>おお</rt></ruby>きく<ruby>向<rt>こう</rt></ruby><ruby>上<rt>じょう</rt></ruby>していないことになる。",
+        "cn": "如果平均家庭收入实际上没有增加，那就意味着他们的生活水平没有得到大幅提高。",
+        "source": { "original": "平均世帯所得が実質的に増加していないとしたら、それは彼らの生活水準が大きく向上していないことになる。", "name": "アジア経済研究所「経済は成長するも平均世帯所得は増加せず」", "url": "https://www.ide.go.jp/Japanese/IDEsquare/Overseas/2012/ROR201217_001.html?_previewDate_=null&revision=0&viewForce=1", "type": "政府系研究机构", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "244": [
+      {
+        "jp": "JLPTに<ruby>受<rt>う</rt></ruby>かるかどうかは、<ruby>君<rt>きみ</rt></ruby>たちの<ruby>努<rt>ど</rt></ruby><ruby>力<rt>りょく</rt></ruby><span style='color:#d64045'><ruby>次<rt>し</rt></ruby><ruby>第<rt>だい</rt></ruby>だ</span>。",
+        "cn": "能否通过JLPT，取决于你们的努力。",
+        "source": { "original": "JLPTに受かるかどうかは、君たちの努力次第だ。", "name": "日本語NET「〜次第だ／〜次第で」", "url": "https://nihongokyoshi-net.com/2019/05/16/jlptn2-grammar-shidaida/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>田<rt>た</rt></ruby><ruby>中<rt>なか</rt></ruby>さんはその<ruby>日<rt>ひ</rt></ruby>の<ruby>気<rt>き</rt></ruby><ruby>分<rt>ぶん</rt></ruby><span style='color:#d64045'><ruby>次<rt>し</rt></ruby><ruby>第<rt>だい</rt></ruby>で</span><ruby>態<rt>たい</rt></ruby><ruby>度<rt>ど</rt></ruby>が<ruby>変<rt>か</rt></ruby>わるから、<ruby>本<rt>ほん</rt></ruby><ruby>当<rt>とう</rt></ruby>に<ruby>困<rt>こま</rt></ruby>る。",
+        "cn": "田中会随当天的心情改变对人的态度，实在让人头疼。",
+        "source": { "original": "田中さんはその日の気分次第で態度が変わるから、本当に困る。", "name": "日本語教師たのすけ「～次第だ／～次第で」", "url": "https://tanosuke.com/n2-shidaida-shidaide", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "245": [
+      {
+        "jp": "<ruby>九<rt>きゅう</rt></ruby><ruby>七<rt>しち</rt></ruby><ruby>年<rt>ねん</rt></ruby><ruby>以<rt>い</rt></ruby><ruby>降<rt>こう</rt></ruby>、<ruby>東<rt>とう</rt></ruby><ruby>西<rt>ざい</rt></ruby><ruby>間<rt>かん</rt></ruby>の<ruby>経<rt>けい</rt></ruby><ruby>済<rt>ざい</rt></ruby><ruby>格<rt>かく</rt></ruby><ruby>差<rt>さ</rt></ruby>は<ruby>開<rt>ひら</rt></ruby>く<span style='color:#d64045'><ruby>一<rt>いっ</rt></ruby><ruby>方<rt>ぽう</rt></ruby>だ</span>。",
+        "cn": "自1997年以来，东西部之间的经济差距不断扩大。",
+        "source": { "original": "九七年以降、東西間の経済格差は開く一方だ。", "name": "大阪大学「2002年ドイツ連邦議会選挙」", "url": "https://www2.osipp.osaka-u.ac.jp/~ekido/power.html", "type": "大学研究页面", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>工<rt>こう</rt></ruby><ruby>場<rt>じょう</rt></ruby><ruby>排<rt>はい</rt></ruby><ruby>煙<rt>えん</rt></ruby>は、<ruby>約<rt>やく</rt></ruby><ruby>二<rt>に</rt></ruby><ruby>十<rt>じゅう</rt></ruby><ruby>年<rt>ねん</rt></ruby><ruby>前<rt>まえ</rt></ruby>の<ruby>四<rt>よっ</rt></ruby><ruby>日<rt>か</rt></ruby><ruby>市<rt>いち</rt></ruby><ruby>公<rt>こう</rt></ruby><ruby>害<rt>がい</rt></ruby><ruby>判<rt>はん</rt></ruby><ruby>決<rt>けつ</rt></ruby><ruby>以<rt>い</rt></ruby><ruby>来<rt>らい</rt></ruby>、<ruby>削<rt>さく</rt></ruby><ruby>減<rt>げん</rt></ruby><ruby>対<rt>たい</rt></ruby><ruby>策<rt>さく</rt></ruby>が<ruby>進<rt>すす</rt></ruby>んだが、<ruby>大<rt>だい</rt></ruby><ruby>都<rt>と</rt></ruby><ruby>市<rt>し</rt></ruby><ruby>圏<rt>けん</rt></ruby>での<ruby>主<rt>おも</rt></ruby>に<ruby>自<rt>じ</rt></ruby><ruby>動<rt>どう</rt></ruby><ruby>車<rt>しゃ</rt></ruby><ruby>排<rt>はい</rt></ruby>ガスによる<ruby>窒<rt>ちっ</rt></ruby><ruby>素<rt>そ</rt></ruby><ruby>酸<rt>さん</rt></ruby><ruby>化<rt>か</rt></ruby><ruby>物<rt>ぶつ</rt></ruby>（ＮＯｘ）<ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>は<ruby>深<rt>しん</rt></ruby><ruby>刻<rt>こく</rt></ruby><ruby>化<rt>か</rt></ruby>する<span style='color:#d64045'><ruby>一<rt>いっ</rt></ruby><ruby>方<rt>ぽう</rt></ruby>だ</span>。",
+        "cn": "工厂排烟的减排措施虽自约二十年前的四日市公害判决后有所推进，但大都市圈主要由汽车尾气造成的氮氧化物问题仍在不断加剧。",
+        "source": { "original": "工場排煙は、約二十年前の四日市公害判決以来、削減対策が進んだが、大都市圏での主に自動車排ガスによる窒素酸化物（ＮＯｘ）問題は深刻化する一方だ。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "246": [
+      {
+        "jp": "<ruby>給<rt>きゅう</rt></ruby><ruby>料<rt>りょう</rt></ruby>は<ruby>上<rt>あ</rt></ruby>がらないのに、<ruby>仕<rt>し</rt></ruby><ruby>事<rt>ごと</rt></ruby>は<ruby>増<rt>ふ</rt></ruby>える<span style='color:#d64045'>ばかりで</span>、<ruby>正<rt>しょう</rt></ruby><ruby>直<rt>じき</rt></ruby><ruby>辛<rt>つら</rt></ruby>い。",
+        "cn": "工资不涨，工作却只增不减，说实话很难受。",
+        "source": { "original": "給料は上がらないのに、仕事は増えるばかりで、正直辛い。", "name": "日本の言葉と文化「〜ばかりだ」", "url": "https://nihon5-bunka.net/japanese-grammar-intermediate-bakarida/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>諸<rt>しょ</rt></ruby><ruby>藩<rt>はん</rt></ruby>の<ruby>財<rt>ざい</rt></ruby><ruby>政<rt>せい</rt></ruby>も，<ruby>早<rt>はや</rt></ruby>くから<ruby>苦<rt>くる</rt></ruby>しくなり，<ruby>都<rt>と</rt></ruby><ruby>市<rt>し</rt></ruby>の<ruby>大<rt>だい</rt></ruby><ruby>商<rt>しょう</rt></ruby><ruby>人<rt>にん</rt></ruby>から<ruby>金<rt>かね</rt></ruby>をかりて，<ruby>一<rt>いち</rt></ruby><ruby>時<rt>じ</rt></ruby>をしのいでいたが，<ruby>借<rt>しゃっ</rt></ruby><ruby>金<rt>きん</rt></ruby>はふえる<span style='color:#d64045'>ばかりであった</span>。",
+        "cn": "各藩的财政也早早陷入困难，只能向城市大商人借钱暂度难关，债务却不断增加。",
+        "source": { "original": "諸藩の財政も，早くから苦しくなり，都市の大商人から金をかりて，一時をしのいでいたが，借金はふえるばかりであった。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "247": [
+      {
+        "jp": "この<ruby>行<rt>ぎょう</rt></ruby><ruby>事<rt>じ</rt></ruby>には、<ruby>屋<rt>や</rt></ruby><ruby>台<rt>たい</rt></ruby>の<ruby>曳<rt>えい</rt></ruby><ruby>行<rt>こう</rt></ruby>・<ruby>神<rt>み</rt></ruby><ruby>輿<rt>こし</rt></ruby>の<ruby>渡<rt>と</rt></ruby><ruby>御<rt>ぎょ</rt></ruby>・<ruby>太<rt>だい</rt></ruby><ruby>々<rt>だい</rt></ruby><ruby>神<rt>か</rt></ruby><ruby>楽<rt>ぐら</rt></ruby>の<ruby>奉<rt>ほう</rt></ruby><ruby>納<rt>のう</rt></ruby>などがあるほか、これら<span style='color:#d64045'>に<ruby>先<rt>さき</rt></ruby><ruby>立<rt>だ</rt></ruby>って</span><ruby>濁<rt>どぶ</rt></ruby><ruby>酒<rt>ろく</rt></ruby>の<ruby>仕<rt>し</rt></ruby><ruby>込<rt>こ</rt></ruby>みや<ruby>御<rt>お</rt></ruby><ruby>神<rt>み</rt></ruby><ruby>酒<rt>き</rt></ruby><ruby>開<rt>びら</rt></ruby>きなどの<ruby>諸<rt>しょ</rt></ruby><ruby>準<rt>じゅん</rt></ruby><ruby>備<rt>び</rt></ruby>が<ruby>行<rt>おこ</rt></ruby>なわれる。",
+        "cn": "这项仪式除花车巡行、神轿出巡和太太神乐奉纳等活动外，还会事先酿制浊酒、举行御神酒开封等各项准备。",
+        "source": { "original": "この行事には、屋台の曳行・神輿の渡御・太々神楽の奉納などがあるほか、これらに先立って濁酒の仕込みや御神酒開きなどの諸準備が行なわれる。", "name": "文化庁 国指定文化財等データベース「古戸の白山神社祭礼」", "url": "https://kunishitei.bunka.go.jp/heritage/detail/302/30", "type": "政府文化数据库", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>映<rt>えい</rt></ruby><ruby>画<rt>が</rt></ruby><ruby>公<rt>こう</rt></ruby><ruby>開<rt>かい</rt></ruby><span style='color:#d64045'>に<ruby>先<rt>さき</rt></ruby><ruby>立<rt>だ</rt></ruby>って</span><ruby>内<rt>ない</rt></ruby><ruby>容<rt>よう</rt></ruby>を<ruby>審<rt>しん</rt></ruby><ruby>査<rt>さ</rt></ruby>した<ruby>映<rt>えい</rt></ruby><ruby>倫<rt>りん</rt></ruby><ruby>管<rt>かん</rt></ruby><ruby>理<rt>り</rt></ruby><ruby>委<rt>い</rt></ruby><ruby>員<rt>いん</rt></ruby><ruby>会<rt>かい</rt></ruby>は<ruby>数<rt>すう</rt></ruby>カ<ruby>所<rt>しょ</rt></ruby>のセリフの<ruby>修<rt>しゅう</rt></ruby><ruby>正<rt>せい</rt></ruby>を<ruby>指<rt>し</rt></ruby><ruby>導<rt>どう</rt></ruby>した。",
+        "cn": "电影上映前，审查内容的电影伦理管理委员会要求修改了数处台词。",
+        "source": { "original": "映画公開に先立って内容を審査した映倫管理委員会は数カ所のセリフの修正を指導した。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "248": [
+      {
+        "jp": "いろいろな<ruby>戦<rt>たたか</rt></ruby>いで<ruby>手<rt>て</rt></ruby><ruby>柄<rt>がら</rt></ruby>をたて、<ruby>豊<rt>とよ</rt></ruby><ruby>臣<rt>とみ</rt></ruby><ruby>秀<rt>ひで</rt></ruby><ruby>吉<rt>よし</rt></ruby>などの<ruby>期<rt>き</rt></ruby><ruby>待<rt>たい</rt></ruby><span style='color:#d64045'>にこたえて</span>いきました。",
+        "cn": "他在各种战斗中建立功勋，逐步回应了丰臣秀吉等人的期待。",
+        "source": { "original": "いろいろな戦いで手柄をたて、豊臣秀吉などの期待にこたえていきました。", "name": "熊本県立大学「加藤清正」", "url": "https://www.pu-kumamoto.ac.jp/users_site/ijin/new/tableware/kiyomasa.html", "type": "大学教育页面", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>安<rt>あん</rt></ruby><ruby>全<rt>ぜん</rt></ruby>なデータ<ruby>利<rt>り</rt></ruby><ruby>活<rt>かつ</rt></ruby><ruby>用<rt>よう</rt></ruby>チームの<ruby>各<rt>かく</rt></ruby>プロジェクトの<ruby>運<rt>うん</rt></ruby><ruby>営<rt>えい</rt></ruby>をする<ruby>上<rt>うえ</rt></ruby>で<ruby>重<rt>じゅう</rt></ruby><ruby>要<rt>よう</rt></ruby>だと<ruby>考<rt>かんが</rt></ruby>えるのは、<ruby>社<rt>しゃ</rt></ruby><ruby>会<rt>かい</rt></ruby><ruby>的<rt>てき</rt></ruby>ニーズ<span style='color:#d64045'>にこたえて</span>いくだけでなく、シーズ<ruby>的<rt>てき</rt></ruby>な<ruby>基<rt>き</rt></ruby><ruby>盤<rt>ばん</rt></ruby><ruby>技<rt>ぎ</rt></ruby><ruby>術<rt>じゅつ</rt></ruby>にも<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>み、<ruby>両<rt>りょう</rt></ruby><ruby>輪<rt>りん</rt></ruby>をまわすことだと<ruby>考<rt>かんが</rt></ruby>えています。",
+        "cn": "在运营安全数据利用团队的各个项目时，重要的是不仅回应社会需求，也要投入基础种子技术，使两者共同运转。",
+        "source": { "original": "安全なデータ利活用チームの各プロジェクトの運営をする上で重要だと考えるのは、社会的ニーズにこたえていくだけでなく、シーズ的な基盤技術にも取り組み、両輪をまわすことだと考えています。", "name": "情報通信研究機構「検索可能暗号システム ESKS プロジェクト」", "url": "https://sfl.nict.go.jp/interview/secure-data-utilization.html", "type": "国立研究机构", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "249": [
+      {
+        "jp": "<ruby>全<rt>ぜん</rt></ruby><ruby>部<rt>ぶ</rt></ruby><ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>で<span style='color:#d64045'>やったことにして</span><ruby>提<rt>てい</rt></ruby><ruby>出<rt>しゅつ</rt></ruby>したよ！",
+        "cn": "我当作是自己全部做完的，直接交上去了！",
+        "source": { "original": "全部自分でやったことにして提出したよ！", "name": "日本語の森「N2文法 〜ことにする」", "url": "https://www.youtube.com/watch?v=7vcCLvTazuA", "type": "日语教学视频", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "お<ruby>願<rt>ねが</rt></ruby>い！<span style='color:#d64045'><ruby>見<rt>み</rt></ruby>なかったことにして</span>！",
+        "cn": "拜托！就当作没看见吧！",
+        "source": { "original": "お願い！見なかったことにして！", "name": "日本語の森「N2文法 〜ことにする」", "url": "https://www.youtube.com/watch?v=7vcCLvTazuA", "type": "日语教学视频", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "250": [
+      {
+        "jp": "はじめのうちは<ruby>友<rt>とも</rt></ruby><ruby>達<rt>だち</rt></ruby>もいないし，<ruby>国<rt>くに</rt></ruby>のことが<span style='color:#d64045'><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>されてならなかった</span>。",
+        "cn": "刚开始时一个朋友也没有，总是不由得想起自己的国家。",
+        "source": { "original": "はじめのうちは友達もいないし，国のことが思い出されてならなかった。", "name": "国立国語研究所 基本動詞用法ハンドブック「ならない」", "url": "https://mmsrv.ninjal.ac.jp/kamus/data/item2322.html", "type": "国立语言研究机构词典", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>学<rt>がく</rt></ruby><ruby>習<rt>しゅう</rt></ruby><ruby>課<rt>か</rt></ruby><ruby>題<rt>だい</rt></ruby>を<ruby>冷<rt>れい</rt></ruby><ruby>静<rt>せい</rt></ruby>に<ruby>分<rt>ぶん</rt></ruby><ruby>析<rt>せき</rt></ruby>する<ruby>一<rt>いっ</rt></ruby><ruby>方<rt>ぽう</rt></ruby>で、<ruby>心<rt>こころ</rt></ruby>が<ruby>折<rt>お</rt></ruby>れそうな<ruby>川<rt>かわ</rt></ruby><ruby>口<rt>ぐち</rt></ruby>さんが<span style='color:#d64045'><ruby>心<rt>しん</rt></ruby><ruby>配<rt>ぱい</rt></ruby>でならなかった</span>。",
+        "cn": "老师一面冷静分析学习上的问题，一面又控制不住地担心仿佛快要泄气的川口。",
+        "source": { "original": "学習課題を冷静に分析する一方で、心が折れそうな川口さんが心配でならなかった。", "name": "同志社香里中学校・高等学校「クロストーク」", "url": "https://www.kori.doshisha.ac.jp/sv/talk01/", "type": "学校官方网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "251": [
+      {
+        "jp": "<span style='color:#d64045'>やり<ruby>直<rt>なお</rt></ruby>せるものなら</span>、やり<ruby>直<rt>なお</rt></ruby>したいと<ruby>思<rt>おも</rt></ruby>う。",
+        "cn": "如果能够重来的话，我想重新来过。",
+        "source": { "original": "やり直せるものなら、やり直したいと思う。", "name": "国際交流基金 日本語教育通信「もの」（2）", "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201209.html", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<span style='color:#d64045'>できるものなら</span><ruby>今<rt>いま</rt></ruby>だけ<ruby>私<rt>わたし</rt></ruby>の<ruby>脳<rt>のう</rt></ruby>と<ruby>父<rt>ちち</rt></ruby>の<ruby>脳<rt>のう</rt></ruby>を<ruby>瞬<rt>しゅん</rt></ruby><ruby>間<rt>かん</rt></ruby><ruby>移<rt>い</rt></ruby><ruby>動<rt>どう</rt></ruby>させたい。",
+        "cn": "如果可能，我真想只在此刻把我的大脑和父亲的大脑瞬间互换。",
+        "source": { "original": "できるものなら今だけ私の脳と父の脳を瞬間移動させたい。", "name": "国立国語研究所『現代語複合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "252": [
+      {
+        "jp": "<ruby>本<rt>ほん</rt></ruby><ruby>当<rt>とう</rt></ruby>のことを<span style='color:#d64045'><ruby>話<rt>はな</rt></ruby>そうか</span><span style='color:#d64045'><ruby>話<rt>はな</rt></ruby>すまいか</span><ruby>迷<rt>まよ</rt></ruby>っています。",
+        "cn": "我正在犹豫要不要说出真相。",
+        "source": { "original": "本当のことを話そうか話すまいか迷っています。", "name": "YATOの日本語「〜か〜まいか」", "url": "https://yatomonkey-nihongo.com/entry/jlpt-n2-15", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>春<rt>はる</rt></ruby><ruby>休<rt>やす</rt></ruby>みに<ruby>国<rt>くに</rt></ruby>へ<span style='color:#d64045'><ruby>帰<rt>かえ</rt></ruby>ろうか</span><span style='color:#d64045'><ruby>帰<rt>かえ</rt></ruby>るまいか</span><ruby>悩<rt>なや</rt></ruby>んでいる。",
+        "cn": "我正在苦恼春假要不要回国。",
+        "source": { "original": "春休みに国へ帰ろうか帰るまいか悩んでいる。", "name": "毎日日本語「〜ようか〜まいか」", "url": "https://japanese-language-education.com/for-overseas-learners/youka-maika/", "type": "日语教学网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "253": [
+      {
+        "jp": "そして<ruby>検<rt>けん</rt></ruby><ruby>討<rt>とう</rt></ruby><span style='color:#d64045'>の<ruby>末<rt>すえ</rt></ruby></span>、<ruby>改<rt>あらた</rt></ruby>めて、<ruby>学<rt>がく</rt></ruby><ruby>園<rt>えん</rt></ruby>の<ruby>建<rt>けん</rt></ruby><ruby>学<rt>がく</rt></ruby>の<ruby>精<rt>せい</rt></ruby><ruby>神<rt>しん</rt></ruby>を「<ruby>人<rt>じん</rt></ruby><ruby>間<rt>かん</rt></ruby><ruby>愛<rt>あい</rt></ruby>」と<ruby>読<rt>よ</rt></ruby>み<ruby>替<rt>か</rt></ruby>えることにしました。",
+        "cn": "经过讨论，学园最终决定将创校精神改称为“人类之爱”。",
+        "source": { "original": "そして検討の末、改めて、学園の建学の精神を「人間愛」と読み替えることにしました。", "name": "文教大学学园「创立100周年记念事业 理事长寄语」", "url": "https://www.bunkyo.ac.jp/academy/100th/message/", "type": "大学官方网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>熱<rt>あつ</rt></ruby>い<ruby>議<rt>ぎ</rt></ruby><ruby>論<rt>ろん</rt></ruby><span style='color:#d64045'>の<ruby>末<rt>すえ</rt></ruby></span>、なんとか<ruby>決<rt>き</rt></ruby>まった。",
+        "cn": "经过激烈讨论，总算作出了决定。",
+        "source": { "original": "熱い議論の末、なんとか決まった。", "name": "法政大学「総長日誌 2020年11月」", "url": "https://www.hosei.ac.jp/hosei/daigakugaiyo/socho/diary/2020/11?auth=9abbb458a78210eb174f4bdd385bcf54", "type": "大学官方网站", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "254": [
+      {
+        "jp": "<span style='color:#d64045'>たとえ<ruby>失<rt>しっ</rt></ruby><ruby>敗<rt>ぱい</rt></ruby>しても</span>、<ruby>責<rt>せき</rt></ruby><ruby>任<rt>にん</rt></ruby>は<ruby>上<rt>じょう</rt></ruby><ruby>司<rt>し</rt></ruby>が<ruby>持<rt>も</rt></ruby>ってくれます。",
+        "cn": "即使失败，上司也会承担责任。",
+        "source": { "original": "たとえ失敗しても、責任は上司が持ってくれます。", "name": "厚生劳働省『技能士活躍事例集』", "url": "https://waza.mhlw.go.jp/sasshi/pdf/H29_ginoushi_jireisyuu_company.pdf", "type": "政府资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "どうか<ruby>常<rt>つね</rt></ruby>に<ruby>夢<rt>ゆめ</rt></ruby>を<ruby>渇<rt>かつ</rt></ruby><ruby>望<rt>ぼう</rt></ruby>し、<ruby>夢<rt>ゆめ</rt></ruby>を<ruby>思<rt>おも</rt></ruby>い<ruby>描<rt>えが</rt></ruby>きチャレンジし、<span style='color:#d64045'>たとえ<ruby>失<rt>しっ</rt></ruby><ruby>敗<rt>ぱい</rt></ruby>しても</span>また<ruby>不<rt>ふ</rt></ruby><ruby>死<rt>し</rt></ruby><ruby>鳥<rt>ちょう</rt></ruby>の<ruby>如<rt>ごと</rt></ruby>く<ruby>立<rt>た</rt></ruby>ち<ruby>上<rt>あ</rt></ruby>がってください。",
+        "cn": "请始终渴望梦想、描绘梦想并勇于挑战；即使失败，也请像不死鸟一样再次站起来。",
+        "source": { "original": "どうか常に夢を渇望し、夢を思い描きチャレンジし、たとえ失敗してもまた不死鳥の如く立ち上がってください。", "name": "徳島大学「入学式学长告辞」", "url": "https://www.tokushima-u.ac.jp/about/president/message/48374.html", "type": "大学官方讲话", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "255": [
+      {
+        "jp": "<ruby>国<rt>くに</rt></ruby>の<ruby>医<rt>い</rt></ruby><ruby>療<rt>りょう</rt></ruby><ruby>政<rt>せい</rt></ruby><ruby>策<rt>さく</rt></ruby>だから<ruby>連<rt>れん</rt></ruby><ruby>携<rt>けい</rt></ruby>を<ruby>進<rt>すす</rt></ruby>めますといった<ruby>説<rt>せつ</rt></ruby><ruby>明<rt>めい</rt></ruby>は<ruby>患<rt>かん</rt></ruby><ruby>者<rt>じゃ</rt></ruby>には<span style='color:#d64045'><ruby>受<rt>う</rt></ruby>け<ruby>入<rt>い</rt></ruby>れがたい</span>。",
+        "cn": "仅以“这是国家医疗政策，所以要推进协作”来解释，患者难以接受。",
+        "source": { "original": "国の医療政策だから連携を進めますといった説明は患者には受け入れがたい。", "name": "厚生劳働科学研究成果データベース「地域医疗连携」", "url": "https://mhlw-grants.niph.go.jp/system/files/2009/093051/200925033A/200925033A0016.pdf", "type": "政府研究资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "また<ruby>宗<rt>そう</rt></ruby><ruby>祗<rt>ぎ</rt></ruby><ruby>自<rt>じ</rt></ruby><ruby>筆<rt>ひつ</rt></ruby>との<ruby>伝<rt>つた</rt></ruby>えもあるが、<span style='color:#d64045'><ruby>信<rt>しん</rt></ruby>じがたい</span>。",
+        "cn": "也有传说称这是宗祗的亲笔，但难以相信。",
+        "source": { "original": "また宗祗自筆との伝えもあるが、信じがたい。", "name": "国文学研究资料馆「宗祗连歌」", "url": "https://www.nijl.ac.jp/pages/articles/201003/index.html", "type": "国立研究机构", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "256": [
+      {
+        "jp": "<ruby>人<rt>ひと</rt></ruby><ruby>々<rt>びと</rt></ruby>は<span style='color:#d64045'><ruby>濡<rt>ぬ</rt></ruby>れるのもかまわず</span>，おどりあがって<ruby>喜<rt>よろこ</rt></ruby>ぶのでした。",
+        "cn": "人们不顾浑身湿透，高兴得跳了起来。",
+        "source": { "original": "人々は濡れるのもかまわず，おどりあがって喜ぶのでした。", "name": "石川县白山自然保护中心『はくさん』", "url": "https://www.pref.ishikawa.lg.jp/hakusan/publish/hakusan/documents/hakusan2-1.pdf", "type": "地方政府资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>雨<rt>あめ</rt></ruby>に<span style='color:#d64045'><ruby>濡<rt>ぬ</rt></ruby>れるのもかまわずに</span>、「<ruby>溜<rt>た</rt></ruby>まれ！ここだぞ！」と<ruby>木<rt>き</rt></ruby><ruby>々<rt>ぎ</rt></ruby>を<ruby>見<rt>み</rt></ruby><ruby>上<rt>あ</rt></ruby>げる。",
+        "cn": "他们不顾雨水淋湿，仰望树木喊道：“积起来！就在这里！”",
+        "source": { "original": "雨に濡れるのもかまわずに、「溜まれ！ここだぞ！」と木々を見上げる。", "name": "ソニー教育财団 Webマガジン", "url": "https://www.sony-ef.or.jp/preschool/pdf/webmag/webmag174-01.pdf", "type": "教育财团资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "257": [
+      {
+        "jp": "<ruby>若<rt>わか</rt></ruby>き<ruby>日<rt>ひ</rt></ruby>の<ruby>錣<rt>しころ</rt></ruby><ruby>太<rt>だ</rt></ruby><ruby>夫<rt>ゆう</rt></ruby>さんは<ruby>緊<rt>きん</rt></ruby><ruby>張<rt>ちょう</rt></ruby><span style='color:#d64045'>のあまり</span>、<ruby>師<rt>し</rt></ruby><ruby>匠<rt>しょう</rt></ruby>の<ruby>言<rt>こと</rt></ruby><ruby>葉<rt>ば</rt></ruby>の<ruby>意<rt>い</rt></ruby><ruby>味<rt>み</rt></ruby>がよく<ruby>理<rt>り</rt></ruby><ruby>解<rt>かい</rt></ruby>できず、<ruby>立<rt>た</rt></ruby>ち<ruby>上<rt>あ</rt></ruby>がってもぞもぞと<ruby>着<rt>き</rt></ruby>ていた<ruby>浴<rt>ゆ</rt></ruby><ruby>衣<rt>かた</rt></ruby>の<ruby>裾<rt>すそ</rt></ruby>をめくろうとした。",
+        "cn": "年轻时的錣太夫因过度紧张，没能听懂师傅的话，站起来便要翻起身上浴衣的下摆。",
+        "source": { "original": "若き日の錣太夫さんは緊張のあまり、師匠の言葉の意味がよく理解できず、立ち上がってもぞもぞと着ていた浴衣の裾をめくろうとした。", "name": "日本艺术文化振兴会「文乐、日々のこと」", "url": "https://www.ntj.jac.go.jp/bunraku/diary/2019/3960/", "type": "国立艺术机构", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>村<rt>むら</rt></ruby><ruby>娘<rt>むすめ</rt></ruby>ジゼルは<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>恋<rt>こい</rt></ruby><ruby>人<rt>びと</rt></ruby>が<ruby>実<rt>じつ</rt></ruby>はアルベルト（アルブレヒト）という<ruby>名<rt>な</rt></ruby>の<ruby>貴<rt>き</rt></ruby><ruby>族<rt>ぞく</rt></ruby>で<ruby>婚<rt>こん</rt></ruby><ruby>約<rt>やく</rt></ruby><ruby>者<rt>しゃ</rt></ruby>のいる<ruby>身<rt>み</rt></ruby>だったと<ruby>知<rt>し</rt></ruby>り、<ruby>驚<rt>おどろ</rt></ruby>き<span style='color:#d64045'>のあまり</span><ruby>狂<rt>きょう</rt></ruby><ruby>乱<rt>らん</rt></ruby>しそのまま<ruby>息<rt>いき</rt></ruby><ruby>絶<rt>た</rt></ruby>えてしまう。",
+        "cn": "村姑吉塞尔得知恋人其实是名叫阿尔贝特的贵族且已有婚约，震惊过度而陷入疯狂，随即死去。",
+        "source": { "original": "村娘ジゼルは自分の恋人が実はアルベルト（アルブレヒト）という名の貴族で婚約者のいる身だったと知り、驚きのあまり狂乱しそのまま息絶えてしまう。", "name": "新国立剧场「ジゼル」", "url": "https://www.nntt.jac.go.jp/release/r466/r466.html", "type": "国立剧场", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "258": [
+      {
+        "jp": "<span style='color:#d64045'><ruby>心<rt>こころ</rt></ruby>を<ruby>込<rt>こ</rt></ruby>めて</span><ruby>歌<rt>うた</rt></ruby>うなどと<ruby>申<rt>もう</rt></ruby>しますが、<ruby>心<rt>こころ</rt></ruby>と<ruby>歌<rt>うた</rt></ruby><ruby>声<rt>ごえ</rt></ruby>は<ruby>密<rt>みつ</rt></ruby><ruby>接<rt>せつ</rt></ruby>な<ruby>関<rt>かん</rt></ruby><ruby>係<rt>けい</rt></ruby>にあります。",
+        "cn": "人们常说要用心歌唱，内心与歌声确实有着密切关系。",
+        "source": { "original": "心を込めて歌うなどと申しますが、心と歌声は密接な関係にあります。", "name": "桜美林大学「教员介绍 小林玲子」", "url": "https://www.obirin.ac.jp/academics/performing_visual_arts/course_music/list_teacher/teacher01.html", "type": "大学官方网站", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "だから<ruby>私<rt>わたし</rt></ruby>も<ruby>一<rt>ひと</rt></ruby><ruby>人<rt>り</rt></ruby>ひとり<span style='color:#d64045'><ruby>思<rt>おも</rt></ruby>いを<ruby>込<rt>こ</rt></ruby>めて</span>、メッセージを<ruby>書<rt>か</rt></ruby>くことに<ruby>決<rt>き</rt></ruby>めました。",
+        "cn": "所以我也决定用心为每一个人写下留言。",
+        "source": { "original": "だから私も一人ひとり思いを込めて、メッセージを書くことに決めました。", "name": "国际交流基金 日本語パートナーズ「お別れはあっさりと」", "url": "https://asiawa.jpf.go.jp/partners/voice/blog/2020-03-23/", "type": "语言机构实际记录", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "259": [
+      {
+        "jp": "<ruby>環<rt>かん</rt></ruby><ruby>境<rt>きょう</rt></ruby><ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>き<ruby>起<rt>お</rt></ruby>こして<ruby>滅<rt>めつ</rt></ruby><ruby>亡<rt>ぼう</rt></ruby>した<ruby>文<rt>ぶん</rt></ruby><ruby>明<rt>めい</rt></ruby><span style='color:#d64045'>もあれば</span>、<ruby>環<rt>かん</rt></ruby><ruby>境<rt>きょう</rt></ruby>とうまく<ruby>付<rt>つ</rt></ruby>き<ruby>合<rt>あ</rt></ruby>いながら<ruby>長<rt>なが</rt></ruby>らく<ruby>繁<rt>はん</rt></ruby><ruby>栄<rt>えい</rt></ruby>し<ruby>続<rt>つづ</rt></ruby>けた<ruby>文<rt>ぶん</rt></ruby><ruby>明<rt>めい</rt></ruby><span style='color:#d64045'>もある</span>。",
+        "cn": "有的文明因引发环境问题而毁灭，也有的文明在与环境良好相处中长久繁荣。",
+        "source": { "original": "環境問題を引き起こして滅亡した文明もあれば、環境とうまく付き合いながら長らく繁栄し続けた文明もある。", "name": "桜美林大学「环境と文明」授业纲要", "url": "https://www.obirin.ac.jp/syllabus/year2011/7fl296000001ndwi.html", "type": "大学课程资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "その<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>は、<ruby>機<rt>き</rt></ruby><ruby>械<rt>かい</rt></ruby>のばあい<span style='color:#d64045'>もあれば</span>、<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>のばあい<span style='color:#d64045'>もある</span>。",
+        "cn": "那个对象既可能是机器，也可能是人。",
+        "source": { "original": "その相手は、機械のばあいもあれば、人間のばあいもある。", "name": "四日市大学论集「组织とリズム」", "url": "https://www.jstage.jst.go.jp/article/jyu/16/1/16_KJ00000195298/_pdf/-char/ja", "type": "大学学术论文", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "260": [
+      {
+        "jp": "<ruby>目<rt>もく</rt></ruby><ruby>標<rt>ひょう</rt></ruby>を<ruby>達<rt>たっ</rt></ruby><ruby>成<rt>せい</rt></ruby>するには、<ruby>達<rt>たっ</rt></ruby><ruby>成<rt>せい</rt></ruby>のための<ruby>方<rt>ほう</rt></ruby><ruby>法<rt>ほう</rt></ruby>を<ruby>最<rt>さい</rt></ruby><ruby>後<rt>ご</rt></ruby>まで<span style='color:#d64045'>やり<ruby>抜<rt>ぬ</rt></ruby>かなければならない</span>。",
+        "cn": "要实现目标，就必须将实现目标的方法坚持到底。",
+        "source": { "original": "目標を達成するには、達成のための方法を最後までやり抜かなければならない。", "name": "职业能力开发综合大学校「やる気を起こさせるリーダーシップ」", "url": "https://www.tetras.uitec.jeed.go.jp/files/kankoubutu/i-033-09.pdf", "type": "公共职业教育资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "ハノイの<ruby>塔<rt>とう</rt></ruby>というパズルを<ruby>最<rt>さい</rt></ruby><ruby>後<rt>ご</rt></ruby>まで<span style='color:#d64045'>やり<ruby>抜<rt>ぬ</rt></ruby>く</span>ことを<ruby>目<rt>もく</rt></ruby><ruby>標<rt>ひょう</rt></ruby>に<ruby>実<rt>じっ</rt></ruby><ruby>施<rt>し</rt></ruby>してもらいました。",
+        "cn": "实验要求参加者以坚持完成“汉诺塔”这一益智游戏为目标。",
+        "source": { "original": "ハノイの塔というパズルを最後までやり抜くことを目標に実施してもらいました。", "name": "JST「『やり抜く力』を育つ脳のしくみ」", "url": "https://www.jst.go.jp/pr/announce/20200428-2/pdf/20200428-2.pdf", "type": "国立研发机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "261": [
+      {
+        "jp": "<ruby>両<rt>りょう</rt></ruby><ruby>国<rt>こく</rt></ruby>の<ruby>貿<rt>ぼう</rt></ruby><ruby>易<rt>えき</rt></ruby><ruby>摩<rt>ま</rt></ruby><ruby>擦<rt>さつ</rt></ruby><span style='color:#d64045'>をめぐって</span>、<ruby>首<rt>しゅ</rt></ruby><ruby>相<rt>しょう</rt></ruby>による<ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>いが<ruby>行<rt>おこな</rt></ruby>われた。",
+        "cn": "两国首相围绕贸易摩擦进行了会谈。",
+        "source": { "original": "両国の貿易摩擦をめぐって、首相による話し合いが行われた。", "name": "国际交流基金 みんなの教材サイト「をめぐって／をめぐる」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00049/ja/render.do", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "ダム<ruby>建<rt>けん</rt></ruby><ruby>設<rt>せつ</rt></ruby><span style='color:#d64045'>をめぐる</span><ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>いは<ruby>全<rt>まっ</rt></ruby>く<ruby>進<rt>すす</rt></ruby>んでいない。",
+        "cn": "围绕水坝建设的协商毫无进展。",
+        "source": { "original": "ダム建設をめぐる話し合いは全く進んでいない。", "name": "国际交流基金 みんなの教材サイト「をめぐって／をめぐる」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00049/ja/render.do", "type": "语言机构教材", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "262": [
+      {
+        "jp": "<ruby>国<rt>こっ</rt></ruby><ruby>会<rt>かい</rt></ruby>は，<ruby>法<rt>ほう</rt></ruby><ruby>律<rt>りつ</rt></ruby>の<span style='color:#d64045'><ruby>制<rt>せい</rt></ruby><ruby>定<rt>てい</rt></ruby>にあたって</span>しんちょうに<ruby>審<rt>しん</rt></ruby><ruby>議<rt>ぎ</rt></ruby>し，<ruby>世<rt>せ</rt></ruby><ruby>論<rt>ろん</rt></ruby>を<ruby>尊<rt>そん</rt></ruby><ruby>重<rt>ちょう</rt></ruby>して<ruby>国<rt>こく</rt></ruby><ruby>民<rt>みん</rt></ruby>の<ruby>意<rt>い</rt></ruby><ruby>思<rt>し</rt></ruby>にそう<ruby>法<rt>ほう</rt></ruby><ruby>律<rt>りつ</rt></ruby>を<ruby>制<rt>せい</rt></ruby><ruby>定<rt>てい</rt></ruby>する<ruby>重<rt>おも</rt></ruby>い<ruby>責<rt>せき</rt></ruby><ruby>任<rt>にん</rt></ruby>がある。",
+        "cn": "国会在制定法律时，有责任慎重审议、尊重舆论，制定符合国民意志的法律。",
+        "source": { "original": "国会は，法律の制定にあたってしんちょうに審議し，世論を尊重して国民の意思にそう法律を制定する重い責任がある。", "name": "国立国语研究所『现代语复合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>大<rt>おお</rt></ruby><ruby>坂<rt>さか</rt></ruby><ruby>城<rt>じょう</rt></ruby><ruby>代<rt>だい</rt></ruby>は、その<span style='color:#d64045'><ruby>赴<rt>ふ</rt></ruby><ruby>任<rt>にん</rt></ruby>に<ruby>際<rt>さい</rt></ruby>して</span><ruby>妻<rt>さい</rt></ruby><ruby>子<rt>し</rt></ruby>の<ruby>同<rt>どう</rt></ruby><ruby>行<rt>こう</rt></ruby>を<ruby>許<rt>ゆる</rt></ruby>される。",
+        "cn": "大阪城代在赴任时获准携带妻儿同行。",
+        "source": { "original": "大坂城代は、その赴任に際して妻子の同行を許される。", "name": "国立国语研究所『现代语复合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "263": [
+      {
+        "jp": "<ruby>本<rt>ほん</rt></ruby><ruby>研<rt>けん</rt></ruby><ruby>究<rt>きゅう</rt></ruby>の<ruby>測<rt>そく</rt></ruby><ruby>定<rt>てい</rt></ruby><ruby>方<rt>ほう</rt></ruby><ruby>法<rt>ほう</rt></ruby>を<ruby>用<rt>もち</rt></ruby>いることによって，<ruby>遊<rt>ゆう</rt></ruby><ruby>離<rt>り</rt></ruby>カルニチン<span style='color:#d64045'>に<ruby>加<rt>くわ</rt></ruby>えて</span>アシルカルニチン<ruby>類<rt>るい</rt></ruby>をシカ<ruby>肉<rt>にく</rt></ruby>から<ruby>検<rt>けん</rt></ruby><ruby>出<rt>しゅつ</rt></ruby>することが<ruby>可<rt>か</rt></ruby><ruby>能<rt>のう</rt></ruby>となった．",
+        "cn": "采用本研究的测定方法后，除游离肉碱外，也能从鹿肉中检出酰基肉碱类。",
+        "source": { "original": "本研究の測定方法を用いることによって，遊離カルニチンに加えてアシルカルニチン類をシカ肉から検出することが可能となった．", "name": "日本食品科学工学会誌「シカ肉中のカルニチン」", "url": "https://www.jstage.jst.go.jp/article/nskkk/59/12/59_637/_article/download/-char/ja", "type": "学术论文", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>涙<rt>なみだ</rt></ruby>はアニマシー<span style='color:#d64045'>に<ruby>加<rt>くわ</rt></ruby>えて</span><ruby>社<rt>しゃ</rt></ruby><ruby>会<rt>かい</rt></ruby><ruby>性<rt>せい</rt></ruby>と<ruby>主<rt>しゅ</rt></ruby><ruby>体<rt>たい</rt></ruby><ruby>性<rt>せい</rt></ruby>の<ruby>評<rt>ひょう</rt></ruby><ruby>価<rt>か</rt></ruby>も<ruby>向<rt>こう</rt></ruby><ruby>上<rt>じょう</rt></ruby>させた．",
+        "cn": "眼泪除了提高生命感评价，也提高了对社会性和主体性的评价。",
+        "source": { "original": "涙はアニマシーに加えて社会性と主体性の評価も向上させた．", "name": "日本认知心理学会「ロボットの涙と心理的擬人化」", "url": "https://www.jstage.jst.go.jp/article/jcogpsy/advpub/0/advpub_2414/_article/-char/ja", "type": "学术论文", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "264": [
+      {
+        "jp": "<ruby>万<rt>まん</rt></ruby><ruby>一<rt>いち</rt></ruby><ruby>気<rt>き</rt></ruby><ruby>付<rt>づ</rt></ruby>かれた<span style='color:#d64045'>としても</span>、<ruby>逃<rt>に</rt></ruby>げるのは<ruby>容<rt>た</rt></ruby><ruby>易<rt>やす</rt></ruby>い。",
+        "cn": "万一被发现，要逃走也很容易。",
+        "source": { "original": "万一気付かれたとしても、逃げるのは容易い。", "name": "国立国语研究所『现代语复合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "また，<ruby>経<rt>けい</rt></ruby><ruby>済<rt>ざい</rt></ruby><ruby>的<rt>てき</rt></ruby>な<ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>が<ruby>制<rt>せい</rt></ruby><ruby>度<rt>ど</rt></ruby>のうえで<span style='color:#d64045'><ruby>解<rt>かい</rt></ruby><ruby>決<rt>けつ</rt></ruby>されたとしても</span>，<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby>は<ruby>親<rt>おや</rt></ruby><ruby>子<rt>こ</rt></ruby>の<ruby>基<rt>き</rt></ruby><ruby>本<rt>ほん</rt></ruby><ruby>的<rt>てき</rt></ruby>な<ruby>愛<rt>あい</rt></ruby><ruby>情<rt>じょう</rt></ruby>を<ruby>無<rt>む</rt></ruby><ruby>視<rt>し</rt></ruby>してよいのであろうか．",
+        "cn": "即使经济问题在制度上得到解决，人就可以无视亲子间基本的爱吗？",
+        "source": { "original": "また，経済的な問題が制度のうえで解決されたとしても，人間は親子の基本的な愛情を無視してよいのであろうか．", "name": "国立国语研究所『现代语复合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "265": [
+      {
+        "jp": "<ruby>捜<rt>そう</rt></ruby><ruby>査<rt>さ</rt></ruby><ruby>側<rt>がわ</rt></ruby>が<ruby>得<rt>え</rt></ruby>た<ruby>情<rt>じょう</rt></ruby><ruby>報<rt>ほう</rt></ruby><span style='color:#d64045'>に<ruby>基<rt>もと</rt></ruby>づいて</span><ruby>捜<rt>そう</rt></ruby><ruby>査<rt>さ</rt></ruby><ruby>方<rt>ほう</rt></ruby><ruby>針<rt>しん</rt></ruby>を<ruby>変<rt>へん</rt></ruby><ruby>更<rt>こう</rt></ruby>したのに<ruby>応<rt>おう</rt></ruby>じて、<ruby>自<rt>じ</rt></ruby><ruby>白<rt>はく</rt></ruby><ruby>内<rt>ない</rt></ruby><ruby>容<rt>よう</rt></ruby>も<ruby>変<rt>か</rt></ruby>わってきた。",
+        "cn": "随着侦查方根据所获信息改变侦查方针，供述内容也发生了变化。",
+        "source": { "original": "捜査側が得た情報に基づいて捜査方針を変更したのに応じて、自白内容も変わってきた。", "name": "国立国语研究所『现代语复合辞用例集』", "url": "https://repository.ninjal.ac.jp/record/2322/files/gdghgz_200103.pdf", "type": "国立语言研究机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>図<rt>ず</rt></ruby><ruby>表<rt>ひょう</rt></ruby>1は、IASC（2017）のモデルを<ruby>本<rt>ほん</rt></ruby><ruby>調<rt>ちょう</rt></ruby><ruby>査<rt>さ</rt></ruby>の<ruby>分<rt>ぶん</rt></ruby><ruby>析<rt>せき</rt></ruby><ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby><span style='color:#d64045'>に<ruby>基<rt>もと</rt></ruby>づいて</span><ruby>再<rt>さい</rt></ruby><ruby>構<rt>こう</rt></ruby><ruby>成<rt>せい</rt></ruby>したものであり、<ruby>本<rt>ほん</rt></ruby><ruby>文<rt>ぶん</rt></ruby><ruby>内<rt>ない</rt></ruby><ruby>図<rt>ず</rt></ruby><ruby>表<rt>ひょう</rt></ruby>S1と<ruby>同<rt>どう</rt></ruby><ruby>内<rt>ない</rt></ruby><ruby>容<rt>よう</rt></ruby>である。",
+        "cn": "图表1是根据本次调查的分析结果对IASC（2017）模型重新构成的，与正文图表S1内容相同。",
+        "source": { "original": "図表1は、IASC（2017）のモデルを本調査の分析結果に基づいて再構成したものであり、本文内図表S1と同内容である。", "name": "劳动政策研究・研修机构「キャリアコンサルタントのリファー」", "url": "https://www.jil.go.jp/institute/discussion/2026/26-07.html", "type": "政府系研究机构", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "266": [
+      {
+        "jp": "<ruby>資<rt>し</rt></ruby><ruby>料<rt>りょう</rt></ruby><span style='color:#d64045'>をもとに</span><ruby>海<rt>かい</rt></ruby><ruby>外<rt>がい</rt></ruby>での<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>を<ruby>口<rt>こう</rt></ruby><ruby>頭<rt>とう</rt></ruby>で<ruby>発<rt>はっ</rt></ruby><ruby>表<rt>ぴょう</rt></ruby>したり、<ruby>文<rt>ぶん</rt></ruby><ruby>章<rt>しょう</rt></ruby>に<ruby>書<rt>か</rt></ruby>いたりすることができる。",
+        "cn": "能根据资料，以口头或书面形式表述在海外的回忆。",
+        "source": { "original": "資料をもとに海外での思い出を口頭で発表したり、文章に書いたりすることができる。", "name": "福冈教育大学附属福冈小学校「帰国儿童教育实践」", "url": "https://fukuokaes.fukuoka-edu.ac.jp/research/gi9lru00000006q1-att/gi9lru00000007rq.pdf", "type": "大学附属校资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>実<rt>じっ</rt></ruby><ruby>験<rt>けん</rt></ruby>が<ruby>成<rt>せい</rt></ruby><ruby>功<rt>こう</rt></ruby>しても<ruby>失<rt>しっ</rt></ruby><ruby>敗<rt>ぱい</rt></ruby>しても、レポートでは<ruby>実<rt>じっ</rt></ruby><ruby>験<rt>けん</rt></ruby><ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby>や<ruby>適<rt>てき</rt></ruby><ruby>切<rt>せつ</rt></ruby>な<ruby>資<rt>し</rt></ruby><ruby>料<rt>りょう</rt></ruby>のデータ<span style='color:#d64045'>をもとに</span>「<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の」<ruby>実<rt>じっ</rt></ruby><ruby>験<rt>けん</rt></ruby>について<ruby>科<rt>か</rt></ruby><ruby>学<rt>がく</rt></ruby><ruby>的<rt>てき</rt></ruby>・<ruby>論<rt>ろん</rt></ruby><ruby>理<rt>り</rt></ruby><ruby>的<rt>てき</rt></ruby>に<ruby>記<rt>き</rt></ruby><ruby>述<rt>じゅつ</rt></ruby>しましょう。",
+        "cn": "无论实验成功还是失败，报告都应根据实验结果及合适的资料数据，科学、有逻辑地记述自己的实验。",
+        "source": { "original": "実験が成功しても失敗しても、レポートでは実験結果や適切な資料のデータをもとに「自分の」実験について科学的・論理的に記述しましょう。", "name": "名古屋大学「化学实验レポートの書き方」", "url": "https://www.ilas.nagoya-u.ac.jp/Chem_Exp/report.html", "type": "大学官方教材", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "267": [
+      {
+        "jp": "<ruby>全<rt>ぜん</rt></ruby><ruby>力<rt>りょく</rt></ruby>を<span style='color:#d64045'><ruby>尽<rt>つ</rt></ruby>くしてこそ</span>いい<ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby>がでます。",
+        "cn": "只有竭尽全力，才会取得好结果。",
+        "source": { "original": "全力を尽くしてこそいい結果がでます。", "name": "东京外国语大学 言语モジュール「副助辞」", "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/095.html", "type": "大学语言教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>結<rt>けっ</rt></ruby><ruby>果<rt>か</rt></ruby>を<span style='color:#d64045'><ruby>出<rt>だ</rt></ruby>してこそ</span><ruby>努<rt>ど</rt></ruby><ruby>力<rt>りょく</rt></ruby>が<ruby>認<rt>みと</rt></ruby>められる",
+        "cn": "只有做出成果，努力才会得到认可。",
+        "source": { "original": "結果を出してこそ努力が認められる", "name": "日本教育心理学会「人は努力をどう捉えているのか」", "url": "https://www.jstage.jst.go.jp/article/pamjaep/63/0/63_308/_pdf/-char/ja", "type": "学术会议资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "4005": [
+      {
+        "jp": "<ruby>今<rt>こん</rt></ruby><ruby>回<rt>かい</rt></ruby>のアンケート<ruby>回<rt>かい</rt></ruby><ruby>答<rt>とう</rt></ruby><ruby>者<rt>しゃ</rt></ruby>の<ruby>多<rt>おお</rt></ruby>くは<span style='color:#d64045'>2011<ruby>年<rt>ねん</rt></ruby>に<ruby>開<rt>かい</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>している</span>。",
+        "cn": "本次问卷的多数受访者都于2011年创业。",
+        "source": { "original": "今回のアンケート回答者の多くは2011年に開業している。", "name": "日本政策金融公庫『调查月报』2013年5月号", "url": "https://www.jfc.go.jp/n/findings/pdf/tyousa_gttupou_1305.pdf", "type": "政府系金融机构资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>現<rt>げん</rt></ruby><ruby>在<rt>ざい</rt></ruby>の<ruby>小<rt>お</rt></ruby><ruby>田<rt>だ</rt></ruby><ruby>原<rt>わら</rt></ruby><ruby>市<rt>し</rt></ruby>を<ruby>流<rt>なが</rt></ruby>れる<ruby>酒<rt>さか</rt></ruby><ruby>匂<rt>わ</rt></ruby><ruby>川<rt>がわ</rt></ruby>では、<ruby>噴<rt>ふん</rt></ruby><ruby>火<rt>か</rt></ruby>の<ruby>翌<rt>よく</rt></ruby><ruby>年<rt>ねん</rt></ruby><span style='color:#d64045'>1708<ruby>年<rt>ねん</rt></ruby>８<ruby>月<rt>がつ</rt></ruby>に<ruby>洪<rt>こう</rt></ruby><ruby>水<rt>ずい</rt></ruby><ruby>氾<rt>はん</rt></ruby><ruby>濫<rt>らん</rt></ruby>が<ruby>起<rt>お</rt></ruby>こっている</span>。",
+        "cn": "在流经现今小田原市的酒匂川，喷火第二年的1708年8月曾发生洪水泛滥。",
+        "source": { "original": "現在の小田原市を流れる酒匂川では、噴火の翌年1708年８月に洪水氾濫が起こっている。", "name": "内阁府防灾信息「火山灾害が长期化する」", "url": "https://www.bousai.go.jp/kazan/expert/pdf/140318_katsudo.pdf", "type": "政府防灾资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "4006": [
+      {
+        "jp": "<ruby>禁<rt>きん</rt></ruby><ruby>煙<rt>えん</rt></ruby>してからもう3<ruby>週<rt>しゅう</rt></ruby><ruby>間<rt>かん</rt></ruby>もたばこを<span style='color:#d64045'><ruby>吸<rt>す</rt></ruby>わずにいる</span>｡",
+        "cn": "戒烟以后，已经整整三周没有抽烟了。",
+        "source": { "original": "禁煙してからもう3週間もたばこを吸わずにいる｡", "name": "早稻田大学『日本語教科书 中级文型』", "url": "https://waseda.repo.nii.ac.jp/record/27012/files/NihongoKyokasho_Chukyu_Bunkei_Kaitei_00_00_001.pdf", "type": "大学公开教材", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>卒<rt>そつ</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>後<rt>ご</rt></ruby>､<ruby>就<rt>しゅう</rt></ruby><ruby>職<rt>しょく</rt></ruby>するか<ruby>大<rt>だい</rt></ruby><ruby>学<rt>がく</rt></ruby><ruby>院<rt>いん</rt></ruby>に<ruby>進<rt>しん</rt></ruby><ruby>学<rt>がく</rt></ruby>するか､まだ<ruby>決<rt>けっ</rt></ruby><ruby>心<rt>しん</rt></ruby>が<span style='color:#d64045'>つかずにいる</span>｡",
+        "cn": "毕业后是就业还是读研究生，至今仍未下定决心。",
+        "source": { "original": "卒業後､就職するか大学院に進学するか､まだ決心がつかずにいる｡", "name": "早稻田大学『日本語教科书 中级文型』", "url": "https://waseda.repo.nii.ac.jp/record/27012/files/NihongoKyokasho_Chukyu_Bunkei_Kaitei_00_00_001.pdf", "type": "大学公开教材", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "4007": [
+      {
+        "jp": "<ruby>最<rt>さい</rt></ruby><ruby>初<rt>しょ</rt></ruby>の<ruby>体<rt>たい</rt></ruby><ruby>験<rt>けん</rt></ruby><ruby>宿<rt>しゅく</rt></ruby><ruby>泊<rt>はく</rt></ruby>の<ruby>時<rt>とき</rt></ruby>も<ruby>実<rt>じっ</rt></ruby><ruby>際<rt>さい</rt></ruby>に<ruby>飛<rt>と</rt></ruby>び<ruby>出<rt>だ</rt></ruby>してコンビニに<ruby>行<rt>い</rt></ruby>ってしまったが、パンジーの<ruby>顔<rt>かお</rt></ruby><ruby>見<rt>み</rt></ruby><ruby>知<rt>し</rt></ruby>りの<ruby>店<rt>てん</rt></ruby><ruby>員<rt>いん</rt></ruby>だったこともあり<span style='color:#d64045'><ruby>大<rt>おお</rt></ruby><ruby>事<rt>ごと</rt></ruby>にはならずに<ruby>済<rt>す</rt></ruby>んだ</span>。",
+        "cn": "第一次体验住宿时，他确实跑去了便利店；好在店员认识“Pansy”，事情才没有闹大。",
+        "source": { "original": "最初の体験宿泊の時も実際に飛び出してコンビニに行ってしまったが、パンジーの顔見知りの店員だったこともあり大事にはならずに済んだ。", "name": "厚生劳働省「障害者の地域生活支援事例」", "url": "https://www.mhlw.go.jp/content/12200000/000521826.pdf", "type": "政府资料", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "<ruby>硬<rt>こう</rt></ruby><ruby>木<rt>ぼく</rt></ruby>は<ruby>燃<rt>も</rt></ruby>えにくく、ゆっくりと<ruby>燃<rt>も</rt></ruby>える<ruby>性<rt>せい</rt></ruby><ruby>質<rt>しつ</rt></ruby>があることから、<ruby>堅<rt>かた</rt></ruby>い<ruby>欅<rt>けやき</rt></ruby><ruby>材<rt>ざい</rt></ruby>で<ruby>作<rt>つく</rt></ruby>られていたため、<span style='color:#d64045'><ruby>完<rt>かん</rt></ruby><ruby>全<rt>ぜん</rt></ruby>に<ruby>灰<rt>はい</rt></ruby>にならずに<ruby>済<rt>す</rt></ruby>んだ</span>と<ruby>考<rt>かんが</rt></ruby>えられます。",
+        "cn": "硬木难燃且燃烧缓慢，这尊像由坚硬的榉木制成，因此被认为才没有完全烧成灰烬。",
+        "source": { "original": "硬木は燃えにくく、ゆっくりと燃える性質があることから、堅い欅材で作られていたため、完全に灰にならずに済んだと考えられます。", "name": "观光庁「烧损观音像的保存」", "url": "https://www.mlit.go.jp/kankocho/content/001998615.pdf", "type": "政府观光资料", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "4009": [
+      {
+        "jp": "<ruby>刊<rt>かん</rt></ruby><ruby>行<rt>こう</rt></ruby><ruby>本<rt>ほん</rt></ruby><ruby>数<rt>すう</rt></ruby>に<ruby>多<rt>た</rt></ruby><ruby>少<rt>しょう</rt></ruby>の<ruby>波<rt>なみ</rt></ruby>があるのは，<ruby>査<rt>さ</rt></ruby><ruby>読<rt>どく</rt></ruby>の<ruby>回<rt>かい</rt></ruby><ruby>数<rt>すう</rt></ruby>や<ruby>期<rt>き</rt></ruby><ruby>間<rt>かん</rt></ruby>にもよるため，<span style='color:#d64045'>やむを<ruby>得<rt>え</rt></ruby>ない</span><ruby>面<rt>めん</rt></ruby>もある。",
+        "cn": "由于会受审稿次数和期间影响，刊载篇数有些波动也在所难免。",
+        "source": { "original": "刊行本数に多少の波があるのは，査読の回数や期間にもよるため，やむを得ない面もある。", "name": "日本マーケティング学会「生成AI时代における学会誌のあり方」", "url": "https://www.jstage.jst.go.jp/article/jsmd/27/3/27_1/_html/-char/ja", "type": "学术论文", "accessedAt": "2026-08-24" }
+      },
+      {
+        "jp": "それは，<ruby>機<rt>き</rt></ruby><ruby>械<rt>かい</rt></ruby>を<ruby>労<rt>ろう</rt></ruby><ruby>働<rt>どう</rt></ruby><ruby>者<rt>しゃ</rt></ruby>に<ruby>手<rt>て</rt></ruby><ruby>渡<rt>わた</rt></ruby>す<ruby>前<rt>まえ</rt></ruby>に<ruby>判<rt>はん</rt></ruby><ruby>断<rt>だん</rt></ruby>するという<ruby>安<rt>あん</rt></ruby><ruby>全<rt>ぜん</rt></ruby>の<ruby>本<rt>ほん</rt></ruby><ruby>質<rt>しつ</rt></ruby>による，<span style='color:#d64045'>やむを<ruby>得<rt>え</rt></ruby>ない</span><ruby>現<rt>げん</rt></ruby><ruby>実<rt>じつ</rt></ruby>である．",
+        "cn": "这是由机械必须在交到劳动者手中之前就做出判断这一安全本质所带来的、无可避免的现实。",
+        "source": { "original": "それは，機械を労働者に手渡す前に判断するという安全の本質による，やむを得ない現実である．", "name": "安全工学会「机械安全の原理とヒューマンファクター」", "url": "https://www.jstage.jst.go.jp/article/safety/38/6/38_365/_article/-char/ja", "type": "学术论文", "accessedAt": "2026-08-24" }
+      }
+    ],
+    "4012": [
+      {
+        "jp": "<ruby>結<rt>けっ</rt></ruby><ruby>婚<rt>こん</rt></ruby><span style='color:#d64045'>しては</span><ruby>離<rt>り</rt></ruby><ruby>婚<rt>こん</rt></ruby>し、<ruby>離<rt>り</rt></ruby><ruby>婚<rt>こん</rt></ruby><span style='color:#d64045'>しては</span><ruby>結<rt>けっ</rt></ruby><ruby>婚<rt>こん</rt></ruby>し。",
+        "cn": "结了又离，离了又结。",
+        "source": { "original": "結婚しては離婚し、離婚しては結婚し。", "name": "毎日のんびり日本語教師「～ては～ては」", "url": "https://mainichi-nonbiri.com/grammar/n1-tehateha/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>日<rt>に</rt></ruby><ruby>本<rt>ほん</rt></ruby><ruby>語<rt>ご</rt></ruby>を<ruby>勉<rt>べん</rt></ruby><ruby>強<rt>きょう</rt></ruby><span style='color:#d64045'>しては</span><ruby>忘<rt>わす</rt></ruby>れ、それを<ruby>繰<rt>く</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>して<ruby>少<rt>すこ</rt></ruby>しずつ<ruby>上<rt>じょう</rt></ruby><ruby>達<rt>たつ</rt></ruby>した。",
+        "cn": "日语学了又忘，在这样的反复中一点点进步了。",
+        "source": { "original": "日本語を勉強しては忘れ、それを繰り返して少しずつ上達した。", "name": "にほんご部「〜ては（反復）」", "url": "https://nihongobu.net/n1-tewa-repeat/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4013": [
+      {
+        "jp": "<ruby>私<rt>わたし</rt></ruby>はTOEICで<ruby>満<rt>まん</rt></ruby><ruby>点<rt>てん</rt></ruby>をとったことがありますが、アメリカに<ruby>行<rt>い</rt></ruby>ってみ<span style='color:#d64045'>て<ruby>初<rt>はじ</rt></ruby>めて</span>、テストのスコアは<ruby>意<rt>い</rt></ruby><ruby>味<rt>み</rt></ruby>がないと<ruby>理<rt>り</rt></ruby><ruby>解<rt>かい</rt></ruby>した。",
+        "cn": "我曾在TOEIC中拿过满分，但去到美国之后才第一次明白，考试分数并没有意义。",
+        "source": { "original": "私はTOEICで満点をとったことがありますが、アメリカに行ってみて初めて、テストのスコアは意味がないと理解した。", "name": "日本の言葉と文化「〜て初めて」", "url": "https://nihon5-bunka.net/japanese-grammar-intermediate-tehajimete/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>失<rt>うしな</rt></ruby>っ<span style='color:#d64045'>て<ruby>初<rt>はじ</rt></ruby>めて</span>、その<ruby>価<rt>か</rt></ruby><ruby>値<rt>ち</rt></ruby>が<ruby>分<rt>わ</rt></ruby>かりました。",
+        "cn": "直到失去之后，才懂得了它的价值。",
+        "source": { "original": "失って初めて、その価値が分かりました。", "name": "Bunpro「て初めて」", "url": "https://bunpro.jp/grammar_points/%E3%81%A6%E5%88%9D%E3%82%81%E3%81%A6", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4017": [
+      {
+        "jp": "そんなことは<span style='color:#d64045'><ruby>考<rt>かんが</rt></ruby>えるだけ<ruby>無<rt>む</rt></ruby><ruby>駄<rt>だ</rt></ruby></span>だ。",
+        "cn": "那种事想了也是白费。",
+        "source": { "original": "そんなことは考えるだけ無駄だ。", "name": "国立国語研究所『日本語文法辞典 DGG2』", "url": "https://www2.ninjal.ac.jp/takoni/DGG/DGG2.pdf", "type": "语言研究机构资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>価<rt>か</rt></ruby><ruby>値<rt>ち</rt></ruby>のない<ruby>利<rt>り</rt></ruby><ruby>用<rt>よう</rt></ruby><ruby>方<rt>ほう</rt></ruby><ruby>法<rt>ほう</rt></ruby>は<span style='color:#d64045'><ruby>考<rt>かんが</rt></ruby>えるだけ<ruby>無<rt>む</rt></ruby><ruby>駄<rt>だ</rt></ruby></span>です。",
+        "cn": "没有价值的使用方法，想了也只是浪费时间。",
+        "source": { "original": "価値のない利用方法は考えるだけ無駄です。", "name": "文化庁「著作権制度に関する資料」", "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/chosakuken/hoseido/r05_07/pdf/94021801_02.pdf", "type": "政府资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4023": [
+      {
+        "jp": "<ruby>彼<rt>かれ</rt></ruby>らは<ruby>同<rt>おな</rt></ruby>じ<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby>だった<span style='color:#d64045'>ところから</span><ruby>付<rt>つ</rt></ruby>き<ruby>合<rt>あ</rt></ruby>うようになり、<ruby>結<rt>けっ</rt></ruby><ruby>婚<rt>こん</rt></ruby>した",
+        "cn": "他们因为在同一家公司而开始交往，后来结了婚。",
+        "source": { "original": "彼らは同じ会社だったところから付き合うようになり、結婚した", "name": "絵でわかる日本語「〜ところから」", "url": "https://www.edewakaru.com/archives/cat_116816.html", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "カキはミルクのように<ruby>栄<rt>えい</rt></ruby><ruby>養<rt>よう</rt></ruby>がある<span style='color:#d64045'>ところから</span>、<ruby>海<rt>うみ</rt></ruby>のミルクと<ruby>呼<rt>よ</rt></ruby>ばれている。",
+        "cn": "牡蛎因为像牛奶一样营养丰富，所以被称为“海中牛奶”。",
+        "source": { "original": "カキはミルクのように栄養があるところから、海のミルクと呼ばれている。", "name": "JP19VLOG「〜ことから／〜ところから」", "url": "https://jp19vlog.com/n3bunpou-koto-tokorokara/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4024": [
+      {
+        "jp": "<ruby>顔<rt>かお</rt></ruby>がよく<ruby>似<rt>に</rt></ruby>ている<span style='color:#d64045'>ところから</span>、<ruby>山<rt>やま</rt></ruby><ruby>田<rt>だ</rt></ruby>くんのお<ruby>父<rt>とう</rt></ruby>さんだとわかった",
+        "cn": "从长得很像这一点判断出，他是山田同学的父亲。",
+        "source": { "original": "顔がよく似ているところから、山田くんのお父さんだとわかった", "name": "絵でわかる日本語「〜ところから」", "url": "https://www.edewakaru.com/archives/cat_116816.html", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>部<rt>へ</rt></ruby><ruby>屋<rt>や</rt></ruby>が<ruby>散<rt>ち</rt></ruby>らかっている<span style='color:#d64045'>ところから</span>、<ruby>高<rt>たか</rt></ruby><ruby>橋<rt>はし</rt></ruby>さんは<ruby>急<rt>いそ</rt></ruby>いで<ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>たのだと<ruby>思<rt>おも</rt></ruby>う。",
+        "cn": "从房间很乱这一点来看，我想高桥是匆忙离开家的。",
+        "source": { "original": "部屋が散らかっているところから、高橋さんは急いで家を出たのだと思う。", "name": "日本語イラスト「〜ところから」", "url": "https://nihongo-illust.com/post-1275/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4025": [
+      {
+        "jp": "<ruby>給<rt>きゅう</rt></ruby><ruby>料<rt>りょう</rt></ruby>も<ruby>上<rt>あ</rt></ruby>がった<span style='color:#d64045'>ことだし</span>、このへんで<ruby>結<rt>けっ</rt></ruby><ruby>婚<rt>こん</rt></ruby><ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>でも<ruby>探<rt>さが</rt></ruby>してみてはどうか。",
+        "cn": "工资也涨了，不如趁这个时候找个结婚对象怎么样？",
+        "source": { "original": "給料も上がったことだし、このへんで結婚相手でも探してみてはどうか。", "name": "国際交流基金「文法を楽しく」", "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201203.html", "type": "语言教育机构资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "お<ruby>腹<rt>なか</rt></ruby>も<ruby>空<rt>す</rt></ruby>いてきた<span style='color:#d64045'>ことだし</span>、<ruby>休<rt>きゅう</rt></ruby><ruby>憩<rt>けい</rt></ruby>にしませんか。",
+        "cn": "肚子也饿了，要不要休息一下？",
+        "source": { "original": "お腹も空いてきたことだし、休憩にしませんか。", "name": "たのすけ「〜ことだし」", "url": "https://tanosuke.com/n2-kotodashi", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4027": [
+      {
+        "jp": "<ruby>一<rt>いち</rt></ruby><ruby>応<rt>おう</rt></ruby><ruby>迷<rt>めい</rt></ruby><ruby>惑<rt>わく</rt></ruby>かけたので<span style='color:#d64045'><ruby>謝<rt>あやま</rt></ruby>りはするが</span>、やり<ruby>方<rt>かた</rt></ruby>は<ruby>間<rt>ま</rt></ruby><ruby>違<rt>ちが</rt></ruby>ってると<ruby>思<rt>おも</rt></ruby>わない。",
+        "cn": "给别人添了麻烦，所以道歉还是会道歉，但我不认为自己的做法有错。",
+        "source": { "original": "一応迷惑かけたので謝りはするが、やり方は間違ってると思わない。", "name": "毎日のんびり日本語教師「～しはする」", "url": "https://mainichi-nonbiri.com/grammar/n0-shihasuru/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>行<rt>こう</rt></ruby><ruby>為<rt>い</rt></ruby>を<span style='color:#d64045'><ruby>謝<rt>あやま</rt></ruby>りはするが</span>、<ruby>原<rt>げん</rt></ruby><ruby>因<rt>いん</rt></ruby>は<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>にあるのだと<ruby>言<rt>い</rt></ruby>われることもある。",
+        "cn": "有时对方虽会为行为本身道歉，却说原因在另一方。",
+        "source": { "original": "行為を謝りはするが、原因は相手にあるのだと言われることもある。", "name": "神戸YWCA『DV被害者支援資料』", "url": "https://www.kobe.ywca.or.jp/top/wp-content/uploads/2011/03/yomawari-ver.07.pdf", "type": "公益组织资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4032": [
+      {
+        "jp": "<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>がいつ<ruby>変<rt>か</rt></ruby>わった<span style='color:#d64045'>かといえば</span>、<ruby>新<rt>しん</rt></ruby><ruby>卒<rt>そつ</rt></ruby>で<ruby>入<rt>はい</rt></ruby>った<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby>を<ruby>辞<rt>や</rt></ruby>めた<ruby>時<rt>とき</rt></ruby>です。",
+        "cn": "要说自己是什么时候改变的，那就是辞掉毕业后进入的第一家公司时。",
+        "source": { "original": "自分がいつ変わったかといえば、新卒で入った会社を辞めた時です。", "name": "毎日のんびり日本語教師「～かというと／～かといえば」", "url": "https://mainichi-nonbiri.com/grammar/n2-katoiuto/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>彼<rt>かの</rt></ruby><ruby>女<rt>じょ</rt></ruby>は<ruby>英<rt>えい</rt></ruby><ruby>語<rt>ご</rt></ruby>がペラペラだ。どうして<span style='color:#d64045'>かというと</span>、アメリカに<ruby>留<rt>りゅう</rt></ruby><ruby>学<rt>がく</rt></ruby>していたからだ",
+        "cn": "她英语说得很流利。要问为什么，是因为她曾在美国留学。",
+        "source": { "original": "彼女は英語がペラペラだ。どうしてかというと、アメリカに留学していたからだ", "name": "絵でわかる日本語「〜かというと」", "url": "https://www.edewakaru.com/archives/25967211.html", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4034": [
+      {
+        "jp": "メタボリックシンドロームやその<ruby>予<rt>よ</rt></ruby><ruby>備<rt>び</rt></ruby><ruby>群<rt>ぐん</rt></ruby>である<ruby>場<rt>ば</rt></ruby><ruby>合<rt>あい</rt></ruby>は、<ruby>運<rt>うん</rt></ruby><ruby>動<rt>どう</rt></ruby>する<span style='color:#d64045'>などして</span>、その<ruby>改<rt>かい</rt></ruby><ruby>善<rt>ぜん</rt></ruby>に<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>んでください。",
+        "cn": "如果属于代谢综合征或其高风险人群，请通过运动等方式着手改善。",
+        "source": { "original": "メタボリックシンドロームやその予備群である場合は、運動するなどして、その改善に取り組んでください。", "name": "長崎県医師会『特定保健指導プログラム』", "url": "https://www.nagasaki.med.or.jp/tokutei/r6-puroguramu.pdf", "type": "医疗机构资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>日<rt>にち</rt></ruby><ruby>曜<rt>よう</rt></ruby><ruby>日<rt>び</rt></ruby>は、<ruby>友<rt>とも</rt></ruby><ruby>達<rt>だち</rt></ruby>とゲームをする<span style='color:#d64045'>などして</span><ruby>遊<rt>あそ</rt></ruby>んだ",
+        "cn": "星期天和朋友打打游戏之类地玩了。",
+        "source": { "original": "日曜日は、友達とゲームをするなどして遊んだ", "name": "絵でわかる日本語「〜などして」", "url": "https://www.edewakaru.com/?p=209", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4036": [
+      {
+        "jp": "<span style='color:#d64045'><ruby>君<rt>きみ</rt></ruby>は<ruby>君<rt>きみ</rt></ruby>で</span><ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>の<ruby>好<rt>す</rt></ruby>きなことをやればいいよ。",
+        "cn": "你就按你自己的方式做喜欢的事就好。",
+        "source": { "original": "君は君で自分の好きなことをやればいいよ。", "name": "毎日のんびり日本語教師「～は～で」", "url": "https://mainichi-nonbiri.com/grammar/n0-hade/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>猫<rt>ねこ</rt></ruby>になりたい<ruby>人<rt>ひと</rt></ruby>は<ruby>多<rt>おお</rt></ruby>いけど、<span style='color:#d64045'><ruby>猫<rt>ねこ</rt></ruby>も<ruby>猫<rt>ねこ</rt></ruby>で</span><ruby>大<rt>たい</rt></ruby><ruby>変<rt>へん</rt></ruby>なこともありそう。",
+        "cn": "想变成猫的人很多，不过猫也有猫自己的难处。",
+        "source": { "original": "猫になりたい人は多いけど、猫も猫で大変なこともありそう。", "name": "毎日のんびり日本語教師「～は～で」", "url": "https://mainichi-nonbiri.com/grammar/n0-hade/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4040": [
+      {
+        "jp": "「<ruby>時<rt>じ</rt></ruby><ruby>間<rt>かん</rt></ruby>がなくてできなかった」なんて<span style='color:#d64045'><ruby>言<rt>い</rt></ruby>い<ruby>訳<rt>わけ</rt></ruby>でしかない</span>。",
+        "cn": "“因为没时间所以做不到”之类的话，只不过是借口。",
+        "source": { "original": "「時間がなくてできなかった」なんて言い訳でしかない。", "name": "毎日のんびり日本語教師「～でしかない」", "url": "https://mainichi-nonbiri.com/grammar/n2-deshikanai/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "この<ruby>作<rt>さ</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>は<span style='color:#d64045'><ruby>時<rt>じ</rt></ruby><ruby>間<rt>かん</rt></ruby>の<ruby>無<rt>む</rt></ruby><ruby>駄<rt>だ</rt></ruby>でしかない</span>。",
+        "cn": "这项工作只是在浪费时间。",
+        "source": { "original": "この作業は時間の無駄でしかない。", "name": "Japan Vitta「〜でしかない」", "url": "https://japanvitta.com/level-2-pdf-download/31", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4044": [
+      {
+        "jp": "ロータリーの<ruby>目<rt>もく</rt></ruby><ruby>的<rt>てき</rt></ruby>は、<ruby>意<rt>い</rt></ruby><ruby>義<rt>ぎ</rt></ruby>ある<ruby>事<rt>じ</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>の<ruby>基<rt>き</rt></ruby><ruby>礎<rt>そ</rt></ruby>として<ruby>奉<rt>ほう</rt></ruby><ruby>仕<rt>し</rt></ruby>の<ruby>理<rt>り</rt></ruby><ruby>想<rt>そう</rt></ruby>を<ruby>奨<rt>しょう</rt></ruby><ruby>励<rt>れい</rt></ruby>し、これを<ruby>育<rt>はぐく</rt></ruby>む<span style='color:#d64045'>ことにある</span>。",
+        "cn": "扶轮社的目的在于倡导并培育服务的理想，以此作为有意义事业的基础。",
+        "source": { "original": "ロータリーの目的は、意義ある事業の基礎として奉仕の理想を奨励し、これを育むことにある。", "name": "広島ロータリークラブ「ロータリーの目的」", "url": "https://hiroshima-rc.jp/about/purpose", "type": "公益团体资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "それぞれの<ruby>違<rt>ちが</rt></ruby>いは、<ruby>動<rt>どう</rt></ruby><ruby>機<rt>き</rt></ruby>が<ruby>活<rt>かつ</rt></ruby><ruby>動<rt>どう</rt></ruby>を「<ruby>引<rt>ひ</rt></ruby>き<ruby>起<rt>お</rt></ruby>こす」こと、<ruby>目<rt>もく</rt></ruby><ruby>的<rt>てき</rt></ruby>が<ruby>活<rt>かつ</rt></ruby><ruby>動<rt>どう</rt></ruby>を「<ruby>方<rt>ほう</rt></ruby><ruby>向<rt>こう</rt></ruby>づける」<span style='color:#d64045'>ことにある</span>。",
+        "cn": "二者的区别在于：动机会“引发”活动，而目的会为活动“指明方向”。",
+        "source": { "original": "それぞれの違いは、動機が活動を「引き起こす」こと、目的が活動を「方向づける」ことにある。", "name": "琉球大学学术库《人権教育资料》", "url": "https://u-ryukyu.repo.nii.ac.jp/record/2012352/files/jinken49text.pdf", "type": "大学公开资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4048": [
+      {
+        "jp": "<ruby>区<rt>く</rt></ruby><ruby>役<rt>やく</rt></ruby><ruby>所<rt>しょ</rt></ruby>の<ruby>方<rt>かた</rt></ruby>の<ruby>話<rt>はなし</rt></ruby><span style='color:#d64045'>では</span>、ゴミの<ruby>分<rt>ぶん</rt></ruby><ruby>別<rt>べつ</rt></ruby>ルールが<ruby>来<rt>らい</rt></ruby><ruby>月<rt>げつ</rt></ruby>から<ruby>変<rt>か</rt></ruby>わるらしい。",
+        "cn": "据区政府工作人员说，垃圾分类规则好像从下个月起会改变。",
+        "source": { "original": "区役所の方の話では、ゴミの分別ルールが来月から変わるらしい。", "name": "Benri「らしい」", "url": "https://www.benri.jp/jlpt/n3/grammar/rashii", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "ヤンさんの<ruby>話<rt>はなし</rt></ruby><span style='color:#d64045'>では</span>、<ruby>来<rt>らい</rt></ruby><ruby>週<rt>しゅう</rt></ruby>、<ruby>留<rt>りゅう</rt></ruby><ruby>学<rt>がく</rt></ruby><ruby>生<rt>せい</rt></ruby>の<ruby>旅<rt>りょ</rt></ruby><ruby>行<rt>こう</rt></ruby>があるらしい。",
+        "cn": "据杨同学说，下周好像有留学生旅行。",
+        "source": { "original": "ヤンさんの話では、来週、留学生の旅行があるらしい。", "name": "日本語教師の参考書「らしい」", "url": "https://www.sansyo-bunpo.net/117%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4049": [
+      {
+        "jp": "<ruby>鳩<rt>はと</rt></ruby>は<ruby>世<rt>せ</rt></ruby><ruby>界<rt>かい</rt></ruby><ruby>的<rt>てき</rt></ruby>に<ruby>愛<rt>あい</rt></ruby>と<ruby>平<rt>へい</rt></ruby><ruby>和<rt>わ</rt></ruby>の<ruby>象<rt>しょう</rt></ruby><ruby>徴<rt>ちょう</rt></ruby><span style='color:#d64045'>とされている</span>。",
+        "cn": "鸽子在世界范围内被视为爱与和平的象征。",
+        "source": { "original": "鳩は世界的に愛と平和の象徴とされている。", "name": "毎日のんびり日本語教師「～とされている」", "url": "https://mainichi-nonbiri.com/grammar/n3-tosareteiru/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>仏<rt>ぶっ</rt></ruby><ruby>教<rt>きょう</rt></ruby>で、<ruby>生<rt>い</rt></ruby>き<ruby>物<rt>もの</rt></ruby>を<ruby>殺<rt>ころ</rt></ruby>すのは<ruby>十<rt>じゅう</rt></ruby><ruby>悪<rt>あく</rt></ruby>の<ruby>一<rt>ひと</rt></ruby>つ<span style='color:#d64045'>とされている</span>。",
+        "cn": "在佛教中，杀生被认为是十恶之一。",
+        "source": { "original": "仏教で、生き物を殺すのは十悪の一つとされている。", "name": "関西学院大学博士论文资料", "url": "https://kwansei.repo.nii.ac.jp/record/25156/files/%E6%9C%B4%E9%BA%97%E8%8F%AF%EF%BC%BF%E8%A8%80%E8%AA%9E%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%96%87%E5%8C%96%E7%A0%94%E7%A9%B6%E7%A7%91%EF%BC%88%E8%AB%96%E6%96%87%E5%85%A8%E6%96%87%EF%BC%89.pdf", "type": "大学学术论文", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4051": [
+      {
+        "jp": "<ruby>自<rt>じ</rt></ruby><ruby>分<rt>ぶん</rt></ruby>や<ruby>親<rt>しん</rt></ruby><ruby>族<rt>ぞく</rt></ruby>の<ruby>結<rt>けっ</rt></ruby><ruby>婚<rt>こん</rt></ruby><ruby>問<rt>もん</rt></ruby><ruby>題<rt>だい</rt></ruby>で<span style='color:#d64045'>つらい<ruby>思<rt>おも</rt></ruby>いをした</span>。",
+        "cn": "自己或亲属的婚姻问题曾让人有过痛苦的经历。",
+        "source": { "original": "自分や親族の結婚問題でつらい思いをした。", "name": "厚生労働省「原爆体験者調査票」", "url": "https://www.mhlw.go.jp/stf/shingi/2r9852000001rubh-att/2r9852000001rxi8.pdf", "type": "政府调查资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>高<rt>こう</rt></ruby><ruby>速<rt>そく</rt></ruby><ruby>道<rt>どう</rt></ruby><ruby>路<rt>ろ</rt></ruby>で<ruby>車<rt>くるま</rt></ruby>が<ruby>故<rt>こ</rt></ruby><ruby>障<rt>しょう</rt></ruby>して<span style='color:#d64045'><ruby>非<rt>ひ</rt></ruby><ruby>常<rt>じょう</rt></ruby>に<ruby>怖<rt>こわ</rt></ruby>い<ruby>思<rt>おも</rt></ruby>いをした</span>。",
+        "cn": "汽车在高速公路上发生故障，让人经历了非常可怕的遭遇。",
+        "source": { "original": "高速道路で車が故障して非常に怖い思いをした。", "name": "自動車製造物責任相談センター「相談事例」", "url": "https://www.adr.or.jp/about/support/case05.html", "type": "公益机构案例", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4053": [
+      {
+        "jp": "エゾシカはとても<ruby>可<rt>か</rt></ruby><ruby>愛<rt>わい</rt></ruby>いですが、<ruby>木<rt>き</rt></ruby>を<span style='color:#d64045'>いじめないでほしいものです</span>。",
+        "cn": "虾夷鹿虽然很可爱，但真希望它们不要伤害树木。",
+        "source": { "original": "エゾシカはとても可愛いですが、木をいじめないでほしいものです。", "name": "林野庁北海道森林管理局「こんにちは森林官です！」", "url": "https://www.rinya.maff.go.jp/hokkaido/koho/koho_si/forester/2011/1105nukabira.html", "type": "政府机构网页", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>一<rt>いち</rt></ruby><ruby>日<rt>にち</rt></ruby>も<ruby>早<rt>はや</rt></ruby>く、<ruby>原<rt>げん</rt></ruby><ruby>因<rt>いん</rt></ruby>を<span style='color:#d64045'>つきとめてほしいものです</span>。",
+        "cn": "真希望能尽早查明原因。",
+        "source": { "original": "一日も早く、原因をつきとめてほしいものです。", "name": "食品安全委員会「Q&A詳細」", "url": "https://www.fsc.go.jp/fsciis/questionAndAnswer/show/mob20110500021", "type": "政府机构网页", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4057": [
+      {
+        "jp": "いかなる<ruby>宗<rt>しゅう</rt></ruby><ruby>教<rt>きょう</rt></ruby><ruby>団<rt>だん</rt></ruby><ruby>体<rt>たい</rt></ruby>も、<ruby>国<rt>くに</rt></ruby>から<ruby>特<rt>とっ</rt></ruby><ruby>権<rt>けん</rt></ruby>を<ruby>受<rt>う</rt></ruby>け、<ruby>又<rt>また</rt></ruby>は<ruby>政<rt>せい</rt></ruby><ruby>治<rt>じ</rt></ruby><ruby>上<rt>じょう</rt></ruby>の<ruby>権<rt>けん</rt></ruby><ruby>力<rt>りょく</rt></ruby>を<ruby>行<rt>こう</rt></ruby><ruby>使<rt>し</rt></ruby>し<span style='color:#d64045'>てはならない</span>。",
+        "cn": "任何宗教团体都不得从国家获得特权，也不得行使政治权力。",
+        "source": { "original": "いかなる宗教団体も、国から特権を受け、又は政治上の権力を行使してはならない。", "name": "衆議院「日本国憲法」第二十条", "url": "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/shiryo/dl-constitution.htm", "type": "法律原文", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "この<ruby>先<rt>さき</rt></ruby><ruby>立<rt>た</rt></ruby>ち<ruby>入<rt>い</rt></ruby>っ<span style='color:#d64045'>てはならない</span>。",
+        "cn": "前方不得进入。",
+        "source": { "original": "この先立ち入ってはならない。", "name": "毎日のんびり日本語教師「～てはならない」", "url": "https://mainichi-nonbiri.com/grammar/n4-tehaikenai/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4061": [
+      {
+        "jp": "<ruby>完<rt>かん</rt></ruby><ruby>成<rt>せい</rt></ruby><ruby>度<rt>ど</rt></ruby>が<ruby>高<rt>たか</rt></ruby>くて、<ruby>大<rt>おと</rt></ruby><ruby>人<rt>な</rt></ruby>が<ruby>見<rt>み</rt></ruby>ても<span style='color:#d64045'><ruby>見<rt>み</rt></ruby>ごたえがある</span>んですよ。",
+        "cn": "完成度很高，即使成年人看也很有看头。",
+        "source": { "original": "完成度が高くて、大人が見ても見ごたえがあるんですよ。", "name": "国際交流基金『まるごと 中級2』音声スクリプト", "url": "https://marugoto.jpf.go.jp/b1/transcription/b1_2_transcription_T1-9.pdf", "type": "语言教育机构教材", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>特<rt>とく</rt></ruby>に、<ruby>貿<rt>ぼう</rt></ruby><ruby>易<rt>えき</rt></ruby>・<ruby>投<rt>とう</rt></ruby><ruby>資<rt>し</rt></ruby>や、<ruby>鉱<rt>こう</rt></ruby><ruby>業<rt>ぎょう</rt></ruby>、<ruby>経<rt>けい</rt></ruby><ruby>済<rt>ざい</rt></ruby><ruby>協<rt>きょう</rt></ruby><ruby>力<rt>りょく</rt></ruby>についての<ruby>章<rt>しょう</rt></ruby>は、<ruby>一<rt>いっ</rt></ruby><ruby>般<rt>ぱん</rt></ruby><ruby>的<rt>てき</rt></ruby>な<ruby>報<rt>ほう</rt></ruby><ruby>告<rt>こく</rt></ruby><ruby>資<rt>し</rt></ruby><ruby>料<rt>りょう</rt></ruby>にはない<ruby>情<rt>じょう</rt></ruby><ruby>報<rt>ほう</rt></ruby>・<ruby>逸<rt>いつ</rt></ruby><ruby>話<rt>わ</rt></ruby>も<ruby>多<rt>おお</rt></ruby>く、<span style='color:#d64045'><ruby>読<rt>よ</rt></ruby>みごたえがある</span>。",
+        "cn": "尤其是关于贸易、投资、矿业和经济合作的章节，包含许多一般报告中没有的信息和轶事，很值得一读。",
+        "source": { "original": "特に、貿易・投資や、鉱業、経済協力についての章は、一般的な報告資料にはない情報・逸話も多く、読みごたえがある。", "name": "J-STAGE『ラテンアメリカ・レポート』书评", "url": "https://www.jstage.jst.go.jp/article/latinamericareport/36/2/36_95/_html/-char/ja", "type": "学术期刊", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4062": [
+      {
+        "jp": "あなたが<ruby>何<rt>なん</rt></ruby><ruby>人<rt>にん</rt></ruby>かの<ruby>友<rt>とも</rt></ruby><ruby>達<rt>だち</rt></ruby>に「<ruby>連<rt>れん</rt></ruby><ruby>休<rt>きゅう</rt></ruby>にどこかへ<ruby>行<rt>い</rt></ruby>くか」と<ruby>尋<rt>たず</rt></ruby>ねた<span style='color:#d64045'>とします</span>。",
+        "cn": "假设你向几位朋友询问“连休要不要去哪里”。",
+        "source": { "original": "あなたが何人かの友達に「連休にどこかへ行くか」と尋ねたとします。", "name": "国際交流基金「文法を楽しく 表現意図―意志―」", "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/pdf/grammar201503.pdf", "type": "语言教育机构资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "あなたが、ある<ruby>会<rt>かい</rt></ruby><ruby>社<rt>しゃ</rt></ruby>の<ruby>社<rt>しゃ</rt></ruby><ruby>長<rt>ちょう</rt></ruby>だった<span style='color:#d64045'>とします</span>。",
+        "cn": "假设你是某家公司的社长。",
+        "source": { "original": "あなたが、ある会社の社長だったとします。", "name": "統計数理研究所『国民性調査研究报告』", "url": "https://www.ism.ac.jp/editsec/kenripo/pdf/kenripo076.pdf", "type": "研究机构调查资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4066": [
+      {
+        "jp": "<ruby>今<rt>いま</rt></ruby>はじっくり<ruby>相<rt>あい</rt></ruby><ruby>手<rt>て</rt></ruby>のニーズを<ruby>聞<rt>き</rt></ruby>きだしたり、<ruby>人<rt>にん</rt></ruby><ruby>間<rt>げん</rt></ruby><ruby>関<rt>かん</rt></ruby><ruby>係<rt>けい</rt></ruby>を<ruby>広<rt>ひろ</rt></ruby>げたりする<ruby>期<rt>き</rt></ruby><ruby>間<rt>かん</rt></ruby>と<ruby>捉<rt>とら</rt></ruby>え、<span style='color:#d64045'><ruby>来<rt>らい</rt></ruby><ruby>期<rt>き</rt></ruby>に<ruby>向<rt>む</rt></ruby>けて</span>ゆっくり<ruby>準<rt>じゅん</rt></ruby><ruby>備<rt>び</rt></ruby>に<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>んでいます。",
+        "cn": "现在把这段时间看作认真了解对方需求、拓展人际关系的阶段，正为下一学期逐步做准备。",
+        "source": { "original": "今はじっくり相手のニーズを聞きだしたり、人間関係を広げたりする期間と捉え、来期に向けてゆっくり準備に取り組んでいます。", "name": "JICA海外協力隊「来期に向けての準備」", "url": "https://world-diary.jica.go.jp/mikoda/activity/post_49.php", "type": "国际协力机构网页", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>今<rt>こん</rt></ruby><ruby>後<rt>ご</rt></ruby>，<span style='color:#d64045'><ruby>開<rt>かい</rt></ruby><ruby>催<rt>さい</rt></ruby>に<ruby>向<rt>む</rt></ruby>けて</span>，<ruby>京<rt>きょう</rt></ruby><ruby>都<rt>と</rt></ruby><ruby>府<rt>ふ</rt></ruby><ruby>内<rt>ない</rt></ruby><ruby>高<rt>こう</rt></ruby><ruby>校<rt>こう</rt></ruby><ruby>生<rt>せい</rt></ruby>から<ruby>構<rt>こう</rt></ruby><ruby>成<rt>せい</rt></ruby>される「おもてなし<ruby>隊<rt>たい</rt></ruby>」による<ruby>出<rt>しゅつ</rt></ruby><ruby>演<rt>えん</rt></ruby><ruby>校<rt>こう</rt></ruby><ruby>等<rt>とう</rt></ruby>の<ruby>受<rt>うけ</rt></ruby><ruby>入<rt>い</rt></ruby>れ<ruby>準<rt>じゅん</rt></ruby><ruby>備<rt>び</rt></ruby>を<ruby>進<rt>すす</rt></ruby>めていきます。",
+        "cn": "今后将为活动举办做准备，由京都府内高中生组成的“接待队”推进出演学校等的接待工作。",
+        "source": { "original": "今後，開催に向けて，京都府内高校生から構成される「おもてなし隊」による出演校等の受入れ準備を進めていきます。", "name": "文化庁「全国高校生伝統文化フェスティバル開催決定」", "url": "https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/1407039.html", "type": "政府机构网页", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4070": [
+      {
+        "jp": "ペット<span style='color:#d64045'>とは</span>かわいがるために<ruby>飼<rt>か</rt></ruby>う<ruby>動<rt>どう</rt></ruby><ruby>物<rt>ぶつ</rt></ruby>のことです。",
+        "cn": "所谓宠物，就是为了疼爱而饲养的动物。",
+        "source": { "original": "ペットとはかわいがるために飼う動物のことです。", "name": "文化庁『「生活者としての外国人」のための日本語教育』教师用资料", "url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kyoiku/seikatsusha/h25_nihongo_program_a/pdf/a_26_5.pdf", "type": "政府语言教育资料", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "<ruby>通<rt>つう</rt></ruby><ruby>勤<rt>きん</rt></ruby><ruby>災<rt>さい</rt></ruby><ruby>害<rt>がい</rt></ruby><span style='color:#d64045'>とは</span>、<ruby>労<rt>ろう</rt></ruby><ruby>働<rt>どう</rt></ruby><ruby>者<rt>しゃ</rt></ruby>が<ruby>通<rt>つう</rt></ruby><ruby>勤<rt>きん</rt></ruby>によって<ruby>被<rt>こうむ</rt></ruby>った<ruby>傷<rt>しょう</rt></ruby><ruby>病<rt>びょう</rt></ruby><ruby>等<rt>とう</rt></ruby>のことをいいます。",
+        "cn": "所谓通勤灾害，是指劳动者因通勤而遭受的伤害或疾病等。",
+        "source": { "original": "通勤災害とは、労働者が通勤によって被った傷病等のことをいいます。", "name": "厚生労働省「通勤災害」用语定义", "url": "https://www.mhlw.go.jp/content/11200000/001628620.pdf", "type": "政府资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4084": [
+      {
+        "jp": "<ruby>好<rt>す</rt></ruby>きという<ruby>気<rt>き</rt></ruby><ruby>持<rt>も</rt></ruby>ちを<ruby>伝<rt>つた</rt></ruby>えるのは、<ruby>簡<rt>かん</rt></ruby><ruby>単<rt>たん</rt></ruby>な<span style='color:#d64045'>ようでいて</span><ruby>実<rt>じつ</rt></ruby>は<ruby>難<rt>むずか</rt></ruby>しい。",
+        "cn": "表达喜欢的心情看似简单，实际上却很难。",
+        "source": { "original": "好きという気持ちを伝えるのは、簡単なようでいて実は難しい。", "name": "毎日のんびり日本語教師「～ようで／ようでいて」", "url": "https://mainichi-nonbiri.com/grammar/n2-youde/", "type": "日语教学网站", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4085": [
+      {
+        "jp": "<span style='color:#d64045'><ruby>思<rt>おも</rt></ruby>うがままに</span><ruby>手<rt>て</rt></ruby>を<ruby>動<rt>うご</rt></ruby>かし、<ruby>子<rt>こ</rt></ruby>どもから<ruby>大<rt>おと</rt></ruby><ruby>人<rt>な</rt></ruby>までとても<ruby>個<rt>こ</rt></ruby><ruby>性<rt>せい</rt></ruby><ruby>的<rt>てき</rt></ruby>なドローイングが<ruby>仕<rt>し</rt></ruby><ruby>上<rt>あ</rt></ruby>がりました。",
+        "cn": "大家随心动手创作，从孩子到成人都完成了极具个性的绘画。",
+        "source": { "original": "思うがままに手を動かし、子どもから大人までとても個性的なドローイングが仕上がりました。", "name": "東京藝術大学设计科「芸術によるまちづくりプロジェクト2025」", "url": "https://design.geidai.ac.jp/news/graduate/environmental-design/2026-04-27-6175/", "type": "大学活动记录", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "960002": [
+      {
+        "jp": "<ruby>夏<rt>なつ</rt></ruby><ruby>休<rt>やす</rt></ruby>みはどちらへ<span style='color:#d64045'>いらっしゃる</span><ruby>予<rt>よ</rt></ruby><ruby>定<rt>てい</rt></ruby>ですか。",
+        "cn": "暑假您打算去哪里？",
+        "source": { "original": "夏休みはどちらへいらっしゃる予定ですか。", "name": "国際交流基金「みんなの教材サイト：尊敬の意味を持つ動詞」", "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00088/ja/render.do", "type": "语言教育机构教材", "accessedAt": "2026-08-31" }
+      },
+      {
+        "jp": "お<ruby>名<rt>な</rt></ruby><ruby>前<rt>まえ</rt></ruby>を<span style='color:#d64045'><ruby>伺<rt>うかが</rt></ruby>って</span>もよろしいでしょうか？",
+        "cn": "方便请教您的姓名吗？",
+        "source": { "original": "お名前を伺ってもよろしいでしょうか？", "name": "国際交流基金『いろどり 生活の日本語』初中級第16课", "url": "https://www.irodori.jpf.go.jp/assets/data/pre-intermediate/pdf/ZZ_L16.pdf", "type": "语言教育机构教材", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4251": [
+      {
+        "jp": "<ruby>玄<rt>げん</rt></ruby><ruby>武<rt>ぶ</rt></ruby><ruby>書<rt>しょ</rt></ruby><ruby>房<rt>ぼう</rt></ruby>に<ruby>勤<rt>つと</rt></ruby>める<ruby>馬<rt>ま</rt></ruby><ruby>締<rt>じめ</rt></ruby><ruby>光<rt>みつ</rt></ruby><ruby>也<rt>や</rt></ruby>は、<ruby>営<rt>えい</rt></ruby><ruby>業<rt>ぎょう</rt></ruby><ruby>部<rt>ぶ</rt></ruby><span style='color:#d64045'>きっての</span><ruby>変<rt>へん</rt></ruby><ruby>人<rt>じん</rt></ruby>として、<ruby>持<rt>も</rt></ruby>て<ruby>余<rt>あま</rt></ruby>されていた。",
+        "cn": "在玄武书房工作的马缔光也，被视为营业部首屈一指的怪人，令周围人颇感棘手。",
+        "source": { "original": "玄武書房に勤める馬締光也は、営業部きっての変人として、持て余されていた。", "name": "国立国会図書館サーチ『舟を編む』书志摘要", "url": "https://ndlsearch.ndl.go.jp/en/books/R100000002-I000011275493", "type": "国家图书馆书志资料", "accessedAt": "2026-08-31" }
+      }
+    ],
+    "4252": [
+      {
+        "jp": "<ruby>同<rt>おな</rt></ruby>じ<ruby>業<rt>ぎょう</rt></ruby><ruby>界<rt>かい</rt></ruby>でも、<ruby>記<rt>き</rt></ruby><ruby>者<rt>しゃ</rt></ruby>の「<ruby>専<rt>せん</rt></ruby><ruby>門<rt>もん</rt></ruby><ruby>家<rt>か</rt></ruby><span style='color:#d64045'><ruby>気<rt>き</rt></ruby><ruby>取<rt>ど</rt></ruby>り</span>」はＮＧ！（<ruby>山<rt>やま</rt></ruby>）",
+        "cn": "即使在同一行业，记者也不能摆出“专家派头”！",
+        "source": { "original": "同じ業界でも、記者の「専門家気取り」はＮＧ！（山）", "name": "朝日新聞NIE『新聞記者の「専門家気取り」はＮＧ！』", "url": "https://nie.asahi.com/text/jp-how-to-read/jp-how-to-read117.pdf", "type": "新闻教育资料", "accessedAt": "2026-08-31" }
       }
     ],
     "4113": [

@@ -5,9 +5,9 @@
         return;
     }
 
-    const VERSION = "1.13.4";
+    const VERSION = "1.14.0";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
-    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV18";
+    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV21";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
     const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV2";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
@@ -20,6 +20,7 @@
     const TOAST_ID = "kiki-word-bank-toast";
     const MAX_ENTRIES = 600;
     const MAX_SOURCE_TEXT = 700;
+    const EXAMPLES_PER_SENSE = 2;
     const CIRCLED_NUMBERS = ["❶", "❷", "❸", "❹", "❺", "❻", "❼", "❽", "❾", "❿"];
     const MULTI_SENSE_PRESET_IDS = new Set([
         "kiki-exam-20260723-potsunto",
@@ -49,7 +50,7 @@
         ? new URL("./", currentScript.src)
         : new URL("./shared/", window.location.href);
     const siteRoot = new URL("../", sharedBase);
-    const cssHref = new URL("word-bank.css?v=20260820-novel-muttsuri1", sharedBase).href;
+    const cssHref = new URL("word-bank.css?v=20260831-two-examples1", sharedBase).href;
 
     let activeSelection = null;
     let selectionTimer = 0;
@@ -560,9 +561,9 @@
         const nuance = normalizeMultiline(rawEntry && rawEntry.nuance, 520);
         const usage = normalizeMultiline(rawEntry && rawEntry.usage, 360);
         const collocations = normalizeLearningList(rawEntry && rawEntry.collocations, 8, 48);
-        const example = normalizeMultiline(rawEntry && rawEntry.example, 520);
-        const exampleRuby = normalizeMultiline(rawEntry && rawEntry.exampleRuby, 1200);
-        const exampleZh = normalizeMultiline(rawEntry && rawEntry.exampleZh, 520);
+        const example = normalizeMultiline(rawEntry && rawEntry.example, 1600);
+        const exampleRuby = normalizeMultiline(rawEntry && rawEntry.exampleRuby, 2400);
+        const exampleZh = normalizeMultiline(rawEntry && rawEntry.exampleZh, 1600);
         const relatedWords = normalizeLearningList(rawEntry && rawEntry.relatedWords, 8, 48);
         const note = normalizeMultiline(rawEntry && rawEntry.note, 520);
         const sourceText = normalizeMultiline(rawEntry && rawEntry.sourceText, MAX_SOURCE_TEXT);
@@ -1187,19 +1188,19 @@
                                         <span class="kiki-word-bank-section-number">例</span>
                                         <div>
                                             <h3 id="kiki-word-bank-section-example">例句</h3>
-                                            <p>多个义项时，按含义顺序每行填写1条例句。</p>
+                                            <p>每个含义填写2条例句；多个义项时，按含义顺序每2行一组。</p>
                                         </div>
                                     </div>
                                     <label class="kiki-word-bank-field">
-                                        <span class="kiki-word-bank-label">日文例句 / 原文 <small>每行对应一个含义</small></span>
-                                        <textarea class="kiki-word-bank-textarea kiki-word-bank-textarea--example" id="kiki-word-bank-example" name="example" placeholder="例：鏡の前で服装を整えてから出かけた。"></textarea>
+                                        <span class="kiki-word-bank-label">日文例句 / 原文 <small>每个含义连续填写2行</small></span>
+                                        <textarea class="kiki-word-bank-textarea kiki-word-bank-textarea--example" id="kiki-word-bank-example" name="example" placeholder="例句1：鏡の前で服装を整えてから出かけた。&#10;例句2：出発前に服装をきちんと整えた。"></textarea>
                                     </label>
                                     <label class="kiki-word-bank-field">
-                                        <span class="kiki-word-bank-label">例句注音 <small>每行对应例句 · 汉字后用 [假名] 标注</small></span>
+                                        <span class="kiki-word-bank-label">例句注音 <small>与日文例句逐行对应 · 汉字后用 [假名] 标注</small></span>
                                         <textarea class="kiki-word-bank-textarea kiki-word-bank-textarea--compact" id="kiki-word-bank-example-ruby" name="exampleRuby" placeholder="例：鏡[かがみ]の前[まえ]で服装[ふくそう]を整[ととの]えてから出[で]かけた。"></textarea>
                                     </label>
                                     <label class="kiki-word-bank-field">
-                                        <span class="kiki-word-bank-label">中文译文 <small>每行对应例句</small></span>
+                                        <span class="kiki-word-bank-label">中文译文 <small>与日文例句逐行对应</small></span>
                                         <textarea class="kiki-word-bank-textarea kiki-word-bank-textarea--compact" id="kiki-word-bank-example-zh" name="exampleZh" placeholder="例：在镜子前整理好服装后出门了。"></textarea>
                                     </label>
                                 </section>
@@ -1405,6 +1406,19 @@
             .split(/\n+/)
             .map((item) => item.replace(/^\s*(?:[❶❷❸❹❺❻❼❽❾❿]|\d+[.、])\s*/, "").trim())
             .filter(Boolean);
+    }
+
+    function getExampleGroupSize(meaningCount, ...exampleCollections) {
+        if (!meaningCount) {
+            return 1;
+        }
+        const largestExampleCount = Math.max(
+            0,
+            ...exampleCollections.map((items) => items.length)
+        );
+        return largestExampleCount >= meaningCount * EXAMPLES_PER_SENSE
+            ? EXAMPLES_PER_SENSE
+            : 1;
     }
 
     function getDisplayNumber(index) {
@@ -1636,10 +1650,16 @@
         }
 
         const meanings = splitDisplayItems(data.meaning || options.meaningFallback || "暂无释义");
-        const examples = splitDisplayItems(data.example, 520);
-        const annotatedExamples = splitDisplayItems(data.exampleRuby, 1200);
-        const translations = splitDisplayItems(data.exampleZh, 520);
+        const examples = splitDisplayItems(data.example, 1600);
+        const annotatedExamples = splitDisplayItems(data.exampleRuby, 2400);
+        const translations = splitDisplayItems(data.exampleZh, 1600);
         const isMultiple = meanings.length > 1;
+        const exampleGroupSize = getExampleGroupSize(
+            meanings.length,
+            examples,
+            annotatedExamples,
+            translations
+        );
         target.replaceChildren();
         target.classList.toggle("is-multiple", isMultiple);
 
@@ -1660,30 +1680,42 @@
             meaningBlock.appendChild(meaningText);
             item.appendChild(meaningBlock);
 
-            const exampleText = annotatedExamples[index] || examples[index] || "";
-            const translation = translations[index] || "";
-            if (exampleText || translation) {
+            const exampleStart = index * exampleGroupSize;
+            const exampleItems = Array.from({ length: exampleGroupSize }, (_, offset) => {
+                const exampleIndex = exampleStart + offset;
+                return {
+                    text: annotatedExamples[exampleIndex] || examples[exampleIndex] || "",
+                    translation: translations[exampleIndex] || ""
+                };
+            }).filter((exampleItem) => exampleItem.text || exampleItem.translation);
+
+            if (exampleItems.length) {
                 const exampleBlock = document.createElement("div");
                 exampleBlock.className = "kiki-word-sense-example";
                 const label = document.createElement("span");
                 label.className = "kiki-word-sense-example-label";
-                label.textContent = "例句";
+                label.textContent = exampleItems.length > 1 ? `例句 · ${exampleItems.length}则` : "例句";
                 exampleBlock.appendChild(label);
 
-                if (exampleText) {
-                    const japanese = document.createElement("p");
-                    japanese.className = "kiki-word-sense-example-ja";
-                    appendFurigana(japanese, exampleText, {
-                        highlightWord: data.word
-                    });
-                    exampleBlock.appendChild(japanese);
-                }
-                if (translation) {
-                    const translated = document.createElement("small");
-                    translated.className = "kiki-word-sense-example-zh";
-                    translated.textContent = translation;
-                    exampleBlock.appendChild(translated);
-                }
+                exampleItems.forEach((exampleItem) => {
+                    const exampleRow = document.createElement("div");
+                    exampleRow.className = "kiki-word-sense-example-row";
+                    if (exampleItem.text) {
+                        const japanese = document.createElement("p");
+                        japanese.className = "kiki-word-sense-example-ja";
+                        appendFurigana(japanese, exampleItem.text, {
+                            highlightWord: data.word
+                        });
+                        exampleRow.appendChild(japanese);
+                    }
+                    if (exampleItem.translation) {
+                        const translated = document.createElement("small");
+                        translated.className = "kiki-word-sense-example-zh";
+                        translated.textContent = exampleItem.translation;
+                        exampleRow.appendChild(translated);
+                    }
+                    exampleBlock.appendChild(exampleRow);
+                });
                 item.appendChild(exampleBlock);
             } else {
                 item.classList.add("has-no-example");
@@ -1974,9 +2006,9 @@
         const accent = normalizeText(getFieldValue(modal, "#kiki-word-bank-accent"), 32);
         const meaning = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-meaning"), 1200);
         const collocations = normalizeLearningList(getFieldValue(modal, "#kiki-word-bank-collocations"), 8, 48);
-        const example = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example"), 520);
-        const exampleRuby = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-ruby"), 1200);
-        const exampleZh = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-zh"), 520);
+        const example = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example"), 1600);
+        const exampleRuby = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-ruby"), 2400);
+        const exampleZh = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-zh"), 1600);
         const relatedWords = normalizeLearningList(getFieldValue(modal, "#kiki-word-bank-related"), 8, 48);
         const note = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-note"), 520);
 
@@ -2018,7 +2050,7 @@
             : !meaning
                 ? "词形已完成，接着补上核心释义。"
                 : !example
-                    ? "基础卡片已可用，建议再加一条例句。"
+                    ? "基础卡片已可用，每个含义还需要补充2条例句。"
                     : completion < 75
                         ? "已具备核心内容，可继续补充搭配、近义词和备注。"
                         : "词条信息较完整，可以保存并开始复习。";
@@ -2056,6 +2088,12 @@
             nuance: normalizeMultiline(rawEntry.nuance, 520),
             usage: normalizeMultiline(rawEntry.usage, 360),
             tags: normalizeTags(rawEntry.tags),
+            examplePolicyBaseline: isEditing ? {
+                meaning: normalizeMultiline(rawEntry.meaning || [rawEntry.meaningZh, rawEntry.meaningJa].filter(Boolean).join("\n"), 1200),
+                example: normalizeMultiline(rawEntry.example, 1600),
+                exampleRuby: normalizeMultiline(rawEntry.exampleRuby, 2400),
+                exampleZh: normalizeMultiline(rawEntry.exampleZh, 1600)
+            } : null,
             sourceCategory: normalizeSourceCategory(rawEntry.sourceCategory, {
                 sourceTitle,
                 sourceUrl,
@@ -2159,6 +2197,49 @@
             return;
         }
 
+        const example = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example"), 1600);
+        const exampleRuby = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-ruby"), 2400);
+        const exampleZh = normalizeMultiline(getFieldValue(modal, "#kiki-word-bank-example-zh"), 1600);
+        const baseline = editorState && editorState.examplePolicyBaseline;
+        const keepsLegacyExamples = Boolean(
+            baseline
+            && meaning === baseline.meaning
+            && example === baseline.example
+            && exampleRuby === baseline.exampleRuby
+            && exampleZh === baseline.exampleZh
+        );
+
+        if (!keepsLegacyExamples) {
+            const meaningCount = splitDisplayItems(meaning).length;
+            const requiredExampleCount = meaningCount * EXAMPLES_PER_SENSE;
+            const exampleCount = splitDisplayItems(example, 1600).length;
+            const rubyCount = splitDisplayItems(exampleRuby, 2400).length;
+            const translationCount = splitDisplayItems(exampleZh, 1600).length;
+            let invalidField = "";
+            let message = "";
+
+            if (exampleCount !== requiredExampleCount) {
+                invalidField = "#kiki-word-bank-example";
+                message = `当前有${meaningCount}个含义，需要填写${requiredExampleCount}条例句（每个含义2条）。`;
+            } else if (exampleRuby && rubyCount !== requiredExampleCount) {
+                invalidField = "#kiki-word-bank-example-ruby";
+                message = `例句注音需要填写${requiredExampleCount}行，与日文例句逐行对应。`;
+            } else if (exampleZh && translationCount !== requiredExampleCount) {
+                invalidField = "#kiki-word-bank-example-zh";
+                message = `中文译文需要填写${requiredExampleCount}行，与日文例句逐行对应。`;
+            }
+
+            if (invalidField) {
+                showToast(message);
+                setEditorTab(modal, "example");
+                const field = modal.querySelector(invalidField);
+                if (field) {
+                    field.focus();
+                }
+                return;
+            }
+        }
+
         const entry = upsertEntry({
             id: editorState && editorState.id,
             createdAt: editorState && editorState.createdAt,
@@ -2173,9 +2254,9 @@
             nuance: editorState && editorState.nuance,
             usage: editorState && editorState.usage,
             collocations: getFieldValue(modal, "#kiki-word-bank-collocations"),
-            example: getFieldValue(modal, "#kiki-word-bank-example"),
-            exampleRuby: getFieldValue(modal, "#kiki-word-bank-example-ruby"),
-            exampleZh: getFieldValue(modal, "#kiki-word-bank-example-zh"),
+            example,
+            exampleRuby,
+            exampleZh,
             relatedWords: getFieldValue(modal, "#kiki-word-bank-related"),
             note: getFieldValue(modal, "#kiki-word-bank-note"),
             tags: editorState && editorState.tags,

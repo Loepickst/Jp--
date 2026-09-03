@@ -1115,6 +1115,12 @@
     letter-spacing: 0.12em;
 }
 
+.kiki-word-sense-example-row + .kiki-word-sense-example-row {
+    margin-top: 13px;
+    padding-top: 13px;
+    border-top: 1px dashed rgba(17, 17, 17, 0.14);
+}
+
 .kiki-word-sense-example .kiki-word-sense-example-ja {
     margin: 0;
     color: #000;
@@ -2765,11 +2771,11 @@
 }
 
 .kiki-word-bank-textarea--example {
-    min-height: 132px;
+    min-height: 160px;
 }
 
 .kiki-word-bank-textarea--compact {
-    min-height: 88px;
+    min-height: 120px;
 }
 
 .kiki-word-bank-input:focus,

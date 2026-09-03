@@ -294,7 +294,7 @@
     "macro": null,
     "category": null,
     "keyword": "程度 对比 甚至",
-    "firstKana": "は",
+    "firstKana": "た",
     "sourceMacro": null,
     "sourceCategory": null,
     "legacy": {
@@ -375,12 +375,12 @@
   },
   {
     "id": "n1-032",
-    "macro": null,
-    "category": null,
-    "keyword": "时间 瞬间 紧接着",
+    "macro": "时间与顺序",
+    "category": "瞬间紧接・客观叙述",
+    "keyword": "前后动作几乎同时发生 不接命令请求愿望",
     "firstKana": "が",
-    "sourceMacro": null,
-    "sourceCategory": null,
+    "sourceMacro": "时间与顺序",
+    "sourceCategory": "瞬间紧接・客观叙述",
     "legacy": {
       "searchId": 32
     }
@@ -1349,7 +1349,7 @@
     "id": "n1-113",
     "macro": null,
     "category": null,
-    "keyword": "限定 唯一 书面语",
+    "keyword": "只 仅 仅限 限定 唯一 正式 书面语",
     "firstKana": "の",
     "sourceMacro": null,
     "sourceCategory": null,
@@ -2048,11 +2048,11 @@
   {
     "id": "n2-168",
     "macro": "状态与结果",
-    "category": "状态・结果",
-    "keyword": "之后再也没",
+    "category": "动作后无后续、范围限定或状态持续",
+    "keyword": "自从……后一直没……；只有……；一直处于……",
     "firstKana": "き",
     "sourceMacro": "状态与强制",
-    "sourceCategory": "状态・结果",
+    "sourceCategory": "动作后无后续、范围限定或状态持续",
     "legacy": {
       "tryCenterId": 2037,
       "searchId": 168
@@ -2316,19 +2316,6 @@
     "legacy": {
       "tryCenterId": 2057,
       "searchId": 188
-    }
-  },
-  {
-    "id": "n2-189",
-    "macro": "限定与程度",
-    "category": "限定・书面",
-    "keyword": "书面限定仅限",
-    "firstKana": "の",
-    "sourceMacro": "限定",
-    "sourceCategory": "限定・书面",
-    "legacy": {
-      "tryCenterId": 2058,
-      "searchId": 189
     }
   },
   {
@@ -2685,11 +2672,11 @@
   {
     "id": "n2-217",
     "macro": "限定与程度",
-    "category": "偏偏・唯独",
-    "keyword": "偏偏或唯独不会",
+    "category": "负面倾向・不巧时点・信任否定",
+    "keyword": "偏偏……；唯独……绝不会……",
     "firstKana": "に",
     "sourceMacro": "限定与程度",
-    "sourceCategory": "偏偏・唯独",
+    "sourceCategory": "负面倾向・不巧时点・信任否定",
     "legacy": {
       "tryCenterId": 2086,
       "searchId": 217
@@ -3478,11 +3465,11 @@
   {
     "id": "n3-011",
     "macro": "传闻与引用",
-    "category": "提示话题",
-    "keyword": "提示话题或传达",
+    "category": "引用・话题提示",
+    "keyword": "口语引用 转述传闻 提示话题 定义",
     "firstKana": "っ",
     "sourceMacro": "传闻与引用",
-    "sourceCategory": "提示话题",
+    "sourceCategory": "引用・话题提示",
     "legacy": {
       "tryCenterId": 3011,
       "searchId": 3011
@@ -3608,11 +3595,11 @@
   {
     "id": "n3-021",
     "macro": "对象与关联",
-    "category": "手段・原因",
-    "keyword": "方法手段或原因",
+    "category": "手段・客观原因・个体差异",
+    "keyword": "方法手段 客观原因 因对象或条件而异",
     "firstKana": "に",
-    "sourceMacro": "方法与媒介",
-    "sourceCategory": "手段・原因",
+    "sourceMacro": "方法・原因・差异",
+    "sourceCategory": "手段・客观原因・个体差异",
     "legacy": {
       "tryCenterId": 3021,
       "searchId": 3021
@@ -3673,11 +3660,11 @@
   {
     "id": "n3-026",
     "macro": "对象与关联",
-    "category": "通过媒介",
-    "keyword": "通过媒介手段",
+    "category": "通过媒介或贯穿期间",
+    "keyword": "通过媒介手段 贯穿整个期间",
     "firstKana": "を",
     "sourceMacro": "方法与媒介",
-    "sourceCategory": "通过媒介",
+    "sourceCategory": "通过媒介或贯穿期间",
     "legacy": {
       "tryCenterId": 3026,
       "searchId": 3026
@@ -3687,7 +3674,7 @@
     "id": "n3-027",
     "macro": "举例与递进",
     "category": "典型比喻",
-    "keyword": "典型例子直观比喻",
+    "keyword": "典型例子 直观比喻 口语",
     "firstKana": "の",
     "sourceMacro": "比喻与例举",
     "sourceCategory": "典型比喻",
@@ -3750,12 +3737,12 @@
   },
   {
     "id": "n3-032",
-    "macro": "状态与结果",
-    "category": "必须・义务",
-    "keyword": "口语必须做",
+    "macro": "义务、必要与规范",
+    "category": "用正式、口语或书面形式说明必须履行的义务或必要条件",
+    "keyword": "必须……；非……不可；需要……",
     "firstKana": "な",
-    "sourceMacro": "状态与强制",
-    "sourceCategory": "必须・义务",
+    "sourceMacro": "义务、必要与规范",
+    "sourceCategory": "用正式、口语或书面形式说明必须履行的义务或必要条件",
     "legacy": {
       "tryCenterId": 3032,
       "searchId": 3032
@@ -3827,19 +3814,6 @@
     }
   },
   {
-    "id": "n3-038",
-    "macro": "主张与评价",
-    "category": "提示话题",
-    "keyword": "口语提示话题",
-    "firstKana": "っ",
-    "sourceMacro": "评价与视角",
-    "sourceCategory": "提示话题",
-    "legacy": {
-      "tryCenterId": 3038,
-      "searchId": 3038
-    }
-  },
-  {
     "id": "n3-039",
     "macro": "举例与递进",
     "category": "主观比喻・推测",
@@ -3879,19 +3853,6 @@
     }
   },
   {
-    "id": "n3-042",
-    "macro": "举例与递进",
-    "category": "直观比喻",
-    "keyword": "典型事物直观比喻",
-    "firstKana": "の",
-    "sourceMacro": "比喻与例举",
-    "sourceCategory": "直观比喻",
-    "legacy": {
-      "tryCenterId": 3042,
-      "searchId": 3042
-    }
-  },
-  {
     "id": "n3-043",
     "macro": "举例与递进",
     "category": "理所当然",
@@ -3907,11 +3868,11 @@
   {
     "id": "n3-044",
     "macro": "比较与伴随",
-    "category": "程度不及",
-    "keyword": "程度比较不及",
+    "category": "否定比较・基准差",
+    "keyword": "B为比较基准 A的程度没有达到B",
     "firstKana": "ほ",
     "sourceMacro": "比较与基准",
-    "sourceCategory": "程度不及",
+    "sourceCategory": "否定比较・基准差",
     "legacy": {
       "tryCenterId": 3044,
       "searchId": 3044
@@ -3972,11 +3933,11 @@
   {
     "id": "n3-049",
     "macro": "时间与顺序",
-    "category": "特定阶段",
-    "keyword": "特定时间阶段",
+    "category": "动作阶段・场面助词",
+    "keyword": "开始前 进行中 刚结束 にへをで的作用",
     "firstKana": "と",
     "sourceMacro": "时间与场景",
-    "sourceCategory": "特定阶段",
+    "sourceCategory": "动作阶段・场面助词",
     "legacy": {
       "tryCenterId": 3049,
       "searchId": 3049
@@ -4006,19 +3967,6 @@
     "legacy": {
       "tryCenterId": 3051,
       "searchId": 3051
-    }
-  },
-  {
-    "id": "n3-052",
-    "macro": "时间与顺序",
-    "category": "期间贯穿",
-    "keyword": "期间一直贯穿",
-    "firstKana": "を",
-    "sourceMacro": "时间与场景",
-    "sourceCategory": "期间贯穿",
-    "legacy": {
-      "tryCenterId": 3052,
-      "searchId": 3052
     }
   },
   {
@@ -4084,19 +4032,6 @@
     "legacy": {
       "tryCenterId": 3057,
       "searchId": 3057
-    }
-  },
-  {
-    "id": "n3-058",
-    "macro": "原因与理由",
-    "category": "客观重大原因",
-    "keyword": "客观重大事件原因",
-    "firstKana": "に",
-    "sourceMacro": "原因与理由",
-    "sourceCategory": "客观重大原因",
-    "legacy": {
-      "tryCenterId": 3058,
-      "searchId": 3058
     }
   },
   {
@@ -4245,11 +4180,11 @@
   {
     "id": "n3-070",
     "macro": "情感与决心",
-    "category": "遗憾・责备",
-    "keyword": "遗憾/责备/建议",
+    "category": "愿望、责备与反事实遗憾",
+    "keyword": "要是……就好了；本来可以……的",
     "firstKana": "ば",
     "sourceMacro": "情感与思考",
-    "sourceCategory": "遗憾・责备",
+    "sourceCategory": "愿望、责备与反事实遗憾",
     "legacy": {
       "tryCenterId": 3070,
       "searchId": 3070
@@ -4323,11 +4258,11 @@
   {
     "id": "n3-076",
     "macro": "授受与敬语",
-    "category": "郑重委婉请求",
-    "keyword": "极度委婉请求",
+    "category": "用いただく或願う委婉郑重地请求对方行动",
+    "keyword": "能否请您……",
     "firstKana": "て",
     "sourceMacro": "敬语",
-    "sourceCategory": "郑重委婉请求",
+    "sourceCategory": "用いただく或願う委婉郑重地请求对方行动",
     "legacy": {
       "tryCenterId": 3076,
       "searchId": 3076
@@ -4409,19 +4344,6 @@
     "legacy": {
       "tryCenterId": 3082,
       "searchId": 3082
-    }
-  },
-  {
-    "id": "n3-083",
-    "macro": "原因与理由",
-    "category": "因...而异",
-    "keyword": "随之呈现差异",
-    "firstKana": "に",
-    "sourceMacro": "原因与情况",
-    "sourceCategory": "因...而异",
-    "legacy": {
-      "tryCenterId": 3083,
-      "searchId": 3083
     }
   },
   {
@@ -4695,19 +4617,6 @@
     "legacy": {
       "tryCenterId": 3104,
       "searchId": 3104
-    }
-  },
-  {
-    "id": "n3-105",
-    "macro": "可能性",
-    "category": "意外推测",
-    "keyword": "意外或期待的推测",
-    "firstKana": "た",
-    "sourceMacro": "可能性与推测",
-    "sourceCategory": "意外推测",
-    "legacy": {
-      "tryCenterId": 3105,
-      "searchId": 3105
     }
   },
   {
@@ -5465,12 +5374,12 @@
   },
   {
     "id": "supp-n1-review-054",
-    "macro": "情感与决心",
-    "category": "祈祷未来结果",
-    "keyword": "希望……",
+    "macro": "目的、忠告与祈愿",
+    "category": "目的行动、委婉提醒与未来祈愿",
+    "keyword": "为了……；请注意……；但愿……",
     "firstKana": "よ",
-    "sourceMacro": "情感与决心",
-    "sourceCategory": "祈祷未来结果",
+    "sourceMacro": "目的、忠告与祈愿",
+    "sourceCategory": "目的行动、委婉提醒与未来祈愿",
     "legacy": {
       "searchId": 4054
     }
@@ -5622,11 +5531,11 @@
   {
     "id": "supp-n1-review-067",
     "macro": "限定与程度",
-    "category": "未达到所举程度",
+    "category": "实际程度未达到所举标准",
     "keyword": "没有达到……的程度",
     "firstKana": "ほ",
     "sourceMacro": "限定与程度",
-    "sourceCategory": "未达到所举程度",
+    "sourceCategory": "实际程度未达到所举标准",
     "legacy": {
       "searchId": 4067
     }
@@ -6136,6 +6045,126 @@
     }
   },
   {
+    "id": "mainichi-n1-p003",
+    "macro": "限定与程度",
+    "category": "唯一选择",
+    "keyword": "只能……；除此之外没有办法",
+    "firstKana": "よ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "唯一选择",
+    "legacy": {
+      "searchId": 4117
+    }
+  },
+  {
+    "id": "mainichi-n2-001",
+    "macro": "状态与结果",
+    "category": "期待中的变化一直没有出现",
+    "keyword": "一直不……；完全没有……",
+    "firstKana": "い",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "期待中的变化一直没有出现",
+    "legacy": {
+      "searchId": 4118
+    }
+  },
+  {
+    "id": "mainichi-n2-002",
+    "macro": "时间与场面",
+    "category": "根据眼前征兆判断即将发生",
+    "keyword": "眼看就要……；似乎马上会……",
+    "firstKana": "い",
+    "sourceMacro": "时间与场面",
+    "sourceCategory": "根据眼前征兆判断即将发生",
+    "legacy": {
+      "searchId": 4119
+    }
+  },
+  {
+    "id": "mainichi-n2-003",
+    "macro": "说明与传达",
+    "category": "提示社会上的通称",
+    "keyword": "所谓……；通常所说的……",
+    "firstKana": "い",
+    "sourceMacro": "说明与传达",
+    "sourceCategory": "提示社会上的通称",
+    "legacy": {
+      "searchId": 4120
+    }
+  },
+  {
+    "id": "mainichi-n2-004",
+    "macro": "判断与推测",
+    "category": "加强完全难以成立的否定判断",
+    "keyword": "完全不像……；怎么也难以认为……",
+    "firstKana": "お",
+    "sourceMacro": "判断与推测",
+    "sourceCategory": "加强完全难以成立的否定判断",
+    "legacy": {
+      "searchId": 4121
+    }
+  },
+  {
+    "id": "mainichi-n2-005",
+    "macro": "评价与结果",
+    "category": "努力是否获得相称回报",
+    "keyword": "有／没有……的价值或回报；没有白……",
+    "firstKana": "か",
+    "sourceMacro": "评价与结果",
+    "sourceCategory": "努力是否获得相称回报",
+    "legacy": {
+      "searchId": 4122
+    }
+  },
+  {
+    "id": "mainichi-n2-006",
+    "macro": "程度与评价",
+    "category": "与基准之间的差距极小",
+    "keyword": "无限接近……；几乎就是……",
+    "firstKana": "か",
+    "sourceMacro": "程度与评价",
+    "sourceCategory": "与基准之间的差距极小",
+    "legacy": {
+      "searchId": 4123
+    }
+  },
+  {
+    "id": "mainichi-n2-007",
+    "macro": "评价与结果",
+    "category": "做某事的价值与成就感",
+    "keyword": "值得……；有……的价值或成就感",
+    "firstKana": "か",
+    "sourceMacro": "评价与结果",
+    "sourceCategory": "做某事的价值与成就感",
+    "legacy": {
+      "searchId": 4124
+    }
+  },
+  {
+    "id": "mainichi-n2-009",
+    "macro": "判断与评价",
+    "category": "否定由前项直接推导出的结论",
+    "keyword": "不能算作……；并不等于……",
+    "firstKana": "こ",
+    "sourceMacro": "判断与评价",
+    "sourceCategory": "否定由前项直接推导出的结论",
+    "legacy": {
+      "searchId": 4125
+    }
+  },
+  {
+    "id": "mainichi-n2-010",
+    "macro": "方式与能力",
+    "category": "凭技能熟练驾驭并完成动作",
+    "keyword": "熟练地……；充分驾驭……",
+    "firstKana": "こ",
+    "sourceMacro": "方式与能力",
+    "sourceCategory": "凭技能熟练驾驭并完成动作",
+    "legacy": {
+      "searchId": 4126
+    }
+  },
+  {
     "id": "mainichi-n2-046",
     "macro": "依据与视角",
     "category": "所知・信息范围",
@@ -6182,6 +6211,1688 @@
     "legacy": {
       "searchId": 4112
     }
+  },
+  {
+    "id": "supp-n2-gaii-choice",
+    "macro": "判断与评价",
+    "category": "从候选项中积极选择偏好的对象",
+    "keyword": "想选……；更喜欢……；……比较好",
+    "firstKana": "が",
+    "sourceMacro": "判断与评价",
+    "sourceCategory": "从候选项中积极选择偏好的对象",
+    "legacy": {
+      "searchId": 4127
+    }
+  },
+  {
+    "id": "supp-n2-deii-acceptable",
+    "macro": "判断与评价",
+    "category": "把当前方案判断为足够且可以接受",
+    "keyword": "……就可以；……就够了",
+    "firstKana": "で",
+    "sourceMacro": "判断与评价",
+    "sourceCategory": "把当前方案判断为足够且可以接受",
+    "legacy": {
+      "searchId": 4128
+    }
+  },
+  {
+    "id": "supp-n2-naraii-conditional",
+    "macro": "条件与假定",
+    "category": "以前项为认可或接受成立的条件",
+    "keyword": "如果是……就可以；只要……就行",
+    "firstKana": "な",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "以前项为认可或接受成立的条件",
+    "legacy": {
+      "searchId": 4129
+    }
+  },
+  {
+    "id": "mainichi-n2-011",
+    "macro": "状态与结果",
+    "category": "手续或处理已经完成",
+    "keyword": "已经……；……完毕",
+    "firstKana": "ず",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "手续或处理已经完成",
+    "legacy": {
+      "searchId": 4130
+    }
+  },
+  {
+    "id": "mainichi-n2-012",
+    "macro": "限定与程度",
+    "category": "以具体事物为大小基准",
+    "keyword": "如……般大小；……大小",
+    "firstKana": "だ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "以具体事物为大小基准",
+    "legacy": {
+      "searchId": 4131
+    }
+  },
+  {
+    "id": "mainichi-n2-013",
+    "macro": "限定与程度",
+    "category": "强调爱好倾向或关系的程度",
+    "keyword": "非常……；十足的……",
+    "firstKana": "だ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "强调爱好倾向或关系的程度",
+    "legacy": {
+      "searchId": 4132
+    }
+  },
+  {
+    "id": "mainichi-n2-014",
+    "macro": "状态与结果",
+    "category": "充分做前项却未做后续行为",
+    "keyword": "只顾……；尽管做了……却没有……",
+    "firstKana": "だ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "充分做前项却未做后续行为",
+    "legacy": {
+      "searchId": 4133
+    }
+  },
+  {
+    "id": "mainichi-n2-015",
+    "macro": "限定与程度",
+    "category": "简单处理办法或限定为仅此而已",
+    "keyword": "只要……就行；不过是……而已",
+    "firstKana": "だ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "简单处理办法或限定为仅此而已",
+    "legacy": {
+      "searchId": 4134
+    }
+  },
+  {
+    "id": "mainichi-n2-016",
+    "macro": "状态与结果",
+    "category": "由拟声拟态词构成状态动词",
+    "keyword": "呈现……的状态；显得……",
+    "firstKana": "つ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "由拟声拟态词构成状态动词",
+    "legacy": {
+      "searchId": 4135
+    }
+  },
+  {
+    "id": "mainichi-n2-017",
+    "macro": "判断与推测",
+    "category": "不希望的动作或结果很可能发生",
+    "keyword": "差点要……；恐怕会……",
+    "firstKana": "て",
+    "sourceMacro": "判断与推测",
+    "sourceCategory": "不希望的动作或结果很可能发生",
+    "legacy": {
+      "searchId": 4136
+    }
+  },
+  {
+    "id": "mainichi-n2-018",
+    "macro": "情感与决心",
+    "category": "为实现目的不惜采取高代价手段",
+    "keyword": "即使采取……手段也要……",
+    "firstKana": "て",
+    "sourceMacro": "情感与决心",
+    "sourceCategory": "为实现目的不惜采取高代价手段",
+    "legacy": {
+      "searchId": 4137
+    }
+  },
+  {
+    "id": "mainichi-n2-019",
+    "macro": "方式与能力",
+    "category": "说明活动方式、动作后的内容或行为动机",
+    "keyword": "以……的方式；在……之后的……",
+    "firstKana": "て",
+    "sourceMacro": "方式与能力",
+    "sourceCategory": "说明活动方式、动作后的内容或行为动机",
+    "legacy": {
+      "searchId": 4138
+    }
+  },
+  {
+    "id": "mainichi-n2-020",
+    "macro": "逆接与让步",
+    "category": "反复进行动作仍未出现期待结果",
+    "keyword": "无论反复……多少次也仍然……",
+    "firstKana": "て",
+    "sourceMacro": "逆接与让步",
+    "sourceCategory": "反复进行动作仍未出现期待结果",
+    "legacy": {
+      "searchId": 4139
+    }
+  },
+  {
+    "id": "mainichi-n2-021",
+    "macro": "说明与传达",
+    "category": "用同格关系说明同一对象的身份或性质",
+    "keyword": "作为……的……；即……的……",
+    "firstKana": "で",
+    "sourceMacro": "说明与传达",
+    "sourceCategory": "用同格关系说明同一对象的身份或性质",
+    "legacy": {
+      "searchId": 4140
+    }
+  },
+  {
+    "id": "mainichi-n2-022",
+    "macro": "条件与假定",
+    "category": "假设不希望发生的情况并提示严重结果",
+    "keyword": "万一……的话；要是竟然……",
+    "firstKana": "で",
+    "sourceMacro": "条件与假定",
+    "sourceCategory": "假设不希望发生的情况并提示严重结果",
+    "legacy": {
+      "searchId": 4141
+    }
+  },
+  {
+    "id": "mainichi-n2-023",
+    "macro": "限定与程度",
+    "category": "数量或期间连所示界限都未达到",
+    "keyword": "连……都不到；未满……",
+    "firstKana": "と",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "数量或期间连所示界限都未达到",
+    "legacy": {
+      "searchId": 4142
+    }
+  },
+  {
+    "id": "mainichi-n2-025",
+    "macro": "原因与理由",
+    "category": "把未经确认的传闻作为后项理由",
+    "keyword": "听说是因为……；说是……所以……",
+    "firstKana": "と",
+    "sourceMacro": "原因与理由",
+    "sourceCategory": "把未经确认的传闻作为后项理由",
+    "legacy": {
+      "searchId": 4143
+    }
+  },
+  {
+    "id": "mainichi-n2-026",
+    "macro": "依据与视角",
+    "category": "从身份立场或类别标准作出判断",
+    "keyword": "作为……来说；以……的立场来看",
+    "firstKana": "と",
+    "sourceMacro": "依据与视角",
+    "sourceCategory": "从身份立场或类别标准作出判断",
+    "legacy": {
+      "searchId": 4144
+    }
+  },
+  {
+    "id": "mainichi-n2-027",
+    "macro": "比较与伴随",
+    "category": "对象状态或实际结果与前项相反",
+    "keyword": "与……相反；与……正好相反",
+    "firstKana": "と",
+    "sourceMacro": "比较与伴随",
+    "sourceCategory": "对象状态或实际结果与前项相反",
+    "legacy": {
+      "searchId": 4145
+    }
+  },
+  {
+    "id": "mainichi-n2-028",
+    "macro": "程度与评价",
+    "category": "表示同等水平或普通程度",
+    "keyword": "与……相当；普通程度的……",
+    "firstKana": "な",
+    "sourceMacro": "程度与评价",
+    "sourceCategory": "表示同等水平或普通程度",
+    "legacy": {
+      "searchId": 4146
+    }
+  },
+  {
+    "id": "mainichi-n2-029",
+    "macro": "逆接与让步",
+    "category": "先作有限度的肯定再补充保留意见",
+    "keyword": "……是……，不过……",
+    "firstKana": "に",
+    "sourceMacro": "逆接与让步",
+    "sourceCategory": "先作有限度的肯定再补充保留意见",
+    "legacy": {
+      "searchId": 4147
+    }
+  },
+  {
+    "id": "mainichi-n2-030",
+    "macro": "逆接与让步",
+    "category": "承认或假定前项仍保持后项结论",
+    "keyword": "即使……也……；无论……都……",
+    "firstKana": "に",
+    "sourceMacro": "逆接与让步",
+    "sourceCategory": "承认或假定前项仍保持后项结论",
+    "legacy": {
+      "searchId": 4148
+    }
+  },
+  {
+    "id": "mainichi-n2-031",
+    "macro": "状态与结果",
+    "category": "变化达到超出通常预期的阶段",
+    "keyword": "发展到……的阶段；甚至变成……",
+    "firstKana": "に",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "变化达到超出通常预期的阶段",
+    "legacy": {
+      "searchId": 4149
+    }
+  },
+  {
+    "id": "mainichi-n2-032",
+    "macro": "状态与结果",
+    "category": "到达空间终点或抽象结果",
+    "keyword": "到达……；发展到……",
+    "firstKana": "に",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "到达空间终点或抽象结果",
+    "legacy": {
+      "searchId": 4150
+    }
+  },
+  {
+    "id": "mainichi-n2-033",
+    "macro": "比较与伴随",
+    "category": "实际性质与外表年龄等通常印象不符",
+    "keyword": "与……不相称；不像……通常会有的样子",
+    "firstKana": "に",
+    "sourceMacro": "比较与伴随",
+    "sourceCategory": "实际性质与外表年龄等通常印象不符",
+    "legacy": {
+      "searchId": 4151
+    }
+  },
+  {
+    "id": "mainichi-n2-034",
+    "macro": "时间与顺序",
+    "category": "在前项之前行动或领先他人开创",
+    "keyword": "在……之前；领先于……",
+    "firstKana": "に",
+    "sourceMacro": "时间与顺序",
+    "sourceCategory": "在前项之前行动或领先他人开创",
+    "legacy": {
+      "searchId": 4152
+    }
+  },
+  {
+    "id": "mainichi-n2-035",
+    "macro": "否定",
+    "category": "以最小单位强调完全不存在",
+    "keyword": "连一个……都没有；一次也没有",
+    "firstKana": "ひ",
+    "sourceMacro": "否定",
+    "sourceCategory": "以最小单位强调完全不存在",
+    "legacy": {
+      "searchId": 4153
+    }
+  },
+  {
+    "id": "mainichi-n2-036",
+    "macro": "程度与评价",
+    "category": "把部分形容词名词化表示主观感受的性质",
+    "keyword": "……感；带有……的感觉或性质",
+    "firstKana": "み",
+    "sourceMacro": "程度与评价",
+    "sourceCategory": "把部分形容词名词化表示主观感受的性质",
+    "legacy": {
+      "searchId": 4154
+    }
+  },
+  {
+    "id": "mainichi-n2-037",
+    "macro": "判断与推测",
+    "category": "从外表立即作出明显判断",
+    "keyword": "一看就……；明显看起来……",
+    "firstKana": "み",
+    "sourceMacro": "判断与推测",
+    "sourceCategory": "从外表立即作出明显判断",
+    "legacy": {
+      "searchId": 4155
+    }
+  },
+  {
+    "id": "mainichi-n2-038",
+    "macro": "限定与程度",
+    "category": "程度稍微偏向形容词所示一侧",
+    "keyword": "稍微偏……；比较……",
+    "firstKana": "め",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "程度稍微偏向形容词所示一侧",
+    "legacy": {
+      "searchId": 4156
+    }
+  },
+  {
+    "id": "mainichi-n2-039",
+    "macro": "原因与结果",
+    "category": "根据前项原因判断结果自然合理",
+    "keyword": "……也是理所当然的；难怪会……",
+    "firstKana": "も",
+    "sourceMacro": "原因与结果",
+    "sourceCategory": "根据前项原因判断结果自然合理",
+    "legacy": {
+      "searchId": 4157
+    }
+  },
+  {
+    "id": "mainichi-n2-040",
+    "macro": "时间与顺序",
+    "category": "正准备行动或刚进入阶段时突发意外",
+    "keyword": "正要……的时候；刚进入……阶段时",
+    "firstKana": "や",
+    "sourceMacro": "时间与顺序",
+    "sourceCategory": "正准备行动或刚进入阶段时突发意外",
+    "legacy": {
+      "searchId": 4158
+    }
+  },
+  {
+    "id": "mainichi-n2-041",
+    "macro": "比较与伴随",
+    "category": "比较两项并判断后项更合适或更接近实际",
+    "keyword": "与其……不如……；反而……",
+    "firstKana": "よ",
+    "sourceMacro": "比较与伴随",
+    "sourceCategory": "比较两项并判断后项更合适或更接近实际",
+    "legacy": {
+      "searchId": 4159
+    }
+  },
+  {
+    "id": "mainichi-n2-042",
+    "macro": "对象与关联",
+    "category": "一次行动同时兼顾另一个目的",
+    "keyword": "兼作……；也为了……",
+    "firstKana": "を",
+    "sourceMacro": "对象与关联",
+    "sourceCategory": "一次行动同时兼顾另一个目的",
+    "legacy": {
+      "searchId": 4160
+    }
+  },
+  {
+    "id": "mainichi-n2-043",
+    "macro": "限定与程度",
+    "category": "从整体范围中排除指定对象",
+    "keyword": "除……以外；不包括……",
+    "firstKana": "を",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "从整体范围中排除指定对象",
+    "legacy": {
+      "searchId": 4161
+    }
+  },
+  {
+    "id": "mainichi-n2-044",
+    "macro": "依据与视角",
+    "category": "把事实经验结果或意见作为后续判断依据",
+    "keyword": "根据……；在考虑……的基础上",
+    "firstKana": "を",
+    "sourceMacro": "依据与视角",
+    "sourceCategory": "把事实经验结果或意见作为后续判断依据",
+    "legacy": {
+      "searchId": 4162
+    }
+  },
+  {
+    "id": "mainichi-n2-045",
+    "macro": "限定与程度",
+    "category": "把现有能力或资源发挥到最大程度",
+    "keyword": "尽可能……；竭尽……",
+    "firstKana": "か",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "把现有能力或资源发挥到最大程度",
+    "legacy": {
+      "searchId": 4163
+    }
+  },
+  {
+    "id": "mainichi-n2-047",
+    "macro": "限定与程度",
+    "category": "前项程度与后项结果按相应份量联动",
+    "keyword": "随着……的程度，后项也相应变化",
+    "firstKana": "だ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "前项程度与后项结果按相应份量联动",
+    "legacy": {
+      "searchId": 4164
+    }
+  },
+  {
+    "id": "mainichi-n2-048",
+    "macro": "转折与让步",
+    "category": "把通常状态与当前特殊情况对照",
+    "keyword": "通常本应……，但当前却……",
+    "firstKana": "と",
+    "sourceMacro": "转折与让步",
+    "sourceCategory": "把通常状态与当前特殊情况对照",
+    "legacy": {
+      "searchId": 4165
+    }
+  },
+  {
+    "id": "mainichi-n2-049",
+    "macro": "判断与推测",
+    "category": "正式判断或认定对象的性质与结论",
+    "keyword": "判断为……；认定为……",
+    "firstKana": "と",
+    "sourceMacro": "判断与推测",
+    "sourceCategory": "正式判断或认定对象的性质与结论",
+    "legacy": {
+      "searchId": 4166
+    }
+  },
+  {
+    "id": "mainichi-n2-050",
+    "macro": "决定与规定",
+    "category": "在正式文本中制定具体规则与处理办法",
+    "keyword": "规定为……；规定要……／不得……",
+    "firstKana": "と",
+    "sourceMacro": "决定与规定",
+    "sourceCategory": "在正式文本中制定具体规则与处理办法",
+    "legacy": {
+      "searchId": 4167
+    }
+  },
+  {
+    "id": "mainichi-n3-001",
+    "macro": "动作与相互作用",
+    "category": "两人以上互相进行同一动作",
+    "keyword": "互相……；共同……",
+    "firstKana": "あ",
+    "sourceMacro": "动作与相互作用",
+    "sourceCategory": "两人以上互相进行同一动作",
+    "legacy": {
+      "searchId": 4168
+    }
+  },
+  {
+    "id": "mainichi-n3-002",
+    "macro": "状态与结果",
+    "category": "动作完成向上移动或状态达到极端",
+    "keyword": "做完……；向上……；达到极端状态",
+    "firstKana": "あ",
+    "sourceMacro": "状态与结果",
+    "sourceCategory": "动作完成向上移动或状态达到极端",
+    "legacy": {
+      "searchId": 4169
+    }
+  },
+  {
+    "id": "mainichi-n3-003",
+    "macro": "条件与结果",
+    "category": "程度过高时自然出现相应结果",
+    "keyword": "如果过于……，就会……",
+    "firstKana": "あ",
+    "sourceMacro": "条件与结果",
+    "sourceCategory": "程度过高时自然出现相应结果",
+    "legacy": {
+      "searchId": 4170
+    }
+  },
+  {
+    "id": "mainichi-n3-004",
+    "macro": "限定与程度",
+    "category": "性质程度或动作频率不高",
+    "keyword": "不太……；不怎么……",
+    "firstKana": "あ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "性质程度或动作频率不高",
+    "legacy": {
+      "searchId": 4171
+    }
+  },
+  {
+    "id": "mainichi-n3-005",
+    "macro": "限定与程度",
+    "category": "性质状态或动作程度超过通常范围",
+    "keyword": "太……；过于……",
+    "firstKana": "あ",
+    "sourceMacro": "限定与程度",
+    "sourceCategory": "性质状态或动作程度超过通常范围",
+    "legacy": {
+      "searchId": 4172
+    }
+  },
+  {
+    "id": "mainichi-n3-006",
+    "macro": "原因与结果",
+    "category": "程度过高并引起直接反应或具体结果",
+    "keyword": "由于过于……；因为太……",
+    "firstKana": "あ",
+    "sourceMacro": "原因与结果",
+    "sourceCategory": "程度过高并引起直接反应或具体结果",
+    "legacy": {
+      "searchId": 4173
+    }
+  },
+  {
+    "id": "mainichi-n3-007",
+    "macro": "时间与经验",
+    "category": "从过去到现在一次也未发生",
+    "keyword": "从未……；前所未有",
+    "firstKana": "い",
+    "sourceMacro": "时间与经验",
+    "sourceCategory": "从过去到现在一次也未发生",
+    "legacy": {
+      "searchId": 4174
+    }
+  },
+  {
+    "id": "mainichi-n3-008",
+    "macro": "时间与状态",
+    "category": "本应发生的事情到现在仍未发生",
+    "keyword": "至今仍未……；到现在还没有……",
+    "firstKana": "い",
+    "sourceMacro": "时间与状态",
+    "sourceCategory": "本应发生的事情到现在仍未发生",
+    "legacy": {
+      "searchId": 4175
+    }
+  },
+  {
+    "id": "mainichi-n3-009",
+    "macro": "时间与评价",
+    "category": "把某段持续时期评价为最好或最重要",
+    "keyword": "在……期间最……；……的时候最重要",
+    "firstKana": "う",
+    "sourceMacro": "时间与评价",
+    "sourceCategory": "把某段持续时期评价为最好或最重要",
+    "legacy": {
+      "searchId": 4176
+    }
+  },
+  {
+    "id": "mainichi-n3-010",
+    "macro": "时间与状态",
+    "category": "前项状态持续期间后项情况一直成立",
+    "keyword": "在……期间；只要还处于……状态",
+    "firstKana": "う",
+    "sourceMacro": "时间与状态",
+    "sourceCategory": "前项状态持续期间后项情况一直成立",
+    "legacy": {
+      "searchId": 4177
+    }
+  },
+  {
+    "id": "mainichi-n3-011",
+    "macro": "授受与敬语",
+    "category": "抬高对方的动作或礼貌请求对方行动",
+    "keyword": "（尊敬地）为……做……；请……",
+    "firstKana": "お",
+    "sourceMacro": "授受与敬语",
+    "sourceCategory": "抬高对方的动作或礼貌请求对方行动",
+    "legacy": {
+      "searchId": 4178
+    }
+  },
+  {
+    "id": "mainichi-n3-012",
+    "macro": "授受与敬语",
+    "category": "以尊敬形式郑重叙述对方的动作",
+    "keyword": "（尊敬地）做……",
+    "firstKana": "お",
+    "sourceMacro": "授受与敬语",
+    "sourceCategory": "以尊敬形式郑重叙述对方的动作",
+    "legacy": {
+      "searchId": 4179
+    }
+  },
+  {
+    "id": "mainichi-n3-013",
+    "macro": "可能与许可",
+    "category": "以尊敬形式说明对方能够进行某项动作",
+    "keyword": "（尊敬地）能够……；可以……",
+    "firstKana": "お",
+    "sourceMacro": "可能与许可",
+    "sourceCategory": "以尊敬形式说明对方能够进行某项动作",
+    "legacy": {
+      "searchId": 4180
+    }
+  },
+  {
+    "id": "mainichi-n3-014",
+    "macro": "授受与敬语",
+    "category": "承蒙对方行动并表达受益和感谢",
+    "keyword": "承蒙……；感谢您……",
+    "firstKana": "お",
+    "sourceMacro": "授受与敬语",
+    "sourceCategory": "承蒙对方行动并表达受益和感谢",
+    "legacy": {
+      "searchId": 4181
+    }
+  },
+  {
+    "id": "mainichi-n3-015",
+    "macro": "构成与材料",
+    "category": "说明整体的组成要素或物品的材料来源",
+    "keyword": "由……组成；由……制成",
+    "firstKana": "か",
+    "sourceMacro": "构成与材料",
+    "sourceCategory": "说明整体的组成要素或物品的材料来源",
+    "legacy": {
+      "searchId": 4182
+    }
+  },
+  {
+    "id": "mainichi-n3-016",
+    "macro": "列举与模糊表达",
+    "category": "举出代表项并保留其他相近可能",
+    "keyword": "……什么的；……之类的",
+    "firstKana": "か",
+    "sourceMacro": "列举与模糊表达",
+    "sourceCategory": "举出代表项并保留其他相近可能",
+    "legacy": {
+      "searchId": 4183
+    }
+  },
+  {
+    "id": "mainichi-n3-017",
+    "macro": "动作与方向",
+    "category": "反向回应或返回并再次进行动作",
+    "keyword": "反过来……；重新……；……回去",
+    "firstKana": "か",
+    "sourceMacro": "动作与方向",
+    "sourceCategory": "反向回应或返回并再次进行动作",
+    "legacy": {
+      "searchId": 4184
+    }
+  },
+  {
+    "id": "mainichi-n3-018",
+    "macro": "数量与规模",
+    "category": "完成事情花费较长时间或动用较多人力",
+    "keyword": "花费……；动用……人",
+    "firstKana": "か",
+    "sourceMacro": "数量与规模",
+    "sourceCategory": "完成事情花费较长时间或动用较多人力",
+    "legacy": {
+      "searchId": 4185
+    }
+  },
+  {
+    "id": "mainichi-n3-022",
+    "macro": "动作与状态",
+    "category": "动作进入内部、大量积累或深入持续",
+    "keyword": "进入……；大量……；深入地……",
+    "firstKana": "こ",
+    "sourceMacro": "动作与状态",
+    "sourceCategory": "动作进入内部、大量积累或深入持续",
+    "legacy": {
+      "searchId": 4186
+    }
+  },
+  {
+    "id": "mainichi-n3-023",
+    "macro": "敬语与礼貌表达",
+    "category": "以郑重礼貌形式说明存在或作出判断",
+    "keyword": "有……；是……（郑重礼貌）",
+    "firstKana": "こ",
+    "sourceMacro": "敬语与礼貌表达",
+    "sourceCategory": "以郑重礼貌形式说明存在或作出判断",
+    "legacy": {
+      "searchId": 4187
+    }
+  },
+  {
+    "id": "mainichi-n3-024",
+    "macro": "词形变化与名词化",
+    "category": "把形容词表示的性质或程度转化为名词",
+    "keyword": "……度；……性；……程度",
+    "firstKana": "さ",
+    "sourceMacro": "词形变化与名词化",
+    "sourceCategory": "把形容词表示的性质或程度转化为名词",
+    "legacy": {
+      "searchId": 4188
+    }
+  },
+  {
+    "id": "mainichi-n3-025",
+    "macro": "让步与条件",
+    "category": "即使不进行前项动作后项也仍然成立",
+    "keyword": "即使不……也……；不……也……",
+    "firstKana": "ず",
+    "sourceMacro": "让步与条件",
+    "sourceCategory": "即使不进行前项动作后项也仍然成立",
+    "legacy": {
+      "searchId": 4189
+    }
+  },
+  {
+    "id": "mainichi-n3-026",
+    "macro": "样态与观察",
+    "category": "从表情态度和动作观察人物表现出的状态",
+    "keyword": "显得……；表现出……的样子",
+    "firstKana": "そ",
+    "sourceMacro": "样态与观察",
+    "sourceCategory": "从表情态度和动作观察人物表现出的状态",
+    "legacy": {
+      "searchId": 4190
+    }
+  },
+  {
+    "id": "mainichi-n3-027",
+    "macro": "推测与可能性",
+    "category": "根据现状判断事情发生或实现的可能性很低",
+    "keyword": "看样子不会……；恐怕不能……",
+    "firstKana": "そ",
+    "sourceMacro": "推测与可能性",
+    "sourceCategory": "根据现状判断事情发生或实现的可能性很低",
+    "legacy": {
+      "searchId": 4191
+    }
+  },
+  {
+    "id": "mainichi-n3-028",
+    "macro": "动作与状态",
+    "category": "动作或状态发展到即将发生的临界点",
+    "keyword": "差点……；眼看就要……",
+    "firstKana": "そ",
+    "sourceMacro": "动作与状态",
+    "sourceCategory": "动作或状态发展到即将发生的临界点",
+    "legacy": {
+      "searchId": 4192
+    }
+  },
+  {
+    "id": "mainichi-n3-029",
+    "macro": "样态与观察",
+    "category": "根据外表推测人物或事物的内在状态",
+    "keyword": "看起来……；显得……",
+    "firstKana": "そ",
+    "sourceMacro": "样态与观察",
+    "sourceCategory": "根据外表推测人物或事物的内在状态",
+    "legacy": { "searchId": 4193 }
+  },
+  {
+    "id": "mainichi-n3-030",
+    "macro": "程度与评价",
+    "category": "以简略形式说明抽象事物的程度很大",
+    "keyword": "……很大；……程度很高",
+    "firstKana": "た",
+    "sourceMacro": "程度与评价",
+    "sourceCategory": "以简略形式说明抽象事物的程度很大",
+    "legacy": { "searchId": 4194 }
+  },
+  {
+    "id": "mainichi-n3-032",
+    "macro": "经历与记录",
+    "category": "说明到现在为止有无某种过去经历",
+    "keyword": "曾经……过；从未……过",
+    "firstKana": "た",
+    "sourceMacro": "经历与记录",
+    "sourceCategory": "说明到现在为止有无某种过去经历",
+    "legacy": { "searchId": 4195 }
+  },
+  {
+    "id": "mainichi-n3-033",
+    "macro": "判断与结果",
+    "category": "根据事实或标准客观推导并认定结果",
+    "keyword": "按……来算就等于……；可视为已经……",
+    "firstKana": "た",
+    "sourceMacro": "判断与结果",
+    "sourceCategory": "根据事实或标准客观推导并认定结果",
+    "legacy": { "searchId": 4196 }
+  },
+  {
+    "id": "mainichi-n3-034",
+    "macro": "指示与命令",
+    "category": "上位者以带权威的语气命令下位者行动",
+    "keyword": "你……吧；给我……",
+    "firstKana": "た",
+    "sourceMacro": "指示与命令",
+    "sourceCategory": "上位者以带权威的语气命令下位者行动",
+    "legacy": { "searchId": 4197 }
+  },
+  {
+    "id": "mainichi-n3-035",
+    "macro": "说明与传达",
+    "category": "将前述内容换言概括或归纳为结论",
+    "keyword": "也就是说……；换句话说……",
+    "firstKana": "つ",
+    "sourceMacro": "说明与传达",
+    "sourceCategory": "将前述内容换言概括或归纳为结论",
+    "legacy": { "searchId": 4198 }
+  },
+  {
+    "id": "mainichi-n3-036",
+    "macro": "敬语与礼貌表达",
+    "category": "尊敬地叙述他人的动作身份或所处状态",
+    "keyword": "（尊敬地）……；正在……；处于……状态",
+    "firstKana": "て",
+    "sourceMacro": "敬语与礼貌表达",
+    "sourceCategory": "尊敬地叙述他人的动作身份或所处状态",
+    "legacy": { "searchId": 4199 }
+  },
+  {
+    "id": "mainichi-n3-037",
+    "macro": "建议与促使",
+    "category": "由较高立场鼓励或指示对方尝试行动",
+    "keyword": "试着……看；你……看看",
+    "firstKana": "て",
+    "sourceMacro": "建议与促使",
+    "sourceCategory": "由较高立场鼓励或指示对方尝试行动",
+    "legacy": { "searchId": 4200 }
+  },
+  {
+    "id": "mainichi-n3-039",
+    "macro": "让步与选择",
+    "category": "并列动作成立与不成立的两种情况并说明结果不变",
+    "keyword": "无论……还是不……；不管是否……",
+    "firstKana": "て",
+    "sourceMacro": "让步与选择",
+    "sourceCategory": "并列动作成立与不成立的两种情况并说明结果不变",
+    "legacy": { "searchId": 4201 }
+  },
+  {
+    "id": "mainichi-n3-040",
+    "macro": "让步与无可奈何",
+    "category": "说明行动没有意义或某种状态难以避免",
+    "keyword": "即使……也没用；即使……也无可奈何",
+    "firstKana": "て",
+    "sourceMacro": "让步与无可奈何",
+    "sourceCategory": "说明行动没有意义或某种状态难以避免",
+    "legacy": { "searchId": 4202 }
+  },
+  {
+    "id": "mainichi-n3-041",
+    "macro": "意外与未预料",
+    "category": "说明结果出乎意料或事情完全没有进入过自己的预想",
+    "keyword": "没想到……；完全没想到……；想都没想过……",
+    "firstKana": "て",
+    "sourceMacro": "意外与未预料",
+    "sourceCategory": "说明事情完全没有进入过自己的想法或预料",
+    "legacy": { "searchId": 4203 }
+  },
+  {
+    "id": "mainichi-n3-042",
+    "macro": "未尝试与批评",
+    "category": "批评在尚未实际行动时就放弃判断或抱怨",
+    "keyword": "连试都没试就……；还没做就……",
+    "firstKana": "て",
+    "sourceMacro": "未尝试与批评",
+    "sourceCategory": "批评在尚未实际行动时就放弃判断或抱怨",
+    "legacy": { "searchId": 4204 }
+  },
+  {
+    "id": "mainichi-n3-043",
+    "macro": "许可与礼貌请求",
+    "category": "郑重婉转地询问自己的动作是否被允许",
+    "keyword": "可以……吗？",
+    "firstKana": "て",
+    "sourceMacro": "许可与礼貌请求",
+    "sourceCategory": "郑重婉转地询问自己的动作是否被允许",
+    "legacy": { "searchId": 4205 }
+  },
+  {
+    "id": "mainichi-n3-044",
+    "macro": "许可与容许",
+    "category": "说明某个动作状态或选择即使成立也可以接受",
+    "keyword": "即使……也没关系；……也可以",
+    "firstKana": "て",
+    "sourceMacro": "许可与容许",
+    "sourceCategory": "说明某个动作状态或选择即使成立也可以接受",
+    "legacy": { "searchId": 4206 }
+  },
+  {
+    "id": "mainichi-n3-045",
+    "macro": "无效行动与劝告",
+    "category": "说明继续某种行为也不能解决问题或推动进展",
+    "keyword": "即使……也没有用；……也无法推动事情进展",
+    "firstKana": "て",
+    "sourceMacro": "无效行动与劝告",
+    "sourceCategory": "说明继续某种行为也不能解决问题或推动进展",
+    "legacy": { "searchId": 4207 }
+  },
+  {
+    "id": "mainichi-n3-046",
+    "macro": "完成与充分条件",
+    "category": "说明达到某种程度或采用某种方法就足以处理完事情",
+    "keyword": "只需……即可；到……程度就解决",
+    "firstKana": "て",
+    "sourceMacro": "完成与充分条件",
+    "sourceCategory": "说明达到某种程度或采用某种方法就足以处理完事情",
+    "legacy": { "searchId": 4208 }
+  },
+  {
+    "id": "mainichi-n3-047",
+    "macro": "基准与当然归结",
+    "category": "从连基准对象都成立的事实推出更明显的结论",
+    "keyword": "就连……都……，更何况……",
+    "firstKana": "て",
+    "sourceMacro": "基准与当然归结",
+    "sourceCategory": "从连基准对象都成立的事实推出更明显的结论",
+    "legacy": { "searchId": 4209 }
+  },
+  {
+    "id": "mainichi-n3-048",
+    "macro": "误解与预想落空",
+    "category": "发现此前一直确信的判断与实际情况不同",
+    "keyword": "一直以为……；原以为……",
+    "firstKana": "と",
+    "sourceMacro": "误解与预想落空",
+    "sourceCategory": "发现此前一直确信的判断与实际情况不同",
+    "legacy": { "searchId": 4210 }
+  },
+  {
+    "id": "mainichi-n3-050",
+    "macro": "追加与分离",
+    "category": "说明原有项目之外另有内容或与前项分开处理",
+    "keyword": "除……之外另有……；与……分开……",
+    "firstKana": "と",
+    "sourceMacro": "追加与分离",
+    "sourceCategory": "说明原有项目之外另有内容或与前项分开处理",
+    "legacy": { "searchId": 4211 }
+  },
+  {
+    "id": "mainichi-n3-051",
+    "macro": "范围与复数",
+    "category": "表示成员全部如此或用后缀表示人的复数",
+    "keyword": "……都……；……们",
+    "firstKana": "と",
+    "sourceMacro": "范围与复数",
+    "sourceCategory": "表示成员全部如此或用后缀表示人的复数",
+    "legacy": { "searchId": 4212 }
+  },
+  {
+    "id": "mainichi-n3-052",
+    "macro": "持续与完成",
+    "category": "有意识地让动作从开始持续到最后并贯彻完成",
+    "keyword": "一直……到底；坚持完成……",
+    "firstKana": "と",
+    "sourceMacro": "持续与完成",
+    "sourceCategory": "有意识地让动作从开始持续到最后并贯彻完成",
+    "legacy": { "searchId": 4213 }
+  },
+  {
+    "id": "mainichi-n3-053",
+    "macro": "让步与结果不变",
+    "category": "无论程度次数或数量怎样变化后项仍不改变",
+    "keyword": "无论多么……也……；不管怎样……也……",
+    "firstKana": "ど",
+    "sourceMacro": "让步与结果不变",
+    "sourceCategory": "无论程度次数或数量怎样变化后项仍不改变",
+    "legacy": { "searchId": 4214 }
+  },
+  {
+    "id": "mainichi-n3-054",
+    "macro": "愿望与委婉请求",
+    "category": "期待理想情况实现或委婉请求别人采取行动",
+    "keyword": "真希望……；能不能……呢",
+    "firstKana": "な",
+    "sourceMacro": "愿望与委婉请求",
+    "sourceCategory": "期待理想情况实现或委婉请求别人采取行动",
+    "legacy": { "searchId": 4215 }
+  },
+  {
+    "id": "mainichi-n3-055",
+    "macro": "推测与担忧",
+    "category": "在把握不足时委婉提出判断或担心某种可能性",
+    "keyword": "大概是……吧；会不会……呢",
+    "firstKana": "な",
+    "sourceMacro": "推测与担忧",
+    "sourceCategory": "在把握不足时委婉提出判断或担心某种可能性",
+    "legacy": { "searchId": 4216 }
+  },
+  {
+    "id": "mainichi-n3-056",
+    "macro": "批评与抗议",
+    "category": "认为做法待遇或结果过于残酷不公平而表示强烈不满",
+    "keyword": "……太过分了；……实在太不像话",
+    "firstKana": "な",
+    "sourceMacro": "批评与抗议",
+    "sourceCategory": "认为做法待遇或结果过于残酷不公平而表示强烈不满",
+    "legacy": { "searchId": 4217 }
+  },
+  {
+    "id": "mainichi-n3-057",
+    "macro": "习惯与熟悉",
+    "category": "通过反复行动而熟练或对反复接触的对象不再陌生",
+    "keyword": "做惯……；已经习惯……",
+    "firstKana": "な",
+    "sourceMacro": "习惯与熟悉",
+    "sourceCategory": "通过反复行动而熟练或对反复接触的对象不再陌生",
+    "legacy": { "searchId": 4218 }
+  },
+  {
+    "id": "mainichi-n3-058",
+    "macro": "重做与恢复",
+    "category": "修正后重新进行动作或恢复到较好的状态",
+    "keyword": "重新……；改正后再……；恢复……",
+    "firstKana": "な",
+    "sourceMacro": "重做与恢复",
+    "sourceCategory": "修正后重新进行动作或恢复到较好的状态",
+    "legacy": { "searchId": 4219 }
+  },
+  {
+    "id": "mainichi-n3-059",
+    "macro": "理由与重点强调",
+    "category": "从若干情况中突出最主要的理由或最值得强调的一点",
+    "keyword": "毕竟……；最重要的是……",
+    "firstKana": "な",
+    "sourceMacro": "理由与重点强调",
+    "sourceCategory": "从若干情况中突出最主要的理由或最值得强调的一点",
+    "legacy": { "searchId": 4220 }
+  },
+  {
+    "id": "supp-try-n1-nite",
+    "macro": "场所、手段与终点",
+    "category": "用郑重书面表达指出动作地点手段方式或时间终点",
+    "keyword": "在……；用……；到……为止",
+    "firstKana": "に",
+    "sourceMacro": "场所、手段与终点",
+    "sourceCategory": "用郑重书面表达指出动作地点手段方式或时间终点",
+    "legacy": { "searchId": 950007 }
+  },
+  {
+    "id": "mainichi-n3-061",
+    "macro": "目的条件与评价",
+    "category": "说明实现目的所需条件或把人物群体作为评价标准",
+    "keyword": "要……就需要……；对……来说……",
+    "firstKana": "に",
+    "sourceMacro": "目的条件与评价",
+    "sourceCategory": "说明实现目的所需条件或把人物群体作为评价标准",
+    "legacy": { "searchId": 4221 }
+  },
+  {
+    "id": "mainichi-n3-062",
+    "macro": "条件无关与印象反差",
+    "category": "说明结果不受条件限制或实际性质与外表印象不同",
+    "keyword": "不受……限制；与外表不相符",
+    "firstKana": "に",
+    "sourceMacro": "条件无关与印象反差",
+    "sourceCategory": "说明结果不受条件限制或实际性质与外表印象不同",
+    "legacy": { "searchId": 4222 }
+  },
+  {
+    "id": "mainichi-n3-063",
+    "macro": "界限与上限",
+    "category": "说明数量能力范围存在或不存在明确的上限",
+    "keyword": "……有极限；……没有极限",
+    "firstKana": "に",
+    "sourceMacro": "界限与上限",
+    "sourceCategory": "说明数量能力范围存在或不存在明确的上限",
+    "legacy": { "searchId": 4223 }
+  },
+  {
+    "id": "mainichi-n3-064",
+    "macro": "强烈否定与决心",
+    "category": "强调同样的事情今后不会再次发生或要求绝不再做",
+    "keyword": "再也不……；绝不会再……",
+    "firstKana": "に",
+    "sourceMacro": "强烈否定与决心",
+    "sourceCategory": "强调同样的事情今后不会再次发生或要求绝不再做",
+    "legacy": { "searchId": 4224 }
+  },
+  {
+    "id": "mainichi-n3-065",
+    "macro": "否定形式与语体",
+    "category": "使用ぬ表示书面否定或使用ん表示随意口语否定",
+    "keyword": "不……；没有……",
+    "firstKana": "ぬ",
+    "sourceMacro": "否定形式与语体",
+    "sourceCategory": "使用ぬ表示书面否定或使用ん表示随意口语否定",
+    "legacy": { "searchId": 4225 }
+  },
+  {
+    "id": "mainichi-n3-066",
+    "macro": "逆接、对比与意外",
+    "category": "说明实际结果与通常预想或原先期待不一致",
+    "keyword": "明明……却……；本以为……可是……",
+    "firstKana": "の",
+    "sourceMacro": "逆接、对比与意外",
+    "sourceCategory": "说明实际结果与通常预想或原先期待不一致",
+    "legacy": { "searchId": 4226 }
+  },
+  {
+    "id": "mainichi-n3-067",
+    "macro": "目的、用途与必要条件",
+    "category": "说明实现目的所需的条件或事物对于特定用途的合适程度",
+    "keyword": "为了……；做……需要……；用于……",
+    "firstKana": "の",
+    "sourceMacro": "目的、用途与必要条件",
+    "sourceCategory": "说明实现目的所需的条件或事物对于特定用途的合适程度",
+    "legacy": { "searchId": 4227 }
+  },
+  {
+    "id": "mainichi-n3-069",
+    "macro": "伪装与回避",
+    "category": "故意表现出与实际不同的动作状态或装作没有察觉",
+    "keyword": "假装……；装作……",
+    "firstKana": "ふ",
+    "sourceMacro": "伪装与回避",
+    "sourceCategory": "故意表现出与实际不同的动作状态或装作没有察觉",
+    "legacy": { "searchId": 4228 }
+  },
+  {
+    "id": "mainichi-n3-070",
+    "macro": "样态、程度与表现",
+    "category": "描写动作方式或状态表现并可突出显著程度",
+    "keyword": "……的样子或表现；……得很明显",
+    "firstKana": "ぶ",
+    "sourceMacro": "样态、程度与表现",
+    "sourceCategory": "描写动作方式或状态表现并可突出显著程度",
+    "legacy": { "searchId": 4229 }
+  },
+  {
+    "id": "mainichi-n3-071",
+    "macro": "时间与间隔",
+    "category": "说明某事在相隔一段时间后再次发生",
+    "keyword": "时隔……；隔了……再次……",
+    "firstKana": "ぶ",
+    "sourceMacro": "时间与间隔",
+    "sourceCategory": "说明某事在相隔一段时间后再次发生",
+    "legacy": { "searchId": 4230 }
+  },
+  {
+    "id": "mainichi-n3-072",
+    "macro": "分类、单位与基准",
+    "category": "按照年龄性别种类用途等标准进行分类处理",
+    "keyword": "按……分类；以……为类别",
+    "firstKana": "べ",
+    "sourceMacro": "分类、单位与基准",
+    "sourceCategory": "按照年龄性别种类用途等标准进行分类处理",
+    "legacy": { "searchId": 4231 }
+  },
+  {
+    "id": "mainichi-n3-073",
+    "macro": "建议、选择与偏好",
+    "category": "认为某一行动对象或状态更合适更有利",
+    "keyword": "最好……；……比较好",
+    "firstKana": "ほ",
+    "sourceMacro": "建议、选择与偏好",
+    "sourceCategory": "认为某一行动对象或状态更合适更有利",
+    "legacy": { "searchId": 4232 }
+  },
+  {
+    "id": "mainichi-n3-074",
+    "macro": "后悔、选择与评价",
+    "category": "回顾过去并认为另一种行动选择或状态更合适",
+    "keyword": "本来最好……；还是……更好",
+    "firstKana": "ほ",
+    "sourceMacro": "后悔、选择与评价",
+    "sourceCategory": "回顾过去并认为另一种行动选择或状态更合适",
+    "legacy": { "searchId": 4233 }
+  },
+  {
+    "id": "mainichi-n3-077",
+    "macro": "意愿、拒绝与态度",
+    "category": "对应该进行的动作完全没有采取行动的意愿或迹象",
+    "keyword": "不肯……；完全没有要……的样子",
+    "firstKana": "よ",
+    "sourceMacro": "意愿、拒绝与态度",
+    "sourceCategory": "对应该进行的动作完全没有采取行动的意愿或迹象",
+    "legacy": { "searchId": 4234 }
+  },
+  {
+    "id": "mainichi-n3-079",
+    "macro": "样态、印象与复合感受",
+    "category": "同一对象同时具有两种不同甚至相反的印象或状态",
+    "keyword": "既像……又像……；似乎……又似乎……",
+    "firstKana": "よ",
+    "sourceMacro": "样态、印象与复合感受",
+    "sourceCategory": "同一对象同时具有两种不同甚至相反的印象或状态",
+    "legacy": { "searchId": 4235 }
+  },
+  {
+    "id": "mainichi-n3-080",
+    "macro": "感觉、推测与委婉判断",
+    "category": "根据直觉或不明确的依据表达主观感觉与印象",
+    "keyword": "感觉好像……；似乎……",
+    "firstKana": "よ",
+    "sourceMacro": "感觉、推测与委婉判断",
+    "sourceCategory": "根据直觉或不明确的依据表达主观感觉与印象",
+    "legacy": { "searchId": 4236 }
+  },
+  {
+    "id": "mainichi-n3-081",
+    "macro": "意图、解释与辩解",
+    "category": "说明现在或过去没有实施某种行为或造成某种结果的意图",
+    "keyword": "并不是有意要……；本来没有打算……",
+    "firstKana": "つ",
+    "sourceMacro": "意图、解释与辩解",
+    "sourceCategory": "说明现在或过去没有实施某种行为或造成某种结果的意图",
+    "legacy": { "searchId": 4237 }
+  },
+  {
+    "id": "mainichi-n3-082",
+    "macro": "语态与心理活动",
+    "category": "记忆感情或感觉不受意志控制地自然产生",
+    "keyword": "不由得……；自然而然地感到或想起……",
+    "firstKana": "れ",
+    "sourceMacro": "语态与心理活动",
+    "sourceCategory": "记忆感情或感觉不受意志控制地自然产生",
+    "legacy": { "searchId": 4238 }
+  },
+  {
+    "id": "mainichi-n3-083",
+    "macro": "敬语与人际表达",
+    "category": "用与受身形相同的动词形式尊敬动作主体",
+    "keyword": "（尊敬地）……",
+    "firstKana": "れ",
+    "sourceMacro": "敬语与人际表达",
+    "sourceCategory": "用与受身形相同的动词形式尊敬动作主体",
+    "legacy": { "searchId": 4239 }
+  },
+  {
+    "id": "mainichi-n3-084",
+    "macro": "数量、范围与程度",
+    "category": "表示实际数量略多于前面的整数或概数",
+    "keyword": "……多；略多于……",
+    "firstKana": "あ",
+    "sourceMacro": "数量、范围与程度",
+    "sourceCategory": "表示实际数量略多于前面的整数或概数",
+    "legacy": { "searchId": 4240 }
+  },
+  {
+    "id": "mainichi-n3-085",
+    "macro": "话题提示与一般论",
+    "category": "以某类事物为话题概括其一般性质规律或倾向",
+    "keyword": "所谓……；……这种事物通常……",
+    "firstKana": "と",
+    "sourceMacro": "话题提示与一般论",
+    "sourceCategory": "以某类事物为话题概括其一般性质规律或倾向",
+    "legacy": { "searchId": 4241 }
+  },
+  {
+    "id": "mainichi-n3-p004",
+    "macro": "授受、使役与敬语",
+    "category": "叙述受尊敬者允许己方行动或向其请求许可",
+    "keyword": "承蒙允许……；请允许我……",
+    "firstKana": "さ",
+    "sourceMacro": "授受、使役与敬语",
+    "sourceCategory": "叙述受尊敬者允许己方行动或向其请求许可",
+    "legacy": { "searchId": 4242 }
+  },
+  {
+    "id": "mainichi-n3-p005",
+    "macro": "授受、使役与敬语",
+    "category": "替己方第三者郑重请求许可或有益安排",
+    "keyword": "能否让他／她……；能否请您为他／她……",
+    "firstKana": "さ",
+    "sourceMacro": "授受、使役与敬语",
+    "sourceCategory": "替己方第三者郑重请求许可或有益安排",
+    "legacy": { "searchId": 4243 }
+  },
+  {
+    "id": "mainichi-n3-p006",
+    "macro": "愿望与期待",
+    "category": "表达长久抱有或不容易实现的强烈愿望",
+    "keyword": "真想……；一直希望……",
+    "firstKana": "た",
+    "sourceMacro": "愿望与期待",
+    "sourceCategory": "表达长久抱有或不容易实现的强烈愿望",
+    "legacy": { "searchId": 4244 }
+  },
+  {
+    "id": "mainichi-n3-p007",
+    "macro": "情感与心理",
+    "category": "感情或心理感受不受意志控制地强烈涌现",
+    "keyword": "……得不得了；不由得……",
+    "firstKana": "て",
+    "sourceMacro": "情感与心理",
+    "sourceCategory": "感情或心理感受不受意志控制地强烈涌现",
+    "legacy": { "searchId": 4245 }
+  },
+  {
+    "id": "mainichi-n3-p008",
+    "macro": "授受、敬语与请求",
+    "category": "以预期感谢或荣幸的方式委婉请求对方配合",
+    "keyword": "如果您能……，我将非常感谢",
+    "firstKana": "て",
+    "sourceMacro": "授受、敬语与请求",
+    "sourceCategory": "以预期感谢或荣幸的方式委婉请求对方配合",
+    "legacy": { "searchId": 4246 }
+  },
+  {
+    "id": "mainichi-n3-p009",
+    "macro": "说明、换言与归结",
+    "category": "根据事实或条件换言说明其实际含义或结论",
+    "keyword": "也就是说……；这就意味着……",
+    "firstKana": "と",
+    "sourceMacro": "说明、换言与归结",
+    "sourceCategory": "根据事实或条件换言说明其实际含义或结论",
+    "legacy": { "searchId": 4247 }
+  },
+  {
+    "id": "mainichi-n3-p011",
+    "macro": "替代与代理",
+    "category": "代替他人承担行动或职责",
+    "keyword": "代替……；代表……",
+    "firstKana": "に",
+    "sourceMacro": "替代与代理",
+    "sourceCategory": "代替他人承担行动或职责",
+    "legacy": { "searchId": 4248 }
+  },
+  {
+    "id": "mainichi-n3-p013",
+    "macro": "范围、重点与中心",
+    "category": "以人物地点或内容作为活动核心",
+    "keyword": "以……为中心；以……为重点",
+    "firstKana": "を",
+    "sourceMacro": "范围、重点与中心",
+    "sourceCategory": "以人物地点或内容作为活动核心",
+    "legacy": { "searchId": 4249 }
+  },
+  {
+    "id": "mainichi-n3-p014",
+    "macro": "说明与名词修饰",
+    "category": "用完整句子说明后续名词的具体内容",
+    "keyword": "……这一……；内容为……的……",
+    "firstKana": "と",
+    "sourceMacro": "说明与名词修饰",
+    "sourceCategory": "用完整句子说明后续名词的具体内容",
+    "legacy": { "searchId": 4250 }
+  },
+  {
+    "id": "mainichi-n1-010",
+    "macro": "范围与最高评价",
+    "category": "指出某一范围内最出色或最具代表性的对象",
+    "keyword": "……中首屈一指的；……中最出色的",
+    "firstKana": "き",
+    "sourceMacro": "范围与最高评价",
+    "sourceCategory": "指出某一范围内最出色或最具代表性的对象",
+    "legacy": { "searchId": 4251 }
+  },
+  {
+    "id": "mainichi-n1-011",
+    "macro": "身份、姿态与评价",
+    "category": "装出并不真正具有的身份气质或态度",
+    "keyword": "装作……；摆出……的样子",
+    "firstKana": "き",
+    "sourceMacro": "身份、姿态与评价",
+    "sourceCategory": "装出并不真正具有的身份气质或态度",
+    "legacy": { "searchId": 4252 }
+  },
+  {
+    "id": "mainichi-n1-012",
+    "macro": "持续、限度与反复",
+    "category": "动作状态或欲望没有可以停止的界限",
+    "keyword": "没完没了；没有尽头",
+    "firstKana": "き",
+    "sourceMacro": "持续、限度与反复",
+    "sourceCategory": "动作状态或欲望没有可以停止的界限",
+    "legacy": { "searchId": 4253 }
+  },
+  {
+    "id": "mainichi-n1-013",
+    "macro": "条件与必要程度",
+    "category": "未达到最低程度便无法实现后项",
+    "keyword": "如果达不到……程度，就无法……",
+    "firstKana": "く",
+    "sourceMacro": "条件与必要程度",
+    "sourceCategory": "未达到最低程度便无法实现后项",
+    "legacy": { "searchId": 4254 }
+  },
+  {
+    "id": "mainichi-n1-022",
+    "macro": "目的、愿望与动机",
+    "category": "强烈愿望成为后续行动或表现的目的",
+    "keyword": "为了实现强烈想要……的愿望",
+    "firstKana": "た",
+    "sourceMacro": "目的、愿望与动机",
+    "sourceCategory": "强烈愿望成为后续行动或表现的目的",
+    "legacy": { "searchId": 4255 }
+  },
+  {
+    "id": "mainichi-n1-023",
+    "macro": "意图、解释与辩解",
+    "category": "否认已经发生的行为具有对方所理解的意图",
+    "keyword": "并不是有意做过……；当时并没有想……",
+    "firstKana": "た",
+    "sourceMacro": "意图、解释与辩解",
+    "sourceCategory": "否认已经发生的行为具有对方所理解的意图",
+    "legacy": { "searchId": 4256 }
+  },
+  {
+    "id": "mainichi-n1-024",
+    "macro": "条件、反事实与假设结果",
+    "category": "说明未成立条件本来会造成的状态或结果",
+    "keyword": "如果……，本来就会……",
+    "firstKana": "た",
+    "sourceMacro": "条件、反事实与假设结果",
+    "sourceCategory": "说明未成立条件本来会造成的状态或结果",
+    "legacy": { "searchId": 4257 }
+  },
+  {
+    "id": "mainichi-n1-025",
+    "macro": "性质、外观与负面评价",
+    "category": "使用固定后缀表示过分明显且令人不快的性质",
+    "keyword": "显得过分……；带着令人不快的……样子",
+    "firstKana": "た",
+    "sourceMacro": "性质、外观与负面评价",
+    "sourceCategory": "使用固定后缀表示过分明显且令人不快的性质",
+    "legacy": { "searchId": 4258 }
+  },
+  {
+    "id": "mainichi-n1-026",
+    "macro": "契机、瞬间与意外结果",
+    "category": "动作势头或偶然时机引发无意的突发结果",
+    "keyword": "由于一瞬间的势头或偶然契机，不由得……",
+    "firstKana": "た",
+    "sourceMacro": "契机、瞬间与意外结果",
+    "sourceCategory": "动作势头或偶然时机引发无意的突发结果",
+    "legacy": { "searchId": 4259 }
+  },
+  {
+    "id": "mainichi-n1-027",
+    "macro": "列举、引用与负面评价",
+    "category": "带着不满列举同类事物或复述他人的说法",
+    "keyword": "又是……又是……；说什么……什么的",
+    "firstKana": "だ",
+    "sourceMacro": "列举、引用与负面评价",
+    "sourceCategory": "带着不满列举同类事物或复述他人的说法",
+    "legacy": { "searchId": 4260 }
+  },
+  {
+    "id": "mainichi-n1-029",
+    "macro": "规范、义务与理所当然",
+    "category": "根据常识、身份或客观条件判断某状态理应成立",
+    "keyword": "按常理或规范，本来就应该……",
+    "firstKana": "て",
+    "sourceMacro": "规范、义务与理所当然",
+    "sourceCategory": "根据常识、身份或客观条件判断某状态理应成立",
+    "legacy": { "searchId": 4261 }
+  },
+  {
+    "id": "mainichi-n1-030",
+    "macro": "感觉、负担与难以承受",
+    "category": "身体负担或负面感情强烈到无法忍受、难以排解",
+    "keyword": "……得受不了；因……而难以承受",
+    "firstKana": "て",
+    "sourceMacro": "感觉、负担与难以承受",
+    "sourceCategory": "身体负担或负面感情强烈到无法忍受、难以排解",
+    "legacy": { "searchId": 4262 }
+  },
+  {
+    "id": "mainichi-n1-031",
+    "macro": "无效、徒劳与问题解决",
+    "category": "即使实施某种做法也不能解决问题或改变结果",
+    "keyword": "即使……也无济于事",
+    "firstKana": "て",
+    "sourceMacro": "无效、徒劳与问题解决",
+    "sourceCategory": "即使实施某种做法也不能解决问题或改变结果",
+    "legacy": { "searchId": 4263 }
+  },
+  {
+    "id": "mainichi-n1-032",
+    "macro": "许可、容许与无妨",
+    "category": "某动作或条件即使成立也不会造成妨碍",
+    "keyword": "即使……也没有妨碍；……也无妨",
+    "firstKana": "て",
+    "sourceMacro": "许可、容许与无妨",
+    "sourceCategory": "某动作或条件即使成立也不会造成妨碍",
+    "legacy": { "searchId": 4264 }
+  },
+  {
+    "id": "mainichi-n1-033",
+    "macro": "警告、后果与责任",
+    "category": "警告对方继续当前行为将自行承担不良后果",
+    "keyword": "再……下去，出了问题我可不管",
+    "firstKana": "て",
+    "sourceMacro": "警告、后果与责任",
+    "sourceCategory": "警告对方继续当前行为将自行承担不良后果",
+    "legacy": { "searchId": 4265 }
+  },
+  {
+    "id": "mainichi-n1-034",
+    "macro": "处理、责任与不足",
+    "category": "当前处理程度不足以解决性质严重的问题",
+    "keyword": "不是只靠……就能解决的",
+    "firstKana": "て",
+    "sourceMacro": "处理、责任与不足",
+    "sourceCategory": "当前处理程度不足以解决性质严重的问题",
+    "legacy": { "searchId": 4266 }
+  },
+  {
+    "id": "mainichi-n1-035",
+    "macro": "处理、后果与社会责任",
+    "category": "事情不会停留在当前程度或当前处理不能被接受",
+    "keyword": "不能就这样了事；不能被当作……处理",
+    "firstKana": "で",
+    "sourceMacro": "处理、后果与社会责任",
+    "sourceCategory": "事情不会停留在当前程度或当前处理不能被接受",
+    "legacy": { "searchId": 4267 }
+  },
+  {
+    "id": "mainichi-n1-036",
+    "macro": "并列、身份与双重性质",
+    "category": "同一对象同时具有两种身份、性质或评价",
+    "keyword": "既是……也是……；既……又……",
+    "firstKana": "で",
+    "sourceMacro": "并列、身份与双重性质",
+    "sourceCategory": "同一对象同时具有两种身份、性质或评价",
+    "legacy": { "searchId": 4268 }
+  },
+  {
+    "id": "mainichi-n1-037",
+    "macro": "强烈否定、身份与感觉",
+    "category": "完全否定某种分类、评价、性质或感觉成立",
+    "keyword": "根本不是……；一点也不……",
+    "firstKana": "で",
+    "sourceMacro": "强烈否定、身份与感觉",
+    "sourceCategory": "完全否定某种分类、评价、性质或感觉成立",
+    "legacy": { "searchId": 4269 }
+  },
+  {
+    "id": "mainichi-n1-038",
+    "macro": "意外、失误与自责",
+    "category": "一向可靠的人做出不符合平时表现的失误",
+    "keyword": "一向可靠的……竟然……；我竟然……",
+    "firstKana": "と",
+    "sourceMacro": "意外、失误与自责",
+    "sourceCategory": "一向可靠的人做出不符合平时表现的失误",
+    "legacy": { "searchId": 4270 }
+  },
+  {
+    "id": "mainichi-n1-039",
+    "macro": "数量、全面否定与经历",
+    "category": "最小数量单位连一个或一次都不成立",
+    "keyword": "一个也不……；一次也没有……",
+    "firstKana": "と",
+    "sourceMacro": "数量、全面否定与经历",
+    "sourceCategory": "最小数量单位连一个或一次都不成立",
+    "legacy": { "searchId": 4271 }
+  },
+  {
+    "id": "mainichi-n1-040",
+    "macro": "追加、同类与无例外",
+    "category": "所提示的身份或对象也与其他对象相同而不例外",
+    "keyword": "即使是……也……；……也不例外",
+    "firstKana": "と",
+    "sourceMacro": "追加、同类与无例外",
+    "sourceCategory": "所提示的身份或对象也与其他对象相同而不例外",
+    "legacy": { "searchId": 4272 }
+  },
+  {
+    "id": "mainichi-n1-041",
+    "macro": "变化、对照与前后反差",
+    "category": "当前状态与过去时间或先前状态截然不同",
+    "keyword": "与……截然不同；和先前完全不同",
+    "firstKana": "と",
+    "sourceMacro": "变化、对照与前后反差",
+    "sourceCategory": "当前状态与过去时间或先前状态截然不同",
+    "legacy": { "searchId": 4273 }
+  },
+  {
+    "id": "mainichi-n1-042",
+    "macro": "程度、界限与保留肯定",
+    "category": "客观状态未达到较高界限但较低程度仍然成立",
+    "keyword": "虽未达到……的程度，但……",
+    "firstKana": "と",
+    "sourceMacro": "程度、界限与保留肯定",
+    "sourceCategory": "客观状态未达到较高界限但较低程度仍然成立",
+    "legacy": { "searchId": 4274 }
+  },
+  {
+    "id": "mainichi-n1-043",
+    "macro": "委婉、评价与最低要求",
+    "category": "不采用最强评价或要求但肯定较缓和内容",
+    "keyword": "虽不至于说……，但至少……",
+    "firstKana": "と",
+    "sourceMacro": "委婉、评价与最低要求",
+    "sourceCategory": "不采用最强评价或要求但肯定较缓和内容",
+    "legacy": { "searchId": 4275 }
+  },
+  {
+    "id": "mainichi-n1-044",
+    "macro": "身份、规范与责备",
+    "category": "具有特定职业或立场的人做出不符合身份的行为",
+    "keyword": "身为……竟然……",
+    "firstKana": "と",
+    "sourceMacro": "身份、规范与责备",
+    "sourceCategory": "具有特定职业或立场的人做出不符合身份的行为",
+    "legacy": { "searchId": 4276 }
+  },
+  {
+    "id": "mainichi-n1-045",
+    "macro": "保留肯定、评价与分类",
+    "category": "通过双重否定谨慎承认某种评价可以成立",
+    "keyword": "也不能说不是……；也可以说是……",
+    "firstKana": "と",
+    "sourceMacro": "保留肯定、评价与分类",
+    "sourceCategory": "通过双重否定谨慎承认某种评价可以成立",
+    "legacy": { "searchId": 4277 }
+  },
+  {
+    "id": "mainichi-n1-046",
+    "macro": "名称、不熟悉与距离感",
+    "category": "对名称或内容不熟悉并可能有意保持距离",
+    "keyword": "所谓的……；叫什么……的",
+    "firstKana": "と",
+    "sourceMacro": "名称、不熟悉与距离感",
+    "sourceCategory": "对名称或内容不熟悉并可能有意保持距离",
+    "legacy": { "searchId": 4278 }
+  },
+  {
+    "id": "mainichi-n1-047",
+    "macro": "可能性、风险与预防",
+    "category": "可能性较低但仍然不能完全排除发生",
+    "keyword": "未必不会……；也有可能……",
+    "firstKana": "な",
+    "sourceMacro": "可能性、风险与预防",
+    "sourceCategory": "可能性较低但仍然不能完全排除发生",
+    "legacy": { "searchId": 4279 }
+  },
+  {
+    "id": "mainichi-n1-048",
+    "macro": "条件、例外与判断改变",
+    "category": "只有特定条件或实际阶段需要作为例外处理",
+    "keyword": "如果是……则另当别论",
+    "firstKana": "な",
+    "sourceMacro": "条件、例外与判断改变",
+    "sourceCategory": "只有特定条件或实际阶段需要作为例外处理",
+    "legacy": { "searchId": 4280 }
   }
 ];
 })();

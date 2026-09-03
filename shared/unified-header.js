@@ -242,6 +242,14 @@
             const level = path.startsWith("daily/try-n1/") ? "N1" : "N2";
             return { title: `TRY! ${level} 教材学习`, backLabel: "返回教材学习", hash: "#daily/exam-textbook", type: "study" };
         }
+        if (path === "exam/vocabulary/n1/comprehensive_practice_n1_verbs.html") {
+            return {
+                title: "N1 综合练习",
+                backLabel: "返回动词目录",
+                href: "./verbs_n1.html",
+                type: "practice"
+            };
+        }
         if (path === "exam/vocabulary/n1/practice_n1_verbs.html") {
             return {
                 title: "N1 語彙特訓",

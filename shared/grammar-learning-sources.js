@@ -46,7 +46,7 @@
     "compound-particles": {
       ni_tsuite: "n3-030",
       ni_taishite: "n3-022",
-      ni_yotte: "n3-058",
+      ni_yotte: "n3-021",
       ni_totte: "n3-056",
       ni_atatte: "n2-262",
       ni_itaru: "learn-compound-ni-itaru",
@@ -84,7 +84,7 @@
       ni_todomarazu: "learn-compound-ni-todomarazu",
       wo_komete: "n2-258",
       wo_nozoite: "learn-compound-wo-nozoite",
-      wo_tsuujite: "n3-052",
+      wo_tsuujite: "n3-026",
       wo_ni_toshite_group: "n2-144",
       toshite: "n2-153",
       toshitemo: "n2-264",
@@ -98,7 +98,7 @@
       "te-iru": "learn-te-iru",
       "te-aru": "learn-te-aru",
       "te-oku": "n3-019",
-      "te-shimau": "learn-te-shimau",
+      "te-shimau": "n3-020",
       "te-miru": "learn-te-miru",
       "te-miseru": "n1-089",
       "te-iku": "learn-te-iku",
@@ -115,7 +115,7 @@
       "toiu-koto-desu": "n3-029",
       "tono-koto-desu": "n3-003",
       "you-inference": "learn-you-inference",
-      "you-simile": "n3-042",
+      "you-simile": "n3-027",
       gotoku: "n1-101",
       mitai: "n3-039",
       "rashii-hearsay": "supp-n1-review-072",
@@ -156,7 +156,7 @@
     n2-171 n2-173 n2-175 n2-177 n2-180 n2-182 n2-183 n2-185 n2-187 n2-188
     n2-190 n2-193 n2-202 n2-212 n2-213 n2-218 n2-220 n2-223 n2-227 n2-233
     n2-241 n2-249 n2-251 n3-002 n3-003 n3-018 n3-023 n3-027 n3-029 n3-031
-    n3-042 n3-045 n3-047 n3-049 n3-051 n3-061 n3-063 n3-064 n3-065 n3-068
+    n3-045 n3-047 n3-049 n3-051 n3-061 n3-063 n3-064 n3-065 n3-068
     n3-080 n3-081 n3-087 n3-094 n3-097 n3-098 n3-114 supp-formal-noun-001
     supp-formal-noun-002 supp-n1-review-001 supp-n1-review-002 supp-n1-review-010
     supp-n1-review-014 supp-n1-review-020 supp-n1-review-021 supp-n1-review-023
@@ -174,6 +174,10 @@
     supp-n1-review-018 supp-n1-review-034 supp-n1-review-035 supp-n1-review-037
     supp-n1-review-067 supp-n1-review-071 supp-te-made-made-shite
   `.trim().split(/\s+/);
+
+  const SUPPLEMENT_MERGES = {
+    "learn-te-shimau": "n3-020"
+  };
 
   let nextSearchId = 900001;
 
@@ -260,7 +264,26 @@
   }
 
   function addSupplement(config) {
-    if (!config || core.some((item) => item.id === config.id)) return;
+    if (!config) return;
+    const mergeTargetId = SUPPLEMENT_MERGES[config.id];
+    const mergeTarget = mergeTargetId
+      ? core.find((item) => item && item.id === mergeTargetId)
+      : null;
+    if (mergeTarget) {
+      const reservedSearchId = nextSearchId++;
+      appendSource(mergeTarget, config.sourceKey, config.anchor);
+      mergeTarget.legacy = mergeTarget.legacy || {};
+      mergeTarget.legacy.aliasCanonicalIds = [...new Set([
+        ...(Array.isArray(mergeTarget.legacy.aliasCanonicalIds) ? mergeTarget.legacy.aliasCanonicalIds : []),
+        config.id
+      ])];
+      mergeTarget.legacy.aliasSearchIds = [...new Set([
+        ...(Array.isArray(mergeTarget.legacy.aliasSearchIds) ? mergeTarget.legacy.aliasSearchIds : []),
+        reservedSearchId
+      ])];
+      return;
+    }
+    if (core.some((item) => item.id === config.id)) return;
     const source = SOURCES[config.sourceKey];
     const examples = Array.isArray(config.examples) && config.examples.length
       ? config.examples
