@@ -2,12 +2,26 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (() => {
+            // Resolve the shared tablet frame before the shell can paint.
+            const viewportWidth = window.innerWidth;
+            if (viewportWidth >= 768 && viewportWidth <= 1366) {
+                const availableWidth = document.documentElement.clientWidth || viewportWidth;
+                const scale = Math.min(1, (availableWidth - 16) / 1366);
+                document.documentElement.style.setProperty("--tablet-home-scale", scale.toFixed(4));
+            }
+            const key = location.hash.slice(1).split("/")[0];
+            if (["daily", "exam", "grammar-search", "word-bank", "study-plan", "site-search"].includes(key)) document.documentElement.dataset.initialSection = key;
+        })();
+    </script>
+    <style>html[data-initial-section] .notice-panel, html[data-initial-section] .dashboard-rail { display: none !important; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kikiの日本語の家</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="daily/grammar/grammar-directory-home.css?v=20260725c">
     <link rel="stylesheet" href="shared/study-directory.css?v=20260810b">
-    <link rel="stylesheet" href="shared/study-plan.css?v=20260902c">
+    <link rel="stylesheet" href="shared/study-plan.css?v=20260907a">
     <style>
         :root {
             /* 海拉鲁旅行者日记色彩系统 */
@@ -3367,9 +3381,9 @@
             width: 90px;
             height: 90px;
             object-fit: contain;
-            opacity: 0.72;
-            filter: saturate(0.78) contrast(0.94);
-            mix-blend-mode: multiply;
+            opacity: 1;
+            filter: none;
+            mix-blend-mode: normal;
             pointer-events: none;
             user-select: none;
             transform: translateY(-48%) rotate(-1.5deg);
@@ -4138,6 +4152,105 @@
             --grammar-usage-soft: rgba(73, 111, 130, 0.08);
         }
 
+        .grammar-legacy-usage-card--4 {
+            --grammar-usage-accent: #52765b;
+            --grammar-usage-accent-dark: #3b5842;
+            --grammar-usage-soft: rgba(82, 118, 91, 0.08);
+        }
+
+        .grammar-legacy-usage-card--5 {
+            --grammar-usage-accent: #796389;
+            --grammar-usage-accent-dark: #594768;
+            --grammar-usage-soft: rgba(121, 99, 137, 0.08);
+        }
+
+        .grammar-usage-structure {
+            margin: 0;
+            padding: 18px;
+            border: 1px solid var(--grammar-modal-line);
+            border-radius: 8px;
+            background: var(--grammar-usage-soft);
+        }
+
+        .grammar-usage-structure-flow {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .grammar-usage-structure-part {
+            min-width: 0;
+            padding: 15px 16px;
+            border: 1px solid var(--grammar-usage-accent);
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .grammar-usage-structure-part-label {
+            display: block;
+            margin-bottom: 9px;
+            color: var(--grammar-usage-accent-dark);
+            font-size: 0.76rem;
+            font-weight: 700;
+        }
+
+        .grammar-usage-structure-part-text {
+            color: var(--grammar-modal-black);
+            font-size: 1.05rem;
+            font-weight: 650;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+
+        .grammar-usage-structure-operator {
+            align-self: center;
+            color: var(--grammar-usage-accent-dark);
+            text-align: center;
+            font-size: 1.7rem;
+        }
+
+        .grammar-usage-structure-example {
+            margin-top: 12px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--grammar-modal-line);
+            color: var(--grammar-modal-black);
+            font-family: var(--legacy-grammar-font);
+            font-size: 1rem;
+            line-height: 2;
+            overflow-wrap: anywhere;
+        }
+
+        .grammar-usage-structure-example rt { font-size: 0.55em; }
+
+        .grammar-usage-structure-caption {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+            align-items: baseline;
+            margin-top: 14px;
+            color: var(--grammar-modal-muted);
+            font-size: 0.82rem;
+            line-height: 1.65;
+        }
+
+        .grammar-usage-structure-caption strong {
+            color: var(--grammar-usage-accent-dark);
+        }
+
+        @media (max-width: 600px) {
+            .grammar-usage-structure { padding: 12px; }
+            .grammar-usage-structure-flow {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 6px;
+            }
+            .grammar-usage-structure-part { padding: 11px 13px; }
+            .grammar-usage-structure-part-label { margin-bottom: 4px; }
+            .grammar-usage-structure-part-text { font-size: 0.92rem; }
+            .grammar-usage-structure-operator { line-height: 1.1; }
+            .grammar-usage-structure-operator--arrow { transform: rotate(90deg); }
+        }
+
         .grammar-legacy-usage-header {
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
@@ -4869,7 +4982,7 @@
                 right: calc(100% + 2px);
                 width: 70px;
                 height: 70px;
-                opacity: 0.66;
+                opacity: 1;
             }
 
             .grammar-legacy-filter-bar {
@@ -5797,7 +5910,7 @@
     </style>
     <link rel="stylesheet" href="shared/site-fonts.css">
     <link rel="stylesheet" href="shared/home-pet.css?v=20260717-ronin-unlock1">
-    <link rel="stylesheet" href="shared/word-bank.css?v=20260831-two-examples1">
+    <link rel="stylesheet" href="shared/word-bank.css?v=20260907-list-ruby-gap1">
     <style>
         :root {
             --site-font-ui: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -11705,7 +11818,7 @@
 
             body.home-dashboard-redesign .feature-panel[data-section="word-bank"].is-active {
                 display: grid;
-                grid-template-rows: auto minmax(0, 1fr);
+                grid-template-rows: minmax(0, 1fr);
                 height: 100%;
                 min-height: 0;
                 overflow: hidden;
@@ -11789,7 +11902,7 @@
             body.home-dashboard-redesign .mobile-learning-section,
             body.home-dashboard-redesign .mobile-discovery,
             body.home-dashboard-redesign .mobile-bottom-nav,
-            body.home-dashboard-redesign .mobile-fortune-dialog {
+            body.home-dashboard-redesign .mobile-fortune-dialog:not(.home-fortune-dialog) {
                 display: none !important;
             }
         }
@@ -11821,12 +11934,6 @@
                 height: auto;
                 min-height: 0;
                 max-height: none;
-            }
-
-            body.home-dashboard-redesign:not(.is-home-view) .page-shell {
-                height: var(--desktop-home-frame-height, auto);
-                min-height: var(--desktop-home-frame-height, 0);
-                max-height: var(--desktop-home-frame-height, none);
             }
 
             body.home-dashboard-redesign:not(.is-home-view) .app-workspace {
@@ -11875,7 +11982,7 @@
 
             body.home-dashboard-redesign .feature-panel[data-section="word-bank"].is-active {
                 display: grid;
-                grid-template-rows: auto minmax(0, 1fr);
+                grid-template-rows: minmax(0, 1fr);
                 overflow: hidden;
             }
 
@@ -13003,7 +13110,7 @@
                 width: 50px;
                 height: 50px;
                 margin-left: 0;
-                opacity: 0.72;
+                opacity: 1;
                 transform: translateY(-48%) rotate(-1.5deg);
             }
 
@@ -13686,8 +13793,31 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="shared/home-refinement.css?v=20260908-editorial-type">
+    <link rel="stylesheet" href="shared/grammar-detail-refinement.css?v=20260907-mobile-shiba-divider">
+    <link rel="stylesheet" href="shared/fortune-prayer-entry.css?v=20260908-support-tea-png">
+    <link rel="stylesheet" href="shared/shiba-cottage-entry.css?v=20260908-house-gif">
+    <link rel="stylesheet" href="shared/dashboard-frame.css?v=20260908-header">
+    <link rel="stylesheet" href="shared/grammar-search-collections.css?v=20260908-collection-no-search">
+    <link rel="stylesheet" href="shared/fonts/noto-serif-jp/noto-serif-jp-variable.css" media="(min-width: 768px)">
+    <link rel="preload" href="shared/fonts/yuji-syuku/yuji-syuku-hero-v1.woff2" as="font" type="font/woff2" crossorigin media="(min-width: 768px)">
+    <link rel="stylesheet" href="shared/home-magazine.css?v=20260908j">
+    <link rel="stylesheet" href="shared/site-search.css?v=20260908a">
+    <script src="shared/home-magazine.js?v=20260908c" defer></script>
+    <script src="shared/navigation-routes.js?v=20260907" defer></script>
 </head>
 <body class="home-dashboard-redesign is-home-view">
+    <script>
+        // Choose the shell before its HTML paints, not after loading all data.
+        (() => {
+            const key = location.hash.slice(1).split("/")[0];
+            if (!["daily", "exam", "grammar-search", "word-bank", "study-plan", "site-search"].includes(key)) return;
+            document.body.classList.remove("is-home-view");
+            document.body.dataset.initialSection = key;
+            if (["grammar-search", "word-bank", "study-plan"].includes(key)) document.body.classList.add("is-tool-content-only");
+            if (["grammar-search", "study-plan"].includes(key)) document.body.classList.add("is-mobile-app-tool-view");
+        })();
+    </script>
     <div class="page-shell">
         <aside class="side-panel" aria-label="主页导航">
             <a href="index.html" class="brand" aria-label="返回首页通知页">
@@ -13733,14 +13863,13 @@
                     <span class="mobile-home-greeting">また来たね、友よ</span>
                 </div>
                 <nav class="mobile-home-tools" aria-label="快捷工具">
-                    <a href="lottery.html" class="mobile-home-tool mobile-home-tool--fortune" aria-label="お神籤">
-                        <span class="mobile-home-tool-art" aria-hidden="true"></span>
-                        <span>お神籤</span>
-                        <i aria-hidden="true"></i>
+                    <a href="lottery.html" class="mobile-home-tool mobile-home-tool--fortune fortune-prayer-entry" aria-label="柴犬祈福 · 进入抽签" title="柴犬祈福 · 进入抽签">
+                        <span class="fortune-prayer-sprite" aria-hidden="true"></span>
+                        <span class="fortune-prayer-label" aria-hidden="true">祈福</span>
                     </a>
-                    <button type="button" class="mobile-home-tool mobile-home-tool--support" data-mobile-sponsor-trigger aria-label="応援">
-                        <span class="mobile-home-tool-art" aria-hidden="true"></span>
-                        <span>応援</span>
+                    <button type="button" class="mobile-home-tool mobile-home-tool--support fortune-prayer-entry fortune-prayer-entry--support" data-mobile-sponsor-trigger aria-label="应援" title="大佬，赏一杯吧">
+                        <span class="fortune-prayer-sprite" aria-hidden="true"></span>
+                        <span class="fortune-prayer-label" aria-hidden="true">应援</span>
                     </button>
                 </nav>
             </header>
@@ -13755,14 +13884,18 @@
                     </label>
                 </form>
                 <div class="tool-rail" aria-label="工具入口">
-                    <a href="lottery.html" class="tool-link tool-link--fortune" aria-label="お神籤">
-                        <span class="icon-slot tool-icon" data-icon="treasure" aria-hidden="true"></span>
-                        <span>お神籤</span>
+                    <a href="shiba-study-cottage/index.html" class="tool-link fortune-prayer-entry cottage-home-entry" aria-label="柴柴学习小屋" title="柴柴学习小屋">
+                        <span class="cottage-entry-art" aria-hidden="true"></span>
+                        <span class="fortune-prayer-label" aria-hidden="true">小屋</span>
                     </a>
-                    <button type="button" class="tool-button tool-button--support" id="sponsor-btn" aria-label="応援">
-                        <span class="icon-slot tool-icon" data-icon="support" aria-hidden="true"></span>
-                        <span>応援</span>
+                    <button type="button" class="tool-button tool-button--support fortune-prayer-entry fortune-prayer-entry--support" id="sponsor-btn" aria-label="应援" title="大佬，赏一杯吧">
+                        <span class="fortune-prayer-sprite" aria-hidden="true"></span>
+                        <span class="fortune-prayer-label" aria-hidden="true">应援</span>
                     </button>
+                    <a href="lottery.html" class="tool-link tool-link--fortune fortune-prayer-entry" aria-label="柴犬祈福 · 进入抽签" title="柴犬祈福 · 进入抽签">
+                        <span class="fortune-prayer-sprite" aria-hidden="true"></span>
+                        <span class="fortune-prayer-label" aria-hidden="true">祈福</span>
+                    </a>
                 </div>
             </header>
 
@@ -13777,15 +13910,15 @@
                                             <article class="mobile-feature-slide mobile-feature-cover is-active" data-mobile-feature-slide="cover" aria-hidden="false">
                                                 <img src="assets/home-redesign/hero-mobile-autumn-camp-shiba-cat-quote-v1.webp?v=20260817b" alt="红枫林露营地里，柴犬和猫一起烧烤，题字为“人事を尽くして天命を待つ”">
                                             </article>
-                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/8.31.html" data-mobile-feature-slide="reading" aria-hidden="true">
+                                            <a class="mobile-feature-slide mobile-feature-reading" href="daily/light-read/daily/9.8.html" data-mobile-feature-slide="reading" aria-hidden="true">
                                                 <span class="mobile-feature-reading-media" aria-hidden="true">
-                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a" alt="高层观众席里，一位女生安静聆听远处重金属乐队演出的日漫铅笔水彩插画">
+                                                    <img src="daily/light-read/daily/assets/covers/daily-cover-09-08.webp?v=20260908a" alt="女生在运动后休息，脑海中仍回响着旋律的日漫铅笔水彩插画">
                                                 </span>
                                                 <span class="mobile-feature-reading-copy">
                                                     <span class="mobile-feature-eyebrow">毎日一読 · NEW</span>
-                                                    <h2>誰かの配剤</h2>
-                                                    <p>几乎第一次走进演唱会，却意外遇见一场恰到好处的“地狱安排”。</p>
-                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-08-31">08.31</time></span>
+                                                    <h2>気ままな記憶</h2>
+                                                    <p>脑海里循环的音乐无法一键删除，这份随性的记忆，也许正与写小说相连。</p>
+                                                    <span class="mobile-feature-reading-meta"><span>随笔</span><time datetime="2026-09-08">09.08</time></span>
                                                 </span>
                                             </a>
                                             <article class="mobile-feature-slide mobile-feature-notice" data-mobile-feature-slide="notice" aria-hidden="true">
@@ -13812,46 +13945,70 @@
                                         </div>
                                     </section>
                                     <section class="desktop-entry-panel" aria-label="日语学习首页入口">
-                                        <div class="desktop-entry-art" aria-hidden="true">
-                                            <picture>
-                                                <source media="(max-width: 640px)" type="image/webp" srcset="assets/home-redesign/hero-mobile-autumn-camp-shiba-cat-quote-v1.webp?v=20260817b">
-                                                <img src="assets/home-redesign/hero-autumn-sumi-maple-walk-shiba-quote-v6.webp?v=20260817c" alt="拟人柴犬穿着和服漫步于红黄枫叶林间，题字为“人事を尽くして天命を待つ”">
-                                            </picture>
-                                        </div>
-                                        <section class="desktop-announcement-board" aria-labelledby="desktop-announcement-title" data-mobile-announcement>
-                                            <button type="button" class="mobile-announcement-trigger" aria-expanded="false" aria-controls="mobile-announcement-detail" data-mobile-announcement-trigger>
-                                                <span class="mobile-announcement-trigger-mark" aria-hidden="true"><img src="assets/home-redesign/notice-megaphone.webp" alt=""></span>
-                                                <span class="mobile-announcement-trigger-copy"><strong>お知らせ</strong><small>语法学习内容全面上线</small></span>
-                                                <span class="mobile-announcement-trigger-chevron" aria-hidden="true">⌄</span>
-                                            </button>
-                                            <div class="mobile-announcement-disclosure" id="mobile-announcement-detail" aria-hidden="true" data-mobile-announcement-detail>
-                                                <div class="mobile-announcement-disclosure-inner">
-                                                    <div class="desktop-announcement-content">
-                                                        <div class="desktop-announcement-head">
-                                                            <span class="desktop-announcement-heading">
-                                                                <span class="desktop-announcement-mark" aria-hidden="true">
-                                                                    <img src="assets/home-redesign/notice-megaphone.webp" alt="">
-                                                                </span>
-                                                                <h2 class="desktop-announcement-title" id="desktop-announcement-title"><span class="desktop-announcement-title-desktop">网页公告</span><span class="desktop-announcement-title-mobile">お知らせ</span></h2>
-                                                            </span>
-                                                            <span class="desktop-announcement-kana">お知らせ</span>
-                                                        </div>
-                                                        <div class="desktop-announcement-sheet">
-                                                            <article class="desktop-announcement-log">
-                                                                <header class="desktop-announcement-log-head">
-                                                                    <time class="desktop-announcement-log-date" datetime="2026-08-15">08.15</time>
-                                                                    <span class="desktop-announcement-log-badge">更新</span>
-                                                                    <strong class="desktop-announcement-log-title">备考区更新，新添学习计划功能</strong>
-                                                                </header>
-                                                                <div class="desktop-announcement-log-body">
-                                                                    <p class="desktop-announcement-log-intro">能力考马上又要开始啦！重做了备考区的样式，使得更加美观，完善了错题库和部分学习功能，之后会补全听力部分的精听功能。</p>
-                                                                    <p class="desktop-announcement-log-ps"><strong>PS：</strong>有什么问题记得跟我说。</p>
-                                                                </div>
-                                                            </article>
-                                                        </div>
-                                                    </div>
+                                        <section class="magazine-hero" aria-label="日语学习寄语" aria-roledescription="轮播">
+                                            <img class="magazine-hero-image" src="assets/home-redesign/hero-magazine-autumn-veranda-v1.webp" width="1921" height="819" alt="秋日枫叶与远山之间，柴犬坐在木廊上眺望山城" fetchpriority="high" decoding="async">
+                                            <div class="magazine-hero-quotes" aria-live="off">
+                                                <div class="magazine-hero-copy" data-magazine-quote>
+                                                    <h1 lang="ja">学ぶほど、<br>見える景色が広がる。</h1>
+                                                    <p lang="ja">ことばで、もう一つの世界へ</p>
+                                                    <span class="magazine-hero-rule" aria-hidden="true"></span>
+                                                    <small lang="ja">日本語と、ここからまた。</small>
+                                                </div>
+                                                <div class="magazine-hero-copy" data-magazine-quote hidden>
+                                                    <h2 lang="ja">積み上げてきたことが、<br>君の武器になる。</h2>
+                                                    <p>每一次积累，都会成为你的力量。</p>
+                                                    <span class="magazine-hero-rule" aria-hidden="true"></span>
+                                                    <small lang="ja">一歩ずつ、できることを増やそう。</small>
+                                                </div>
+                                                <div class="magazine-hero-copy" data-magazine-quote hidden>
+                                                    <h2 lang="ja">人事を尽くして<br>天命を待つ。</h2>
+                                                    <p>做好今天的事，安心向前。</p>
+                                                    <span class="magazine-hero-rule" aria-hidden="true"></span>
+                                                    <small lang="ja">今日の一歩を、大切に。</small>
                                                 </div>
                                             </div>
+                                            <p class="magazine-hero-aside" lang="ja">今日も、<br>もう一度、<br>少し前へ。</p>
+                                        </section>
+                                        <section class="magazine-learning" aria-labelledby="magazine-learning-title">
+                                            <div class="magazine-section-head">
+                                                <h2 id="magazine-learning-title"><span aria-hidden="true">🍁</span> 学びの入り口</h2>
+                                                <p>今日の一歩が、明日の景色を変える</p>
+                                                <a href="#daily" data-home-section-link="daily">全部学习 <span aria-hidden="true">→</span></a>
+                                            </div>
+                                            <nav class="magazine-entry-grid" aria-label="学习快捷入口">
+                                            <a class="magazine-entry" href="#daily/daily-grammar" data-home-section-link="daily" data-home-section-path="daily-grammar">
+                                                <span class="magazine-entry-art magazine-entry-art--0" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>语法学习</strong><small>从基础到表达</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#daily/exam-textbook" data-home-section-link="daily" data-home-section-path="exam-textbook">
+                                                <span class="magazine-entry-art magazine-entry-art--1" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>教材学习</strong><small>跟着教材逐课学</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read">
+                                                <span class="magazine-entry-art magazine-entry-art--6" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>轻松一读</strong><small>在故事里学日语</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="lottery.html#collection">
+                                                <span class="magazine-entry-art magazine-entry-art--7" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>收藏图鉴</strong><small>收集每一次好运</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#exam/exam-vocabulary" data-home-section-link="exam" data-home-section-path="exam-vocabulary">
+                                                <span class="magazine-entry-art magazine-entry-art--2" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>語彙暗記</strong><small>积累核心词汇</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#exam/exam-grammar" data-home-section-link="exam" data-home-section-path="exam-grammar">
+                                                <span class="magazine-entry-art magazine-entry-art--3" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>文法練習</strong><small>巩固考点与题型</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#exam/exam-reading" data-home-section-link="exam" data-home-section-path="exam-reading">
+                                                <span class="magazine-entry-art magazine-entry-art--4" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>読解練習</strong><small>读懂文章的脉络</small></span>
+                                            </a>
+                                            <a class="magazine-entry" href="#exam/exam-listening" data-home-section-link="exam" data-home-section-path="exam-listening">
+                                                <span class="magazine-entry-art magazine-entry-art--5" aria-hidden="true"></span>
+                                                <span class="magazine-entry-copy"><strong>聴解練習</strong><small>听见自然的日语</small></span>
+                                            </a>
+                                            </nav>
                                         </section>
                                     </section>
                                     <section class="mobile-learning-section" aria-labelledby="mobile-daily-learning-title">
@@ -13950,10 +14107,18 @@
                 </section>
 
                 <aside class="dashboard-rail" aria-label="学习信息">
-                    <section class="rail-card latest-culture-quick-card home-rail-carousel" aria-label="最新日本文化内容" data-home-rail-carousel>
-                        <div class="home-rail-carousel-viewport" data-home-rail-carousel-viewport>
-                            <div class="home-rail-carousel-track" data-home-rail-carousel-track>
-                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide aria-hidden="false">
+                    <section class="rail-card latest-culture-quick-card home-rail-carousel" aria-label="特集与每日一读" data-home-rail-carousel>
+                        <div class="magazine-feature-head">
+                            <div class="magazine-feature-tabs" role="tablist" aria-label="阅读栏目">
+                                <button type="button" role="tab" id="magazine-feature-tab" aria-controls="magazine-feature-panel" aria-selected="false" tabindex="-1" data-feature-tab="feature">特集</button>
+                                <button type="button" role="tab" id="magazine-reading-tab" aria-controls="magazine-feature-panel" aria-selected="true" data-feature-tab="reading">每日一读</button>
+                            </div>
+                            <a href="#daily/daily-culture" data-feature-more="feature" data-home-section-link="daily" data-home-section-path="daily-culture" hidden>发现更多 →</a>
+                            <a href="#daily/daily-light-read" data-feature-more="reading" data-home-section-link="daily" data-home-section-path="daily-light-read">全部文章 →</a>
+                        </div>
+                        <div class="home-rail-carousel-viewport" id="magazine-feature-panel" role="tabpanel" aria-labelledby="magazine-reading-tab" data-home-rail-carousel-viewport>
+                            <div class="home-rail-carousel-track" data-home-rail-carousel-track style="transform: translate3d(-200%, 0, 0)">
+                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide data-feature-group="feature" data-feature-updated-at="2026-08-31" aria-hidden="true" inert>
                                     <!-- 最新日本文化：与手机端“发现”入口同步更新。 -->
                                     <a class="latest-culture-quick-link" href="daily/culture/tradition/japanese-language-exams.html" aria-label="阅读日本文化文章《日语相关考试有哪些？》">
                                         <span class="latest-culture-quick-media" aria-hidden="true">
@@ -13969,7 +14134,7 @@
                                         </span>
                                     </a>
                                 </div>
-                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide aria-hidden="true">
+                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide data-feature-group="feature" aria-hidden="true" inert>
                                     <button class="fortune-quick-link" type="button" data-open-home-fortune aria-label="打开2026年8月星座运势">
                                         <span class="fortune-quick-visual" aria-hidden="true">
                                             <img class="fortune-quick-cover" src="assets/home-redesign/monthly-fortune-cover.webp?v=20260811g" alt="" loading="lazy" decoding="async">
@@ -13984,15 +14149,67 @@
                                         </span>
                                     </button>
                                 </div>
+                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide data-feature-group="reading" aria-hidden="false">
+                                    <a class="latest-culture-quick-link" href="daily/light-read/daily/9.8.html" aria-label="阅读：気ままな記憶">
+                                        <span class="latest-culture-quick-media" aria-hidden="true">
+                                            <img src="daily/light-read/daily/assets/covers/daily-cover-09-08.webp?v=20260908a" alt="" loading="lazy" decoding="async">
+                                        </span>
+                                        <span class="latest-culture-quick-copy">
+                                            <span>
+                                                <strong lang="ja">気ままな記憶</strong>
+                                                <small>随性的记忆</small>
+                                                <time class="magazine-feature-date" datetime="2026-09-08">2026.09.08</time>
+                                            </span>
+                                            <span class="latest-culture-quick-arrow" aria-hidden="true">→</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="home-rail-carousel-slide" data-home-rail-carousel-slide data-feature-group="reading" aria-hidden="true" inert>
+                                    <a class="latest-culture-quick-link" href="daily/light-read/daily/8.31.html" aria-label="阅读：誰かの配剤">
+                                        <span class="latest-culture-quick-media" aria-hidden="true">
+                                            <img src="daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a" alt="" loading="lazy" decoding="async">
+                                        </span>
+                                        <span class="latest-culture-quick-copy">
+                                            <span>
+                                                <strong lang="ja">誰かの配剤</strong>
+                                                <small>某人的安排</small>
+                                                <time class="magazine-feature-date" datetime="2026-08-31">2026.08.31</time>
+                                            </span>
+                                            <span class="latest-culture-quick-arrow" aria-hidden="true">→</span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <button class="home-rail-carousel-control home-rail-carousel-control--prev" type="button" data-home-rail-carousel-prev aria-label="上一项">‹</button>
                         <button class="home-rail-carousel-control home-rail-carousel-control--next" type="button" data-home-rail-carousel-next aria-label="下一项">›</button>
                         <div class="home-rail-carousel-dots" aria-label="推荐内容页码">
-                            <button class="home-rail-carousel-dot" type="button" data-home-rail-carousel-dot="0" aria-label="显示最新日本文化内容" aria-current="true"></button>
-                            <button class="home-rail-carousel-dot" type="button" data-home-rail-carousel-dot="1" aria-label="显示今月运势" aria-current="false"></button>
+                            <button class="home-rail-carousel-dot" type="button" data-home-rail-carousel-dot="0" aria-label="显示：気ままな記憶" aria-current="true"></button>
+                            <button class="home-rail-carousel-dot" type="button" data-home-rail-carousel-dot="1" aria-label="显示：誰かの配剤" aria-current="false"></button>
                         </div>
                     </section>
+
+                    <section class="magazine-notices" aria-labelledby="magazine-notices-title">
+                        <div class="magazine-section-head">
+                            <h2 id="magazine-notices-title"><i aria-hidden="true"></i> お知らせ</h2>
+                            <span>网页公告</span>
+                        </div>
+                        <details>
+                            <summary><span>备考区更新，新添学习计划功能</span><time datetime="2026-08-15">08.15</time></summary>
+                            <p>重做了备考区的样式，完善了错题库和部分学习功能，之后会补全听力部分的精听功能。</p>
+                            <a href="#study-plan" data-home-section-link="study-plan">查看学习计划 →</a>
+                        </details>
+                        <details>
+                            <summary><span>语法学习内容全面上线</span><time datetime="2026-07-25">07.25</time></summary>
+                            <p>语法学习内容全面上线，可以用于日语知识体系的搭配。后续还会补全剩下部分。</p>
+                            <a href="#daily/daily-grammar" data-home-section-link="daily" data-home-section-path="daily-grammar">开始语法学习 →</a>
+                        </details>
+                    </section>
+                    <a class="magazine-game-entry" href="日语学习游戏合集.html" aria-label="进入日语小游戏">
+                        <span class="magazine-game-mark" aria-hidden="true">遊</span>
+                        <span class="magazine-game-copy"><strong>日语小游戏</strong><small>进入游戏合集</small></span>
+                        <span class="magazine-game-arrow" aria-hidden="true">→</span>
+                    </a>
 
                     <section class="mobile-today-fortune-card" aria-labelledby="mobile-today-fortune-title" data-mobile-today-fortune>
                         <div class="mobile-today-fortune-head">
@@ -14028,6 +14245,19 @@
                             <a class="rail-link" href="#daily/daily-light-read" data-home-section-link="daily" data-home-section-path="daily-light-read"><span class="daily-reading-link-desktop">全部文章</span><span class="daily-reading-link-mobile">查看全部</span> →</a>
                         </div>
                         <div class="daily-reading-list">
+                            <a class="daily-reading-item" href="daily/light-read/daily/9.8.html" aria-label="阅读：気ままな記憶">
+                                <span class="daily-reading-thumb" aria-hidden="true">
+                                    <img src="daily/light-read/daily/assets/covers/daily-cover-09-08.webp?v=20260908a" alt="" loading="lazy" decoding="async">
+                                </span>
+                                <span class="daily-reading-item-copy">
+                                    <strong class="daily-reading-item-title">気ままな記憶</strong>
+                                    <span class="daily-reading-item-subtitle">随性的记忆</span>
+                                    <span class="daily-reading-item-tags">
+                                        <span class="daily-reading-item-tag">随笔</span>
+                                    </span>
+                                    <time datetime="2026-09-08">2026.09.08</time>
+                                </span>
+                            </a>
                             <a class="daily-reading-item" href="daily/light-read/daily/8.31.html" aria-label="阅读：誰かの配剤">
                                 <span class="daily-reading-thumb" aria-hidden="true">
                                     <img src="daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a" alt="">
@@ -14039,19 +14269,6 @@
                                         <span class="daily-reading-item-tag">随笔</span>
                                     </span>
                                     <time datetime="2026-08-31">2026.08.31</time>
-                                </span>
-                            </a>
-                            <a class="daily-reading-item" href="daily/light-read/daily/8.24.html" aria-label="阅读：信じろいつか終わる">
-                                <span class="daily-reading-thumb" aria-hidden="true">
-                                    <img src="daily/light-read/daily/assets/covers/daily-cover-08-24.webp?v=20260824a" alt="">
-                                </span>
-                                <span class="daily-reading-item-copy">
-                                    <strong class="daily-reading-item-title">信じろいつか終わる</strong>
-                                    <span class="daily-reading-item-subtitle">相信自己，总会做完的</span>
-                                    <span class="daily-reading-item-tags">
-                                        <span class="daily-reading-item-tag">随笔</span>
-                                    </span>
-                                    <time datetime="2026-08-24">2026.08.24</time>
                                 </span>
                             </a>
                         </div>
@@ -14197,15 +14414,19 @@
     </dialog>
 
     <script src="shared/omikuji-catalog.js?v=20260811-qiuji1"></script>
-    <script src="shared/home-pet.js?v=20260717-ronin-unlock1"></script>
-    <script src="shared/grammar-db-core.js?v=20260831-mainichi-n1-048"></script>
-    <script src="shared/grammar-db-tags.js?v=20260831-mainichi-n1-048"></script>
+    <script src="shared/home-pet.js?v=20260907-direct-routes"></script>
+    <script src="shared/grammar-db-core.js?v=20260905-te-usage"></script>
+    <script src="shared/grammar-db-tags.js?v=20260905-te-usage"></script>
     <script src="shared/grammar-db-resources.js?v=20260808-example-batch5"></script>
-    <script src="shared/grammar-learning-sources.js?v=20260804c"></script>
+    <script src="shared/grammar-learning-sources.js?v=20260908-collections"></script>
     <script src="shared/grammar-db-repo.js?v=20260825-gaii-textbook2"></script>
+    <script src="shared/grammar-search-collections.js?v=20260908-collection-n1-suffix"></script>
     <script src="shared/grammar-favorites.js?v=20260726a"></script>
-    <script src="shared/word-bank-presets.js?v=20260831-two-examples1"></script>
-    <script src="shared/word-bank.js?v=20260831-two-examples1"></script>
+    <script src="shared/word-bank-presets.js?v=20260904-drama-shinogono1"></script>
+    <script src="shared/word-bank.js?v=20260907-list-ruby-gap1"></script>
+    <script src="shared/site-search-engine.js?v=20260908b"></script>
+    <script src="daily/try-n1/data/lesson-catalog.js"></script>
+    <script src="daily/try-n2/data/lesson-catalog.js"></script>
     <script src="shared/monthly-fortune-2026-08.js?v=20260811a"></script>
     <script>
         const DAILY_READING_CATEGORY_DEFINITIONS = [
@@ -14222,6 +14443,7 @@
         const DAILY_READING_HORROR_COVER_ALT = "夏夜无灯的和室里，柴犬与狸猫、兔子、小猫和刺猬围坐在手电筒旁讲怪谈的铅笔手绘插画";
 
         const HOME_DAILY_READING_ESSAYS = [
+            { id: "daily-essay-9-8", file: "9.8.html", publishedAt: "2026.09.08", titleJa: "気ままな記憶", titleZh: "随性的记忆", summary: "運動動画の音楽が頭の中で繰り返される体験から、思い通りにならない記憶と小説を書くことのつながりを考える随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-09-08.webp?v=20260908a", coverAlt: "日光明亮的客厅里，女生坐在运动垫上休息，头边的淡淡音符表示脑海中仍在循环的旋律" },
             { id: "daily-essay-8-31", file: "8.31.html", publishedAt: "2026.08.31", titleJa: "誰かの配剤", titleZh: "某人的安排", summary: "ほぼ初めて参加した聖飢魔Ⅱのライブで、音楽の圧倒的な力と、初心者にちょうどよく巡ってきた「地獄の配剤」を味わう随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-31.webp?v=20260831a", coverAlt: "高层观众席里，一位女生安静聆听远处重金属乐队演出的日漫铅笔水彩插画" },
             { id: "daily-essay-8-24", file: "8.24.html", publishedAt: "2026.08.24", titleJa: "信じろいつか終わる", titleZh: "相信自己，总会做完的", summary: "読書仕事に使う小さな付箋を自作し、終わりの見えない細かな作業で自分を信じて手を動かすことを考える随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-24.webp?v=20260824a", coverAlt: "日光窗边，一位日漫风格的女生把裁好的小号绿色便利贴贴到书页上方留白处的铅笔水彩插画" },
             { id: "daily-essay-8-20", file: "8.20.html", publishedAt: "2026.08.20", titleJa: "感覚の領域", titleZh: "感官的领域", summary: "散瞳検査で焦点が合わなくなった体験から、料理では視覚以外の感覚も重なり合って働いていることに気づく随筆。", category: "essay", series: "随笔", cover: "daily/light-read/daily/assets/covers/daily-cover-08-20-v2.webp?v=20260820b", coverAlt: "日光照进厨房，一位日漫风格的女生在木砧板上切胡萝卜丝，旁边放着茶与洋葱的铅笔水彩插画" },
@@ -14744,7 +14966,7 @@
                         id: "daily-light-read",
                         title: "轻松一读",
                         desc: "每天读一点日语，在故事与随笔中培养语感和理解力。",
-                        href: "daily/light-read/index.html",
+                        href: "index.html#daily/daily-light-read",
                         icon: "light-read",
                         tag: "読解",
                         tone: "sage",
@@ -14800,7 +15022,7 @@
                         id: "exam-vocabulary",
                         title: "語彙暗記",
                         desc: "按词性系统积累核心词汇，在例句与练习中加深理解和记忆。",
-                        href: "exam/vocabulary/index.html",
+                        href: "index.html#exam/exam-vocabulary",
                         icon: "vocabulary",
                         tag: "語彙",
                         tone: "pearl",
@@ -14811,7 +15033,7 @@
                         id: "exam-grammar",
                         title: "语法专项",
                         desc: "从选择、排序到文章语法，按题型掌握能力考常见考法。",
-                        href: "exam/grammar/index.html",
+                        href: "index.html#exam/exam-grammar",
                         icon: "grammar",
                         tag: "文法",
                         tone: "blush",
@@ -14861,7 +15083,7 @@
                         id: "exam-listening",
                         title: "聴解特训",
                         desc: "结合历年真题与分类训练，提升听辨信息和理解语境的能力。",
-                        href: "exam/listening/index.html",
+                        href: "index.html#exam/exam-listening",
                         icon: "listen",
                         tag: "聴解",
                         tone: "mist",
@@ -15304,9 +15526,22 @@
         let wordBankActiveSource = "all";
         let wordBankOriginFilter = "official";
         let wordBankPartOfSpeechFilter = "all";
+        const WORD_BANK_PAGE_SIZE = 5;
+        let wordBankPage = 1;
+        let wordBankPaginationFilterKey = "";
         let wordBankSort = "recent";
         let wordBankSearchTimer = 0;
-        let siteSearchQuery = "";
+        const SITE_SEARCH_STATE_KEY = "kiki.site-search.v2";
+        const savedSiteSearchState = (() => {
+            try { return JSON.parse(sessionStorage.getItem(SITE_SEARCH_STATE_KEY) || "null") || {}; }
+            catch (_) { return {}; }
+        })();
+        let siteSearchQuery = typeof savedSiteSearchState.query === "string" ? savedSiteSearchState.query.slice(0, 120) : "";
+        let siteSearchCategory = window.KikiSiteSearch.categories.some(([key]) => key === savedSiteSearchState.category) ? savedSiteSearchState.category : "all";
+        let siteSearchLevel = /^(N[1-5]|ungraded)$/.test(savedSiteSearchState.level) ? savedSiteSearchState.level : "all";
+        let siteSearchSort = ["relevance", "items", "practice"].includes(savedSiteSearchState.sort) ? savedSiteSearchState.sort : "relevance";
+        let siteSearchVisibleLimit = 20;
+        let siteSearchIndex = null;
         let siteSearchTimer = 0;
         let siteSearchPanelDirty = false;
         let siteSearchComposing = false;
@@ -15318,6 +15553,16 @@
         let grammarSearchQuery = "";
         let grammarLevelFilter = "all";
         let grammarBookFilter = "all";
+        let grammarActiveCollection = "";
+        let grammarCollectionGroup = "";
+        let grammarCollectionPage = 1;
+        let grammarCollectionDetailId = null;
+        let grammarCollectionCardFocusId = null;
+        let grammarCollectionBrowserScroll = 0;
+        let grammarCollectionRailScroll = 0;
+        let grammarCollectionReturnFocus = null;
+        let grammarCollectionInertElements = [];
+        let grammarCollectionScrollLock = null;
         let grammarActiveView = "search";
         let grammarFavoritesQuery = "";
         let grammarFavoritesLevelFilter = "all";
@@ -15764,6 +16009,7 @@
 
         function saveFavoriteEntries(entries) {
             localStorage.setItem(FAVORITES_KEY, JSON.stringify(entries));
+            siteSearchIndex = null;
         }
 
         function getFixedEntryCatalogItem(entryId) {
@@ -15956,9 +16202,13 @@
                 return value;
             }
 
-            const separator = value.includes("?") ? "&" : "?";
+            // Homepage panels are already the destination, not another document.
+            if (/^(?:\.\/)?index\.html#/.test(value)) return value;
+
             const fallbackTarget = getFallbackTarget(sectionKey, value, sectionPath);
-            return `${value}${separator}return=${encodeURIComponent(fallbackTarget)}`;
+            const [base, hash = ""] = value.split("#");
+            const separator = base.includes("?") ? "&" : "?";
+            return `${base}${separator}return=${encodeURIComponent(fallbackTarget)}${hash ? `#${hash}` : ""}`;
         }
 
         function rerenderSectionAfterFixedCoverChange(sectionKey) {
@@ -16139,50 +16389,6 @@
             return api && typeof api.loadEntries === "function" ? api.loadEntries() : [];
         }
 
-        function normalizeSiteSearchText(value) {
-            return String(value || "")
-                .replace(/<[^>]*>/g, " ")
-                .replace(/\u301C/g, "\uFF5E")
-                .replace(/\s+/g, " ")
-                .trim()
-                .toLowerCase();
-        }
-
-        function getSiteSearchTokens(query) {
-            const normalized = normalizeSiteSearchText(query);
-            if (!normalized) {
-                return [];
-            }
-            return normalized.split(/[\s,，、;；]+/).filter(Boolean);
-        }
-
-        function getSiteSearchScore(query, fields) {
-            const normalizedQuery = normalizeSiteSearchText(query);
-            const tokens = getSiteSearchTokens(query);
-            if (!normalizedQuery || !tokens.length) {
-                return 0;
-            }
-
-            const title = normalizeSiteSearchText(fields.title);
-            const tag = normalizeSiteSearchText(fields.tag);
-            const desc = normalizeSiteSearchText(fields.desc);
-            const extra = normalizeSiteSearchText(fields.extra);
-            const haystack = [title, tag, desc, extra].filter(Boolean).join(" ");
-            if (!tokens.every((token) => haystack.includes(token))) {
-                return 0;
-            }
-
-            let score = 10;
-            if (title === normalizedQuery) score += 90;
-            if (title.startsWith(normalizedQuery)) score += 56;
-            if (title.includes(normalizedQuery)) score += 34;
-            if (tag.includes(normalizedQuery)) score += 24;
-            if (desc.includes(normalizedQuery)) score += 14;
-            if (extra.includes(normalizedQuery)) score += 8;
-            score += Math.max(0, 12 - title.length / 6);
-            return score;
-        }
-
         function getSiteSearchLinkHref(item, sectionKey, sectionPath = []) {
             const href = String(item && item.href ? item.href : "").trim();
             if (!href) {
@@ -16191,7 +16397,7 @@
             if (href.startsWith("#")) {
                 return href;
             }
-            return appendReturnParam(href, sectionKey, sectionPath);
+            return appendReturnParam(href, "site-search", []);
         }
 
         function collectSectionSearchEntries(sectionKey, items, parentPath = [], parentLabels = []) {
@@ -16209,18 +16415,31 @@
                 const hasNestedItems = hasChildItems(item);
                 const isBranch = hasNestedItems && !item.directoryPage;
                 const labels = [...parentLabels, item.title].filter(Boolean);
+                const category = currentPath.includes("exam-textbook") ? "textbook"
+                    : sectionKey === "exam" ? "exam"
+                    : currentPath.includes("daily-grammar") ? "grammar"
+                    : currentPath.some((id) => ["daily-culture", "daily-light-read"].includes(id)) ? "reading" : "entry";
+                const path = String(item.href || "").split(/[?#]/)[0];
+                const sharedExamLevels = {
+                    "exam/grammar/sort/index.html": ["N1", "N2", "N3"],
+                    "exam/grammar/cloze/index.html": ["N1", "N2"],
+                    "exam/jlpt-reading/index.html": ["N1", "N2"]
+                };
                 const result = {
                     id: `${sectionKey}:${currentPath.join("/")}`,
-                    type: "入口",
+                    type: isBranch ? "栏目入口" : ({ grammar: "语法讲解", textbook: "教材", exam: "备考练习", reading: "阅读文化", entry: "栏目入口" }[category]),
+                    category: isBranch ? "entry" : category,
+                    kind: isBranch ? "entry" : category === "grammar" ? "lesson" : category,
                     title: item.title || "",
                     desc: item.desc || "",
                     tag: item.tag || section.title || "",
                     extra: labels.join(" / "),
+                    context: parentLabels.slice(1).join(" / "),
+                    levels: sharedExamLevels[path] || window.KikiSiteSearch.levels([item.title, item.tag, item.href].join(" ")),
                     action: isBranch ? "section" : "link",
                     sectionKey,
                     sectionPath: isBranch ? currentPath : parentPath,
-                    href: isBranch ? "" : getSiteSearchLinkHref(item, sectionKey, parentPath),
-                    scoreBoost: isBranch ? 5 : 0
+                    href: isBranch ? "" : getSiteSearchLinkHref(item, sectionKey, parentPath)
                 };
                 const children = hasNestedItems
                     ? collectSectionSearchEntries(sectionKey, item.children, currentPath, labels)
@@ -16246,8 +16465,7 @@
                     action: "section",
                     sectionKey,
                     sectionPath: [],
-                    href: "",
-                    scoreBoost: 10
+                    href: ""
                 };
                 return [rootEntry, ...collectSectionSearchEntries(sectionKey, section.items, [], [section.title])];
             });
@@ -16263,8 +16481,7 @@
                     action: "section",
                     sectionKey: "grammar-search",
                     sectionPath: [],
-                    href: "",
-                    scoreBoost: 12
+                    href: ""
                 },
                 {
                     id: "word-bank:root",
@@ -16276,8 +16493,16 @@
                     action: "section",
                     sectionKey: "word-bank",
                     sectionPath: [],
-                    href: "",
-                    scoreBoost: 12
+                    href: ""
+                },
+                {
+                    id: "study-plan:root",
+                    type: "入口",
+                    title: "学习计划",
+                    desc: "安排学习任务与备考进度。",
+                    action: "section",
+                    sectionKey: "study-plan",
+                    sectionPath: []
                 },
                 {
                     id: "favorites:root",
@@ -16289,8 +16514,7 @@
                     action: "section",
                     sectionKey: "favorites",
                     sectionPath: [],
-                    href: "",
-                    scoreBoost: 8
+                    href: ""
                 }
             );
 
@@ -16303,49 +16527,49 @@
                     tag: "常用",
                     extra: entry.href,
                     action: "link",
-                    href: entry.href,
-                    scoreBoost: 6
+                    href: entry.href
                 });
             });
 
-            return entries;
+            return entries.map((entry) => ({ category: "entry", kind: "entry", ...entry }));
         }
 
-        function getGrammarSiteSearchEntries(query) {
+        function getGrammarSiteSearchEntries() {
             return getGrammarSearchDataset()
                 .map((item) => {
-                    const score = getSiteSearchScore(query, {
-                        title: item.title,
-                        tag: item.level,
-                        desc: item.meaning,
-                        extra: [item.kana, item.romaji, item.connection, item.tags, item.book, item.lesson].join(" ")
-                    });
-                    if (!score) {
-                        return null;
-                    }
                     return {
                         id: `grammar:${item.id}`,
-                        type: "语法",
+                        type: "语法条目",
+                        category: "grammar",
+                        kind: "grammar",
                         title: item.title || "未命名文法",
                         desc: [item.meaning, item.connection].filter(Boolean).join(" / "),
                         tag: item.level || "文法",
+                        level: item.level,
+                        reading: [item.kana, item.romaji].filter(Boolean).join(" "),
+                        extra: [item.tags, item.book, item.lesson].join(" "),
                         action: "grammar",
-                        grammarId: item.id,
-                        score: score + 18
+                        grammarId: item.id
                     };
                 })
                 .filter(Boolean);
         }
 
-        function getWordBankSiteSearchEntries(query) {
+        function getWordBankSiteSearchEntries() {
             return getWordBankEntries()
                 .map((entry) => {
-                    const score = getSiteSearchScore(query, {
-                        title: entry.word,
+                    return {
+                        id: `word:${entry.id}`,
+                        type: "词汇",
+                        category: "word",
+                        kind: "word",
+                        title: entry.word || entry.sourceText || "未命名词条",
                         tag: Array.isArray(entry.tags) ? entry.tags.join(" ") : "",
-                        desc: [entry.meaning, entry.meaningZh, entry.meaningJa, entry.nuance, entry.usage, entry.example, entry.exampleZh].join(" "),
+                        level: entry.jlptLevel,
+                        reading: entry.reading,
+                        desc: entry.meaning || entry.meaningZh || entry.meaningJa || entry.example || entry.note || "我推の単語",
                         extra: [
-                            entry.reading,
+                            entry.meaning, entry.meaningZh, entry.meaningJa, entry.nuance, entry.usage, entry.example, entry.exampleZh,
                             entry.partOfSpeech,
                             entry.accent,
                             entry.jlptLevel,
@@ -16355,58 +16579,56 @@
                             entry.sourceTitle,
                             entry.sourceUrl,
                             entry.sourceText
-                        ].join(" ")
-                    });
-                    if (!score) {
-                        return null;
-                    }
-                    return {
-                        id: `word:${entry.id}`,
-                        type: "单词",
-                        title: entry.word || entry.sourceText || "未命名词条",
-                        desc: entry.meaning || entry.meaningZh || entry.meaningJa || entry.example || entry.note || "我推の単語",
-                        tag: "我推の単語",
+                        ].join(" "),
                         action: "word",
                         wordId: entry.id,
-                        wordQuery: entry.word || entry.reading || entry.meaning || entry.meaningZh || entry.meaningJa || query,
-                        score: score + 14
+                        wordQuery: entry.word || entry.reading || entry.meaning || entry.meaningZh || entry.meaningJa || ""
                     };
                 })
                 .filter(Boolean);
         }
 
+        function getTextbookSiteSearchEntries() {
+            return [["N1", window.tryN1LessonCatalog], ["N2", window.tryN2LessonCatalog]].flatMap(([level, lessons]) =>
+                (lessons || []).map((lesson) => ({
+                    id: `textbook:${level}:${lesson.lesson}`,
+                    type: "教材课文", category: "textbook", kind: "textbook", level,
+                    lessonNumber: lesson.lesson,
+                    title: `TRY！${level} 第${lesson.lesson}课 · ${lesson.title}`,
+                    desc: "课文、文型与课后练习",
+                    tag: `TRY ${level} 教材学习 第${lesson.lesson}课 第${lesson.lesson}課`,
+                    action: "link",
+                    href: appendReturnParam(`daily/try-${level.toLowerCase()}/lesson-content-redesign.html?lesson=${lesson.lesson}`, "site-search", [])
+                }))
+            );
+        }
+
         function getSiteSearchResults(query) {
-            const normalizedQuery = normalizeSiteSearchText(query);
-            if (!normalizedQuery) {
-                return [];
+            try {
+                sessionStorage.setItem(SITE_SEARCH_STATE_KEY, JSON.stringify({ query, category: siteSearchCategory, level: siteSearchLevel, sort: siteSearchSort }));
+            } catch (_) { /* Searching still works when storage is unavailable. */ }
+            if (!siteSearchIndex && query.trim()) {
+                siteSearchIndex = window.KikiSiteSearch.prepare([
+                    ...getSectionSearchEntries(), ...getTextbookSiteSearchEntries(), ...getGrammarSiteSearchEntries(), ...getWordBankSiteSearchEntries()
+                ]);
             }
-
-            const sectionResults = getSectionSearchEntries()
-                .map((entry) => {
-                    const score = getSiteSearchScore(query, entry);
-                    return score ? { ...entry, score: score + (entry.scoreBoost || 0) } : null;
-                })
-                .filter(Boolean);
-
-            return [
-                ...sectionResults,
-                ...getGrammarSiteSearchEntries(query),
-                ...getWordBankSiteSearchEntries(query)
-            ]
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 36);
+            return window.KikiSiteSearch.search(siteSearchIndex || [], query, {
+                category: siteSearchCategory, level: siteSearchLevel, sort: siteSearchSort
+            });
         }
 
         function getSiteSearchResultMarkup(result, index) {
             const title = escapeHtml(result.title || "未命名内容");
             const desc = escapeHtml(result.desc || "");
             const type = escapeHtml(result.type || "结果");
-            const tag = result.tag ? `<span class="site-search-desc">${escapeHtml(result.tag)}${desc ? ` · ${desc}` : ""}</span>` : (desc ? `<span class="site-search-desc">${desc}</span>` : "");
             const body = `
-                <span class="site-search-type">${type}</span>
-                <span>
-                    <span class="site-search-title">${title}</span>
-                    ${tag}
+                <span class="site-search-result-copy">
+                    <span class="site-search-result-head">
+                        <span class="site-search-title">${title}</span>
+                        <span class="site-search-badges"><span class="site-search-type">${type}</span>${(result.levels || []).map((level) => `<span class="site-search-level">${escapeHtml(level)}</span>`).join("")}</span>
+                    </span>
+                    <span class="site-search-desc">${desc}</span>
+                    <span class="site-search-match">${escapeHtml(result.matchReason || "相关内容")}${result.context ? ` · ${escapeHtml(result.context)}` : ""}</span>
                 </span>
                 <span class="site-search-arrow" aria-hidden="true">→</span>
             `;
@@ -16443,23 +16665,38 @@
         }
 
         function getSiteSearchSummaryText(query, results) {
-            return query
-                ? results.length
-                    ? `找到 ${results.length} 个相关结果，包含入口、语法、阅读和单词库内容。`
-                    : "没有找到相关内容，可以换一个关键词试试。"
-                : "可搜索网页内已有的学习入口、阅读文章、语法条目和我推の単語内容。";
+            return query ? `“${query.slice(0, 50)}” · ${results.total} 条结果${hasSiteSearchFilters() ? " · 已筛选" : ""}` : "搜索讲解、教材、练习与词汇";
+        }
+
+        function hasSiteSearchFilters() {
+            return siteSearchCategory !== "all" || siteSearchLevel !== "all" || siteSearchSort !== "relevance";
+        }
+
+        function getSiteSearchFiltersMarkup(result) {
+            return `<div class="site-search-filters">
+                <div class="site-search-categories" role="group" aria-label="内容分类">
+                    ${window.KikiSiteSearch.categories.map(([id, label]) => `<button type="button" data-site-search-category="${id}" aria-pressed="${siteSearchCategory === id}">${label}<span data-site-search-count="${id}">${result.counts[id] || 0}</span></button>`).join("")}
+                </div>
+                <div class="site-search-options">
+                    <label>等级<select data-site-search-level aria-label="按等级筛选">${["all", "N1", "N2", "N3", "N4", "N5", "ungraded"].map((level) => `<option value="${level}"${level === siteSearchLevel ? " selected" : ""}>${level === "all" ? "全部等级" : level === "ungraded" ? "不分级" : level}</option>`).join("")}</select></label>
+                    <label>排序<select data-site-search-sort aria-label="搜索排序">${[["relevance", "讲解教材优先"], ["items", "语法词汇优先"], ["practice", "备考练习优先"]].map(([value, label]) => `<option value="${value}"${value === siteSearchSort ? " selected" : ""}>${label}</option>`).join("")}</select></label>
+                    <span class="site-search-order-note">标题匹配优先</span>
+                    <button type="button" class="site-search-reset" data-site-search-reset${hasSiteSearchFilters() ? "" : " hidden"}>清除筛选</button>
+                </div>
+            </div>`;
         }
 
         function getSiteSearchResultsAreaMarkup(query, results) {
             if (!query) {
-                return `<div class="site-search-empty">试试搜索「每日阅读」「N2」「排序题」「積み重ね」或某个语法表达。</div>`;
+                return `<div class="site-search-empty"><strong>想学什么？</strong><p>输入主题、日语表达或教材名称</p><div class="site-search-suggestions">${["敬语", "TRY！N2", "助词", "听力"].map((word) => `<button type="button" data-site-search-suggestion="${escapeHtml(word)}">${escapeHtml(word)}</button>`).join("")}</div></div>`;
             }
 
-            if (!results.length) {
-                return `<div class="site-search-empty">没有找到“${escapeHtml(query)}”相关内容。</div>`;
+            if (!results.total) {
+                return `<div class="site-search-empty"><strong>没有符合条件的内容</strong><p>${hasSiteSearchFilters() ? "可以清除筛选，查看其他相关内容。" : "试试更短的关键词，或换一种中日文写法。"}</p>${hasSiteSearchFilters() ? '<button type="button" class="site-search-reset" data-site-search-reset>清除筛选</button>' : ""}</div>`;
             }
 
-            return `<div class="site-search-results">${results.map(getSiteSearchResultMarkup).join("")}</div>`;
+            const shown = Math.min(siteSearchVisibleLimit, results.total);
+            return `<div class="site-search-results">${results.results.slice(0, shown).map(getSiteSearchResultMarkup).join("")}</div><div class="site-search-pagination"><span>已显示 ${shown} / ${results.total} 条</span>${shown < results.total ? '<button type="button" data-site-search-more>加载更多</button>' : ""}</div>`;
         }
 
         function getSiteSearchPanelMarkup() {
@@ -16469,13 +16706,12 @@
 
             return `
                 <div class="site-search-board" data-site-search-panel>
-                    <section class="site-search-hero">
-                        <p class="site-search-copy" data-site-search-copy>${escapeHtml(summary)}</p>
-                        <form class="site-search-form" data-site-search-inline>
-                            <input class="site-search-input" type="search" value="${escapeHtml(siteSearchQuery)}" placeholder="输入关键词，例如：阅读、N2、あっての、听力" aria-label="站内搜索关键词" data-site-search-input>
+                    <header class="site-search-heading"><h2>站内搜索</h2><p class="site-search-copy" data-site-search-copy role="status" aria-live="polite">${escapeHtml(summary)}</p></header>
+                        <form class="site-search-form" data-site-search-inline role="search">
+                            <input class="site-search-input" type="search" maxlength="120" value="${escapeHtml(siteSearchQuery)}" placeholder="搜索讲解、教材、练习与词汇" aria-label="站内搜索关键词" data-site-search-input>
                             <button type="submit" class="site-search-submit">搜索</button>
                         </form>
-                    </section>
+                    ${getSiteSearchFiltersMarkup(results)}
                     <div data-site-search-results-host>${getSiteSearchResultsAreaMarkup(query, results)}</div>
                 </div>
             `;
@@ -16486,10 +16722,8 @@
             if (!panel) {
                 return;
             }
-            panel.innerHTML = `
-                ${getSectionHeaderMarkup("site-search", getSectionViewState("site-search"))}
-                ${getSiteSearchPanelMarkup()}
-            `;
+            panel.innerHTML = getSiteSearchPanelMarkup();
+            if (globalSiteSearchInput && siteSearchQuery) globalSiteSearchInput.value = siteSearchQuery;
             panel.dataset.rendered = "site-search:root";
             siteSearchPanelDirty = false;
         }
@@ -16511,6 +16745,17 @@
             if (resultsHost) {
                 resultsHost.innerHTML = getSiteSearchResultsAreaMarkup(query, results);
             }
+            panel.querySelectorAll("[data-site-search-category]").forEach((button) => {
+                const category = button.dataset.siteSearchCategory;
+                button.setAttribute("aria-pressed", String(category === siteSearchCategory));
+                button.querySelector("[data-site-search-count]").textContent = results.counts[category] || 0;
+            });
+            panel.querySelector("[data-site-search-level]").value = siteSearchLevel;
+            panel.querySelector("[data-site-search-sort]").value = siteSearchSort;
+            panel.querySelector(".site-search-options [data-site-search-reset]").hidden = !hasSiteSearchFilters();
+            [globalSiteSearchInput, panel.querySelector("[data-site-search-input]")].forEach((input) => {
+                if (input && input.value !== siteSearchQuery) input.value = siteSearchQuery;
+            });
 
             siteSearchPanelDirty = false;
             return true;
@@ -16521,7 +16766,8 @@
             if (activeSection === "site-search") {
                 renderSection("site-search", false, false);
                 if (options.focusSearch) {
-                    const input = featurePanels.querySelector("[data-site-search-input]");
+                    const input = globalSiteSearchInput && globalSiteSearchInput.getClientRects().length
+                        ? globalSiteSearchInput : featurePanels.querySelector("[data-site-search-input]");
                     if (input) {
                         input.focus();
                         input.setSelectionRange(input.value.length, input.value.length);
@@ -16741,9 +16987,10 @@
             }
 
             const normalize = (value) => normalizeGrammarText(value);
-            const filtered = getGrammarSearchDataset().filter((item) => {
-                const matchBook = grammarBookFilter === "all" || item.book === grammarBookFilter;
-                const matchLevel = grammarLevelFilter === "all" || item.level === grammarLevelFilter;
+            const dataset = getGrammarSearchDataset();
+            const filtered = dataset.filter((item) => {
+                const matchBook = !query || grammarBookFilter === "all" || item.book === grammarBookFilter;
+                const matchLevel = !query || grammarLevelFilter === "all" || item.level === grammarLevelFilter;
                 const matchSearch = normalize(item.title).includes(query)
                     || normalize(item.meaning).includes(query)
                     || normalize(item.romaji).includes(query)
@@ -16936,7 +17183,11 @@
             const isFav = isGrammarFavorite(canonicalId);
             document.querySelectorAll(`[data-grammar-favorite="${canonicalId}"]`).forEach((button) => {
                 button.classList.toggle("is-fav", isFav);
-                button.textContent = isFav ? "★" : "☆";
+                if (button.classList.contains("grammar-legacy-modal-fav") || button.classList.contains("grammar-collection-detail-favorite")) {
+                    button.title = isFav ? "已收藏，点击取消收藏" : "收藏此语法";
+                } else {
+                    button.textContent = isFav ? "★" : "☆";
+                }
                 button.setAttribute("aria-pressed", String(isFav));
                 const labelPrefix = isFav ? "取消收藏" : "收藏";
                 const rawLabel = button.getAttribute("aria-label") || "";
@@ -17080,6 +17331,55 @@
             `;
         }
 
+        function getGrammarUsageStructureMarkup(structure, examples) {
+            if (!structure || !structure.left || !structure.right) return "";
+            const operator = structure.operator === "＋" ? "＋" : "→";
+            const sample = examples[0];
+            const sampleParts = ["", ""];
+            if (sample && sample.jp) {
+                const host = document.createElement("div");
+                host.innerHTML = sample.jp;
+                const target = host.querySelector("span[style*='#d64045']");
+                if (target) {
+                    const range = document.createRange();
+                    range.setStart(host, 0);
+                    range.setEndAfter(target);
+                    const left = document.createElement("div");
+                    left.append(range.cloneContents());
+                    sampleParts[0] = left.innerHTML;
+                    range.setStartAfter(target);
+                    range.setEnd(host, host.childNodes.length);
+                    const right = document.createElement("div");
+                    right.append(range.cloneContents());
+                    sampleParts[1] = right.innerHTML.replace(/^[\s、，,]+/, "");
+                }
+            }
+            return `
+                <div class="grammar-legacy-usage-field">
+                    <span class="grammar-legacy-usage-field-label">用法结构</span>
+                    <figure class="grammar-usage-structure" aria-label="${escapeHtml(structure.relation || "用法结构图")}">
+                        <div class="grammar-usage-structure-flow">
+                            <div class="grammar-usage-structure-part">
+                                <span class="grammar-usage-structure-part-label">${escapeHtml(structure.leftLabel || "前项")}</span>
+                                <div class="grammar-usage-structure-part-text">${escapeHtml(structure.left)}</div>
+                                ${sampleParts[0] ? `<div class="grammar-usage-structure-example" lang="ja">${sampleParts[0]}</div>` : ""}
+                            </div>
+                            <span class="grammar-usage-structure-operator${operator === "→" ? " grammar-usage-structure-operator--arrow" : ""}" aria-hidden="true">${operator}</span>
+                            <div class="grammar-usage-structure-part">
+                                <span class="grammar-usage-structure-part-label">${escapeHtml(structure.rightLabel || "后项")}</span>
+                                <div class="grammar-usage-structure-part-text">${escapeHtml(structure.right)}</div>
+                                ${sampleParts[1] ? `<div class="grammar-usage-structure-example" lang="ja">${sampleParts[1]}</div>` : ""}
+                            </div>
+                        </div>
+                        <figcaption class="grammar-usage-structure-caption">
+                            <strong>${escapeHtml(structure.relation || "")}</strong>
+                            ${structure.note ? `<span>${escapeHtml(structure.note)}</span>` : ""}
+                        </figcaption>
+                    </figure>
+                </div>
+            `;
+        }
+
         function getGrammarUsageSectionMarkup(section, index, allExamples) {
             const indexes = Array.isArray(section && section.exampleIndexes)
                 ? section.exampleIndexes.map(Number).filter(Number.isInteger)
@@ -17109,6 +17409,7 @@
                             <div class="grammar-legacy-desc">${section.desc}</div>
                         </div>
                     ` : ""}
+                    ${getGrammarUsageStructureMarkup(section.structure, examples)}
                     ${examples.length ? `
                         <div class="grammar-legacy-usage-field">
                             <span class="grammar-legacy-usage-field-label">例文</span>
@@ -17135,7 +17436,7 @@
                 .slice(0, 8);
         }
 
-        function getGrammarDetailMarkup(item) {
+        function getGrammarDetailMarkup(item, { embedded = false } = {}) {
             if (!item) {
                 return "";
             }
@@ -17159,41 +17460,51 @@
                 .join("");
 
             return `
-                <div class="grammar-legacy-modal" data-grammar-modal-close>
-                    <button type="button" class="grammar-legacy-modal-close" data-grammar-modal-close aria-label="关闭详情">×</button>
+                ${embedded ? `<div class="grammar-collection-detail-content${!usageSections.length && item.meaning && item.connection ? " has-summary-pair" : ""}">` : `<div class="grammar-legacy-modal" data-grammar-modal-close>
                     <div class="grammar-legacy-modal-content" role="dialog" aria-modal="true" aria-label="${escapeHtml(item.title || "文法详情")}">
+                        <div class="grammar-detail-toolbar">
+                            <button type="button" class="grammar-legacy-modal-close" data-grammar-modal-close aria-label="关闭详情">← ${grammarActiveView === "favorites" ? "返回收藏列表" : "返回搜索结果"}</button>
+                            <button type="button" class="grammar-legacy-modal-fav${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}" title="${isFav ? "已收藏，点击取消收藏" : "收藏此语法"}"><span class="grammar-favorite-leaf" aria-hidden="true">🍁</span></button>
+                        </div>`}
+                        <div class="grammar-detail-sheet">
                         <div class="grammar-legacy-modal-header">
-                            <div>
+                            <div class="grammar-detail-heading">
+                                <span class="grammar-legacy-badge grammar-detail-level ${levelClass}">${escapeHtml(item.level || "")}</span>
                                 <h2 class="grammar-legacy-modal-title">${escapeHtml(item.title || "未命名文法")}</h2>
-                                <div class="grammar-legacy-modal-badges">
-                                    <span class="grammar-legacy-badge ${levelClass}">${escapeHtml(item.level || "")}</span>
+                                ${lessonBadges ? `<div class="grammar-legacy-modal-badges">
                                     ${lessonBadges}
-                                </div>
+                                </div>` : ""}
                             </div>
-                            <button type="button" class="grammar-legacy-modal-fav${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(item.canonicalId)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(item.title)}" aria-pressed="${isFav}">${isFav ? "★" : "☆"}</button>
+                            <img class="grammar-detail-hero-art" src="assets/grammar/grammar-detail-shiba-maple-v1.png" alt="" aria-hidden="true" decoding="async">
                         </div>
                         <div class="grammar-legacy-modal-body">
-                            <div class="grammar-legacy-detail-item">
-                                <span class="grammar-legacy-label">意味</span><br>
+                            ${item.meaning ? `<div class="grammar-legacy-detail-item${embedded ? " grammar-collection-summary-meaning" : ""}">
+                                <span class="grammar-legacy-label">意味</span>
                                 <div class="grammar-legacy-highlight">${escapeHtml(item.meaning || "")}</div>
-                            </div>
+                            </div>` : ""}
                             ${usageSections.length ? `
-                                <div class="grammar-legacy-detail-item">
+                                ${usageSections.some((section) => section.structure) && item.desc ? `
+                                    <div class="grammar-legacy-detail-item">
+                                        <span class="grammar-legacy-label">解説</span>
+                                        <div class="grammar-legacy-desc">${item.desc}</div>
+                                    </div>
+                                ` : ""}
+                                <div class="grammar-legacy-detail-item grammar-legacy-detail-item--usages">
                                     <span class="grammar-legacy-label">用法</span>
                                     <div class="grammar-legacy-usage-list">
                                         ${usageSections.map((section, index) => getGrammarUsageSectionMarkup(section, index, allExamples)).join("")}
                                     </div>
                                 </div>
                             ` : `
-                                <div class="grammar-legacy-detail-item">
-                                    <span class="grammar-legacy-label">接续</span><br>
+                                ${item.connection ? `<div class="grammar-legacy-detail-item${embedded ? " grammar-collection-summary-connection" : ""}">
+                                    <span class="grammar-legacy-label">接续</span>
                                     <div class="grammar-legacy-code">${escapeHtml(item.connection || "")}</div>
-                                </div>
-                                <div class="grammar-legacy-detail-item">
+                                </div>` : ""}
+                                ${item.desc ? `<div class="grammar-legacy-detail-item">
                                     <span class="grammar-legacy-label">解説</span>
                                     <div class="grammar-legacy-desc">${item.desc || ""}</div>
-                                </div>
-                                <div class="grammar-legacy-detail-item">
+                                </div>` : ""}
+                                ${allExamples.length ? `<div class="grammar-legacy-detail-item">
                                     <span class="grammar-legacy-label">例文</span>
                                     ${visibleExamples.map(getGrammarExampleMarkup).join("")}
                                     ${allExamples.length > 3 ? `
@@ -17201,19 +17512,19 @@
                                             ${isExamplesExpanded ? "收起例句" : "查看更多例句"} <span>${isExamplesExpanded ? "↑" : "➜"}</span>
                                         </button>
                                     ` : ""}
-                                </div>
+                                </div>` : ""}
                             `}
                             ${relatedItems.length ? `
                                 <div class="grammar-legacy-detail-item">
-                                    <span class="grammar-legacy-label">关联语法</span><br>
-                                    <div>
-                                        ${relatedItems.map((related) => `<button type="button" class="grammar-legacy-related-tag" data-grammar-select="${escapeHtml(related.id)}">↗ ${escapeHtml(related.title)}</button>`).join("")}
+                                    <span class="grammar-legacy-label">关联语法</span>
+                                    <div class="grammar-detail-related-list">
+                                        ${relatedItems.map((related) => `<button type="button" class="grammar-legacy-related-tag" data-grammar-select="${escapeHtml(related.id)}">${escapeHtml(related.title)} <span class="grammar-detail-related-arrow" aria-hidden="true">↗</span></button>`).join("")}
                                     </div>
                                 </div>
                             ` : ""}
                         </div>
-                    </div>
-                </div>
+                        </div>
+                    ${embedded ? "</div>" : "</div></div>"}
             `;
         }
 
@@ -17229,6 +17540,170 @@
                     </button>
                 </div>
             `;
+        }
+
+        function getGrammarCollectionIcon(icon) {
+            if (icon === "noun") return "名";
+            if (icon === "suffix") return "尾";
+            const paths = {
+                link: '<path d="m9.5 14.5 5-5M8 15.8l-1 1a3.4 3.4 0 0 1-4.8-4.8l4-4a3.4 3.4 0 0 1 4.8 0M16 8.2l1-1a3.4 3.4 0 0 1 4.8 4.8l-4 4a3.4 3.4 0 0 1-4.8 0"/>',
+                sprout: '<path d="M12 21V11M12 15C5 15 3 10 3 5c6 0 9 3 9 10ZM12 11c0-6 4-8 9-8 0 5-3 8-9 8Z"/>',
+                book: '<path d="M12 6C9 4 6 4 3 5v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1ZM12 6v14"/>'
+            };
+            return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[icon] || paths.book}</svg>`;
+        }
+
+        function getGrammarCollectionsMarkup() {
+            const collections = window.GrammarSearchCollections.getCollections();
+            return `
+                <div class="grammar-collections-heading">
+                    <h3 id="grammar-collections-title">同类语法知识合集</h3>
+                    <p>按类别梳理，集中复习</p>
+                </div>
+                <nav class="grammar-collection-grid" aria-label="语法知识合集">
+                    ${collections.map((collection) => `
+                        <button type="button" class="grammar-collection-entry" data-grammar-collection="${escapeHtml(collection.key)}" data-tone="${escapeHtml(collection.tone)}" aria-label="查看${escapeHtml(collection.title)}合集">
+                            <span class="grammar-collection-icon" aria-hidden="true">${getGrammarCollectionIcon(collection.icon)}</span>
+                            <span class="grammar-collection-copy">
+                                <strong>${escapeHtml(collection.title)}</strong>
+                                <small>${escapeHtml(collection.description)}</small>
+                                <span>${window.GrammarSearchCollections.getItems(collection.key).length} 条语法</span>
+                            </span>
+                            <span class="grammar-collection-arrow" aria-hidden="true">›</span>
+                        </button>
+                    `).join("")}
+                </nav>
+            `;
+        }
+
+        function setGrammarCollectionGroup(key) {
+            if (!window.GrammarSearchCollections.getGroups(grammarActiveCollection).some((group) => group.key === key)) return false;
+            grammarCollectionGroup = key;
+            grammarCollectionPage = 1;
+            grammarCollectionDetailId = null;
+            grammarCollectionBrowserScroll = 0;
+            grammarExpandedExamplesId = null;
+            return true;
+        }
+
+        function resetGrammarCollectionState() {
+            grammarActiveCollection = "";
+            grammarCollectionGroup = "";
+            grammarCollectionPage = 1;
+            grammarCollectionDetailId = null;
+            grammarCollectionCardFocusId = null;
+            grammarCollectionBrowserScroll = 0;
+            grammarCollectionRailScroll = 0;
+        }
+
+        function selectGrammarCollection(key) {
+            if (!window.GrammarSearchCollections.getCollection(key)) return false;
+            resetGrammarCollectionState();
+            grammarActiveCollection = key;
+            grammarCollectionGroup = window.GrammarSearchCollections.getGroups(key)[0]?.key || "";
+            grammarExpandedExamplesId = null;
+            return true;
+        }
+
+        function getGrammarCollectionResults() {
+            return window.GrammarSearchCollections.getGroups(grammarActiveCollection)
+                .find((group) => group.key === grammarCollectionGroup)?.items || [];
+        }
+
+        function getGrammarCollectionNavigationMarkup(groups) {
+            return `
+                <aside class="grammar-collection-navigation">
+                    <div class="grammar-collection-rail">
+                        <div class="grammar-collection-rail-label">语法分组</div>
+                        <nav aria-label="切换语法分组">
+                            ${groups.map((group) => `
+                                <button type="button" data-grammar-collection-group="${escapeHtml(group.key)}"${grammarCollectionGroup === group.key ? ' aria-current="true"' : ""}>
+                                    <span>${escapeHtml(group.title)}</span><span>${group.items.length}</span>
+                                </button>
+                            `).join("")}
+                        </nav>
+                    </div>
+                    <label class="grammar-collection-mobile-group">
+                        <span>分组</span>
+                        <select data-grammar-collection-group-select aria-label="切换语法分组">
+                            ${groups.map((group) => `<option value="${escapeHtml(group.key)}"${grammarCollectionGroup === group.key ? " selected" : ""}>${escapeHtml(group.title)} · ${group.items.length} 条</option>`).join("")}
+                        </select>
+                    </label>
+                </aside>
+            `;
+        }
+
+        function getGrammarCollectionCardMarkup(item) {
+            return `
+                <button type="button" class="grammar-collection-grammar-tile" data-grammar-select="${escapeHtml(item.id)}" aria-label="查看 ${escapeHtml(item.title)} 的完整讲解">
+                    <span class="grammar-collection-grammar-meta"><span>${escapeHtml(item.level)}</span><span class="grammar-collection-grammar-arrow" aria-hidden="true">↗</span></span>
+                    <strong lang="ja">${escapeHtml(item.title)}</strong>
+                    <span class="grammar-collection-grammar-meaning">${escapeHtml(item.meaning)}</span>
+                </button>
+            `;
+        }
+
+        function getGrammarCollectionBrowserMarkup() {
+            const api = window.GrammarSearchCollections;
+            const groups = api.getGroups(grammarActiveCollection);
+            const group = groups.find((item) => item.key === grammarCollectionGroup);
+            const page = api.getPage(getGrammarCollectionResults(), grammarCollectionPage);
+            return `
+                <section class="grammar-collection-browser">
+                    ${getGrammarCollectionNavigationMarkup(groups)}
+                    <div class="grammar-collection-main">
+                        <header class="grammar-collection-main-heading">
+                            <h3 tabindex="-1" data-grammar-collection-heading>${escapeHtml(group?.title || "语法")}</h3>
+                            <span role="status">${page.total} 条语法</span>
+                        </header>
+                        <div class="grammar-collection-card-scroll" data-grammar-collection-scroll>
+                            ${page.total ? `<div class="grammar-collection-grammar-grid">${page.items.map(getGrammarCollectionCardMarkup).join("")}</div>` : '<div class="grammar-collection-empty"><strong>该分组暂无语法</strong><p>请选择其他分组继续查看。</p></div>'}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function getGrammarCollectionPaginationMarkup() {
+            const page = window.GrammarSearchCollections.getPage(getGrammarCollectionResults(), grammarCollectionPage);
+            return `
+                <span class="grammar-collection-page-range">${page.total ? `${page.start}–${page.end} / ${page.total} 条` : "0 条结果"}</span>
+                <nav class="grammar-collection-pagination" aria-label="语法分页">
+                    <button type="button" data-grammar-collection-page="${page.page - 1}"${page.page === 1 ? " disabled" : ""} aria-label="上一页语法">← 上一页</button>
+                    <span>${page.page} / ${page.pageCount}</span>
+                    <button type="button" data-grammar-collection-page="${page.page + 1}"${page.page === page.pageCount ? " disabled" : ""} aria-label="下一页语法">下一页 →</button>
+                </nav>
+            `;
+        }
+
+        function getGrammarCollectionModalMarkup() {
+            const api = window.GrammarSearchCollections;
+            const collection = api.getCollection(grammarActiveCollection);
+            if (!collection) return "";
+            const detail = grammarCollectionDetailId ? getGrammarItemById(grammarCollectionDetailId) : null;
+            const isFav = detail && isGrammarFavorite(detail.canonicalId);
+            return `
+                <div class="grammar-legacy-modal grammar-collection-modal" data-grammar-collection-close>
+                    <section class="grammar-collection-dialog${detail ? " is-detail" : " is-browsing"}" role="dialog" aria-modal="true" aria-labelledby="grammar-collection-dialog-title" tabindex="-1">
+                        <header class="grammar-collection-dialog-header">
+                            ${detail ? '<button type="button" class="grammar-collection-detail-back" data-grammar-collection-detail-back>← 返回合集</button>' : ""}
+                            <div class="grammar-collection-dialog-title"><h2 id="grammar-collection-dialog-title" tabindex="-1">${escapeHtml(collection.title)}</h2>${detail ? "" : `<span>${api.getItems(collection.key).length} 条语法</span>`}</div>
+                            ${detail ? `<button type="button" class="grammar-collection-detail-favorite${isFav ? " is-fav" : ""}" data-grammar-favorite="${escapeHtml(detail.canonicalId)}" aria-label="${isFav ? "取消收藏" : "收藏"} ${escapeHtml(detail.title)}" aria-pressed="${isFav}"><span aria-hidden="true">🍁</span></button>` : ""}
+                            <button type="button" class="grammar-collection-close" data-grammar-collection-close aria-label="关闭语法合集"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+                        </header>
+                        ${detail ? `<div class="grammar-collection-detail-scroll" data-grammar-collection-detail-scroll>${getGrammarDetailMarkup(detail, { embedded: true })}</div>` : `
+                            <nav class="grammar-collection-tabs" aria-label="切换语法合集">${api.getCollections().map((item) => `<button type="button" data-grammar-collection-switch="${escapeHtml(item.key)}" aria-pressed="${item.key === collection.key}">${escapeHtml(item.title)}</button>`).join("")}</nav>
+                            <div class="grammar-collection-browse-host" data-grammar-collection-browse>${getGrammarCollectionBrowserMarkup()}</div>
+                            <footer class="grammar-collection-footer" data-grammar-collection-footer>${getGrammarCollectionPaginationMarkup()}</footer>
+                        `}
+                    </section>
+                </div>
+            `;
+        }
+
+        function getGrammarSearchResultsMarkup(results) {
+            if (!normalizeGrammarText(grammarSearchQuery)) return "";
+            return results.map(getGrammarResultMarkup).join("");
         }
 
         function getGrammarSearchViewMarkup() {
@@ -17255,7 +17730,7 @@
                         <span class="grammar-mobile-search-icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg>
                         </span>
-                        <input type="text" class="grammar-legacy-search-input" value="${escapeHtml(grammarSearchQuery)}" placeholder="输入语法、假名或中文含义" data-grammar-search-input>
+                        <input type="text" class="grammar-legacy-search-input" value="${escapeHtml(grammarSearchQuery)}" placeholder="输入语法、假名或中文含义" aria-label="搜索语法" data-grammar-search-input>
                         <button type="button" class="grammar-legacy-search-clear" data-grammar-search-clear="search" aria-label="清空搜索"${grammarSearchQuery ? "" : " hidden"}>✕</button>
                     </div>
                     <div class="grammar-legacy-filter-bar" data-grammar-search-filters aria-label="搜索结果筛选"${hasQuery ? "" : " hidden"}>
@@ -17306,6 +17781,9 @@
                         <button type="button" data-grammar-quick-query="に限って"><span>に限って</span><small>偏偏……</small><i aria-hidden="true">›</i></button>
                         <button type="button" data-grammar-quick-query="とは限らない"><span>とは限らない</span><small>未必……</small><i aria-hidden="true">›</i></button>
                     </section>
+                    <section class="grammar-collections" data-grammar-collections aria-labelledby="grammar-collections-title"${hasQuery ? " hidden" : ""}>
+                        ${getGrammarCollectionsMarkup()}
+                    </section>
                 </section>
                 <div class="grammar-legacy-container">
                     <div class="grammar-legacy-status${hasQuery && !results.length ? " is-visible" : ""}">
@@ -17314,7 +17792,7 @@
                             <h3>未找到结果</h3>
                         ` : ""}
                     </div>
-                    <div class="grammar-legacy-grid">${hasQuery ? results.map(getGrammarResultMarkup).join("") : ""}</div>
+                    <div class="grammar-legacy-grid">${getGrammarSearchResultsMarkup(results)}</div>
                 </div>
             `;
         }
@@ -17549,6 +18027,7 @@
             const grid = panel.querySelector(".grammar-legacy-grid");
             const mobileResultCount = panel.querySelector("[data-grammar-mobile-result-count]");
             const mobileSuggestions = panel.querySelector("[data-grammar-mobile-suggestions]");
+            const collections = panel.querySelector("[data-grammar-collections]");
 
             if (clearButton) {
                 clearButton.hidden = !grammarSearchQuery;
@@ -17570,7 +18049,7 @@
             }
 
             if (grid) {
-                grid.innerHTML = hasQuery ? results.map(getGrammarResultMarkup).join("") : "";
+                grid.innerHTML = getGrammarSearchResultsMarkup(results);
             }
 
             if (mobileResultCount) {
@@ -17581,6 +18060,7 @@
             if (mobileSuggestions) {
                 mobileSuggestions.hidden = hasQuery || getGrammarRecentSearchItems().length > 0;
             }
+            if (collections) collections.hidden = hasQuery;
             updateGrammarModalHost();
 
             grammarSearchPanelDirty = false;
@@ -17611,6 +18091,118 @@
             return true;
         }
 
+        function syncGrammarCollectionIsolation(host, isOpen) {
+            if (isOpen && !grammarCollectionScrollLock) {
+                grammarCollectionScrollLock = {
+                    htmlOverflow: document.documentElement.style.overflow,
+                    bodyOverflow: document.body.style.overflow,
+                    panelOverflow: contentPanel?.style.overflow || "",
+                    panelScroll: contentPanel?.scrollTop || 0
+                };
+                document.documentElement.style.overflow = "hidden";
+                document.body.style.overflow = "hidden";
+                if (contentPanel) contentPanel.style.overflow = "hidden";
+                grammarCollectionInertElements = [...document.body.children]
+                    .filter((element) => element !== host && !["SCRIPT", "STYLE", "LINK"].includes(element.tagName))
+                    .map((element) => ({ element, inert: element.inert }));
+                grammarCollectionInertElements.forEach(({ element }) => { element.inert = true; });
+            } else if (!isOpen && grammarCollectionScrollLock) {
+                document.documentElement.style.overflow = grammarCollectionScrollLock.htmlOverflow;
+                document.body.style.overflow = grammarCollectionScrollLock.bodyOverflow;
+                if (contentPanel) {
+                    contentPanel.style.overflow = grammarCollectionScrollLock.panelOverflow;
+                    contentPanel.scrollTop = grammarCollectionScrollLock.panelScroll;
+                }
+                grammarCollectionInertElements.forEach(({ element, inert }) => { element.inert = inert; });
+                grammarCollectionInertElements = [];
+                grammarCollectionScrollLock = null;
+            }
+            document.body.classList.toggle("is-grammar-collection-open", isOpen);
+            host.classList.toggle("is-collection-open", isOpen);
+        }
+
+        function openGrammarCollection(key, trigger) {
+            if (!selectGrammarCollection(key)) return;
+            grammarCollectionReturnFocus = trigger || document.activeElement;
+            grammarSelectedId = null;
+            updateGrammarModalHost();
+            requestAnimationFrame(() => document.getElementById("grammar-collection-dialog-title")?.focus({ preventScroll: true }));
+        }
+
+        function closeGrammarCollection() {
+            const trigger = grammarCollectionReturnFocus;
+            const collectionKey = grammarActiveCollection;
+            resetGrammarCollectionState();
+            grammarCollectionReturnFocus = null;
+            grammarExpandedExamplesId = null;
+            updateGrammarModalHost();
+            requestAnimationFrame(() => {
+                const target = trigger?.isConnected ? trigger : featurePanels.querySelector(`[data-grammar-collection="${collectionKey}"]`);
+                target?.focus({ preventScroll: true });
+            });
+        }
+
+        function showGrammarCollectionDetail(id) {
+            const item = getGrammarItemById(id);
+            if (!item) return;
+            if (!grammarCollectionDetailId) {
+                grammarCollectionBrowserScroll = document.querySelector("[data-grammar-collection-scroll]")?.scrollTop || 0;
+                grammarCollectionRailScroll = document.querySelector(".grammar-collection-rail nav")?.scrollTop || 0;
+                grammarCollectionCardFocusId = item.id;
+            }
+            grammarCollectionDetailId = item.id;
+            grammarExpandedExamplesId = null;
+            recordGrammarRecentSearch(item.id);
+            updateGrammarModalHost();
+            requestAnimationFrame(() => document.querySelector("[data-grammar-collection-detail-back]")?.focus({ preventScroll: true }));
+        }
+
+        function backToGrammarCollection() {
+            grammarCollectionDetailId = null;
+            grammarExpandedExamplesId = null;
+            updateGrammarModalHost();
+            requestAnimationFrame(() => document.querySelector(`.grammar-collection-grammar-tile[data-grammar-select="${grammarCollectionCardFocusId}"]`)?.focus({ preventScroll: true }));
+        }
+
+        function updateGrammarCollectionResultsOnly() {
+            const host = document.getElementById("grammar-modal-layer");
+            const browse = host?.querySelector("[data-grammar-collection-browse]");
+            if (!browse || !grammarActiveCollection || grammarCollectionDetailId) return false;
+            grammarCollectionRailScroll = host.querySelector(".grammar-collection-rail nav")?.scrollTop || grammarCollectionRailScroll;
+            browse.innerHTML = getGrammarCollectionBrowserMarkup();
+            const footer = host.querySelector("[data-grammar-collection-footer]");
+            if (footer) footer.innerHTML = getGrammarCollectionPaginationMarkup();
+            const scroll = host.querySelector("[data-grammar-collection-scroll]");
+            if (scroll) scroll.scrollTop = grammarCollectionBrowserScroll;
+            const rail = host.querySelector(".grammar-collection-rail nav");
+            if (rail) rail.scrollTop = grammarCollectionRailScroll;
+            return true;
+        }
+
+        function handleGrammarCollectionKeydown(event) {
+            if (!grammarActiveCollection || event.isComposing || event.keyCode === 229) return;
+            if (event.key === "Escape") {
+                event.preventDefault();
+                event.stopPropagation();
+                if (grammarCollectionDetailId) backToGrammarCollection();
+                else closeGrammarCollection();
+                return;
+            }
+            if (event.key !== "Tab") return;
+            const dialog = document.querySelector(".grammar-collection-dialog");
+            if (!dialog) return;
+            const focusable = [...dialog.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href], [tabindex="0"]')]
+                .filter((element) => !element.hidden && element.getClientRects().length);
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (!first) { event.preventDefault(); dialog.focus(); return; }
+            if (event.shiftKey && (document.activeElement === first || !focusable.includes(document.activeElement))) {
+                event.preventDefault(); last.focus();
+            } else if (!event.shiftKey && (document.activeElement === last || !focusable.includes(document.activeElement))) {
+                event.preventDefault(); first.focus();
+            }
+        }
+
         function updateGrammarModalHost() {
             let host = document.getElementById("grammar-modal-layer");
             if (!host) {
@@ -17618,9 +18210,45 @@
                 host.id = "grammar-modal-layer";
                 host.className = "grammar-legacy-modal-portal";
                 host.addEventListener("click", handleGrammarModalLayerClick);
+                host.addEventListener("change", (event) => {
+                    if (!event.target.matches("[data-grammar-collection-group-select]")) return;
+                    if (!setGrammarCollectionGroup(event.target.value)) return;
+                    updateGrammarCollectionResultsOnly();
+                    host.querySelector("[data-grammar-collection-group-select]")?.focus({ preventScroll: true });
+                });
+                host.addEventListener("keydown", handleGrammarCollectionKeydown);
+                document.addEventListener("focusin", (event) => {
+                    if (grammarActiveCollection && activeSection === "grammar-search" && !host.contains(event.target)) {
+                        host.querySelector(".grammar-collection-dialog")?.focus({ preventScroll: true });
+                    }
+                });
                 document.body.appendChild(host);
             }
 
+            if (grammarActiveCollection && activeSection !== "grammar-search") resetGrammarCollectionState();
+            const isCollectionOpen = Boolean(grammarActiveCollection);
+            if (isCollectionOpen) {
+                const viewKey = `${grammarActiveCollection}:${grammarCollectionDetailId || "browse"}`;
+                const isSameView = host.dataset.collectionView === viewKey;
+                const scroll = host.querySelector(grammarCollectionDetailId ? "[data-grammar-collection-detail-scroll]" : "[data-grammar-collection-scroll]");
+                const currentScroll = isSameView && scroll ? scroll.scrollTop : grammarCollectionDetailId ? 0 : grammarCollectionBrowserScroll;
+                const active = host.contains(document.activeElement) ? document.activeElement : null;
+                const favoriteId = active?.getAttribute("data-grammar-favorite");
+                const moreId = active?.getAttribute("data-grammar-more-examples");
+                host.innerHTML = getGrammarCollectionModalMarkup();
+                host.dataset.collectionView = viewKey;
+                const nextScroll = host.querySelector(grammarCollectionDetailId ? "[data-grammar-collection-detail-scroll]" : "[data-grammar-collection-scroll]");
+                if (nextScroll) nextScroll.scrollTop = currentScroll;
+                const rail = host.querySelector(".grammar-collection-rail nav");
+                if (rail) rail.scrollTop = grammarCollectionRailScroll;
+                if (isSameView && favoriteId) host.querySelector(`[data-grammar-favorite="${favoriteId}"]`)?.focus({ preventScroll: true });
+                else if (isSameView && moreId) host.querySelector(`[data-grammar-more-examples="${moreId}"]`)?.focus({ preventScroll: true });
+                syncGrammarCollectionIsolation(host, true);
+                document.body.classList.add("is-grammar-modal-open");
+                return true;
+            }
+            delete host.dataset.collectionView;
+            syncGrammarCollectionIsolation(host, false);
             const selectedItem = activeSection === "grammar-search" && grammarSelectedId
                 ? getGrammarItemById(grammarSelectedId)
                 : null;
@@ -17630,12 +18258,58 @@
         }
 
         function closeGrammarDetailModal() {
+            if (grammarActiveCollection) {
+                if (grammarCollectionDetailId) backToGrammarCollection();
+                else closeGrammarCollection();
+                return;
+            }
             grammarSelectedId = null;
             grammarExpandedExamplesId = null;
             updateGrammarModalHost();
         }
 
         function handleGrammarModalLayerClick(event) {
+            if (grammarActiveCollection) {
+                const close = event.target.closest("[data-grammar-collection-close]");
+                if (close && (close.tagName === "BUTTON" || event.target === close)) {
+                    event.preventDefault(); closeGrammarCollection(); return;
+                }
+                if (event.target.closest("[data-grammar-collection-detail-back]")) {
+                    event.preventDefault(); backToGrammarCollection(); return;
+                }
+                const collectionSwitch = event.target.closest("[data-grammar-collection-switch]");
+                if (collectionSwitch) {
+                    event.preventDefault();
+                    const key = collectionSwitch.getAttribute("data-grammar-collection-switch");
+                    if (!selectGrammarCollection(key)) return;
+                    updateGrammarModalHost();
+                    document.querySelector(`[data-grammar-collection-switch="${key}"]`)?.focus({ preventScroll: true });
+                    return;
+                }
+                const group = event.target.closest("[data-grammar-collection-group]");
+                if (group) {
+                    event.preventDefault();
+                    const key = group.getAttribute("data-grammar-collection-group");
+                    if (!setGrammarCollectionGroup(key)) return;
+                    updateGrammarCollectionResultsOnly();
+                    document.querySelector(`[data-grammar-collection-group="${key}"]`)?.focus({ preventScroll: true });
+                    return;
+                }
+                const page = event.target.closest("[data-grammar-collection-page]");
+                if (page) {
+                    event.preventDefault();
+                    if (page.disabled) return;
+                    grammarCollectionPage = window.GrammarSearchCollections.getPage(getGrammarCollectionResults(), page.getAttribute("data-grammar-collection-page")).page;
+                    grammarCollectionBrowserScroll = 0;
+                    updateGrammarCollectionResultsOnly();
+                    const heading = document.querySelector("[data-grammar-collection-heading]");
+                    const focusTarget = heading?.getClientRects().length ? heading : document.querySelector("[data-grammar-collection-group-select]");
+                    focusTarget?.focus({ preventScroll: true });
+                    return;
+                }
+                const item = event.target.closest("[data-grammar-select]");
+                if (item) { event.preventDefault(); showGrammarCollectionDetail(item.getAttribute("data-grammar-select")); return; }
+            }
             if (event.target.matches("[data-grammar-modal-close]")) {
                 event.preventDefault();
                 closeGrammarDetailModal();
@@ -17691,36 +18365,37 @@
             }
         }
 
-        function getWordBankRowMarkup(entry) {
+        function getWordBankRowMarkup(entry, index) {
             const safeId = escapeHtml(entry.id);
             const word = entry.word || "未命名词条";
             const meaning = entry.meaning || entry.meaningZh || entry.meaningJa || entry.note || entry.example || "暂无释义";
             const sourceId = getWordBankSourceCategory(entry);
             const sourceLabel = getWordBankSourceLabel(sourceId);
             const sourceTitle = String(entry.sourceTitle || entry.sourceUrl || sourceLabel).trim();
+            const headwordParts = getWordBankApi()?.getHeadwordFuriganaParts?.(word, entry.reading) || [{ text: word }];
+            const hasRuby = headwordParts.some((part) => Boolean(part.reading));
+            const headwordMarkup = headwordParts.map((part) => part.reading
+                ? `<ruby><rb>${escapeHtml(part.text)}</rb><rt>${escapeHtml(part.reading)}</rt></ruby>`
+                : escapeHtml(part.text)).join("");
 
             return `
                 <article class="word-bank-entry-row" data-word-bank-id="${safeId}" data-source-tone="${escapeHtml(sourceId)}">
                     <button type="button" class="word-bank-entry-main" data-word-bank-view="${safeId}" aria-label="查看 ${escapeHtml(word)} 的词条详情">
                         <span class="word-bank-entry-word">
-                            <strong>${escapeHtml(word)}</strong>
-                            ${entry.reading ? `<small>${escapeHtml(entry.reading)}</small>` : ""}
+                            <span class="word-bank-entry-index" aria-hidden="true">${String((wordBankPage - 1) * WORD_BANK_PAGE_SIZE + index + 1).padStart(2, "0")}</span>
+                            <span class="word-bank-entry-spelling">
+                                <strong lang="ja"${hasRuby ? ' class="has-ruby"' : ""}>${headwordMarkup}</strong>
+                            </span>
                         </span>
                         <span class="word-bank-entry-meaning">${escapeHtml(meaning)}</span>
                         <span class="word-bank-entry-source" title="${escapeHtml(sourceTitle)}">${escapeHtml(sourceLabel)}</span>
                     </button>
                     <div class="word-bank-entry-actions">
-                        <button type="button" class="word-bank-icon-button" data-word-bank-edit="${safeId}" aria-label="编辑 ${escapeHtml(word)}">
-                            ${getWordBankIcon("edit")}
-                        </button>
-                        <button type="button" class="word-bank-icon-button" data-word-bank-delete="${safeId}" aria-label="删除 ${escapeHtml(word)}">
-                            ${getWordBankIcon("delete")}
-                        </button>
-                        <details class="word-bank-entry-menu">
+                        <details class="word-bank-entry-menu" name="word-bank-entry-menu">
                             <summary aria-label="管理 ${escapeHtml(word)}">${getWordBankIcon("more")}</summary>
                             <div class="word-bank-entry-menu-popover">
-                                <button type="button" data-word-bank-edit="${safeId}">编辑词条</button>
-                                <button type="button" data-word-bank-delete="${safeId}">删除词条</button>
+                                <button type="button" data-word-bank-edit="${safeId}" aria-label="编辑 ${escapeHtml(word)}">编辑词条</button>
+                                <button type="button" data-word-bank-delete="${safeId}" aria-label="删除 ${escapeHtml(word)}">删除词条</button>
                             </div>
                         </details>
                     </div>
@@ -17738,6 +18413,36 @@
             `;
         }
 
+        function getWordBankPaginationMarkup(totalEntries, totalPages) {
+            const firstEntry = totalEntries ? (wordBankPage - 1) * WORD_BANK_PAGE_SIZE + 1 : 0;
+            const lastEntry = Math.min(wordBankPage * WORD_BANK_PAGE_SIZE, totalEntries);
+            const entryRange = firstEntry === lastEntry ? String(lastEntry) : `${firstEntry}–${lastEntry}`;
+            const pages = Array.from(new Set([1, totalPages, wordBankPage - 1, wordBankPage, wordBankPage + 1]))
+                .filter((page) => page >= 1 && page <= totalPages)
+                .sort((a, b) => a - b);
+            const pageButton = (page) => `<button type="button" class="word-bank-page-number${page === wordBankPage ? " is-active" : ""}" data-word-bank-page="${page}" aria-label="第 ${page} 页"${page === wordBankPage ? ' aria-current="page"' : ""}>${page}</button>`;
+            let previousPage = 0;
+            const pageNumbers = pages.map((page) => {
+                const gap = page - previousPage;
+                const separator = previousPage && gap > 1
+                    ? gap === 2 ? pageButton(page - 1) : '<span class="word-bank-page-ellipsis" aria-hidden="true">…</span>'
+                    : "";
+                previousPage = page;
+                return separator + pageButton(page);
+            }).join("");
+            return `
+                <footer class="word-bank-pagination-footer">
+                    <span class="word-bank-page-range" role="status">${entryRange} / ${totalEntries} 个词汇</span>
+                    <nav class="word-bank-pagination" aria-label="词汇分页" tabindex="-1">
+                        <button type="button" class="word-bank-page-arrow" data-word-bank-page="${wordBankPage - 1}" aria-label="上一页"${wordBankPage <= 1 ? " disabled" : ""}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg></button>
+                        ${pageNumbers}
+                        <span class="word-bank-page-current" aria-hidden="true">${wordBankPage} / ${totalPages}</span>
+                        <button type="button" class="word-bank-page-arrow" data-word-bank-page="${wordBankPage + 1}" aria-label="下一页"${wordBankPage >= totalPages ? " disabled" : ""}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg></button>
+                    </nav>
+                </footer>
+            `;
+        }
+
         function getWordBankPanelMarkup() {
             const entries = getWordBankEntries();
             if (!WORD_BANK_SOURCE_CATEGORIES.some((category) => category.id === wordBankActiveSource)) {
@@ -17747,6 +18452,14 @@
                 wordBankOriginFilter = "official";
             }
             const filteredEntries = getFilteredWordBankEntries(entries);
+            const filterKey = JSON.stringify([wordBankQuery.trim().toLowerCase(), wordBankActiveSource, wordBankOriginFilter, wordBankPartOfSpeechFilter, wordBankSort]);
+            if (filterKey !== wordBankPaginationFilterKey) {
+                wordBankPage = 1;
+                wordBankPaginationFilterKey = filterKey;
+            }
+            const totalPages = Math.max(1, Math.ceil(filteredEntries.length / WORD_BANK_PAGE_SIZE));
+            wordBankPage = Math.min(Math.max(1, wordBankPage), totalPages);
+            const visibleEntries = filteredEntries.slice((wordBankPage - 1) * WORD_BANK_PAGE_SIZE, wordBankPage * WORD_BANK_PAGE_SIZE);
             const sourceGroups = WORD_BANK_SOURCE_GROUPS.map((group) => {
                 const groupEntries = entries.filter((entry) => group.id === "official"
                     ? isOfficialWordBankEntry(entry)
@@ -17836,12 +18549,16 @@
             return `
                 <div class="word-bank-board" data-word-bank-panel>
                     <div class="word-bank-toolbar">
+                        <div class="word-bank-page-heading">
+                            <h2 class="word-bank-page-title">我推の単語<svg class="word-bank-title-paw" viewBox="0 0 28 28" aria-hidden="true"><ellipse cx="6" cy="10" rx="3" ry="4" transform="rotate(-28 6 10)"></ellipse><ellipse cx="12" cy="5.5" rx="3" ry="4"></ellipse><ellipse cx="19" cy="6.5" rx="3" ry="4" transform="rotate(18 19 6.5)"></ellipse><ellipse cx="24" cy="12" rx="2.8" ry="3.7" transform="rotate(30 24 12)"></ellipse><path d="M6.5 21c0-3.1 2.7-4.2 4-6.7 1.5-2.8 5.5-2.8 7 0 1.5 2.5 4 3.6 4 6.7 0 3.1-2.5 4.8-5.1 3.7a6.3 6.3 0 0 0-5 0C8.8 25.8 6.5 24.1 6.5 21Z"></path></svg></h2>
+                            <p class="word-bank-page-subtitle" lang="ja">好きな言葉を集めて、日々を少し豊かに。</p>
+                        </div>
                         <label class="word-bank-search-wrap">
                             <span class="word-bank-search-icon" aria-hidden="true"></span>
                             <input class="word-bank-search" type="search" value="${escapeHtml(wordBankQuery)}" placeholder="搜索单词、读音、释义或来源" aria-label="搜索我推の単語" data-word-bank-search>
                         </label>
                         <div class="word-bank-tools">
-                            <button type="button" class="word-bank-action word-bank-action--primary" data-word-bank-add><span aria-hidden="true">+</span> 添加词汇</button>
+                            <button type="button" class="word-bank-action word-bank-action--primary" data-word-bank-add aria-label="添加词汇"><span aria-hidden="true">+</span><span class="word-bank-add-label">添加词汇</span></button>
                             <details class="word-bank-more">
                                 <summary aria-label="更多单词库操作">${getWordBankIcon("more")}</summary>
                                 <div class="word-bank-more-menu">
@@ -17852,6 +18569,9 @@
                             </details>
                             <input class="word-bank-file-input" type="file" accept="application/json,.json" data-word-bank-import-file>
                         </div>
+                    </div>
+                    <div class="word-bank-mascot" aria-hidden="true">
+                        <img src="assets/home-redesign/word-bank-shiba-peek.png" width="1254" height="1254" alt="" loading="lazy" decoding="async" draggable="false">
                     </div>
                     <div class="word-bank-library">
                         <div class="word-bank-mobile-filters" aria-label="词汇收藏筛选">
@@ -17876,12 +18596,16 @@
                             </div>
                         </div>
                         <aside class="word-bank-source-directory" aria-label="词汇来源分类">
-                            <h3>来源</h3>
+                            <h3><span lang="ja">目次</span><span class="word-bank-directory-hint">来源分类</span></h3>
                             <div class="word-bank-source-list">${sourceGroups}</div>
                         </aside>
                         <section class="word-bank-collection" data-source-tone="${escapeHtml(wordBankActiveSource)}" aria-label="${escapeHtml(activeCollectionLabel)}">
                             <div class="word-bank-collection-toolbar">
-                                <h3>${escapeHtml(activeCollectionLabel)}</h3>
+                                <div class="word-bank-collection-heading">
+                                    <span class="word-bank-collection-seal" aria-hidden="true">蔵書</span>
+                                    <h3>${escapeHtml(activeCollectionLabel)}</h3>
+                                    <span class="word-bank-result-count" role="status">${filteredEntries.length} 个词条</span>
+                                </div>
                                 <div class="word-bank-view-filters">
                                     <select data-word-bank-pos-filter aria-label="按词性筛选">${partOfSpeechOptions}</select>
                                 </div>
@@ -17890,8 +18614,9 @@
                                 <span>词汇</span><span>释义</span><span>来源</span><span></span>
                             </div>
                             ${filteredEntries.length
-                                ? `<div class="word-bank-list">${filteredEntries.map(getWordBankRowMarkup).join("")}</div>`
+                                ? `<div class="word-bank-list">${visibleEntries.map(getWordBankRowMarkup).join("")}</div>`
                                 : getWordBankEmptyMarkup(entries.length > 0)}
+                            ${getWordBankPaginationMarkup(filteredEntries.length, totalPages)}
                         </section>
                     </div>
                 </div>
@@ -17904,7 +18629,6 @@
                 return;
             }
             panel.innerHTML = `
-                ${getSectionHeaderMarkup("word-bank", getSectionViewState("word-bank"))}
                 ${getWordBankPanelMarkup()}
             `;
             panel.dataset.rendered = "word-bank:root";
@@ -19028,16 +19752,6 @@
                         </nav>
                     </div>
 
-                    <section class="plan-preset-status" data-plan-preset-status hidden aria-label="已导入的预设计划">
-                        <span class="plan-preset-status-mark" aria-hidden="true">予</span>
-                        <div>
-                            <small data-plan-preset-status-label>導入済み</small>
-                            <strong data-plan-preset-status-title>TRY！N2 课程计划</strong>
-                        </div>
-                        <span data-plan-preset-status-progress>14 / 14课</span>
-                        <button type="button" data-plan-preset-jump>查看课程</button>
-                    </section>
-
                     <section class="plan-insights-view" data-plan-insights-view hidden aria-labelledby="plan-insights-title">
                         <header class="plan-insights-intro">
                             <div>
@@ -19677,21 +20391,6 @@
             });
         }
 
-        function syncDesktopHomeFrameHeight() {
-            if (!pageShell || window.innerWidth <= 1366 || !document.body.classList.contains("is-home-view")) {
-                return;
-            }
-
-            const frameHeight = Math.ceil(pageShell.getBoundingClientRect().height);
-            if (frameHeight > 0) {
-                document.documentElement.style.setProperty("--desktop-home-frame-height", `${frameHeight}px`);
-            }
-        }
-
-        function scheduleDesktopHomeFrameSync() {
-            window.requestAnimationFrame(syncDesktopHomeFrameHeight);
-        }
-
         function renderNotice(syncHash = true) {
             activeSection = null;
             activeSectionPath = [];
@@ -19703,7 +20402,6 @@
             setActiveSwitch(null);
             noticePanel.classList.remove("is-hidden");
             contentPanel.classList.add("is-hidden");
-            scheduleDesktopHomeFrameSync();
             syncHomePet("section-change");
             if (syncHash) {
                 syncSectionHash(null);
@@ -19714,8 +20412,6 @@
             if (!HOME_SECTIONS[sectionKey]) {
                 return;
             }
-
-            syncDesktopHomeFrameHeight();
 
             const validSectionPath = getValidSectionPath(sectionKey, sectionPath);
             activeSection = sectionKey;
@@ -19779,10 +20475,17 @@
             if (globalSiteSearchInput) {
                 globalSiteSearchInput.addEventListener("compositionstart", () => {
                     globalSiteSearchComposing = true;
+                    window.clearTimeout(siteSearchTimer);
                 });
                 globalSiteSearchInput.addEventListener("compositionend", () => {
                     globalSiteSearchComposing = false;
                     globalSiteSearchCompositionEndedAt = Date.now();
+                    if (activeSection === "site-search") queueSiteSearch(globalSiteSearchInput.value);
+                });
+                globalSiteSearchInput.addEventListener("input", (event) => {
+                    if (activeSection === "site-search" && !event.isComposing && !globalSiteSearchComposing) {
+                        queueSiteSearch(globalSiteSearchInput.value);
+                    }
                 });
             }
 
@@ -19792,8 +20495,11 @@
                     return;
                 }
                 siteSearchQuery = globalSiteSearchInput ? globalSiteSearchInput.value.trim() : "";
+                siteSearchVisibleLimit = 20;
+                window.clearTimeout(siteSearchTimer);
                 siteSearchPanelDirty = true;
-                renderSection("site-search", true, true);
+                if (activeSection === "site-search") updateSiteSearchResultsOnly();
+                else renderSection("site-search", true, true);
             });
         }
 
@@ -19813,6 +20519,7 @@
         }
 
         window.addEventListener("kiki-word-bank:changed", () => {
+            siteSearchIndex = null;
             refreshWordBankPanel();
             if (activeSection === "site-search") {
                 refreshSiteSearchPanel();
@@ -19829,6 +20536,47 @@
         featurePanels.addEventListener("pointercancel", resetFixedEntryLongPress);
         featurePanels.addEventListener("pointerleave", resetFixedEntryLongPress);
         featurePanels.addEventListener("contextmenu", handleFixedEntryLongPressContextMenu);
+        featurePanels.addEventListener("toggle", (event) => {
+            const menu = event.target;
+            if (!menu.matches?.(".word-bank-entry-menu") || !menu.open) return;
+            const popover = menu.querySelector(".word-bank-entry-menu-popover");
+            const list = menu.closest(".word-bank-list");
+            if (!popover || !list) return;
+            const triggerBounds = menu.getBoundingClientRect();
+            const listBounds = list.getBoundingClientRect();
+            const menuHeight = popover.offsetHeight;
+            const availableBottom = Math.min(listBounds.bottom, window.innerHeight);
+            const fitsBelow = triggerBounds.bottom + menuHeight + 8 <= availableBottom;
+            const desiredTop = fitsBelow ? triggerBounds.bottom + 4 : triggerBounds.top - menuHeight - 4;
+            const top = Math.max(listBounds.top + 4, desiredTop);
+            popover.style.top = `${top - triggerBounds.top}px`;
+        }, true);
+
+        featurePanels.addEventListener("keydown", (event) => {
+            const menu = event.target.closest?.(".word-bank-entry-menu[open]");
+            if (event.key !== "Escape" || !menu) return;
+            menu.open = false;
+            menu.querySelector("summary").focus();
+            event.stopPropagation();
+        });
+
+        featurePanels.addEventListener("click", (event) => {
+            const pageButton = event.target.closest("[data-word-bank-page]");
+            if (!pageButton || pageButton.disabled) return;
+            const page = Number(pageButton.getAttribute("data-word-bank-page"));
+            if (!Number.isInteger(page) || page < 1 || page === wordBankPage) return;
+            event.preventDefault();
+            wordBankPage = page;
+            refreshWordBankPanel();
+            featurePanels.querySelector(".word-bank-pagination")?.focus({ preventScroll: true });
+        });
+
+        featurePanels.addEventListener("click", (event) => {
+            featurePanels.querySelectorAll(".word-bank-entry-menu[open]").forEach((menu) => {
+                if (!menu.contains(event.target) || event.target.closest("button")) menu.open = false;
+            });
+        });
+
         featurePanels.addEventListener("click", (event) => {
             if (!suppressNextFixedEntryClick) {
                 return;
@@ -19856,10 +20604,49 @@
             }
             const input = siteSearchForm.querySelector("[data-site-search-input]");
             siteSearchQuery = input ? input.value.trim() : "";
+            siteSearchVisibleLimit = 20;
+            window.clearTimeout(siteSearchTimer);
             updateSiteSearchResultsOnly();
         });
 
+        function queueSiteSearch(query) {
+            siteSearchQuery = query;
+            siteSearchVisibleLimit = 20;
+            window.clearTimeout(siteSearchTimer);
+            siteSearchTimer = window.setTimeout(updateSiteSearchResultsOnly, 160);
+        }
+
+        featurePanels.addEventListener("change", (event) => {
+            if (event.target.matches("[data-site-search-level]")) siteSearchLevel = event.target.value;
+            else if (event.target.matches("[data-site-search-sort]")) siteSearchSort = event.target.value;
+            else return;
+            siteSearchVisibleLimit = 20;
+            updateSiteSearchResultsOnly();
+        });
+
+        window.addEventListener("storage", () => {
+            siteSearchIndex = null;
+            if (activeSection === "site-search") updateSiteSearchResultsOnly();
+        });
+
         featurePanels.addEventListener("click", (event) => {
+            const searchCategory = event.target.closest("[data-site-search-category]");
+            const searchReset = event.target.closest("[data-site-search-reset]");
+            const searchMore = event.target.closest("[data-site-search-more]");
+            const searchSuggestion = event.target.closest("[data-site-search-suggestion]");
+            if (searchCategory || searchReset || searchMore || searchSuggestion) {
+                if (searchCategory) siteSearchCategory = searchCategory.dataset.siteSearchCategory;
+                if (searchReset) { siteSearchCategory = "all"; siteSearchLevel = "all"; siteSearchSort = "relevance"; }
+                if (searchSuggestion) siteSearchQuery = searchSuggestion.dataset.siteSearchSuggestion;
+                siteSearchVisibleLimit = searchMore ? siteSearchVisibleLimit + 20 : 20;
+                updateSiteSearchResultsOnly();
+                // Restore focus if a reset/load button was removed from the result list.
+                if (searchMore || searchReset) {
+                    const target = featurePanels.querySelector("[data-site-search-more]") || featurePanels.querySelector(`[data-site-search-category="${siteSearchCategory}"]`);
+                    if (target) target.focus({ preventScroll: true });
+                }
+                return;
+            }
             const grammarDirectoryEntry = event.target.closest("[data-grammar-directory-entry]");
             if (grammarDirectoryEntry) {
                 saveLastViewedGrammarEntry({
@@ -19907,6 +20694,7 @@
                 const grammarId = Number(siteGrammarTarget.getAttribute("data-site-search-grammar-id"));
                 const item = getGrammarItemById(grammarId);
                 grammarActiveView = "search";
+                resetGrammarCollectionState();
                 grammarSearchQuery = item ? String(item.title || "").replace(/^～/, "") : siteSearchQuery;
                 grammarSelectedId = Number.isNaN(grammarId) ? null : grammarId;
                 grammarExpandedExamplesId = null;
@@ -20035,6 +20823,15 @@
                 clearGrammarRecentSearches();
                 const input = featurePanels.querySelector("[data-grammar-search-input]");
                 if (input) input.focus();
+                return;
+            }
+
+            const grammarCollectionTarget = event.target.closest("[data-grammar-collection]");
+            if (grammarCollectionTarget) {
+                const key = grammarCollectionTarget.getAttribute("data-grammar-collection");
+                if (!window.GrammarSearchCollections.getCollection(key)) return;
+                event.preventDefault();
+                openGrammarCollection(key, grammarCollectionTarget);
                 return;
             }
 
@@ -20231,11 +21028,7 @@
             if (siteSearchInput) {
                 siteSearchComposing = false;
                 siteSearchCompositionEndedAt = Date.now();
-                siteSearchQuery = siteSearchInput.value;
-                window.clearTimeout(siteSearchTimer);
-                siteSearchTimer = window.setTimeout(() => {
-                    updateSiteSearchResultsOnly();
-                }, 90);
+                queueSiteSearch(siteSearchInput.value);
                 return;
             }
 
@@ -20271,11 +21064,7 @@
                 if (event.isComposing || siteSearchComposing) {
                     return;
                 }
-                siteSearchQuery = siteSearchInput.value;
-                window.clearTimeout(siteSearchTimer);
-                siteSearchTimer = window.setTimeout(() => {
-                    updateSiteSearchResultsOnly();
-                }, 90);
+                queueSiteSearch(siteSearchInput.value);
                 return;
             }
 
@@ -20521,6 +21310,7 @@
 
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") {
+                if (grammarActiveCollection && (event.isComposing || event.keyCode === 229)) return;
                 if (document.body.classList.contains("is-grammar-modal-open")) {
                     closeGrammarDetailModal();
                     return;
@@ -20583,15 +21373,6 @@
             showSectionPanel("daily", false, activeSectionPath);
         });
 
-        window.addEventListener("load", scheduleDesktopHomeFrameSync, { once: true });
-        window.addEventListener("resize", () => {
-            if (window.innerWidth <= 1366) {
-                document.documentElement.style.removeProperty("--desktop-home-frame-height");
-                return;
-            }
-            scheduleDesktopHomeFrameSync();
-        }, { passive: true });
-
         mountStaticIcons();
         renderSupportCards();
         renderFavoritePresets();
@@ -20621,6 +21402,8 @@
         } else {
             renderNotice(false);
         }
+        delete document.body.dataset.initialSection;
+        delete document.documentElement.dataset.initialSection;
 
         initHomePet();
         if (typeof homePetDesktopQuery.addEventListener === "function") {
@@ -20870,60 +21653,6 @@
     </script>
     <script>
         (() => {
-            const board = document.querySelector("[data-mobile-announcement]");
-            const trigger = board?.querySelector("[data-mobile-announcement-trigger]");
-            const detail = board?.querySelector("[data-mobile-announcement-detail]");
-            if (!board || !trigger || !detail) {
-                return;
-            }
-
-            const mobileQuery = window.matchMedia("(max-width: 980px)");
-
-            function setOpen(open, announce = false) {
-                const nextOpen = Boolean(open && mobileQuery.matches);
-                board.classList.toggle("is-mobile-open", nextOpen);
-                trigger.setAttribute("aria-expanded", String(nextOpen));
-                detail.setAttribute("aria-hidden", String(mobileQuery.matches ? !nextOpen : false));
-                if (nextOpen && announce) {
-                    document.dispatchEvent(new CustomEvent("kiki:mobile-disclosure-open", { detail: { source: "announcement" } }));
-                }
-            }
-
-            trigger.addEventListener("click", () => {
-                const open = trigger.getAttribute("aria-expanded") !== "true";
-                setOpen(open, open);
-            });
-
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape" && trigger.getAttribute("aria-expanded") === "true") {
-                    setOpen(false);
-                    trigger.focus({ preventScroll: true });
-                }
-            });
-
-            document.addEventListener("kiki:mobile-disclosure-open", (event) => {
-                if (event.detail?.source !== "announcement") {
-                    setOpen(false);
-                }
-            });
-
-            const handleViewportChange = () => setOpen(false);
-            if (typeof mobileQuery.addEventListener === "function") {
-                mobileQuery.addEventListener("change", handleViewportChange);
-            } else if (typeof mobileQuery.addListener === "function") {
-                mobileQuery.addListener(handleViewportChange);
-            }
-            window.addEventListener("resize", () => {
-                if (!mobileQuery.matches) {
-                    setOpen(false);
-                }
-            }, { passive: true });
-
-            setOpen(false);
-        })();
-    </script>
-    <script>
-        (() => {
             const card = document.querySelector("[data-monthly-fortune-card]");
             if (!card) {
                 return;
@@ -21146,8 +21875,32 @@
             const dots = Array.from(carousel?.querySelectorAll("[data-home-rail-carousel-dot]") || []);
             const previousButton = carousel?.querySelector("[data-home-rail-carousel-prev]");
             const nextButton = carousel?.querySelector("[data-home-rail-carousel-next]");
+            const categoryTabs = Array.from(carousel?.querySelectorAll("[data-feature-tab]") || []);
+            const categoryLinks = Array.from(carousel?.querySelectorAll("[data-feature-more]") || []);
             const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-            let activeIndex = 0;
+            const categoryPositions = new Map();
+            // Article dates decide the initial column; manual tab/paging choices stay untouched afterward.
+            // For culture cards (or later revisions), set data-feature-updated-at to the content update date.
+            // Reading cards already expose their publication date through <time datetime>.
+            const parseFeatureDate = (value) => {
+                const normalized = String(value || "").trim();
+                const match = normalized.match(/^(\d{4})[.-](\d{2})[.-](\d{2})(?:T.*)?$/);
+                if (!match) return -Infinity;
+                const [year, month, day] = match.slice(1).map(Number);
+                const date = new Date(Date.UTC(year, month - 1, day));
+                if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) return -Infinity;
+                const timestamp = normalized.includes("T") ? Date.parse(normalized) : date.getTime();
+                return Number.isFinite(timestamp) ? timestamp : -Infinity;
+            };
+            const slideDates = slides.map((slide) => {
+                const updated = parseFeatureDate(slide.dataset.featureUpdatedAt);
+                return Number.isFinite(updated) ? updated : parseFeatureDate(slide.querySelector("time[datetime]")?.getAttribute("datetime"));
+            });
+            const fallbackIndex = Math.max(0, slides.findIndex((slide) => slide.getAttribute("aria-hidden") === "false"));
+            const newestIndex = slides.reduce((latest, slide, index) => slideDates[index] > slideDates[latest] ? index : latest, fallbackIndex);
+            let activeCategory = slides[newestIndex]?.dataset.featureGroup || categoryTabs[0]?.dataset.featureTab;
+            let activeIndex = newestIndex;
+            categoryPositions.set(activeCategory, newestIndex);
             let pointerId = null;
             let pointerStartX = 0;
             let pointerStartY = 0;
@@ -21156,16 +21909,28 @@
             let suppressClick = false;
 
             const setSlideFocus = (slide, active) => {
+                slide.inert = !active;
                 slide.querySelectorAll("a, button").forEach((control) => {
                     control.tabIndex = active ? 0 : -1;
                 });
             };
 
+            const categoryIndices = () => slides.reduce((indices, slide, index) => {
+                if (slide.dataset.featureGroup === activeCategory) indices.push(index);
+                return indices;
+            }, []).sort((left, right) => {
+                if (slideDates[left] === slideDates[right]) return left - right;
+                return slideDates[left] > slideDates[right] ? -1 : 1;
+            });
+
             const selectSlide = (index, animate = true) => {
                 if (!track || !slides.length) {
                     return;
                 }
-                activeIndex = (index + slides.length) % slides.length;
+                const indices = categoryIndices();
+                if (!indices.length) return;
+                activeIndex = indices.includes(index) ? index : indices[0];
+                categoryPositions.set(activeCategory, activeIndex);
                 track.style.transitionDuration = !animate || reducedMotion.matches ? "0ms" : "280ms";
                 track.style.transform = `translate3d(${-activeIndex * 100}%, 0, 0)`;
                 slides.forEach((slide, slideIndex) => {
@@ -21174,16 +21939,55 @@
                     setSlideFocus(slide, active);
                 });
                 dots.forEach((dot, dotIndex) => {
-                    dot.setAttribute("aria-current", String(dotIndex === activeIndex));
+                    const slideIndex = indices[dotIndex];
+                    dot.hidden = slideIndex === undefined;
+                    dot.setAttribute("aria-current", String(slideIndex === activeIndex));
+                    const title = slides[slideIndex]?.querySelector("strong")?.textContent;
+                    if (title) dot.setAttribute("aria-label", `显示：${title}`);
                 });
             };
 
+            const stepSlide = (direction) => {
+                const indices = categoryIndices();
+                const position = indices.indexOf(activeIndex);
+                selectSlide(indices[(position + direction + indices.length) % indices.length]);
+            };
+
+            const selectCategory = (category) => {
+                activeCategory = category;
+                categoryTabs.forEach((tab) => {
+                    const selected = tab.dataset.featureTab === category;
+                    tab.setAttribute("aria-selected", String(selected));
+                    tab.tabIndex = selected ? 0 : -1;
+                    if (selected) viewport.setAttribute("aria-labelledby", tab.id);
+                });
+                categoryLinks.forEach((link) => {
+                    link.hidden = link.dataset.featureMore !== category;
+                });
+                // Changing columns is instant; only paging within a column slides.
+                selectSlide(categoryPositions.get(category) ?? categoryIndices()[0], false);
+            };
+
             if (carousel && viewport && track && slides.length) {
-                previousButton?.addEventListener("click", () => selectSlide(activeIndex - 1));
-                nextButton?.addEventListener("click", () => selectSlide(activeIndex + 1));
+                previousButton?.addEventListener("click", () => stepSlide(-1));
+                nextButton?.addEventListener("click", () => stepSlide(1));
+                categoryTabs.forEach((tab, tabIndex) => {
+                    tab.addEventListener("click", () => selectCategory(tab.dataset.featureTab));
+                    tab.addEventListener("keydown", (event) => {
+                        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+                        event.preventDefault();
+                        event.stopPropagation();
+                        const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? categoryTabs.length - 1
+                            : (tabIndex + (event.key === "ArrowRight" ? 1 : -1) + categoryTabs.length) % categoryTabs.length;
+                        const nextTab = categoryTabs[nextIndex];
+                        selectCategory(nextTab.dataset.featureTab);
+                        nextTab.focus();
+                    });
+                });
                 dots.forEach((dot) => {
                     dot.addEventListener("click", () => {
-                        selectSlide(Number(dot.getAttribute("data-home-rail-carousel-dot")) || 0);
+                        const position = Number(dot.getAttribute("data-home-rail-carousel-dot")) || 0;
+                        selectSlide(categoryIndices()[position]);
                     });
                 });
 
@@ -21192,7 +21996,7 @@
                         return;
                     }
                     event.preventDefault();
-                    selectSlide(activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+                    stepSlide(event.key === "ArrowRight" ? 1 : -1);
                 });
 
                 viewport.addEventListener("pointerdown", (event) => {
@@ -21231,7 +22035,7 @@
                     }
                     const swipeThreshold = Math.min(54, viewport.clientWidth * 0.18);
                     if (isHorizontalDrag && Math.abs(pointerDeltaX) >= swipeThreshold) {
-                        selectSlide(activeIndex + (pointerDeltaX < 0 ? 1 : -1));
+                        stepSlide(pointerDeltaX < 0 ? 1 : -1);
                         suppressClick = true;
                     } else {
                         selectSlide(activeIndex);
@@ -21255,7 +22059,7 @@
                     suppressClick = false;
                 }, true);
                 window.addEventListener("resize", () => selectSlide(activeIndex, false), { passive: true });
-                selectSlide(0, false);
+                selectCategory(activeCategory);
             }
 
             const dialog = document.querySelector("[data-home-fortune-dialog]");
@@ -21334,9 +22138,9 @@
             syncMobileNavigation();
         })();
     </script>
-    <script src="shared/study-plan-insights.js?v=20260824a"></script>
+    <script src="shared/study-plan-insights.js?v=20260907-direct-routes"></script>
     <script src="shared/study-plan-presets.js?v=20260902a"></script>
-    <script src="shared/study-plan.js?v=20260902c"></script>
+    <script src="shared/study-plan.js?v=20260907a"></script>
     <script>
         (() => {
             const carousel = document.querySelector("[data-mobile-feature-carousel]");

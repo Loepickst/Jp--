@@ -1,0 +1,120 @@
+// Homepage styling, compact room controls, filters and photo exports in an isolated browser.
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs/promises');
+const path=require('node:path');
+(async()=>{
+  const output=process.env.COTTAGE_ARTIFACTS||path.join(__dirname,'artifacts');await fs.mkdir(output,{recursive:true});
+  const browser=await chromium.launch({channel:'chrome',headless:true});
+  const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
+  const page=await context.newPage(),results=[],errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  const check=(name,value)=>{assert.ok(value,name);results.push(name);};
+  const state=()=>page.evaluate(()=>JSON.parse(JSON.stringify(Cottage.App.store.state)));
+  const scene=async(x,y)=>{const b=await page.locator('#game').boundingBox();await page.mouse.click(b.x+x*b.width/384,b.y+y*b.height/288);};
+  const capture=async name=>page.screenshot({path:path.join(output,name)});
+  try{
+    await page.goto(process.env.COTTAGE_URL||'http://127.0.0.1:8873/');await page.waitForFunction(()=>window.Cottage?.App);
+    for(const [width,height,scale] of [[1280,720,2],[1440,900,2],[1920,1200,3],[1100,900,2],[1440,620,1],[900,680,1]]){
+      await page.setViewportSize({width,height});
+      await page.waitForFunction(expected=>Number(document.documentElement.dataset.scale)===expected,scale);
+      const layout=await page.evaluate(()=>{const r=s=>{const b=document.querySelector(s).getBoundingClientRect();return {x:b.x,y:b.y,right:b.right,bottom:b.bottom};};return {room:r('#game'),side:r('.room-sidebar'),bar:r('.toolbar'),scale:Number(getComputedStyle(document.documentElement).getPropertyValue('--scale')),scroll:document.documentElement.scrollWidth};});
+      check(`${width}×${height}: pixel scale and toolbar fit`,layout.scale===scale&&layout.bar.bottom<=height&&layout.bar.right<=width&&layout.scroll<=width);
+      check(`${width}×${height}: notebook never covers the room`,width>=1160?layout.side.x>=layout.room.right:layout.side.y>=layout.bar.bottom);
+      if(scale===1){
+        check(`${width}×${height}: tool buttons stay within the room column`,await page.locator('.toolbar nav').evaluate(el=>el.getBoundingClientRect().right<=document.querySelector('.room-column').getBoundingClientRect().right));
+        await page.locator('#build-button').click();await page.locator('[data-quick-place="desk"]').click();
+        check(`${width}×${height}: all build actions fit below the room`,await page.locator('.build-actions').evaluate(el=>{const a=el.getBoundingClientRect(),room=document.querySelector('#game').getBoundingClientRect();return a.right<=room.right+6&&a.bottom<=innerHeight&&a.top>=room.bottom;}));
+        await page.locator('#finish-build').click();
+      }
+      if(width===1280)await capture('room-ui-compact.png');if(width===1920)await capture('room-ui-large.png');
+    }
+    await page.setViewportSize({width:1440,height:1000});
+    check('header shows fresh progress once',await page.locator('#today-minutes').innerText()==='0'&&await page.locator('#coin-count').innerText()==='0');
+    check('decorative copy and duplicate progress cards are removed',await page.locator('.eyebrow,.room-heading,.guide-card,.today-card,#story-line,.bottom-note').count()===0);
+    check('inventory remains directly accessible',await page.locator('.toolbar #room-inventory-button').isVisible());
+    await page.locator('#settings-button').click();
+    check('help is available on demand and starts collapsed',await page.locator('#panel details').count()>0&&await page.locator('#panel details[open]').count()===0);
+    await page.locator('#panel summary').first().focus();await page.keyboard.press('Enter');
+    check('keyboard can expand the control reference',await page.locator('#panel details[open]').count()===1&&(await page.locator('#panel details[open]').innerText()).includes('WASD'));
+    await page.keyboard.press('Escape');
+    await page.locator('#shop-button').click();
+    check('shop has eight products and dimensions',await page.locator('#catalog-items .item-card').count()===8&&await page.locator('#catalog-items .item-size').count()===8);
+    await page.locator('[data-catalog-filter="affordable"]').click();
+    check('unaffordable filter explains its empty state',await page.locator('#catalog-items .catalog-empty').isVisible()&&await page.locator('[data-buy]').count()===0);
+    await page.locator('[data-catalog-filter="owned"]').click();
+    check('owned shop filter starts empty',await page.locator('#catalog-items .item-card').count()===0);
+    await capture('room-ui-shop-empty.png');await page.keyboard.press('Escape');await page.waitForTimeout(80);
+    check('closing shop restores keyboard focus',await page.locator('#shop-button').evaluate(el=>el===document.activeElement));
+    await page.locator('#study-button').click();await page.locator('#study-form').waitFor({state:'visible',timeout:8000});
+    check('study shortcut walks to the desk',await page.evaluate(()=>Math.hypot(Cottage.App.game.player.x-96,Cottage.App.game.player.y-136)<1));
+    check('reward cap and read-only submission remain visible',(await page.locator('#panel-body').innerText()).includes('120')&&(await page.locator('#panel-body').innerText()).includes('只读'));
+    await page.locator('#study-title').fill('复习了日语单词与助词');await page.locator('#study-minutes').fill('25');
+    await page.locator('#study-form button[type="submit"]').click();await page.waitForTimeout(100);
+    check('header reflects confirmed study and earned coins',await page.locator('#today-minutes').innerText()==='25'&&await page.locator('#coin-count').innerText()==='25'&&(await state()).records.length===1);
+    await page.locator('#journal-button').click();
+    check('study detail remains available on demand',(await page.locator('#journal-records').innerText()).includes('复习了日语单词与助词'));await page.keyboard.press('Escape');
+    await page.locator('#shop-button').click();await page.locator('[data-catalog-filter="affordable"]').click();
+    check('affordable filter uses the actual balance',await page.locator('[data-buy]').count()===4);
+    await page.locator('[data-catalog-filter="all"]').click();await capture('room-ui-shop.png');
+    await page.locator('[data-buy="plant"]').click();await page.waitForTimeout(100);
+    check('buying opens the side picker and deducts once',await page.locator('#build-notebook').isVisible()&&await page.locator('#room-notebook').isHidden()&&(await state()).coins===10);
+    check('purchased furniture is selected in the picker',await page.locator('[data-quick-place="plant"]').getAttribute('aria-pressed')==='true');
+    await scene(248,104);await page.locator('#finish-build').click();
+    check('placed purchase survives leaving build mode',(await state()).placements.some(p=>p.id==='plant')&&await page.locator('#room-notebook').isVisible());
+    await page.locator('#shop-button').click();await page.locator('[data-catalog-filter="owned"]').click();
+    check('owned filter offers free placement rather than repurchase',await page.locator('[data-place="plant"]').count()===1&&await page.locator('[data-buy]').count()===0);await page.keyboard.press('Escape');
+    await page.locator('[data-care="water"]').click();await page.waitForFunction(()=>Cottage.App.game.action==='drink',{},{timeout:8000});
+    check('care water walks to the actual bowl',await page.evaluate(()=>Math.hypot(Cottage.App.game.player.x-280,Cottage.App.game.player.y-184)<1)&&(await page.locator('#companion-status').innerText()).includes('喝水'));
+    await page.locator('[data-care="rest"]').click();await page.waitForFunction(()=>Cottage.App.game.action==='sleep',{},{timeout:8000});
+    check('care rest settles in the bed',await page.evaluate(()=>!!Cottage.App.game.renderPosition));await capture('room-ui-rest.png');
+    await page.keyboard.press('s');
+    check('keyboard immediately takes over from care',await page.evaluate(()=>!Cottage.App.game.renderPosition&&!Cottage.App.game.destination));
+    await page.locator('[data-care="window"]').click();await page.waitForFunction(()=>Cottage.App.game.action==='sit',{},{timeout:8000});
+    check('care window follows the safe route to its real anchor',await page.evaluate(()=>Math.hypot(Cottage.App.game.player.x-208,Cottage.App.game.player.y-104)<1));
+    await page.locator('[data-care="pet"]').click();
+    check('pet shortcut triggers affection without a reward',await page.evaluate(()=>Cottage.App.game.action==='pet')&&(await state()).coins===10);
+    await page.locator('#build-button').click();
+    const before=JSON.stringify((await state()).placements);
+    await page.locator('[data-quick-place="welcomeRug"]').click();await page.keyboard.press('ArrowRight');
+    check('quick picker edits a preview and transfers keyboard focus',JSON.stringify((await state()).placements)===before&&await page.locator('#game').evaluate(el=>document.activeElement===el));
+    await page.keyboard.press('Escape');
+    check('Escape from quick placement restores arrangement',JSON.stringify((await state()).placements)===before);
+    for(const id of ['water','bed','desk']){await page.locator(`[data-quick-place="${id}"]`).click();await page.locator('#store-button').click();}
+    await page.locator('[data-build-filter="stored"]').click();
+    check('stored quick filter has three freely stored objects',await page.locator('[data-quick-place]').count()===3&&(await state()).coins===10);
+    await capture('room-ui-build.png');await page.locator('#finish-build').click();
+    check('missing furniture disables only relevant shortcuts',!(await page.locator('[data-care="water"]').isEnabled())&&!(await page.locator('[data-care="rest"]').isEnabled())&&!(await page.locator('#study-button').isEnabled())&&await page.locator('[data-care="window"]').isEnabled());
+    await page.locator('#room-inventory-button').click();await page.locator('[data-catalog-filter="stored"]').click();
+    check('inventory modal exposes the same stored furniture',await page.locator('[data-place]').count()===3);await page.keyboard.press('Escape');
+    await page.locator('#build-button').click();
+    await page.locator('[data-quick-place="water"]').click();await scene(280,168);await page.locator('#finish-build').click();
+    check('restoring the water bowl re-enables its care action',await page.locator('[data-care="water"]').isEnabled());
+    const beforePhoto=JSON.stringify(await state());const downloadPromise=page.waitForEvent('download');await page.locator('#snapshot-button').click();const download=await downloadPromise;
+    const photoPath=path.join(output,'room-ui-photo.png');await download.saveAs(photoPath);const png=await fs.readFile(photoPath);
+    check('photo exports a 3x PNG with the pet name',png.subarray(1,4).toString()==='PNG'&&png.readUInt32BE(16)===1152&&png.readUInt32BE(20)===864&&download.suggestedFilename().startsWith('木木的小屋-'));
+    check('taking a photo leaves progress unchanged',JSON.stringify(await state())===beforePhoto);
+    await page.reload();await page.waitForFunction(()=>window.Cottage?.App);
+    check('new room controls restore existing v1 saves',await page.locator('#today-minutes').innerText()==='25'&&(await state()).coins===10&&!(await page.locator('[data-care="rest"]').isEnabled()));
+    // A second isolated save spans three Beijing dates; no simulated rows enter the player preview.
+    const fixture=await page.evaluate(()=>{const M=Cottage.Model;let s=M.newState();for(const [days,title] of [[9,'九天前的语法'],[2,'两天前的单词'],[0,'今天 <b>单词</b> 的笔记']])s=M.recordStudy(s,{id:`journal-${days}`,title,minutes:25},Date.now()-days*86400000).state;return s;});
+    const journalContext=await browser.newContext({viewport:{width:1440,height:1000}});await journalContext.addInitScript(s=>localStorage.setItem('shibaStudyCottage.v1',JSON.stringify(s)),fixture);
+    const journal=await journalContext.newPage();journal.on('pageerror',e=>errors.push(e.message));await journal.goto(process.env.COTTAGE_URL||'http://127.0.0.1:8873/');await journal.waitForFunction(()=>window.Cottage?.App);await journal.locator('#journal-button').click();
+    check('journal groups full history by date',await journal.locator('.journal-day').count()===3);
+    check('journal search has an accessible label without visible label clutter',await journal.locator('.journal-search .sr-only').evaluate(el=>el.getBoundingClientRect().width<=1)&&await journal.locator('#journal-search').getAttribute('aria-label')==='搜索学习记录');
+    await journal.locator('[data-journal-filter="week"]').click();
+    check('recent week excludes older study',await journal.locator('.journal-record').count()===2);
+    await journal.locator('[data-journal-filter="today"]').click();
+    check('today filter displays plain user text safely',await journal.locator('.journal-record').count()===1&&(await journal.locator('#journal-records').innerText()).includes('<b>单词</b>')&&await journal.locator('#journal-records b').count()===0);
+    await journal.locator('[data-journal-filter="all"]').click();await journal.locator('#journal-search').fill('单词');
+    check('content search filters and totals matching records',await journal.locator('.journal-record').count()===2&&(await journal.locator('#journal-result-count').innerText()).includes('50 分钟'));
+    const stopped=await journal.evaluate(()=>({...Cottage.App.game.player}));await journal.locator('#journal-search').press('a');await journal.waitForTimeout(200);
+    check('typing in journal cannot move the dog',await journal.evaluate(p=>Cottage.App.game.player.x===p.x&&Cottage.App.game.player.y===p.y,stopped));
+    await journal.locator('#journal-search').fill('没有这条记录');
+    check('search empty state is explicit',await journal.locator('#journal-empty').isVisible()&&await journal.locator('.journal-record').count()===0);
+    await journal.locator('#journal-search').fill('');await journal.screenshot({path:path.join(output,'room-ui-journal.png')});await journalContext.close();
+    check('no runtime errors in room controls or journal',errors.length===0);
+    await fs.writeFile(path.join(output,'room-ui-report.json'),JSON.stringify({passed:results.length,results,errors},null,2));console.log(JSON.stringify({passed:results.length,errors,output},null,2));
+  }catch(error){await capture('room-ui-failure.png');console.error(JSON.stringify({passed:results,errors,failure:error.stack},null,2));process.exitCode=1;}
+  finally{await browser.close();}
+})();

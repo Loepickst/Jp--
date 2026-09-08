@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f0ec">
+  <meta name="description" content="和柴犬一起学习、休息，布置自己的像素小屋。">
+  <title>柴柴学习小屋</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-group">
+        <a id="home-link" class="home-link" href="../index.html" aria-label="出门" title="出门 · 返回主页"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5-7 7 7 7M3 12h18"/></svg><span>出门</span></a>
+        <div class="brand"><canvas id="brand-shiba" width="32" height="32" aria-hidden="true"></canvas><h1>柴柴学习小屋</h1></div>
+      </div>
+      <div class="stats" aria-label="学习与余额">
+        <div class="stat"><span class="stat-label">今日学习</span><strong><span id="today-minutes">0</span><small> 分钟</small></strong></div>
+        <div class="stat coins"><span data-icon="paw" aria-hidden="true"></span><strong><span id="coin-count">0</span></strong><span class="stat-label">爪印币</span></div>
+      </div>
+    </header>
+
+    <main class="cottage-layout">
+      <div class="room-column">
+        <section class="game-frame" aria-label="柴犬小屋游戏">
+          <canvas id="game" width="384" height="288" tabindex="0" aria-label="小屋：点击地板走动，点击家具互动，点击柴犬摸摸。WASD 或方向键移动，Shift 快走，E 互动，B 布置，Esc 取消。">请使用支持 Canvas 的电脑浏览器。</canvas>
+          <div id="interaction" class="interaction" hidden><kbd>E</kbd><span></span></div>
+          <div id="mode-label" class="mode-label" hidden><span data-icon="box"></span>布置中</div>
+          <div id="toast" role="status" aria-live="polite" hidden></div>
+        </section>
+        <div id="storage-error" role="alert" hidden></div>
+        <section id="build-bar" class="build-bar" aria-label="布置工具" hidden>
+          <div class="build-copy"><strong id="build-title">选择家具</strong><p id="build-help">点击家具开始摆放</p></div>
+          <div class="build-actions"><button id="inventory-button" class="button secondary">收纳</button><button id="undo-placement" class="button secondary" disabled title="撤销上一步 · Z">撤销</button><button id="store-button" class="button secondary" hidden>收起</button><button id="cancel-place" class="button secondary" hidden>取消</button><button id="finish-build" class="button primary">完成</button></div>
+        </section>
+        <footer class="toolbar">
+          <span id="save-state">本地存档</span>
+          <nav aria-label="小屋工具"><button id="journal-button" class="tool-button"><span data-icon="book"></span>手账</button><button id="shop-button" class="tool-button"><span data-icon="shop"></span>商店</button><button id="build-button" class="tool-button"><span data-icon="box"></span>布置</button><button id="room-inventory-button" class="tool-button"><span data-icon="storage"></span>收纳</button><button id="snapshot-button" class="tool-button icon-only" aria-label="给小屋拍照" title="拍照"><span data-icon="camera"></span></button><button id="settings-button" class="tool-button icon-only" aria-label="设置" title="设置"><span data-icon="settings"></span></button></nav>
+        </footer>
+      </div>
+
+      <aside class="room-sidebar" aria-label="柴犬与家具">
+        <section id="room-notebook" class="companion-card" aria-labelledby="companion-name">
+          <div class="companion-profile"><div class="portrait-frame"><canvas id="companion-portrait" width="32" height="32" aria-hidden="true"></canvas></div><div><h2 id="companion-name">木木</h2><p id="companion-status">陪着你</p></div></div>
+          <div class="care-actions" role="group" aria-label="照顾柴犬"><button data-care="pet"><span data-icon="heart"></span>摸摸</button><button data-care="water"><span data-icon="water"></span>喝水</button><button data-care="rest"><span data-icon="rest"></span>休息</button><button data-care="window"><span data-icon="sun"></span>看云</button></div>
+          <button id="study-button" class="button primary full"><span data-icon="book"></span>记录学习</button>
+        </section>
+
+        <section id="build-notebook" class="build-notebook" aria-labelledby="quick-inventory-title" hidden>
+          <div class="note-heading"><h2 id="quick-inventory-title">选择家具</h2><span id="quick-count">4 件</span></div>
+          <div class="catalog-tabs build-tabs" role="group" aria-label="筛选布置家具"><button data-build-filter="all" aria-pressed="true">全部</button><button data-build-filter="placed" aria-pressed="false">已摆放</button><button data-build-filter="stored" aria-pressed="false">收纳中</button></div>
+          <div id="quick-inventory" class="quick-inventory" aria-label="可布置的家具"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="panel" aria-labelledby="panel-title">
+    <div class="panel-heading"><h2 id="panel-title"></h2><button id="close-panel" class="close-button" aria-label="关闭">×</button></div>
+    <div id="panel-body"></div>
+  </dialog>
+  <noscript>请启用 JavaScript 后进入小屋。</noscript>
+  <script src="data.js"></script>
+  <script src="model.js"></script>
+  <script src="art.js"></script>
+  <script src="audio.js"></script>
+  <script src="autonomy.js"></script>
+  <script src="game.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
