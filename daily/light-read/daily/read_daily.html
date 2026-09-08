@@ -2,15 +2,19 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <script src="../../../shared/legacy-directory-redirect.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日常阅读 - kiki的日语小窝</title>
     <link rel="stylesheet" href="../../../shared/daily-reading.css?v=20260715-android1">
-    <script src="../../../shared/legacy-directory-redirect.js"></script>
+    <link rel="stylesheet" href="../../../shared/unified-header.css?v=20260907-first-paint" data-kiki-unified-header-style>
+    <link rel="preload" as="script" href="../../../shared/unified-header.js?v=20260907-first-paint">
+    <script src="../../../shared/navigation-routes.js?v=20260907" defer></script>
+    <link rel="preload" as="image" href="../../../assets/home-redesign/kiji-logo-maple-header-v3.webp?v=20260810-no-tagline">
 </head>
-<body class="daily-reading-page reading-list-page">
+<body class="kiki-unified-header-enabled daily-reading-page reading-list-page">
 
-    <header class="reading-site-header">
-        <a href="../index.html" class="reading-head-link reading-head-back">← 戻る</a>
+    <header class="reading-site-header" data-kiki-unified-header-host="page" data-kiki-header-pending>
+        <a href="../../../index.html#daily/daily-light-read" class="reading-head-link reading-head-back">← 戻る</a>
         <h1 class="reading-head-title">日常阅读</h1>
         <div class="reading-head-tools" aria-label="阅读目录操作">
             <button class="reading-list-library-button" type="button" data-filter="favorites" aria-pressed="false">
@@ -31,6 +35,15 @@
             <button type="button" class="reading-list-filter-button" data-filter="month">最近一个月</button>
         </div>
         <section class="article-list reading-list" aria-label="日常阅读文章列表">
+            <a href="9.8.html" class="article-card">
+                <div class="card-header">
+                    <span class="article-date">2026.09.08</span>
+                    <span class="level-tag">随笔</span>
+                </div>
+                <h2 class="article-title">気ままな記憶 (随性的记忆)</h2>
+                <p class="article-desc">運動動画の音楽が頭の中で繰り返される体験から、思い通りにならない記憶と小説を書くことのつながりを考える随筆。</p>
+            </a>
+
             <a href="8.31.html" class="article-card">
                 <div class="card-header">
                     <span class="article-date">2026.08.31</span>
@@ -576,6 +589,6 @@
         })();
     </script>
     <script src="../../../shared/word-bank.js?v=20260711b"></script>
-    <script src="../../../shared/unified-header.js?v=20260731-reading-controls1" data-kiki-unified-header-loader></script>
+    <script src="../../../shared/unified-header.js?v=20260907-first-paint" data-kiki-unified-header-loader></script>
 </body>
 </html>
