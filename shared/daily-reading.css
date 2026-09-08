@@ -1,6 +1,5 @@
 @import url("site-fonts.css");
 @import url("reading-header.css?v=20260713e");
-@import url("fonts/noto-serif-jp/noto-serif-jp-variable.css?v=5.2.9");
 
 :root {
     --reading-bg: #fbfaf6;

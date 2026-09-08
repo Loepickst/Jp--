@@ -1,6 +1,6 @@
 (function () {
-    const FAVORITES_KEY = "kikiDailyReadingFavoritesV1";
     const FONT_KEY = "kikiDailyReadingFontScaleV1";
+    const FAVORITES_KEY = "kikiDailyReadingFavoritesV1";
     const RECENT_KEY = "kikiDailyReadingRecentV1";
     const SIDEBAR_KEY = "kikiDailyReadingSidebarV1";
 
@@ -78,12 +78,14 @@
     }
 
     function iconPanel() {
-        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM15 5v14M7.5 9h4M7.5 12h4"/></svg>';
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m13 6-6 6 6 6m6-12-6 6 6 6"/></svg>';
     }
 
     function setupLearningSidebar() {
         const sidebar = document.querySelector(".reading-sidebar");
-        if (!sidebar) return;
+        if (!sidebar || sidebar.dataset.assistReady === "true") return;
+        sidebar.dataset.assistReady = "true";
+        sidebar.setAttribute("aria-label", "词汇学习辅助");
 
         const toolbar = document.createElement("div");
         toolbar.className = "reading-sidebar-toolbar";
@@ -91,43 +93,77 @@
         button.className = "reading-sidebar-toggle";
         button.type = "button";
         button.setAttribute("aria-controls", "reading-learning-sidebar-content");
-        button.innerHTML = `${iconPanel()}<span data-sidebar-label></span>`;
+        button.innerHTML = `${iconPanel()}<span data-sidebar-label>词汇学习</span>`;
         toolbar.append(button);
-        sidebar.prepend(toolbar);
 
         const content = document.createElement("div");
         content.className = "reading-sidebar-content";
         content.id = "reading-learning-sidebar-content";
-        Array.from(sidebar.querySelectorAll(":scope > .reading-side-card")).forEach((card) => content.append(card));
-        sidebar.append(content);
+        buildStudyVocabulary(content);
+        sidebar.replaceChildren(toolbar, content);
+        // The DOM follows the visual order: auxiliary rail, then the article.
+        article.parentNode.insertBefore(sidebar, article);
 
         let saved = null;
         try {
             saved = localStorage.getItem(SIDEBAR_KEY);
         } catch (error) {
-            saved = null;
+            // An unavailable preference store must not prevent reading.
         }
-        let collapsed = saved === "collapsed";
+        const wideScreen = window.matchMedia("(min-width: 1200px)");
+        let desktopCollapsed = saved === "collapsed";
+        let compactCollapsed = true;
+        const isCollapsed = () => wideScreen.matches ? desktopCollapsed : compactCollapsed;
 
-        const sync = (persist = false) => {
+        function sync(restoreFocus = false) {
+            const collapsed = isCollapsed();
+            if (collapsed && content.contains(document.activeElement)) restoreFocus = true;
             document.body.classList.toggle("is-reading-sidebar-collapsed", collapsed);
             button.setAttribute("aria-expanded", String(!collapsed));
+            button.setAttribute("aria-label", collapsed ? "展开词汇学习" : "收起词汇学习");
+            content.hidden = collapsed;
             content.setAttribute("aria-hidden", String(collapsed));
-            const label = button.querySelector("[data-sidebar-label]");
-            if (label) label.textContent = collapsed ? "打开学习辅助" : "收起学习辅助";
-            if (persist) {
-                try {
-                    localStorage.setItem(SIDEBAR_KEY, collapsed ? "collapsed" : "expanded");
-                } catch (error) {
-                    // The UI remains usable when storage is unavailable.
-                }
+            if (restoreFocus) button.focus({ preventScroll: true });
+        }
+
+        function collapse(restoreFocus = false) {
+            if (wideScreen.matches) {
+                desktopCollapsed = true;
+                try { localStorage.setItem(SIDEBAR_KEY, "collapsed"); } catch (error) {}
+            } else {
+                compactCollapsed = true;
             }
-        };
+            sync(restoreFocus);
+        }
 
         button.addEventListener("click", () => {
-            collapsed = !collapsed;
-            sync(true);
+            if (wideScreen.matches) {
+                desktopCollapsed = !desktopCollapsed;
+                try {
+                    localStorage.setItem(SIDEBAR_KEY, desktopCollapsed ? "collapsed" : "expanded");
+                } catch (error) {}
+            } else {
+                compactCollapsed = !compactCollapsed;
+            }
+            sync();
         });
+        sidebar.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape" || isCollapsed()) return;
+            event.preventDefault();
+            collapse(true);
+        });
+        document.addEventListener("click", (event) => {
+            if (!wideScreen.matches && !isCollapsed() && !sidebar.contains(event.target)) collapse();
+        });
+        const onBreakpointChange = () => {
+            compactCollapsed = true;
+            sync();
+        };
+        if (typeof wideScreen.addEventListener === "function") {
+            wideScreen.addEventListener("change", onBreakpointChange);
+        } else {
+            wideScreen.addListener(onBreakpointChange);
+        }
         sync();
     }
 
@@ -137,115 +173,78 @@
         return clone.textContent.replace(/\s+/g, " ").trim();
     }
 
-    function parseVocabInfo(rawInfo, fallbackWord) {
-        const info = (rawInfo || "").trim();
-        const separatorIndex = info.search(/[：:]/);
-        const head = separatorIndex >= 0 ? info.slice(0, separatorIndex).trim() : fallbackWord;
-        const meaning = separatorIndex >= 0 ? info.slice(separatorIndex + 1).trim() : info;
-        const readingMatch = head.match(/(.+?)[（(]([^）)]+)[）)]/);
-        return {
-            word: readingMatch ? readingMatch[1].trim() : (head || fallbackWord),
-            reading: readingMatch ? readingMatch[2].trim() : "",
-            meaning: meaning || "本文中の重要語です。"
-        };
-    }
-
-    function getVocabPronunciationSource(entry) {
-        const pronunciations = window.KikiReadingPronunciations;
-        const sources = pronunciations && pronunciations.entries;
-        if (!sources) return "";
-        return String(sources[entry.reading] || sources[entry.word] || "").trim();
-    }
-
-    function buildVocabMemo() {
-        const list = document.querySelector("[data-vocab-list]");
-        const moreButton = document.querySelector("[data-vocab-more]");
-        if (!list) return;
-
+    function getStudyVocabulary() {
         const seen = new Set();
-        const entries = Array.from(document.querySelectorAll(".reading-content .vocab-word"))
-            .map((word) => {
-                const fallbackWord = stripRubyText(word);
-                const parsed = parseVocabInfo(word.getAttribute("data-info"), fallbackWord);
-                const key = `${parsed.word}|${parsed.reading}|${parsed.meaning}`;
-                if (seen.has(key)) return null;
-                seen.add(key);
-                return parsed;
-            })
-            .filter(Boolean);
-
-        if (!entries.length) {
-            list.innerHTML = '<p class="empty-related">この文章の語彙メモはまだありません。</p>';
-            if (moreButton) moreButton.hidden = true;
-            return;
-        }
-
-        list.innerHTML = entries.map((entry, index) => {
-            const extraClass = index >= 3 ? " is-extra" : "";
-            const reading = entry.reading ? `<span class="vocab-reading">（${escapeHtml(entry.reading)}）</span>` : "";
-            const pronunciationSource = getVocabPronunciationSource(entry);
-            const sourceAttribute = pronunciationSource
-                ? ` data-pronounce-src="${escapeHtml(pronunciationSource)}" data-pronounce-provider="microsoft-neural"`
-                : ` data-pronounce-provider="browser"`;
-            return `
-                <article class="vocab-entry${extraClass}">
-                    <div>
-                        <h3 class="vocab-term">${escapeHtml(entry.word)} ${reading}</h3>
-                        <p class="vocab-meaning">${escapeHtml(entry.meaning)}</p>
-                    </div>
-                    <button
-                        class="vocab-sound-button"
-                        type="button"
-                        data-pronounce
-                        data-pronounce-text="${escapeHtml(entry.word)}"
-                        data-pronounce-reading="${escapeHtml(entry.reading || entry.word)}"
-                        data-pronounce-lang="ja-JP"
-                        data-pronounce-rate="0.92"
-                        ${sourceAttribute}
-                        aria-label="${escapeHtml(entry.word)} を読み上げる"
-                        aria-pressed="false"
-                    >
-                        ${iconSpeaker()}
-                    </button>
-                </article>
-            `;
-        }).join("");
-
-        if (moreButton) {
-            moreButton.hidden = entries.length <= 3;
-            moreButton.addEventListener("click", () => {
-                const expanded = list.classList.toggle("is-expanded");
-                moreButton.setAttribute("aria-expanded", String(expanded));
-                moreButton.querySelector("span").textContent = expanded ? "閉じる" : "もっと見る";
-            });
-        }
+        return Array.from(article.querySelectorAll(".vocab-word")).map((element) => {
+            const info = (element.getAttribute("data-info") || "").trim();
+            const separator = info.search(/[：:]/);
+            const head = separator >= 0 ? info.slice(0, separator).trim() : stripRubyText(element);
+            const meaning = separator >= 0 ? info.slice(separator + 1).trim() : info;
+            const readingMatch = head.match(/^(.+?)[（(]([^）)]+)[）)]$/);
+            return {
+                word: readingMatch ? readingMatch[1].trim() : head,
+                reading: readingMatch ? readingMatch[2].trim() : "",
+                meaning
+            };
+        }).filter((entry) => {
+            if (!entry.word || !entry.meaning) return false;
+            const key = JSON.stringify([entry.word, entry.reading, entry.meaning]);
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
     }
 
-    function escapeHtml(value) {
-        return String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-    }
+    function buildStudyVocabulary(content) {
+        const entries = getStudyVocabulary();
+        const summary = document.createElement("p");
+        summary.className = "reading-assist-vocab-summary";
+        summary.textContent = entries.length ? `${entries.length} 个词汇` : "这篇文章尚未添加词汇解释。";
+        content.append(summary);
+        if (!entries.length) return;
 
-    function iconSpeaker() {
-        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4 4 0 0 0-1.6-3.2v6.4A4 4 0 0 0 16.5 12Zm-1.6-8.3v2.1A7 7 0 0 1 18 12a7 7 0 0 1-3.1 5.8v2.1A9 9 0 0 0 20 12a9 9 0 0 0-5.1-8.3Z"/></svg>';
-    }
-
-    function setupVocabCardScroll() {
-        const card = document.querySelector("[data-vocab-card]");
-        const list = document.querySelector("[data-vocab-list]");
-        if (!card || !list) return;
-
-        card.addEventListener("wheel", (event) => {
-            if (window.matchMedia("(max-width: 720px)").matches) return;
-            if (list.scrollHeight <= list.clientHeight + 1) return;
-
-            event.preventDefault();
-            list.scrollTop += event.deltaY;
-        }, { passive: false });
+        const list = document.createElement("ul");
+        list.className = "reading-assist-vocab-list";
+        list.setAttribute("aria-label", "本文词汇解释");
+        // Explicit list semantics remain available when list markers are removed.
+        list.setAttribute("role", "list");
+        const sources = window.KikiReadingPronunciations?.entries || {};
+        entries.forEach((entry) => {
+            const item = document.createElement("li");
+            item.className = "reading-assist-vocab-entry";
+            const term = document.createElement("h2");
+            term.className = "reading-assist-vocab-term";
+            term.lang = "ja";
+            term.textContent = entry.word;
+            if (entry.reading) {
+                const reading = document.createElement("span");
+                reading.className = "reading-assist-vocab-reading";
+                reading.textContent = entry.reading;
+                term.append(reading);
+            }
+            const meaning = document.createElement("p");
+            meaning.className = "reading-assist-vocab-meaning";
+            meaning.lang = "zh-CN";
+            meaning.textContent = entry.meaning;
+            const sound = document.createElement("button");
+            sound.type = "button";
+            sound.className = "reading-assist-vocab-sound";
+            sound.dataset.pronounce = "";
+            sound.dataset.pronounceText = entry.word;
+            sound.dataset.pronounceReading = entry.reading || entry.word;
+            sound.dataset.pronounceLang = "ja-JP";
+            sound.dataset.pronounceRate = "0.92";
+            sound.dataset.wordBankIgnore = "true";
+            const source = String(sources[entry.reading] || sources[entry.word] || "").trim();
+            if (source) sound.dataset.pronounceSrc = source;
+            sound.dataset.pronounceProvider = source ? "microsoft-neural" : "browser";
+            sound.setAttribute("aria-label", `朗读 ${entry.word}`);
+            sound.setAttribute("aria-pressed", "false");
+            sound.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 9v6h4l5 4V5L8 9H4Zm12 0a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></svg>';
+            item.append(term, sound, meaning);
+            list.append(item);
+        });
+        content.append(list);
     }
 
     function setupTranslation() {
@@ -259,41 +258,61 @@
         });
     }
 
-    function setupFontScale() {
-        const scales = ["small", "base", "large"];
-        const controls = document.querySelector(".reading-font-controls");
-        if (!controls) return;
+    function setupFontPicker() {
+        const picker = document.querySelector(".reading-font-picker");
+        if (!picker || picker.dataset.ready === "true") return;
+        picker.dataset.ready = "true";
+        const trigger = picker.querySelector("[data-reading-font-trigger]");
+        const panel = picker.querySelector(".reading-font-popover");
+        const slider = picker.querySelector("[data-reading-font-range]");
+        const output = picker.querySelector("[data-reading-font-output]");
+        const phoneScreen = window.matchMedia("(max-width: 720px)");
         let saved = "base";
-        try {
-            saved = localStorage.getItem(FONT_KEY) || "base";
-        } catch (error) {
-            // Keep the default size when local storage is unavailable.
-        }
+        try { saved = localStorage.getItem(FONT_KEY) || "base"; } catch (error) {}
 
-        function sync(nextScale) {
-            const scale = scales.includes(nextScale) ? nextScale : "base";
-            const index = scales.indexOf(scale);
-            document.body.setAttribute("data-reading-font-scale", scale);
-            controls.querySelectorAll("[data-reading-font-step]").forEach((button) => {
-                const step = Number(button.dataset.readingFontStep);
-                button.disabled = (step < 0 && index === 0) || (step > 0 && index === scales.length - 1);
-            });
-            return scale;
+        function syncSize() {
+            const legacy = phoneScreen.matches
+                ? { small: 15, base: 17, large: 19 }
+                : { small: 16, base: 18, large: 20 };
+            const candidate = Object.prototype.hasOwnProperty.call(legacy, saved) ? legacy[saved] : Number(saved);
+            const size = Number.isFinite(candidate) && candidate >= 15 && candidate <= 24
+                ? Math.round(candidate) : legacy.base;
+            document.body.style.setProperty("--reading-body-size", `${size}px`);
+            slider.value = String(size);
+            slider.style.setProperty("--reading-font-progress", `${((size - 15) / 9) * 100}%`);
+            slider.setAttribute("aria-valuetext", `${size} 像素`);
+            output.textContent = `${size}px`;
         }
-
-        sync(saved);
-        controls.addEventListener("click", (event) => {
-            const button = event.target.closest("[data-reading-font-step]");
-            if (!button || button.disabled) return;
-            const current = document.body.getAttribute("data-reading-font-scale") || "base";
-            const nextIndex = Math.max(0, Math.min(scales.length - 1, scales.indexOf(current) + Number(button.dataset.readingFontStep)));
-            const scale = sync(scales[nextIndex]);
-            try {
-                localStorage.setItem(FONT_KEY, scale);
-            } catch (error) {
-                // The visual state still works without persistence.
+        function setOpen(open, restoreFocus = false) {
+            panel.hidden = !open;
+            trigger.setAttribute("aria-expanded", String(open));
+            if (open) slider.focus({ preventScroll: true });
+            else if (restoreFocus) trigger.focus({ preventScroll: true });
+        }
+        trigger.addEventListener("click", () => setOpen(panel.hidden));
+        slider.addEventListener("input", () => {
+            saved = slider.value;
+            syncSize();
+            try { localStorage.setItem(FONT_KEY, saved); } catch (error) {}
+        });
+        document.addEventListener("click", (event) => {
+            if (!panel.hidden && !picker.contains(event.target)) setOpen(false);
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !panel.hidden) {
+                event.preventDefault();
+                setOpen(false, true);
             }
         });
+        picker.addEventListener("focusout", (event) => {
+            if (event.relatedTarget && !picker.contains(event.relatedTarget)) setOpen(false);
+        });
+        if (typeof phoneScreen.addEventListener === "function") {
+            phoneScreen.addEventListener("change", syncSize);
+        } else {
+            phoneScreen.addListener(syncSize);
+        }
+        syncSize();
     }
 
     function articlePayload(extra) {
@@ -459,12 +478,9 @@
 
     setupRecentReading();
     setupEditorialHeader();
-    buildVocabMemo();
     setupLearningSidebar();
-    setupVocabCardScroll();
-    window.KikiReadingControls?.setup();
     setupTranslation();
-    setupFontScale();
+    setupFontPicker();
     setupFavorites();
     setupReadingBackNavigation();
     setupTooltip();

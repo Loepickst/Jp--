@@ -2618,86 +2618,9 @@
     font-size: 10px;
 }
 
-.study-plan-embedded .plan-import-open:hover,
-.study-plan-embedded .plan-preset-status button:hover {
+.study-plan-embedded .plan-import-open:hover {
     border-color: rgba(182, 52, 58, 0.34);
     background: #fff8f5;
-}
-
-.study-plan-embedded .plan-preset-status {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto auto;
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
-    padding: 8px 10px;
-    border-left: 3px solid var(--plan-maple);
-    border-radius: 4px 10px 10px 4px;
-    background: #fff6f2;
-    color: var(--plan-muted);
-}
-
-.study-plan-embedded .plan-preset-status[hidden] {
-    display: none;
-}
-
-.study-plan-embedded .plan-preset-status-mark {
-    display: grid;
-    width: 27px;
-    height: 27px;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--plan-maple);
-    color: #fff;
-    font-family: var(--font-display, "Noto Serif JP", serif);
-    font-size: 10px;
-}
-
-.study-plan-embedded .plan-preset-status div {
-    min-width: 0;
-}
-
-.study-plan-embedded .plan-preset-status small,
-.study-plan-embedded .plan-preset-status strong {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.study-plan-embedded .plan-preset-status small {
-    color: var(--plan-maple);
-    font-size: 7px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-}
-
-.study-plan-embedded .plan-preset-status strong {
-    margin-top: 1px;
-    color: var(--plan-ink);
-    font-size: 10px;
-}
-
-.study-plan-embedded .plan-preset-status > span:nth-last-of-type(1) {
-    font-size: 8px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.study-plan-embedded .plan-preset-status button {
-    min-height: 29px;
-    padding: 0 9px;
-    border: 1px solid #e1d2ca;
-    border-radius: 8px;
-    background: #fff;
-    color: var(--plan-maple-dark);
-    cursor: pointer;
-    font-size: 8px;
-    font-weight: 800;
-}
-
-.study-plan-embedded.is-insights-view .plan-preset-status {
-    display: none !important;
 }
 
 .study-plan-embedded .day-task-preset-source {
@@ -3010,25 +2933,9 @@
     }
 
     .study-plan-embedded .mobile-plan-week { order: 3; }
-    .study-plan-embedded .plan-preset-status { order: 4; }
-    .study-plan-embedded .mobile-plan-summary { order: 5; }
-    .study-plan-embedded .plan-embedded-layout { order: 6; }
-    .study-plan-embedded .mobile-plan-stats { order: 7; }
-
-    .study-plan-embedded .plan-preset-status {
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        margin: 0 0 11px;
-        padding: 8px 9px;
-    }
-
-    .study-plan-embedded .plan-preset-status > span:nth-last-of-type(1) {
-        grid-column: 2;
-    }
-
-    .study-plan-embedded .plan-preset-status button {
-        grid-column: 3;
-        grid-row: 1 / span 2;
-    }
+    .study-plan-embedded .mobile-plan-summary { order: 4; }
+    .study-plan-embedded .plan-embedded-layout { order: 5; }
+    .study-plan-embedded .mobile-plan-stats { order: 6; }
 
     .study-plan-embedded .day-task-preset-source {
         margin-left: 4px;

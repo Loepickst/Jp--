@@ -22,7 +22,7 @@
         area: 'daily',
         sectionKey: 'daily',
         label: '词汇入口',
-        href: 'exam/vocabulary/index.html',
+        href: 'index.html#exam/exam-vocabulary',
         statusText: '先挑一条轻松的练习开始吧。',
         reviewCount: 0,
         score: 1
@@ -2966,7 +2966,7 @@
     function resolveListeningYearHref(level, rawYearLabel) {
         const normalizedLevel = String(level || '').trim().toLowerCase();
         if (!normalizedLevel) {
-            return 'exam/listening/index.html';
+            return 'index.html#exam/exam-listening';
         }
 
         const match = String(rawYearLabel || '').match(/20\d{2}/);
@@ -2983,7 +2983,7 @@
             {
                 label: formatListeningLabel('N1'),
                 lastKey: 'study_quest_test_v1_listening_last_practice::n1',
-                href: 'exam/listening/index.html'
+                href: 'index.html#exam/exam-listening'
             },
             {
                 label: '阅读样本',
@@ -2993,7 +2993,7 @@
             {
                 label: '语法排序',
                 lastKey: 'study_quest_test_v1_grammar_last_practice::n1',
-                href: 'exam/grammar/index.html'
+                href: 'index.html#exam/exam-grammar'
             }
         ];
 

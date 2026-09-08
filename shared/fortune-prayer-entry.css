@@ -1,0 +1,165 @@
+/* Shared three-frame character entries; preserve the header's existing height. */
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry,
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:hover,
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:active {
+    position: relative;
+    display: block;
+    flex: 0 0 56px;
+    width: 56px;
+    min-width: 56px;
+    height: 46px;
+    min-height: 46px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    filter: none;
+    transform: none;
+    overflow: visible;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry::before,
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry::after,
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-sprite::after,
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-label::after {
+    content: none;
+}
+
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-sprite {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    right: 0;
+    width: var(--character-width, 48px);
+    height: auto;
+    aspect-ratio: var(--character-aspect, 200 / 205);
+    margin: 0 auto;
+    padding: 0;
+    background-image: var(--character-sprite, url("../assets/home-redesign/fortune-shiba-prayer-sprite-v1.webp"));
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    background-position: 0% 50%;
+    transform: translateY(-50%);
+    transform-origin: center 90%;
+    pointer-events: none;
+}
+
+/* A quiet upper-left hint: the character remains the main visual and target. */
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-label {
+    position: absolute;
+    top: 0;
+    right: auto;
+    left: -8px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--character-label, #957365);
+    font-family: var(--font-display, serif);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    text-shadow: none;
+    box-shadow: none;
+    transform: none;
+    transition: color 180ms ease;
+    pointer-events: none;
+}
+
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:is(:hover, :focus-visible) > .fortune-prayer-label {
+    color: var(--character-label-active, var(--autumn-maple-dark, #85332f));
+}
+
+/* Keep the supplied transparent PNG intact; each frame is one third of its width. */
+body.home-dashboard-redesign .fortune-prayer-entry--support {
+    --character-sprite: url("../assets/home-redesign/support-shiba-tea-sprite-v1.png");
+    --character-aspect: 2059 / 2292;
+    --character-width: 44px;
+    --character-mobile-width: 38.5px;
+    --character-label: #7e986c;
+    --character-label-active: #5d7c4a;
+}
+
+/* Frames hold like a hand-drawn GIF: rest → gesture → smile. */
+@keyframes fortune-prayer-frames {
+    0%, 14% { background-position: 0% 50%; }
+    15%, 53% { background-position: 50% 50%; }
+    54%, 89% { background-position: 100% 50%; }
+    90%, 100% { background-position: 0% 50%; }
+}
+
+@keyframes fortune-prayer-bob {
+    0%, 14%, 90%, 100% { transform: translateY(-50%) scale(1); }
+    28%, 46% { transform: translateY(calc(-50% + 1px)) scale(.98); }
+    64%, 78% { transform: translateY(calc(-50% - 1px)) scale(1.015); }
+}
+
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:focus-visible {
+    outline: 2px solid var(--autumn-pine, #486b5e);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:focus-visible > .fortune-prayer-sprite {
+    animation: fortune-prayer-frames 2.4s steps(1, end) infinite,
+        fortune-prayer-bob 2.4s ease-in-out infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:hover > .fortune-prayer-sprite {
+        animation: fortune-prayer-frames 2.4s steps(1, end) infinite,
+            fortune-prayer-bob 2.4s ease-in-out infinite;
+    }
+}
+
+@media (max-width: 767px) {
+    body.home-dashboard-redesign .mobile-home-tools {
+        gap: 12px;
+    }
+
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry,
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:hover,
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:active {
+        flex-basis: 44px;
+        width: 44px;
+        min-width: 44px;
+        height: 36px;
+        min-height: 36px;
+    }
+
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-sprite {
+        width: var(--character-mobile-width, 42px);
+    }
+
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-label {
+        top: -3px;
+        left: -10px;
+        font-size: 9px;
+        letter-spacing: .02em;
+    }
+}
+
+@media (hover: none) {
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:active > .fortune-prayer-sprite {
+        background-position: 50% 50%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry > .fortune-prayer-sprite {
+        animation: none !important;
+    }
+
+    body.home-dashboard-redesign :is(a, button).fortune-prayer-entry:is(:hover, :focus-visible) > .fortune-prayer-sprite {
+        background-position: 50% 50%;
+    }
+}

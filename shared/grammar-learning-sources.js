@@ -150,29 +150,34 @@
   };
 
   const FORMAL_IDS = `
-    n1-039 n1-047 n1-050 n1-051 n1-061 n1-063 n1-064 n1-068 n1-070 n1-072
-    n1-077 n1-079 n1-084 n1-088 n1-093 n1-094 n1-103 n1-107 n1-126
-    n2-136 n2-141 n2-142 n2-149 n2-150 n2-151 n2-154 n2-156 n2-170
-    n2-171 n2-173 n2-175 n2-177 n2-180 n2-182 n2-183 n2-185 n2-187 n2-188
-    n2-190 n2-193 n2-202 n2-212 n2-213 n2-218 n2-220 n2-223 n2-227 n2-233
-    n2-241 n2-249 n2-251 n3-002 n3-003 n3-018 n3-023 n3-027 n3-029 n3-031
-    n3-045 n3-047 n3-049 n3-051 n3-061 n3-063 n3-064 n3-065 n3-068
-    n3-080 n3-081 n3-087 n3-094 n3-097 n3-098 n3-114 supp-formal-noun-001
-    supp-formal-noun-002 supp-n1-review-001 supp-n1-review-002 supp-n1-review-010
-    supp-n1-review-014 supp-n1-review-020 supp-n1-review-021 supp-n1-review-023
-    supp-n1-review-024 supp-n1-review-025 supp-n1-review-026 supp-n1-review-031
-    supp-n1-review-044 supp-n1-review-053 supp-n1-review-054 supp-n1-review-056
-    supp-n1-review-079
+    mainichi-n3-020 mainichi-n3-021 n3-003 supp-n1-review-014 supp-n1-review-020
+    supp-n1-review-021 n3-018 n3-029 n3-094 n3-098 mainichi-n2-009 mainichi-n2-015
+    n2-136 supp-n1-review-025 supp-n1-review-044 n2-151 n2-171 n2-173 n2-180
+    n2-185 n2-193 n2-218 n2-241 n2-249 mainichi-n1-015 mainichi-n1-016 n1-039
+    n1-064 n1-070 n1-084 n1-126
+    n3-065 supp-n1-review-053 n2-141 n2-156 n2-170 n2-177 n2-182 n2-183
+    n2-187 n2-223 n2-251 supp-n1-review-082 supp-n1-review-083 n1-051 n1-061
+    n1-063 n1-077 n1-093 n1-094
+    supp-n1-review-010 n3-049 supp-n1-review-023 supp-n1-review-024 n2-220
+    supp-n1-review-026 n1-047 n1-068 n1-079 n1-088
+    n3-087 n2-150 n2-188 n2-213 supp-n1-review-079 n3-061 n3-114 n3-023 n1-103
+    n2-142 n2-149 n2-202 n2-233 n2-190 n3-047 supp-formal-noun-002
+    n3-068 n3-081 n2-227 mainichi-n1-006 n3-097 n3-051 n3-045
+    supp-n1-review-001 supp-n1-review-002
+    n3-002 supp-n1-review-031 supp-n1-review-054 supp-n1-review-056 n3-027 n3-063
+    n3-080 supp-formal-noun-001 n2-175 n2-212 n3-031 n3-064 n1-050
+    n2-154 n1-072 n1-107
   `.trim().split(/\s+/);
 
   const ADVERBIAL_IDS = `
-    n1-005 n1-043 n1-045 n1-052 n1-056 n1-074 n1-075 n1-076 n1-084
-    n2-168 n2-178 n2-179 n2-194 n2-221 n2-236 n2-246 n3-007 n3-041
-    n3-044 n3-057 n3-059 n3-069 n3-111 supp-bakari-final-step
-    supp-dake-corresponding-degree-n1 supp-dake-sufficient-n1 supp-hodo-proportional
-    supp-kore-sore-kiri supp-made-deadline supp-n1-review-016 supp-n1-review-017
-    supp-n1-review-018 supp-n1-review-034 supp-n1-review-035 supp-n1-review-037
-    supp-n1-review-067 supp-n1-review-071 supp-te-made-made-shite
+    supp-n1-review-016 supp-n1-review-018 supp-n1-review-035 supp-n1-review-017
+    n2-178 learn-dake-ni n2-236 supp-dake-sufficient-n1
+    supp-dake-corresponding-degree-n1 n1-056 n2-194 n3-041
+    supp-bakari-final-step n2-179 n3-059 n3-069 n2-246 n1-074 n1-075
+    supp-made-deadline supp-n1-review-037 n1-076 n1-084 supp-te-made-made-shite
+    n1-005 n1-043 n1-045 supp-n1-review-071 n2-221 n3-007
+    supp-hodo-proportional n3-057 n3-044 n3-111 supp-n1-review-067 n1-052
+    n2-168 supp-kore-sore-kiri supp-n1-review-034
   `.trim().split(/\s+/);
 
   const SUPPLEMENT_MERGES = {
@@ -407,6 +412,11 @@
       return item && Array.isArray(item.learningSources)
         ? JSON.parse(JSON.stringify(item.learningSources))
         : [];
+    },
+    getOrderedGrammarIds(sourceKey) {
+      if (sourceKey === "formal-nouns") return FORMAL_IDS.slice();
+      if (sourceKey === "adverbial-particles") return ADVERBIAL_IDS.slice();
+      return Object.values(LOCAL_MAP[sourceKey] || {});
     }
   };
 })();

@@ -1,0 +1,464 @@
+/* Homepage grammar details — an illustrated textbook page. */
+body.home-dashboard-redesign .grammar-legacy-modal {
+    --grammar-modal-red: #9b4836;
+    --grammar-modal-red-dark: #8b3e2e;
+    --grammar-modal-black: #292521;
+    --grammar-modal-muted: #70675f;
+    --grammar-modal-line: #eadfd3;
+    --grammar-detail-paper: #fff;
+    --grammar-detail-wash: #f8f5f1;
+    --legacy-grammar-font: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    padding: 18px 28px;
+    background: #faf7f2;
+    font-family: var(--font-ui);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content {
+    width: min(100%, 880px);
+    max-width: 880px;
+    max-height: calc(100dvh - 36px);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #d8cbbd transparent;
+    transform: none;
+    will-change: auto;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-toolbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 2px 12px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-sheet {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid var(--grammar-modal-line);
+    border-radius: 10px;
+    background: var(--grammar-detail-paper);
+    box-shadow: 0 3px 20px rgba(88, 62, 35, .025);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-sheet::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+    height: 180px;
+    background: url("../assets/grammar/grammar-detail-autumn-corner-v1.png") right bottom / contain no-repeat;
+    opacity: .3;
+    pointer-events: none;
+}
+
+/* Art has a reserved column, so long titles cannot run behind it. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 238px;
+    align-items: center;
+    gap: 20px;
+    min-height: 186px;
+    box-sizing: border-box;
+    padding: 28px 34px 26px;
+    border: 0;
+    background: transparent;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header::after {
+    content: "";
+    position: absolute;
+    right: 28px;
+    bottom: 0;
+    left: 28px;
+    height: 1px;
+    background: #eee5dc;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-heading {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-title {
+    margin: 14px 0 0;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: .025em;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-badge {
+    max-width: 100%;
+    min-height: 24px;
+    box-sizing: border-box;
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--grammar-modal-muted);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-level {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    padding: 4px 12px;
+    border: 1px solid #f0dfcd;
+    background: #f5e9da;
+    color: #795d43;
+    font-family: var(--legacy-grammar-font);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-badges {
+    gap: 4px 10px;
+    margin-top: 9px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-badge--lesson { padding: 0; }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-hero-art {
+    position: absolute;
+    right: 23px;
+    bottom: -15px;
+    width: 276px;
+    height: 158px;
+    object-fit: contain;
+    object-position: bottom;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Short autumn-colored markers distinguish the top-level chapters. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body {
+    position: relative;
+    padding: 24px 28px 30px;
+    background: transparent;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item {
+    --grammar-section-accent: #c66b45;
+    position: relative;
+    margin: 0 0 26px;
+    padding-left: 18px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item:nth-child(3n + 2) { --grammar-section-accent: #78834f; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item:nth-child(3n) { --grammar-section-accent: #c99a40; }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item:last-child { margin-bottom: 0; }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-label {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 28px;
+    margin: 0 0 11px -18px;
+    color: var(--grammar-modal-red);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: .025em;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-label::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 20px;
+    flex: 0 0 5px;
+    margin: 0;
+    border-radius: 3px;
+    background: var(--grammar-section-accent);
+    transform: none;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-highlight {
+    display: block;
+    padding: 13px 16px;
+    border-radius: 7px;
+    background: #f7eee8;
+    color: var(--grammar-modal-black);
+    font-family: var(--font-ui) !important;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: .01em;
+    box-shadow: none;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-code {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--grammar-detail-wash);
+    color: #514940;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.8;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc,
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-desc {
+    padding: 0 7px;
+    color: #49433d;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.95;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc :is(b, strong) {
+    color: #302b26;
+    font-weight: 600;
+}
+
+/* Each use keeps its own border, number, explanation and corresponding examples. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item--usages { padding-left: 0; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-detail-item--usages > .grammar-legacy-label { margin-left: 0; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-list { gap: 24px; }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card {
+    padding: 20px 22px;
+    border: 1px solid #e3dbd1;
+    border-left: 3px solid var(--grammar-usage-accent);
+    border-radius: 8px;
+    background: #fff;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-header {
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ede6df;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-number {
+    min-width: 48px;
+    min-height: 25px;
+    box-sizing: border-box;
+    padding: 4px 7px;
+    border: 0;
+    border-radius: 5px;
+    background: var(--grammar-usage-soft);
+    color: var(--grammar-usage-accent-dark);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-title {
+    font-family: var(--font-ui);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-meaning {
+    margin-top: 5px;
+    color: var(--grammar-usage-accent-dark);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.75;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-field + .grammar-legacy-usage-field { margin-top: 18px; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-field-label {
+    margin-bottom: 8px;
+    color: var(--grammar-usage-accent-dark);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-code { width: auto; background: #f8f6f3; }
+
+/* Diagrams stay secondary to their clause explanation. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure { padding: 0; border: 0; border-radius: 0; background: transparent; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-flow { grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); gap: 8px; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part { padding: 14px 15px; border: 1px solid #e9e0d6; border-radius: 6px; background: #fbf9f6; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part-label { margin-bottom: 7px; font-size: 11px; font-weight: 600; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part-text { font-size: 14px; font-weight: 600; line-height: 1.75; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-operator { font-size: 20px; font-weight: 400; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example { margin-top: 10px; padding-top: 12px; border-top: 1px solid #e9e0d6; font-size: 16px; font-weight: 700; line-height: 2.1; letter-spacing: .015em; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-caption { gap: 4px 12px; margin-top: 10px; font-size: 12px; line-height: 1.7; }
+
+/* Ruby and the target phrase remain readable; translations are secondary. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-card {
+    margin-bottom: 12px;
+    padding: 16px 20px;
+    border: 1px solid var(--grammar-modal-line);
+    border-radius: 7px;
+    background: #fff;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp {
+    margin-bottom: 7px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 2.05;
+    letter-spacing: .025em;
+    line-break: strict;
+    overflow-wrap: anywhere;
+}
+/* Older examples wrap the whole sentence in <b>; keep the same weight as newer examples. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp :is(b, strong) {
+    font-weight: inherit;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp rt,
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example rt { color: #6e645a; font-size: max(10px, .58em); font-weight: 400; line-height: 1; letter-spacing: .015em; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp span[style*="#d64045"],
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp span[style*="rgb(214, 64, 69)"],
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example span[style*="#d64045"] {
+    padding: 0 1px;
+    border-radius: 2px;
+    background: transparent;
+    color: var(--grammar-modal-red) !important;
+    font-weight: 700;
+    box-shadow: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-cn { color: var(--grammar-modal-muted); font-size: 13px; font-weight: 400; line-height: 1.8; }
+
+/* Existing actions, without decorative or non-functional controls. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close {
+    position: static;
+    display: inline-flex;
+    width: auto;
+    min-width: 44px;
+    min-height: 44px;
+    height: auto;
+    align-items: center;
+    padding: 0 5px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    box-shadow: none;
+    color: #685b4d;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    transform: none;
+    transition: color 150ms ease;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close::before { content: none; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close:hover { transform: none; border: 0; background: transparent; color: var(--grammar-modal-red-dark); }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav {
+    position: absolute;
+    top: 78px;
+    right: 24px;
+    z-index: 2;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 29px;
+    box-shadow: none;
+    transition: none;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav::before { content: none; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav:is(:hover, .is-fav) { transform: none; border: 0; background: transparent; box-shadow: none; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-favorite-leaf { display: block; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; line-height: 1; filter: grayscale(1); opacity: .68; transition: filter 150ms ease, opacity 150ms ease; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav:hover .grammar-favorite-leaf { opacity: .9; }
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav.is-fav .grammar-favorite-leaf { filter: none; opacity: 1; }
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-related-list { display: flex; flex-wrap: wrap; gap: 8px; }
+body.home-dashboard-redesign .grammar-legacy-modal :is(.grammar-legacy-more-examples, .grammar-legacy-related-tag) {
+    display: inline-flex;
+    min-height: 44px;
+    max-width: 100%;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px 15px;
+    border: 1px solid #eadfd3;
+    border-radius: 6px;
+    background: rgba(255, 253, 250, .88);
+    color: #625446;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-related-arrow { flex: 0 0 auto; color: #af9780; font-size: 17px; }
+body.home-dashboard-redesign .grammar-legacy-modal :is(.grammar-legacy-more-examples, .grammar-legacy-related-tag):hover { transform: none; border-color: #d5bfaa; background: #f8f0e6; color: #8b3e2e; }
+body.home-dashboard-redesign .grammar-legacy-modal button:focus-visible { outline: 2px solid #946b43; outline-offset: 3px; }
+
+@media (max-width: 640px) {
+    body.home-dashboard-redesign .grammar-legacy-modal { display: block; padding: 0; background: #faf7f2; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content { width: 100%; max-width: none; height: 100%; max-height: none; border: 0; border-radius: 0; background: transparent; box-shadow: none; scrollbar-gutter: auto; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-toolbar { position: sticky; top: 0; z-index: 4; min-height: 54px; box-sizing: content-box; padding: env(safe-area-inset-top) 15px 0; background: #faf7f2; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-sheet { margin: 0 10px 12px; border-radius: 8px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-sheet::after { width: 230px; height: 130px; opacity: .25; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header { grid-template-columns: minmax(0, 1fr) 108px; gap: 12px; min-height: 0; padding: 18px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header::after { right: 18px; left: 18px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-title { margin-top: 11px; font-size: 21px; line-height: 1.55; letter-spacing: .015em; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-badges { gap: 6px 8px; margin-top: 8px; }
+    /* Rest the paws on the divider, compensating for the asset's transparent bottom margin. */
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-detail-hero-art { position: absolute; right: 18px; bottom: -6px; width: 108px; height: 68px; object-position: bottom; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body { padding: 20px 16px calc(24px + env(safe-area-inset-bottom)); }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body > .grammar-legacy-detail-item { margin-bottom: 24px; padding-left: 0; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-label { gap: 11px; margin-left: 0; margin-bottom: 10px; font-size: 15px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-highlight { padding: 12px 14px; font-size: 15px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-code { padding: 12px 14px; font-size: 14px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-desc { padding: 0 3px; font-size: 14px; line-height: 1.9; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card { padding: 17px 13px; border-radius: 6px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-list { gap: 22px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-header { gap: 9px; margin-bottom: 16px; padding-bottom: 13px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-title { font-size: 15px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-meaning { font-size: 14px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-flow { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part { padding: 13px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-operator--arrow { transform: rotate(90deg); }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-card { padding: 15px 14px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp { font-size: 16px; line-height: 2.1; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close { min-height: 44px; font-size: 13px; }
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav { position: fixed; top: calc(5px + env(safe-area-inset-top)); right: 15px; z-index: 5003; width: 44px; height: 44px; min-width: 44px; min-height: 44px; font-size: 29px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.home-dashboard-redesign .grammar-legacy-modal,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content { animation: none; }
+    body.home-dashboard-redesign .grammar-legacy-modal button,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-favorite-leaf { transition: none; }
+}

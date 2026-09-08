@@ -2,6 +2,241 @@
   window.GrammarDB = window.GrammarDB || {};
   window.GrammarDB.core = [
   {
+    "id": "basic-te-form-001",
+    "level": "基础",
+    "bookKey": "basic-grammar-supplement",
+    "bookLabel": "其他",
+    "lesson": "基础语法补充",
+    "lessonNumber": 1,
+    "title": "～て／～で（て形的连接用法）",
+    "meaning": "连接动作、状态或事情，表示先后、并列、状态、手段及原因",
+    "connection": "动词て形／イ形容词词干＋くて／ナ形容词词干＋で／名词＋で",
+    "desc": "用于<b>连接两个或两个以上的动作、状态或事情</b>。前后项可表示先后、并列、状态、手段或因果关系。整句的时态和语气通常由句末决定。",
+    "usageSections": [
+      {
+        "key": "te-sequence",
+        "title": "动作先后",
+        "meaning": "先……，然后……",
+        "connection": "动词て形＋动词句",
+        "desc": "表示<b>前一个动作结束后，接着进行后一个动作</b>。按动作发生的顺序叙述，常用于说明步骤或安排。",
+        "structure": {
+          "leftLabel": "前项",
+          "left": "先做的动作（て形）",
+          "rightLabel": "后项",
+          "right": "接着做的动作",
+          "operator": "→",
+          "relation": "先后顺序",
+          "note": "按照动作实际发生的顺序连接。"
+        },
+        "exampleIndexes": [
+          0,
+          1
+        ]
+      },
+      {
+        "key": "te-parallel",
+        "title": "并列叙述",
+        "meaning": "……而且……；既……又……",
+        "connection": "动词て形／イ形容词词干＋くて／ナ形容词词干＋で／名词＋で＋后项",
+        "desc": "用于<b>并列说明两个特点、状态或事实</b>。两项内容都成立，不强调时间先后。",
+        "structure": {
+          "leftLabel": "前项",
+          "left": "特点／情况①（て／で）",
+          "rightLabel": "后项",
+          "right": "特点／情况②",
+          "operator": "＋",
+          "relation": "两项都成立",
+          "note": "把两项内容并列起来，共同说明人或事物。"
+        },
+        "exampleIndexes": [
+          2,
+          3
+        ]
+      },
+      {
+        "key": "te-state",
+        "title": "保持某种状态进行动作",
+        "meaning": "……着做……；在……状态下……",
+        "connection": "表示姿势、穿戴等的动词て形＋动词句",
+        "desc": "表示<b>保持前项的状态进行后项动作</b>。常用于说明姿势、穿戴等。",
+        "structure": {
+          "leftLabel": "前项",
+          "left": "保持的状态（て形）",
+          "rightLabel": "后项",
+          "right": "在该状态下做的动作",
+          "operator": "→",
+          "relation": "状态伴随动作",
+          "note": "后项进行时，前项所示的状态仍然存在。"
+        },
+        "exampleIndexes": [
+          4,
+          5
+        ]
+      },
+      {
+        "key": "te-means",
+        "title": "方法与手段",
+        "meaning": "用……的方法……；通过……来……",
+        "connection": "表示方法或手段的动词て形＋动词句",
+        "desc": "表示<b>通过前项的方法或手段完成后项动作</b>。前后项通常由同一个人完成。",
+        "structure": {
+          "leftLabel": "前项",
+          "left": "采用的方法（て形）",
+          "rightLabel": "后项",
+          "right": "要完成的动作",
+          "operator": "→",
+          "relation": "方法帮助完成动作",
+          "note": "用前项的方法完成后项动作。"
+        },
+        "exampleIndexes": [
+          6,
+          7
+        ]
+      },
+      {
+        "key": "te-cause",
+        "title": "原因与理由",
+        "meaning": "因为……，所以……",
+        "connection": "动词て形／イ形容词词干＋くて／ナ形容词词干＋で／名词＋で＋结果句",
+        "desc": "前项表示<b>原因或理由</b>，后项说明结果、感受或无法做到的事情。后项一般不接命令、请求、劝诱或意愿。",
+        "structure": {
+          "leftLabel": "前项",
+          "left": "原因／理由（て／で）",
+          "rightLabel": "后项",
+          "right": "产生的结果或感受",
+          "operator": "→",
+          "relation": "因果关系",
+          "note": "前项为原因，后项为结果。"
+        },
+        "exampleIndexes": [
+          8,
+          9
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "jp": "きのうはうちに<span style='color:#d64045'><ruby>帰<rt>かえ</rt></ruby>って</span>、すぐシャワーを<ruby>浴<rt>あ</rt></ruby>びた。",
+        "cn": "昨天回到家后，马上洗了个澡。",
+        "source": {
+          "original": "きのうはうちに帰って、すぐシャワーを浴びた。",
+          "name": "国際交流基金「文法を楽しく：～て～（1）」",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/bn/dw_pdfs/nk56_14-15.pdf",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "わたしは<ruby>日<rt>に</rt></ruby><ruby>本<rt>ほん</rt></ruby>へ<span style='color:#d64045'><ruby>行<rt>い</rt></ruby>って</span>、すもうを<ruby>見<rt>み</rt></ruby>たいです。",
+        "cn": "我想去日本看相扑。",
+        "source": {
+          "original": "わたしは日本へ行って、すもうを見たいです。",
+          "name": "国際交流基金「教科書を作ろう：ＶてＶ」",
+          "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BTS00134/ja/render.do",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "この<ruby>花<rt>はな</rt></ruby>は<span style='color:#d64045'><ruby>小<rt>ちい</rt></ruby>さくて</span><ruby>赤<rt>あか</rt></ruby>いです。",
+        "cn": "这朵花小小的，是红色的。",
+        "source": {
+          "original": "この花は小さくて赤いです。",
+          "name": "東京外国語大学「AくてA・NAでNA・NでN」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/049.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "この<ruby>靴<rt>くつ</rt></ruby><ruby>下<rt>した</rt></ruby>は、<span style='color:#d64045'>じょうぶで</span><ruby>安<rt>やす</rt></ruby>いです。",
+        "cn": "这双袜子结实又便宜。",
+        "source": {
+          "original": "この靴下は、じょうぶで安いです。",
+          "name": "東京外国語大学「AくてA・NAでNA・NでN」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/049.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "めがねを<span style='color:#d64045'>かけて</span><ruby>運<rt>うん</rt></ruby><ruby>転<rt>てん</rt></ruby>する。",
+        "cn": "戴着眼镜开车。",
+        "source": {
+          "original": "めがねをかけて運転する。",
+          "name": "国際交流基金「文法を楽しく：～て～（1）」",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/bn/dw_pdfs/nk56_14-15.pdf",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "あそこに<span style='color:#d64045'><ruby>座<rt>すわ</rt></ruby>って</span>、お<ruby>弁<rt>べん</rt></ruby><ruby>当<rt>とう</rt></ruby>を<ruby>食<rt>た</rt></ruby>べましょう。",
+        "cn": "坐到那边吃便当吧。",
+        "source": {
+          "original": "あそこに座って、お弁当を食べましょう。",
+          "name": "国際交流基金「教科書を作ろう：ＶてＶ」",
+          "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BTS00134/ja/render.do",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "わたしは<ruby>毎<rt>まい</rt></ruby><ruby>日<rt>にち</rt></ruby><span style='color:#d64045'><ruby>歩<rt>ある</rt></ruby>いて</span><ruby>学<rt>がっ</rt></ruby><ruby>校<rt>こう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。",
+        "cn": "我每天步行去学校。",
+        "source": {
+          "original": "わたしは毎日歩いて学校へ行きます。",
+          "name": "東京外国語大学「VてVます」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/051.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "テープを<span style='color:#d64045'><ruby>聞<rt>き</rt></ruby>いて</span>、<ruby>日<rt>に</rt></ruby><ruby>本<rt>ほん</rt></ruby><ruby>語<rt>ご</rt></ruby>を<ruby>勉<rt>べん</rt></ruby><ruby>強<rt>きょう</rt></ruby>します。",
+        "cn": "通过听录音带学习日语。",
+        "source": {
+          "original": "テープを聞いて、日本語を勉強します。",
+          "name": "東京外国語大学「VてVます」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/051.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "<ruby>雨<rt>あめ</rt></ruby>が<span style='color:#d64045'><ruby>降<rt>ふ</rt></ruby>って</span><ruby>試<rt>し</rt></ruby><ruby>合<rt>あい</rt></ruby>が<ruby>中<rt>ちゅう</rt></ruby><ruby>止<rt>し</rt></ruby>になりました。",
+        "cn": "因为下雨，比赛取消了。",
+        "source": {
+          "original": "雨が降って試合が中止になりました。",
+          "name": "東京外国語大学「理由」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson21/step1/explanation/081.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      },
+      {
+        "jp": "<ruby>熱<rt>ねつ</rt></ruby>が<span style='color:#d64045'>あって</span>、<ruby>起<rt>お</rt></ruby>きられませんでした。",
+        "cn": "因为发烧，没能起床。",
+        "source": {
+          "original": "熱があって、起きられませんでした。",
+          "name": "東京外国語大学「理由」",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson21/step1/explanation/081.html",
+          "type": "语言教育机构教材",
+          "accessedAt": "2026-09-05"
+        }
+      }
+    ],
+    "related": [],
+    "kana": "て で てけい テ形",
+    "romaji": "te de tekei te-form te form",
+    "legacy": {
+      "searchId": 4281,
+      "sourceNumericId": 1,
+      "searchTags": "て形 て型 テ形 てけい て で tekei te-form te form 动词て形 连接用法 接续助词 顺序 先后 并列 状态 伴随状态 付带状况 付帯状況 手段 方法 原因 理由 くて で 基础语法",
+      "compareWith": []
+    }
+  },
+  {
     "id": "n1-001",
     "level": "N1",
     "bookKey": "try-n1",

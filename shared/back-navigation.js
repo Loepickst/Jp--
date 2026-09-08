@@ -1,4 +1,9 @@
 (function () {
+    const script = document.currentScript;
+    const projectRoot = new URL("../", script.src);
+    function directTarget(value, base = window.location.href) {
+        return window.KikiRoutes ? window.KikiRoutes.canonicalize(value, base, projectRoot) : new URL(value, base);
+    }
     const LEGACY_DIRECTORY_HASH = {
         "daily/grammar/index.html": "#daily/daily-grammar",
         "daily/light-read/index.html": "#daily/daily-light-read",
@@ -32,23 +37,6 @@
         }
 
         return segments.join("/");
-    }
-
-    function getRootPrefixFromCurrentPath() {
-        let pathname = "";
-        try {
-            pathname = decodeURIComponent(window.location.pathname || "");
-        } catch (error) {
-            pathname = window.location.pathname || "";
-        }
-
-        const segments = pathname.split("/").filter(Boolean);
-        const markerIndex = segments.findIndex((segment) => segment === "daily" || segment === "exam");
-        const depth = markerIndex >= 0
-            ? Math.max(0, segments.length - markerIndex - 1)
-            : Math.max(0, segments.length - 1);
-
-        return depth ? "../".repeat(depth) : "";
     }
 
     function hasFunctionalSearch(url) {
@@ -100,10 +88,6 @@
 
         if (/^exam\/vocabulary\/n2\/(?!index\.html)[^/]+\.html$/.test(path)) {
             return "#exam/exam-vocabulary";
-        }
-
-        if (/^exam\/grammar\/复合格助词\.html$/.test(path)) {
-            return "#daily/daily-grammar";
         }
 
         if (/^exam\/grammar\/grammar\//.test(path)) {
@@ -207,7 +191,7 @@
             return null;
         }
 
-        return new URL(`${getRootPrefixFromCurrentPath()}index.html${hash}`, window.location.href);
+        return new URL(`index.html${hash}`, projectRoot);
     }
 
     function getElement(selector) {
@@ -256,7 +240,7 @@
             || window.location.href;
 
         try {
-            const targetUrl = new URL(rawTarget, window.location.href);
+            const targetUrl = directTarget(rawTarget);
             if (returnParam) {
                 return targetUrl;
             }

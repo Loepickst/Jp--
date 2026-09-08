@@ -2,6 +2,18 @@
   window.GrammarDB = window.GrammarDB || {};
   window.GrammarDB.tags = [
   {
+    "id": "basic-te-form-001",
+    "macro": "连接与叙述",
+    "category": "て形的连接用法",
+    "keyword": "て形 て型 テ形 てけい て で tekei te-form te form 动词て形 连接用法 接续助词 顺序 先后 并列 状态 伴随状态 付带状况 付帯状況 手段 方法 原因 理由 くて で 基础语法",
+    "firstKana": "て",
+    "sourceMacro": null,
+    "sourceCategory": null,
+    "legacy": {
+      "searchId": 4281
+    }
+  },
+  {
     "id": "n1-001",
     "macro": null,
     "category": null,

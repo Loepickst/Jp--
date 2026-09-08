@@ -1,6 +1,6 @@
 :root {
     --kiki-header-height: 64px;
-    --kiki-header-bg: #fffdf8;
+    --kiki-header-bg: #ffffff;
     --kiki-header-ink: #30322d;
     --kiki-header-muted: #74766f;
     --kiki-header-primary: #6f8a55;
@@ -12,6 +12,44 @@
 
 body.kiki-unified-header-enabled {
     --site-header-height: var(--kiki-header-height);
+}
+
+/* Reserve the final topbar geometry before JS; legacy controls never paint. */
+body [data-kiki-header-pending] {
+    box-sizing: border-box !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000;
+    display: block !important;
+    width: 100% !important;
+    height: var(--kiki-header-height) !important;
+    min-height: var(--kiki-header-height) !important;
+    max-height: var(--kiki-header-height) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--kiki-header-border) !important;
+    border-radius: 0 !important;
+    background: var(--kiki-header-bg) !important;
+    box-shadow: 0 5px 16px rgba(62, 55, 44, 0.035) !important;
+    backdrop-filter: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+body [data-kiki-header-pending] > * {
+    visibility: hidden !important;
+}
+
+body [data-kiki-header-pending]::before,
+body [data-kiki-header-pending]::after {
+    content: none !important;
+}
+
+body.listening-directory-app [data-kiki-header-pending],
+body [data-kiki-header-pending="listening"] {
+    background: #fff !important;
 }
 
 .kiki-unified-header,

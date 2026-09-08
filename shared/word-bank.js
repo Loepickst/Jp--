@@ -5,9 +5,9 @@
         return;
     }
 
-    const VERSION = "1.14.0";
+    const VERSION = "1.16.0";
     const STORAGE_KEY = "kikiWordBankEntriesV1";
-    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV21";
+    const PRESET_IMPORTED_KEY = "kikiWordBankPresetsImportedV22";
     const NOTES_CLEARED_KEY = "kikiWordBankNotesClearedV1";
     const FURIGANA_SYNC_KEY = "kikiWordBankFuriganaSyncedV2";
     const MULTI_SENSE_SYNC_KEY = "kikiWordBankMultiSenseSyncedV1";
@@ -50,7 +50,7 @@
         ? new URL("./", currentScript.src)
         : new URL("./shared/", window.location.href);
     const siteRoot = new URL("../", sharedBase);
-    const cssHref = new URL("word-bank.css?v=20260831-two-examples1", sharedBase).href;
+    const cssHref = new URL("word-bank.css?v=20260907-list-ruby-gap1", sharedBase).href;
 
     let activeSelection = null;
     let selectionTimer = 0;
@@ -282,10 +282,6 @@
 
         if (/^exam\/vocabulary\/n2\/(?!index\.html)[^/]+\.html$/.test(path)) {
             return "#exam/exam-vocabulary";
-        }
-
-        if (/^exam\/grammar\/复合格助词\.html$/.test(path)) {
-            return "#daily/daily-grammar";
         }
 
         if (/^exam\/grammar\/grammar\//.test(path)) {
@@ -1560,7 +1556,7 @@
         const displayReading = String(reading || "");
         const kanjiPattern = /[\u3400-\u9fff々〆ヵヶ]+/g;
         const kanjiMatches = Array.from(displayWord.matchAll(kanjiPattern));
-        if (!displayWord || !displayReading || !kanjiMatches.length) {
+        if (!displayWord || !displayReading || !kanjiMatches.length || !/[\u3400-\u9fff]/.test(displayWord)) {
             return [{ text: displayWord }];
         }
 
@@ -2545,7 +2541,8 @@
         showToast,
         getHomeUrl,
         tagsToInput,
-        normalizeTags
+        normalizeTags,
+        getHeadwordFuriganaParts
     };
 
     if (document.readyState === "loading") {

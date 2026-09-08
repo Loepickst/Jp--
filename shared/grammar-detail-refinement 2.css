@@ -1,0 +1,561 @@
+/* Homepage grammar details: compact typography and a consistent white surface. */
+body.home-dashboard-redesign .grammar-legacy-modal {
+    --grammar-modal-red: #97443b;
+    --grammar-modal-red-dark: #80372f;
+    --grammar-modal-black: #303030;
+    --grammar-modal-muted: #737373;
+    --grammar-modal-line: #ebebeb;
+    --grammar-detail-paper: #fff;
+    --legacy-grammar-font: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    padding: 32px;
+    background: rgba(38, 35, 30, .34);
+    font-family: var(--font-ui);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content {
+    width: min(100%, 800px);
+    max-width: 800px;
+    max-height: calc(100dvh - 64px);
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 16px;
+    background: var(--grammar-detail-paper);
+    box-shadow: 0 4px 12px rgba(34, 29, 23, .06), 0 24px 70px rgba(34, 29, 23, .19);
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #cbc3b7 transparent;
+    transform: none;
+    will-change: auto;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header {
+    gap: 20px;
+    padding: 26px 36px 22px;
+    border-top: 0;
+    border-bottom: 1px solid var(--grammar-modal-line);
+    background: transparent;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header > div {
+    min-width: 0;
+    flex: 1;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-badges {
+    gap: 8px;
+    margin-top: 12px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-badge {
+    max-width: 100%;
+    min-height: 24px;
+    box-sizing: border-box;
+    padding: 3px 8px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    background: #fff;
+    color: #666;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-badge--lesson {
+    border-color: transparent;
+    background: transparent;
+    color: var(--grammar-modal-muted);
+    font-weight: 500;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body {
+    padding: 24px 36px 32px;
+    background: transparent;
+}
+
+/* Main content: labels stay secondary to the meaning and Japanese examples. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-detail-item {
+    margin-bottom: 24px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-detail-item:last-child {
+    margin-bottom: 0;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-label {
+    margin-bottom: 8px;
+    color: #767676;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: .08em;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-label::before {
+    width: 2px;
+    height: 12px;
+    margin-right: 9px;
+    background: #b8b8b8;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-highlight {
+    display: block;
+    padding: 0;
+    font-family: var(--font-ui) !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: .015em;
+    box-shadow: none;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-code {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    background: #fff;
+    color: #515151;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.75;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc,
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-desc {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc :is(b, strong) {
+    color: #303030;
+    font-weight: 600;
+}
+
+/* Each meaning owns a distinct white section, including its explanation and examples. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-list {
+    gap: 28px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card {
+    padding: 20px 22px;
+    border: 1px solid #e2e2e2;
+    border-left: 3px solid var(--grammar-usage-accent);
+    border-radius: 5px;
+    background: #fff;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-header {
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ededed;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-number {
+    min-width: 46px;
+    min-height: 24px;
+    padding: 3px 6px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--grammar-usage-soft);
+    color: var(--grammar-usage-accent-dark);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-title {
+    font-family: var(--font-ui);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-meaning {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-field + .grammar-legacy-usage-field {
+    margin-top: 18px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-field-label {
+    margin-bottom: 7px;
+    color: #767676;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-code {
+    background: #fff;
+}
+
+/* Clause diagrams: one connecting flow, without nested enclosing borders. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-flow {
+    grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr);
+    gap: 8px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part {
+    padding: 14px 16px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    background: var(--grammar-detail-paper);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part-label {
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-operator {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example {
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid #ededed;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: .015em;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-caption {
+    gap: 4px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Source sentences remain untouched; the Japanese has priority over translation. */
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-card {
+    margin-bottom: 12px;
+    padding: 15px 18px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    background: var(--grammar-detail-paper);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp {
+    margin-bottom: 7px;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: .02em;
+    line-break: strict;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp rt,
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example rt {
+    color: #737373;
+    font-size: max(10px, .58em);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: .015em;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp span[style*="#d64045"],
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp span[style*="rgb(214, 64, 69)"],
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-example span[style*="#d64045"] {
+    padding: 0 2px 1px;
+    border-radius: 3px;
+    background: rgba(155, 48, 38, .06);
+    color: var(--grammar-modal-red-dark) !important;
+    font-weight: 650;
+    box-shadow: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-cn {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+/* Quiet controls, with a visible keyboard focus and generous hit areas. */
+body.home-dashboard-redesign .grammar-legacy-modal :is(.grammar-legacy-modal-close, .grammar-legacy-modal-fav) {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    flex: 0 0 44px;
+    padding: 0;
+    border: 1px solid #e7e1d7;
+    border-radius: 50%;
+    background: var(--grammar-detail-paper);
+    color: #807365;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close {
+    box-shadow: 0 3px 14px rgba(34, 29, 23, .08);
+    font-size: 26px;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav {
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 30px;
+    box-shadow: none;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close:hover {
+    transform: none;
+    border-color: #dcc5b5;
+    background: #f7eee5;
+    color: var(--grammar-modal-red-dark);
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav:is(:hover, .is-fav) {
+    transform: none;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-favorite-leaf {
+    display: block;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    line-height: 1;
+    filter: grayscale(1);
+    opacity: .68;
+    transition: filter 150ms ease, opacity 150ms ease;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav:hover .grammar-favorite-leaf {
+    opacity: .9;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav.is-fav .grammar-favorite-leaf {
+    filter: none;
+    opacity: 1;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal :is(.grammar-legacy-more-examples, .grammar-legacy-related-tag) {
+    min-height: 44px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1px solid #e0d9cd;
+    border-radius: 6px;
+    background: transparent;
+    color: #675b4c;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal :is(.grammar-legacy-more-examples, .grammar-legacy-related-tag):hover {
+    transform: none;
+    border-color: #cbbda9;
+    background: #f4eee4;
+    color: #4f4437;
+}
+
+body.home-dashboard-redesign .grammar-legacy-modal button:focus-visible {
+    outline: 2px solid #4b705f;
+    outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    body.home-dashboard-redesign .grammar-legacy-modal {
+        display: block;
+        padding: 0;
+        background: var(--grammar-detail-paper);
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal::before {
+        content: "";
+        position: fixed;
+        z-index: 5001;
+        inset: 0 0 auto;
+        height: calc(62px + env(safe-area-inset-top));
+        border-bottom: 1px solid #ededed;
+        background: var(--grammar-detail-paper);
+        pointer-events: none;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        max-height: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        scrollbar-gutter: auto;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-header {
+        gap: 0;
+        padding: calc(80px + env(safe-area-inset-top)) 20px 20px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-title {
+        font-size: 20px;
+        line-height: 1.5;
+        letter-spacing: .025em;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-badges {
+        gap: 6px;
+        margin-top: 11px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-body {
+        padding: 22px 20px calc(32px + env(safe-area-inset-bottom));
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-highlight {
+        font-size: 15px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-desc,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card .grammar-legacy-desc {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-code {
+        font-size: 14px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-card {
+        padding: 18px 14px;
+        border-radius: 5px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-list {
+        gap: 24px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-header {
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-title {
+        font-size: 15px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-usage-meaning {
+        font-size: 14px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-flow {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 7px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-part {
+        padding: 13px 14px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-operator--arrow {
+        transform: rotate(90deg);
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-usage-structure-caption {
+        font-size: 12px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-card {
+        padding: 14px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-example-jp {
+        font-size: 16px;
+        line-height: 2.05;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close {
+        top: calc(9px + env(safe-area-inset-top));
+        right: auto;
+        left: 14px;
+        z-index: 5003;
+        width: auto;
+        min-width: 72px;
+        justify-content: center;
+        padding: 0 6px;
+        border: 0;
+        border-radius: 5px;
+        box-shadow: none;
+        font-size: 0;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-close::before {
+        content: "← 返回";
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav {
+        top: calc(9px + env(safe-area-inset-top));
+        right: 18px;
+        z-index: 5003;
+        border: 0;
+        border-radius: 0;
+        font-size: 30px;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-fav::before {
+        content: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.home-dashboard-redesign .grammar-legacy-modal,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-legacy-modal-content {
+        animation: none;
+    }
+
+    body.home-dashboard-redesign .grammar-legacy-modal button,
+    body.home-dashboard-redesign .grammar-legacy-modal .grammar-favorite-leaf {
+        transition: none;
+    }
+}

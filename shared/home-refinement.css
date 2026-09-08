@@ -1,0 +1,585 @@
+/* Shared dashboard finish.
+   Keep the existing layout, dimensions, and vertical positions unchanged.
+   Homepage and all five navigation sections share these surface/color tokens. */
+body.home-dashboard-redesign {
+    --autumn-canvas: #f1f0ec;
+    --autumn-shell: #faf9f6;
+    --autumn-paper: #ffffff;
+    --autumn-paper-muted: #f4f2ee;
+    --autumn-sidebar: #ffffff;
+    --autumn-ink: #302d29;
+    --autumn-ink-muted: #706a63;
+    --autumn-ink-faint: #817970;
+    --autumn-line: #e2ddd5;
+    --autumn-line-soft: #ede9e2;
+    --autumn-maple: #a63d37;
+    --autumn-maple-dark: #85332f;
+    --autumn-maple-soft: #f8eeea;
+    --autumn-pine: #486b5e;
+    --autumn-pine-dark: #365649;
+    --autumn-pine-soft: #edf2ed;
+    --autumn-shadow-panel: 0 2px 6px rgba(48, 40, 30, .02), 0 20px 60px rgba(48, 40, 30, .055);
+    --autumn-shadow-card: 0 2px 4px rgba(48, 40, 30, .025), 0 8px 22px rgba(48, 40, 30, .04);
+    --autumn-shadow-hover: 0 4px 8px rgba(48, 40, 30, .04), 0 14px 28px rgba(48, 40, 30, .07);
+    background: var(--autumn-canvas) !important;
+    color: var(--autumn-ink);
+}
+
+body.home-dashboard-redesign::before,
+body.home-dashboard-redesign::after {
+    content: none;
+    animation: none;
+}
+
+body.home-dashboard-redesign .page-shell {
+    border-color: var(--autumn-line);
+    background: var(--autumn-shell);
+    box-shadow: var(--autumn-shadow-panel);
+}
+
+body.home-dashboard-redesign .side-panel {
+    border-color: var(--autumn-line-soft);
+    background: var(--autumn-sidebar);
+}
+
+body.home-dashboard-redesign :is(.main-chip, .side-home-button) {
+    border-color: transparent;
+    border-radius: 8px;
+    color: #635e57;
+    font-weight: 500;
+    box-shadow: none;
+}
+
+body.home-dashboard-redesign :is(.main-chip, .side-home-button):hover {
+    border-color: transparent;
+    background: var(--autumn-paper-muted);
+    color: var(--autumn-ink);
+    transform: none;
+}
+
+body.home-dashboard-redesign :is(.main-chip, .side-home-button).is-active {
+    border-color: #efdfd8;
+    background: var(--autumn-maple-soft);
+    color: var(--autumn-maple-dark);
+    box-shadow: inset 2px 0 0 var(--autumn-maple);
+    font-weight: 600;
+}
+
+body.home-dashboard-redesign .side-copy {
+    color: var(--autumn-ink-faint);
+}
+
+body.home-dashboard-redesign :is(a, button, input, select, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--autumn-pine);
+    outline-offset: 3px;
+}
+
+body.home-dashboard-redesign .global-search input {
+    border-color: var(--autumn-line);
+    border-radius: 10px;
+    background: var(--autumn-paper);
+    color: var(--autumn-ink);
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign .global-search input::placeholder {
+    color: var(--autumn-ink-faint);
+}
+
+body.home-dashboard-redesign .global-search input:hover {
+    border-color: #c9c3b9;
+}
+
+body.home-dashboard-redesign .global-search input:focus {
+    border-color: #7d9689;
+    box-shadow: 0 0 0 3px rgba(72, 107, 94, .08);
+}
+
+/* White illustrated controls retain their original footprint and artwork. */
+@media (min-width: 768px) {
+    /* The persistent navigation must not resize or change type on section switches. */
+    body.home-dashboard-redesign .side-nav :is(.main-chip, .side-home-button) {
+        min-height: 52px;
+        padding: 0 16px;
+        gap: 14px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: .035em;
+        color: #645f57;
+        border: 1px solid transparent;
+        border-radius: 9px;
+    }
+
+    body.home-dashboard-redesign .side-nav .icon-slot {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 20px;
+        opacity: .85;
+    }
+
+    body.home-dashboard-redesign .side-nav .icon-svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    body.home-dashboard-redesign .side-nav :is(.main-chip, .side-home-button).is-active {
+        color: #913d33;
+        background: linear-gradient(100deg, #f8eeea, #fbf6f2);
+        border-color: #eee0d7;
+        box-shadow: inset 2px 0 0 #ad4e3e;
+        font-weight: 500;
+    }
+
+    body.home-dashboard-redesign .side-nav :is(.main-chip, .side-home-button):hover:not(.is-active) {
+        color: #393c35;
+        background: #f5f3ee;
+        border-color: transparent;
+    }
+
+    body.home-dashboard-redesign .side-copy {
+        font-size: 10px;
+        line-height: 1.6;
+        letter-spacing: .025em;
+    }
+
+    body.home-dashboard-redesign.is-tool-content-only {
+        background: var(--autumn-canvas) !important;
+    }
+
+    body.home-dashboard-redesign :is(.tool-link--fortune, .tool-button--support) {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 2px 3px 0 rgba(93, 70, 49, .065), 0 6px 13px rgba(48, 40, 30, .08);
+        transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    body.home-dashboard-redesign .tool-link--fortune {
+        border-color: #e5c9c3;
+    }
+
+    body.home-dashboard-redesign .tool-button--support {
+        border-color: #cddad1;
+    }
+
+    body.home-dashboard-redesign :is(.tool-link--fortune, .tool-button--support):hover {
+        background: #ffffff;
+        box-shadow: 2px 4px 0 rgba(93, 70, 49, .07), 0 9px 18px rgba(48, 40, 30, .11);
+        filter: none;
+        transform: none;
+    }
+
+    body.home-dashboard-redesign :is(.tool-link--fortune, .tool-button--support):active {
+        box-shadow: 0 2px 4px rgba(48, 40, 30, .09);
+        transform: none;
+    }
+}
+
+/* Homepage surfaces. No additional margins, padding, or taller image frames. */
+body.home-dashboard-redesign :is(.desktop-entry-art, .desktop-announcement-board, .rail-card) {
+    border-color: var(--autumn-line);
+    border-radius: 12px;
+    background: var(--autumn-paper);
+    box-shadow: var(--autumn-shadow-card);
+}
+
+body.home-dashboard-redesign .desktop-entry-art img {
+    filter: none;
+}
+
+body.home-dashboard-redesign .desktop-announcement-board::before {
+    background: var(--autumn-maple);
+    opacity: .75;
+}
+
+body.home-dashboard-redesign .desktop-announcement-sheet {
+    border-color: var(--autumn-line-soft);
+    background: var(--autumn-paper);
+    box-shadow: none;
+}
+
+body.home-dashboard-redesign :is(.desktop-announcement-kana, .desktop-announcement-log-date) {
+    color: var(--autumn-ink-muted);
+}
+
+body.home-dashboard-redesign .desktop-announcement-log-badge {
+    border-color: transparent;
+    background: var(--autumn-maple-soft);
+    color: var(--autumn-maple-dark);
+}
+
+body.home-dashboard-redesign .desktop-announcement-log-body {
+    border-color: var(--autumn-line-soft);
+}
+
+body.home-dashboard-redesign .desktop-announcement-log-ps {
+    border-color: #cddad1;
+    background: #f5f7f3;
+    color: var(--autumn-ink-muted);
+}
+
+body.home-dashboard-redesign :is(.latest-culture-quick-media, .fortune-quick-visual) {
+    border-color: var(--autumn-line-soft);
+}
+
+body.home-dashboard-redesign :is(.latest-culture-quick-kicker, .fortune-quick-kicker) {
+    border-color: rgba(255, 255, 255, .7);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .94);
+    color: var(--autumn-maple-dark);
+    box-shadow: 0 2px 6px rgba(48, 40, 30, .04);
+}
+
+body.home-dashboard-redesign .home-rail-carousel-control {
+    border-color: rgba(70, 57, 43, .1);
+    background: #ffffff;
+    color: #635e57;
+    box-shadow: 0 2px 8px rgba(48, 40, 30, .1);
+}
+
+body.home-dashboard-redesign .daily-reading-card {
+    border-top-color: var(--autumn-line);
+}
+
+body.home-dashboard-redesign .rail-card-head h2 {
+    color: var(--autumn-ink);
+}
+
+body.home-dashboard-redesign .daily-reading-card .rail-card-head h2::before {
+    background: var(--autumn-pine);
+    box-shadow: none;
+}
+
+body.home-dashboard-redesign .daily-reading-item {
+    border-color: var(--autumn-line-soft);
+}
+
+body.home-dashboard-redesign .daily-reading-thumb {
+    border-color: transparent;
+    border-radius: 7px;
+}
+
+body.home-dashboard-redesign .daily-reading-item-tag {
+    border-color: transparent;
+    background: var(--autumn-pine-soft);
+    color: var(--autumn-pine-dark);
+}
+
+/* Daily learning, exam index, and their in-dashboard subdirectories. */
+body.home-dashboard-redesign .section-view-head {
+    border-color: var(--autumn-line);
+}
+
+body.home-dashboard-redesign :is(.section-view-title, .rail-card-head h2) {
+    color: var(--autumn-ink);
+    font-family: "Noto Serif JP", "Noto Serif SC", serif !important;
+    font-weight: 600;
+}
+
+body.home-dashboard-redesign .section-view-eyebrow {
+    color: var(--autumn-pine-dark);
+}
+
+body.home-dashboard-redesign :is(.section-view-description, .feature-desc) {
+    color: var(--autumn-ink-muted);
+}
+
+body.home-dashboard-redesign :is(.section-view-open, .section-view-back, .study-directory-back) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    color: var(--autumn-maple-dark);
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign .feature-card,
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory {
+    border-color: var(--autumn-line);
+    border-radius: 12px;
+    background: var(--autumn-paper);
+    box-shadow: var(--autumn-shadow-card);
+}
+
+body.home-dashboard-redesign .feature-card:hover,
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory:hover {
+    border-color: #c8d3c8;
+    box-shadow: var(--autumn-shadow-hover);
+}
+
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-card-link {
+    border-radius: 12px;
+}
+
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory :is(.feature-cover, .feature-visual) {
+    border-radius: 12px 0 0 12px;
+    border-color: var(--autumn-line-soft);
+}
+
+body.home-dashboard-redesign .feature-title {
+    color: var(--autumn-ink);
+}
+
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-context-badge {
+    border-color: #dce3d9;
+    background: #f4f7f1;
+    color: var(--autumn-pine-dark);
+}
+
+body.home-dashboard-redesign .feature-grid[data-view-depth="root"] .feature-card--main-directory .feature-art {
+    border-color: var(--autumn-line);
+    background: rgba(255, 255, 255, .95);
+    box-shadow: 0 2px 6px rgba(48, 40, 30, .06);
+}
+
+/* Grammar search, favorites, and detail surfaces keep their existing layouts. */
+body.home-dashboard-redesign .home-study-directory {
+    --study-directory-line: var(--autumn-line);
+    --study-directory-paper: var(--autumn-paper);
+    --study-directory-muted: var(--autumn-ink-muted);
+}
+
+body.home-dashboard-redesign .home-grammar-directory {
+    --grammar-directory-line: var(--autumn-line);
+    --grammar-directory-paper: var(--autumn-paper);
+    --grammar-directory-muted: var(--autumn-ink-muted);
+}
+
+body.home-dashboard-redesign :is(.home-study-directory-cover, .home-grammar-directory-cover, .home-study-directory-group, .home-grammar-directory-group) {
+    border-radius: 12px;
+    box-shadow: var(--autumn-shadow-card);
+}
+
+body.home-dashboard-redesign .grammar-legacy-search {
+    --legacy-surface: var(--autumn-paper);
+    --legacy-surface-strong: var(--autumn-paper-muted);
+    --legacy-surface-muted: var(--autumn-line-soft);
+    --legacy-text: var(--autumn-ink);
+    --legacy-muted: var(--autumn-ink-muted);
+    --legacy-accent: var(--autumn-maple);
+    --legacy-accent-strong: var(--autumn-maple-dark);
+    --legacy-accent-soft: var(--autumn-maple-soft);
+    --legacy-border: var(--autumn-line-soft);
+    --legacy-border-strong: var(--autumn-line);
+    --legacy-shadow-sm: var(--autumn-shadow-card);
+    --legacy-shadow-md: var(--autumn-shadow-hover);
+}
+
+body.home-dashboard-redesign :is(.grammar-legacy-search-input, .grammar-legacy-search-bar input, .grammar-legacy-filter-control) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign :is(.grammar-legacy-search-input, .grammar-legacy-search-bar input):focus {
+    border-color: #7d9689;
+    box-shadow: 0 0 0 3px rgba(72, 107, 94, .08);
+}
+
+body.home-dashboard-redesign :is(.grammar-search-history, .grammar-mobile-suggestions, .grammar-favorites-library) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    box-shadow: var(--autumn-shadow-card);
+}
+
+body.home-dashboard-redesign :is(.grammar-legacy-card, .grammar-favorite-card) {
+    border-color: var(--autumn-line-soft);
+    background: var(--autumn-paper);
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign :is(.grammar-legacy-card, .grammar-favorite-card):hover {
+    border-color: #c8d3c8;
+    background: #fcfcf9;
+}
+
+body.home-dashboard-redesign .grammar-center-favorite-entry {
+    border-color: #e1cda9;
+    background: var(--autumn-paper);
+    color: #866331;
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign :is(.grammar-favorites-library-tools select, .grammar-favorites-review-button) {
+    border-color: var(--autumn-line);
+    background-color: var(--autumn-paper);
+}
+
+body.home-dashboard-redesign :is(.grammar-legacy-example-card, .grammar-legacy-usage-card) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    box-shadow: none;
+}
+
+/* Vocabulary library owns its scoped palette in word-bank.css. */
+
+/* Study plan: consistent paper, ink and maple accents; category colors stay semantic. */
+body.home-dashboard-redesign .study-plan-embedded {
+    --plan-paper: var(--autumn-paper);
+    --plan-panel: var(--autumn-shell);
+    --plan-line: var(--autumn-line);
+    --plan-line-strong: #cec5b9;
+    --plan-ink: var(--autumn-ink);
+    --plan-muted: var(--autumn-ink-muted);
+    --plan-maple: var(--autumn-maple);
+    --plan-maple-dark: var(--autumn-maple-dark);
+    --plan-maple-soft: var(--autumn-maple-soft);
+    --plan-success: var(--autumn-pine);
+}
+
+body.home-dashboard-redesign .study-plan-embedded :is(.plan-embedded-header, .calendar-card, .day-panel) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    box-shadow: var(--autumn-shadow-card);
+}
+
+body.home-dashboard-redesign .study-plan-embedded .plan-embedded-header {
+    border-left-color: var(--autumn-maple);
+}
+
+body.home-dashboard-redesign .study-plan-embedded :is(.plan-view-tabs, .calendar-controls button) {
+    background: var(--autumn-paper-muted);
+}
+
+body.home-dashboard-redesign .study-plan-embedded :is(.calendar-controls button:nth-child(2), .plan-import-open, .plan-view-tabs button[aria-selected="true"]) {
+    border-color: var(--autumn-line);
+    background: var(--autumn-paper);
+    box-shadow: 0 2px 5px rgba(48, 40, 30, .025);
+}
+
+body.home-dashboard-redesign .study-plan-embedded .calendar-day {
+    border-color: var(--autumn-line-soft);
+}
+
+body.home-dashboard-redesign .study-plan-embedded .calendar-day.is-selected {
+    border-color: var(--autumn-maple);
+    background: #fcf7f4;
+}
+
+body.home-dashboard-redesign .study-plan-embedded .calendar-day.is-outside {
+    background: #faf9f6;
+}
+
+body.home-dashboard-redesign .study-plan-embedded :is(.day-task-card, .task-form, .student-card, .profile-card) {
+    border-color: var(--autumn-line);
+}
+
+@media (max-width: 767px) {
+    body.home-dashboard-redesign,
+    body.home-dashboard-redesign :is(.page-shell, .app-workspace) {
+        background: var(--autumn-shell) !important;
+    }
+
+    body.home-dashboard-redesign :is(.mobile-home-header, .mobile-bottom-nav) {
+        border-color: var(--autumn-line-soft);
+        background: #ffffff;
+    }
+
+    body.home-dashboard-redesign .mobile-bottom-nav {
+        box-shadow: 0 -3px 18px rgba(48, 40, 30, .045);
+    }
+
+    body.home-dashboard-redesign :is(.mobile-feature-viewport, .mobile-entry-card) {
+        border-color: var(--autumn-line);
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: var(--autumn-shadow-card);
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card {
+        border-color: var(--autumn-line);
+        border-radius: 10px;
+        background: var(--autumn-paper);
+        box-shadow: var(--autumn-shadow-card);
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__footer {
+        background: var(--autumn-paper);
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__copy strong {
+        color: var(--autumn-ink);
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__copy small {
+        color: var(--autumn-ink-muted);
+    }
+
+    body.home-dashboard-redesign .mobile-combined-study-card__label {
+        border-color: #dce3d9;
+        background: #f4f7f1;
+        color: var(--autumn-pine-dark);
+    }
+
+    body.home-dashboard-redesign .mobile-entry-card__copy {
+        background: #ffffff;
+    }
+
+    body.home-dashboard-redesign .mobile-entry-card__copy strong {
+        color: var(--autumn-ink);
+    }
+
+    body.home-dashboard-redesign .mobile-entry-card__copy small {
+        color: var(--autumn-ink-muted);
+    }
+
+    body.home-dashboard-redesign .mobile-entry-card__label {
+        border-color: #dce3d9;
+        background: #f4f7f1;
+        color: var(--autumn-pine-dark);
+    }
+
+    body.home-dashboard-redesign :is(.mobile-feature-tabs, .mobile-discovery-item) {
+        border-color: var(--autumn-line);
+    }
+
+    body.home-dashboard-redesign .mobile-feature-tabs button::before {
+        background: var(--autumn-paper);
+        box-shadow: 0 1px 5px rgba(48, 40, 30, .045);
+    }
+
+    body.home-dashboard-redesign :is(.mobile-feature-tabs button[aria-selected="true"], .mobile-section-head h2) {
+        color: var(--autumn-ink);
+    }
+
+    body.home-dashboard-redesign :is(.mobile-mini-game-entry, .mobile-discovery-item-art) {
+        border-color: var(--autumn-line);
+        background: #ffffff;
+        color: var(--autumn-pine-dark);
+        box-shadow: none;
+    }
+
+    body.home-dashboard-redesign .study-plan-embedded {
+        background: var(--autumn-shell);
+    }
+
+    body.home-dashboard-redesign .study-plan-embedded .day-panel {
+        background: transparent;
+        box-shadow: none;
+    }
+
+    body.home-dashboard-redesign .study-plan-embedded .mobile-plan-summary {
+        border-color: var(--autumn-line);
+        background: var(--autumn-paper);
+        box-shadow: var(--autumn-shadow-card);
+    }
+
+    body.home-dashboard-redesign .study-plan-embedded .mobile-plan-week-day {
+        background: var(--autumn-paper);
+        box-shadow: 0 1px 4px rgba(48, 40, 30, .025);
+    }
+
+    body.home-dashboard-redesign .study-plan-embedded .mobile-plan-week-day.is-selected {
+        background: var(--autumn-maple);
+        box-shadow: 0 3px 8px rgba(133, 51, 47, .12);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.home-dashboard-redesign :is(.tool-link--fortune, .tool-button--support, .feature-card, .mobile-entry-card) {
+        transition: none;
+        transform: none;
+    }
+}
+/* Deep links never briefly show the homepage before their panel is ready. */
+body[data-initial-section] .notice-panel {
+    display: none !important;
+}

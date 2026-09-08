@@ -10,10 +10,10 @@
     const PAST_VOCAB_STORE_KEY = 'n1-past-vocab-review:v1';
 
     const SECTION_META = Object.freeze({
-        vocabulary: Object.freeze({ name: '語彙', mark: '語', overviewUrl: 'exam/vocabulary/index.html' }),
+        vocabulary: Object.freeze({ name: '語彙', mark: '語', overviewUrl: 'index.html#exam/exam-vocabulary' }),
         grammar: Object.freeze({ name: '文法', mark: '文', overviewUrl: 'exam/grammar/grammar/index.html?browse=mistakes' }),
         reading: Object.freeze({ name: '読解', mark: '読', overviewUrl: 'exam/jlpt-reading/index.html?browse=mistakes' }),
-        listening: Object.freeze({ name: '聴解', mark: '聴', overviewUrl: 'exam/listening/index.html' })
+        listening: Object.freeze({ name: '聴解', mark: '聴', overviewUrl: 'index.html#exam/exam-listening' })
     });
 
     const VOCAB_MODULES = Object.freeze({

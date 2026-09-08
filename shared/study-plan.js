@@ -110,12 +110,12 @@
                 ...TRY_N1_TASK_CONTENTS,
                 ...TRY_N2_TASK_CONTENTS,
                 ...DAILY_GRAMMAR_TASK_CONTENTS,
-                { id: 'grammar-overview', title: 'JLPT 语法专项总览', chip: '语法 · 专项', url: 'exam/grammar/index.html' },
-                { id: 'grammar-form-n2', title: 'N2 文法形式判断', chip: '语法 · 形式', url: 'exam/grammar/grammar/n2/index.html' },
+                { id: 'grammar-overview', title: 'JLPT 语法专项总览', chip: '语法 · 专项', url: 'index.html#exam/exam-grammar' },
+                { id: 'grammar-form-n2', title: 'N2 文法形式判断', chip: '语法 · 形式', url: 'exam/grammar/grammar/index.html?level=N2' },
                 { id: 'grammar-sort', title: 'JLPT 文法排序练习', chip: '语法 · 排序', url: 'exam/grammar/sort/index.html' },
                 { id: 'grammar-cloze', title: 'JLPT 完形填空练习', chip: '语法 · 填空', url: 'exam/grammar/cloze/index.html' },
-                { id: 'compound-particles', title: '复合格助词学习', chip: '语法 · 助词', url: 'exam/grammar/复合格助词.html' },
-                { id: 'compound-particles-practice', title: '复合格助词练习', chip: '语法 · 助词练习', url: 'exam/grammar/复合格助词练习.html' }
+                { id: 'compound-particles', title: '复合格助词学习', chip: '语法 · 助词', url: 'daily/grammar/expressions/复合格助词.html' },
+                { id: 'compound-particles-practice', title: '复合格助词练习', chip: '语法 · 助词练习', url: 'daily/grammar/expressions/复合格助词练习.html' }
             ])
         }),
         reading: Object.freeze({
@@ -136,7 +136,7 @@
             shortLabel: '听力',
             color: '#587a98',
             contents: Object.freeze([
-                { id: 'listening-overview', title: 'JLPT 听力专项总览', chip: '听力 · 总览', url: 'exam/listening/index.html' },
+                { id: 'listening-overview', title: 'JLPT 听力专项总览', chip: '听力 · 总览', url: 'index.html#exam/exam-listening' },
                 { id: 'listening-immediate-n1', title: 'N1 即时应答', chip: '听力 · N1应答', url: 'exam/listening/immediate-response/n1/index.html' },
                 { id: 'listening-task-n1', title: 'N1 课题理解', chip: '听力 · N1课题', url: 'exam/listening/task-comprehension/n1/index.html' },
                 { id: 'listening-point-n1', title: 'N1 要点理解', chip: '听力 · N1要点', url: 'exam/listening/point-comprehension/n1/index.html' },
@@ -212,11 +212,6 @@
         importPreview: root.querySelector('[data-plan-import-preview]'),
         importConfirm: root.querySelector('[data-plan-import-confirm]'),
         importFootnote: root.querySelector('[data-plan-import-footnote]'),
-        presetStatus: root.querySelector('[data-plan-preset-status]'),
-        presetStatusLabel: root.querySelector('[data-plan-preset-status-label]'),
-        presetStatusTitle: root.querySelector('[data-plan-preset-status-title]'),
-        presetStatusProgress: root.querySelector('[data-plan-preset-status-progress]'),
-        presetJump: root.querySelector('[data-plan-preset-jump]'),
         insightsView: root.querySelector('[data-plan-insights-view]'),
         insightCategories: root.querySelector('[data-plan-insight-categories]'),
         insightDetail: root.querySelector('[data-plan-insight-detail]'),
@@ -701,25 +696,6 @@
         }
     }
 
-    function renderPresetStatus() {
-        if (!elements.presetStatus) return;
-        const preset = getPrimaryPreset();
-        if (!preset) {
-            elements.presetStatus.hidden = true;
-            return;
-        }
-        const coverage = getPresetCoverage(preset);
-        elements.presetStatus.hidden = coverage.matched === 0;
-        if (coverage.matched === 0) return;
-        if (elements.presetStatusLabel) {
-            elements.presetStatusLabel.textContent = coverage.matched === coverage.total ? '導入済み' : '一部導入済み';
-        }
-        if (elements.presetStatusTitle) elements.presetStatusTitle.textContent = preset.title;
-        if (elements.presetStatusProgress) {
-            elements.presetStatusProgress.textContent = `${coverage.matched} / ${coverage.total}课`;
-        }
-    }
-
     function openPresetImportDialog() {
         if (!elements.importDialog) return;
         renderPresetImportPreview();
@@ -781,17 +757,6 @@
 
         closePresetImportDialog();
         showToast(additions.length ? `已导入 ${additions.length} 节 TRY！N2 课程。` : '14节 TRY！N2 课程已经全部导入。');
-    }
-
-    function jumpToPrimaryPreset() {
-        const preset = getPrimaryPreset();
-        if (!preset) return;
-        setPlanView('calendar');
-        selectDate(preset.startDate, true);
-        if (window.innerWidth <= 767) {
-            isMobileCalendarOpen = true;
-            syncMobileCalendarState();
-        }
     }
 
     function getTasksForDate(dateKey) {
@@ -1603,7 +1568,6 @@
         renderHeaderMetrics();
         renderMobileOverview();
         renderCharacterAvatar();
-        renderPresetStatus();
         if (activePlanView === 'insights') renderInsights();
     }
 
@@ -1646,9 +1610,6 @@
     }
     if (elements.importConfirm) {
         elements.importConfirm.addEventListener('click', importPrimaryPreset);
-    }
-    if (elements.presetJump) {
-        elements.presetJump.addEventListener('click', jumpToPrimaryPreset);
     }
     if (elements.characterAvatarChange && elements.characterAvatarInput) {
         elements.characterAvatarChange.addEventListener('click', () => elements.characterAvatarInput.click());

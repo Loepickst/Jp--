@@ -1,0 +1,46 @@
+/* Desktop companion to the existing support/prayer entries. */
+body.home-dashboard-redesign a.cottage-home-entry {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    body.home-dashboard-redesign a.cottage-home-entry {
+        display: block;
+        --character-label: #8a6245;
+        --character-label-active: var(--autumn-maple-dark, #85332f);
+    }
+
+    body.home-dashboard-redesign .cottage-home-entry > .cottage-entry-art {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 48px;
+        height: 48px;
+        transform: translate(-50%, -50%);
+        background: url("../assets/home-redesign/cottage-shiba-house-still-v1.png") center / contain no-repeat;
+        pointer-events: none;
+    }
+}
+
+/* Like the neighboring characters, the supplied three-frame GIF plays on intent. */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    body.home-dashboard-redesign a.cottage-home-entry:focus-visible > .cottage-entry-art {
+        background-image: url("../assets/home-redesign/cottage-shiba-house-v1.gif");
+    }
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    body.home-dashboard-redesign a.cottage-home-entry:hover > .cottage-entry-art {
+        background-image: url("../assets/home-redesign/cottage-shiba-house-v1.gif");
+    }
+}
+
+/* Keep this entry out of the mobile header, including hover/focus states. */
+@media (max-width: 767px) {
+    body.home-dashboard-redesign a.cottage-home-entry,
+    body.home-dashboard-redesign a.cottage-home-entry:hover,
+    body.home-dashboard-redesign a.cottage-home-entry:active {
+        display: none;
+    }
+}
